@@ -14,6 +14,14 @@ function LayersIcon({ className }: { className?: string }) {
 export function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden">
+      {/* Radial gradient background */}
+      <div
+        className="absolute inset-0 -z-10 h-[600px] md:h-[800px] rounded-b-xl"
+        style={{
+          background:
+            "radial-gradient(125% 125% at 50% 10%, var(--background) 40%, var(--primary) 100%)",
+        }}
+      />
       <div className="mx-auto max-w-6xl px-4 pt-28 pb-16 text-center">
         {/* Badge */}
         <div className="group mb-8 flex justify-center">

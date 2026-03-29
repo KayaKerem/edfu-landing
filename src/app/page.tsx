@@ -15,19 +15,25 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
-        <Hero />
-        <Logos />
-        <BentoFeatures />
-        <Testimonial />
-        <HowItWorks />
-        <Security />
-        <Pricing />
-        <MarqueeTestimonials />
-        <FAQ />
-        <CTA />
-      </main>
-      <Footer />
+      {/* Side borders */}
+      <div className="relative mx-auto max-w-7xl">
+        <div className="pointer-events-none absolute inset-y-0 left-6 w-px border-l border-border" />
+        <div className="pointer-events-none absolute inset-y-0 right-6 w-px border-r border-border" />
+
+        <main className="divide-y divide-border">
+          <Hero />
+          <Logos />
+          <BentoFeatures />
+          <Testimonial />
+          <HowItWorks />
+          <Security />
+          <Pricing />
+          <MarqueeTestimonials />
+          <FAQ />
+          <CTA />
+        </main>
+        <Footer />
+      </div>
     </>
   );
 }
