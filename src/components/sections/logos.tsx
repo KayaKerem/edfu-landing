@@ -84,16 +84,16 @@ export function Logos() {
             <a
               key={logo.name}
               href="#"
-              className={`group relative flex flex-col items-center justify-center gap-2 px-6 py-8 transition-colors hover:bg-accent/30 ${
+              className={`group relative flex flex-col items-center justify-center px-6 py-10 transition-colors hover:bg-accent/30 overflow-hidden ${
                 i < 4 ? "border-b border-[oklch(.922_0_0)]" : ""
               }`}
             >
-              <div className="flex items-center gap-2 text-foreground">
+              <div className="flex items-center gap-2 text-foreground transition-transform duration-300 group-hover:-translate-y-2">
                 {logo.svg}
                 <span className="text-lg font-bold">{logo.name}</span>
               </div>
-              <span className="flex items-center gap-1 text-sm text-muted-foreground opacity-0 transition-all duration-300 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0">
-                Daha Fazla <ArrowRight className="size-3" />
+              <span className="absolute bottom-4 flex items-center gap-1 text-sm font-medium text-muted-foreground opacity-0 transition-all duration-300 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0">
+                Daha Fazla <ArrowRight className="size-3.5" />
               </span>
             </a>
           ))}
