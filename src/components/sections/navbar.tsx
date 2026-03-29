@@ -109,7 +109,7 @@ export function Navbar() {
               {/* Animated pill indicator */}
               {pillStyle.width > 0 && (
                 <motion.li
-                  className="absolute inset-y-0 my-1.5 rounded-full border border-border bg-accent/60"
+                  className="absolute inset-y-0 my-1.5 rounded-full border border-border bg-background"
                   animate={{ left: pillStyle.left, width: pillStyle.width }}
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   style={{ listStyle: "none" }}
