@@ -230,12 +230,12 @@ export function BentoFeatures() {
           {features.map((feature, i) => (
             <div
               key={feature.title}
-              className={`relative flex flex-col overflow-hidden ${
+              className={`relative flex flex-col overflow-hidden aspect-[554/496] ${
                 i % 2 === 0 && i < features.length - 1 ? "md:border-r border-[oklch(.922_0_0)]" : ""
               } ${i < 2 ? "border-b border-[oklch(.922_0_0)]" : ""}`}
             >
               {/* Visual area */}
-              <div className="relative h-[280px] [mask-image:linear-gradient(to_top,transparent_5%,#000_40%)]">
+              <div className="relative flex-1 [mask-image:linear-gradient(to_top,transparent_5%,#000_40%)]">
                 {feature.visual}
               </div>
               {/* Text area */}
