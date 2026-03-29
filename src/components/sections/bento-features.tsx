@@ -39,12 +39,11 @@ function ChatMockup() {
     // Thinking dots for a moment, then start typing
     setTimeout(() => {
       setIsThinking(false);
-      const words = AI_RESPONSE.split(" ");
-      let w = 0;
+      let i = 0;
       const interval = setInterval(() => {
-        w++;
-        setDisplayedText(words.slice(0, w).join(" "));
-        if (w >= words.length) {
+        i++;
+        setDisplayedText(AI_RESPONSE.slice(0, i));
+        if (i >= AI_RESPONSE.length) {
           clearInterval(interval);
           setTimeout(() => {
             setDisplayedText("");
@@ -53,7 +52,7 @@ function ChatMockup() {
             setTimeout(() => startStreaming(), 1000);
           }, 5000);
         }
-      }, 80);
+      }, 20);
     }, 1500);
   }, []);
 
