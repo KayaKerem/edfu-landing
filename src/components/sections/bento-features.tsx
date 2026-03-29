@@ -203,25 +203,26 @@ const features = [
 /* ------------------------------------------------------------------ */
 export function BentoFeatures() {
   return (
-    <section id="features" className="py-20">
-      {/* Header */}
-      <div className="mx-auto mb-14 max-w-2xl px-4 text-center">
-        <h2 className="text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
-          İş Akışınızı Yapay Zeka ile Güçlendirin
-        </h2>
-        <p className="mt-4 text-base text-muted-foreground font-medium text-balance tracking-tight">
-          Yapay zeka destekli araçlarla üretkenliğinizi artırın, tekrarlayan
-          görevleri otomatikleştirin ve ekibinizle daha akıllı çalışın.
-        </p>
-      </div>
-
-      {/* Bento Grid with border lines and hatched edges */}
+    <section id="features">
+      {/* Wrapper with hatched edges */}
       <div className="relative mx-6">
-        {/* Hatched areas on both sides */}
         <HatchedEdge side="left" />
         <HatchedEdge side="right" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 border border-[oklch(.922_0_0)]">
+        <div className="border border-[oklch(.922_0_0)] rounded-xl overflow-hidden">
+          {/* Header inside the container */}
+          <div className="px-4 py-14 text-center">
+            <h2 className="text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
+              İş Akışınızı Yapay Zeka ile Güçlendirin
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground font-medium text-balance tracking-tight">
+              Yapay zeka destekli araçlarla üretkenliğinizi artırın, tekrarlayan
+              görevleri otomatikleştirin ve ekibinizle daha akıllı çalışın.
+            </p>
+          </div>
+
+          {/* Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 border-t border-[oklch(.922_0_0)]">
           {features.map((feature, i) => (
             <div
               key={feature.title}
@@ -240,6 +241,7 @@ export function BentoFeatures() {
               </div>
             </div>
           ))}
+          </div>
         </div>
       </div>
     </section>
