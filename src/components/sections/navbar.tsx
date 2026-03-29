@@ -104,7 +104,7 @@ export function Navbar() {
             {/* Desktop nav links - absolute center */}
             <ul
               ref={navRef}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden h-11 w-fit items-center justify-center rounded-full px-2 md:flex"
+              className="absolute left-1/2 -translate-x-1/2 hidden h-11 w-fit items-center justify-center rounded-full px-2 md:flex"
             >
               {/* Animated pill indicator */}
               {pillStyle.width > 0 && (
