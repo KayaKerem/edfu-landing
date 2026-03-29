@@ -282,7 +282,7 @@ export function BentoFeatures() {
               } ${i < 2 ? "border-b border-[oklch(.922_0_0)]" : ""}`}
             >
               {/* Visual area */}
-              <div className="relative flex-1 [mask-image:linear-gradient(to_top,transparent_5%,#000_40%)]">
+              <div className="relative flex-1">
                 {feature.visual}
               </div>
               {/* Text area */}
