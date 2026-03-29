@@ -30,22 +30,30 @@ function ChatMockup() {
     return () => observer.disconnect();
   }, [isVisible]);
 
+  const [isThinking, setIsThinking] = useState(false);
+
   const startStreaming = useCallback(() => {
     setShowResponse(true);
-    let i = 0;
-    const interval = setInterval(() => {
-      i++;
-      setDisplayedText(AI_RESPONSE.slice(0, i));
-      if (i >= AI_RESPONSE.length) {
-        clearInterval(interval);
-        // Replay after pause
-        setTimeout(() => {
-          setDisplayedText("");
-          setShowResponse(false);
-          setTimeout(() => startStreaming(), 1000);
-        }, 5000);
-      }
-    }, 30);
+    setIsThinking(true);
+    setDisplayedText("");
+    // Thinking dots for a moment, then start typing
+    setTimeout(() => {
+      setIsThinking(false);
+      let i = 0;
+      const interval = setInterval(() => {
+        i++;
+        setDisplayedText(AI_RESPONSE.slice(0, i));
+        if (i >= AI_RESPONSE.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            setDisplayedText("");
+            setShowResponse(false);
+            setIsThinking(false);
+            setTimeout(() => startStreaming(), 1000);
+          }, 5000);
+        }
+      }, 30);
+    }, 1500);
   }, []);
 
   useEffect(() => {
@@ -86,9 +94,17 @@ function ChatMockup() {
             </div>
             {/* Response bubble with streaming text */}
             <div className="max-w-[280px] rounded-xl border border-border bg-accent p-4 shadow-[0_0_10px_rgba(0,0,0,0.05)]">
-              <div className="overflow-hidden transition-[max-height] duration-300 ease-out" style={{ maxHeight: displayedText ? 200 : 0 }}>
-                <p className="text-sm text-muted-foreground">{displayedText}</p>
-              </div>
+              {isThinking ? (
+                <div className="flex gap-1 py-1">
+                  <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground/50 [animation-delay:0ms]" />
+                  <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground/50 [animation-delay:150ms]" />
+                  <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground/50 [animation-delay:300ms]" />
+                </div>
+              ) : (
+                <div className="overflow-hidden transition-[max-height] duration-300 ease-out" style={{ maxHeight: displayedText ? 200 : 0 }}>
+                  <p className="text-sm text-muted-foreground">{displayedText}</p>
+                </div>
+              )}
             </div>
           </div>
         )}
