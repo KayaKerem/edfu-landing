@@ -46,7 +46,7 @@ function ChatMockup() {
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center p-4">
       {/* Bottom fade */}
-      <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-20 w-full bg-gradient-to-t from-background to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-8 w-full bg-gradient-to-t from-background to-transparent" />
 
       <div className="mx-auto flex w-full max-w-md flex-col gap-3" style={{ transform: "translateY(-15px)" }}>
         {/* User message */}
