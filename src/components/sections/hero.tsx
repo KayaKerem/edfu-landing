@@ -28,13 +28,13 @@ export function Hero() {
         <div className="mt-8 flex items-center justify-center gap-4">
           <a
             href="#pricing"
-            className="inline-flex h-10 w-32 items-center justify-center rounded-full border border-white/[0.12] bg-primary text-sm font-normal tracking-wide text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] transition-all hover:bg-primary/90 active:scale-95"
+            className="bg-primary h-9 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground dark:text-primary-foreground w-32 px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] hover:bg-primary/80 transition-all ease-out active:scale-95"
           >
             Ücretsiz Dene
           </a>
           <a
             href="#"
-            className="inline-flex h-10 w-32 items-center justify-center rounded-full border border-border bg-background text-sm font-normal tracking-wide text-foreground transition-all hover:bg-accent active:scale-95"
+            className="h-10 flex items-center justify-center w-32 px-5 text-sm font-normal tracking-wide text-foreground rounded-full transition-all ease-out active:scale-95 bg-background dark:bg-background border border-border hover:bg-accent dark:hover:bg-accent"
           >
             Giriş Yap
           </a>
