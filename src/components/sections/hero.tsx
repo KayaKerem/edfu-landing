@@ -16,13 +16,13 @@ export function Hero() {
     <section id="hero" className="relative overflow-hidden">
       {/* Radial gradient background */}
       <div
-        className="absolute inset-0 -z-10 h-[600px] md:h-[800px] rounded-b-xl"
+        className="absolute inset-0 -z-10 h-[600px] md:h-[800px] rounded-b-xl opacity-[0.08]"
         style={{
           background:
             "radial-gradient(125% 125% at 50% 10%, var(--background) 40%, var(--primary) 100%)",
         }}
       />
-      <div className="mx-auto max-w-6xl px-4 pt-28 pb-16 text-center">
+      <div className="mx-auto max-w-5xl px-6 sm:px-8 pt-28 pb-16 text-center">
         {/* Badge */}
         <div className="group mb-8 flex justify-center">
           <div className="inline-flex items-center rounded-full border border-border bg-background px-4 py-1.5 shadow-sm transition-all hover:border-border/80 hover:bg-accent/30">
