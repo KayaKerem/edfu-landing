@@ -77,7 +77,7 @@ export function Navbar() {
       <motion.nav
         initial={false}
         animate={{
-          maxWidth: isScrolled ? 800 : 1120,
+          maxWidth: isScrolled ? 880 : 1120,
           marginTop: isScrolled ? 20 : 16,
         }}
         transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
