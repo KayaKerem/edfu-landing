@@ -167,7 +167,7 @@ function CalendarMockup() {
 function HatchedEdge({ side }: { side: "left" | "right" }) {
   return (
     <div
-      className={`absolute top-0 ${side === "left" ? "-left-4 md:-left-6" : "-right-4 md:-right-6"} h-full w-4 md:w-6 text-primary/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]`}
+      className={`absolute top-0 ${side === "left" ? "-left-4 md:-left-14" : "-right-4 md:-right-14"} h-full w-4 md:w-14 text-primary/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]`}
     />
   );
 }
@@ -216,7 +216,7 @@ export function BentoFeatures() {
       </div>
 
       {/* Bento Grid with border lines and hatched edges */}
-      <div className="relative mx-6">
+      <div className="relative mx-6 md:mx-20">
         {/* Hatched areas on both sides */}
         <HatchedEdge side="left" />
         <HatchedEdge side="right" />
