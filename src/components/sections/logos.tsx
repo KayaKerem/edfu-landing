@@ -79,12 +79,14 @@ export function Logos() {
       </div>
 
       <div className="mx-6">
-        <div className="grid grid-cols-2 sm:grid-cols-4 border border-[oklch(.922_0_0)] divide-x divide-y divide-[oklch(.922_0_0)]">
-          {logos.map((logo) => (
+        <div className="grid grid-cols-2 sm:grid-cols-4 border border-[oklch(.922_0_0)] divide-x divide-[oklch(.922_0_0)]">
+          {logos.map((logo, i) => (
             <a
               key={logo.name}
               href="#"
-              className="group relative flex flex-col items-center justify-center gap-2 px-6 py-8 transition-colors hover:bg-accent/30"
+              className={`group relative flex flex-col items-center justify-center gap-2 px-6 py-8 transition-colors hover:bg-accent/30 ${
+                i < 4 ? "border-b border-[oklch(.922_0_0)]" : ""
+              }`}
             >
               <div className="flex items-center gap-2 text-foreground">
                 {logo.svg}
