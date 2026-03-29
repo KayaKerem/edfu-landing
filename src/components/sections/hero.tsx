@@ -1,17 +1,14 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-
 export function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 pt-20 pb-16 text-center">
         {/* Badge */}
-        <Badge
-          variant="outline"
-          className="mb-6 inline-flex h-auto rounded-full px-4 py-1.5 text-sm"
-        >
-          <span className="mr-1">👋</span> Özel otomasyonları keşfedin
-        </Badge>
+        <div className="mb-8 flex justify-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-1.5 text-sm font-medium text-foreground shadow-sm">
+            <span>👋</span>
+            Özel otomasyonları keşfedin
+          </span>
+        </div>
 
         {/* Heading */}
         <h1 className="font-heading text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
@@ -29,12 +26,18 @@ export function Hero() {
 
         {/* CTA Buttons */}
         <div className="mt-8 flex items-center justify-center gap-4">
-          <Button size="lg" className="rounded-full px-8">
+          <a
+            href="#pricing"
+            className="inline-flex h-10 w-32 items-center justify-center rounded-full border border-white/[0.12] bg-primary text-sm font-normal tracking-wide text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] transition-all hover:bg-primary/90 active:scale-95"
+          >
             Ücretsiz Dene
-          </Button>
-          <Button variant="outline" size="lg" className="rounded-full px-8">
+          </a>
+          <a
+            href="#"
+            className="inline-flex h-10 w-32 items-center justify-center rounded-full border border-border bg-background text-sm font-normal tracking-wide text-foreground transition-all hover:bg-accent active:scale-95"
+          >
             Giriş Yap
-          </Button>
+          </a>
         </div>
 
         {/* Browser Mockup */}
