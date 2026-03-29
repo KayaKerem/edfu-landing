@@ -78,23 +78,27 @@ export function Logos() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 border-y border-[oklch(.922_0_0)] divide-x divide-y divide-[oklch(.922_0_0)]">
-        {logos.map((logo) => (
-          <a
-            key={logo.name}
-            href="#"
-            className="group relative flex flex-col items-center justify-center gap-2 px-6 py-8 transition-colors hover:bg-accent/30"
-          >
-            <div className="flex items-center gap-2 text-foreground">
-              {logo.svg}
-              <span className="text-lg font-bold">{logo.name}</span>
-            </div>
-            <span className="flex items-center gap-1 text-sm text-muted-foreground opacity-0 transition-all duration-300 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0">
-              Daha Fazla <ArrowRight className="size-3" />
-            </span>
-          </a>
-        ))}
+      <div className="mx-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 border-y border-[oklch(.922_0_0)] divide-x divide-y divide-[oklch(.922_0_0)]">
+          {logos.map((logo) => (
+            <a
+              key={logo.name}
+              href="#"
+              className="group relative flex flex-col items-center justify-center gap-2 px-6 py-8 transition-colors hover:bg-accent/30"
+            >
+              <div className="flex items-center gap-2 text-foreground">
+                {logo.svg}
+                <span className="text-lg font-bold">{logo.name}</span>
+              </div>
+              <span className="flex items-center gap-1 text-sm text-muted-foreground opacity-0 transition-all duration-300 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0">
+                Daha Fazla <ArrowRight className="size-3" />
+              </span>
+            </a>
+          ))}
+        </div>
       </div>
+
+      <div className="h-12" />
     </section>
   );
 }
