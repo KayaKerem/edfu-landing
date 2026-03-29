@@ -104,12 +104,12 @@ export function Navbar() {
             {/* Desktop nav links - absolute center */}
             <ul
               ref={navRef}
-              className="absolute left-1/2 -translate-x-1/2 hidden h-11 w-fit items-center justify-center rounded-full px-2 md:flex"
+              className="absolute left-1/2 -translate-x-1/2 hidden h-11 items-center justify-center rounded-full px-2 md:flex whitespace-nowrap"
             >
               {/* Animated pill indicator */}
               {pillStyle.width > 0 && (
                 <motion.li
-                  className="absolute inset-0 my-1.5 rounded-full border border-border bg-background"
+                  className="absolute inset-y-0 my-1.5 rounded-full border border-border bg-background"
                   animate={{ left: pillStyle.left, width: pillStyle.width }}
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   style={{ listStyle: "none" }}
