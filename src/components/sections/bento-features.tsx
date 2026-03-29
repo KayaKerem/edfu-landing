@@ -39,11 +39,12 @@ function ChatMockup() {
     // Thinking dots for a moment, then start typing
     setTimeout(() => {
       setIsThinking(false);
-      let i = 0;
+      const words = AI_RESPONSE.split(" ");
+      let w = 0;
       const interval = setInterval(() => {
-        i++;
-        setDisplayedText(AI_RESPONSE.slice(0, i));
-        if (i >= AI_RESPONSE.length) {
+        w++;
+        setDisplayedText(words.slice(0, w).join(" "));
+        if (w >= words.length) {
           clearInterval(interval);
           setTimeout(() => {
             setDisplayedText("");
@@ -52,7 +53,7 @@ function ChatMockup() {
             setTimeout(() => startStreaming(), 1000);
           }, 5000);
         }
-      }, 30);
+      }, 80);
     }, 1500);
   }, []);
 
@@ -101,8 +102,8 @@ function ChatMockup() {
                   <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground/50 [animation-delay:300ms]" />
                 </div>
               ) : (
-                <div className="overflow-hidden transition-[max-height] duration-300 ease-out" style={{ maxHeight: displayedText ? 200 : 0 }}>
-                  <p className="text-sm text-muted-foreground">{displayedText}</p>
+                <div className="overflow-hidden transition-[max-height] duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]" style={{ maxHeight: displayedText ? 300 : 0 }}>
+                  <p className="text-sm text-muted-foreground transition-opacity duration-500 ease-out" style={{ opacity: displayedText ? 1 : 0 }}>{displayedText}</p>
                 </div>
               )}
             </div>
