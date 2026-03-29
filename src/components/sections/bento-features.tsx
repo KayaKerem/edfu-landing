@@ -52,7 +52,7 @@ function ChatMockup() {
             setTimeout(() => startStreaming(), 1000);
           }, 5000);
         }
-      }, 20);
+      }, 35);
     }, 1500);
   }, []);
 
