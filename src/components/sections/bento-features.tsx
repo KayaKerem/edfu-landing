@@ -74,7 +74,7 @@ function ChatMockup() {
               </svg>
             </div>
             {/* Response bubble with streaming text */}
-            <div className="min-w-[220px] rounded-xl border border-border bg-accent p-4 shadow-[0_0_10px_rgba(0,0,0,0.05)] md:min-w-[300px]">
+            <div className="max-w-[280px] rounded-xl border border-border bg-accent p-4 shadow-[0_0_10px_rgba(0,0,0,0.05)]">
               <div className="overflow-hidden transition-[max-height] duration-300 ease-out" style={{ maxHeight: displayedText ? 200 : 0 }}>
                 <p className="text-sm text-muted-foreground">{displayedText}</p>
               </div>
