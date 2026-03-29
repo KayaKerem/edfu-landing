@@ -207,6 +207,9 @@ export function BentoFeatures() {
       {/* Hatched areas - full section height, positioned at inner line */}
       <div className="pointer-events-none absolute inset-y-0 left-6 w-4 md:w-14 text-primary/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" />
       <div className="pointer-events-none absolute inset-y-0 right-6 w-4 md:w-14 text-primary/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" />
+      {/* Vertical lines at grid edges (3rd lines) - full section height */}
+      <div className="pointer-events-none absolute inset-y-0 left-10 md:left-20 w-px bg-[oklch(.922_0_0)]" />
+      <div className="pointer-events-none absolute inset-y-0 right-10 md:right-20 w-px bg-[oklch(.922_0_0)]" />
 
       <div className="py-20">
         {/* Header */}
