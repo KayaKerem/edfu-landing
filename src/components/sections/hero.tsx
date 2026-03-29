@@ -16,7 +16,7 @@ export function Hero() {
     <section id="hero" className="relative overflow-hidden">
       {/* Radial gradient background */}
       <div
-        className="absolute inset-0 -z-10 h-[600px] md:h-[800px] rounded-b-xl"
+        className="absolute inset-0 -z-10 h-[900px] md:h-[1100px] rounded-b-xl"
         style={{
           background:
             "radial-gradient(125% 125% at 50% 10%, var(--background) 40%, var(--primary) 100%)",
