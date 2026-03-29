@@ -34,7 +34,7 @@ export function Hero() {
         </h1>
 
         {/* Description */}
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+        <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg text-center text-muted-foreground font-medium text-balance leading-relaxed tracking-tight">
           Dijital iş akışlarınızı kolaylaştırmak ve sıradan görevleri halletmek
           için tasarlanan yapay zeka asistanı, böylece gerçekten önemli olana
           odaklanabilirsiniz
