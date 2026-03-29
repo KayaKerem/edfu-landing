@@ -84,7 +84,7 @@ export function Logos() {
             <a
               key={logo.name}
               href="#"
-              className={`group relative flex flex-col items-center justify-center px-6 py-10 transition-colors hover:bg-accent/30 overflow-hidden ${
+              className={`group relative flex flex-col items-center justify-center px-6 py-10 overflow-hidden ${
                 i < 4 ? "border-b border-[oklch(.922_0_0)]" : ""
               }`}
             >
