@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 const FREE_FEATURES = [
   "Özel alan adı",
@@ -82,9 +81,12 @@ export function Pricing() {
               </p>
             </div>
 
-            <Button variant="outline" className="mb-6 w-full">
+            <a
+              href="#"
+              className="mb-6 flex h-10 w-full items-center justify-center rounded-full border border-border bg-background text-sm font-normal tracking-wide text-foreground transition-all ease-out hover:bg-accent active:scale-95"
+            >
               Ücretsiz Başla
-            </Button>
+            </a>
 
             <ul className="space-y-3">
               {FREE_FEATURES.map((feature) => (
@@ -116,9 +118,12 @@ export function Pricing() {
               </p>
             </div>
 
-            <Button variant="default" className="mb-6 w-full">
+            <a
+              href="#"
+              className="mb-6 flex h-10 w-full items-center justify-center rounded-full bg-primary text-sm font-normal tracking-wide text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] transition-all ease-out hover:bg-primary/80 active:scale-95"
+            >
               Pro&apos;ya Yükselt
-            </Button>
+            </a>
 
             <ul className="space-y-3">
               {FREE_FEATURES.map((feature) => (
@@ -153,11 +158,12 @@ export function Pricing() {
               </p>
             </div>
 
-            <Button
-              className="mb-6 w-full bg-foreground text-background hover:bg-foreground/90"
+            <a
+              href="#"
+              className="mb-6 flex h-10 w-full items-center justify-center rounded-full bg-foreground text-sm font-normal tracking-wide text-background shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.06] transition-all ease-out hover:bg-foreground/90 active:scale-95"
             >
               Satışla İletişim
-            </Button>
+            </a>
 
             <ul className="space-y-3">
               {FREE_FEATURES.map((feature) => (
