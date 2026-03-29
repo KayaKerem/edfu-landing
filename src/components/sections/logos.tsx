@@ -73,7 +73,7 @@ export function Logos() {
   return (
     <section className="w-full">
       <div className="py-12 px-4 sm:px-6">
-        <p className="text-center text-base text-muted-foreground font-medium">
+        <p className="text-center text-base text-muted-foreground font-medium" style={{ fontFamily: "var(--font-geist)" }}>
           Hızla büyüyen startup&apos;ların tercihi
         </p>
       </div>
