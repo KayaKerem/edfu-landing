@@ -34,7 +34,7 @@ export function Hero() {
         </h1>
 
         {/* Description */}
-        <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg text-center text-muted-foreground font-medium text-balance leading-relaxed tracking-tight">
+        <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg text-center text-muted-foreground font-medium text-balance tracking-tight" style={{ lineHeight: "calc(1.75 / 1.125)" }}>
           Dijital iş akışlarınızı kolaylaştırmak ve sıradan görevleri halletmek
           için tasarlanan yapay zeka asistanı, böylece gerçekten önemli olana
           odaklanabilirsiniz
