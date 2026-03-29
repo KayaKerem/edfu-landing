@@ -1,17 +1,17 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import createGlobe, { type COBEOptions } from "cobe"
+import createGlobe from "cobe"
 import { useMotionValue, useSpring } from "motion/react"
 
 import { cn } from "@/lib/utils"
 
 const MOVEMENT_DAMPING = 1400
 
-const GLOBE_CONFIG: COBEOptions = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const GLOBE_CONFIG: Record<string, any> = {
   width: 800,
   height: 800,
-  onRender: () => {},
   devicePixelRatio: 2,
   phi: 0,
   theta: 0.3,
@@ -41,7 +41,7 @@ export function Globe({
   config = GLOBE_CONFIG,
 }: {
   className?: string
-  config?: COBEOptions
+  config?: Record<string, any>
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const phiRef = useRef(0)
@@ -81,17 +81,18 @@ export function Globe({
     window.addEventListener("resize", onResize)
     onResize()
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const globe = createGlobe(canvasRef.current!, {
       ...config,
       width: widthRef.current * 2,
       height: widthRef.current * 2,
-      onRender: (state) => {
+      onRender: (state: any) => {
         if (!pointerInteracting.current) phiRef.current += 0.005
         state.phi = phiRef.current + rs.get()
         state.width = widthRef.current * 2
         state.height = widthRef.current * 2
       },
-    })
+    } as any)
 
     setTimeout(() => (canvasRef.current!.style.opacity = "1"), 0)
     return () => {
