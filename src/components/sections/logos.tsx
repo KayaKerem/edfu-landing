@@ -92,8 +92,8 @@ export function Logos() {
                 {logo.svg}
                 <span className="text-lg font-bold">{logo.name}</span>
               </div>
-              <span className="absolute bottom-4 flex items-center gap-1 text-sm font-medium text-muted-foreground opacity-0 transition-all duration-300 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0">
-                Daha Fazla <ArrowRight className="size-3.5" />
+              <span className="absolute bottom-4 flex items-center gap-1 text-sm font-medium text-foreground/80 opacity-0 transition-all duration-300 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0">
+                Daha Fazla <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
               </span>
             </a>
           ))}
