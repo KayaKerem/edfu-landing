@@ -16,7 +16,7 @@ export default function Home() {
     <>
       <Navbar />
       {/* Side borders */}
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-7xl border-x border-[oklch(.922_0_0)]">
         <div className="pointer-events-none absolute inset-y-0 left-6 z-10 w-px bg-[oklch(.922_0_0)]" />
         <div className="pointer-events-none absolute inset-y-0 right-6 z-10 w-px bg-[oklch(.922_0_0)]" />
 
