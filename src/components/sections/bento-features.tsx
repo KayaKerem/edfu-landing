@@ -93,7 +93,7 @@ function ChatMockup() {
               </svg>
             </div>
             {/* Response bubble with streaming text */}
-            <div className="max-w-[280px] rounded-xl border border-border bg-accent p-4 shadow-[0_0_10px_rgba(0,0,0,0.05)]">
+            <div className="max-w-[280px] rounded-xl border border-border bg-accent shadow-[0_0_10px_rgba(0,0,0,0.05)] transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]" style={{ padding: isThinking || displayedText ? "1rem" : "0.75rem 1rem" }}>
               {isThinking ? (
                 <div className="flex gap-1 py-1">
                   <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground/50 [animation-delay:0ms]" />
@@ -101,9 +101,7 @@ function ChatMockup() {
                   <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground/50 [animation-delay:300ms]" />
                 </div>
               ) : (
-                <div className="overflow-hidden transition-[max-height] duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]" style={{ maxHeight: displayedText ? 300 : 0 }}>
-                  <p className="text-sm text-muted-foreground transition-opacity duration-500 ease-out" style={{ opacity: displayedText ? 1 : 0 }}>{displayedText}</p>
-                </div>
+                <p className="text-sm text-muted-foreground">{displayedText}</p>
               )}
             </div>
           </div>
