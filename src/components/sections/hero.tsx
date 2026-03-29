@@ -25,12 +25,12 @@ export function Hero() {
       <div className="mx-auto max-w-6xl px-4 pt-40 pb-16 text-center">
         {/* Badge */}
         <div className="group mb-8 flex justify-center">
-          <div className="inline-flex items-center rounded-full border border-border bg-background px-4 py-1.5 shadow-sm transition-all hover:border-border/80 hover:bg-accent/30">
-            <LayersIcon className="mr-2 size-4 text-foreground dark:text-white" />
-            <AnimatedShinyText className="text-sm font-medium">
+          <div className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 shadow-sm transition-all hover:border-border/80 hover:bg-accent/30">
+            <LayersIcon className="mr-1.5 size-3.5 text-foreground dark:text-white" />
+            <AnimatedShinyText className="text-xs font-medium">
               Özel otomasyonları keşfedin
             </AnimatedShinyText>
-            <ArrowRight className="ml-2 size-3 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight className="ml-1.5 size-2.5 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
           </div>
         </div>
 
