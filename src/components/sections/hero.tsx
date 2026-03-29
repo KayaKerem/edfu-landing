@@ -1,7 +1,7 @@
 export function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden">
-      <div className="mx-auto max-w-6xl px-4 pt-20 pb-16 text-center">
+      <div className="mx-auto max-w-6xl px-4 pt-28 pb-16 text-center">
         {/* Badge */}
         <div className="mb-8 flex justify-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-1.5 text-sm font-medium text-foreground shadow-sm">
