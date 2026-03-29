@@ -1,39 +1,86 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 
+const AI_RESPONSE = "Takvim kalıplarınıza ve tercihlerinize dayanarak, ekip toplantısını Salı saat 14:00'e planlamanızı öneririm. Bu zaman dilimi geçmişte en yüksek katılım oranına sahipti ve diğer tekrarlayan toplantılarla çakışmıyor.";
+
 /* ------------------------------------------------------------------ */
-/*  Card 1 – Chat Mockup                                              */
+/*  Card 1 – Chat Mockup with streaming animation                     */
 /* ------------------------------------------------------------------ */
 function ChatMockup() {
+  const [displayedText, setDisplayedText] = useState("");
+  const [showResponse, setShowResponse] = useState(false);
+
+  useEffect(() => {
+    // Show user message first, then start streaming after delay
+    const startTimer = setTimeout(() => {
+      setShowResponse(true);
+      let i = 0;
+      const interval = setInterval(() => {
+        i++;
+        setDisplayedText(AI_RESPONSE.slice(0, i));
+        if (i >= AI_RESPONSE.length) {
+          clearInterval(interval);
+          // Reset after a pause and replay
+          setTimeout(() => {
+            setDisplayedText("");
+            setShowResponse(false);
+            setTimeout(() => {
+              setShowResponse(true);
+              let j = 0;
+              const interval2 = setInterval(() => {
+                j++;
+                setDisplayedText(AI_RESPONSE.slice(0, j));
+                if (j >= AI_RESPONSE.length) clearInterval(interval2);
+              }, 30);
+            }, 1000);
+          }, 4000);
+        }
+      }, 30);
+      return () => clearInterval(interval);
+    }, 1500);
+    return () => clearTimeout(startTimer);
+  }, []);
+
   return (
-    <div className="flex flex-col gap-3 p-6 pt-8">
-      <div className="flex items-end justify-end gap-2">
-        <div className="max-w-[70%] rounded-2xl bg-primary px-4 py-2.5 text-sm text-primary-foreground">
-          Bu haftanın raporunu hazırlayabilir misin?
+    <div className="relative flex h-full w-full flex-col items-center justify-center p-4">
+      {/* Bottom fade */}
+      <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-20 w-full bg-gradient-to-t from-background to-transparent" />
+
+      <div className="mx-auto flex w-full max-w-md flex-col gap-3" style={{ transform: "translateY(-40px)" }}>
+        {/* User message */}
+        <div className="flex items-end justify-end gap-3">
+          <div className="ml-auto max-w-[280px] rounded-2xl bg-primary p-4 text-sm text-primary-foreground shadow-[0_0_10px_rgba(0,0,0,0.05)]">
+            <p>Merhaba, herkes için uygun bir ekip toplantısı planlamam gerekiyor. Uygun zaman dilimi bulmak için öneriniz var mı?</p>
+          </div>
+          <div className="flex shrink-0 items-center rounded-full border border-border bg-background">
+            <img
+              src="https://randomuser.me/api/portraits/women/79.jpg"
+              alt="Kullanıcı"
+              className="size-8 rounded-full"
+            />
+          </div>
         </div>
-        <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-semibold">
-          K
-        </div>
-      </div>
-      <div className="flex items-end gap-2">
-        <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/20 text-xs font-semibold text-primary">
-          AI
-        </div>
-        <div className="max-w-[70%] rounded-2xl border border-border bg-card px-4 py-2.5 text-sm text-foreground">
-          Tabii! Rapor hazırlanıyor... Veriler analiz edildi, 3 önemli bulgu var.
-        </div>
-      </div>
-      <div className="flex items-end gap-2">
-        <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/20 text-xs font-semibold text-primary">
-          AI
-        </div>
-        <div className="flex gap-1 rounded-2xl border border-border bg-card px-4 py-3">
-          <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground/40 [animation-delay:0ms]" />
-          <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground/40 [animation-delay:150ms]" />
-          <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground/40 [animation-delay:300ms]" />
-        </div>
+
+        {/* AI response */}
+        {showResponse && (
+          <div className="flex items-start gap-2">
+            {/* AI icon */}
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-background shadow-[0_0_10px_rgba(0,0,0,0.05)]">
+              <svg width="42" height="24" viewBox="0 0 42 24" fill="none" className="size-4 fill-primary">
+                <path d="M22.3546 0.96832C22.9097 0.390834 23.6636 0.0664062 24.4487 0.0664062C27.9806 0.0664062 31.3091 0.066408 34.587 0.0664146C41.1797 0.0664284 44.481 8.35854 39.8193 13.2082L29.6649 23.7718C29.1987 24.2568 28.4016 23.9133 28.4016 23.2274V13.9234L29.5751 12.7025C30.5075 11.7326 29.8472 10.0742 28.5286 10.0742H13.6016L22.3546 0.96832Z" />
+                <path d="M19.6469 23.0305C19.0919 23.608 18.338 23.9324 17.5529 23.9324C14.021 23.9324 10.6925 23.9324 7.41462 23.9324C0.821896 23.9324 -2.47942 15.6403 2.18232 10.7906L12.3367 0.227022C12.8029 -0.257945 13.6 0.0855283 13.6 0.771372L13.6 10.0754L12.4265 11.2963C11.4941 12.2662 12.1544 13.9246 13.473 13.9246L28.4001 13.9246L19.6469 23.0305Z" />
+              </svg>
+            </div>
+            {/* Response bubble with streaming text */}
+            <div className="min-w-[220px] rounded-xl border border-border bg-accent p-4 shadow-[0_0_10px_rgba(0,0,0,0.05)] md:min-w-[300px]">
+              <div className="overflow-hidden transition-[max-height] duration-300 ease-out" style={{ maxHeight: displayedText ? 200 : 0 }}>
+                <p className="text-sm text-muted-foreground">{displayedText}</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -240,8 +287,8 @@ export function BentoFeatures() {
               </div>
               {/* Text area */}
               <div className="px-6 pb-8">
-                <h3 className="text-base font-bold text-foreground">{feature.title}</h3>
-                <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>{feature.title}</h3>
+                <p className="mt-1.5 text-base text-muted-foreground">{feature.description}</p>
               </div>
             </div>
           ))}
