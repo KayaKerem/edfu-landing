@@ -203,23 +203,25 @@ const features = [
 /* ------------------------------------------------------------------ */
 export function BentoFeatures() {
   return (
-    <section id="features" className="py-20">
-      {/* Header */}
-      <div className="mx-auto mb-14 max-w-2xl px-4 text-center">
-        <h2 className="text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
-          İş Akışınızı Yapay Zeka ile Güçlendirin
-        </h2>
-        <p className="mt-4 text-base text-muted-foreground font-medium text-balance tracking-tight">
-          Yapay zeka destekli araçlarla üretkenliğinizi artırın, tekrarlayan
-          görevleri otomatikleştirin ve ekibinizle daha akıllı çalışın.
-        </p>
-      </div>
+    <section id="features" className="relative">
+      {/* Hatched areas - full section height, positioned at inner line */}
+      <div className="pointer-events-none absolute inset-y-0 left-6 w-4 md:w-14 text-primary/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" />
+      <div className="pointer-events-none absolute inset-y-0 right-6 w-4 md:w-14 text-primary/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" />
 
-      {/* Bento Grid with border lines and hatched edges */}
-      <div className="relative mx-6 md:mx-20">
-        {/* Hatched areas on both sides */}
-        <HatchedEdge side="left" />
-        <HatchedEdge side="right" />
+      <div className="py-20">
+        {/* Header */}
+        <div className="mx-auto mb-14 max-w-2xl px-4 text-center">
+          <h2 className="text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
+            İş Akışınızı Yapay Zeka ile Güçlendirin
+          </h2>
+          <p className="mt-4 text-base text-muted-foreground font-medium text-balance tracking-tight">
+            Yapay zeka destekli araçlarla üretkenliğinizi artırın, tekrarlayan
+            görevleri otomatikleştirin ve ekibinizle daha akıllı çalışın.
+          </p>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="relative mx-10 md:mx-20">
 
         <div className="grid grid-cols-1 md:grid-cols-2 border border-[oklch(.922_0_0)]">
           {features.map((feature, i) => (
@@ -240,6 +242,7 @@ export function BentoFeatures() {
               </div>
             </div>
           ))}
+        </div>
         </div>
       </div>
     </section>
