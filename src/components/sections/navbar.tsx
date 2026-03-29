@@ -90,7 +90,7 @@ export function Navbar() {
               : "bg-transparent"
           }`}
         >
-          <div className="flex h-14 items-center justify-between px-4 sm:px-5">
+          <div className="relative flex h-14 items-center justify-between px-4 sm:px-5">
             {/* Logo */}
             <a href="#hero" className="flex items-center gap-2">
               <div className="flex size-8 items-center justify-center rounded-lg bg-primary">
@@ -101,10 +101,10 @@ export function Navbar() {
               </span>
             </a>
 
-            {/* Desktop nav links */}
+            {/* Desktop nav links - absolute center */}
             <ul
               ref={navRef}
-              className="relative mx-auto hidden h-11 w-fit items-center justify-center rounded-full px-2 md:flex"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden h-11 w-fit items-center justify-center rounded-full px-2 md:flex"
             >
               {/* Animated pill indicator */}
               {pillStyle.width > 0 && (
