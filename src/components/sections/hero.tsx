@@ -27,7 +27,7 @@ export function Hero() {
         </div>
 
         {/* Heading */}
-        <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tighter text-balance text-center text-foreground">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium text-balance text-center text-foreground" style={{ letterSpacing: "-0.05em" }}>
           AI Asistanınızla Tanışın
           <br />
           İş Akışınızı Kolaylaştırın
