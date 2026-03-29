@@ -126,6 +126,7 @@ export function Navbar() {
                 >
                   <a
                     href={link.href}
+                    style={{ fontFamily: "var(--font-geist)" }}
                     className={`relative z-10 flex h-full cursor-pointer items-center justify-center px-4 py-2 text-sm font-medium tracking-tight transition-colors duration-200 ${
                       activeSection === link.sectionId
                         ? "text-foreground"

@@ -35,7 +35,7 @@ export function Hero() {
         </div>
 
         {/* Heading */}
-        <h1 className="text-4xl md:text-5xl lg:text-[3rem] xl:text-6xl font-medium text-balance text-center text-foreground leading-none" style={{ letterSpacing: "-0.05em" }}>
+        <h1 className="text-4xl md:text-5xl lg:text-[3rem] xl:text-6xl font-medium text-balance text-center text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
           AI Asistanınızla Tanışın
           <br />
           İş Akışınızı Kolaylaştırın
