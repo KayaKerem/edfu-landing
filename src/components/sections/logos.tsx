@@ -79,7 +79,7 @@ export function Logos() {
       </div>
 
       <div className="mx-6">
-        <div className="grid grid-cols-2 sm:grid-cols-4 border-y border-[oklch(.922_0_0)] divide-x divide-y divide-[oklch(.922_0_0)]">
+        <div className="grid grid-cols-2 sm:grid-cols-4 border border-[oklch(.922_0_0)] divide-x divide-y divide-[oklch(.922_0_0)]">
           {logos.map((logo) => (
             <a
               key={logo.name}
