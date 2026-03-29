@@ -211,9 +211,9 @@ export function BentoFeatures() {
       <div className="pointer-events-none absolute inset-y-0 left-10 md:left-20 w-px bg-[oklch(.922_0_0)]" />
       <div className="pointer-events-none absolute inset-y-0 right-10 md:right-20 w-px bg-[oklch(.922_0_0)]" />
 
-      <div className="pt-20">
+      <div className="pt-12">
         {/* Header */}
-        <div className="mx-auto mb-14 max-w-2xl px-4 text-center">
+        <div className="mx-auto mb-10 max-w-2xl px-4 text-center">
           <h2 className="text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
             İş Akışınızı Yapay Zeka ile Güçlendirin
           </h2>
