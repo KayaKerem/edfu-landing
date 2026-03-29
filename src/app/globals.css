@@ -63,6 +63,17 @@
       transform: translateY(calc(-100% - var(--gap)));
     }
   }
+  --animate-slide-up: slideUp 0.5s ease-out;
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   --animate-shiny-text: shiny-text 8s infinite
 ;
   @keyframes shiny-text {

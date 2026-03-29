@@ -84,7 +84,7 @@ function ChatMockup() {
 
         {/* AI response */}
         {showResponse && (
-          <div className="flex items-start gap-2">
+          <div className="flex items-start gap-2 animate-slide-up">
             {/* AI icon */}
             <div className="flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-background shadow-[0_0_10px_rgba(0,0,0,0.05)]">
               <svg width="42" height="24" viewBox="0 0 42 24" fill="none" className="size-4 fill-primary">
