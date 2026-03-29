@@ -126,10 +126,10 @@ export function Navbar() {
                 >
                   <a
                     href={link.href}
-                    className={`relative z-10 flex items-center px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+                    className={`relative z-10 flex items-center px-4 py-2 text-sm font-medium tracking-tight transition-colors duration-200 ${
                       activeSection === link.sectionId
                         ? "text-foreground"
-                        : "text-muted-foreground hover:text-foreground"
+                        : "text-foreground/60 hover:text-foreground"
                     }`}
                   >
                     {link.label}
