@@ -211,7 +211,7 @@ export function BentoFeatures() {
       <div className="pointer-events-none absolute inset-y-0 left-10 md:left-20 w-px bg-[oklch(.922_0_0)]" />
       <div className="pointer-events-none absolute inset-y-0 right-10 md:right-20 w-px bg-[oklch(.922_0_0)]" />
 
-      <div className="py-20">
+      <div className="pt-20">
         {/* Header */}
         <div className="mx-auto mb-14 max-w-2xl px-4 text-center">
           <h2 className="text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
@@ -226,7 +226,7 @@ export function BentoFeatures() {
         {/* Bento Grid */}
         <div className="relative mx-10 md:mx-20">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 border border-[oklch(.922_0_0)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 border-t border-x border-[oklch(.922_0_0)]">
           {features.map((feature, i) => (
             <div
               key={feature.title}
