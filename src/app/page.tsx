@@ -1,7 +1,14 @@
+import { Navbar } from "@/components/sections/navbar";
+
 export default function Home() {
   return (
-    <main className="flex items-center justify-center min-h-screen">
-      <h1 className="text-4xl font-heading font-bold">Edfu Landing Page</h1>
-    </main>
+    <>
+      <Navbar />
+      <main>
+        <section className="py-20 text-center">
+          <h1 className="text-4xl font-heading font-bold">Edfu Landing Page</h1>
+        </section>
+      </main>
+    </>
   );
 }
