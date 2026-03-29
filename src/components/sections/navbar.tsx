@@ -104,12 +104,12 @@ export function Navbar() {
             {/* Desktop nav links */}
             <ul
               ref={navRef}
-              className="relative mx-auto hidden items-center md:flex"
+              className="relative mx-auto hidden h-11 w-fit items-center justify-center rounded-full px-2 md:flex"
             >
               {/* Animated pill indicator */}
               {pillStyle.width > 0 && (
                 <motion.li
-                  className="absolute inset-y-0 -my-0.5 rounded-full border border-border bg-background"
+                  className="absolute inset-0 my-1.5 rounded-full border border-border bg-background"
                   animate={{ left: pillStyle.left, width: pillStyle.width }}
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   style={{ listStyle: "none" }}
@@ -126,7 +126,7 @@ export function Navbar() {
                 >
                   <a
                     href={link.href}
-                    className={`relative z-10 flex items-center px-4 py-2 text-sm font-medium tracking-tight transition-colors duration-200 ${
+                    className={`relative z-10 flex h-full cursor-pointer items-center justify-center px-4 py-2 text-sm font-medium tracking-tight transition-colors duration-200 ${
                       activeSection === link.sectionId
                         ? "text-foreground"
                         : "text-foreground/60 hover:text-foreground"
