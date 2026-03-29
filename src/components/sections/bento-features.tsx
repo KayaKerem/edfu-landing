@@ -314,7 +314,7 @@ export function BentoFeatures() {
           <h2 className="text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
             İş Akışınızı Yapay Zeka ile Güçlendirin
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="mt-4 text-base text-muted-foreground font-medium text-balance tracking-tight">
             Yapay zeka destekli araçlarla üretkenliğinizi artırın, tekrarlayan
             görevleri otomatikleştirin ve ekibinizle daha akıllı çalışın.
           </p>
