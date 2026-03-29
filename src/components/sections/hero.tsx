@@ -22,7 +22,7 @@ export function Hero() {
             "radial-gradient(125% 125% at 50% 10%, var(--background) 40%, var(--primary) 100%)",
         }}
       />
-      <div className="mx-auto max-w-6xl px-4 pt-28 pb-16 text-center">
+      <div className="mx-auto max-w-6xl px-4 pt-40 pb-16 text-center">
         {/* Badge */}
         <div className="group mb-8 flex justify-center">
           <div className="inline-flex items-center rounded-full border border-border bg-background px-4 py-1.5 shadow-sm transition-all hover:border-border/80 hover:bg-accent/30">
