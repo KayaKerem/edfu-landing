@@ -311,7 +311,7 @@ export function BentoFeatures() {
       <div className="mx-auto max-w-6xl px-4">
         {/* Header */}
         <div className="mx-auto mb-14 max-w-2xl text-center">
-          <h2 className="font-heading text-4xl font-bold sm:text-5xl">
+          <h2 className="text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
             İş Akışınızı Yapay Zeka ile Güçlendirin
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
