@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 
 const AI_RESPONSE = "Takvim kalıplarınıza ve tercihlerinize dayanarak, ekip toplantısını Salı saat 14:00'e planlamanızı öneririm. Bu zaman dilimi geçmişte en yüksek katılım oranına sahipti ve diğer tekrarlayan toplantılarla çakışmıyor.";
@@ -11,40 +11,51 @@ const AI_RESPONSE = "Takvim kalıplarınıza ve tercihlerinize dayanarak, ekip t
 function ChatMockup() {
   const [displayedText, setDisplayedText] = useState("");
   const [showResponse, setShowResponse] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
+  // Intersection Observer - start animation when visible
   useEffect(() => {
-    // Show user message first, then start streaming after delay
-    const startTimer = setTimeout(() => {
-      setShowResponse(true);
-      let i = 0;
-      const interval = setInterval(() => {
-        i++;
-        setDisplayedText(AI_RESPONSE.slice(0, i));
-        if (i >= AI_RESPONSE.length) {
-          clearInterval(interval);
-          // Reset after a pause and replay
-          setTimeout(() => {
-            setDisplayedText("");
-            setShowResponse(false);
-            setTimeout(() => {
-              setShowResponse(true);
-              let j = 0;
-              const interval2 = setInterval(() => {
-                j++;
-                setDisplayedText(AI_RESPONSE.slice(0, j));
-                if (j >= AI_RESPONSE.length) clearInterval(interval2);
-              }, 30);
-            }, 1000);
-          }, 4000);
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
         }
-      }, 30);
-      return () => clearInterval(interval);
-    }, 1500);
-    return () => clearTimeout(startTimer);
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  const startStreaming = useCallback(() => {
+    setShowResponse(true);
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      setDisplayedText(AI_RESPONSE.slice(0, i));
+      if (i >= AI_RESPONSE.length) {
+        clearInterval(interval);
+        // Replay after pause
+        setTimeout(() => {
+          setDisplayedText("");
+          setShowResponse(false);
+          setTimeout(() => startStreaming(), 1000);
+        }, 5000);
+      }
+    }, 30);
   }, []);
 
+  useEffect(() => {
+    if (!isVisible) return;
+    const timer = setTimeout(() => startStreaming(), 1000);
+    return () => clearTimeout(timer);
+  }, [isVisible, startStreaming]);
+
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center p-4">
+    <div ref={containerRef} className="relative flex h-full w-full flex-col items-center justify-center p-4">
       {/* Bottom fade */}
       <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-8 w-full bg-gradient-to-t from-background to-transparent" />
 
