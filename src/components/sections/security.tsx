@@ -153,8 +153,8 @@ export function Security() {
                 <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-24 w-full bg-gradient-to-t from-background to-transparent" />
               </div>
               <div className="relative z-20 px-4 sm:px-6 pb-6 sm:pb-8 -mt-4">
-                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>Tam Veri İzolasyonu</h3>
-                <p className="mt-1.5 text-base text-muted-foreground">Her organizasyonun verileri birbirinden tamamen izole. Multi-tenant mimaride şirketinizin bilgileri yalnızca size ait. Hetzner EU altyapısı ile KVKK uyumlu veri barındırma.</p>
+                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>Verileriniz Şifreli ve Güvende</h3>
+                <p className="mt-1.5 text-base text-muted-foreground">Tüm verileriniz uçtan uca şifrelenerek saklanır. Yalnızca sizin erişiminize açık, üçüncü taraflarla paylaşılmaz.</p>
               </div>
             </div>
 
@@ -166,8 +166,8 @@ export function Security() {
                 </div>
               </div>
               <div className="relative z-20 px-4 sm:px-6 pb-6 sm:pb-8 -mt-4">
-                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>Ekibinizle Birlikte Büyür</h3>
-                <p className="mt-1.5 text-base text-muted-foreground">2 kişilik ekipten 50 kişilik organizasyona kadar ölçeklenir. Rol bazlı erişim kontrolü, paylaşılan ve özel çalışma alanları, merkezi yönetim paneli.</p>
+                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>Bugün 2 Kişi, Yarın 50</h3>
+                <p className="mt-1.5 text-base text-muted-foreground">Ekibiniz büyüdükçe şirket hafızası da büyür. Yeni gelen ilk günden her şeye erişir, eski bilgi kaybolmaz.</p>
               </div>
             </div>
           </div>

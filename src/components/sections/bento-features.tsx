@@ -15,7 +15,7 @@ import { Stripe } from "@/components/ui/svgs/stripe";
 import { Vercel } from "@/components/ui/svgs/vercel";
 import { Openai } from "@/components/ui/svgs/openai";
 
-const AI_RESPONSE = "Tedarikçi sözleşmesinin 12. maddesine göre, fesih için 60 gün önceden yazılı bildirim gerekiyor. Ayrıca madde 14'te cezai şartlar tanımlanmıştır.";
+const AI_RESPONSE = "2023 Mart'taki Bursa projesinde NNF ile çalışıldı. Toplantı notlarına göre teslim süresi ve çıktı kalitesinden memnun kalındı, sonraki projede tekrar değerlendirileceği belirtilmiş.";
 
 /* ------------------------------------------------------------------ */
 /*  Card 1 – Chat Mockup with streaming animation                     */
@@ -83,7 +83,7 @@ function ChatMockup() {
         {/* User message */}
         <div className="flex items-end justify-end gap-3">
           <div className="ml-auto max-w-[280px] rounded-2xl bg-primary p-4 text-sm text-primary-foreground shadow-[0_0_10px_rgba(0,0,0,0.05)]">
-            <p>Son yüklediğim tedarikçi sözleşmesindeki fesih koşullarını özetler misin?</p>
+            <p>Geçen yıl Bursa projesinde hangi yazılım ekibiyle çalışmıştık, memnun kalmış mıydık?</p>
           </div>
           <div className="flex shrink-0 items-center rounded-full border border-border bg-background">
             <img
@@ -195,18 +195,18 @@ function IntegrationOrbits() {
 type DragPhase = "idle" | "dragging" | "dropping" | "uploading" | "done";
 
 const uploadedFiles: { name: string; icon: typeof FileText; size: string; color: string; status: "ready" | "processing" }[] = [
-  { name: "Rapor_Q4.pdf", icon: FileText, size: "2.4 MB", color: "text-red-500", status: "ready" },
-  { name: "Banner.png", icon: ImageIcon, size: "890 KB", color: "text-blue-500", status: "ready" },
-  { name: "Sunum_v2.docx", icon: FileText, size: "1.8 MB", color: "text-blue-600", status: "ready" },
-  { name: "Finans_2024.xlsx", icon: FileText, size: "3.2 MB", color: "text-emerald-600", status: "processing" },
-  { name: "Logo_Final.svg", icon: ImageIcon, size: "64 KB", color: "text-blue-500", status: "ready" },
-  { name: "Sözleşme.pdf", icon: FileText, size: "540 KB", color: "text-red-500", status: "ready" },
-  { name: "Ekip_Foto.jpg", icon: ImageIcon, size: "4.1 MB", color: "text-blue-500", status: "processing" },
-  { name: "Strateji.pptx", icon: FileText, size: "7.6 MB", color: "text-orange-500", status: "ready" },
-  { name: "Müşteri_Liste.csv", icon: FileText, size: "220 KB", color: "text-emerald-600", status: "ready" },
-  { name: "Tasarım_v3.fig", icon: ImageIcon, size: "12 MB", color: "text-purple-500", status: "processing" },
-  { name: "Bütçe_Q1.xlsx", icon: FileText, size: "1.1 MB", color: "text-emerald-600", status: "ready" },
-  { name: "Toplantı_Notu.docx", icon: FileText, size: "380 KB", color: "text-blue-600", status: "ready" },
+  { name: "Tedarikçi_Sözleşme.pdf", icon: FileText, size: "2.4 MB", color: "text-red-500", status: "ready" },
+  { name: "KVKK_Politikası.pdf", icon: FileText, size: "890 KB", color: "text-red-500", status: "ready" },
+  { name: "Ürün_Kataloğu.docx", icon: FileText, size: "1.8 MB", color: "text-blue-600", status: "ready" },
+  { name: "Bütçe_2025_Q1.xlsx", icon: FileText, size: "3.2 MB", color: "text-emerald-600", status: "processing" },
+  { name: "İK_El_Kitabı.pdf", icon: FileText, size: "1.5 MB", color: "text-red-500", status: "ready" },
+  { name: "Satış_Raporu.xlsx", icon: FileText, size: "540 KB", color: "text-emerald-600", status: "ready" },
+  { name: "Müşteri_Brifingi.docx", icon: FileText, size: "420 KB", color: "text-blue-600", status: "processing" },
+  { name: "ISO_27001_Prosedür.pdf", icon: FileText, size: "7.6 MB", color: "text-red-500", status: "ready" },
+  { name: "Organizasyon_Şeması.pdf", icon: FileText, size: "220 KB", color: "text-red-500", status: "ready" },
+  { name: "Yıllık_Faaliyet.pdf", icon: FileText, size: "12 MB", color: "text-red-500", status: "processing" },
+  { name: "Toplantı_Tutanağı.docx", icon: FileText, size: "380 KB", color: "text-blue-600", status: "ready" },
+  { name: "Fiyat_Listesi_2025.xlsx", icon: FileText, size: "1.1 MB", color: "text-emerald-600", status: "ready" },
 ];
 
 function DriveUploadMockup() {
@@ -333,7 +333,7 @@ function DriveUploadMockup() {
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             >
               <FileText className="size-4 text-blue-600 shrink-0" />
-              <span className="text-xs font-medium text-foreground whitespace-nowrap">Sözleşme_Şablonu.pdf</span>
+              <span className="text-xs font-medium text-foreground whitespace-nowrap">Tedarikçi_Anlaşması_2025.pdf</span>
             </motion.div>
           </motion.div>
         )}
@@ -371,7 +371,7 @@ function DriveUploadMockup() {
                   </div>
                   <div className="text-center">
                     <p className="text-sm font-medium text-foreground">İndeksleniyor...</p>
-                    <p className="text-xs text-muted-foreground">Sözleşme_Şablonu.pdf · {uploadProgress}%</p>
+                    <p className="text-xs text-muted-foreground">Tedarikçi_Anlaşması_2025.pdf · {uploadProgress}%</p>
                   </div>
                 </>
               ) : (
@@ -385,7 +385,7 @@ function DriveUploadMockup() {
                   </motion.div>
                   <div className="text-center">
                     <p className="text-sm font-medium text-foreground">İndekslendi</p>
-                    <p className="text-xs text-muted-foreground">Sözleşme_Şablonu.pdf · 1.8 MB</p>
+                    <p className="text-xs text-muted-foreground">Tedarikçi_Anlaşması_2025.pdf · 1.8 MB</p>
                   </div>
                 </>
               )}
