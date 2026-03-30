@@ -9,6 +9,9 @@ import { Drive } from "@/components/ui/svgs/drive";
 import { GithubDark } from "@/components/ui/svgs/githubDark";
 import { Discord } from "@/components/ui/svgs/discord";
 import { Linear } from "@/components/ui/svgs/linear";
+import { Stripe } from "@/components/ui/svgs/stripe";
+import { Vercel } from "@/components/ui/svgs/vercel";
+import { Openai } from "@/components/ui/svgs/openai";
 
 const AI_RESPONSE = "Takvim kalıplarınıza ve tercihlerinize dayanarak, ekip toplantısını Salı saat 14:00'e planlamanızı öneririm. Bu zaman dilimi geçmişte en yüksek katılım oranına sahipti ve diğer tekrarlayan toplantılarla çakışmıyor.";
 
@@ -143,33 +146,42 @@ function IntegrationOrbits() {
         <div className={`relative flex items-center justify-center transition-all duration-[1200ms] ease-out ${isVisible ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} style={{ width: 500, height: 500, transitionDelay: "1200ms" }}>
           <img src="/ai-icon-filled.svg" alt="Edfu" className="relative z-10 size-16 rounded-xl" />
 
-          <OrbitingCircles iconSize={44} radius={120} speed={0.5}>
-            <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
-              <Slack className="size-6" />
+          <OrbitingCircles iconSize={48} radius={120} speed={0.5}>
+            <div className="flex size-12 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2.5">
+              <Slack className="size-7" />
             </div>
-            <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
-              <Figma className="size-6" />
+            <div className="flex size-12 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2.5">
+              <Figma className="size-7" />
             </div>
-          </OrbitingCircles>
-
-          <OrbitingCircles iconSize={40} radius={195} speed={0.4} reverse>
-            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
-              <Notion className="size-5" />
-            </div>
-            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
-              <Drive className="size-5" />
-            </div>
-            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
-              <Linear className="size-5" />
+            <div className="flex size-12 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2.5">
+              <Openai className="size-7" />
             </div>
           </OrbitingCircles>
 
-          <OrbitingCircles iconSize={36} radius={250} speed={0.3}>
-            <div className="flex size-9 items-center justify-center rounded-full border border-border bg-background shadow-sm p-1.5">
+          <OrbitingCircles iconSize={44} radius={195} speed={0.4} reverse>
+            <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
+              <Notion className="size-6" />
+            </div>
+            <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
+              <Drive className="size-6" />
+            </div>
+            <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
+              <Linear className="size-6" />
+            </div>
+            <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
+              <Vercel className="size-6" />
+            </div>
+          </OrbitingCircles>
+
+          <OrbitingCircles iconSize={40} radius={250} speed={0.3}>
+            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
               <GithubDark className="size-5" />
             </div>
-            <div className="flex size-9 items-center justify-center rounded-full border border-border bg-background shadow-sm p-1.5">
+            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
               <Discord className="size-5" />
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
+              <Stripe className="size-5" />
             </div>
           </OrbitingCircles>
         </div>
