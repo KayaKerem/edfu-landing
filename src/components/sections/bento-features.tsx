@@ -290,9 +290,11 @@ export function BentoFeatures() {
               {/* Visual area */}
               <div className="relative flex-1">
                 {feature.visual}
+                {/* Bottom gradient fade into text area */}
+                <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-24 w-full bg-gradient-to-t from-background to-transparent" />
               </div>
               {/* Text area */}
-              <div className="px-6 pb-8">
+              <div className="relative z-20 px-6 pb-8 -mt-4">
                 <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>{feature.title}</h3>
                 <p className="mt-1.5 text-base text-muted-foreground">{feature.description}</p>
               </div>
