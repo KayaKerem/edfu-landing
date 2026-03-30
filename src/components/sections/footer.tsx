@@ -1,4 +1,4 @@
-import { Zap } from "lucide-react";
+import Image from "next/image";
 
 const columns = [
   {
@@ -25,13 +25,8 @@ export function Footer() {
           {/* Brand section */}
           <div className="lg:col-span-2">
             {/* Logo */}
-            <a href="#hero" className="flex items-center gap-2.5">
-              <div className="flex size-8 items-center justify-center rounded-lg bg-primary">
-                <Zap className="size-4.5 fill-primary-foreground text-primary-foreground" />
-              </div>
-              <span className="text-lg font-heading font-bold tracking-tight">
-                Edfu
-              </span>
+            <a href="#hero" className="flex items-center">
+              <Image src="/logo.svg" alt="Edfu" width={120} height={32} className="h-8 w-auto" />
             </a>
 
             {/* Description */}

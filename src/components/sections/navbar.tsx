@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "next-themes";
-import { Sun, Moon, Menu, X, Zap } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 
 const navLinks = [
@@ -92,13 +93,8 @@ export function Navbar() {
         >
           <div className="relative flex h-14 items-center justify-between px-4 sm:px-5">
             {/* Logo */}
-            <a href="#hero" className="flex items-center gap-2">
-              <div className="flex size-8 items-center justify-center rounded-lg bg-primary">
-                <Zap className="size-4 fill-primary-foreground text-primary-foreground" />
-              </div>
-              <span className="text-lg font-heading font-bold tracking-tight">
-                Edfu
-              </span>
+            <a href="#hero" className="flex items-center">
+              <Image src="/logo.svg" alt="Edfu" width={120} height={32} className="h-8 w-auto" />
             </a>
 
             {/* Desktop nav links - absolute center */}
