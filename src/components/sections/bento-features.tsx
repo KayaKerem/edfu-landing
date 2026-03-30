@@ -132,8 +132,8 @@ function IntegrationOrbits() {
         <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[400px] rounded-full bg-black/[0.03] transition-all duration-1000 ease-out ${isVisible ? "scale-100 opacity-100" : "scale-0 opacity-0"}`} style={{ transitionDelay: "400ms" }} />
         <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[260px] rounded-full bg-black/[0.03] transition-all duration-700 ease-out ${isVisible ? "scale-100 opacity-100" : "scale-0 opacity-0"}`} style={{ transitionDelay: "100ms" }} />
 
-        {/* Orbiting container - scale in */}
-        <div className={`relative flex items-center justify-center transition-all duration-[1200ms] ease-out ${isVisible ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} style={{ width: 500, height: 500, transitionDelay: "200ms" }}>
+        {/* Orbiting container - appears after gradient circles */}
+        <div className={`relative flex items-center justify-center transition-all duration-[1200ms] ease-out ${isVisible ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} style={{ width: 500, height: 500, transitionDelay: "1200ms" }}>
           <img src="/ai-icon-filled.svg" alt="Edfu" className="relative z-10 size-16 rounded-xl" />
 
           <OrbitingCircles iconSize={44} radius={120} speed={0.5}>
