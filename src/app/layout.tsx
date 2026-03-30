@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import "@fontsource-variable/inter";
-import "@fontsource-variable/dm-sans";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 

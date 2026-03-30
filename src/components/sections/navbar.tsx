@@ -8,8 +8,8 @@ import { motion, AnimatePresence } from "motion/react";
 
 const navLinks = [
   { label: "Ana Sayfa", href: "#hero", sectionId: "hero" },
-  { label: "Nasıl Çalışır", href: "#how-it-works", sectionId: "how-it-works" },
   { label: "Özellikler", href: "#features", sectionId: "features" },
+  { label: "Nasıl Çalışır", href: "#how-it-works", sectionId: "how-it-works" },
   { label: "Fiyatlandırma", href: "#pricing", sectionId: "pricing" },
 ] as const;
 
