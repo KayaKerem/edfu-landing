@@ -146,6 +146,7 @@ function IntegrationOrbits() {
         <div className={`relative flex items-center justify-center transition-all duration-[1200ms] ease-out ${isVisible ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} style={{ width: 500, height: 500, transitionDelay: "1200ms" }}>
           <img src="/ai-icon-filled.svg" alt="Edfu" className="relative z-10 size-16 rounded-xl" />
 
+          {/* Inner orbit - 2 icons, most space */}
           <OrbitingCircles iconSize={48} radius={120} speed={0.5}>
             <div className="flex size-12 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2.5">
               <Slack className="size-7" />
@@ -153,11 +154,9 @@ function IntegrationOrbits() {
             <div className="flex size-12 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2.5">
               <Figma className="size-7" />
             </div>
-            <div className="flex size-12 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2.5">
-              <Openai className="size-7" />
-            </div>
           </OrbitingCircles>
 
+          {/* Middle orbit - 3 icons */}
           <OrbitingCircles iconSize={44} radius={195} speed={0.4} reverse>
             <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
               <Notion className="size-6" />
@@ -166,13 +165,11 @@ function IntegrationOrbits() {
               <Drive className="size-6" />
             </div>
             <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
-              <Linear className="size-6" />
-            </div>
-            <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
-              <Vercel className="size-6" />
+              <Openai className="size-6" />
             </div>
           </OrbitingCircles>
 
+          {/* Outer orbit - 5 icons, biggest circumference */}
           <OrbitingCircles iconSize={40} radius={250} speed={0.3}>
             <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
               <GithubDark className="size-5" />
@@ -182,6 +179,12 @@ function IntegrationOrbits() {
             </div>
             <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
               <Stripe className="size-5" />
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
+              <Linear className="size-5" />
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
+              <Vercel className="size-5" />
             </div>
           </OrbitingCircles>
         </div>
