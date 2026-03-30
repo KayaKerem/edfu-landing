@@ -169,22 +169,16 @@ function IntegrationOrbits() {
             </div>
           </OrbitingCircles>
 
-          {/* Outer orbit - 5 icons, biggest circumference */}
+          {/* Outer orbit - 3 icons */}
           <OrbitingCircles iconSize={40} radius={250} speed={0.3}>
             <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
               <GithubDark className="size-5" />
             </div>
             <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
-              <Discord className="size-5" />
+              <Vercel className="size-5" />
             </div>
             <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
               <Stripe className="size-5" />
-            </div>
-            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
-              <Linear className="size-5" />
-            </div>
-            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
-              <Vercel className="size-5" />
             </div>
           </OrbitingCircles>
         </div>
