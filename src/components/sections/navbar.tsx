@@ -93,8 +93,9 @@ export function Navbar() {
         >
           <div className="relative flex h-14 items-center justify-between px-4 sm:px-5">
             {/* Logo */}
-            <a href="#hero" className="flex items-center">
-              <Image src="/logo.svg" alt="Edfu" width={120} height={32} className="h-8 w-auto" />
+            <a href="#hero" className="flex items-center gap-2">
+              <Image src="/logo.svg" alt="Edfu" width={32} height={32} className="size-8" />
+              <span className="text-xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>Edfu</span>
             </a>
 
             {/* Desktop nav links - absolute center */}

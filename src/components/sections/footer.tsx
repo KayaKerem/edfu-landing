@@ -25,8 +25,9 @@ export function Footer() {
           {/* Brand section */}
           <div className="lg:col-span-2">
             {/* Logo */}
-            <a href="#hero" className="flex items-center">
-              <Image src="/logo.svg" alt="Edfu" width={120} height={32} className="h-8 w-auto" />
+            <a href="#hero" className="flex items-center gap-2">
+              <Image src="/logo.svg" alt="Edfu" width={32} height={32} className="size-8" />
+              <span className="text-xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>Edfu</span>
             </a>
 
             {/* Description */}
