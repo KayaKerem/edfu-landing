@@ -121,7 +121,7 @@ function IntegrationOrbits() {
 
         {/* Orbiting container */}
         <div className="relative flex items-center justify-center" style={{ width: 500, height: 500 }}>
-          <img src="/logo.svg" alt="Edfu" className="relative z-10 size-16 rounded-xl" />
+          <img src="/ai-icon-filled.svg" alt="Edfu" className="relative z-10 size-16 rounded-xl" />
 
           <OrbitingCircles iconSize={44} radius={120} speed={0.5}>
             <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm">
