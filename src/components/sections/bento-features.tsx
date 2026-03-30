@@ -115,9 +115,9 @@ function IntegrationOrbits() {
       {/* Orbit center positioned at bottom-center, so only top half shows */}
       <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[35%]">
         {/* Background gradient circles */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[480px] rounded-full bg-black/[0.02]" />
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[360px] rounded-full bg-black/[0.03]" />
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[240px] rounded-full bg-black/[0.03]" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[520px] rounded-full bg-black/[0.02]" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[400px] rounded-full bg-black/[0.03]" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[260px] rounded-full bg-black/[0.03]" />
 
         {/* Orbiting container */}
         <div className="relative flex items-center justify-center" style={{ width: 500, height: 500 }}>
@@ -132,7 +132,7 @@ function IntegrationOrbits() {
             </div>
           </OrbitingCircles>
 
-          <OrbitingCircles iconSize={40} radius={175} speed={0.4} reverse>
+          <OrbitingCircles iconSize={40} radius={195} speed={0.4} reverse>
             <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm">
               <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
             </div>
@@ -144,7 +144,7 @@ function IntegrationOrbits() {
             </div>
           </OrbitingCircles>
 
-          <OrbitingCircles iconSize={36} radius={230} speed={0.3}>
+          <OrbitingCircles iconSize={36} radius={250} speed={0.3}>
             <div className="flex size-9 items-center justify-center rounded-full border border-border bg-background shadow-sm">
               <svg viewBox="0 0 24 24" className="size-4.5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
             </div>
