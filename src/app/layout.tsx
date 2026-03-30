@@ -12,7 +12,7 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: "Edfu - AI Asistanınız",
   description:
-    "Dijital iş akışlarınızı kolaylaştırmak ve sıradan görevleri halletmek için tasarlanan yapay zeka asistanı.",
+    "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform. Dokümanlarınızı yükleyin, ekibiniz sorusunu sorsun.",
 };
 
 export default function RootLayout({
@@ -25,8 +25,8 @@ export default function RootLayout({
       <body className={`min-h-screen font-sans antialiased ${geist.variable}`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           {children}

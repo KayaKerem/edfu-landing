@@ -28,7 +28,7 @@ export function Hero() {
           <div className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 shadow-sm transition-all hover:border-border/80 hover:bg-accent/30">
             <LayersIcon className="mr-1.5 size-3.5 text-foreground dark:text-white" />
             <AnimatedShinyText className="text-xs font-medium">
-              Özel otomasyonları keşfedin
+              300+ AI modeli, tek platform
             </AnimatedShinyText>
             <ArrowRight className="ml-1.5 size-2.5 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
           </div>
@@ -36,16 +36,16 @@ export function Hero() {
 
         {/* Heading */}
         <h1 className="text-4xl md:text-5xl lg:text-[3rem] xl:text-6xl font-medium text-balance text-center text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
-          AI Asistanınızla Tanışın
+          Her Sorunun Cevabı
           <br />
-          İş Akışınızı Kolaylaştırın
+          Sizde Zaten Var.
         </h1>
 
         {/* Description */}
         <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg text-center text-muted-foreground font-medium text-balance tracking-tight" style={{ lineHeight: "calc(1.75 / 1.125)" }}>
-          Dijital iş akışlarınızı kolaylaştırmak ve sıradan görevleri halletmek
-          için tasarlanan yapay zeka asistanı, böylece gerçekten önemli olana
-          odaklanabilirsiniz
+          Dokümanlarınızı yükleyin, kaynaklarınızı bağlayın, ekibiniz sorusunu sorsun.
+            <br />
+            Edfu şirketinizin tüm bilgi birikiminden doğru cevabı anında bulsun.
         </p>
 
         {/* CTA Buttons */}
@@ -54,7 +54,7 @@ export function Hero() {
             href="#pricing"
             className="bg-primary h-9 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground whitespace-nowrap w-32 px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] hover:bg-primary/80 transition-all ease-out active:scale-95"
           >
-            Ücretsiz Dene
+            Ücretsiz Deneyin
           </a>
           <a
             href="#"

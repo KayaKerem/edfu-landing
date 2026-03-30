@@ -15,7 +15,7 @@ import { Stripe } from "@/components/ui/svgs/stripe";
 import { Vercel } from "@/components/ui/svgs/vercel";
 import { Openai } from "@/components/ui/svgs/openai";
 
-const AI_RESPONSE = "Takvim kalıplarınıza ve tercihlerinize dayanarak, ekip toplantısını Salı saat 14:00'e planlamanızı öneririm. Bu zaman dilimi geçmişte en yüksek katılım oranına sahipti ve diğer tekrarlayan toplantılarla çakışmıyor.";
+const AI_RESPONSE = "Tedarikçi sözleşmesinin 12. maddesine göre, fesih için 60 gün önceden yazılı bildirim gerekiyor. Ayrıca madde 14'te cezai şartlar tanımlanmıştır.";
 
 /* ------------------------------------------------------------------ */
 /*  Card 1 – Chat Mockup with streaming animation                     */
@@ -83,7 +83,7 @@ function ChatMockup() {
         {/* User message */}
         <div className="flex items-end justify-end gap-3">
           <div className="ml-auto max-w-[280px] rounded-2xl bg-primary p-4 text-sm text-primary-foreground shadow-[0_0_10px_rgba(0,0,0,0.05)]">
-            <p>Merhaba, herkes için uygun bir ekip toplantısı planlamam gerekiyor. Uygun zaman dilimi bulmak için öneriniz var mı?</p>
+            <p>Son yüklediğim tedarikçi sözleşmesindeki fesih koşullarını özetler misin?</p>
           </div>
           <div className="flex shrink-0 items-center rounded-full border border-border bg-background">
             <img
@@ -333,7 +333,7 @@ function DriveUploadMockup() {
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             >
               <FileText className="size-4 text-blue-600 shrink-0" />
-              <span className="text-xs font-medium text-foreground whitespace-nowrap">Rapor_2024.docx</span>
+              <span className="text-xs font-medium text-foreground whitespace-nowrap">Sözleşme_Şablonu.pdf</span>
             </motion.div>
           </motion.div>
         )}
@@ -370,8 +370,8 @@ function DriveUploadMockup() {
                     <Upload className="size-5 text-primary" />
                   </div>
                   <div className="text-center">
-                    <p className="text-sm font-medium text-foreground">Yükleniyor...</p>
-                    <p className="text-xs text-muted-foreground">Rapor_2024.docx · {uploadProgress}%</p>
+                    <p className="text-sm font-medium text-foreground">İndeksleniyor...</p>
+                    <p className="text-xs text-muted-foreground">Sözleşme_Şablonu.pdf · {uploadProgress}%</p>
                   </div>
                 </>
               ) : (
@@ -384,8 +384,8 @@ function DriveUploadMockup() {
                     <CheckCircle2 className="size-14 text-emerald-500" />
                   </motion.div>
                   <div className="text-center">
-                    <p className="text-sm font-medium text-foreground">Yüklendi</p>
-                    <p className="text-xs text-muted-foreground">Rapor_2024.docx · 1.8 MB</p>
+                    <p className="text-sm font-medium text-foreground">İndekslendi</p>
+                    <p className="text-xs text-muted-foreground">Sözleşme_Şablonu.pdf · 1.8 MB</p>
                   </div>
                 </>
               )}
@@ -494,9 +494,9 @@ function FolderIcon({ color = "#5227FF", size = 1, open = false }: { color?: str
 /* ------------------------------------------------------------------ */
 /*  Card 4 – AI Notes Mockup                                           */
 /* ------------------------------------------------------------------ */
-const NOTE_TITLE = "Toplantı Özeti";
-const NOTE_CONTENT = "Müşteri ile yapılan görüşmede yeni ürün lansmanı için Q2 hedefleri belirlendi. Pazarlama bütçesi %15 artırılacak, sosyal medya kampanyası Nisan başında başlayacak.";
-const NOTE_TAGS = ["toplantı", "Q2", "pazarlama"];
+const NOTE_TITLE = "Q3 Satış Toplantısı";
+const NOTE_CONTENT = "Müşteri görüşmelerinde fiyat itirazları öne çıktı. Rakip ürünlerle karşılaştırma yapılıyor. Satış ekibi yeni teklif şablonu istiyor — önümüzdeki hafta hazırlanacak.";
+const NOTE_TAGS = ["satış", "toplantı", "Q3"];
 
 function NotesMockup() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -691,23 +691,23 @@ function HatchedEdge({ side }: { side: "left" | "right" }) {
 /* ------------------------------------------------------------------ */
 const features = [
   {
-    title: "Gerçek Zamanlı AI İş Birliği",
-    description: "Gerçek zamanlı yardım deneyimi. AI Asistanınızdan görevleri koordine etmesini, soruları yanıtlamasını ve ekip uyumunu sağlamasını isteyin.",
+    title: "Dokümanlarınızla Konuşun",
+    description: "Sözleşmelerinizi, yönetmeliklerinizi, toplantı notlarınızı yükleyin. Edfu içeriklerini analiz eder, sorularınıza dokümanlarınıza dayalı cevaplar verir.",
     visual: <ChatMockup />,
   },
   {
-    title: "Sorunsuz Entegrasyonlar",
-    description: "Zahmetsiz bağlantı için favori araçlarınızı birleştirin. Birbirine bağlı iş akışlarıyla üretkenliği artırın.",
+    title: "Kaynaklarınızı Bağlayın",
+    description: "Drive, Notion, Slack, CRM, ERP ve daha fazlası. Mevcut araçlarınızı Edfu'ya bağlayın, tüm kaynaklarınız otomatik senkronize olsun.",
     visual: <IntegrationOrbits />,
   },
   {
-    title: "Anlık İçgörü Raporlama",
-    description: "Ham verileri saniyeler içinde net içgörülere dönüştürün. Gerçek zamanlı, sürekli öğrenen zekayla daha akıllı kararlar alın.",
+    title: "Dokümanlarınızı Yükleyin, Anında Hazır",
+    description: "PDF, Word, Excel — dokümanlarınızı sürükleyip bırakın. Edfu içerikleri otomatik parçalar, indeksler ve sorguya hazır hale getirir.",
     visual: <DriveUploadMockup />,
   },
   {
-    title: "AI Hafıza & Notlar",
-    description: "AI asistanınız toplantılarınızı özetler, önemli detayları not alır ve her şeyi hatırlar. Hiçbir bilgi kaybolmaz.",
+    title: "Siz Konuşun, AI Yazsın",
+    description: "Toplantı notları, müşteri görüşmeleri, finansal kararlar — AI dinler, yazar, etiketler. Ekibiniz arar, anında bulur.",
     visual: <NotesMockup />,
   },
 ];
@@ -729,11 +729,10 @@ export function BentoFeatures() {
         {/* Header */}
         <div className="mx-auto mb-10 max-w-2xl px-4 text-center">
           <h2 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
-            İş Akışınızı Yapay Zeka ile Güçlendirin
+            Şirketinizin Dijital Hafızasını Oluşturun
           </h2>
           <p className="mt-4 text-base text-muted-foreground font-medium text-balance tracking-tight">
-            Yapay zeka destekli araçlarla üretkenliğinizi artırın, tekrarlayan
-            görevleri otomatikleştirin ve ekibinizle daha akıllı çalışın.
+            Edfu, şirketinizdeki tüm bilgiyi tek bir platformda toplar. Ekibiniz ihtiyaç duyduğu bilgiye saniyeler içinde ulaşır.
           </p>
         </div>
 

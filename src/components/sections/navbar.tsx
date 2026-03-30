@@ -143,7 +143,7 @@ export function Navbar() {
                 href="#pricing"
                 className="bg-primary h-8 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground dark:text-primary-foreground w-fit px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12]"
               >
-                Ücretsiz Dene
+                Ücretsiz Deneyin
               </a>
               <AnimatedThemeToggler className="size-8 cursor-pointer rounded-full border border-border text-muted-foreground" />
             </div>
@@ -192,7 +192,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="mt-2 flex h-10 items-center justify-center rounded-full bg-primary text-sm font-normal tracking-wide text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] transition-all ease-out active:scale-95"
                 >
-                  Ücretsiz Dene
+                  Ücretsiz Deneyin
                 </a>
               </nav>
             </motion.div>

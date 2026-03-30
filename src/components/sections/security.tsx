@@ -136,11 +136,10 @@ export function Security() {
         {/* Header */}
         <div className="mx-auto mb-10 max-w-2xl px-4 text-center">
           <h2 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
-            Güvenli Büyüme İçin Tasarlandı
+            Verileriniz Güvende, Altyapınız Sağlam
           </h2>
           <p className="mt-4 text-base text-muted-foreground font-medium text-balance tracking-tight">
-            Gelişmiş güvenlik ile sorunsuz ölçeklenebilirliğin buluştuğu yer
-            — verilerinizi korumak ve büyümenizi güçlendirmek için tasarlandı.
+            Hetzner Avrupa veri merkezlerinde barındırılan altyapı, tam veri izolasyonu ve kurumsal düzeyde güvenlik.
           </p>
         </div>
 
@@ -154,8 +153,8 @@ export function Security() {
                 <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-24 w-full bg-gradient-to-t from-background to-transparent" />
               </div>
               <div className="relative z-20 px-4 sm:px-6 pb-6 sm:pb-8 -mt-4">
-                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>Gelişmiş Görev Güvenliği</h3>
-                <p className="mt-1.5 text-base text-muted-foreground">Son teknoloji şifreleme ve güvenli erişim ile görevlerinizi koruyun.</p>
+                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>Tam Veri İzolasyonu</h3>
+                <p className="mt-1.5 text-base text-muted-foreground">Her organizasyonun verileri birbirinden tamamen izole. Multi-tenant mimaride şirketinizin bilgileri yalnızca size ait. Hetzner EU altyapısı ile KVKK uyumlu veri barındırma.</p>
               </div>
             </div>
 
@@ -167,8 +166,8 @@ export function Security() {
                 </div>
               </div>
               <div className="relative z-20 px-4 sm:px-6 pb-6 sm:pb-8 -mt-4">
-                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>Takımlar İçin Ölçeklenebilir</h3>
-                <p className="mt-1.5 text-base text-muted-foreground">Takımınızla birlikte büyüyün. Birden fazla çalışma alanı ve tüm ekip üyeleri arasında görevleri takip edin.</p>
+                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>Ekibinizle Birlikte Büyür</h3>
+                <p className="mt-1.5 text-base text-muted-foreground">2 kişilik ekipten 50 kişilik organizasyona kadar ölçeklenir. Rol bazlı erişim kontrolü, paylaşılan ve özel çalışma alanları, merkezi yönetim paneli.</p>
               </div>
             </div>
           </div>

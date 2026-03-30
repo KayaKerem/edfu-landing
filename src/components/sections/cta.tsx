@@ -16,11 +16,11 @@ export function CTA() {
           {/* Content */}
           <div className="relative z-10">
             <h2 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground tracking-tight leading-tight">
-              Otomatikleştir.
+              Yükleyin.
               <br />
-              Sadeleştir.
+              Sorun.
               <br />
-              Başarı Yakala.
+              Cevap Alın.
             </h2>
 
             <div className="mt-10">
@@ -28,12 +28,12 @@ export function CTA() {
                 href="#"
                 className="inline-flex h-12 items-center rounded-full bg-white px-6 sm:px-8 text-sm sm:text-base font-normal tracking-wide text-primary shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] transition-all ease-out hover:bg-white/90 active:scale-95"
               >
-                30 Günlük Ücretsiz Denemenizi Başlatın
+                14 Gün Ücretsiz Deneyin
               </a>
             </div>
 
             <p className="mt-4 text-sm text-primary-foreground/70">
-              İstediğiniz zaman iptal edin, soru sorulmaz
+              İstediğiniz zaman iptal edin, taahhüt yok.
             </p>
           </div>
         </div>

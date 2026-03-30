@@ -4,27 +4,27 @@ import { useState, useCallback } from "react";
 
 const steps = [
   {
-    title: "AI Asistanınıza Doğrudan Sorun",
+    title: "Dokümanlarınızı Yükleyin",
     description:
-      "Komutunuzu söyleyin veya yazın — Edfu niyetinizi anlar. İsteğiniz anında süreci başlatır.",
+      "PDF, Word, Excel — mevcut dokümanlarınızı sürükleyip bırakın. Edfu içerikleri otomatik olarak parçalar, indeksler ve sorguya hazır hale getirir.",
     emoji: "💬",
   },
   {
-    title: "Edfu'nun İşlemesine İzin Verin",
+    title: "Kaynaklarınızı Bağlayın",
     description:
-      "Edfu isteğinizi analiz eder, gerekli bağlamı toplar ve en uygun çözümü hazırlar.",
+      "Web sitenizi, Google Drive'ınızı, Notion'ınızı bağlayın. Edfu içeriklerinizi otomatik senkronize eder ve bilgi tabanınızı güncel tutar.",
     emoji: "⚙️",
   },
   {
-    title: "Anında Eyleme Dönüştürülebilir Sonuçlar Alın",
+    title: "Sorun, Cevap Alın",
     description:
-      "Saniyeler içinde net, uygulanabilir sonuçlar alın. Verileriniz yapılandırılmış ve kullanıma hazır.",
+      "Ekibiniz Türkçe sorular sorsun, Edfu bilgi tabanınızdan kaynaklı, doğru ve güvenilir cevapları anında versin.",
     emoji: "📊",
   },
   {
-    title: "Sürekli İyileştirme",
+    title: "Ekip Olarak Büyüyün",
     description:
-      "Edfu her etkileşimden öğrenir, zamanla daha akıllı ve daha verimli hale gelir.",
+      "Her yeni doküman, her yeni sohbet şirketinizin bilgi birikimini zenginleştirir. Edfu kullandıkça daha akıllı hale gelir — ekibinizin ortak hafızası sürekli büyür.",
     emoji: "🚀",
   },
 ];
@@ -55,11 +55,10 @@ export function HowItWorks() {
             className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center"
             style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
           >
-            Basit. Sorunsuz. Akıllı.
+            Üç Adımda Başlayın
           </h2>
           <p className="text-muted-foreground text-center text-balance font-medium">
-            Edfu&apos;nun komutlarınızı dört kolay adımda nasıl eyleme
-            dönüştürdüğünü keşfedin
+            Teknik bilgi gerekmez. Dokümanlarınızı yükleyin, dakikalar içinde şirketinizin AI destekli bilgi tabanı hazır.
           </p>
         </div>
       </div>

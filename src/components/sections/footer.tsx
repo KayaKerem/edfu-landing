@@ -3,19 +3,19 @@ import Image from "next/image";
 const columns = [
   {
     heading: "Şirket",
-    links: ["Hakkımızda", "İletişim", "Blog", "Basın", "Hikayemiz"],
+    links: ["Hakkımızda", "İletişim", "Blog", "Kariyer"],
   },
   {
-    heading: "Ürünler",
-    links: ["Şirket", "Ürün", "Basın", "Daha Fazla"],
+    heading: "Ürün",
+    links: ["Özellikler", "Fiyatlandırma", "Entegrasyonlar", "API Dokümantasyonu"],
   },
   {
     heading: "Kaynaklar",
-    links: ["Basın", "Kariyer", "Bültenler", "Daha Fazla"],
+    links: ["Yardım Merkezi", "Kullanım Kılavuzu", "Durum Sayfası", "Gizlilik Politikası"],
   },
 ] as const;
 
-const badges = ["SOC 2", "HIPAA", "GDPR"] as const;
+const badges = ["KVKK", "Hetzner EU", "GDPR"] as const;
 
 export function Footer() {
   return (
@@ -32,9 +32,7 @@ export function Footer() {
 
             {/* Description */}
             <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
-              Dijital iş akışlarınızı kolaylaştırmak ve sıradan görevleri
-              halletmek için tasarlanan yapay zeka asistanı, böylece gerçekten
-              önemli olana odaklanabilirsiniz
+              Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform. Dokümanlarınızı yükleyin, ekibiniz sorusunu sorsun.
             </p>
 
             {/* Compliance badges */}

@@ -5,34 +5,34 @@ import { ChevronDown } from "lucide-react"
 
 const faqs = [
   {
-    question: "AI Asistanı nedir?",
+    question: "Edfu tam olarak ne işe yarar?",
     answer:
-      "AI Asistanı, yapay zeka teknolojisi kullanan ve çeşitli görevleri otomatikleştirmenize, iş akışlarınızı kolaylaştırmanıza ve daha bilinçli kararlar almanıza yardımcı olan akıllı bir yazılım aracıdır.",
+      "Edfu, şirketinizin dokümanlarını, web sitesini ve bilgi kaynaklarını yapay zeka destekli bir bilgi tabanına dönüştüren bir platformdur. Ekibiniz Türkçe sorular sorarak bu bilgi tabanından anında cevap alır. Sözleşme analizi, mevzuat kontrolü, ürün bilgisi sorgulama gibi her türlü iş sürecinde kullanılabilir.",
   },
   {
-    question: "Edfu nasıl çalışır?",
+    question: "Edfu'yu kullanmaya başlamak için teknik bilgi gerekiyor mu?",
     answer:
-      "Edfu, doğal dil işleme kullanarak komutlarınızı anlar ve uygular. Sorularınızı sorun, görevlerinizi tanımlayın — Edfu gerisini halleder.",
+      "Hayır. Dokümanlarınızı sürükle-bırak ile yükleyin, web sitenizi URL vererek bağlayın — gerisini Edfu halleder. Dokümanlar otomatik olarak işlenir, indekslenir ve sorguya hazır hale gelir. Kurulum dakikalar sürer, herhangi bir yazılım yüklemenize gerek yoktur.",
   },
   {
-    question: "Verilerim ne kadar güvenli?",
+    question: "Verilerim nerede barındırılıyor ve ne kadar güvenli?",
     answer:
-      "Veri güvenliği en büyük önceliğimizdir. Edfu, endüstri standardı şifreleme protokolleri kullanır ve SOC 2, HIPAA ve GDPR uyumluluğuna sahiptir.",
+      "Tüm verileriniz Hetzner'in Avrupa (Almanya) veri merkezlerinde barındırılır. Her organizasyonun verileri birbirinden tamamen izole edilmiştir. S3 uyumlu nesne depolama ile dosyalarınız şifreli olarak saklanır. KVKK uyumlu altyapı ile verileriniz Türkiye dışına çıkmaz.",
   },
   {
-    question: "Mevcut araçlarımı entegre edebilir miyim?",
+    question: "Hangi araçlarla entegre çalışıyor?",
     answer:
-      "Evet! Edfu, Slack, Notion, Google Workspace, Microsoft 365 ve daha birçok popüler araçla sorunsuz bir şekilde entegre olur.",
+      "Edfu; Google Drive, Notion, Dropbox ve Slack ile entegre çalışır. Ayrıca Website Crawler özelliği ile herhangi bir web sitesini otomatik olarak tarayıp bilgi tabanınıza ekleyebilirsiniz. Entegrasyon sayısı planınıza göre değişir.",
   },
   {
-    question: "Ücretsiz deneme sürümü var mı?",
+    question: "Ücretsiz deneme süreci nasıl işliyor?",
     answer:
-      "Evet, Edfu'yu 30 gün boyunca ücretsiz deneyebilirsiniz. Kredi kartı gerekmez, istediğiniz zaman iptal edebilirsiniz.",
+      "Tüm planları 14 gün boyunca ücretsiz deneyebilirsiniz. Deneme süresince tüm özellikler aktiftir. Süre sonunda memnun kalmazsanız herhangi bir ücret tahsil edilmez.",
   },
   {
-    question: "Edfu bana nasıl zaman kazandırır?",
+    question: "300+ AI modeli ne demek, hangisini seçmeliyim?",
     answer:
-      "Edfu, tekrarlayan görevleri otomatikleştirir, verilerinizi anında analiz eder ve ekip iş birliğini kolaylaştırır. Kullanıcılarımız ortalama olarak haftada 10+ saat tasarruf ettiklerini bildirmektedir.",
+      "Edfu, OpenRouter entegrasyonu sayesinde Claude, GPT-4, Gemini, Llama ve yüzlerce farklı AI modeline tek platformdan erişim sunar. Her model farklı görevlerde öne çıkar. Başlangıç planında Claude Sonnet sabit model olarak sunulur, Profesyonel planda tüm modellere erişim açılır.",
   },
 ]
 
@@ -54,8 +54,7 @@ export function FAQ() {
             Sıkça Sorulan Sorular
           </h2>
           <p className="text-muted-foreground text-center text-balance font-medium">
-            Edfu ve özellikleri hakkında sık sorulan soruların yanıtları. Başka
-            sorularınız varsa, lütfen bizimle iletişime geçmekten çekinmeyin.
+            Edfu hakkında merak edilenleri bir araya getirdik. Burada bulamadığınız bir soru varsa bize ulaşın.
           </p>
         </div>
       </div>

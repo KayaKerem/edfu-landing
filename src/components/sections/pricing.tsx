@@ -9,53 +9,58 @@ export function Pricing() {
 
   const plans = [
     {
-      name: "Ücretsiz",
-      monthlyPrice: 0,
-      yearlyPrice: 0,
-      description: "Bireysel kullanıcılar için ideal",
-      cta: "Ücretsiz Başla",
+      name: "Başlangıç",
+      monthlyPrice: 1990,
+      yearlyPrice: 1592,
+      description: "kişi başı, KDV hariç",
+      cta: "14 Gün Ücretsiz Deneyin",
       popular: false,
       inheritLabel: "Pro planın tüm özellikleri +",
       features: [
-        "Özel alan adı",
-        "SEO optimizasyonları",
-        "Otomatik API belgeleri",
-        "Dahili bileşen kütüphanesi",
+        "5 kullanıcıya kadar",
+        "Kişi başı aylık 10M token",
+        "Claude Sonnet sabit model",
+        "50 GB depolama",
+        "5 entegrasyon",
+        "Ayda 200 URL crawl",
+        "10.000 sayfa RAG limiti",
+        "E-posta desteği",
       ],
     },
     {
-      name: "Başlangıç",
-      monthlyPrice: 499,
-      yearlyPrice: 399,
-      description: "Profesyoneller ve küçük ekipler için",
-      cta: "Pro'ya Yükselt",
+      name: "Profesyonel",
+      monthlyPrice: null,
+      yearlyPrice: null,
+      description: "kişi başı, KDV hariç",
+      cta: "Beni Bilgilendir",
       popular: true,
-      inheritLabel: "Pro planın tüm özellikleri +",
+      inheritLabel: "Başlangıç planının tüm özellikleri +",
       features: [
-        "Özel alan adı",
-        "SEO optimizasyonları",
-        "Otomatik API belgeleri",
-        "Dahili bileşen kütüphanesi",
-        "E-ticaret entegrasyonu",
-        "Kullanıcı kimlik doğrulama",
-        "Çoklu dil desteği",
-        "Gerçek zamanlı iş birliği",
+        "300+ AI model erişimi (OpenRouter)",
+        "Kişi başı aylık 25M token",
+        "200 GB depolama",
+        "20 entegrasyon",
+        "Ayda 1.000 URL crawl",
+        "50.000 sayfa RAG limiti",
+        "Özel şablonlar",
+        "Öncelikli destek",
       ],
     },
     {
       name: "Kurumsal",
       monthlyPrice: null,
       yearlyPrice: null,
-      description: "Büyük ekipler ve kurumsal organizasyonlar",
-      cta: "Satışla İletişime Geç",
+      description: "Özel ihtiyaçlarınıza göre fiyatlandırma",
+      cta: "Satış Ekibiyle Görüşün",
       popular: false,
-      inheritLabel: "Pro planın tüm özellikleri +",
+      inheritLabel: "Profesyonel planın tüm özellikleri +",
       features: [
-        "Özel alan adı",
-        "SEO optimizasyonları",
-        "Otomatik API belgeleri",
-        "Dahili bileşen kütüphanesi",
-        "Gerçek zamanlı iş birliği araçları",
+        "Sınırsız kullanıcı",
+        "Dedicated Hetzner altyapısı",
+        "White-label seçeneği",
+        "SLA garantisi",
+        "Özel entegrasyon geliştirme",
+        "Birebir onboarding",
       ],
     },
   ];
@@ -75,11 +80,10 @@ export function Pricing() {
               fontFamily: "var(--font-geist)",
             }}
           >
-            Sizinle Birlikte Ölçeklenen Fiyatlandırma
+            İhtiyacınıza Uygun Plan Seçin
           </h2>
           <p className="text-muted-foreground text-center text-balance font-medium mt-4">
-            Hangi planı seçerseniz seçin, belgelerinizi sevene kadar ücretsiz.
-            Bu bizim sözümüz.
+            Tüm planlar 14 gün ücretsiz deneme ile başlar. Aylık veya yıllık ödeme seçeneği ile bütçenize uygun başlayın.
           </p>
         </div>
       </div>
@@ -127,7 +131,7 @@ export function Pricing() {
               <span className={`relative z-10 flex items-center transition-colors duration-200 ${isYearly ? "text-primary" : "text-muted-foreground"}`}>
                 Yıllık
                 <span className="text-xs font-semibold text-primary bg-primary/15 py-0.5 px-1 rounded-full ml-2">
-                  -20%
+                  %20 İndirim
                 </span>
               </span>
             </button>
@@ -155,7 +159,7 @@ export function Pricing() {
                   <span className="text-sm text-foreground">{plan.name}</span>
                   {isPopular && (
                     <span className="bg-gradient-to-b from-primary/50 to-primary text-white h-6 inline-flex w-fit items-center justify-center px-2 rounded-full text-sm ml-2 shadow-[0px_6px_6px_-3px_rgba(0,0,0,0.08),0px_3px_3px_-1.5px_rgba(0,0,0,0.08),0px_1px_1px_-0.5px_rgba(0,0,0,0.08),0px_0px_0px_1px_rgba(255,255,255,0.12)_inset,0px_1px_0px_0px_rgba(255,255,255,0.12)_inset]">
-                      Popüler
+                      En Popüler
                     </span>
                   )}
                 </div>
@@ -167,8 +171,10 @@ export function Pricing() {
                       <span className="text-4xl font-semibold text-foreground">₺{price}</span>
                       <span className="mb-1 text-sm text-muted-foreground">/ay</span>
                     </>
+                  ) : isPopular ? (
+                    <span className="text-4xl font-semibold text-foreground">Yakında</span>
                   ) : (
-                    <span className="text-4xl font-semibold text-foreground">Özel</span>
+                    <span className="text-4xl font-semibold text-foreground">İletişime Geçin</span>
                   )}
                 </div>
 

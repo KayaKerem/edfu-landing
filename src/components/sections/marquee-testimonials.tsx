@@ -13,119 +13,87 @@ const columns: Testimonial[][] = [
   // Column 1 — 40s
   [
     {
-      body: "Edfu'yu ekibimize tanıttıktan sonra günlük operasyonlarımızda inanılmaz bir verimlilik artışı yaşadık. Yapay zeka destekli otomasyon sayesinde tekrarlayan görevlere harcadığımız süre yarıya indi. Artık ekibimiz stratejik işlere çok daha fazla zaman ayırabiliyor.",
-      highlightStart: 67,
-      highlightEnd: 131,
-      name: "Ahmet Yılmaz",
-      title: "CTO, Bulut Yazılım A.Ş.",
+      body: "Sözleşme incelemesi için eskiden her seferinde mevzuat kitaplarını karıştırıyorduk. Edfu'ya dokümanlarımızı yükledik, artık herhangi bir maddeyi saniyeler içinde bulup karşılaştırabiliyoruz. Müvekkillerimize dönüş süremiz yarıya indi.",
+      highlightStart: 124,
+      highlightEnd: 190,
+      name: "Mehmet Aydın",
+      title: "Kurucu, Dijital Hukuk Danışmanlık",
       avatar: "https://randomuser.me/api/portraits/men/32.jpg",
     },
     {
-      body: "Proje yönetiminde yaşadığımız karmaşayı Edfu tamamen ortadan kaldırdı. Görev dağılımından raporlamaya kadar her şey tek bir platformda. Ekip içi iletişim ve takip artık çok daha şeffaf ve hızlı.",
-      highlightStart: 56,
-      highlightEnd: 115,
-      name: "Elif Demir",
-      title: "Proje Yöneticisi, İnovasyon Hub",
+      body: "Ekibe yeni katılan biri eskiden haftalarca sorular sorarak öğrenirdi. Şimdi şirketin tüm prosedürlerini, politikalarını Edfu'ya sorabiliyor. Oryantasyon süreci 3 haftadan 3 güne düştü.",
+      highlightStart: 76,
+      highlightEnd: 140,
+      name: "Ayşe Korkmaz",
+      title: "İK Müdürü, Orta Ölçekli Üretim Firması",
       avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-    },
-    {
-      body: "Müşteri geri bildirimlerini analiz etmek eskiden günler alıyordu. Şimdi yapay zeka ile anlık içgörüler elde ediyoruz ve ürün geliştirme sürecimiz tamamen dönüştü. Veri odaklı kararlar almak hiç bu kadar kolay olmamıştı.",
-      highlightStart: 63,
-      highlightEnd: 108,
-      name: "Burak Kaya",
-      title: "Ürün Müdürü, Dijital Atölye",
-      avatar: "https://randomuser.me/api/portraits/men/75.jpg",
     },
   ],
   // Column 2 — 60s
   [
     {
-      body: "Satış ekibimiz Edfu'nun tahminleme motorunu kullanarak hedeflerini sürekli aşıyor. Yapay zeka destekli öngörüler sayesinde doğru müşteriye doğru zamanda ulaşabiliyoruz. Satış döngümüz %35 kısaldı.",
-      highlightStart: 105,
-      highlightEnd: 160,
-      name: "Zeynep Arslan",
-      title: "Satış Direktörü, TeknoVizyon",
-      avatar: "https://randomuser.me/api/portraits/women/68.jpg",
-    },
-    {
-      body: "Uzaktan çalışan ekibimiz için Edfu bir devrim oldu. Farklı zaman dilimlerinde çalışanlarımız bile iş birliğini sorunsuz sürdürebiliyor. Ekip uyumu ve motivasyon gözle görülür şekilde arttı.",
-      highlightStart: 45,
-      highlightEnd: 78,
-      name: "Murat Özkan",
-      title: "İK Müdürü, Uzaktan Çözümler",
+      body: "300'den fazla AI modeline tek platformdan erişmek büyük avantaj. İşe göre model seçebiliyoruz — kod için Claude, müşteri metinleri için GPT. Her model için ayrı abonelik derdi bitti.",
+      highlightStart: 65,
+      highlightEnd: 140,
+      name: "Can Yılmaz",
+      title: "CTO, SaaS Girişimi",
       avatar: "https://randomuser.me/api/portraits/men/45.jpg",
     },
     {
-      body: "Finans departmanımızda raporlama süreçleri artık tamamen otomatik. Edfu'nun akıllı şablonları sayesinde aylık raporlar dakikalar içinde hazırlanıyor. Manuel hata oranımız neredeyse sıfıra düştü.",
-      highlightStart: 60,
-      highlightEnd: 126,
-      name: "Selin Çetin",
-      title: "Finans Müdürü, Atlas Holding",
-      avatar: "https://randomuser.me/api/portraits/women/33.jpg",
+      body: "İhale şartnamelerini analiz etmek günler alıyordu. Edfu'ya yüklediğimiz tüm geçmiş ihaleleri karşılaştırmalı analiz edip riskli maddeleri otomatik tespit edebiliyoruz. Teklif hazırlama sürecimiz çok hızlandı.",
+      highlightStart: 93,
+      highlightEnd: 167,
+      name: "Zeynep Demir",
+      title: "Operasyon Müdürü, Lojistik Firması",
+      avatar: "https://randomuser.me/api/portraits/women/68.jpg",
     },
   ],
   // Column 3 — 30s
   [
     {
-      body: "İçerik üretim sürecimiz Edfu ile tamamen değişti. Yapay zeka asistanı bizimle birlikte beyin fırtınası yapıyor ve ilk taslakları hazırlıyor. Yaratıcı ekibimizin üretkenliği iki katına çıktı.",
-      highlightStart: 105,
-      highlightEnd: 160,
-      name: "Deniz Aydın",
-      title: "İçerik Yöneticisi, Medya360",
-      avatar: "https://randomuser.me/api/portraits/women/55.jpg",
-    },
-    {
-      body: "Müşteri destek ekibimiz artık çok daha hızlı yanıt veriyor. Edfu'nun akıllı yönlendirme sistemi talepleri doğru departmana otomatik iletiyor. Müşteri memnuniyet puanımız %40 yükseldi.",
-      highlightStart: 0,
-      highlightEnd: 53,
-      name: "Cem Yıldırım",
-      title: "Destek Müdürü, HızlıServis",
+      body: "Her departmanın kendi bilgi silosu vardı. Edfu ile tüm departmanların dokümanlarını tek bir bilgi havuzunda birleştirdik. Finans ekibi hukuk dokümanlarına, hukuk ekibi finans raporlarına anında erişebiliyor.",
+      highlightStart: 51,
+      highlightEnd: 121,
+      name: "Burak Özkan",
+      title: "Finans Direktörü, Holding Şirketi",
       avatar: "https://randomuser.me/api/portraits/men/22.jpg",
     },
     {
-      body: "Veri güvenliği konusunda Edfu'ya tam güven duyuyoruz. Şifreleme ve erişim kontrolleri üst düzey. Hassas verilerimizin güvende olduğunu bilerek çalışmak büyük bir rahatlık.",
-      highlightStart: 57,
-      highlightEnd: 108,
-      name: "Ayşe Koç",
-      title: "Bilgi Güvenliği Uzmanı, KorumaNet",
-      avatar: "https://randomuser.me/api/portraits/women/12.jpg",
+      body: "Ürün bilgilerimizi güncelleyip web sitemizi Edfu'ya bağladık. Artık müşteri destek ekibimiz her ürün sorusunu AI'a soruyor, ürün ekibini meşgul etmiyor. Doğru bilgi, doğru zamanda.",
+      highlightStart: 68,
+      highlightEnd: 122,
+      name: "Elif Şahin",
+      title: "Pazarlama Müdürü, E-Ticaret Şirketi",
+      avatar: "https://randomuser.me/api/portraits/women/55.jpg",
     },
   ],
   // Column 4 — 50s
   [
     {
-      body: "Tedarik zincirimizi Edfu ile uçtan uca yönetiyoruz. Stok seviyelerinden teslimat takibine kadar her şey gerçek zamanlı izleniyor. Lojistik maliyetlerimiz önemli ölçüde azaldı.",
-      highlightStart: 53,
-      highlightEnd: 130,
-      name: "Emre Şahin",
-      title: "Operasyon Direktörü, LojistikPro",
+      body: "KVKK uyumluluk sürecimiz Edfu ile tamamen değişti. Mevzuat değişikliklerini yükleyip mevcut prosedürlerimizle karşılaştırabiliyoruz. Uyum raporlarını manuel hazırlamak yerine AI'dan özet alıyoruz.",
+      highlightStart: 51,
+      highlightEnd: 132,
+      name: "Ahmet Kaya",
+      title: "Genel Müdür, Danışmanlık Firması",
       avatar: "https://randomuser.me/api/portraits/men/51.jpg",
     },
     {
-      body: "Pazarlama kampanyalarımızı artık veriye dayalı yürütüyoruz. Edfu'nun analitik paneli hangi kanalın ne kadar dönüşüm sağladığını anlık gösteriyor. Reklam bütçemizi çok daha verimli kullanıyoruz.",
-      highlightStart: 56,
-      highlightEnd: 132,
-      name: "İrem Başaran",
-      title: "Dijital Pazarlama Uzmanı, GrowthLab",
+      body: "Satış ekibimiz müşteri toplantılarına hazırlanırken eskiden onlarca dosya karıştırırdı. Şimdi müşteri hakkındaki tüm geçmiş notları ve teklifleri Edfu'ya sorup 2 dakikada brifingi alıyorlar. Kapanış oranımız gözle görülür arttı.",
+      highlightStart: 94,
+      highlightEnd: 190,
+      name: "Selin Tunç",
+      title: "Satış Direktörü, Yazılım Şirketi",
       avatar: "https://randomuser.me/api/portraits/women/27.jpg",
-    },
-    {
-      body: "Yazılım geliştirme döngümüz Edfu entegrasyonu ile hız kazandı. Kod inceleme süreçleri otomatikleşti, hata tespiti kolaylaştı. Ürün teslim sürelerimiz gözle görülür şekilde kısaldı.",
-      highlightStart: 54,
-      highlightEnd: 95,
-      name: "Kaan Tunç",
-      title: "Yazılım Mühendisi, KodFabrika",
-      avatar: "https://randomuser.me/api/portraits/men/64.jpg",
     },
   ],
   // Column 5 — 45s
   [
     {
-      body: "Eğitim programlarımızı Edfu'nun yapay zeka önerileriyle kişiselleştirdik. Her çalışan kendi gelişim alanına uygun içeriklerle ilerliyor. Çalışan bağlılığında ve yetkinlik gelişiminde büyük sıçrama yaşadık.",
-      highlightStart: 108,
-      highlightEnd: 170,
-      name: "Gözde Erdem",
-      title: "Eğitim Koordinatörü, AkademiPlus",
+      body: "Küçük ekibiz ama müşteri portföyümüz büyük. Her müşterinin brief'ini, geri bildirimlerini ve marka kılavuzunu Edfu'ya yükledik. Hangi müşteri için çalışıyorsak bilgiye anında ulaşıyoruz, hiçbir detay kaybolmuyor.",
+      highlightStart: 128,
+      highlightEnd: 185,
+      name: "İrem Başaran",
+      title: "Kurucu, Dijital Ajans",
       avatar: "https://randomuser.me/api/portraits/women/90.jpg",
     },
   ],
@@ -179,12 +147,10 @@ export function MarqueeTestimonials() {
               letterSpacing: "-0.05em",
             }}
           >
-            İş Akışınızı Yapay Zeka ile Güçlendirin
+            Edfu Kullanan Ekiplerin Deneyimleri
           </h2>
           <p className="text-muted-foreground text-center text-balance font-medium">
-            Dünyanın dört bir yanındaki ekipler, Edfu&apos;nun yapay zeka
-            destekli araçlarıyla iş akışlarını dönüştürüyor, daha hızlı karar
-            alıyor ve anlamlı sonuçlar elde ediyor.
+            Farklı sektörlerden ekipler, Edfu ile bilgiye erişim süreçlerini nasıl dönüştürdüklerini anlatıyor.
           </p>
         </div>
       </div>
