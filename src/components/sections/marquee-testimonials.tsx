@@ -1,115 +1,229 @@
-import { Marquee } from "@/components/ui/marquee"
+"use client"
 
 interface Testimonial {
+  body: string
+  highlightStart: number
+  highlightEnd: number
   name: string
   title: string
-  quote: string
-  highlight: string
+  avatar: string
 }
 
-const testimonials: Testimonial[] = [
-  {
-    name: "Samantha Lee",
-    title: "Pazarlama Direktörü, NextGen Solutions",
-    quote:
-      "Edfu'yu entegre ettikten sonra kampanyalarımızı yapay zeka destekli analizlerle optimize ettik ve ",
-    highlight: "Dönüşüm oranlarında %50 artış gördük!",
-  },
-  {
-    name: "Raj Patel",
-    title: "Kurucu & CEO, StartUp Grid",
-    quote:
-      "Tekrarlayan görevleri otomatikleştirerek ekibimizin yaratıcı işlere odaklanmasını sağladık; sonuç olarak ",
-    highlight: "Geliştirme hızımız iki katına çıktı.",
-  },
-  {
-    name: "Priya Sharma",
-    title: "Ürün Geliştirme Müdürü, TechVision",
-    quote:
-      "Yapay zeka destekli raporlama sayesinde karar alma süreçlerimiz çok daha güvenilir hale geldi; ",
-    highlight: "İçgörüler her zamankinden daha doğru ve hızlı.",
-  },
-  {
-    name: "Carlos Gomez",
-    title: "Ar-Ge Başkanı, EcoInnovate",
-    quote:
-      "Edfu ile sürdürülebilirlik hedeflerimizi veri odaklı bir yaklaşımla yönetiyoruz; artık ",
-    highlight: "Çevre dostu iş uygulamalarında öncü",
-  },
-  {
-    name: "Aisha Khan",
-    title: "Pazarlama Müdürü, Fashion Forward",
-    quote:
-      "Müşteri davranışlarını gerçek zamanlı izleyerek stratejilerimizi anında güncelliyoruz; ",
-    highlight: "Kampanyalarımız artık veri odaklı",
-  },
-  {
-    name: "Nadia Ali",
-    title: "Ürün Müdürü, Creative Solutions",
-    quote:
-      "Ekibimizin yaratıcı potansiyelini akıllı araçlarla birleştirerek özgün ürünler üretiyoruz; ",
-    highlight: "Yaratıcılık ve teknolojiyi bir araya getiriyoruz.",
-  },
-  {
-    name: "Sofia Patel",
-    title: "CEO, EduTech Innovations",
-    quote:
-      "Öğrenme analitiği sayesinde müfredatı bireysel ihtiyaçlara göre şekillendiriyoruz; ",
-    highlight: "Her öğrencinin ihtiyaçlarına göre uyarlanmış eğitim.",
-  },
+const columns: Testimonial[][] = [
+  // Column 1 — 40s
+  [
+    {
+      body: "Edfu'yu ekibimize tanıttıktan sonra günlük operasyonlarımızda inanılmaz bir verimlilik artışı yaşadık. Yapay zeka destekli otomasyon sayesinde tekrarlayan görevlere harcadığımız süre yarıya indi. Artık ekibimiz stratejik işlere çok daha fazla zaman ayırabiliyor.",
+      highlightStart: 67,
+      highlightEnd: 131,
+      name: "Ahmet Yılmaz",
+      title: "CTO, Bulut Yazılım A.Ş.",
+      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    },
+    {
+      body: "Proje yönetiminde yaşadığımız karmaşayı Edfu tamamen ortadan kaldırdı. Görev dağılımından raporlamaya kadar her şey tek bir platformda. Ekip içi iletişim ve takip artık çok daha şeffaf ve hızlı.",
+      highlightStart: 56,
+      highlightEnd: 115,
+      name: "Elif Demir",
+      title: "Proje Yöneticisi, İnovasyon Hub",
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    },
+    {
+      body: "Müşteri geri bildirimlerini analiz etmek eskiden günler alıyordu. Şimdi yapay zeka ile anlık içgörüler elde ediyoruz ve ürün geliştirme sürecimiz tamamen dönüştü. Veri odaklı kararlar almak hiç bu kadar kolay olmamıştı.",
+      highlightStart: 63,
+      highlightEnd: 108,
+      name: "Burak Kaya",
+      title: "Ürün Müdürü, Dijital Atölye",
+      avatar: "https://randomuser.me/api/portraits/men/75.jpg",
+    },
+  ],
+  // Column 2 — 60s
+  [
+    {
+      body: "Satış ekibimiz Edfu'nun tahminleme motorunu kullanarak hedeflerini sürekli aşıyor. Yapay zeka destekli öngörüler sayesinde doğru müşteriye doğru zamanda ulaşabiliyoruz. Satış döngümüz %35 kısaldı.",
+      highlightStart: 105,
+      highlightEnd: 160,
+      name: "Zeynep Arslan",
+      title: "Satış Direktörü, TeknoVizyon",
+      avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+    },
+    {
+      body: "Uzaktan çalışan ekibimiz için Edfu bir devrim oldu. Farklı zaman dilimlerinde çalışanlarımız bile iş birliğini sorunsuz sürdürebiliyor. Ekip uyumu ve motivasyon gözle görülür şekilde arttı.",
+      highlightStart: 45,
+      highlightEnd: 78,
+      name: "Murat Özkan",
+      title: "İK Müdürü, Uzaktan Çözümler",
+      avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+    },
+    {
+      body: "Finans departmanımızda raporlama süreçleri artık tamamen otomatik. Edfu'nun akıllı şablonları sayesinde aylık raporlar dakikalar içinde hazırlanıyor. Manuel hata oranımız neredeyse sıfıra düştü.",
+      highlightStart: 60,
+      highlightEnd: 126,
+      name: "Selin Çetin",
+      title: "Finans Müdürü, Atlas Holding",
+      avatar: "https://randomuser.me/api/portraits/women/33.jpg",
+    },
+  ],
+  // Column 3 — 30s
+  [
+    {
+      body: "İçerik üretim sürecimiz Edfu ile tamamen değişti. Yapay zeka asistanı bizimle birlikte beyin fırtınası yapıyor ve ilk taslakları hazırlıyor. Yaratıcı ekibimizin üretkenliği iki katına çıktı.",
+      highlightStart: 105,
+      highlightEnd: 160,
+      name: "Deniz Aydın",
+      title: "İçerik Yöneticisi, Medya360",
+      avatar: "https://randomuser.me/api/portraits/women/55.jpg",
+    },
+    {
+      body: "Müşteri destek ekibimiz artık çok daha hızlı yanıt veriyor. Edfu'nun akıllı yönlendirme sistemi talepleri doğru departmana otomatik iletiyor. Müşteri memnuniyet puanımız %40 yükseldi.",
+      highlightStart: 0,
+      highlightEnd: 53,
+      name: "Cem Yıldırım",
+      title: "Destek Müdürü, HızlıServis",
+      avatar: "https://randomuser.me/api/portraits/men/22.jpg",
+    },
+    {
+      body: "Veri güvenliği konusunda Edfu'ya tam güven duyuyoruz. Şifreleme ve erişim kontrolleri üst düzey. Hassas verilerimizin güvende olduğunu bilerek çalışmak büyük bir rahatlık.",
+      highlightStart: 57,
+      highlightEnd: 108,
+      name: "Ayşe Koç",
+      title: "Bilgi Güvenliği Uzmanı, KorumaNet",
+      avatar: "https://randomuser.me/api/portraits/women/12.jpg",
+    },
+  ],
+  // Column 4 — 50s
+  [
+    {
+      body: "Tedarik zincirimizi Edfu ile uçtan uca yönetiyoruz. Stok seviyelerinden teslimat takibine kadar her şey gerçek zamanlı izleniyor. Lojistik maliyetlerimiz önemli ölçüde azaldı.",
+      highlightStart: 53,
+      highlightEnd: 130,
+      name: "Emre Şahin",
+      title: "Operasyon Direktörü, LojistikPro",
+      avatar: "https://randomuser.me/api/portraits/men/51.jpg",
+    },
+    {
+      body: "Pazarlama kampanyalarımızı artık veriye dayalı yürütüyoruz. Edfu'nun analitik paneli hangi kanalın ne kadar dönüşüm sağladığını anlık gösteriyor. Reklam bütçemizi çok daha verimli kullanıyoruz.",
+      highlightStart: 56,
+      highlightEnd: 132,
+      name: "İrem Başaran",
+      title: "Dijital Pazarlama Uzmanı, GrowthLab",
+      avatar: "https://randomuser.me/api/portraits/women/27.jpg",
+    },
+    {
+      body: "Yazılım geliştirme döngümüz Edfu entegrasyonu ile hız kazandı. Kod inceleme süreçleri otomatikleşti, hata tespiti kolaylaştı. Ürün teslim sürelerimiz gözle görülür şekilde kısaldı.",
+      highlightStart: 54,
+      highlightEnd: 95,
+      name: "Kaan Tunç",
+      title: "Yazılım Mühendisi, KodFabrika",
+      avatar: "https://randomuser.me/api/portraits/men/64.jpg",
+    },
+  ],
+  // Column 5 — 45s
+  [
+    {
+      body: "Eğitim programlarımızı Edfu'nun yapay zeka önerileriyle kişiselleştirdik. Her çalışan kendi gelişim alanına uygun içeriklerle ilerliyor. Çalışan bağlılığında ve yetkinlik gelişiminde büyük sıçrama yaşadık.",
+      highlightStart: 108,
+      highlightEnd: 170,
+      name: "Gözde Erdem",
+      title: "Eğitim Koordinatörü, AkademiPlus",
+      avatar: "https://randomuser.me/api/portraits/women/90.jpg",
+    },
+  ],
 ]
 
+const durations = [40, 60, 30, 50, 45]
+
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
+  const before = testimonial.body.slice(0, testimonial.highlightStart)
+  const highlight = testimonial.body.slice(
+    testimonial.highlightStart,
+    testimonial.highlightEnd
+  )
+  const after = testimonial.body.slice(testimonial.highlightEnd)
+
   return (
-    <div className="w-[350px] rounded-xl border border-border bg-card p-6 mx-3 flex flex-col gap-4">
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        &ldquo;{testimonial.quote}
-        <span className="text-primary font-medium">{testimonial.highlight}</span>
-        &rdquo;
+    <div className="flex w-full cursor-pointer break-inside-avoid flex-col items-center justify-between gap-6 rounded-xl bg-white p-4 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.04),0px_8px_12px_-4px_rgba(15,12,12,0.08),0px_1px_2px_0px_rgba(15,12,12,0.10)] dark:bg-[#27272A] dark:shadow-[0px_0px_0px_1px_rgba(250,250,250,0.1),0px_0px_0px_1px_#18181B,0px_8px_12px_-4px_rgba(15,12,12,0.3),0px_1px_2px_0px_rgba(15,12,12,0.3)]">
+      <p className="select-none leading-relaxed font-normal text-foreground/90">
+        {before}
+        <span className="p-1 py-0.5 font-medium dark:font-semibold text-primary">
+          {highlight}
+        </span>
+        {after}
       </p>
-      <div className="flex items-center gap-3 mt-auto">
-        <div className="h-10 w-10 rounded-full bg-muted shrink-0" />
+      <div className="flex w-full select-none items-center justify-start gap-3.5">
+        <img
+          src={testimonial.avatar}
+          alt={testimonial.name}
+          className="size-8 rounded-full"
+        />
         <div>
-          <p className="text-sm font-medium">{testimonial.name}</p>
-          <p className="text-xs text-muted-foreground">{testimonial.title}</p>
+          <p className="font-medium text-foreground/90">{testimonial.name}</p>
+          <p className="text-xs font-normal text-foreground/50">
+            {testimonial.title}
+          </p>
         </div>
       </div>
     </div>
   )
 }
 
-const firstRow = testimonials.slice(0, 4)
-const secondRow = testimonials.slice(4)
-
 export function MarqueeTestimonials() {
   return (
-    <section className="py-20">
-      <div className="max-w-6xl mx-auto px-4 text-center mb-12">
-        <h2 className="font-heading text-4xl sm:text-5xl font-bold tracking-tight">
-          İş Akışınızı Yapay Zeka ile Güçlendirin
-        </h2>
-        <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
-          Dünyanın dört bir yanındaki ekipler, Edfu'nun yapay zeka destekli
-          araçlarıyla iş akışlarını dönüştürüyor, daha hızlı karar alıyor ve
-          anlamlı sonuçlar elde ediyor.
-        </p>
+    <section className="flex flex-col items-center justify-center w-full">
+      <div className="border-b w-full h-full px-4 py-10 md:p-14">
+        <div className="max-w-xl mx-auto flex flex-col items-center justify-center gap-2">
+          <h2
+            className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground tracking-tighter text-center text-balance"
+            style={{
+              fontFamily: "var(--font-geist)",
+              letterSpacing: "-0.05em",
+            }}
+          >
+            İş Akışınızı Yapay Zeka ile Güçlendirin
+          </h2>
+          <p className="text-muted-foreground text-center text-balance font-medium">
+            Dünyanın dört bir yanındaki ekipler, Edfu&apos;nun yapay zeka
+            destekli araçlarıyla iş akışlarını dönüştürüyor, daha hızlı karar
+            alıyor ve anlamlı sonuçlar elde ediyor.
+          </p>
+        </div>
       </div>
 
-      <div className="relative">
-        <Marquee pauseOnHover className="[--duration:40s]">
-          {firstRow.map((t) => (
-            <TestimonialCard key={t.name} testimonial={t} />
-          ))}
-        </Marquee>
+      <div className="h-full">
+        <div className="px-4 sm:px-10">
+          <div className="relative max-h-[600px] sm:max-h-[750px] overflow-hidden">
+            <div className="gap-0 columns-1 md:columns-2 xl:columns-3">
+              {columns.map((col, i) => (
+                <div
+                  key={i}
+                  className="group flex overflow-hidden p-2 [--gap:1rem] [gap:var(--gap)] flex-col"
+                  style={
+                    {
+                      "--duration": `${durations[i]}s`,
+                    } as React.CSSProperties
+                  }
+                >
+                  {[0, 1, 2, 3].map((copy) => (
+                    <div
+                      key={copy}
+                      className="flex shrink-0 justify-around [gap:var(--gap)] animate-marquee-vertical flex-col"
+                    >
+                      {col.map((testimonial, j) => (
+                        <TestimonialCard
+                          key={`${i}-${j}-${copy}`}
+                          testimonial={testimonial}
+                        />
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
 
-        <Marquee reverse pauseOnHover className="mt-4 [--duration:40s]">
-          {secondRow.map((t) => (
-            <TestimonialCard key={t.name} testimonial={t} />
-          ))}
-        </Marquee>
-
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-1/6 md:h-1/5 w-full bg-gradient-to-b from-background from-20%" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/6 md:h-1/5 w-full bg-gradient-to-t from-background from-20%" />
+          </div>
+        </div>
       </div>
     </section>
   )

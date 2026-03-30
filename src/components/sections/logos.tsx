@@ -78,25 +78,37 @@ export function Logos() {
         </p>
       </div>
 
-      <div className="mx-6">
-        <div className="grid grid-cols-2 sm:grid-cols-4 border border-border divide-x divide-border">
-          {logos.map((logo, i) => (
+      <div className="mx-4 sm:mx-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 border border-border">
+          {logos.map((logo, i) => {
+            // Mobile (2 cols): right border on even indices, bottom border on all except last row
+            // Desktop (4 cols): right border on all except last in row, bottom border on first row
+            const isLastRow2 = i >= logos.length - 2;
+            const isRightInRow2 = i % 2 === 1;
+            const isLastRow4 = i >= logos.length - (logos.length % 4 || 4);
+            const isRightInRow4 = i % 4 === 3;
+            return (
             <a
               key={logo.name}
               href="#"
-              className={`group relative flex flex-col items-center justify-center px-6 py-10 overflow-hidden ${
-                i < 4 ? "border-b border-border" : ""
+              className={`group relative flex flex-col items-center justify-center px-4 py-8 sm:px-6 sm:py-10 overflow-hidden ${
+                !isRightInRow2 ? "border-r border-border" : ""
+              } ${!isLastRow2 ? "border-b border-border" : ""} ${
+                !isRightInRow4 ? "sm:border-r" : "sm:border-r-0"
+              } ${isLastRow2 && !isLastRow4 ? "sm:border-b" : ""} ${
+                isLastRow4 ? "sm:border-b-0" : ""
               }`}
             >
-              <div className="flex items-center gap-2 text-foreground transition-transform duration-300 group-hover:-translate-y-2">
+              <div className="flex items-center gap-1.5 sm:gap-2 text-foreground transition-transform duration-300 group-hover:-translate-y-2">
                 {logo.svg}
-                <span className="text-xl font-bold">{logo.name}</span>
+                <span className="text-base sm:text-xl font-bold">{logo.name}</span>
               </div>
               <span style={{ fontFamily: "var(--font-geist)" }} className="absolute bottom-4 flex items-center gap-1 text-sm font-medium text-foreground/80 opacity-0 transition-all duration-300 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0">
                 Daha Fazla <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
               </span>
             </a>
-          ))}
+            );
+          })}
         </div>
       </div>
 

@@ -17,8 +17,8 @@ export default function Home() {
       <Navbar />
       {/* Side borders */}
       <div className="relative mx-auto max-w-7xl border-x border-border">
-        <div className="pointer-events-none absolute inset-y-0 left-6 z-10 w-px bg-border" />
-        <div className="pointer-events-none absolute inset-y-0 right-6 z-10 w-px bg-border" />
+        <div className="pointer-events-none absolute inset-y-0 left-4 md:left-6 z-10 w-px bg-border" />
+        <div className="pointer-events-none absolute inset-y-0 right-4 md:right-6 z-10 w-px bg-border" />
 
         <main className="divide-y divide-border">
           <Hero />

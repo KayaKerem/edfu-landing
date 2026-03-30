@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
+
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Edfu - AI Asistanınız",
@@ -16,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" suppressHydrationWarning>
-      <body className={`min-h-screen font-sans antialiased ${GeistSans.variable}`}>
+      <body className={`min-h-screen font-sans antialiased ${geist.variable}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

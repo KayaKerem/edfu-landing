@@ -1,186 +1,245 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Check } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-
-const FREE_FEATURES = [
-  "Özel alan adı",
-  "SEO optimizasyonları",
-  "Otomatik API belgeleri",
-  "Dahili bileşen kütüphanesi",
-];
-
-const STARTUP_EXTRA_FEATURES = [
-  "E-ticaret entegrasyonu",
-  "Kullanıcı kimlik doğrulama",
-  "Çoklu dil desteği",
-  "Gerçek zamanlı iş birliği",
-];
-
-const ENTERPRISE_EXTRA_FEATURES = ["Gerçek zamanlı iş birliği"];
+import { motion } from "motion/react";
 
 export function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
 
+  const plans = [
+    {
+      name: "Ücretsiz",
+      monthlyPrice: 0,
+      yearlyPrice: 0,
+      description: "Bireysel kullanıcılar için ideal",
+      cta: "Ücretsiz Başla",
+      popular: false,
+      inheritLabel: "Pro planın tüm özellikleri +",
+      features: [
+        "Özel alan adı",
+        "SEO optimizasyonları",
+        "Otomatik API belgeleri",
+        "Dahili bileşen kütüphanesi",
+      ],
+    },
+    {
+      name: "Başlangıç",
+      monthlyPrice: 499,
+      yearlyPrice: 399,
+      description: "Profesyoneller ve küçük ekipler için",
+      cta: "Pro'ya Yükselt",
+      popular: true,
+      inheritLabel: "Pro planın tüm özellikleri +",
+      features: [
+        "Özel alan adı",
+        "SEO optimizasyonları",
+        "Otomatik API belgeleri",
+        "Dahili bileşen kütüphanesi",
+        "E-ticaret entegrasyonu",
+        "Kullanıcı kimlik doğrulama",
+        "Çoklu dil desteği",
+        "Gerçek zamanlı iş birliği",
+      ],
+    },
+    {
+      name: "Kurumsal",
+      monthlyPrice: null,
+      yearlyPrice: null,
+      description: "Büyük ekipler ve kurumsal organizasyonlar",
+      cta: "Satışla İletişime Geç",
+      popular: false,
+      inheritLabel: "Pro planın tüm özellikleri +",
+      features: [
+        "Özel alan adı",
+        "SEO optimizasyonları",
+        "Otomatik API belgeleri",
+        "Dahili bileşen kütüphanesi",
+        "Gerçek zamanlı iş birliği araçları",
+      ],
+    },
+  ];
+
   return (
-    <section id="pricing" className="py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        {/* Header */}
-        <div className="mb-12 text-center">
-          <h2 className="font-heading text-4xl font-bold sm:text-5xl">
+    <section
+      id="pricing"
+      className="flex flex-col items-center justify-center gap-10 pb-10 w-full relative"
+    >
+      {/* Header */}
+      <div className="border-b w-full h-full px-4 py-10 md:p-14">
+        <div className="max-w-xl mx-auto">
+          <h2
+            className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center"
+            style={{
+              letterSpacing: "-0.05em",
+              fontFamily: "var(--font-geist)",
+            }}
+          >
             Sizinle Birlikte Ölçeklenen Fiyatlandırma
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="text-muted-foreground text-center text-balance font-medium mt-4">
             Hangi planı seçerseniz seçin, belgelerinizi sevene kadar ücretsiz.
             Bu bizim sözümüz.
           </p>
         </div>
+      </div>
 
-        {/* Monthly / Yearly toggle */}
-        <div className="mb-12 flex items-center justify-center gap-3">
-          <button
-            onClick={() => setIsYearly(false)}
-            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-              !isYearly
-                ? "bg-foreground text-background"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
+      {/* Card Grid */}
+      <div className="grid min-[650px]:grid-cols-2 min-[900px]:grid-cols-3 gap-4 w-full max-w-6xl mx-auto px-4 sm:px-6 relative">
+        {/* Toggle - positioned above grid */}
+        <div className="absolute -top-14 left-1/2 -translate-x-1/2">
+          <div
+            className="relative flex w-fit items-center rounded-full border p-0.5 backdrop-blur-sm cursor-pointer h-9 bg-muted mx-auto"
+            onClick={() => setIsYearly(!isYearly)}
           >
-            Aylık
-          </button>
-          <button
-            onClick={() => setIsYearly(true)}
-            className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-              isYearly
-                ? "bg-foreground text-background"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Yıllık
-            <Badge className="rounded-full bg-primary/10 text-primary border-0">
-              -20%
-            </Badge>
-          </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsYearly(false);
+              }}
+              className="relative z-10 flex items-center justify-center rounded-full px-4 h-full text-sm font-medium cursor-pointer"
+            >
+              {!isYearly && (
+                <motion.div
+                  layoutId="pricingTogglePill"
+                  className="absolute inset-0 rounded-full bg-white dark:bg-[#3F3F46] shadow-md border border-border"
+                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                />
+              )}
+              <span className={`relative z-10 transition-colors duration-200 ${!isYearly ? "text-primary" : "text-muted-foreground"}`}>
+                Aylık
+              </span>
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsYearly(true);
+              }}
+              className="relative z-10 flex items-center justify-center rounded-full px-4 h-full text-sm font-medium cursor-pointer"
+            >
+              {isYearly && (
+                <motion.div
+                  layoutId="pricingTogglePill"
+                  className="absolute inset-0 rounded-full bg-white dark:bg-[#3F3F46] shadow-md border border-border"
+                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                />
+              )}
+              <span className={`relative z-10 flex items-center transition-colors duration-200 ${isYearly ? "text-primary" : "text-muted-foreground"}`}>
+                Yıllık
+                <span className="text-xs font-semibold text-primary bg-primary/15 py-0.5 px-1 rounded-full ml-2">
+                  -20%
+                </span>
+              </span>
+            </button>
+          </div>
         </div>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {/* Free plan */}
-          <div className="rounded-xl border border-border bg-card p-8">
-            <div className="mb-6">
-              <p className="text-sm font-medium text-muted-foreground">
-                Ücretsiz
-              </p>
-              <div className="mt-2 flex items-end gap-1">
-                <span className="font-heading text-5xl font-bold">$0</span>
-                <span className="mb-1 text-muted-foreground">/ay</span>
-              </div>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Bireysel kullanıcılar için
-              </p>
-            </div>
+        {/* Cards */}
+        {plans.map((plan) => {
+          const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
 
-            <a
-              href="#"
-              className="mb-6 flex h-10 w-full items-center justify-center rounded-full border border-border bg-background text-sm font-normal tracking-wide text-foreground transition-all ease-out hover:bg-accent active:scale-95"
-            >
-              Ücretsiz Başla
-            </a>
+          // Card 2 (popular) has unique styles
+          const isPopular = plan.popular;
+          const isEnterprise = plan.name === "Kurumsal";
 
-            <ul className="space-y-3">
-              {FREE_FEATURES.map((feature) => (
-                <li key={feature} className="flex items-center gap-2 text-sm">
-                  <Check className="h-4 w-4 shrink-0 text-muted-foreground" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
+          const cardClasses = isPopular
+            ? "rounded-xl grid grid-rows-[180px_auto_1fr] relative h-fit min-[650px]:h-full min-[900px]:h-fit bg-white dark:bg-[#27272A] md:shadow-[0px_61px_24px_-10px_rgba(0,0,0,0.01),0px_34px_20px_-8px_rgba(0,0,0,0.05),0px_15px_15px_-6px_rgba(0,0,0,0.09),0px_4px_8px_-2px_rgba(0,0,0,0.10),0px_0px_0px_1px_rgba(0,0,0,0.08)]"
+            : "rounded-xl grid grid-rows-[180px_auto_1fr] relative h-fit min-[650px]:h-full min-[900px]:h-fit bg-[#F3F4F6] dark:bg-[#F9FAFB]/[0.02] border border-border";
 
-          {/* Startup plan (popular) */}
-          <div className="rounded-xl border border-primary/50 bg-card p-8 shadow-lg">
-            <div className="mb-6">
-              <div className="flex items-center gap-2">
-                <p className="text-sm font-medium text-muted-foreground">
-                  Startup
+          return (
+            <div key={plan.name} className={cardClasses}>
+              {/* Upper section: plan info */}
+              <div className="p-6 flex flex-col justify-center">
+                {/* Plan name + badge */}
+                <div className="flex items-center">
+                  <span className="text-sm text-foreground">{plan.name}</span>
+                  {isPopular && (
+                    <span className="bg-gradient-to-b from-primary/50 to-primary text-white h-6 inline-flex w-fit items-center justify-center px-2 rounded-full text-sm ml-2 shadow-[0px_6px_6px_-3px_rgba(0,0,0,0.08),0px_3px_3px_-1.5px_rgba(0,0,0,0.08),0px_1px_1px_-0.5px_rgba(0,0,0,0.08),0px_0px_0px_1px_rgba(255,255,255,0.12)_inset,0px_1px_0px_0px_rgba(255,255,255,0.12)_inset]">
+                      Popüler
+                    </span>
+                  )}
+                </div>
+
+                {/* Price */}
+                <div className="mt-3 flex items-end gap-1">
+                  {price !== null ? (
+                    <>
+                      <span className="text-4xl font-semibold text-foreground">₺{price}</span>
+                      <span className="mb-1 text-sm text-muted-foreground">/ay</span>
+                    </>
+                  ) : (
+                    <span className="text-4xl font-semibold text-foreground">Özel</span>
+                  )}
+                </div>
+
+                {/* Description */}
+                <p className="text-sm mt-2 text-muted-foreground">
+                  {plan.description}
                 </p>
-                <Badge variant="default">Popüler</Badge>
               </div>
-              <div className="mt-2 flex items-end gap-1">
-                <span className="font-heading text-5xl font-bold">
-                  {isYearly ? "$10" : "$12"}
-                </span>
-                <span className="mb-1 text-muted-foreground">/ay</span>
+
+              {/* Button section */}
+              <div className="px-6 pb-6">
+                {isPopular ? (
+                  <a
+                    href="#"
+                    className="flex h-10 w-full items-center justify-center rounded-full text-sm font-normal tracking-wide bg-primary text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] active:scale-95 transition-all ease-out"
+                  >
+                    {plan.cta}
+                  </a>
+                ) : isEnterprise ? (
+                  <a
+                    href="#"
+                    className="flex h-10 w-full items-center justify-center rounded-full text-sm font-normal tracking-wide bg-[#171717] text-white dark:bg-white dark:text-[#171717] shadow-[0px_1px_2px_0px_rgba(255,255,255,0.16)_inset,0px_3px_3px_-1.5px_rgba(16,24,40,0.24),0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] active:scale-95 transition-all ease-out"
+                  >
+                    {plan.cta}
+                  </a>
+                ) : (
+                  <a
+                    href="#"
+                    className="flex h-10 w-full items-center justify-center rounded-full text-sm font-normal tracking-wide bg-white dark:bg-[#27272A] text-foreground shadow-[0px_1px_2px_0px_rgba(255,255,255,0.16)_inset,0px_3px_3px_-1.5px_rgba(16,24,40,0.24),0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] active:scale-95 transition-all ease-out"
+                  >
+                    {plan.cta}
+                  </a>
+                )}
               </div>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Profesyoneller ve küçük takımlar
-              </p>
+
+              {/* Features section */}
+              <div className="px-6 pb-6">
+                <hr className="border-border dark:border-white/20 mb-6" />
+
+                {/* Inherit label */}
+                <p className="mb-4 text-sm font-medium text-muted-foreground">
+                  {plan.inheritLabel}
+                </p>
+
+                {/* Feature list */}
+                <ul className="space-y-3">
+                  {plan.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-center gap-2 text-sm text-foreground"
+                    >
+                      {isPopular ? (
+                        <span className="size-5 rounded-full border bg-muted-foreground/40 border-border flex items-center justify-center shrink-0">
+                          <Check className="size-3 text-white" strokeWidth={2.5} />
+                        </span>
+                      ) : (
+                        <span className="size-5 rounded-full border border-primary/20 flex items-center justify-center shrink-0">
+                          <Check
+                            className="size-3 text-foreground"
+                            strokeWidth={2.5}
+                          />
+                        </span>
+                      )}
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-
-            <a
-              href="#"
-              className="mb-6 flex h-10 w-full items-center justify-center rounded-full bg-primary text-sm font-normal tracking-wide text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] transition-all ease-out hover:bg-primary/80 active:scale-95"
-            >
-              Pro&apos;ya Yükselt
-            </a>
-
-            <ul className="space-y-3">
-              {FREE_FEATURES.map((feature) => (
-                <li key={feature} className="flex items-center gap-2 text-sm">
-                  <Check className="h-4 w-4 shrink-0 text-primary" />
-                  {feature}
-                </li>
-              ))}
-              {STARTUP_EXTRA_FEATURES.map((feature) => (
-                <li key={feature} className="flex items-center gap-2 text-sm">
-                  <Check className="h-4 w-4 shrink-0 text-primary" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Enterprise plan */}
-          <div className="rounded-xl border border-border bg-card p-8">
-            <div className="mb-6">
-              <p className="text-sm font-medium text-muted-foreground">
-                Kurumsal
-              </p>
-              <div className="mt-2 flex items-end gap-1">
-                <span className="font-heading text-5xl font-bold">
-                  {isYearly ? "$19" : "$24"}
-                </span>
-                <span className="mb-1 text-muted-foreground">/ay</span>
-              </div>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Büyük takımlar ve kurumsal organizasyonlar
-              </p>
-            </div>
-
-            <a
-              href="#"
-              className="mb-6 flex h-10 w-full items-center justify-center rounded-full bg-foreground text-sm font-normal tracking-wide text-background shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.06] transition-all ease-out hover:bg-foreground/90 active:scale-95"
-            >
-              Satışla İletişim
-            </a>
-
-            <ul className="space-y-3">
-              {FREE_FEATURES.map((feature) => (
-                <li key={feature} className="flex items-center gap-2 text-sm">
-                  <Check className="h-4 w-4 shrink-0 text-muted-foreground" />
-                  {feature}
-                </li>
-              ))}
-              {ENTERPRISE_EXTRA_FEATURES.map((feature) => (
-                <li key={feature} className="flex items-center gap-2 text-sm">
-                  <Check className="h-4 w-4 shrink-0 text-muted-foreground" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </section>
   );

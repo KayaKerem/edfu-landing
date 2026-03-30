@@ -1,9 +1,6 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "motion/react";
-
-const STEP_DURATION = 5; // seconds
 
 const steps = [
   {
@@ -34,7 +31,6 @@ const steps = [
 
 export function HowItWorks() {
   const [activeStep, setActiveStep] = useState(0);
-  // Key to force re-mount the progress bar on step change
   const [animKey, setAnimKey] = useState(0);
 
   const goNext = useCallback(() => {
@@ -42,87 +38,158 @@ export function HowItWorks() {
     setAnimKey((k) => k + 1);
   }, []);
 
-  const handleClick = (index: number) => {
+  const handleClick = useCallback((index: number) => {
     setActiveStep(index);
     setAnimKey((k) => k + 1);
-  };
+  }, []);
 
   return (
-    <section id="how-it-works" className="py-0">
-      <div>
-        {/* Header */}
-        <div className="border-b border-border py-14 text-center">
-          <h2 className="text-[36px] font-medium leading-none text-foreground" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
+    <section
+      id="how-it-works"
+      className="flex flex-col items-center justify-center gap-5 w-full relative"
+    >
+      {/* Header */}
+      <div className="border-b w-full h-full px-4 py-10 md:p-14">
+        <div className="max-w-xl mx-auto flex flex-col items-center justify-center gap-2">
+          <h2
+            className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center"
+            style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
+          >
             Basit. Sorunsuz. Akıllı.
           </h2>
-          <p className="mt-4 text-base text-muted-foreground font-medium tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>
+          <p className="text-muted-foreground text-center text-balance font-medium">
             Edfu&apos;nun komutlarınızı dört kolay adımda nasıl eyleme
             dönüştürdüğünü keşfedin
           </p>
         </div>
+      </div>
 
-        {/* Two-column layout */}
-        <div className="mx-auto grid max-w-6xl grid-cols-1 items-stretch gap-8 px-4 py-16 sm:px-6 lg:grid-cols-[2fr_3fr]">
-          {/* Left column – Steps */}
-          <div className="flex flex-col justify-between">
+      {/* Content area */}
+      <div className="w-full h-full lg:h-[450px] flex items-center justify-center">
+        <div className="grid h-full grid-cols-1 lg:grid-cols-5 gap-x-10 px-4 md:px-20 items-center w-full max-w-7xl mx-auto">
+          {/* Left accordion (desktop only) */}
+          <div className="col-span-2 w-full hidden lg:flex items-stretch justify-start">
+            <div className="w-full flex flex-col justify-between">
+              {steps.map((step, index) => {
+                const isActive = activeStep === index;
+                return (
+                  <div
+                    key={index}
+                    className={`relative transition-all duration-300 ${
+                      isActive
+                        ? "bg-white dark:bg-[#27272A] rounded-lg shadow-[0px_0px_1px_0px_rgba(0,0,0,0.16),0px_1px_2px_-0.5px_rgba(0,0,0,0.16)] dark:shadow-[0px_0px_0px_1px_rgba(249,250,251,0.06),0px_0px_0px_1px_#27272A,0px_1px_2px_-0.5px_rgba(0,0,0,0.24),0px_2px_4px_-1px_rgba(0,0,0,0.24)]"
+                        : ""
+                    }`}
+                  >
+                    {/* Title button */}
+                    <button
+                      onClick={() => handleClick(index)}
+                      className="flex h-[45px] flex-1 w-full cursor-pointer items-center justify-between p-3 font-semibold text-lg tracking-tight text-left"
+                      style={{ fontFamily: "var(--font-geist)" }}
+                    >
+                      {step.title}
+                    </button>
+
+                    {/* Content (description) with grid-template-rows trick */}
+                    <div
+                      className="grid transition-all duration-300 ease-in-out"
+                      style={{
+                        gridTemplateRows: isActive ? "1fr" : "0fr",
+                      }}
+                    >
+                      <div className="overflow-hidden">
+                        <p className="text-sm font-medium p-3 pt-0">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Progress bar */}
+                    <div
+                      className="absolute left-0 right-0 bottom-0 h-0.5 w-full bg-neutral-300/50 dark:bg-neutral-300/30 rounded-lg overflow-hidden transition-opacity duration-300"
+                      style={{ opacity: isActive ? 1 : 0 }}
+                    >
+                      {isActive && (
+                        <div
+                          key={`progress-${animKey}`}
+                          className="absolute left-0 top-0 h-full bg-primary progress-fill"
+                          onAnimationEnd={goNext}
+                        />
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right visual */}
+          <div className="col-span-1 h-[280px] sm:h-[350px] min-h-[200px] w-auto lg:col-span-3">
+            <div className="relative h-full w-full overflow-hidden rounded-xl border border-neutral-300/50 p-1">
+              <div className="flex h-full w-full items-center justify-center">
+                {steps.map((step, index) => (
+                  <span
+                    key={index}
+                    className="absolute text-8xl transition-all duration-300"
+                    style={{
+                      opacity: activeStep === index ? 1 : 0,
+                      filter:
+                        activeStep === index ? "blur(0px)" : "blur(8px)",
+                    }}
+                  >
+                    {step.emoji}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile horizontal scroll */}
+          <div className="col-span-1 lg:col-span-5 flex snap-x flex-nowrap overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [-webkit-mask-image:linear-gradient(90deg,transparent,black_10%,white_90%,transparent)] [mask-image:linear-gradient(90deg,transparent,black_10%,white_90%,transparent)] snap-mandatory lg:hidden mt-4">
             {steps.map((step, index) => {
               const isActive = activeStep === index;
               return (
                 <button
                   key={index}
                   onClick={() => handleClick(index)}
-                  className="w-full cursor-pointer text-left"
+                  className="relative grid h-full min-w-[280px] max-w-[300px] shrink-0 items-start justify-center p-4 bg-background border-l last:border-r border-t border-b border-border first:rounded-tl-xl last:rounded-tr-xl snap-start cursor-pointer text-left"
                 >
-                  <div className={`rounded-xl p-6 transition-all duration-300 ${isActive ? "border border-border bg-white dark:bg-card pb-4" : ""}`}>
-                    <h3 className="text-lg font-semibold text-foreground" style={{ fontFamily: "var(--font-geist)" }}>
-                      {step.title}
-                    </h3>
-                    <div
-                      className="grid transition-all duration-300 ease-in-out"
-                      style={{ gridTemplateRows: isActive ? "1fr" : "0fr" }}
-                    >
-                      <div className="overflow-hidden">
-                        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                          {step.description}
-                        </p>
-                        <div className="mt-4 h-1 w-full rounded-full bg-primary/10 overflow-hidden">
-                          {isActive && (
-                            <div
-                              key={animKey}
-                              className="h-full rounded-full bg-primary"
-                              style={{
-                                animation: `progressFill ${STEP_DURATION}s linear forwards`,
-                              }}
-                              onAnimationEnd={goNext}
-                            />
-                          )}
-                        </div>
-                      </div>
-                    </div>
+                  <h3 className="text-base font-bold" style={{ fontFamily: "var(--font-geist)" }}>{step.title}</h3>
+                  <p className="text-sm font-medium leading-relaxed text-muted-foreground">
+                    {step.description}
+                  </p>
+
+                  {/* Progress bar */}
+                  <div
+                    className="absolute left-0 right-0 bottom-0 h-0.5 w-full bg-neutral-300/50 dark:bg-neutral-300/30 rounded-lg overflow-hidden transition-opacity duration-300"
+                    style={{ opacity: isActive ? 1 : 0 }}
+                  >
+                    {isActive && (
+                      <div
+                        key={`mobile-progress-${animKey}`}
+                        className="absolute left-0 top-0 h-full bg-primary progress-fill"
+                        onAnimationEnd={goNext}
+                      />
+                    )}
                   </div>
                 </button>
               );
             })}
-          </div>
-
-          {/* Right column – Visual */}
-          <div className="rounded-xl border border-border bg-white dark:bg-card overflow-hidden">
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/5 via-transparent to-transparent">
-              <span
-                className="text-8xl transition-all duration-300"
-                key={activeStep}
-              >
-                {steps[activeStep].emoji}
-              </span>
-            </div>
           </div>
         </div>
       </div>
 
       <style jsx>{`
         @keyframes progressFill {
-          from { width: 0%; }
-          to { width: 100%; }
+          from {
+            width: 0%;
+          }
+          to {
+            width: 100%;
+          }
+        }
+        .progress-fill {
+          animation: progressFill 5s linear forwards;
         }
       `}</style>
     </section>

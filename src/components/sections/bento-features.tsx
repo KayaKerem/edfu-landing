@@ -138,7 +138,7 @@ function IntegrationOrbits() {
 
   return (
     <div ref={orbitRef} className="relative h-full w-full overflow-hidden">
-      <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[35%]">
+      <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[35%] scale-[0.85] sm:scale-[0.9] md:scale-100 origin-bottom">
         {/* Background gradient circles - ripple in from center */}
         <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-black/[0.02] dark:bg-[#1F2023]/40 transition-all duration-[1200ms] ease-out ${isVisible ? "scale-100 opacity-100" : "scale-0 opacity-0"}`} style={{ transitionDelay: "800ms" }} />
         <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[390px] rounded-full bg-black/[0.03] dark:bg-[#1F2023]/60 transition-all duration-1000 ease-out ${isVisible ? "scale-100 opacity-100" : "scale-0 opacity-0"}`} style={{ transitionDelay: "400ms" }} />
@@ -681,7 +681,7 @@ function NotesMockup() {
 function HatchedEdge({ side }: { side: "left" | "right" }) {
   return (
     <div
-      className={`absolute top-0 ${side === "left" ? "-left-4 md:-left-14" : "-right-4 md:-right-14"} h-full w-4 md:w-14 text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]`}
+      className={`absolute top-0 ${side === "left" ? "-left-4 md:-left-14" : "-right-4 md:-right-14"} h-full hidden md:block w-14 text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]`}
     />
   );
 }
@@ -719,16 +719,16 @@ export function BentoFeatures() {
   return (
     <section id="features" className="relative">
       {/* Hatched areas - full section height, positioned at inner line */}
-      <div className="pointer-events-none absolute inset-y-0 left-6 w-4 md:w-14 text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" />
-      <div className="pointer-events-none absolute inset-y-0 right-6 w-4 md:w-14 text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" />
+      <div className="pointer-events-none absolute inset-y-0 left-6 hidden md:block w-14 text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" />
+      <div className="pointer-events-none absolute inset-y-0 right-6 hidden md:block w-14 text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" />
       {/* Vertical lines at grid edges (3rd lines) - full section height */}
-      <div className="pointer-events-none absolute inset-y-0 left-10 md:left-20 w-px bg-border" />
-      <div className="pointer-events-none absolute inset-y-0 right-10 md:right-20 w-px bg-border" />
+      <div className="pointer-events-none absolute inset-y-0 left-4 md:left-20 w-px bg-border" />
+      <div className="pointer-events-none absolute inset-y-0 right-4 md:right-20 w-px bg-border" />
 
       <div className="pt-12">
         {/* Header */}
         <div className="mx-auto mb-10 max-w-2xl px-4 text-center">
-          <h2 className="text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
+          <h2 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
             İş Akışınızı Yapay Zeka ile Güçlendirin
           </h2>
           <p className="mt-4 text-base text-muted-foreground font-medium text-balance tracking-tight">
@@ -738,15 +738,17 @@ export function BentoFeatures() {
         </div>
 
         {/* Bento Grid */}
-        <div className="relative mx-10 md:mx-20">
+        <div className="relative mx-4 md:mx-20">
 
         <div className="grid grid-cols-1 md:grid-cols-2 border-t border-x border-border">
           {features.map((feature, i) => (
             <div
               key={feature.title}
-              className={`relative flex flex-col overflow-hidden aspect-[554/496] ${
+              className={`relative flex flex-col overflow-hidden aspect-auto min-h-[420px] sm:min-h-[450px] md:aspect-[554/496] md:min-h-0 ${
                 i % 2 === 0 && i < features.length - 1 ? "md:border-r border-border" : ""
-              } ${i < 2 ? "border-b border-border" : ""}`}
+              } ${i < features.length - 1 ? "border-b border-border" : ""} ${
+                i >= 2 ? "md:border-b-0" : ""
+              }`}
             >
               {/* Visual area */}
               <div className="relative flex-1">
@@ -755,9 +757,9 @@ export function BentoFeatures() {
                 <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-24 w-full bg-gradient-to-t from-background to-transparent" />
               </div>
               {/* Text area */}
-              <div className="relative z-20 px-6 pb-8 -mt-4">
+              <div className="relative z-20 px-4 sm:px-6 pb-6 sm:pb-8 -mt-4">
                 <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>{feature.title}</h3>
-                <p className="mt-1.5 text-base text-muted-foreground">{feature.description}</p>
+                <p className="mt-1.5 text-sm sm:text-base text-muted-foreground">{feature.description}</p>
               </div>
             </div>
           ))}
