@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useTheme } from "next-themes";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { motion, AnimatePresence } from "motion/react";
 
 const navLinks = [
@@ -17,15 +17,9 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
-  const { theme, setTheme } = useTheme();
   const navRef = useRef<HTMLUListElement>(null);
   const linkRefs = useRef<Map<string, HTMLLIElement>>(new Map());
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -71,7 +65,6 @@ export function Navbar() {
     return () => window.removeEventListener("resize", updatePill);
   }, [updatePill]);
 
-  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4">
@@ -144,28 +137,12 @@ export function Navbar() {
               >
                 Ücretsiz Dene
               </a>
-              {mounted && (
-                <button
-                  onClick={toggleTheme}
-                  aria-label="Tema değiştir"
-                  className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                >
-                  {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
-                </button>
-              )}
+              <AnimatedThemeToggler className="size-8 cursor-pointer rounded-full border border-border text-muted-foreground" />
             </div>
 
             {/* Mobile */}
             <div className="flex items-center gap-2 md:hidden">
-              {mounted && (
-                <button
-                  onClick={toggleTheme}
-                  aria-label="Tema değiştir"
-                  className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full border border-border text-muted-foreground"
-                >
-                  {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
-                </button>
-              )}
+              <AnimatedThemeToggler className="size-8 cursor-pointer rounded-full border border-border text-muted-foreground" />
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 aria-label={mobileOpen ? "Menüyü kapat" : "Menüyü aç"}
