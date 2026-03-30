@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
-import { AnimatedBeam } from "@/components/ui/animated-beam";
+import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 
 const AI_RESPONSE = "Takvim kalıplarınıza ve tercihlerinize dayanarak, ekip toplantısını Salı saat 14:00'e planlamanızı öneririm. Bu zaman dilimi geçmişte en yüksek katılım oranına sahipti ve diğer tekrarlayan toplantılarla çakışmıyor.";
 
@@ -107,67 +107,46 @@ function ChatMockup() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Card 2 – Animated Integration Beams                                */
+/*  Card 2 – Orbiting Circles Integration                             */
 /* ------------------------------------------------------------------ */
-function IntegrationBeams() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const centerRef = useRef<HTMLDivElement>(null);
-  const icon1Ref = useRef<HTMLDivElement>(null);
-  const icon2Ref = useRef<HTMLDivElement>(null);
-  const icon3Ref = useRef<HTMLDivElement>(null);
-  const icon4Ref = useRef<HTMLDivElement>(null);
-  const icon5Ref = useRef<HTMLDivElement>(null);
-  const icon6Ref = useRef<HTMLDivElement>(null);
-
-  const icons = [
-    { ref: icon1Ref, emoji: "📊" },
-    { ref: icon2Ref, emoji: "💬" },
-    { ref: icon3Ref, emoji: "🎨" },
-    { ref: icon4Ref, emoji: "☁️" },
-    { ref: icon5Ref, emoji: "📁" },
-    { ref: icon6Ref, emoji: "📧" },
-  ];
-
+function IntegrationOrbits() {
   return (
-    <div
-      ref={containerRef}
-      className="relative flex h-full w-full items-center justify-center p-8"
-    >
-      {icons.map((icon, i) => {
-        const angle = (i * 360) / 6 - 90;
-        const radius = 38;
-        const x = 50 + radius * Math.cos((angle * Math.PI) / 180);
-        const y = 50 + radius * Math.sin((angle * Math.PI) / 180);
-        return (
-          <div
-            key={i}
-            ref={icon.ref}
-            className="absolute z-10 flex size-10 items-center justify-center rounded-lg border border-border bg-card text-lg shadow-sm"
-            style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%, -50%)" }}
-          >
-            {icon.emoji}
-          </div>
-        );
-      })}
-      <div
-        ref={centerRef}
-        className="relative z-10 flex size-14 items-center justify-center rounded-xl border border-border bg-primary text-lg font-bold text-primary-foreground shadow-lg"
-      >
-        E
-      </div>
-      {icons.map((icon, i) => (
-        <AnimatedBeam
-          key={i}
-          containerRef={containerRef}
-          fromRef={icon.ref}
-          toRef={centerRef}
-          duration={4 + i * 0.5}
-          delay={i * 0.3}
-          pathColor="oklch(0.7 0.05 260)"
-          gradientStartColor="oklch(0.72 0.19 155)"
-          gradientStopColor="oklch(0.62 0.19 260)"
-        />
-      ))}
+    <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
+      {/* Center – Edfu logo */}
+      <img src="/logo.svg" alt="Edfu" className="size-16 rounded-xl" />
+
+      {/* Inner orbit */}
+      <OrbitingCircles iconSize={40} radius={80} speed={0.5}>
+        <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+          <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+          <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+      </OrbitingCircles>
+
+      {/* Middle orbit */}
+      <OrbitingCircles iconSize={36} radius={130} speed={0.4} reverse>
+        <div className="flex size-9 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+          <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div className="flex size-9 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+          <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div className="flex size-9 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+          <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        </div>
+      </OrbitingCircles>
+
+      {/* Outer orbit */}
+      <OrbitingCircles iconSize={32} radius={180} speed={0.3}>
+        <div className="flex size-8 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+          <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+        </div>
+        <div className="flex size-8 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+          <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+      </OrbitingCircles>
     </div>
   );
 }
@@ -251,7 +230,7 @@ const features = [
   {
     title: "Sorunsuz Entegrasyonlar",
     description: "Zahmetsiz bağlantı için favori araçlarınızı birleştirin. Birbirine bağlı iş akışlarıyla üretkenliği artırın.",
-    visual: <IntegrationBeams />,
+    visual: <IntegrationOrbits />,
   },
   {
     title: "Anlık İçgörü Raporlama",
