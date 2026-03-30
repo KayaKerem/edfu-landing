@@ -33,9 +33,9 @@
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
 
-  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-geist: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-geist: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -158,6 +158,8 @@
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
   }
 }
 

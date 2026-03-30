@@ -8,46 +8,17 @@ import { cn } from "@/lib/utils"
 
 const MOVEMENT_DAMPING = 1400
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const GLOBE_CONFIG: Record<string, any> = {
-  width: 800,
-  height: 800,
-  devicePixelRatio: 2,
-  phi: 0,
-  theta: 0.3,
-  dark: 0,
-  diffuse: 0.4,
-  mapSamples: 16000,
-  mapBrightness: 1.2,
-  baseColor: [1, 1, 1],
-  markerColor: [251 / 255, 100 / 255, 21 / 255],
-  glowColor: [1, 1, 1],
-  markers: [
-    { location: [14.5995, 120.9842], size: 0.03 },
-    { location: [19.076, 72.8777], size: 0.1 },
-    { location: [23.8103, 90.4125], size: 0.05 },
-    { location: [30.0444, 31.2357], size: 0.07 },
-    { location: [39.9042, 116.4074], size: 0.08 },
-    { location: [-23.5505, -46.6333], size: 0.1 },
-    { location: [19.4326, -99.1332], size: 0.1 },
-    { location: [40.7128, -74.006], size: 0.1 },
-    { location: [34.6937, 135.5022], size: 0.05 },
-    { location: [41.0082, 28.9784], size: 0.06 },
-  ],
-}
-
 export function Globe({
   className,
-  config = GLOBE_CONFIG,
+  dark = false,
 }: {
   className?: string
-  config?: Record<string, any>
+  dark?: boolean
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const phiRef = useRef(0)
   const widthRef = useRef(0)
   const pointerInteracting = useRef<number | null>(null)
-  const pointerInteractionMovement = useRef(0)
 
   const r = useMotionValue(0)
   const rs = useSpring(r, {
@@ -56,22 +27,9 @@ export function Globe({
     stiffness: 100,
   })
 
-  const updatePointerInteraction = (value: number | null) => {
-    pointerInteracting.current = value
-    if (canvasRef.current) {
-      canvasRef.current.style.cursor = value !== null ? "grabbing" : "grab"
-    }
-  }
-
-  const updateMovement = (clientX: number) => {
-    if (pointerInteracting.current !== null) {
-      const delta = clientX - pointerInteracting.current
-      pointerInteractionMovement.current = delta
-      r.set(r.get() + delta / MOVEMENT_DAMPING)
-    }
-  }
-
   useEffect(() => {
+    if (!canvasRef.current) return
+
     const onResize = () => {
       if (canvasRef.current) {
         widthRef.current = canvasRef.current.offsetWidth
@@ -81,48 +39,79 @@ export function Globe({
     window.addEventListener("resize", onResize)
     onResize()
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const globe = createGlobe(canvasRef.current!, {
-      ...config,
+    const globe = createGlobe(canvasRef.current, {
       width: widthRef.current * 2,
       height: widthRef.current * 2,
-      onRender: (state: any) => {
-        if (!pointerInteracting.current) phiRef.current += 0.005
-        state.phi = phiRef.current + rs.get()
-        state.width = widthRef.current * 2
-        state.height = widthRef.current * 2
-      },
-    } as any)
+      devicePixelRatio: 2,
+      phi: 0,
+      theta: 0.3,
+      dark: dark ? 1 : 0,
+      diffuse: dark ? 0.5 : 0.4,
+      mapSamples: 16000,
+      mapBrightness: dark ? 1.4 : 1.2,
+      baseColor: dark ? [0.4, 0.4, 0.4] : [1, 1, 1],
+      markerColor: [1, 1, 1],
+      glowColor: dark ? [0.24, 0.24, 0.27] : [1, 1, 1],
+      markers: [],
+    })
 
-    setTimeout(() => (canvasRef.current!.style.opacity = "1"), 0)
+    let animationId: number
+    const animate = () => {
+      phiRef.current += 0.005
+      globe.update({
+        phi: phiRef.current + rs.get(),
+        width: widthRef.current * 2,
+        height: widthRef.current * 2,
+      })
+      animationId = requestAnimationFrame(animate)
+    }
+    animationId = requestAnimationFrame(animate)
+
+    setTimeout(() => {
+      if (canvasRef.current) canvasRef.current.style.opacity = "1"
+    }, 100)
+
     return () => {
+      cancelAnimationFrame(animationId)
       globe.destroy()
       window.removeEventListener("resize", onResize)
     }
-  }, [rs, config])
+  }, [rs, dark])
 
   return (
     <div
       className={cn(
-        "absolute inset-0 mx-auto aspect-square w-full max-w-150",
+        "absolute inset-0 mx-auto aspect-square w-full max-w-[600px]",
         className
       )}
     >
       <canvas
-        className={cn(
-          "size-full opacity-0 transition-opacity duration-500 contain-[layout_paint_size]"
-        )}
+        className="size-full opacity-0 transition-opacity duration-500"
         ref={canvasRef}
         onPointerDown={(e) => {
           pointerInteracting.current = e.clientX
-          updatePointerInteraction(e.clientX)
+          if (canvasRef.current) canvasRef.current.style.cursor = "grabbing"
         }}
-        onPointerUp={() => updatePointerInteraction(null)}
-        onPointerOut={() => updatePointerInteraction(null)}
-        onMouseMove={(e) => updateMovement(e.clientX)}
-        onTouchMove={(e) =>
-          e.touches[0] && updateMovement(e.touches[0].clientX)
-        }
+        onPointerUp={() => {
+          pointerInteracting.current = null
+          if (canvasRef.current) canvasRef.current.style.cursor = "grab"
+        }}
+        onPointerOut={() => {
+          pointerInteracting.current = null
+          if (canvasRef.current) canvasRef.current.style.cursor = "grab"
+        }}
+        onMouseMove={(e) => {
+          if (pointerInteracting.current !== null) {
+            const delta = e.clientX - pointerInteracting.current
+            r.set(r.get() + delta / MOVEMENT_DAMPING)
+          }
+        }}
+        onTouchMove={(e) => {
+          if (pointerInteracting.current !== null && e.touches[0]) {
+            const delta = e.touches[0].clientX - pointerInteracting.current
+            r.set(r.get() + delta / MOVEMENT_DAMPING)
+          }
+        }}
       />
     </div>
   )

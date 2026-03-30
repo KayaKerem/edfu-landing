@@ -20,6 +20,7 @@ export function Navbar() {
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
   const navRef = useRef<HTMLUListElement>(null);
   const linkRefs = useRef<Map<string, HTMLLIElement>>(new Map());
+  const isClickScrolling = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -36,9 +37,11 @@ export function Navbar() {
       if (!el) return;
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(link.sectionId);
+          if (entry.isIntersecting && !isClickScrolling.current) {
+            setActiveSection(link.sectionId);
+          }
         },
-        { rootMargin: "-100px 0px -60% 0px", threshold: 0 }
+        { rootMargin: "-80px 0px -50% 0px", threshold: 0 }
       );
       observer.observe(el);
       observers.push(observer);
@@ -116,6 +119,11 @@ export function Navbar() {
                 >
                   <a
                     href={link.href}
+                    onClick={() => {
+                      setActiveSection(link.sectionId);
+                      isClickScrolling.current = true;
+                      setTimeout(() => { isClickScrolling.current = false; }, 1000);
+                    }}
                     style={{ fontFamily: "var(--font-geist)" }}
                     className={`relative z-10 flex h-full cursor-pointer items-center justify-center px-4 py-2 text-sm font-medium tracking-tight transition-colors duration-200 ${
                       activeSection === link.sectionId
