@@ -113,17 +113,17 @@ function IntegrationOrbits() {
   return (
     <div className="relative h-full w-full overflow-hidden">
       {/* Orbit center positioned at bottom-center, so only top half shows */}
-      <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[45%]">
+      <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[35%]">
         {/* Background gradient circles */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[380px] rounded-full bg-black/[0.02]" />
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[280px] rounded-full bg-black/[0.03]" />
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[180px] rounded-full bg-black/[0.03]" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[480px] rounded-full bg-black/[0.02]" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[360px] rounded-full bg-black/[0.03]" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[240px] rounded-full bg-black/[0.03]" />
 
         {/* Orbiting container */}
-        <div className="relative flex items-center justify-center" style={{ width: 400, height: 400 }}>
+        <div className="relative flex items-center justify-center" style={{ width: 500, height: 500 }}>
           <img src="/logo.svg" alt="Edfu" className="relative z-10 size-16 rounded-xl" />
 
-          <OrbitingCircles iconSize={36} radius={90} speed={0.5}>
+          <OrbitingCircles iconSize={36} radius={120} speed={0.5}>
             <div className="flex size-9 items-center justify-center rounded-full border border-border bg-background shadow-sm">
               <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
@@ -132,7 +132,7 @@ function IntegrationOrbits() {
             </div>
           </OrbitingCircles>
 
-          <OrbitingCircles iconSize={34} radius={140} speed={0.4} reverse>
+          <OrbitingCircles iconSize={34} radius={175} speed={0.4} reverse>
             <div className="flex size-8.5 items-center justify-center rounded-full border border-border bg-background shadow-sm">
               <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
             </div>
@@ -144,7 +144,7 @@ function IntegrationOrbits() {
             </div>
           </OrbitingCircles>
 
-          <OrbitingCircles iconSize={30} radius={190} speed={0.3}>
+          <OrbitingCircles iconSize={30} radius={230} speed={0.3}>
             <div className="flex size-7.5 items-center justify-center rounded-full border border-border bg-background shadow-sm">
               <svg viewBox="0 0 24 24" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
             </div>
