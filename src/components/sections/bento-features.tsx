@@ -123,33 +123,33 @@ function IntegrationOrbits() {
         <div className="relative flex items-center justify-center" style={{ width: 500, height: 500 }}>
           <img src="/logo.svg" alt="Edfu" className="relative z-10 size-16 rounded-xl" />
 
-          <OrbitingCircles iconSize={36} radius={120} speed={0.5}>
-            <div className="flex size-9 items-center justify-center rounded-full border border-border bg-background shadow-sm">
-              <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <OrbitingCircles iconSize={44} radius={120} speed={0.5}>
+            <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+              <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
-            <div className="flex size-9 items-center justify-center rounded-full border border-border bg-background shadow-sm">
-              <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-          </OrbitingCircles>
-
-          <OrbitingCircles iconSize={34} radius={175} speed={0.4} reverse>
-            <div className="flex size-8.5 items-center justify-center rounded-full border border-border bg-background shadow-sm">
-              <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-            </div>
-            <div className="flex size-8.5 items-center justify-center rounded-full border border-border bg-background shadow-sm">
-              <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            </div>
-            <div className="flex size-8.5 items-center justify-center rounded-full border border-border bg-background shadow-sm">
-              <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+              <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
           </OrbitingCircles>
 
-          <OrbitingCircles iconSize={30} radius={230} speed={0.3}>
-            <div className="flex size-7.5 items-center justify-center rounded-full border border-border bg-background shadow-sm">
-              <svg viewBox="0 0 24 24" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+          <OrbitingCircles iconSize={40} radius={175} speed={0.4} reverse>
+            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+              <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
             </div>
-            <div className="flex size-7.5 items-center justify-center rounded-full border border-border bg-background shadow-sm">
-              <svg viewBox="0 0 24 24" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+              <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+              <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            </div>
+          </OrbitingCircles>
+
+          <OrbitingCircles iconSize={36} radius={230} speed={0.3}>
+            <div className="flex size-9 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+              <svg viewBox="0 0 24 24" className="size-4.5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            </div>
+            <div className="flex size-9 items-center justify-center rounded-full border border-border bg-background shadow-sm">
+              <svg viewBox="0 0 24 24" className="size-4.5" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
           </OrbitingCircles>
         </div>
