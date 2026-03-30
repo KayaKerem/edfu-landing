@@ -147,7 +147,7 @@ function IntegrationOrbits() {
           <img src="/ai-icon-filled.svg" alt="Edfu" className="relative z-10 size-16 rounded-xl" />
 
           {/* Inner orbit - 2 icons, most space */}
-          <OrbitingCircles iconSize={48} radius={120} speed={0.5}>
+          <OrbitingCircles iconSize={48} radius={120} speed={0.8}>
             <div className="flex size-12 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2.5">
               <Slack className="size-7" />
             </div>
@@ -157,7 +157,7 @@ function IntegrationOrbits() {
           </OrbitingCircles>
 
           {/* Middle orbit - 3 icons */}
-          <OrbitingCircles iconSize={44} radius={195} speed={0.4} reverse>
+          <OrbitingCircles iconSize={44} radius={195} speed={0.6} reverse>
             <div className="flex size-11 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
               <Notion className="size-6" />
             </div>
@@ -170,7 +170,7 @@ function IntegrationOrbits() {
           </OrbitingCircles>
 
           {/* Outer orbit - 3 icons */}
-          <OrbitingCircles iconSize={40} radius={250} speed={0.3}>
+          <OrbitingCircles iconSize={40} radius={250} speed={0.5}>
             <div className="flex size-10 items-center justify-center rounded-full border border-border bg-background shadow-sm p-2">
               <GithubDark className="size-5" />
             </div>
