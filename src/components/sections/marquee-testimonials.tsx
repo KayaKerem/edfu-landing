@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 interface Testimonial {
   body: string
   highlightStart: number
@@ -119,9 +121,11 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         {after}
       </p>
       <div className="flex w-full select-none items-center justify-start gap-3.5">
-        <img
+        <Image
           src={testimonial.avatar}
-          alt={testimonial.name}
+          alt={`${testimonial.name} profil fotoğrafı`}
+          width={32}
+          height={32}
           className="size-8 rounded-full"
         />
         <div>

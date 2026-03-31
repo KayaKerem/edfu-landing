@@ -1,5 +1,9 @@
+"use client";
+
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
+import { Highlighter } from "@/components/ui/highlighter";
 import { ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
 
 function LayersIcon({ className }: { className?: string }) {
   return (
@@ -24,7 +28,12 @@ export function Hero() {
       />
       <div className="mx-auto max-w-6xl px-4 pt-28 sm:pt-40 pb-16 text-center">
         {/* Badge */}
-        <div className="group mb-8 flex justify-center">
+        <motion.div
+          className="group mb-8 flex justify-center"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           <div className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 shadow-sm transition-all hover:border-border/80 hover:bg-accent/30">
             <LayersIcon className="mr-1.5 size-3.5 text-foreground dark:text-white" />
             <AnimatedShinyText className="text-xs font-medium">
@@ -32,24 +41,41 @@ export function Hero() {
             </AnimatedShinyText>
             <ArrowRight className="ml-1.5 size-2.5 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
           </div>
-        </div>
+        </motion.div>
 
         {/* Heading */}
-        <h1 className="text-4xl md:text-5xl lg:text-[3rem] xl:text-6xl font-medium text-balance text-center text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
-          Her Sorunun Cevabı
+        <motion.h1
+          className="text-4xl md:text-5xl lg:text-[3rem] xl:text-6xl font-medium text-balance text-center text-foreground leading-none"
+          style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+        >
+          Her Sorunun <Highlighter action="underline" color="#4AA4E0" strokeWidth={2} animationDuration={800} padding={4} delay={850}>Cevabı</Highlighter>
           <br />
-          Sizde Zaten Var.
-        </h1>
+          <Highlighter action="highlight" color="#87CEFA" strokeWidth={2} animationDuration={800} padding={4} delay={1000}>Sizde</Highlighter> Zaten Var.
+        </motion.h1>
 
         {/* Description */}
-        <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg text-center text-muted-foreground font-medium text-balance tracking-tight" style={{ lineHeight: "calc(1.75 / 1.125)" }}>
+        <motion.p
+          className="mx-auto mt-6 max-w-2xl text-base md:text-lg text-center text-muted-foreground font-medium text-balance tracking-tight"
+          style={{ lineHeight: "calc(1.75 / 1.125)" }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.35 }}
+        >
           Dokümanlarınızı yükleyin, kaynaklarınızı bağlayın, ekibiniz sorusunu sorsun.
             <br />
             Edfu şirketinizin tüm bilgi birikiminden doğru cevabı anında bulsun.
-        </p>
+        </motion.p>
 
         {/* CTA Buttons */}
-        <div className="mt-8 flex items-center justify-center gap-4">
+        <motion.div
+          className="mt-8 flex items-center justify-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
+        >
           <a
             href="#pricing"
             className="bg-primary h-9 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground whitespace-nowrap w-32 px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] hover:bg-primary/80 transition-all ease-out active:scale-95"
@@ -62,10 +88,15 @@ export function Hero() {
           >
             Giriş Yap
           </a>
-        </div>
+        </motion.div>
 
         {/* Browser Mockup */}
-        <div className="relative mt-16">
+        <motion.div
+          className="relative mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.65 }}
+        >
           {/* Gradient blur background */}
           <div className="pointer-events-none absolute inset-0 -top-10">
             <div className="absolute inset-x-0 top-0 h-full rounded-full bg-gradient-to-b from-primary/10 via-primary/5 to-transparent blur-3xl" />
@@ -89,7 +120,7 @@ export function Hero() {
             {/* Content area */}
             <div className="h-[300px] rounded-b-xl bg-gradient-to-br from-primary/10 via-primary/5 to-background sm:h-[400px]" />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

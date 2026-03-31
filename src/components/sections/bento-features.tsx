@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { FileText, Image as ImageIcon, Upload, CheckCircle2, Loader2 } from "lucide-react";
+import NextImage from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 import { Notion } from "@/components/ui/svgs/notion";
@@ -86,9 +87,11 @@ function ChatMockup() {
             <p>Geçen yıl Bursa projesinde hangi yazılım ekibiyle çalışmıştık, memnun kalmış mıydık?</p>
           </div>
           <div className="flex shrink-0 items-center rounded-full border border-border bg-background">
-            <img
+            <NextImage
               src="https://randomuser.me/api/portraits/women/79.jpg"
-              alt="Kullanıcı"
+              alt="Edfu kullanıcısı profil fotoğrafı"
+              width={32}
+              height={32}
               className="size-8 rounded-full"
             />
           </div>
@@ -98,7 +101,7 @@ function ChatMockup() {
         {showResponse && (
           <div className="flex items-start gap-2 animate-slide-up">
             {/* AI icon */}
-            <img src="/ai-icon.svg" alt="AI" className="size-10 shrink-0 rounded-full" />
+            <img src="/ai-icon.svg" alt="Edfu AI Asistan" className="size-10 shrink-0 rounded-full" />
             {/* Response bubble with streaming text */}
             <div className="max-w-[280px] rounded-xl border border-border bg-white dark:bg-card shadow-[0_0_10px_rgba(0,0,0,0.05)] transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]" style={{ padding: isThinking || displayedText ? "1rem" : "0.75rem 1rem" }}>
               {isThinking ? (
@@ -146,7 +149,7 @@ function IntegrationOrbits() {
 
         {/* Orbiting container - appears after gradient circles */}
         <div className={`relative flex items-center justify-center transition-all duration-[1200ms] ease-out ${isVisible ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} style={{ width: 500, height: 500, transitionDelay: "1200ms" }}>
-          <img src="/ai-icon-filled.svg" alt="Edfu" className="relative z-10 size-16 rounded-xl" />
+          <img src="/ai-icon-filled.svg" alt="Edfu platform logosu" className="relative z-10 size-16 rounded-xl" />
 
           {/* Inner orbit - 2 icons, most space */}
           <OrbitingCircles iconSize={48} radius={120} speed={0.8}>

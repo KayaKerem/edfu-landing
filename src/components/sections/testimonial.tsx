@@ -11,7 +11,7 @@ export function Testimonial() {
         <div className="mt-8 flex items-center gap-4">
           <Image
             src="https://randomuser.me/api/portraits/men/52.jpg"
-            alt="Mehmet K."
+            alt="Mehmet K. profil fotoğrafı - Kurucu Ortak, Teknoloji Şirketi"
             width={48}
             height={48}
             className="h-12 w-12 rounded-full object-cover"
