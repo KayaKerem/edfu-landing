@@ -3,9 +3,10 @@
 import { useRef, useState } from "react";
 import { Check } from "lucide-react";
 import { motion } from "motion/react";
+import { AnimatedNumber } from "@/components/ui/animated-number";
 
 export function Pricing() {
-  const [isYearly, setIsYearly] = useState(false);
+  const [isYearly, setIsYearly] = useState(true);
 
   const plans = [
     {
@@ -56,7 +57,7 @@ export function Pricing() {
       inheritLabel: "Profesyonel planın tüm özellikleri +",
       features: [
         "Sınırsız kullanıcı",
-        "Dedicated Hetzner altyapısı",
+        "Dedicated altyapı",
         "White-label seçeneği",
         "SLA garantisi",
         "Özel entegrasyon geliştirme",
@@ -93,7 +94,7 @@ export function Pricing() {
         {/* Toggle - positioned above grid */}
         <div className="absolute -top-14 left-1/2 -translate-x-1/2">
           <div
-            className="relative flex w-fit items-center rounded-full border p-0.5 backdrop-blur-sm cursor-pointer h-9 bg-muted mx-auto"
+            className="relative flex w-fit items-center rounded-full border p-0.5 backdrop-blur-sm cursor-pointer h-9 bg-muted"
             onClick={() => setIsYearly(!isYearly)}
           >
             <button
@@ -128,9 +129,9 @@ export function Pricing() {
                   transition={{ type: "spring", stiffness: 500, damping: 35 }}
                 />
               )}
-              <span className={`relative z-10 flex items-center transition-colors duration-200 ${isYearly ? "text-primary" : "text-muted-foreground"}`}>
+              <span className={`relative z-10 flex items-center gap-1.5 whitespace-nowrap transition-colors duration-200 ${isYearly ? "text-primary" : "text-muted-foreground"}`}>
                 Yıllık
-                <span className="text-xs font-semibold text-primary bg-primary/15 py-0.5 px-1 rounded-full ml-2">
+                <span className="text-xs font-semibold text-primary bg-primary/15 py-0.5 px-1.5 rounded-full whitespace-nowrap">
                   %20 İndirim
                 </span>
               </span>
@@ -168,7 +169,9 @@ export function Pricing() {
                 <div className="mt-3 flex items-end gap-1">
                   {price !== null ? (
                     <>
-                      <span className="text-4xl font-semibold text-foreground">₺{price}</span>
+                      <span className="text-4xl font-semibold text-foreground">
+                        ₺<AnimatedNumber value={price} mass={0.8} stiffness={75} damping={15} />
+                      </span>
                       <span className="mb-1 text-sm text-muted-foreground">/ay</span>
                     </>
                   ) : isPopular ? (

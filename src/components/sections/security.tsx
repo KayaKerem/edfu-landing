@@ -11,26 +11,6 @@ import { FlickeringGrid } from "@/components/ui/flickering-grid";
 function ShieldLockVisual() {
   return (
     <div className="relative flex items-center justify-center">
-      {/* Flickering grid background - full area with radial fade */}
-      <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,black_30%,transparent_80%)]">
-        <FlickeringGrid
-          squareSize={4}
-          gridGap={6}
-          flickerChance={0.3}
-          color="rgb(0, 0, 0)"
-          maxOpacity={0.25}
-          className="h-full w-full dark:hidden"
-        />
-        <FlickeringGrid
-          squareSize={4}
-          gridGap={6}
-          flickerChance={0.3}
-          color="rgb(255, 255, 255)"
-          maxOpacity={0.25}
-          className="h-full w-full hidden dark:block"
-        />
-      </div>
-
       {/* Shield */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -136,10 +116,10 @@ export function Security() {
         {/* Header */}
         <div className="mx-auto mb-10 max-w-2xl px-4 text-center">
           <h2 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
-            Verileriniz Güvende, Altyapınız Sağlam
+            Kurumsal Düzeyde Altyapı
           </h2>
           <p className="mt-4 text-base text-muted-foreground font-medium text-balance tracking-tight">
-            Hetzner Avrupa veri merkezlerinde barındırılan altyapı, tam veri izolasyonu ve kurumsal düzeyde güvenlik.
+            Yüksek performans, kesintisiz erişim ve tam veri kontrolü için optimize edilmiş altyapı.
           </p>
         </div>
 
@@ -147,14 +127,33 @@ export function Security() {
         <div className="relative mx-4 md:mx-20">
           <div className="grid grid-cols-1 md:grid-cols-2 border-t border-x border-border">
             {/* Card 1 */}
-            <div className="relative flex flex-col overflow-hidden aspect-auto min-h-[320px] sm:min-h-[380px] md:aspect-[554/496] md:min-h-0 md:border-r border-border">
-              <div className="relative flex-1 flex items-center justify-center">
+            <div className="relative flex flex-col overflow-hidden aspect-auto min-h-[380px] sm:min-h-[420px] md:aspect-[554/496] md:min-h-0 md:border-r border-border">
+              {/* Flickering grid - fills entire card */}
+              <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,black_20%,transparent_70%)]">
+                <FlickeringGrid
+                  squareSize={3}
+                  gridGap={5}
+                  flickerChance={0.3}
+                  color="rgb(0, 0, 0)"
+                  maxOpacity={0.3}
+                  className="h-full w-full dark:hidden"
+                />
+                <FlickeringGrid
+                  squareSize={3}
+                  gridGap={5}
+                  flickerChance={0.3}
+                  color="rgb(255, 255, 255)"
+                  maxOpacity={0.3}
+                  className="h-full w-full hidden dark:block"
+                />
+              </div>
+              <div className="relative z-10 flex-1 flex items-center justify-center pt-6 md:pt-0">
                 <ShieldLockVisual />
                 <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-24 w-full bg-gradient-to-t from-background to-transparent" />
               </div>
               <div className="relative z-20 px-4 sm:px-6 pb-6 sm:pb-8 -mt-4">
-                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>Verileriniz Şifreli ve Güvende</h3>
-                <p className="mt-1.5 text-base text-muted-foreground">Tüm verileriniz uçtan uca şifrelenerek saklanır. Yalnızca sizin erişiminize açık, üçüncü taraflarla paylaşılmaz.</p>
+                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>Tam Gizlilik ve Kontrol</h3>
+                <p className="mt-1.5 text-base text-muted-foreground">Verileriniz yalnızca size ait. Hiçbir üçüncü tarafla paylaşılmaz, tamamen sizin kontrolünüzde.</p>
               </div>
             </div>
 

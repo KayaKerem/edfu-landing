@@ -15,9 +15,9 @@ const faqs = [
       "Hayır. Dokümanlarınızı sürükle-bırak ile yükleyin, web sitenizi URL vererek bağlayın — gerisini Edfu halleder. Dokümanlar otomatik olarak işlenir, indekslenir ve sorguya hazır hale gelir. Kurulum dakikalar sürer, herhangi bir yazılım yüklemenize gerek yoktur.",
   },
   {
-    question: "Verilerim nerede barındırılıyor ve ne kadar güvenli?",
+    question: "Verilerime kim erişebilir?",
     answer:
-      "Tüm verileriniz Hetzner'in Avrupa (Almanya) veri merkezlerinde barındırılır. Her organizasyonun verileri birbirinden tamamen izole edilmiştir. S3 uyumlu nesne depolama ile dosyalarınız şifreli olarak saklanır. KVKK uyumlu altyapı ile verileriniz Türkiye dışına çıkmaz.",
+      "Yalnızca siz. Her organizasyonun verileri birbirinden tamamen izole edilmiştir. Verileriniz üçüncü taraflarla paylaşılmaz ve KVKK uyumlu altyapı ile Avrupa veri merkezlerinde barındırılır.",
   },
   {
     question: "Hangi araçlarla entegre çalışıyor?",

@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { FlickeringGrid } from "@/components/ui/flickering-grid";
 
 const columns = [
   {
@@ -15,7 +18,7 @@ const columns = [
   },
 ] as const;
 
-const badges = ["KVKK", "Hetzner EU", "GDPR"] as const;
+const badges = ["KVKK", "EU Data", "GDPR"] as const;
 
 export function Footer() {
   return (
@@ -73,16 +76,34 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Dot grid decoration */}
-      <div className="relative h-32 overflow-hidden">
-        <div className="absolute inset-0">
-          <div
-            className="w-full h-full opacity-10"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle, currentColor 1px, transparent 1px)",
-              backgroundSize: "24px 24px",
-            }}
+      {/* Flickering grid text */}
+      <div className="relative h-[120px] sm:h-[160px] md:h-[200px] overflow-hidden">
+        <div
+          className="absolute inset-0"
+          style={{
+            maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' dominant-baseline='middle' font-family='system-ui,-apple-system,sans-serif' font-size='200' font-weight='800' fill='black'%3EEdfu%3C/text%3E%3C/svg%3E")`,
+            WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' dominant-baseline='middle' font-family='system-ui,-apple-system,sans-serif' font-size='200' font-weight='800' fill='black'%3EEdfu%3C/text%3E%3C/svg%3E")`,
+            maskSize: "100% 100%",
+            WebkitMaskSize: "100% 100%",
+            maskRepeat: "no-repeat",
+            WebkitMaskRepeat: "no-repeat",
+          }}
+        >
+          <FlickeringGrid
+            squareSize={2}
+            gridGap={4}
+            flickerChance={0.3}
+            color="rgb(0, 0, 0)"
+            maxOpacity={0.25}
+            className="h-full w-full dark:hidden"
+          />
+          <FlickeringGrid
+            squareSize={2}
+            gridGap={4}
+            flickerChance={0.3}
+            color="rgb(255, 255, 255)"
+            maxOpacity={0.25}
+            className="h-full w-full hidden dark:block"
           />
         </div>
       </div>
