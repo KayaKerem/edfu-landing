@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 
 const steps = [
   {
@@ -32,11 +32,24 @@ const steps = [
 export function HowItWorks() {
   const [activeStep, setActiveStep] = useState(0);
   const [animKey, setAnimKey] = useState(0);
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
 
   const goNext = useCallback(() => {
     setActiveStep((prev) => (prev + 1) % steps.length);
     setAnimKey((k) => k + 1);
   }, []);
+
+  // Auto-scroll mobile container to active card
+  useEffect(() => {
+    const container = mobileScrollRef.current;
+    if (!container) return;
+    const card = container.children[activeStep] as HTMLElement | undefined;
+    if (!card) return;
+    container.scrollTo({
+      left: card.offsetLeft - container.offsetLeft - 16,
+      behavior: "smooth",
+    });
+  }, [activeStep]);
 
   const handleClick = useCallback((index: number) => {
     setActiveStep(index);
@@ -144,7 +157,7 @@ export function HowItWorks() {
           </div>
 
           {/* Mobile horizontal scroll */}
-          <div className="col-span-1 lg:col-span-5 flex snap-x flex-nowrap overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [-webkit-mask-image:linear-gradient(90deg,transparent,black_10%,white_90%,transparent)] [mask-image:linear-gradient(90deg,transparent,black_10%,white_90%,transparent)] snap-mandatory lg:hidden mt-4">
+          <div ref={mobileScrollRef} className="col-span-1 lg:col-span-5 flex snap-x flex-nowrap overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [-webkit-mask-image:linear-gradient(90deg,transparent,black_10%,white_90%,transparent)] [mask-image:linear-gradient(90deg,transparent,black_10%,white_90%,transparent)] snap-mandatory lg:hidden mt-4">
             {steps.map((step, index) => {
               const isActive = activeStep === index;
               return (

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function Testimonial() {
   return (
     <section className="relative z-20 bg-white dark:bg-[oklch(0.14_0.005_250)] py-16 sm:py-20 px-4 sm:px-12 lg:px-20">
@@ -7,7 +9,13 @@ export function Testimonial() {
         </blockquote>
 
         <div className="mt-8 flex items-center gap-4">
-          <div className="h-12 w-12 rounded-full bg-muted" />
+          <Image
+            src="https://randomuser.me/api/portraits/men/52.jpg"
+            alt="Mehmet K."
+            width={48}
+            height={48}
+            className="h-12 w-12 rounded-full object-cover"
+          />
           <div>
             <p className="font-medium text-foreground">Mehmet K.</p>
             <p className="text-sm text-muted-foreground">Kurucu Ortak, Teknoloji Şirketi</p>
