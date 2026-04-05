@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://edfu.com.tr/sitemap.xml",
+    sitemap: "https://edfu.ai/sitemap.xml",
   };
 }
