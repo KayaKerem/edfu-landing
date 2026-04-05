@@ -5,15 +5,21 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { motion, AnimatePresence } from "motion/react";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import type { Dictionary } from "@/dictionaries";
 
-const navLinks = [
-  { label: "Ana Sayfa", href: "#hero", sectionId: "hero" },
-  { label: "Özellikler", href: "#features", sectionId: "features" },
-  { label: "Nasıl Çalışır", href: "#how-it-works", sectionId: "how-it-works" },
-  { label: "Fiyatlandırma", href: "#pricing", sectionId: "pricing" },
-] as const;
+interface NavbarProps {
+  dict: Dictionary["navbar"];
+  lang: string;
+}
 
-export function Navbar() {
+export function Navbar({ dict, lang }: NavbarProps) {
+  const navLinks = [
+    { label: dict.home, href: "#hero", sectionId: "hero" },
+    { label: dict.features, href: "#features", sectionId: "features" },
+    { label: dict.howItWorks, href: "#how-it-works", sectionId: "how-it-works" },
+    { label: dict.pricing, href: "#pricing", sectionId: "pricing" },
+  ] as const;
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -139,21 +145,23 @@ export function Navbar() {
 
             {/* Right: CTA + Theme toggle */}
             <div className="hidden items-center gap-2 md:flex">
+              <LanguageSwitcher lang={lang} />
               <a
                 href="#pricing"
                 className="bg-primary h-8 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground dark:text-primary-foreground w-fit px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12]"
               >
-                Ücretsiz Deneyin
+                {dict.cta}
               </a>
               <AnimatedThemeToggler className="size-8 cursor-pointer rounded-full border border-border text-muted-foreground" />
             </div>
 
             {/* Mobile */}
             <div className="flex items-center gap-2 md:hidden">
+              <LanguageSwitcher lang={lang} />
               <AnimatedThemeToggler className="size-8 cursor-pointer rounded-full border border-border text-muted-foreground" />
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                aria-label={mobileOpen ? "Menüyü kapat" : "Menüyü aç"}
+                aria-label={mobileOpen ? dict.menuClose : dict.menuOpen}
                 className="inline-flex size-8 items-center justify-center rounded-md border border-border text-muted-foreground"
               >
                 {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
@@ -192,7 +200,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="mt-2 flex h-10 items-center justify-center rounded-full bg-primary text-sm font-normal tracking-wide text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] transition-all ease-out active:scale-95"
                 >
-                  Ücretsiz Deneyin
+                  {dict.cta}
                 </a>
               </nav>
             </motion.div>
