@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import type { Dictionary } from "@/dictionaries"
 
 interface Testimonial {
   body: string
@@ -11,95 +12,13 @@ interface Testimonial {
   avatar: string
 }
 
-const columns: Testimonial[][] = [
-  // Column 1 — 40s
-  [
-    {
-      body: "Sözleşme incelemesi için eskiden her seferinde mevzuat kitaplarını karıştırıyorduk. Edfu'ya dokümanlarımızı yükledik, artık herhangi bir maddeyi saniyeler içinde bulup karşılaştırabiliyoruz. Müvekkillerimize dönüş süremiz yarıya indi.",
-      highlightStart: 124,
-      highlightEnd: 190,
-      name: "Mehmet Aydın",
-      title: "Kurucu, Dijital Hukuk Danışmanlık",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-    },
-    {
-      body: "Ekibe yeni katılan biri eskiden haftalarca sorular sorarak öğrenirdi. Şimdi şirketin tüm prosedürlerini, politikalarını Edfu'ya sorabiliyor. Oryantasyon süreci 3 haftadan 3 güne düştü.",
-      highlightStart: 76,
-      highlightEnd: 140,
-      name: "Ayşe Korkmaz",
-      title: "İK Müdürü, Orta Ölçekli Üretim Firması",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-    },
-  ],
-  // Column 2 — 60s
-  [
-    {
-      body: "300'den fazla AI modeline tek platformdan erişmek büyük avantaj. İşe göre model seçebiliyoruz — kod için Claude, müşteri metinleri için GPT. Her model için ayrı abonelik derdi bitti.",
-      highlightStart: 65,
-      highlightEnd: 140,
-      name: "Can Yılmaz",
-      title: "CTO, SaaS Girişimi",
-      avatar: "https://randomuser.me/api/portraits/men/45.jpg",
-    },
-    {
-      body: "İhale şartnamelerini analiz etmek günler alıyordu. Edfu'ya yüklediğimiz tüm geçmiş ihaleleri karşılaştırmalı analiz edip riskli maddeleri otomatik tespit edebiliyoruz. Teklif hazırlama sürecimiz çok hızlandı.",
-      highlightStart: 93,
-      highlightEnd: 167,
-      name: "Zeynep Demir",
-      title: "Operasyon Müdürü, Lojistik Firması",
-      avatar: "https://randomuser.me/api/portraits/women/68.jpg",
-    },
-  ],
-  // Column 3 — 30s
-  [
-    {
-      body: "Her departmanın kendi bilgi silosu vardı. Edfu ile tüm departmanların dokümanlarını tek bir bilgi havuzunda birleştirdik. Finans ekibi hukuk dokümanlarına, hukuk ekibi finans raporlarına anında erişebiliyor.",
-      highlightStart: 51,
-      highlightEnd: 121,
-      name: "Burak Özkan",
-      title: "Finans Direktörü, Holding Şirketi",
-      avatar: "https://randomuser.me/api/portraits/men/22.jpg",
-    },
-    {
-      body: "Ürün bilgilerimizi güncelleyip web sitemizi Edfu'ya bağladık. Artık müşteri destek ekibimiz her ürün sorusunu AI'a soruyor, ürün ekibini meşgul etmiyor. Doğru bilgi, doğru zamanda.",
-      highlightStart: 68,
-      highlightEnd: 122,
-      name: "Elif Şahin",
-      title: "Pazarlama Müdürü, E-Ticaret Şirketi",
-      avatar: "https://randomuser.me/api/portraits/women/55.jpg",
-    },
-  ],
-  // Column 4 — 50s
-  [
-    {
-      body: "KVKK uyumluluk sürecimiz Edfu ile tamamen değişti. Mevzuat değişikliklerini yükleyip mevcut prosedürlerimizle karşılaştırabiliyoruz. Uyum raporlarını manuel hazırlamak yerine AI'dan özet alıyoruz.",
-      highlightStart: 51,
-      highlightEnd: 132,
-      name: "Ahmet Kaya",
-      title: "Genel Müdür, Danışmanlık Firması",
-      avatar: "https://randomuser.me/api/portraits/men/51.jpg",
-    },
-    {
-      body: "Satış ekibimiz müşteri toplantılarına hazırlanırken eskiden onlarca dosya karıştırırdı. Şimdi müşteri hakkındaki tüm geçmiş notları ve teklifleri Edfu'ya sorup 2 dakikada brifingi alıyorlar. Kapanış oranımız gözle görülür arttı.",
-      highlightStart: 94,
-      highlightEnd: 190,
-      name: "Selin Tunç",
-      title: "Satış Direktörü, Yazılım Şirketi",
-      avatar: "https://randomuser.me/api/portraits/women/27.jpg",
-    },
-  ],
-  // Column 5 — 45s
-  [
-    {
-      body: "Küçük ekibiz ama müşteri portföyümüz büyük. Her müşterinin brief'ini, geri bildirimlerini ve marka kılavuzunu Edfu'ya yükledik. Hangi müşteri için çalışıyorsak bilgiye anında ulaşıyoruz, hiçbir detay kaybolmuyor.",
-      highlightStart: 128,
-      highlightEnd: 185,
-      name: "İrem Başaran",
-      title: "Kurucu, Dijital Ajans",
-      avatar: "https://randomuser.me/api/portraits/women/90.jpg",
-    },
-  ],
-]
+const avatars = [
+  ["https://randomuser.me/api/portraits/men/32.jpg", "https://randomuser.me/api/portraits/women/44.jpg"],
+  ["https://randomuser.me/api/portraits/men/45.jpg", "https://randomuser.me/api/portraits/women/68.jpg"],
+  ["https://randomuser.me/api/portraits/men/22.jpg", "https://randomuser.me/api/portraits/women/55.jpg"],
+  ["https://randomuser.me/api/portraits/men/51.jpg", "https://randomuser.me/api/portraits/women/27.jpg"],
+  ["https://randomuser.me/api/portraits/women/90.jpg"],
+];
 
 const durations = [40, 60, 30, 50, 45]
 
@@ -123,7 +42,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
       <div className="flex w-full select-none items-center justify-start gap-3.5">
         <Image
           src={testimonial.avatar}
-          alt={`${testimonial.name} profil fotoğrafı`}
+          alt={testimonial.name}
           width={32}
           height={32}
           className="size-8 rounded-full"
@@ -139,7 +58,11 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   )
 }
 
-export function MarqueeTestimonials() {
+interface MarqueeTestimonialsProps {
+  dict: Dictionary["marqueeTestimonials"];
+}
+
+export function MarqueeTestimonials({ dict }: MarqueeTestimonialsProps) {
   return (
     <section className="flex flex-col items-center justify-center w-full">
       <div className="border-b w-full h-full px-4 py-10 md:p-14">
@@ -151,10 +74,10 @@ export function MarqueeTestimonials() {
               letterSpacing: "-0.05em",
             }}
           >
-            Edfu Kullanan Ekiplerin Deneyimleri
+            {dict.title}
           </h2>
           <p className="text-muted-foreground text-center text-balance font-medium">
-            Farklı sektörlerden ekipler, Edfu ile bilgiye erişim süreçlerini nasıl dönüştürdüklerini anlatıyor.
+            {dict.description}
           </p>
         </div>
       </div>
@@ -163,7 +86,7 @@ export function MarqueeTestimonials() {
         <div className="px-4 sm:px-10">
           <div className="relative max-h-[600px] sm:max-h-[750px] overflow-hidden">
             <div className="gap-0 columns-1 md:columns-2 xl:columns-3">
-              {columns.map((col, i) => (
+              {dict.columns.map((col, i) => (
                 <div
                   key={i}
                   className="group flex overflow-hidden p-2 [--gap:1rem] [gap:var(--gap)] flex-col"
@@ -181,7 +104,7 @@ export function MarqueeTestimonials() {
                       {col.map((testimonial, j) => (
                         <TestimonialCard
                           key={`${i}-${j}-${copy}`}
-                          testimonial={testimonial}
+                          testimonial={{ ...testimonial, avatar: avatars[i][j] }}
                         />
                       ))}
                     </div>

@@ -2,25 +2,15 @@
 
 import Image from "next/image";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
-
-const columns = [
-  {
-    heading: "Şirket",
-    links: ["Hakkımızda", "İletişim", "Blog", "Kariyer"],
-  },
-  {
-    heading: "Ürün",
-    links: ["Özellikler", "Fiyatlandırma", "Entegrasyonlar", "API Dokümantasyonu"],
-  },
-  {
-    heading: "Kaynaklar",
-    links: ["Yardım Merkezi", "Kullanım Kılavuzu", "Durum Sayfası", "Gizlilik Politikası"],
-  },
-] as const;
+import type { Dictionary } from "@/dictionaries";
 
 const badges = ["KVKK", "EU Data", "GDPR"] as const;
 
-export function Footer() {
+interface FooterProps {
+  dict: Dictionary["footer"];
+}
+
+export function Footer({ dict }: FooterProps) {
   return (
     <footer className="border-t border-border">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
@@ -35,7 +25,7 @@ export function Footer() {
 
             {/* Description */}
             <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
-              Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform. Dokümanlarınızı yükleyin, ekibiniz sorusunu sorsun.
+              {dict.description}
             </p>
 
             {/* Compliance badges */}
@@ -54,7 +44,7 @@ export function Footer() {
           </div>
 
           {/* Link columns */}
-          {columns.map((col) => (
+          {dict.columns.map((col) => (
             <div key={col.heading}>
               <h4 className="font-heading font-bold text-sm mb-4">
                 {col.heading}

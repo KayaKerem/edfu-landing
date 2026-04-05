@@ -5,6 +5,7 @@ import { FileText, Image as ImageIcon, Upload, CheckCircle2, Loader2 } from "luc
 import NextImage from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles";
+import type { Dictionary } from "@/dictionaries";
 import { Notion } from "@/components/ui/svgs/notion";
 import { Slack } from "@/components/ui/svgs/slack";
 import { Figma } from "@/components/ui/svgs/figma";
@@ -16,12 +17,10 @@ import { Stripe } from "@/components/ui/svgs/stripe";
 import { Vercel } from "@/components/ui/svgs/vercel";
 import { Openai } from "@/components/ui/svgs/openai";
 
-const AI_RESPONSE = "2023 Mart'taki Bursa projesinde NNF ile çalışıldı. Toplantı notlarına göre teslim süresi ve çıktı kalitesinden memnun kalındı, sonraki projede tekrar değerlendirileceği belirtilmiş.";
-
 /* ------------------------------------------------------------------ */
 /*  Card 1 – Chat Mockup with streaming animation                     */
 /* ------------------------------------------------------------------ */
-function ChatMockup() {
+function ChatMockup({ response }: { response: string }) {
   const [displayedText, setDisplayedText] = useState("");
   const [showResponse, setShowResponse] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -55,8 +54,8 @@ function ChatMockup() {
       let i = 0;
       const interval = setInterval(() => {
         i++;
-        setDisplayedText(AI_RESPONSE.slice(0, i));
-        if (i >= AI_RESPONSE.length) {
+        setDisplayedText(response.slice(0, i));
+        if (i >= response.length) {
           clearInterval(interval);
           setTimeout(() => {
             setDisplayedText("");
@@ -67,7 +66,7 @@ function ChatMockup() {
         }
       }, 35);
     }, 1500);
-  }, []);
+  }, [response]);
 
   useEffect(() => {
     if (!isVisible) return;
@@ -212,7 +211,7 @@ const uploadedFiles: { name: string; icon: typeof FileText; size: string; color:
   { name: "Fiyat_Listesi_2025.xlsx", icon: FileText, size: "1.1 MB", color: "text-emerald-600", status: "ready" },
 ];
 
-function DriveUploadMockup() {
+function DriveUploadMockup({ indexing, indexed, fileProcessed, fileProcessing }: { indexing: string; indexed: string; fileProcessed: string; fileProcessing: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [phase, setPhase] = useState<DragPhase>("idle");
@@ -373,7 +372,7 @@ function DriveUploadMockup() {
                     <Upload className="size-5 text-primary" />
                   </div>
                   <div className="text-center">
-                    <p className="text-sm font-medium text-foreground">İndeksleniyor...</p>
+                    <p className="text-sm font-medium text-foreground">{indexing}</p>
                     <p className="text-xs text-muted-foreground">Tedarikçi_Anlaşması_2025.pdf · {uploadProgress}%</p>
                   </div>
                 </>
@@ -387,7 +386,7 @@ function DriveUploadMockup() {
                     <CheckCircle2 className="size-14 text-emerald-500" />
                   </motion.div>
                   <div className="text-center">
-                    <p className="text-sm font-medium text-foreground">İndekslendi</p>
+                    <p className="text-sm font-medium text-foreground">{indexed}</p>
                     <p className="text-xs text-muted-foreground">Tedarikçi_Anlaşması_2025.pdf · 1.8 MB</p>
                   </div>
                 </>
@@ -422,7 +421,7 @@ function DriveUploadMockup() {
                       <p className="text-[10px] text-muted-foreground">{file.size}</p>
                       <span className="text-[9px] text-muted-foreground">·</span>
                       <span className={`text-[10px] font-medium ${file.status === "ready" ? "text-emerald-500" : "text-orange-500"}`}>
-                        {file.status === "ready" ? "İşlendi" : "İşleniyor"}
+                        {file.status === "ready" ? fileProcessed : fileProcessing}
                       </span>
                     </div>
                   </div>
@@ -497,11 +496,9 @@ function FolderIcon({ color = "#5227FF", size = 1, open = false }: { color?: str
 /* ------------------------------------------------------------------ */
 /*  Card 4 – AI Notes Mockup                                           */
 /* ------------------------------------------------------------------ */
-const NOTE_TITLE = "Q3 Satış Toplantısı";
 const NOTE_CONTENT = "Müşteri görüşmelerinde fiyat itirazları öne çıktı. Rakip ürünlerle karşılaştırma yapılıyor. Satış ekibi yeni teklif şablonu istiyor — önümüzdeki hafta hazırlanacak.";
-const NOTE_TAGS = ["satış", "toplantı", "Q3"];
 
-function NotesMockup() {
+function NotesMockup({ noteTitle, noteTags, saved }: { noteTitle: string; noteTags: string[]; saved: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [typedTitle, setTypedTitle] = useState("");
@@ -539,8 +536,8 @@ function NotesMockup() {
       let i = 0;
       const interval = setInterval(() => {
         i++;
-        setTypedTitle(NOTE_TITLE.slice(0, i));
-        if (i >= NOTE_TITLE.length) clearInterval(interval);
+        setTypedTitle(noteTitle.slice(0, i));
+        if (i >= noteTitle.length) clearInterval(interval);
       }, 60);
     }, 800);
 
@@ -568,7 +565,7 @@ function NotesMockup() {
 
     // 5. Restart
     schedule(() => runCycle(), 11000);
-  }, [schedule]);
+  }, [schedule, noteTitle]);
 
   useEffect(() => {
     if (!isVisible) return;
@@ -646,7 +643,7 @@ function NotesMockup() {
         {/* Tags + saved indicator */}
         <div className="flex items-center gap-2 border-t border-border px-4 py-2.5">
           <div className="flex flex-1 items-center gap-1.5 overflow-hidden">
-            {NOTE_TAGS.map((tag, i) => (
+            {noteTags.map((tag, i) => (
               <motion.span
                 key={tag}
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -668,7 +665,7 @@ function NotesMockup() {
                 className="flex shrink-0 items-center gap-1 text-emerald-500"
               >
                 <CheckCircle2 className="size-3" />
-                <span className="text-[10px] font-medium">Kaydedildi</span>
+                <span className="text-[10px] font-medium">{saved}</span>
               </motion.div>
             )}
           </AnimatePresence>
@@ -690,35 +687,19 @@ function HatchedEdge({ side }: { side: "left" | "right" }) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Features data                                                      */
-/* ------------------------------------------------------------------ */
-const features = [
-  {
-    title: "Dokümanlarınızla Konuşun",
-    description: "Sözleşmelerinizi, yönetmeliklerinizi, toplantı notlarınızı yükleyin. Edfu içeriklerini analiz eder, sorularınıza dokümanlarınıza dayalı cevaplar verir.",
-    visual: <ChatMockup />,
-  },
-  {
-    title: "Kaynaklarınızı Bağlayın",
-    description: "Drive, Notion, Slack, CRM, ERP ve daha fazlası. Mevcut araçlarınızı Edfu'ya bağlayın, tüm kaynaklarınız otomatik senkronize olsun.",
-    visual: <IntegrationOrbits />,
-  },
-  {
-    title: "Dokümanlarınızı Yükleyin, Anında Hazır",
-    description: "PDF, Word, Excel — dokümanlarınızı sürükleyip bırakın. Edfu içerikleri otomatik parçalar, indeksler ve sorguya hazır hale getirir.",
-    visual: <DriveUploadMockup />,
-  },
-  {
-    title: "Siz Konuşun, AI Yazsın",
-    description: "Toplantı notları, müşteri görüşmeleri, finansal kararlar — AI dinler, yazar, etiketler. Ekibiniz arar, anında bulur.",
-    visual: <NotesMockup />,
-  },
-];
-
-/* ------------------------------------------------------------------ */
 /*  Section Component                                                  */
 /* ------------------------------------------------------------------ */
-export function BentoFeatures() {
+interface BentoFeaturesProps {
+  dict: Dictionary["features"];
+}
+
+export function BentoFeatures({ dict }: BentoFeaturesProps) {
+  const visuals = [
+    <ChatMockup key="chat" response={dict.chatResponse} />,
+    <IntegrationOrbits key="orbits" />,
+    <DriveUploadMockup key="upload" indexing={dict.indexing} indexed={dict.indexed} fileProcessed={dict.fileProcessed} fileProcessing={dict.fileProcessing} />,
+    <NotesMockup key="notes" noteTitle={dict.noteTitle} noteTags={dict.noteTags} saved={dict.saved} />,
+  ];
   return (
     <section id="features" className="relative">
       {/* Hatched areas - full section height, positioned at inner line */}
@@ -732,10 +713,10 @@ export function BentoFeatures() {
         {/* Header */}
         <div className="mx-auto mb-10 max-w-2xl px-4 text-center">
           <h2 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
-            Şirketinizin Dijital Hafızasını Oluşturun
+            {dict.title}
           </h2>
           <p className="mt-4 text-base text-muted-foreground font-medium text-balance tracking-tight">
-            Edfu, şirketinizdeki tüm bilgiyi tek bir platformda toplar. Ekibiniz ihtiyaç duyduğu bilgiye saniyeler içinde ulaşır.
+            {dict.description}
           </p>
         </div>
 
@@ -743,21 +724,17 @@ export function BentoFeatures() {
         <div className="relative mx-4 md:mx-20">
 
         <div className="grid grid-cols-1 md:grid-cols-2 border-t border-x border-border">
-          {features.map((feature, i) => (
+          {dict.items.map((feature, i) => (
             <div
               key={feature.title}
               className={`relative flex flex-col overflow-hidden aspect-auto min-h-[420px] sm:min-h-[450px] md:aspect-[554/496] md:min-h-0 ${
-                i % 2 === 0 && i < features.length - 1 ? "md:border-r border-border" : ""
-              } ${i < features.length - 1 ? "border-b border-border" : ""} ${
+                i % 2 === 0 && i < dict.items.length - 1 ? "md:border-r border-border" : ""
+              } ${i < dict.items.length - 1 ? "border-b border-border" : ""} ${
                 i >= 2 ? "md:border-b-0" : ""
               }`}
             >
               {/* Visual area */}
-              <div className="relative flex-1">
-                {feature.visual}
-                {/* Bottom gradient fade into text area */}
-                <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-24 w-full bg-gradient-to-t from-background to-transparent" />
-              </div>
+              <div className="relative flex-1">{visuals[i]}</div>
               {/* Text area */}
               <div className="relative z-20 px-4 sm:px-6 pb-6 sm:pb-8 -mt-4">
                 <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>{feature.title}</h3>
