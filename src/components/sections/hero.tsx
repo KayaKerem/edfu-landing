@@ -91,7 +91,7 @@ export function Hero({ dict }: HeroProps) {
             {dict.ctaPrimary}
           </a>
           <a
-            href="#"
+            href="https://app.edfu.ai"
             className="h-10 flex items-center justify-center whitespace-nowrap w-32 px-5 text-sm font-normal tracking-wide text-foreground rounded-full transition-all ease-out active:scale-95 bg-background border border-border hover:bg-accent"
           >
             {dict.ctaSecondary}
