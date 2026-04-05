@@ -4,66 +4,19 @@ import { useRef, useState } from "react";
 import { Check } from "lucide-react";
 import { motion } from "motion/react";
 import { AnimatedNumber } from "@/components/ui/animated-number";
+import type { Dictionary } from "@/dictionaries";
 
-export function Pricing() {
+interface PricingProps {
+  dict: Dictionary["pricing"];
+}
+
+export function Pricing({ dict }: PricingProps) {
   const [isYearly, setIsYearly] = useState(true);
 
-  const plans = [
-    {
-      name: "Başlangıç",
-      monthlyPrice: 1990,
-      yearlyPrice: 1592,
-      description: "kişi başı, KDV hariç",
-      cta: "14 Gün Ücretsiz Deneyin",
-      popular: false,
-      inheritLabel: "Pro planın tüm özellikleri +",
-      features: [
-        "5 kullanıcıya kadar",
-        "Kişi başı aylık 10M token",
-        "Claude Sonnet sabit model",
-        "50 GB depolama",
-        "5 entegrasyon",
-        "Ayda 200 URL crawl",
-        "10.000 sayfa RAG limiti",
-        "E-posta desteği",
-      ],
-    },
-    {
-      name: "Profesyonel",
-      monthlyPrice: null,
-      yearlyPrice: null,
-      description: "kişi başı, KDV hariç",
-      cta: "Beni Bilgilendir",
-      popular: true,
-      inheritLabel: "Başlangıç planının tüm özellikleri +",
-      features: [
-        "300+ AI model erişimi (OpenRouter)",
-        "Kişi başı aylık 25M token",
-        "200 GB depolama",
-        "20 entegrasyon",
-        "Ayda 1.000 URL crawl",
-        "50.000 sayfa RAG limiti",
-        "Özel şablonlar",
-        "Öncelikli destek",
-      ],
-    },
-    {
-      name: "Kurumsal",
-      monthlyPrice: null,
-      yearlyPrice: null,
-      description: "Özel ihtiyaçlarınıza göre fiyatlandırma",
-      cta: "Satış Ekibiyle Görüşün",
-      popular: false,
-      inheritLabel: "Profesyonel planın tüm özellikleri +",
-      features: [
-        "Sınırsız kullanıcı",
-        "Dedicated altyapı",
-        "White-label seçeneği",
-        "SLA garantisi",
-        "Özel entegrasyon geliştirme",
-        "Birebir onboarding",
-      ],
-    },
+  const planPrices = [
+    { monthlyPrice: 1990, yearlyPrice: 1592 },
+    { monthlyPrice: null, yearlyPrice: null },
+    { monthlyPrice: null, yearlyPrice: null },
   ];
 
   return (
@@ -81,10 +34,10 @@ export function Pricing() {
               fontFamily: "var(--font-geist)",
             }}
           >
-            İhtiyacınıza Uygun Plan Seçin
+            {dict.title}
           </h2>
           <p className="text-muted-foreground text-center text-balance font-medium mt-4">
-            Tüm planlar 14 gün ücretsiz deneme ile başlar. Aylık veya yıllık ödeme seçeneği ile bütçenize uygun başlayın.
+            {dict.description}
           </p>
         </div>
       </div>
@@ -112,7 +65,7 @@ export function Pricing() {
                 />
               )}
               <span className={`relative z-10 transition-colors duration-200 ${!isYearly ? "text-primary" : "text-muted-foreground"}`}>
-                Aylık
+                {dict.monthly}
               </span>
             </button>
             <button
@@ -130,9 +83,9 @@ export function Pricing() {
                 />
               )}
               <span className={`relative z-10 flex items-center gap-1.5 whitespace-nowrap transition-colors duration-200 ${isYearly ? "text-primary" : "text-muted-foreground"}`}>
-                Yıllık
+                {dict.yearly}
                 <span className="text-xs font-semibold text-primary bg-primary/15 py-0.5 px-1.5 rounded-full whitespace-nowrap">
-                  %20 İndirim
+                  {dict.discount}
                 </span>
               </span>
             </button>
@@ -140,12 +93,11 @@ export function Pricing() {
         </div>
 
         {/* Cards */}
-        {plans.map((plan) => {
-          const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
-
-          // Card 2 (popular) has unique styles
-          const isPopular = plan.popular;
-          const isEnterprise = plan.name === "Kurumsal";
+        {dict.plans.map((plan, idx) => {
+          const prices = planPrices[idx];
+          const price = isYearly ? prices.yearlyPrice : prices.monthlyPrice;
+          const isPopular = idx === 1;
+          const isEnterprise = idx === 2;
 
           const cardClasses = isPopular
             ? "rounded-xl grid grid-rows-[180px_auto_1fr] relative h-fit min-[650px]:h-full min-[900px]:h-fit bg-white dark:bg-[#27272A] md:shadow-[0px_61px_24px_-10px_rgba(0,0,0,0.01),0px_34px_20px_-8px_rgba(0,0,0,0.05),0px_15px_15px_-6px_rgba(0,0,0,0.09),0px_4px_8px_-2px_rgba(0,0,0,0.10),0px_0px_0px_1px_rgba(0,0,0,0.08)]"
@@ -160,7 +112,7 @@ export function Pricing() {
                   <span className="text-sm text-foreground">{plan.name}</span>
                   {isPopular && (
                     <span className="bg-gradient-to-b from-primary/50 to-primary text-white h-6 inline-flex w-fit items-center justify-center px-2 rounded-full text-sm ml-2 shadow-[0px_6px_6px_-3px_rgba(0,0,0,0.08),0px_3px_3px_-1.5px_rgba(0,0,0,0.08),0px_1px_1px_-0.5px_rgba(0,0,0,0.08),0px_0px_0px_1px_rgba(255,255,255,0.12)_inset,0px_1px_0px_0px_rgba(255,255,255,0.12)_inset]">
-                      En Popüler
+                      {dict.mostPopular}
                     </span>
                   )}
                 </div>
@@ -172,12 +124,12 @@ export function Pricing() {
                       <span className="text-4xl font-semibold text-foreground">
                         ₺<AnimatedNumber value={price} mass={0.8} stiffness={75} damping={15} />
                       </span>
-                      <span className="mb-1 text-sm text-muted-foreground">/ay</span>
+                      <span className="mb-1 text-sm text-muted-foreground">{dict.perMonth}</span>
                     </>
                   ) : isPopular ? (
-                    <span className="text-4xl font-semibold text-foreground">Yakında</span>
+                    <span className="text-4xl font-semibold text-foreground">{dict.comingSoon}</span>
                   ) : (
-                    <span className="text-4xl font-semibold text-foreground">İletişime Geçin</span>
+                    <span className="text-4xl font-semibold text-foreground">{dict.contactUs}</span>
                   )}
                 </div>
 
