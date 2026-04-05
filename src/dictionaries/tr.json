@@ -1,0 +1,329 @@
+{
+  "metadata": {
+    "title": "Edfu - Şirketinizin AI Bilgi Tabanı | Dokümanlardan Anında Cevap",
+    "description": "Şirketinizin bilgi birikimini yapay zekaya dönüştürün. Dokümanlarınızı yükleyin, 300+ AI modeli ile ekibiniz Türkçe sorular sorsun, anında doğru cevap alsın. 14 gün ücretsiz deneyin.",
+    "keywords": [
+      "yapay zeka bilgi tabanı",
+      "AI bilgi yönetimi",
+      "kurumsal yapay zeka",
+      "doküman analizi",
+      "RAG platformu",
+      "Türkçe AI asistan",
+      "şirket bilgi tabanı",
+      "AI destekli arama",
+      "kurumsal chatbot",
+      "doküman sorgulama",
+      "KVKK uyumlu AI",
+      "OpenRouter",
+      "Claude",
+      "GPT-4",
+      "Edfu"
+    ],
+    "ogTitle": "Edfu - Şirketinizin AI Bilgi Tabanı",
+    "ogDescription": "Dokümanlarınızı yükleyin, 300+ AI modeli ile ekibiniz Türkçe sorular sorsun, anında doğru cevap alsın. KVKK uyumlu, kurumsal düzeyde altyapı.",
+    "twitterTitle": "Edfu - Şirketinizin AI Bilgi Tabanı",
+    "twitterDescription": "Dokümanlarınızı yükleyin, 300+ AI modeli ile ekibiniz Türkçe sorular sorsun, anında doğru cevap alsın."
+  },
+  "navbar": {
+    "home": "Ana Sayfa",
+    "features": "Özellikler",
+    "howItWorks": "Nasıl Çalışır",
+    "pricing": "Fiyatlandırma",
+    "cta": "Ücretsiz Deneyin",
+    "menuOpen": "Menüyü aç",
+    "menuClose": "Menüyü kapat"
+  },
+  "hero": {
+    "badge": "300+ AI modeli, tek platform",
+    "titleLine1Before": "Her Sorunun ",
+    "titleLine1Highlight": "Cevabı",
+    "titleLine2Highlight": "Sizde",
+    "titleLine2After": " Zaten Var.",
+    "description": "Dokümanlarınızı yükleyin, kaynaklarınızı bağlayın, ekibiniz sorusunu sorsun.\nEdfu şirketinizin tüm bilgi birikiminden doğru cevabı anında bulsun.",
+    "ctaPrimary": "Ücretsiz Deneyin",
+    "ctaSecondary": "Giriş Yap"
+  },
+  "logos": {
+    "subtitle": "300'den fazla yapay zeka modeline tek platformdan erişin",
+    "learnMore": "Daha Fazla"
+  },
+  "features": {
+    "title": "Şirketinizin Dijital Hafızasını Oluşturun",
+    "description": "Edfu, şirketinizdeki tüm bilgiyi tek bir platformda toplar. Ekibiniz ihtiyaç duyduğu bilgiye saniyeler içinde ulaşır.",
+    "items": [
+      {
+        "title": "Dokümanlarınızla Konuşun",
+        "description": "Sözleşmelerinizi, yönetmeliklerinizi, toplantı notlarınızı yükleyin. Edfu içeriklerini analiz eder, sorularınıza dokümanlarınıza dayalı cevaplar verir."
+      },
+      {
+        "title": "Kaynaklarınızı Bağlayın",
+        "description": "Drive, Notion, Slack, CRM, ERP ve daha fazlası. Mevcut araçlarınızı Edfu'ya bağlayın, tüm kaynaklarınız otomatik senkronize olsun."
+      },
+      {
+        "title": "Dokümanlarınızı Yükleyin, Anında Hazır",
+        "description": "PDF, Word, Excel — dokümanlarınızı sürükleyip bırakın. Edfu içerikleri otomatik parçalar, indeksler ve sorguya hazır hale getirir."
+      },
+      {
+        "title": "Siz Konuşun, AI Yazsın",
+        "description": "Toplantı notları, müşteri görüşmeleri, finansal kararlar — AI dinler, yazar, etiketler. Ekibiniz arar, anında bulur."
+      }
+    ],
+    "chatResponse": "2023 Mart'taki Bursa projesinde NNF ile çalışıldı. Toplantı notlarına göre teslim süresi ve çıktı kalitesinden memnun kalındı, sonraki projede tekrar değerlendirileceği belirtilmiş.",
+    "indexing": "İndeksleniyor...",
+    "indexed": "İndekslendi",
+    "fileProcessed": "İşlendi",
+    "fileProcessing": "İşleniyor",
+    "saved": "Kaydedildi",
+    "noteTitle": "Q3 Satış Toplantısı",
+    "noteTags": ["satış", "toplantı", "Q3"]
+  },
+  "testimonial": {
+    "quote": "Ekibe yeni katılan biri eskiden haftalarca adaptasyon sürecinden geçerdi. Edfu'dan sonra ilk gününde şirketin tüm bilgi birikimine erişip sorularını sorabiliyor. Bilgi kaybı ve tekrar eden açıklamalar tarihe karıştı.",
+    "authorName": "Mehmet K.",
+    "authorTitle": "Kurucu Ortak, Teknoloji Şirketi",
+    "authorAlt": "Mehmet K. profil fotoğrafı - Kurucu Ortak, Teknoloji Şirketi"
+  },
+  "howItWorks": {
+    "title": "Üç Adımda Başlayın",
+    "description": "Teknik bilgi gerekmez. Dokümanlarınızı yükleyin, dakikalar içinde şirketinizin AI destekli bilgi tabanı hazır.",
+    "steps": [
+      {
+        "title": "Dokümanlarınızı Yükleyin",
+        "description": "PDF, Word, Excel — mevcut dokümanlarınızı sürükleyip bırakın. Edfu içerikleri otomatik olarak parçalar, indeksler ve sorguya hazır hale getirir.",
+        "emoji": "💬"
+      },
+      {
+        "title": "Kaynaklarınızı Bağlayın",
+        "description": "Web sitenizi, Google Drive'ınızı, Notion'ınızı bağlayın. Edfu içeriklerinizi otomatik senkronize eder ve bilgi tabanınızı güncel tutar.",
+        "emoji": "⚙️"
+      },
+      {
+        "title": "Sorun, Cevap Alın",
+        "description": "Ekibiniz Türkçe sorular sorsun, Edfu bilgi tabanınızdan kaynaklı, doğru ve güvenilir cevapları anında versin.",
+        "emoji": "📊"
+      },
+      {
+        "title": "Ekip Olarak Büyüyün",
+        "description": "Her yeni doküman, her yeni sohbet şirketinizin bilgi birikimini zenginleştirir. Edfu kullandıkça daha akıllı hale gelir — ekibinizin ortak hafızası sürekli büyür.",
+        "emoji": "🚀"
+      }
+    ]
+  },
+  "security": {
+    "title": "Kurumsal Düzeyde Altyapı",
+    "description": "Yüksek performans, kesintisiz erişim ve tam veri kontrolü için optimize edilmiş altyapı.",
+    "cards": [
+      {
+        "title": "Tam Gizlilik ve Kontrol",
+        "description": "Verileriniz yalnızca size ait. Hiçbir üçüncü tarafla paylaşılmaz, tamamen sizin kontrolünüzde."
+      },
+      {
+        "title": "Bugün 2 Kişi, Yarın 50",
+        "description": "Ekibiniz büyüdükçe şirket hafızası da büyür. Yeni gelen ilk günden her şeye erişir, eski bilgi kaybolmaz."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "İhtiyacınıza Uygun Plan Seçin",
+    "description": "Tüm planlar 14 gün ücretsiz deneme ile başlar. Aylık veya yıllık ödeme seçeneği ile bütçenize uygun başlayın.",
+    "monthly": "Aylık",
+    "yearly": "Yıllık",
+    "discount": "%20 İndirim",
+    "perMonth": "/ay",
+    "comingSoon": "Yakında",
+    "contactUs": "İletişime Geçin",
+    "mostPopular": "En Popüler",
+    "plans": [
+      {
+        "name": "Başlangıç",
+        "description": "kişi başı, KDV hariç",
+        "cta": "14 Gün Ücretsiz Deneyin",
+        "inheritLabel": "Pro planın tüm özellikleri +",
+        "features": [
+          "5 kullanıcıya kadar",
+          "Kişi başı aylık 10M token",
+          "Claude Sonnet sabit model",
+          "50 GB depolama",
+          "5 entegrasyon",
+          "Ayda 200 URL crawl",
+          "10.000 sayfa RAG limiti",
+          "E-posta desteği"
+        ]
+      },
+      {
+        "name": "Profesyonel",
+        "description": "kişi başı, KDV hariç",
+        "cta": "Beni Bilgilendir",
+        "inheritLabel": "Başlangıç planının tüm özellikleri +",
+        "features": [
+          "300+ AI model erişimi (OpenRouter)",
+          "Kişi başı aylık 25M token",
+          "200 GB depolama",
+          "20 entegrasyon",
+          "Ayda 1.000 URL crawl",
+          "50.000 sayfa RAG limiti",
+          "Özel şablonlar",
+          "Öncelikli destek"
+        ]
+      },
+      {
+        "name": "Kurumsal",
+        "description": "Özel ihtiyaçlarınıza göre fiyatlandırma",
+        "cta": "Satış Ekibiyle Görüşün",
+        "inheritLabel": "Profesyonel planın tüm özellikleri +",
+        "features": [
+          "Sınırsız kullanıcı",
+          "Dedicated altyapı",
+          "White-label seçeneği",
+          "SLA garantisi",
+          "Özel entegrasyon geliştirme",
+          "Birebir onboarding"
+        ]
+      }
+    ]
+  },
+  "marqueeTestimonials": {
+    "title": "Edfu Kullanan Ekiplerin Deneyimleri",
+    "description": "Farklı sektörlerden ekipler, Edfu ile bilgiye erişim süreçlerini nasıl dönüştürdüklerini anlatıyor.",
+    "columns": [
+      [
+        {
+          "body": "Sözleşme incelemesi için eskiden her seferinde mevzuat kitaplarını karıştırıyorduk. Edfu'ya dokümanlarımızı yükledik, artık herhangi bir maddeyi saniyeler içinde bulup karşılaştırabiliyoruz. Müvekkillerimize dönüş süremiz yarıya indi.",
+          "highlightStart": 124,
+          "highlightEnd": 190,
+          "name": "Mehmet Aydın",
+          "title": "Kurucu, Dijital Hukuk Danışmanlık"
+        },
+        {
+          "body": "Ekibe yeni katılan biri eskiden haftalarca sorular sorarak öğrenirdi. Şimdi şirketin tüm prosedürlerini, politikalarını Edfu'ya sorabiliyor. Oryantasyon süreci 3 haftadan 3 güne düştü.",
+          "highlightStart": 76,
+          "highlightEnd": 140,
+          "name": "Ayşe Korkmaz",
+          "title": "İK Müdürü, Orta Ölçekli Üretim Firması"
+        }
+      ],
+      [
+        {
+          "body": "300'den fazla AI modeline tek platformdan erişmek büyük avantaj. İşe göre model seçebiliyoruz — kod için Claude, müşteri metinleri için GPT. Her model için ayrı abonelik derdi bitti.",
+          "highlightStart": 65,
+          "highlightEnd": 140,
+          "name": "Can Yılmaz",
+          "title": "CTO, SaaS Girişimi"
+        },
+        {
+          "body": "İhale şartnamelerini analiz etmek günler alıyordu. Edfu'ya yüklediğimiz tüm geçmiş ihaleleri karşılaştırmalı analiz edip riskli maddeleri otomatik tespit edebiliyoruz. Teklif hazırlama sürecimiz çok hızlandı.",
+          "highlightStart": 93,
+          "highlightEnd": 167,
+          "name": "Zeynep Demir",
+          "title": "Operasyon Müdürü, Lojistik Firması"
+        }
+      ],
+      [
+        {
+          "body": "Her departmanın kendi bilgi silosu vardı. Edfu ile tüm departmanların dokümanlarını tek bir bilgi havuzunda birleştirdik. Finans ekibi hukuk dokümanlarına, hukuk ekibi finans raporlarına anında erişebiliyor.",
+          "highlightStart": 51,
+          "highlightEnd": 121,
+          "name": "Burak Özkan",
+          "title": "Finans Direktörü, Holding Şirketi"
+        },
+        {
+          "body": "Ürün bilgilerimizi güncelleyip web sitemizi Edfu'ya bağladık. Artık müşteri destek ekibimiz her ürün sorusunu AI'a soruyor, ürün ekibini meşgul etmiyor. Doğru bilgi, doğru zamanda.",
+          "highlightStart": 68,
+          "highlightEnd": 122,
+          "name": "Elif Şahin",
+          "title": "Pazarlama Müdürü, E-Ticaret Şirketi"
+        }
+      ],
+      [
+        {
+          "body": "KVKK uyumluluk sürecimiz Edfu ile tamamen değişti. Mevzuat değişikliklerini yükleyip mevcut prosedürlerimizle karşılaştırabiliyoruz. Uyum raporlarını manuel hazırlamak yerine AI'dan özet alıyoruz.",
+          "highlightStart": 51,
+          "highlightEnd": 132,
+          "name": "Ahmet Kaya",
+          "title": "Genel Müdür, Danışmanlık Firması"
+        },
+        {
+          "body": "Satış ekibimiz müşteri toplantılarına hazırlanırken eskiden onlarca dosya karıştırırdı. Şimdi müşteri hakkındaki tüm geçmiş notları ve teklifleri Edfu'ya sorup 2 dakikada brifingi alıyorlar. Kapanış oranımız gözle görülür arttı.",
+          "highlightStart": 94,
+          "highlightEnd": 190,
+          "name": "Selin Tunç",
+          "title": "Satış Direktörü, Yazılım Şirketi"
+        }
+      ],
+      [
+        {
+          "body": "Küçük ekibiz ama müşteri portföyümüz büyük. Her müşterinin brief'ini, geri bildirimlerini ve marka kılavuzunu Edfu'ya yükledik. Hangi müşteri için çalışıyorsak bilgiye anında ulaşıyoruz, hiçbir detay kaybolmuyor.",
+          "highlightStart": 128,
+          "highlightEnd": 185,
+          "name": "İrem Başaran",
+          "title": "Kurucu, Dijital Ajans"
+        }
+      ]
+    ]
+  },
+  "faq": {
+    "title": "Sıkça Sorulan Sorular",
+    "description": "Edfu hakkında merak edilenleri bir araya getirdik. Burada bulamadığınız bir soru varsa bize ulaşın.",
+    "items": [
+      {
+        "question": "Edfu tam olarak ne işe yarar?",
+        "answer": "Edfu, şirketinizin dokümanlarını, web sitesini ve bilgi kaynaklarını yapay zeka destekli bir bilgi tabanına dönüştüren bir platformdur. Ekibiniz Türkçe sorular sorarak bu bilgi tabanından anında cevap alır. Sözleşme analizi, mevzuat kontrolü, ürün bilgisi sorgulama gibi her türlü iş sürecinde kullanılabilir."
+      },
+      {
+        "question": "Edfu'yu kullanmaya başlamak için teknik bilgi gerekiyor mu?",
+        "answer": "Hayır. Dokümanlarınızı sürükle-bırak ile yükleyin, web sitenizi URL vererek bağlayın — gerisini Edfu halleder. Dokümanlar otomatik olarak işlenir, indekslenir ve sorguya hazır hale gelir. Kurulum dakikalar sürer, herhangi bir yazılım yüklemenize gerek yoktur."
+      },
+      {
+        "question": "Verilerime kim erişebilir?",
+        "answer": "Yalnızca siz. Her organizasyonun verileri birbirinden tamamen izole edilmiştir. Verileriniz üçüncü taraflarla paylaşılmaz ve KVKK uyumlu altyapı ile Avrupa veri merkezlerinde barındırılır."
+      },
+      {
+        "question": "Hangi araçlarla entegre çalışıyor?",
+        "answer": "Edfu; Google Drive, Notion, Dropbox ve Slack ile entegre çalışır. Ayrıca Website Crawler özelliği ile herhangi bir web sitesini otomatik olarak tarayıp bilgi tabanınıza ekleyebilirsiniz. Entegrasyon sayısı planınıza göre değişir."
+      },
+      {
+        "question": "Ücretsiz deneme süreci nasıl işliyor?",
+        "answer": "Tüm planları 14 gün boyunca ücretsiz deneyebilirsiniz. Deneme süresince tüm özellikler aktiftir. Süre sonunda memnun kalmazsanız herhangi bir ücret tahsil edilmez."
+      },
+      {
+        "question": "300+ AI modeli ne demek, hangisini seçmeliyim?",
+        "answer": "Edfu, OpenRouter entegrasyonu sayesinde Claude, GPT-4, Gemini, Llama ve yüzlerce farklı AI modeline tek platformdan erişim sunar. Her model farklı görevlerde öne çıkar. Başlangıç planında Claude Sonnet sabit model olarak sunulur, Profesyonel planda tüm modellere erişim açılır."
+      }
+    ]
+  },
+  "cta": {
+    "line1": "Yükleyin.",
+    "line2": "Sorun.",
+    "line3": "Cevap Alın.",
+    "button": "14 Gün Ücretsiz Deneyin",
+    "subtext": "İstediğiniz zaman iptal edin, taahhüt yok."
+  },
+  "footer": {
+    "description": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform. Dokümanlarınızı yükleyin, ekibiniz sorusunu sorsun.",
+    "columns": [
+      {
+        "heading": "Şirket",
+        "links": ["Hakkımızda", "İletişim", "Blog", "Kariyer"]
+      },
+      {
+        "heading": "Ürün",
+        "links": ["Özellikler", "Fiyatlandırma", "Entegrasyonlar", "API Dokümantasyonu"]
+      },
+      {
+        "heading": "Kaynaklar",
+        "links": ["Yardım Merkezi", "Kullanım Kılavuzu", "Durum Sayfası", "Gizlilik Politikası"]
+      }
+    ]
+  },
+  "jsonLd": {
+    "orgDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform.",
+    "contactLanguage": "Turkish",
+    "softwareDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform. Dokümanlarınızı yükleyin, 300+ AI modeli ile ekibiniz Türkçe sorular sorsun, anında doğru cevap alsın.",
+    "planStarterName": "Başlangıç",
+    "planStarterDesc": "5 kullanıcıya kadar, kişi başı aylık 10M token, Claude Sonnet sabit model, 50 GB depolama",
+    "planStarterUnit": "kişi başı / ay",
+    "planEnterpriseName": "Kurumsal",
+    "planEnterpriseDesc": "Sınırsız kullanıcı, dedicated altyapı, white-label seçeneği, SLA garantisi",
+    "websiteDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform."
+  }
+}

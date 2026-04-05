@@ -1,0 +1,329 @@
+{
+  "metadata": {
+    "title": "Edfu - Your Company's AI Knowledge Base | Instant Answers from Documents",
+    "description": "Transform your company's knowledge into AI. Upload your documents, let your team ask questions with 300+ AI models, get instant accurate answers. Try free for 14 days.",
+    "keywords": [
+      "AI knowledge base",
+      "AI knowledge management",
+      "enterprise AI",
+      "document analysis",
+      "RAG platform",
+      "AI assistant",
+      "company knowledge base",
+      "AI-powered search",
+      "enterprise chatbot",
+      "document querying",
+      "GDPR compliant AI",
+      "OpenRouter",
+      "Claude",
+      "GPT-4",
+      "Edfu"
+    ],
+    "ogTitle": "Edfu - Your Company's AI Knowledge Base",
+    "ogDescription": "Upload your documents, let your team ask questions with 300+ AI models, get instant accurate answers. Enterprise-grade, GDPR compliant infrastructure.",
+    "twitterTitle": "Edfu - Your Company's AI Knowledge Base",
+    "twitterDescription": "Upload your documents, let your team ask questions with 300+ AI models, get instant accurate answers."
+  },
+  "navbar": {
+    "home": "Home",
+    "features": "Features",
+    "howItWorks": "How It Works",
+    "pricing": "Pricing",
+    "cta": "Try Free",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu"
+  },
+  "hero": {
+    "badge": "300+ AI models, one platform",
+    "titleLine1Before": "Every Question's ",
+    "titleLine1Highlight": "Answer",
+    "titleLine2Highlight": "Is Already",
+    "titleLine2After": " With You.",
+    "description": "Upload your documents, connect your sources, let your team ask.\nEdfu instantly finds the right answer from your company's entire knowledge.",
+    "ctaPrimary": "Try Free",
+    "ctaSecondary": "Sign In"
+  },
+  "logos": {
+    "subtitle": "Access 300+ AI models from a single platform",
+    "learnMore": "Learn More"
+  },
+  "features": {
+    "title": "Build Your Company's Digital Memory",
+    "description": "Edfu brings all your company's knowledge together on one platform. Your team finds the information they need in seconds.",
+    "items": [
+      {
+        "title": "Talk to Your Documents",
+        "description": "Upload your contracts, regulations, meeting notes. Edfu analyzes the content and provides document-based answers to your questions."
+      },
+      {
+        "title": "Connect Your Sources",
+        "description": "Drive, Notion, Slack, CRM, ERP and more. Connect your existing tools to Edfu, all sources sync automatically."
+      },
+      {
+        "title": "Upload Documents, Instantly Ready",
+        "description": "PDF, Word, Excel — drag and drop your documents. Edfu automatically chunks, indexes, and prepares them for queries."
+      },
+      {
+        "title": "You Talk, AI Writes",
+        "description": "Meeting notes, client calls, financial decisions — AI listens, writes, tags. Your team searches and finds instantly."
+      }
+    ],
+    "chatResponse": "In the March 2023 Bursa project, we worked with NNF. According to meeting notes, they were satisfied with delivery time and output quality, and it was noted they would be reconsidered for the next project.",
+    "indexing": "Indexing...",
+    "indexed": "Indexed",
+    "fileProcessed": "Processed",
+    "fileProcessing": "Processing",
+    "saved": "Saved",
+    "noteTitle": "Q3 Sales Meeting",
+    "noteTags": ["sales", "meeting", "Q3"]
+  },
+  "testimonial": {
+    "quote": "New team members used to go through weeks of adaptation. After Edfu, they can access the company's entire knowledge base and ask questions from day one. Knowledge loss and repetitive explanations are a thing of the past.",
+    "authorName": "Mehmet K.",
+    "authorTitle": "Co-Founder, Technology Company",
+    "authorAlt": "Mehmet K. profile photo - Co-Founder, Technology Company"
+  },
+  "howItWorks": {
+    "title": "Get Started in Three Steps",
+    "description": "No technical knowledge required. Upload your documents, your company's AI-powered knowledge base is ready in minutes.",
+    "steps": [
+      {
+        "title": "Upload Your Documents",
+        "description": "PDF, Word, Excel — drag and drop your existing documents. Edfu automatically chunks, indexes, and prepares content for queries.",
+        "emoji": "💬"
+      },
+      {
+        "title": "Connect Your Sources",
+        "description": "Connect your website, Google Drive, Notion. Edfu automatically syncs your content and keeps your knowledge base up to date.",
+        "emoji": "⚙️"
+      },
+      {
+        "title": "Ask, Get Answers",
+        "description": "Your team asks questions, Edfu provides accurate and reliable answers sourced from your knowledge base instantly.",
+        "emoji": "📊"
+      },
+      {
+        "title": "Grow as a Team",
+        "description": "Every new document, every new conversation enriches your company's knowledge. Edfu gets smarter as you use it — your team's shared memory keeps growing.",
+        "emoji": "🚀"
+      }
+    ]
+  },
+  "security": {
+    "title": "Enterprise-Grade Infrastructure",
+    "description": "Optimized infrastructure for high performance, uninterrupted access, and full data control.",
+    "cards": [
+      {
+        "title": "Full Privacy and Control",
+        "description": "Your data belongs only to you. Never shared with third parties, completely under your control."
+      },
+      {
+        "title": "2 People Today, 50 Tomorrow",
+        "description": "As your team grows, so does the company memory. New members access everything from day one, no knowledge is ever lost."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Choose the Right Plan for You",
+    "description": "All plans start with a 14-day free trial. Start with monthly or yearly payment options to fit your budget.",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "discount": "20% Off",
+    "perMonth": "/mo",
+    "comingSoon": "Coming Soon",
+    "contactUs": "Contact Us",
+    "mostPopular": "Most Popular",
+    "plans": [
+      {
+        "name": "Starter",
+        "description": "per user, excl. VAT",
+        "cta": "Try Free for 14 Days",
+        "inheritLabel": "Everything in Pro plan +",
+        "features": [
+          "Up to 5 users",
+          "10M tokens per user/month",
+          "Claude Sonnet fixed model",
+          "50 GB storage",
+          "5 integrations",
+          "200 URL crawls/month",
+          "10,000 page RAG limit",
+          "Email support"
+        ]
+      },
+      {
+        "name": "Professional",
+        "description": "per user, excl. VAT",
+        "cta": "Notify Me",
+        "inheritLabel": "Everything in Starter plan +",
+        "features": [
+          "300+ AI model access (OpenRouter)",
+          "25M tokens per user/month",
+          "200 GB storage",
+          "20 integrations",
+          "1,000 URL crawls/month",
+          "50,000 page RAG limit",
+          "Custom templates",
+          "Priority support"
+        ]
+      },
+      {
+        "name": "Enterprise",
+        "description": "Custom pricing for your needs",
+        "cta": "Talk to Sales",
+        "inheritLabel": "Everything in Professional plan +",
+        "features": [
+          "Unlimited users",
+          "Dedicated infrastructure",
+          "White-label option",
+          "SLA guarantee",
+          "Custom integration development",
+          "1-on-1 onboarding"
+        ]
+      }
+    ]
+  },
+  "marqueeTestimonials": {
+    "title": "Experiences from Teams Using Edfu",
+    "description": "Teams from different industries share how they transformed their knowledge access processes with Edfu.",
+    "columns": [
+      [
+        {
+          "body": "We used to go through regulation books every time for contract review. We uploaded our documents to Edfu, now we can find and compare any clause in seconds. Our response time to clients has been cut in half.",
+          "highlightStart": 103,
+          "highlightEnd": 163,
+          "name": "Mehmet Aydin",
+          "title": "Founder, Digital Legal Consulting"
+        },
+        {
+          "body": "New team members used to spend weeks asking questions to learn. Now they can ask Edfu about all company procedures and policies. Onboarding dropped from 3 weeks to 3 days.",
+          "highlightStart": 68,
+          "highlightEnd": 128,
+          "name": "Ayse Korkmaz",
+          "title": "HR Manager, Mid-Size Manufacturing"
+        }
+      ],
+      [
+        {
+          "body": "Having access to 300+ AI models from a single platform is a huge advantage. We can choose models per task — Claude for code, GPT for client copy. No more separate subscriptions for each model.",
+          "highlightStart": 61,
+          "highlightEnd": 131,
+          "name": "Can Yilmaz",
+          "title": "CTO, SaaS Startup"
+        },
+        {
+          "body": "Analyzing tender specifications used to take days. We can now do comparative analysis of all past tenders uploaded to Edfu and automatically detect risky clauses. Our proposal preparation process sped up significantly.",
+          "highlightStart": 85,
+          "highlightEnd": 165,
+          "name": "Zeynep Demir",
+          "title": "Operations Manager, Logistics Company"
+        }
+      ],
+      [
+        {
+          "body": "Every department had its own knowledge silo. With Edfu, we merged documents from all departments into a single knowledge pool. Finance can access legal docs, legal can access financial reports instantly.",
+          "highlightStart": 49,
+          "highlightEnd": 115,
+          "name": "Burak Ozkan",
+          "title": "Finance Director, Holding Company"
+        },
+        {
+          "body": "We updated our product info and connected our website to Edfu. Now our customer support team asks AI every product question instead of bothering the product team. Right info, right time.",
+          "highlightStart": 64,
+          "highlightEnd": 118,
+          "name": "Elif Sahin",
+          "title": "Marketing Manager, E-Commerce Company"
+        }
+      ],
+      [
+        {
+          "body": "Our GDPR compliance process completely changed with Edfu. We can upload regulatory changes and compare them with our current procedures. Instead of manually preparing compliance reports, we get AI summaries.",
+          "highlightStart": 49,
+          "highlightEnd": 130,
+          "name": "Ahmet Kaya",
+          "title": "General Manager, Consulting Firm"
+        },
+        {
+          "body": "Our sales team used to dig through dozens of files to prepare for client meetings. Now they ask Edfu for all past notes and proposals about a client and get their briefing in 2 minutes. Our close rate visibly improved.",
+          "highlightStart": 90,
+          "highlightEnd": 186,
+          "name": "Selin Tunc",
+          "title": "Sales Director, Software Company"
+        }
+      ],
+      [
+        {
+          "body": "We're a small team but our client portfolio is large. We uploaded every client's brief, feedback, and brand guidelines to Edfu. Whichever client we're working for, we access info instantly — no detail is ever lost.",
+          "highlightStart": 122,
+          "highlightEnd": 180,
+          "name": "Irem Basaran",
+          "title": "Founder, Digital Agency"
+        }
+      ]
+    ]
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "description": "We gathered the most common questions about Edfu. If you can't find your answer here, reach out to us.",
+    "items": [
+      {
+        "question": "What exactly does Edfu do?",
+        "answer": "Edfu is a platform that transforms your company's documents, website, and knowledge sources into an AI-powered knowledge base. Your team asks questions and gets instant answers from this knowledge base. It can be used in any business process — contract analysis, regulatory compliance, product information queries, and more."
+      },
+      {
+        "question": "Do I need technical knowledge to start using Edfu?",
+        "answer": "No. Drag and drop your documents, connect your website by providing a URL — Edfu handles the rest. Documents are automatically processed, indexed, and made query-ready. Setup takes minutes, no software installation required."
+      },
+      {
+        "question": "Who can access my data?",
+        "answer": "Only you. Each organization's data is completely isolated from others. Your data is never shared with third parties and is hosted in European data centers with GDPR-compliant infrastructure."
+      },
+      {
+        "question": "Which tools does it integrate with?",
+        "answer": "Edfu integrates with Google Drive, Notion, Dropbox, and Slack. The Website Crawler feature also lets you automatically scan any website and add it to your knowledge base. The number of integrations varies by plan."
+      },
+      {
+        "question": "How does the free trial work?",
+        "answer": "You can try all plans free for 14 days. All features are active during the trial. If you're not satisfied at the end, no charges are made."
+      },
+      {
+        "question": "What does 300+ AI models mean, which one should I choose?",
+        "answer": "Through OpenRouter integration, Edfu provides access to Claude, GPT-4, Gemini, Llama, and hundreds of different AI models from a single platform. Each model excels at different tasks. The Starter plan includes Claude Sonnet as a fixed model, while the Professional plan unlocks access to all models."
+      }
+    ]
+  },
+  "cta": {
+    "line1": "Upload.",
+    "line2": "Ask.",
+    "line3": "Get Answers.",
+    "button": "Try Free for 14 Days",
+    "subtext": "Cancel anytime, no commitment."
+  },
+  "footer": {
+    "description": "The platform that transforms your company's knowledge into AI. Upload your documents, let your team ask.",
+    "columns": [
+      {
+        "heading": "Company",
+        "links": ["About Us", "Contact", "Blog", "Careers"]
+      },
+      {
+        "heading": "Product",
+        "links": ["Features", "Pricing", "Integrations", "API Documentation"]
+      },
+      {
+        "heading": "Resources",
+        "links": ["Help Center", "User Guide", "Status Page", "Privacy Policy"]
+      }
+    ]
+  },
+  "jsonLd": {
+    "orgDescription": "The platform that transforms your company's knowledge into AI.",
+    "contactLanguage": "English",
+    "softwareDescription": "The platform that transforms your company's knowledge into AI. Upload your documents, let your team ask questions with 300+ AI models, get instant accurate answers.",
+    "planStarterName": "Starter",
+    "planStarterDesc": "Up to 5 users, 10M tokens per user/month, Claude Sonnet fixed model, 50 GB storage",
+    "planStarterUnit": "per user / month",
+    "planEnterpriseName": "Enterprise",
+    "planEnterpriseDesc": "Unlimited users, dedicated infrastructure, white-label option, SLA guarantee",
+    "websiteDescription": "The platform that transforms your company's knowledge into AI."
+  }
+}
