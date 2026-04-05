@@ -1,5 +1,6 @@
 "use client";
 
+import type { Dictionary } from "@/dictionaries";
 import { ArrowRight } from "lucide-react";
 
 const logos = [
@@ -82,12 +83,16 @@ const logos = [
   },
 ];
 
-export function Logos() {
+interface LogosProps {
+  dict: Dictionary["logos"];
+}
+
+export function Logos({ dict }: LogosProps) {
   return (
     <section className="w-full">
       <div className="py-12 px-4 sm:px-6">
         <p className="text-center text-base text-muted-foreground font-medium" style={{ fontFamily: "var(--font-geist)" }}>
-          300&apos;den fazla yapay zeka modeline tek platformdan erişin
+          {dict.subtitle}
         </p>
       </div>
 
@@ -117,7 +122,7 @@ export function Logos() {
                 <span className="text-base sm:text-xl font-bold">{logo.name}</span>
               </div>
               <span style={{ fontFamily: "var(--font-geist)" }} className="absolute bottom-4 flex items-center gap-1 text-sm font-medium text-foreground/80 opacity-0 transition-all duration-300 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0">
-                Daha Fazla <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                {dict.learnMore} <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
               </span>
             </a>
             );

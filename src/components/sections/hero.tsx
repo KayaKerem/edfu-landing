@@ -1,5 +1,6 @@
 "use client";
 
+import type { Dictionary } from "@/dictionaries";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { Highlighter } from "@/components/ui/highlighter";
 import { ArrowRight } from "lucide-react";
@@ -15,7 +16,11 @@ function LayersIcon({ className }: { className?: string }) {
   );
 }
 
-export function Hero() {
+interface HeroProps {
+  dict: Dictionary["hero"];
+}
+
+export function Hero({ dict }: HeroProps) {
   return (
     <section id="hero" className="relative overflow-hidden">
       {/* Radial gradient background */}
@@ -37,7 +42,7 @@ export function Hero() {
           <div className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 shadow-sm transition-all hover:border-border/80 hover:bg-accent/30">
             <LayersIcon className="mr-1.5 size-3.5 text-foreground dark:text-white" />
             <AnimatedShinyText className="text-xs font-medium">
-              300+ AI modeli, tek platform
+              {dict.badge}
             </AnimatedShinyText>
             <ArrowRight className="ml-1.5 size-2.5 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
           </div>
@@ -51,9 +56,9 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
         >
-          Her Sorunun <Highlighter action="underline" color="#4AA4E0" strokeWidth={2} animationDuration={800} padding={4} delay={850}>Cevabı</Highlighter>
+          {dict.titleLine1Before}<Highlighter action="underline" color="#4AA4E0" strokeWidth={2} animationDuration={800} padding={4} delay={850}>{dict.titleLine1Highlight}</Highlighter>
           <br />
-          <Highlighter action="highlight" color="#87CEFA" strokeWidth={2} animationDuration={800} padding={4} delay={1000}>Sizde</Highlighter> Zaten Var.
+          <Highlighter action="highlight" color="#87CEFA" strokeWidth={2} animationDuration={800} padding={4} delay={1000}>{dict.titleLine2Highlight}</Highlighter>{dict.titleLine2After}
         </motion.h1>
 
         {/* Description */}
@@ -64,9 +69,12 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.35 }}
         >
-          Dokümanlarınızı yükleyin, kaynaklarınızı bağlayın, ekibiniz sorusunu sorsun.
-            <br />
-            Edfu şirketinizin tüm bilgi birikiminden doğru cevabı anında bulsun.
+          {dict.description.split("\n").map((line: string, i: number) => (
+            <span key={i}>
+              {i > 0 && <br />}
+              {line}
+            </span>
+          ))}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -80,13 +88,13 @@ export function Hero() {
             href="#pricing"
             className="bg-primary h-9 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground whitespace-nowrap w-32 px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] hover:bg-primary/80 transition-all ease-out active:scale-95"
           >
-            Ücretsiz Deneyin
+            {dict.ctaPrimary}
           </a>
           <a
             href="#"
             className="h-10 flex items-center justify-center whitespace-nowrap w-32 px-5 text-sm font-normal tracking-wide text-foreground rounded-full transition-all ease-out active:scale-95 bg-background border border-border hover:bg-accent"
           >
-            Giriş Yap
+            {dict.ctaSecondary}
           </a>
         </motion.div>
 

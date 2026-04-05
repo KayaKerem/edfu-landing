@@ -1,24 +1,29 @@
 import Image from "next/image";
+import type { Dictionary } from "@/dictionaries";
 
-export function Testimonial() {
+interface TestimonialProps {
+  dict: Dictionary["testimonial"];
+}
+
+export function Testimonial({ dict }: TestimonialProps) {
   return (
     <section className="relative z-20 bg-white dark:bg-[oklch(0.14_0.005_250)] py-16 sm:py-20 px-4 sm:px-12 lg:px-20">
       <div className="mx-auto max-w-3xl">
         <blockquote className="text-xl sm:text-2xl font-medium leading-relaxed tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>
-          Ekibe yeni katılan biri eskiden haftalarca adaptasyon sürecinden geçerdi. Edfu&apos;dan sonra ilk gününde şirketin tüm bilgi birikimine erişip sorularını sorabiliyor. Bilgi kaybı ve tekrar eden açıklamalar tarihe karıştı.
+          {dict.quote}
         </blockquote>
 
         <div className="mt-8 flex items-center gap-4">
           <Image
             src="https://randomuser.me/api/portraits/men/52.jpg"
-            alt="Mehmet K. profil fotoğrafı - Kurucu Ortak, Teknoloji Şirketi"
+            alt={dict.authorAlt}
             width={48}
             height={48}
             className="h-12 w-12 rounded-full object-cover"
           />
           <div>
-            <p className="font-medium text-foreground">Mehmet K.</p>
-            <p className="text-sm text-muted-foreground">Kurucu Ortak, Teknoloji Şirketi</p>
+            <p className="font-medium text-foreground">{dict.authorName}</p>
+            <p className="text-sm text-muted-foreground">{dict.authorTitle}</p>
           </div>
         </div>
       </div>
