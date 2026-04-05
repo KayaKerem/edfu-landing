@@ -20,7 +20,7 @@ import { Openai } from "@/components/ui/svgs/openai";
 /* ------------------------------------------------------------------ */
 /*  Card 1 – Chat Mockup with streaming animation                     */
 /* ------------------------------------------------------------------ */
-function ChatMockup({ response }: { response: string }) {
+function ChatMockup({ response, question }: { response: string; question: string }) {
   const [displayedText, setDisplayedText] = useState("");
   const [showResponse, setShowResponse] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -83,7 +83,7 @@ function ChatMockup({ response }: { response: string }) {
         {/* User message */}
         <div className="flex items-end justify-end gap-3">
           <div className="ml-auto max-w-[280px] rounded-2xl bg-primary p-4 text-sm text-primary-foreground shadow-[0_0_10px_rgba(0,0,0,0.05)]">
-            <p>Geçen yıl Bursa projesinde hangi yazılım ekibiyle çalışmıştık, memnun kalmış mıydık?</p>
+            <p>{question}</p>
           </div>
           <div className="flex shrink-0 items-center rounded-full border border-border bg-background">
             <NextImage
@@ -196,22 +196,7 @@ function IntegrationOrbits() {
 /* ------------------------------------------------------------------ */
 type DragPhase = "idle" | "dragging" | "dropping" | "uploading" | "done";
 
-const uploadedFiles: { name: string; icon: typeof FileText; size: string; color: string; status: "ready" | "processing" }[] = [
-  { name: "Tedarikçi_Sözleşme.pdf", icon: FileText, size: "2.4 MB", color: "text-red-500", status: "ready" },
-  { name: "KVKK_Politikası.pdf", icon: FileText, size: "890 KB", color: "text-red-500", status: "ready" },
-  { name: "Ürün_Kataloğu.docx", icon: FileText, size: "1.8 MB", color: "text-blue-600", status: "ready" },
-  { name: "Bütçe_2025_Q1.xlsx", icon: FileText, size: "3.2 MB", color: "text-emerald-600", status: "processing" },
-  { name: "İK_El_Kitabı.pdf", icon: FileText, size: "1.5 MB", color: "text-red-500", status: "ready" },
-  { name: "Satış_Raporu.xlsx", icon: FileText, size: "540 KB", color: "text-emerald-600", status: "ready" },
-  { name: "Müşteri_Brifingi.docx", icon: FileText, size: "420 KB", color: "text-blue-600", status: "processing" },
-  { name: "ISO_27001_Prosedür.pdf", icon: FileText, size: "7.6 MB", color: "text-red-500", status: "ready" },
-  { name: "Organizasyon_Şeması.pdf", icon: FileText, size: "220 KB", color: "text-red-500", status: "ready" },
-  { name: "Yıllık_Faaliyet.pdf", icon: FileText, size: "12 MB", color: "text-red-500", status: "processing" },
-  { name: "Toplantı_Tutanağı.docx", icon: FileText, size: "380 KB", color: "text-blue-600", status: "ready" },
-  { name: "Fiyat_Listesi_2025.xlsx", icon: FileText, size: "1.1 MB", color: "text-emerald-600", status: "ready" },
-];
-
-function DriveUploadMockup({ indexing, indexed, fileProcessed, fileProcessing }: { indexing: string; indexed: string; fileProcessed: string; fileProcessing: string }) {
+function DriveUploadMockup({ indexing, indexed, fileProcessed, fileProcessing, dragFileName, uploadedFiles }: { indexing: string; indexed: string; fileProcessed: string; fileProcessing: string; dragFileName: string; uploadedFiles: { name: string; size: string; color: string; status: string }[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [phase, setPhase] = useState<DragPhase>("idle");
@@ -335,7 +320,7 @@ function DriveUploadMockup({ indexing, indexed, fileProcessed, fileProcessing }:
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             >
               <FileText className="size-4 text-blue-600 shrink-0" />
-              <span className="text-xs font-medium text-foreground whitespace-nowrap">Tedarikçi_Anlaşması_2025.pdf</span>
+              <span className="text-xs font-medium text-foreground whitespace-nowrap">{dragFileName}</span>
             </motion.div>
           </motion.div>
         )}
@@ -373,7 +358,7 @@ function DriveUploadMockup({ indexing, indexed, fileProcessed, fileProcessing }:
                   </div>
                   <div className="text-center">
                     <p className="text-sm font-medium text-foreground">{indexing}</p>
-                    <p className="text-xs text-muted-foreground">Tedarikçi_Anlaşması_2025.pdf · {uploadProgress}%</p>
+                    <p className="text-xs text-muted-foreground">{dragFileName} · {uploadProgress}%</p>
                   </div>
                 </>
               ) : (
@@ -387,7 +372,7 @@ function DriveUploadMockup({ indexing, indexed, fileProcessed, fileProcessing }:
                   </motion.div>
                   <div className="text-center">
                     <p className="text-sm font-medium text-foreground">{indexed}</p>
-                    <p className="text-xs text-muted-foreground">Tedarikçi_Anlaşması_2025.pdf · 1.8 MB</p>
+                    <p className="text-xs text-muted-foreground">{dragFileName} · 1.8 MB</p>
                   </div>
                 </>
               )}
@@ -414,7 +399,7 @@ function DriveUploadMockup({ indexing, indexed, fileProcessed, fileProcessing }:
                   transition={{ duration: 0.25, delay: i * 0.07 }}
                   className="flex items-center gap-3 rounded-lg border border-border bg-white dark:bg-card px-3 py-2 shadow-sm"
                 >
-                  <file.icon className={`size-4 shrink-0 ${file.color}`} />
+                  <FileText className={`size-4 shrink-0 ${file.color}`} />
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-[11px] font-medium text-foreground">{file.name}</p>
                     <div className="flex items-center gap-1">
@@ -496,9 +481,7 @@ function FolderIcon({ color = "#5227FF", size = 1, open = false }: { color?: str
 /* ------------------------------------------------------------------ */
 /*  Card 4 – AI Notes Mockup                                           */
 /* ------------------------------------------------------------------ */
-const NOTE_CONTENT = "Müşteri görüşmelerinde fiyat itirazları öne çıktı. Rakip ürünlerle karşılaştırma yapılıyor. Satış ekibi yeni teklif şablonu istiyor — önümüzdeki hafta hazırlanacak.";
-
-function NotesMockup({ noteTitle, noteTags, saved }: { noteTitle: string; noteTags: string[]; saved: string }) {
+function NotesMockup({ noteTitle, noteTags, saved, noteContent }: { noteTitle: string; noteTags: string[]; saved: string; noteContent: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [typedTitle, setTypedTitle] = useState("");
@@ -547,8 +530,8 @@ function NotesMockup({ noteTitle, noteTags, saved }: { noteTitle: string; noteTa
       let i = 0;
       const interval = setInterval(() => {
         i++;
-        setTypedContent(NOTE_CONTENT.slice(0, i));
-        if (i >= NOTE_CONTENT.length) clearInterval(interval);
+        setTypedContent(noteContent.slice(0, i));
+        if (i >= noteContent.length) clearInterval(interval);
       }, 25);
     }, 2000);
 
@@ -695,10 +678,10 @@ interface BentoFeaturesProps {
 
 export function BentoFeatures({ dict }: BentoFeaturesProps) {
   const visuals = [
-    <ChatMockup key="chat" response={dict.chatResponse} />,
+    <ChatMockup key="chat" response={dict.chatResponse} question={dict.chatQuestion} />,
     <IntegrationOrbits key="orbits" />,
-    <DriveUploadMockup key="upload" indexing={dict.indexing} indexed={dict.indexed} fileProcessed={dict.fileProcessed} fileProcessing={dict.fileProcessing} />,
-    <NotesMockup key="notes" noteTitle={dict.noteTitle} noteTags={dict.noteTags} saved={dict.saved} />,
+    <DriveUploadMockup key="upload" indexing={dict.indexing} indexed={dict.indexed} fileProcessed={dict.fileProcessed} fileProcessing={dict.fileProcessing} dragFileName={dict.dragFileName} uploadedFiles={dict.uploadedFiles} />,
+    <NotesMockup key="notes" noteTitle={dict.noteTitle} noteTags={dict.noteTags} saved={dict.saved} noteContent={dict.noteContent} />,
   ];
   return (
     <section id="features" className="relative">

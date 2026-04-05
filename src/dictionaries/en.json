@@ -68,13 +68,30 @@
         "description": "Meeting notes, client calls, financial decisions — AI listens, writes, tags. Your team searches and finds instantly."
       }
     ],
+    "chatQuestion": "Which software team did we work with on the Bursa project last year, were we satisfied?",
     "chatResponse": "In the March 2023 Bursa project, we worked with NNF. According to meeting notes, they were satisfied with delivery time and output quality, and it was noted they would be reconsidered for the next project.",
     "indexing": "Indexing...",
     "indexed": "Indexed",
     "fileProcessed": "Processed",
     "fileProcessing": "Processing",
+    "dragFileName": "Supplier_Agreement_2025.pdf",
+    "uploadedFiles": [
+      { "name": "Supplier_Contract.pdf", "size": "2.4 MB", "color": "text-red-500", "status": "ready" },
+      { "name": "GDPR_Policy.pdf", "size": "890 KB", "color": "text-red-500", "status": "ready" },
+      { "name": "Product_Catalog.docx", "size": "1.8 MB", "color": "text-blue-600", "status": "ready" },
+      { "name": "Budget_2025_Q1.xlsx", "size": "3.2 MB", "color": "text-emerald-600", "status": "processing" },
+      { "name": "HR_Handbook.pdf", "size": "1.5 MB", "color": "text-red-500", "status": "ready" },
+      { "name": "Sales_Report.xlsx", "size": "540 KB", "color": "text-emerald-600", "status": "ready" },
+      { "name": "Client_Brief.docx", "size": "420 KB", "color": "text-blue-600", "status": "processing" },
+      { "name": "ISO_27001_Procedure.pdf", "size": "7.6 MB", "color": "text-red-500", "status": "ready" },
+      { "name": "Org_Chart.pdf", "size": "220 KB", "color": "text-red-500", "status": "ready" },
+      { "name": "Annual_Report.pdf", "size": "12 MB", "color": "text-red-500", "status": "processing" },
+      { "name": "Meeting_Minutes.docx", "size": "380 KB", "color": "text-blue-600", "status": "ready" },
+      { "name": "Price_List_2025.xlsx", "size": "1.1 MB", "color": "text-emerald-600", "status": "ready" }
+    ],
     "saved": "Saved",
     "noteTitle": "Q3 Sales Meeting",
+    "noteContent": "Price objections stood out in client meetings. Comparisons with competitor products are being made. Sales team wants a new proposal template — to be prepared next week.",
     "noteTags": ["sales", "meeting", "Q3"]
   },
   "testimonial": {

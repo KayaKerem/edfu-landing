@@ -68,13 +68,30 @@
         "description": "Toplantı notları, müşteri görüşmeleri, finansal kararlar — AI dinler, yazar, etiketler. Ekibiniz arar, anında bulur."
       }
     ],
+    "chatQuestion": "Geçen yıl Bursa projesinde hangi yazılım ekibiyle çalışmıştık, memnun kalmış mıydık?",
     "chatResponse": "2023 Mart'taki Bursa projesinde NNF ile çalışıldı. Toplantı notlarına göre teslim süresi ve çıktı kalitesinden memnun kalındı, sonraki projede tekrar değerlendirileceği belirtilmiş.",
     "indexing": "İndeksleniyor...",
     "indexed": "İndekslendi",
     "fileProcessed": "İşlendi",
     "fileProcessing": "İşleniyor",
+    "dragFileName": "Tedarikçi_Anlaşması_2025.pdf",
+    "uploadedFiles": [
+      { "name": "Tedarikçi_Sözleşme.pdf", "size": "2.4 MB", "color": "text-red-500", "status": "ready" },
+      { "name": "KVKK_Politikası.pdf", "size": "890 KB", "color": "text-red-500", "status": "ready" },
+      { "name": "Ürün_Kataloğu.docx", "size": "1.8 MB", "color": "text-blue-600", "status": "ready" },
+      { "name": "Bütçe_2025_Q1.xlsx", "size": "3.2 MB", "color": "text-emerald-600", "status": "processing" },
+      { "name": "İK_El_Kitabı.pdf", "size": "1.5 MB", "color": "text-red-500", "status": "ready" },
+      { "name": "Satış_Raporu.xlsx", "size": "540 KB", "color": "text-emerald-600", "status": "ready" },
+      { "name": "Müşteri_Brifingi.docx", "size": "420 KB", "color": "text-blue-600", "status": "processing" },
+      { "name": "ISO_27001_Prosedür.pdf", "size": "7.6 MB", "color": "text-red-500", "status": "ready" },
+      { "name": "Organizasyon_Şeması.pdf", "size": "220 KB", "color": "text-red-500", "status": "ready" },
+      { "name": "Yıllık_Faaliyet.pdf", "size": "12 MB", "color": "text-red-500", "status": "processing" },
+      { "name": "Toplantı_Tutanağı.docx", "size": "380 KB", "color": "text-blue-600", "status": "ready" },
+      { "name": "Fiyat_Listesi_2025.xlsx", "size": "1.1 MB", "color": "text-emerald-600", "status": "ready" }
+    ],
     "saved": "Kaydedildi",
     "noteTitle": "Q3 Satış Toplantısı",
+    "noteContent": "Müşteri görüşmelerinde fiyat itirazları öne çıktı. Rakip ürünlerle karşılaştırma yapılıyor. Satış ekibi yeni teklif şablonu istiyor — önümüzdeki hafta hazırlanacak.",
     "noteTags": ["satış", "toplantı", "Q3"]
   },
   "testimonial": {
