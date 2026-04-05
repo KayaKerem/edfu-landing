@@ -2,41 +2,13 @@
 
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
+import type { Dictionary } from "@/dictionaries"
 
-const faqs = [
-  {
-    question: "Edfu tam olarak ne işe yarar?",
-    answer:
-      "Edfu, şirketinizin dokümanlarını, web sitesini ve bilgi kaynaklarını yapay zeka destekli bir bilgi tabanına dönüştüren bir platformdur. Ekibiniz Türkçe sorular sorarak bu bilgi tabanından anında cevap alır. Sözleşme analizi, mevzuat kontrolü, ürün bilgisi sorgulama gibi her türlü iş sürecinde kullanılabilir.",
-  },
-  {
-    question: "Edfu'yu kullanmaya başlamak için teknik bilgi gerekiyor mu?",
-    answer:
-      "Hayır. Dokümanlarınızı sürükle-bırak ile yükleyin, web sitenizi URL vererek bağlayın — gerisini Edfu halleder. Dokümanlar otomatik olarak işlenir, indekslenir ve sorguya hazır hale gelir. Kurulum dakikalar sürer, herhangi bir yazılım yüklemenize gerek yoktur.",
-  },
-  {
-    question: "Verilerime kim erişebilir?",
-    answer:
-      "Yalnızca siz. Her organizasyonun verileri birbirinden tamamen izole edilmiştir. Verileriniz üçüncü taraflarla paylaşılmaz ve KVKK uyumlu altyapı ile Avrupa veri merkezlerinde barındırılır.",
-  },
-  {
-    question: "Hangi araçlarla entegre çalışıyor?",
-    answer:
-      "Edfu; Google Drive, Notion, Dropbox ve Slack ile entegre çalışır. Ayrıca Website Crawler özelliği ile herhangi bir web sitesini otomatik olarak tarayıp bilgi tabanınıza ekleyebilirsiniz. Entegrasyon sayısı planınıza göre değişir.",
-  },
-  {
-    question: "Ücretsiz deneme süreci nasıl işliyor?",
-    answer:
-      "Tüm planları 14 gün boyunca ücretsiz deneyebilirsiniz. Deneme süresince tüm özellikler aktiftir. Süre sonunda memnun kalmazsanız herhangi bir ücret tahsil edilmez.",
-  },
-  {
-    question: "300+ AI modeli ne demek, hangisini seçmeliyim?",
-    answer:
-      "Edfu, OpenRouter entegrasyonu sayesinde Claude, GPT-4, Gemini, Llama ve yüzlerce farklı AI modeline tek platformdan erişim sunar. Her model farklı görevlerde öne çıkar. Başlangıç planında Claude Sonnet sabit model olarak sunulur, Profesyonel planda tüm modellere erişim açılır.",
-  },
-]
+interface FAQProps {
+  dict: Dictionary["faq"];
+}
 
-export function FAQ() {
+export function FAQ({ dict }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const toggle = (index: number) => {
@@ -51,17 +23,17 @@ export function FAQ() {
             className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground tracking-tighter text-center text-balance"
             style={{ fontFamily: "var(--font-geist)", letterSpacing: "-0.05em" }}
           >
-            Sıkça Sorulan Sorular
+            {dict.title}
           </h2>
           <p className="text-muted-foreground text-center text-balance font-medium">
-            Edfu hakkında merak edilenleri bir araya getirdik. Burada bulamadığınız bir soru varsa bize ulaşın.
+            {dict.description}
           </p>
         </div>
       </div>
 
       <div className="max-w-3xl w-full mx-auto px-4 sm:px-10">
         <div className="w-full grid gap-2">
-          {faqs.map((faq, index) => {
+          {dict.items.map((faq, index) => {
             const isOpen = openIndex === index
 
             return (

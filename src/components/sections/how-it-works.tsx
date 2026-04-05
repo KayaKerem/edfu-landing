@@ -1,35 +1,14 @@
 "use client";
 
 import { useState, useCallback, useRef, useEffect } from "react";
+import type { Dictionary } from "@/dictionaries";
 
-const steps = [
-  {
-    title: "Dokümanlarınızı Yükleyin",
-    description:
-      "PDF, Word, Excel — mevcut dokümanlarınızı sürükleyip bırakın. Edfu içerikleri otomatik olarak parçalar, indeksler ve sorguya hazır hale getirir.",
-    emoji: "💬",
-  },
-  {
-    title: "Kaynaklarınızı Bağlayın",
-    description:
-      "Web sitenizi, Google Drive'ınızı, Notion'ınızı bağlayın. Edfu içeriklerinizi otomatik senkronize eder ve bilgi tabanınızı güncel tutar.",
-    emoji: "⚙️",
-  },
-  {
-    title: "Sorun, Cevap Alın",
-    description:
-      "Ekibiniz Türkçe sorular sorsun, Edfu bilgi tabanınızdan kaynaklı, doğru ve güvenilir cevapları anında versin.",
-    emoji: "📊",
-  },
-  {
-    title: "Ekip Olarak Büyüyün",
-    description:
-      "Her yeni doküman, her yeni sohbet şirketinizin bilgi birikimini zenginleştirir. Edfu kullandıkça daha akıllı hale gelir — ekibinizin ortak hafızası sürekli büyür.",
-    emoji: "🚀",
-  },
-];
+interface HowItWorksProps {
+  dict: Dictionary["howItWorks"];
+}
 
-export function HowItWorks() {
+export function HowItWorks({ dict }: HowItWorksProps) {
+  const steps = dict.steps;
   const [activeStep, setActiveStep] = useState(0);
   const [animKey, setAnimKey] = useState(0);
   const mobileScrollRef = useRef<HTMLDivElement>(null);
@@ -68,10 +47,10 @@ export function HowItWorks() {
             className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center"
             style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
           >
-            Üç Adımda Başlayın
+            {dict.title}
           </h2>
           <p className="text-muted-foreground text-center text-balance font-medium">
-            Teknik bilgi gerekmez. Dokümanlarınızı yükleyin, dakikalar içinde şirketinizin AI destekli bilgi tabanı hazır.
+            {dict.description}
           </p>
         </div>
       </div>
