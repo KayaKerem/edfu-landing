@@ -132,34 +132,22 @@ export default async function Home({
   return (
     <>
       <JsonLd dict={dict} lang={lang} />
-      {/* @ts-expect-error - dict props will be added in Tasks 4-8 */}
       <Navbar dict={dict.navbar} lang={lang} />
       <div className="relative mx-auto max-w-7xl border-x border-border">
         <div className="pointer-events-none absolute inset-y-0 left-4 md:left-6 z-10 w-px bg-border" />
         <div className="pointer-events-none absolute inset-y-0 right-4 md:right-6 z-10 w-px bg-border" />
         <main className="divide-y divide-border">
-          {/* @ts-expect-error - dict props will be added in Tasks 4-8 */}
           <Hero dict={dict.hero} />
-          {/* @ts-expect-error - dict props will be added in Tasks 4-8 */}
           <Logos dict={dict.logos} />
-          {/* @ts-expect-error - dict props will be added in Tasks 4-8 */}
           <BentoFeatures dict={dict.features} />
-          {/* @ts-expect-error - dict props will be added in Tasks 4-8 */}
           <Testimonial dict={dict.testimonial} />
-          {/* @ts-expect-error - dict props will be added in Tasks 4-8 */}
           <HowItWorks dict={dict.howItWorks} />
-          {/* @ts-expect-error - dict props will be added in Tasks 4-8 */}
           <Security dict={dict.security} />
-          {/* @ts-expect-error - dict props will be added in Tasks 4-8 */}
           <Pricing dict={dict.pricing} />
-          {/* @ts-expect-error - dict props will be added in Tasks 4-8 */}
           <MarqueeTestimonials dict={dict.marqueeTestimonials} />
-          {/* @ts-expect-error - dict props will be added in Tasks 4-8 */}
           <FAQ dict={dict.faq} />
-          {/* @ts-expect-error - dict props will be added in Tasks 4-8 */}
           <CTA dict={dict.cta} />
         </main>
-        {/* @ts-expect-error - dict props will be added in Tasks 4-8 */}
         <Footer dict={dict.footer} />
       </div>
     </>
