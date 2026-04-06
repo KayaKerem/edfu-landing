@@ -145,13 +145,13 @@ export function Navbar({ dict, lang }: NavbarProps) {
 
             {/* Right: CTA + Theme toggle */}
             <div className="hidden items-center gap-2 md:flex">
-              <LanguageSwitcher lang={lang} />
               <a
                 href="#pricing"
                 className="bg-primary h-8 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground dark:text-primary-foreground w-fit px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12]"
               >
                 {dict.cta}
               </a>
+              <LanguageSwitcher lang={lang} />
               <AnimatedThemeToggler className="size-8 cursor-pointer rounded-full border border-border text-muted-foreground" />
             </div>
 
