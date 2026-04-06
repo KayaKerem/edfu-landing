@@ -9,24 +9,11 @@ export function LanguageSwitcher({ lang }: { lang: string }) {
   }
 
   return (
-    <div className="flex h-8 items-center rounded-full border border-border px-2 text-xs font-medium">
-      <button
-        onClick={() => handleSwitch("tr")}
-        className={`cursor-pointer px-1.5 py-0.5 transition-colors ${
-          !isEn ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-        }`}
-      >
-        TR
-      </button>
-      <span className="text-border mx-0.5">|</span>
-      <button
-        onClick={() => handleSwitch("en")}
-        className={`cursor-pointer px-1.5 py-0.5 transition-colors ${
-          isEn ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-        }`}
-      >
-        EN
-      </button>
-    </div>
+    <button
+      onClick={() => handleSwitch(isEn ? "tr" : "en")}
+      className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-border text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+    >
+      {isEn ? "TR" : "EN"}
+    </button>
   );
 }
