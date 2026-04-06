@@ -95,8 +95,8 @@ export function Navbar({ dict, lang }: NavbarProps) {
         >
           <div className="relative flex h-14 items-center justify-between px-4 sm:px-5">
             {/* Logo */}
-            <a href="#hero" className="flex items-center gap-2">
-              <Image src="/logo.svg" alt="Edfu" width={32} height={32} className="size-8" />
+            <a href="#hero" className="flex items-end gap-2">
+              <Image src="/logo.png" alt="Edfu" width={32} height={32} className="size-8" />
               <span className="text-xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>Edfu</span>
             </a>
 

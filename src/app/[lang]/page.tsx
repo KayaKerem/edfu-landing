@@ -24,7 +24,7 @@ function JsonLd({ dict, lang }: { dict: Dictionary; lang: string }) {
     "@type": "Organization",
     name: "Edfu",
     url: BASE_URL,
-    logo: `${BASE_URL}/logo.svg`,
+    logo: `${BASE_URL}/logo.png`,
     description: j.orgDescription,
     contactPoint: {
       "@type": "ContactPoint",

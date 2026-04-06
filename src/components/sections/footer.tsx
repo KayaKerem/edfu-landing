@@ -18,8 +18,8 @@ export function Footer({ dict }: FooterProps) {
           {/* Brand section */}
           <div className="lg:col-span-2">
             {/* Logo */}
-            <a href="#hero" className="flex items-center gap-2">
-              <Image src="/logo.svg" alt="Edfu" width={32} height={32} className="size-8" />
+            <a href="#hero" className="flex items-end gap-2">
+              <Image src="/logo.png" alt="Edfu" width={32} height={32} className="size-8" />
               <span className="text-xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>Edfu</span>
             </a>
 
