@@ -80,7 +80,7 @@ export function Navbar({ dict, lang }: NavbarProps) {
       <motion.nav
         initial={false}
         animate={{
-          maxWidth: isScrolled ? 880 : 1120,
+          maxWidth: isScrolled ? 960 : 1120,
           marginTop: isScrolled ? 20 : 16,
         }}
         transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
@@ -131,7 +131,7 @@ export function Navbar({ dict, lang }: NavbarProps) {
                       setTimeout(() => { isClickScrolling.current = false; }, 1000);
                     }}
                     style={{ fontFamily: "var(--font-geist)" }}
-                    className={`relative z-10 flex h-full cursor-pointer items-center justify-center px-4 py-2 text-sm font-medium tracking-tight transition-colors duration-200 ${
+                    className={`relative z-10 flex h-full cursor-pointer items-center justify-center px-3 py-2 text-sm font-medium tracking-tight transition-colors duration-200 ${
                       activeSection === link.sectionId
                         ? "text-foreground"
                         : "text-foreground/60 hover:text-foreground"
