@@ -3,10 +3,33 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import Lottie from "lottie-react";
+import navbarCatAnimation from "@/../public/navbar-cat.json";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { motion, AnimatePresence } from "motion/react";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import type { Dictionary } from "@/dictionaries";
+
+function NavbarCatLogo() {
+  const lottieRef = useRef<any>(null);
+
+  const handleComplete = useCallback(() => {
+    setTimeout(() => {
+      lottieRef.current?.goToAndPlay(0);
+    }, 4000);
+  }, []);
+
+  return (
+    <Lottie
+      lottieRef={lottieRef}
+      animationData={navbarCatAnimation}
+      loop={false}
+      autoplay
+      onComplete={handleComplete}
+      className="size-8"
+    />
+  );
+}
 
 interface NavbarProps {
   dict: Dictionary["navbar"];
@@ -96,8 +119,8 @@ export function Navbar({ dict, lang }: NavbarProps) {
           <div className="relative flex h-14 items-center justify-between px-4 sm:px-5">
             {/* Logo */}
             <a href="#hero" className="flex items-end gap-2">
-              <Image src="/logo.png" alt="Edfu" width={32} height={32} className="size-8" />
-              <span className="text-xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>Edfu</span>
+              <NavbarCatLogo />
+              <span className="text-xl leading-none -translate-y-[1px] font-semibold tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>Edfu</span>
             </a>
 
             {/* Desktop nav links - absolute center */}

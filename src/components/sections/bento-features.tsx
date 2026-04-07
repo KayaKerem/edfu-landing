@@ -16,6 +16,8 @@ import { Linear } from "@/components/ui/svgs/linear";
 import { Stripe } from "@/components/ui/svgs/stripe";
 import { Vercel } from "@/components/ui/svgs/vercel";
 import { Openai } from "@/components/ui/svgs/openai";
+import Lottie from "lottie-react";
+import catAnimation from "@/../public/cat-in-box.json";
 
 /* ------------------------------------------------------------------ */
 /*  Card 1 – Chat Mockup with streaming animation                     */
@@ -125,7 +127,9 @@ function ChatMockup({ response, question }: { response: string; question: string
 /* ------------------------------------------------------------------ */
 function IntegrationOrbits() {
   const orbitRef = useRef<HTMLDivElement>(null);
+  const catLottieRef = useRef<any>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [catReady, setCatReady] = useState(false);
 
   useEffect(() => {
     const el = orbitRef.current;
@@ -138,6 +142,13 @@ function IntegrationOrbits() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!isVisible) return;
+    // Orbit opening: 1200ms delay + 1200ms duration = 2400ms
+    const timer = setTimeout(() => setCatReady(true), 2400);
+    return () => clearTimeout(timer);
+  }, [isVisible]);
+
   return (
     <div ref={orbitRef} className="relative h-full w-full overflow-hidden">
       <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[35%] scale-[0.85] sm:scale-[0.9] md:scale-100 origin-bottom">
@@ -148,7 +159,16 @@ function IntegrationOrbits() {
 
         {/* Orbiting container - appears after gradient circles */}
         <div className={`relative flex items-center justify-center transition-all duration-[1200ms] ease-out ${isVisible ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} style={{ width: 500, height: 500, transitionDelay: "1200ms" }}>
-          <img src="/ai-icon-filled.svg" alt="Edfu platform logosu" className="relative z-10 size-16 rounded-xl" />
+          <div className="relative z-10 size-28">
+              {catReady && (
+                <Lottie
+                  lottieRef={catLottieRef}
+                  animationData={catAnimation}
+                  loop={false}
+                  autoplay
+                />
+              )}
+            </div>
 
           {/* Inner orbit - 2 icons, most space */}
           <OrbitingCircles iconSize={48} radius={120} speed={0.8}>

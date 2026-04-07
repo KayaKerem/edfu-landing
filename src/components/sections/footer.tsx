@@ -20,7 +20,7 @@ export function Footer({ dict }: FooterProps) {
             {/* Logo */}
             <a href="#hero" className="flex items-end gap-2">
               <Image src="/logo.png" alt="Edfu" width={32} height={32} className="size-8" />
-              <span className="text-xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>Edfu</span>
+              <span className="text-xl leading-none translate-y-[2px] font-semibold tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>Edfu</span>
             </a>
 
             {/* Description */}
