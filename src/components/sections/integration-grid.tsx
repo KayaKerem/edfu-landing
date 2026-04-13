@@ -54,7 +54,7 @@ const ICON_MAP: Record<string, React.ComponentType<any>> = {
 
 const DASHED_ITEMS = new Set(["Webhook", "+ API"]);
 
-function IntegrationCard({ item, index }: { item: IntegrationGridItem; index: number }) {
+function IntegrationCard({ item }: { item: IntegrationGridItem }) {
   const Icon = ICON_MAP[item.name];
   const isDashed = DASHED_ITEMS.has(item.name);
   const hasColor = !!item.color && item.color !== "currentColor";
@@ -69,7 +69,7 @@ function IntegrationCard({ item, index }: { item: IntegrationGridItem; index: nu
       )}
     >
       <div className="flex items-start gap-3">
-        {Icon && (
+        {Icon ? (
           <div
             className={cn(
               "flex size-10 shrink-0 items-center justify-center rounded-[10px]",
@@ -84,6 +84,8 @@ function IntegrationCard({ item, index }: { item: IntegrationGridItem; index: nu
               )}
             />
           </div>
+        ) : (
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-muted" />
         )}
         <div className="min-w-0 pt-0.5">
           <p className="text-sm font-semibold text-foreground leading-tight">
@@ -122,15 +124,15 @@ interface IntegrationGridProps {
 
 export function IntegrationGrid({ sections, className }: IntegrationGridProps) {
   return (
-    <section className={cn("py-16 px-4 sm:px-6", className)}>
-      <div className="space-y-12">
+    <section className={cn("py-16", className)}>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 space-y-12">
         {sections.map((section, sectionIndex) => {
           const cols = section.columns ?? (section.items.length > 4 ? 4 : section.items.length);
           const gridCols =
             cols === 4
               ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
               : cols === 3
-              ? "grid-cols-1 sm:grid-cols-3"
+              ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
               : cols === 2
               ? "grid-cols-1 sm:grid-cols-2"
               : "grid-cols-1";
@@ -140,7 +142,7 @@ export function IntegrationGrid({ sections, className }: IntegrationGridProps) {
               <SectionHeader index={sectionIndex} title={section.title} />
               <div className={cn("grid gap-4", gridCols)}>
                 {section.items.map((item, itemIndex) => (
-                  <IntegrationCard key={itemIndex} item={item} index={itemIndex} />
+                  <IntegrationCard key={itemIndex} item={item} />
                 ))}
               </div>
             </div>
