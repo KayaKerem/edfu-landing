@@ -343,6 +343,30 @@
       "button": "Ücretsiz Deneyin"
     }
   },
+  "flowDiagram": {
+    "title": "AI Nasıl Çalışır?",
+    "description": "Müşteri mesajından teklif oluşturmaya kadar tüm süreç otomatik.",
+    "trigger": "Müşteri Mesajı",
+    "triggerSub": "WhatsApp, Instagram, Telegram",
+    "conversation": "Konuşma Agenti",
+    "conversationSub": "Müşteri ile AI görüşme",
+    "condition": "Müşteri uygun mu?",
+    "conditionYes": "Evet",
+    "conditionNo": "Hayır",
+    "research": "Araştırma Agenti",
+    "researchSub": "Şirket + internet aramaları",
+    "proposal": "Teklif Agenti",
+    "proposalSub": "Otomatik teklif oluşturma",
+    "inform": "Bilgilendir & Yönlendir",
+    "informSub": "Uygun olmayan müşteriyi yönlendir"
+  },
+  "aiGradientCard": {
+    "title": "AI Karar Mekanizması",
+    "description": "Agent'lar her müşteri için akıllı kararlar alır.",
+    "question": "Bu müşteri bizim ICP'mize uyuyor mu?",
+    "answer": "Evet. Şirket: 50-200 çalışan, SaaS sektörü, yıllık gelir 5M+ TRY. Karar verici: CTO. Önceki etkileşimler: 3 toplantı, demo talep etti. Öneri: Hızlı teklif gönderin.",
+    "label": "AI Analiz"
+  },
   "jsonLd": {
     "orgDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform.",
     "contactLanguage": "Turkish",

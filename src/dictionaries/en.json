@@ -343,6 +343,30 @@
       "button": "Try Free"
     }
   },
+  "flowDiagram": {
+    "title": "How AI Works",
+    "description": "The entire process from customer message to proposal creation is automatic.",
+    "trigger": "Customer Message",
+    "triggerSub": "WhatsApp, Instagram, Telegram",
+    "conversation": "Conversation Agent",
+    "conversationSub": "AI conversation with customer",
+    "condition": "Is customer qualified?",
+    "conditionYes": "Yes",
+    "conditionNo": "No",
+    "research": "Research Agent",
+    "researchSub": "Company + internet research",
+    "proposal": "Proposal Agent",
+    "proposalSub": "Automatic proposal generation",
+    "inform": "Inform & Redirect",
+    "informSub": "Redirect unqualified customer"
+  },
+  "aiGradientCard": {
+    "title": "AI Decision Engine",
+    "description": "Agents make smart decisions for every customer.",
+    "question": "Does this customer fit our ICP?",
+    "answer": "Yes. Company: 50-200 employees, SaaS sector, annual revenue 5M+ TRY. Decision maker: CTO. Previous interactions: 3 meetings, requested demo. Recommendation: Send a fast proposal.",
+    "label": "AI Analysis"
+  },
   "jsonLd": {
     "orgDescription": "The platform that transforms your company's knowledge into AI.",
     "contactLanguage": "English",

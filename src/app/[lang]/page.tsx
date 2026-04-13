@@ -10,6 +10,8 @@ import { Security } from "@/components/sections/security";
 import { MarqueeTestimonials } from "@/components/sections/marquee-testimonials";
 import { CTA } from "@/components/sections/cta";
 import { Footer } from "@/components/sections/footer";
+import { FlowDiagram } from "@/components/sections/flow-diagram";
+import { AiGradientCard } from "@/components/sections/ai-gradient-card";
 
 const BASE_URL = "https://edfu.ai";
 
@@ -121,7 +123,9 @@ export default async function Home({
           <Logos dict={dict.logos} />
           <BentoFeatures dict={dict.features} />
           <Testimonial dict={dict.testimonial} />
+          <FlowDiagram dict={dict.flowDiagram} />
           <Security dict={dict.security} />
+          <AiGradientCard dict={dict.aiGradientCard} />
           <MarqueeTestimonials dict={dict.marqueeTestimonials} />
           <CTA dict={dict.cta} />
         </main>
