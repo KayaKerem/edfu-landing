@@ -534,6 +534,30 @@
         "description": "Meetings and documents feed the RAG agent, your company's knowledge grows continuously."
       }
     ],
+    "dataModel": {
+      "sectionLabel": "Data Model",
+      "addObject": "Add object",
+      "cards": [
+        {
+          "title": "Customer",
+          "badge": "Standard",
+          "attrs": ["Name", "Email", "Company"],
+          "moreCount": 8
+        },
+        {
+          "title": "Conversation",
+          "badge": "Standard",
+          "attrs": ["Channel", "Status", "Agent"],
+          "moreCount": 5
+        },
+        {
+          "title": "Proposal",
+          "badge": "Custom",
+          "attrs": ["Amount", "Products", "Date"],
+          "moreCount": 4
+        }
+      ]
+    },
     "cta": {
       "title": "Create your agents now.",
       "button": "Try Free"
@@ -576,14 +600,29 @@
         { "name": "+ API", "description": "Custom integration" }
       ]
     },
-    "dataModelTitle": "Data Flow",
-    "dataModelBadges": ["Conversation", "Proposal", "Research", "Meeting", "RAG"],
-    "dataModelOutputs": {
-      "lead": "Qualified Lead",
-      "proposal": "Proposal PDF",
-      "report": "Customer Report",
-      "summary": "Meeting Summary",
-      "knowledge": "Knowledge Base"
+    "dataModel": {
+      "sectionLabel": "Data Model",
+      "addObject": "Add object",
+      "cards": [
+        {
+          "title": "Customer",
+          "badge": "Standard",
+          "attrs": ["Name", "Email", "Company"],
+          "moreCount": 8
+        },
+        {
+          "title": "Conversation",
+          "badge": "Standard",
+          "attrs": ["Channel", "Status", "Agent"],
+          "moreCount": 5
+        },
+        {
+          "title": "Proposal",
+          "badge": "Custom",
+          "attrs": ["Amount", "Products", "Date"],
+          "moreCount": 4
+        }
+      ]
     },
     "cta": {
       "title": "Connect all your channels.",

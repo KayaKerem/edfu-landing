@@ -535,6 +535,30 @@
         "description": "Toplantılar ve dokümanlar RAG agentını besler, şirketinizin bilgi birikimi sürekli büyür."
       }
     ],
+    "dataModel": {
+      "sectionLabel": "Veri Modeli",
+      "addObject": "Obje ekle",
+      "cards": [
+        {
+          "title": "Müşteri",
+          "badge": "Standard",
+          "attrs": ["İsim", "E-posta", "Şirket"],
+          "moreCount": 8
+        },
+        {
+          "title": "Konuşma",
+          "badge": "Standard",
+          "attrs": ["Kanal", "Durum", "Agent"],
+          "moreCount": 5
+        },
+        {
+          "title": "Teklif",
+          "badge": "Custom",
+          "attrs": ["Tutar", "Ürünler", "Tarih"],
+          "moreCount": 4
+        }
+      ]
+    },
     "cta": {
       "title": "Agent'larınızı şimdi oluşturun.",
       "button": "Ücretsiz Deneyin"
@@ -577,14 +601,29 @@
         { "name": "+ API", "description": "Özel entegrasyon" }
       ]
     },
-    "dataModelTitle": "Veri Akışı",
-    "dataModelBadges": ["Konuşma", "Teklif", "Araştırma", "Toplantı", "RAG"],
-    "dataModelOutputs": {
-      "lead": "Nitelikli Lead",
-      "proposal": "Teklif PDF",
-      "report": "Müşteri Raporu",
-      "summary": "Toplantı Özeti",
-      "knowledge": "Bilgi Tabanı"
+    "dataModel": {
+      "sectionLabel": "Veri Modeli",
+      "addObject": "Obje ekle",
+      "cards": [
+        {
+          "title": "Müşteri",
+          "badge": "Standard",
+          "attrs": ["İsim", "E-posta", "Şirket"],
+          "moreCount": 8
+        },
+        {
+          "title": "Konuşma",
+          "badge": "Standard",
+          "attrs": ["Kanal", "Durum", "Agent"],
+          "moreCount": 5
+        },
+        {
+          "title": "Teklif",
+          "badge": "Custom",
+          "attrs": ["Tutar", "Ürünler", "Tarih"],
+          "moreCount": 4
+        }
+      ]
     },
     "cta": {
       "title": "Tüm kanallarınızı bağlayın.",

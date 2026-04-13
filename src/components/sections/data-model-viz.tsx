@@ -1,116 +1,217 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
-import { GradientBorder } from "@/components/ui/gradient-border";
-import { SvgConnector } from "@/components/ui/svg-connector";
+import { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
-interface VizNode {
-  icon?: React.ReactNode;
-  label: string;
-  sublabel?: string;
+interface DataModelCardData {
+  icon: React.ReactNode;
+  iconColor: string;
+  title: string;
+  badge?: string;
+  attrs: string[];
+  moreCount?: number;
 }
 
 interface DataModelVizProps {
-  sources: VizNode[];
-  centerLabel: string;
-  centerBadges: string[];
-  outputs: VizNode[];
+  sectionNumber?: string;
+  sectionLabel?: string;
+  cards: [DataModelCardData, DataModelCardData, DataModelCardData];
+  addObjectLabel?: string;
   className?: string;
 }
 
-interface ConnectorPoint {
-  from: { x: number; y: number };
-  to: { x: number; y: number };
-}
+/* Small attribute row icon */
+const AttrIcon = (
+  <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
+    <rect x="1.5" y="1.5" width="11" height="11" rx="3" stroke="currentColor" strokeWidth="1.2" />
+  </svg>
+);
 
-function NodeCard({ node }: { node: VizNode }) {
+/* --- Internal card component (Attio's DataModelCard pattern) --- */
+function ModelCard({
+  card,
+  className,
+  style,
+}: {
+  card: DataModelCardData;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-[rgba(46,50,56,0.07)] dark:border-border bg-white dark:bg-[#27272A] px-4 py-3 shadow-[0px_1px_3px_rgba(0,0,0,0.04)]">
-      {node.icon && (
-        <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted">
-          {node.icon}
-        </div>
+    <div
+      className={cn(
+        "w-full rounded-[10px] border border-[#EDEFF3] bg-white p-[7px] lg:rounded-xl lg:p-[11px]",
+        "shadow-[0px_2px_3px_-2px_rgba(16,24,40,0.08)]",
+        "dark:border-[#2E3238] dark:bg-[#1C1C1F] dark:shadow-[0px_2px_3px_-2px_rgba(0,0,0,0.3)]",
+        className
       )}
-      <div className="min-w-0">
-        <p className="text-sm font-medium text-foreground truncate">{node.label}</p>
-        {node.sublabel && (
-          <p className="text-xs text-muted-foreground truncate">{node.sublabel}</p>
-        )}
+      style={style}
+    >
+      <div className="pointer-events-none select-none">
+        {/* Title + badge */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-x-1.5 overflow-hidden pl-1 lg:pl-2">
+            <div className="flex size-[14px] shrink-0 items-center justify-center">
+              {card.icon}
+            </div>
+            <span className="truncate text-[11px] font-medium text-[#0F172A] dark:text-[#F1F5F9] lg:text-[14px]">
+              {card.title}
+            </span>
+          </div>
+          {card.badge && (
+            <span
+              className={cn(
+                "border font-medium rounded-md px-[3px] py-[0.5px] text-[8px] leading-[11px]",
+                "lg:rounded-lg lg:px-[5px] lg:py-px lg:text-[10px] lg:leading-[14px]",
+                card.badge === "Custom"
+                  ? "border-[#E9D7FE] bg-[#F9F5FF] text-[#6941C6] dark:border-[#5B21B6] dark:bg-[#2D1B69] dark:text-[#A78BFA]"
+                  : "border-[#EDEFF3] bg-[#F9FAFB] text-[#475467] dark:border-[#2E3238] dark:bg-[#27272A] dark:text-[#94A3B8]"
+              )}
+            >
+              {card.badge}
+            </span>
+          )}
+        </div>
+
+        {/* Attribute rows */}
+        <div className="mt-2 border-t border-[#EDEFF3] dark:border-[#2E3238] lg:mt-3">
+          {card.attrs.map((a) => (
+            <div
+              key={a}
+              className="overflow-hidden border-b border-[#EDEFF3] dark:border-[#2E3238] pt-1 pb-[3px] pl-2 lg:pt-1.5 lg:pb-[5px] lg:pl-3"
+            >
+              <div className="flex items-center gap-x-1.5 text-[#98A2B3] dark:text-[#64748B]">
+                {AttrIcon}
+                <span className="truncate text-[10px] text-[#475467] dark:text-[#94A3B8] lg:text-[12px]">
+                  {a}
+                </span>
+              </div>
+            </div>
+          ))}
+          {card.moreCount && card.moreCount > 0 && (
+            <div className="flex items-center mt-1 gap-x-[6.5px] pl-[8.5px] lg:mt-1.5 lg:gap-x-[7px] lg:pl-[13px]">
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  className="inline-block h-[3px] w-[3px] rounded-full bg-[#98A2B3] dark:bg-[#64748B]"
+                />
+              ))}
+              <span className="ml-1 text-[9px] text-[#98A2B3] dark:text-[#64748B] lg:text-[11px]">
+                {card.moreCount} More
+              </span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
+/* --- "Add object" dashed placeholder --- */
+function AddObjectCard({ label = "Add object" }: { label?: string }) {
+  return (
+    <div
+      className={cn(
+        "flex w-full items-center justify-center",
+        "rounded-[10px] border border-dashed border-[#D0D5DD] lg:rounded-xl",
+        "dark:border-[#475569]",
+        "transition-transform duration-300 ease-[cubic-bezier(0.2,0,0,1)] hover:scale-[1.01]"
+      )}
+    >
+      <span className="flex items-center gap-x-1.5 text-[11px] text-[#98A2B3] dark:text-[#64748B] lg:text-[13px]">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M7 3v8M3 7h8"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+          />
+        </svg>
+        {label}
+      </span>
+    </div>
+  );
+}
+
+/* --- SVG connectors in the grid gutters --- */
+function Connectors({ visible }: { visible: boolean }) {
+  if (!visible) return null;
+
+  return (
+    <>
+      {/* Top-left -> bottom-left (vertical hook in left gutter) */}
+      <div className="pointer-events-none absolute inset-0 col-start-1 col-end-2 row-start-2 row-end-3 flex justify-end pr-2">
+        <svg width="14" height="100%" viewBox="0 0 14 41" fill="none" preserveAspectRatio="none">
+          <path
+            d="M13 41V29C13 26.4819 11.8144 24.1108 9.8 22.6L4.2 18.4C2.18555 16.8892 1 14.5181 1 12V0"
+            stroke="#E4E7EC"
+            strokeWidth="1"
+            strokeDasharray="60"
+            strokeDashoffset="60"
+            className="dark:stroke-[#334155]"
+            style={{ animation: "svg-connector-draw 1.2s cubic-bezier(0.2,0,0,1) 0.3s forwards" }}
+          />
+        </svg>
+      </div>
+
+      {/* Top-left -> top-right (horizontal across top gutter) */}
+      <div className="pointer-events-none absolute inset-0 col-start-2 col-end-3 row-start-1 row-end-2 flex items-center justify-center">
+        <svg width="100%" height="14" viewBox="0 0 64 14" fill="none" preserveAspectRatio="none">
+          <path
+            d="M0 7C16 7 48 7 64 7"
+            stroke="#E4E7EC"
+            strokeWidth="1"
+            strokeDasharray="64"
+            strokeDashoffset="64"
+            className="dark:stroke-[#334155]"
+            style={{ animation: "svg-connector-draw 1.2s cubic-bezier(0.2,0,0,1) 0.5s forwards" }}
+          />
+        </svg>
+      </div>
+
+      {/* Bottom-left -> bottom-right (horizontal across bottom gutter) */}
+      <div className="pointer-events-none absolute inset-0 col-start-2 col-end-3 row-start-3 row-end-4 flex items-center justify-center">
+        <svg width="100%" height="14" viewBox="0 0 64 14" fill="none" preserveAspectRatio="none">
+          <path
+            d="M0 7C16 7 48 7 64 7"
+            stroke="#E4E7EC"
+            strokeWidth="1"
+            strokeDasharray="64"
+            strokeDashoffset="64"
+            className="dark:stroke-[#334155]"
+            style={{ animation: "svg-connector-draw 1.2s cubic-bezier(0.2,0,0,1) 0.7s forwards" }}
+          />
+        </svg>
+      </div>
+
+      {/* Top-right -> bottom-right (vertical hook in right gutter) */}
+      <div className="pointer-events-none absolute inset-0 col-start-3 col-end-4 row-start-2 row-end-3 flex justify-start pl-2">
+        <svg width="14" height="100%" viewBox="0 0 14 41" fill="none" preserveAspectRatio="none">
+          <path
+            d="M1 41V29C1 26.4819 2.18555 24.1108 4.2 22.6L9.8 18.4C11.8144 16.8892 13 14.5181 13 12V0"
+            stroke="#E4E7EC"
+            strokeWidth="1"
+            strokeDasharray="60"
+            strokeDashoffset="60"
+            className="dark:stroke-[#334155]"
+            style={{ animation: "svg-connector-draw 1.2s cubic-bezier(0.2,0,0,1) 0.9s forwards" }}
+          />
+        </svg>
+      </div>
+    </>
+  );
+}
+
+/* --- Main component --- */
 export function DataModelViz({
-  sources,
-  centerLabel,
-  centerBadges,
-  outputs,
+  sectionNumber,
+  sectionLabel,
+  cards,
+  addObjectLabel,
   className,
 }: DataModelVizProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const sourceRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const hubRef = useRef<HTMLDivElement>(null);
-  const outputRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [isVisible, setIsVisible] = useState(false);
-  const [connectors, setConnectors] = useState<ConnectorPoint[]>([]);
-
-  // Initialize ref arrays when sources/outputs count changes
-  sourceRefs.current = new Array(sources.length).fill(null);
-  outputRefs.current = new Array(outputs.length).fill(null);
-
-  const measureConnectors = useCallback(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
-
-    const gridRect = grid.getBoundingClientRect();
-    const points: ConnectorPoint[] = [];
-
-    const hubEl = hubRef.current;
-    if (!hubEl) return;
-    const hubRect = hubEl.getBoundingClientRect();
-    const hubLeftX = hubRect.left - gridRect.left;
-    const hubRightX = hubRect.right - gridRect.left;
-    const hubCenterY = hubRect.top - gridRect.top + hubRect.height / 2;
-
-    // Source → Hub connectors
-    for (let i = 0; i < sources.length; i++) {
-      const el = sourceRefs.current[i];
-      if (!el) continue;
-      const rect = el.getBoundingClientRect();
-      points.push({
-        from: {
-          x: rect.right - gridRect.left,
-          y: rect.top - gridRect.top + rect.height / 2,
-        },
-        to: {
-          x: hubLeftX,
-          y: hubCenterY,
-        },
-      });
-    }
-
-    // Hub → Output connectors
-    for (let i = 0; i < outputs.length; i++) {
-      const el = outputRefs.current[i];
-      if (!el) continue;
-      const rect = el.getBoundingClientRect();
-      points.push({
-        from: {
-          x: hubRightX,
-          y: hubCenterY,
-        },
-        to: {
-          x: rect.left - gridRect.left,
-          y: rect.top - gridRect.top + rect.height / 2,
-        },
-      });
-    }
-
-    setConnectors(points);
-  }, [sources.length, outputs.length]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -128,126 +229,84 @@ export function DataModelViz({
     return () => observer.disconnect();
   }, []);
 
-  // After entrance animations complete, measure positions for connectors.
-  // The last element to finish animating is the last output card:
-  // delay = (outputs.length - 1) * 100 + 600 ms, duration = 500 ms → total ≈ 1200ms+
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const lastOutputDelay = (outputs.length - 1) * 100 + 600 + 500 + 100; // +100ms buffer
-    const timer = setTimeout(measureConnectors, lastOutputDelay);
-    return () => clearTimeout(timer);
-  }, [isVisible, measureConnectors, outputs.length]);
-
-  // Re-measure on resize
-  useEffect(() => {
-    if (!isVisible) return;
-    const handleResize = () => measureConnectors();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [isVisible, measureConnectors]);
-
-  // Number of source connectors (for stagger offset on output side)
-  const sourceCount = sources.length;
-
   return (
-    <section className={cn("py-20 overflow-hidden", className)}>
-      <div ref={containerRef} className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div
-          ref={gridRef}
-          className="relative grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-12 items-center"
-        >
-          {/* SVG connector overlay — md+ only */}
-          {connectors.length > 0 && (
-            <svg
-              aria-hidden="true"
-              className="hidden md:block absolute inset-0 pointer-events-none overflow-visible"
-              style={{ width: "100%", height: "100%" }}
-            >
-              {connectors.map((c, i) => (
-                <SvgConnector
-                  key={i}
-                  from={c.from}
-                  to={c.to}
-                  animated
-                  delay={i < sourceCount ? i * 0.12 : (i - sourceCount) * 0.12 + 0.15}
-                  className="text-muted-foreground/30"
-                />
-              ))}
-            </svg>
-          )}
-
-          {/* Left: Sources */}
-          <div className="flex flex-col gap-3">
-            {sources.map((node, i) => (
-              <div
-                key={i}
-                ref={(el) => { sourceRefs.current[i] = el; }}
-                className="transition-all duration-500"
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible
-                    ? "translateX(0)"
-                    : "translateX(-20px)",
-                  transitionDelay: `${i * 100}ms`,
-                }}
-              >
-                <NodeCard node={node} />
-              </div>
-            ))}
+    <section ref={containerRef} className={cn("py-16 sm:py-20 overflow-hidden", className)}>
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        {/* Section heading (Attio style) */}
+        {(sectionNumber || sectionLabel) && (
+          <div className="mb-8 flex items-center gap-x-[6px] text-[11px] uppercase tracking-[0.12em] text-[#475467] dark:text-[#94A3B8]">
+            {sectionNumber && <span>{sectionNumber}</span>}
+            {sectionLabel && (
+              <span className="text-[#0F172A] dark:text-[#F1F5F9] font-medium">
+                {sectionLabel}
+              </span>
+            )}
           </div>
+        )}
 
-          {/* Center: Hub */}
+        {/* Cards grid + connectors */}
+        <div className="relative">
+          {/* Dot-grid background */}
           <div
-            className="flex justify-center"
+            className="pointer-events-none absolute inset-0 -z-10 opacity-60"
             style={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? "scale(1)" : "scale(0.9)",
-              transition: "all 0.6s ease-out 0.4s",
+              backgroundImage:
+                "radial-gradient(#E4E7EC 1px, transparent 1px)",
+              backgroundSize: "16px 16px",
             }}
-          >
-            <div ref={hubRef}>
-              <GradientBorder className="w-48 md:w-56">
-                <div className="p-6 text-center">
-                  <p
-                    className="text-lg font-bold text-foreground"
-                    style={{ fontFamily: "var(--font-geist)" }}
-                  >
-                    {centerLabel}
-                  </p>
-                  <div className="mt-4 flex flex-wrap justify-center gap-2">
-                    {centerBadges.map((badge) => (
-                      <span
-                        key={badge}
-                        className="inline-flex items-center rounded-full border border-border bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground"
-                      >
-                        {badge}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </GradientBorder>
-            </div>
-          </div>
+          />
 
-          {/* Right: Outputs */}
-          <div className="flex flex-col gap-3">
-            {outputs.map((node, i) => (
-              <div
-                key={i}
-                ref={(el) => { outputRefs.current[i] = el; }}
-                className="transition-all duration-500"
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible
-                    ? "translateX(0)"
-                    : "translateX(20px)",
-                  transitionDelay: `${(i * 100) + 600}ms`,
-                }}
-              >
-                <NodeCard node={node} />
-              </div>
-            ))}
+          <div className="relative mx-auto grid w-fit grid-cols-[1fr_40px_1fr] md:grid-cols-[1fr_64px_1fr] grid-rows-[auto_24px_auto] md:grid-rows-[auto_40px_auto] gap-0 px-4 pt-5 pb-10 md:px-6 md:pb-16">
+            {/* Top-left card */}
+            <div
+              className="[grid-column:1] [grid-row:1]"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0)" : "translateY(12px)",
+                transition: "all 0.6s cubic-bezier(0.2,0,0,1) 0s",
+              }}
+            >
+              <ModelCard card={cards[0]} />
+            </div>
+
+            {/* Top-right card */}
+            <div
+              className="[grid-column:3] [grid-row:1]"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0)" : "translateY(12px)",
+                transition: "all 0.6s cubic-bezier(0.2,0,0,1) 0.15s",
+              }}
+            >
+              <ModelCard card={cards[1]} />
+            </div>
+
+            {/* Bottom-left card */}
+            <div
+              className="[grid-column:1] [grid-row:3]"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0)" : "translateY(12px)",
+                transition: "all 0.6s cubic-bezier(0.2,0,0,1) 0.3s",
+              }}
+            >
+              <ModelCard card={cards[2]} />
+            </div>
+
+            {/* Bottom-right: Add object */}
+            <div
+              className="[grid-column:3] [grid-row:3]"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0)" : "translateY(12px)",
+                transition: "all 0.6s cubic-bezier(0.2,0,0,1) 0.45s",
+              }}
+            >
+              <AddObjectCard label={addObjectLabel} />
+            </div>
+
+            {/* SVG connectors */}
+            <Connectors visible={isVisible} />
           </div>
         </div>
       </div>
