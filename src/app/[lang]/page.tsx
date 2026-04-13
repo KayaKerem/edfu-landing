@@ -148,7 +148,7 @@ export default async function Home({
           <FAQ dict={dict.faq} />
           <CTA dict={dict.cta} />
         </main>
-        <Footer dict={dict.footer} />
+        <Footer dict={dict.footer} lang={lang} />
       </div>
     </>
   );

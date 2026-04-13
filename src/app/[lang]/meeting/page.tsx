@@ -59,7 +59,7 @@ export default async function MeetingPage({
             <p className="text-muted-foreground">Meeting page — coming soon</p>
           </div>
         </main>
-        <Footer dict={dict.footer} />
+        <Footer dict={dict.footer} lang={lang} />
       </div>
     </>
   );

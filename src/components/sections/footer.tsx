@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
 import type { Dictionary } from "@/dictionaries";
@@ -8,9 +9,21 @@ const badges = ["KVKK", "EU Data", "GDPR"] as const;
 
 interface FooterProps {
   dict: Dictionary["footer"];
+  lang: string;
 }
 
-export function Footer({ dict }: FooterProps) {
+export function Footer({ dict, lang }: FooterProps) {
+  const prefix = lang === "tr" ? "" : `/${lang}`;
+
+  const footerRoutes: Record<string, string> = {
+    "Fiyatlandırma": `${prefix}/pricing`,
+    "Pricing": `${prefix}/pricing`,
+    "Entegrasyonlar": `${prefix}/integrations`,
+    "Integrations": `${prefix}/integrations`,
+    "Özellikler": `${prefix}/agents`,
+    "Features": `${prefix}/agents`,
+  };
+
   return (
     <footer className="border-t border-border">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
@@ -18,10 +31,10 @@ export function Footer({ dict }: FooterProps) {
           {/* Brand section */}
           <div className="lg:col-span-2">
             {/* Logo */}
-            <a href="#hero" className="flex items-end gap-2">
+            <Link href={`${prefix}/`} className="flex items-end gap-2">
               <Image src="/logo.png" alt="Edfu" width={32} height={32} className="size-8" />
               <span className="text-xl leading-none translate-y-[2px] font-semibold tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>Edfu</span>
-            </a>
+            </Link>
 
             {/* Description */}
             <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
@@ -52,12 +65,21 @@ export function Footer({ dict }: FooterProps) {
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link}>
-                    <a
-                      href="#"
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {link}
-                    </a>
+                    {footerRoutes[link] ? (
+                      <Link
+                        href={footerRoutes[link]}
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {link}
+                      </Link>
+                    ) : (
+                      <a
+                        href="#"
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {link}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

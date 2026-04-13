@@ -59,7 +59,7 @@ export default async function PricingPage({
             <p className="text-muted-foreground">Pricing page — coming soon</p>
           </div>
         </main>
-        <Footer dict={dict.footer} />
+        <Footer dict={dict.footer} lang={lang} />
       </div>
     </>
   );

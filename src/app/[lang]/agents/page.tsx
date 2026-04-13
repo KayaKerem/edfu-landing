@@ -68,7 +68,7 @@ export default async function AgentsPage({
             <p className="text-muted-foreground">Agents page — coming soon</p>
           </div>
         </main>
-        <Footer dict={dict.footer} />
+        <Footer dict={dict.footer} lang={lang} />
       </div>
     </>
   );
