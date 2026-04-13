@@ -35,17 +35,17 @@
     "menuClose": "Close menu"
   },
   "hero": {
-    "badge": "300+ AI models, one platform",
-    "titleLine1Before": "Every Question's ",
-    "titleLine1Highlight": "Answer",
-    "titleLine2Highlight": "Is Already",
-    "titleLine2After": " With You.",
-    "description": "Upload your documents, connect your sources, let your team ask.\nEdfu instantly finds the right answer from your company's entire knowledge.",
+    "badge": "Multi-Channel AI Communication Platform",
+    "titleLine1Before": "Automate Your ",
+    "titleLine1Highlight": "Customer",
+    "titleLine2Highlight": "Communication",
+    "titleLine2After": ".",
+    "description": "Talk to your customers from WhatsApp, Instagram, Telegram and other channels through AI agents.\nFully automate your research, proposals, and meeting processes.",
     "ctaPrimary": "Try Free",
     "ctaSecondary": "Sign In"
   },
   "logos": {
-    "subtitle": "Access 300+ AI models from a single platform",
+    "subtitle": "All your channels and meeting tools in one platform",
     "learnMore": "Learn More"
   },
   "features": {

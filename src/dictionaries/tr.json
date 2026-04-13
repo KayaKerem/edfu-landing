@@ -35,17 +35,17 @@
     "menuClose": "Menüyü kapat"
   },
   "hero": {
-    "badge": "300+ AI modeli, tek platform",
-    "titleLine1Before": "Her Sorunun ",
-    "titleLine1Highlight": "Cevabı",
-    "titleLine2Highlight": "Sizde",
-    "titleLine2After": " Zaten Var.",
-    "description": "Dokümanlarınızı yükleyin, kaynaklarınızı bağlayın, ekibiniz sorusunu sorsun.\nEdfu şirketinizin tüm bilgi birikiminden doğru cevabı anında bulsun.",
+    "badge": "Çok Kanallı AI İletişim Platformu",
+    "titleLine1Before": "Müşteri ",
+    "titleLine1Highlight": "İletişiminizi",
+    "titleLine2Highlight": "Otomatikleştirin",
+    "titleLine2After": ".",
+    "description": "WhatsApp, Instagram, Telegram ve diğer kanallardan gelen müşterilerinizle AI agent'lar aracılığıyla konuşun.\nAraştırma, teklif ve toplantı süreçlerinizi tamamen otomatikleştirin.",
     "ctaPrimary": "Ücretsiz Deneyin",
     "ctaSecondary": "Giriş Yap"
   },
   "logos": {
-    "subtitle": "300'den fazla yapay zeka modeline tek platformdan erişin",
+    "subtitle": "Tüm kanallarınız ve toplantı araçlarınız tek platformda",
     "learnMore": "Daha Fazla"
   },
   "features": {

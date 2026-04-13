@@ -5,6 +5,7 @@ import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { Highlighter } from "@/components/ui/highlighter";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 function LayersIcon({ className }: { className?: string }) {
   return (
@@ -18,9 +19,11 @@ function LayersIcon({ className }: { className?: string }) {
 
 interface HeroProps {
   dict: Dictionary["hero"];
+  lang: string;
 }
 
-export function Hero({ dict }: HeroProps) {
+export function Hero({ dict, lang }: HeroProps) {
+  const prefix = lang === "tr" ? "" : `/${lang}`;
   return (
     <section id="hero" className="relative overflow-hidden">
       {/* Radial gradient background */}
@@ -84,12 +87,12 @@ export function Hero({ dict }: HeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
         >
-          <a
-            href="#pricing"
+          <Link
+            href={`${prefix}/pricing`}
             className="bg-primary h-9 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground whitespace-nowrap w-32 px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] hover:bg-primary/80 transition-all ease-out active:scale-95"
           >
             {dict.ctaPrimary}
-          </a>
+          </Link>
           <a
             href="https://app.edfu.ai"
             className="h-10 flex items-center justify-center whitespace-nowrap w-32 px-5 text-sm font-normal tracking-wide text-foreground rounded-full transition-all ease-out active:scale-95 bg-background border border-border hover:bg-accent"

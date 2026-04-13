@@ -6,11 +6,8 @@ import { Hero } from "@/components/sections/hero";
 import { Logos } from "@/components/sections/logos";
 import { BentoFeatures } from "@/components/sections/bento-features";
 import { Testimonial } from "@/components/sections/testimonial";
-import { HowItWorks } from "@/components/sections/how-it-works";
 import { Security } from "@/components/sections/security";
-import { Pricing } from "@/components/sections/pricing";
 import { MarqueeTestimonials } from "@/components/sections/marquee-testimonials";
-import { FAQ } from "@/components/sections/faq";
 import { CTA } from "@/components/sections/cta";
 import { Footer } from "@/components/sections/footer";
 
@@ -75,19 +72,6 @@ function JsonLd({ dict, lang }: { dict: Dictionary; lang: string }) {
     },
   };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: dict.faq.items.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -106,10 +90,6 @@ function JsonLd({ dict, lang }: { dict: Dictionary; lang: string }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <script
         type="application/ld+json"
@@ -137,15 +117,12 @@ export default async function Home({
         <div className="pointer-events-none absolute inset-y-0 left-4 md:left-6 z-10 w-px bg-border" />
         <div className="pointer-events-none absolute inset-y-0 right-4 md:right-6 z-10 w-px bg-border" />
         <main className="divide-y divide-border">
-          <Hero dict={dict.hero} />
+          <Hero dict={dict.hero} lang={lang} />
           <Logos dict={dict.logos} />
           <BentoFeatures dict={dict.features} />
           <Testimonial dict={dict.testimonial} />
-          <HowItWorks dict={dict.howItWorks} />
           <Security dict={dict.security} />
-          <Pricing dict={dict.pricing} />
           <MarqueeTestimonials dict={dict.marqueeTestimonials} />
-          <FAQ dict={dict.faq} />
           <CTA dict={dict.cta} />
         </main>
         <Footer dict={dict.footer} lang={lang} />
