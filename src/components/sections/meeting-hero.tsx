@@ -2,6 +2,8 @@
 
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { motion } from "motion/react";
+import { MeetingList } from "@/components/mockups/meeting-list";
+import { CallPlayer } from "@/components/mockups/call-player";
 
 interface MeetingHeroProps {
   dict: {
@@ -61,12 +63,8 @@ export function MeetingHero({ dict }: MeetingHeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.2, 0, 0, 1] as [number, number, number, number], delay: 0.4 }}
         >
-          <div className="rounded-xl border border-border bg-card shadow-lg p-6 min-h-[250px] flex items-center justify-center">
-            <p className="text-sm text-muted-foreground">Meeting list mockup</p>
-          </div>
-          <div className="rounded-xl border border-border bg-card shadow-lg p-6 min-h-[250px] flex items-center justify-center">
-            <p className="text-sm text-muted-foreground">Call player mockup</p>
-          </div>
+          <MeetingList className="shadow-lg" />
+          <CallPlayer className="shadow-lg" />
         </motion.div>
       </div>
     </section>

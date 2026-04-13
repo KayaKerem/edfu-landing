@@ -10,11 +10,13 @@ interface StickyFeature {
 interface ScrollPinnedFeaturesProps {
   title: string;
   features: StickyFeature[];
+  visuals?: React.ReactNode[];
 }
 
 export function ScrollPinnedFeatures({
   title,
   features,
+  visuals,
 }: ScrollPinnedFeaturesProps) {
   const sentinelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -78,11 +80,15 @@ export function ScrollPinnedFeatures({
 
             <div className="hidden md:block">
               <div className="sticky top-28">
-                <div className="rounded-xl border border-border bg-card p-8 min-h-[400px] flex items-center justify-center">
-                  <p className="text-sm text-muted-foreground">
-                    {features[activeIndex]?.title} visual
-                  </p>
-                </div>
+                {visuals ? (
+                  visuals[activeIndex]
+                ) : (
+                  <div className="rounded-xl border border-border bg-card p-8 min-h-[400px] flex items-center justify-center">
+                    <p className="text-sm text-muted-foreground">
+                      {features[activeIndex]?.title}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

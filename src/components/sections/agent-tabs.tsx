@@ -3,6 +3,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Check } from "lucide-react";
+import { WhatsAppChat } from "@/components/mockups/whatsapp-chat";
+import { ProposalDoc } from "@/components/mockups/proposal-doc";
+import { ResearchReport } from "@/components/mockups/research-report";
+import { CallPlayer } from "@/components/mockups/call-player";
+import { RagSearch } from "@/components/mockups/rag-search";
 
 interface AgentTab {
   title: string;
@@ -14,8 +19,11 @@ interface AgentTabsProps {
   tabs: AgentTab[];
 }
 
+const TAB_MOCKUPS = [WhatsAppChat, ProposalDoc, ResearchReport, CallPlayer, RagSearch];
+
 export function AgentTabs({ tabs }: AgentTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
+  const Mockup = TAB_MOCKUPS[activeTab];
 
   return (
     <section className="py-16 sm:py-20">
@@ -51,7 +59,7 @@ export function AgentTabs({ tabs }: AgentTabsProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16"
+            className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start"
           >
             <div>
               <h3
@@ -75,11 +83,7 @@ export function AgentTabs({ tabs }: AgentTabsProps) {
               </ul>
             </div>
 
-            <div className="rounded-xl border border-border bg-card p-6 min-h-[300px] flex items-center justify-center">
-              <p className="text-sm text-muted-foreground">
-                {tabs[activeTab].title} mockup
-              </p>
-            </div>
+            {Mockup && <Mockup />}
           </motion.div>
         </AnimatePresence>
       </div>
