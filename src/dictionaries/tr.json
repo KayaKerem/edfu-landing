@@ -27,12 +27,12 @@
   "navbar": {
     "home": "Ana Sayfa",
     "agents": "Agent'lar",
-    "meeting": "Toplanti",
+    "meeting": "Toplantı",
     "integrations": "Entegrasyonlar",
-    "pricing": "Fiyatlandirma",
-    "cta": "Ucretsiz Deneyin",
-    "menuOpen": "Menuyu ac",
-    "menuClose": "Menuyu kapat"
+    "pricing": "Fiyatlandırma",
+    "cta": "Ücretsiz Deneyin",
+    "menuOpen": "Menüyü aç",
+    "menuClose": "Menüyü kapat"
   },
   "hero": {
     "badge": "300+ AI modeli, tek platform",
