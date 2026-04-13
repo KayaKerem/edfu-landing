@@ -333,6 +333,16 @@
       }
     ]
   },
+  "pricingPage": {
+    "hero": {
+      "title": "Choose the right plan for your business."
+    },
+    "cta": {
+      "title": "Get started today.",
+      "description": "Try free for 14 days, cancel anytime.",
+      "button": "Try Free"
+    }
+  },
   "jsonLd": {
     "orgDescription": "The platform that transforms your company's knowledge into AI.",
     "contactLanguage": "English",

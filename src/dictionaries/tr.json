@@ -333,6 +333,16 @@
       }
     ]
   },
+  "pricingPage": {
+    "hero": {
+      "title": "İşletmenize uygun planı seçin."
+    },
+    "cta": {
+      "title": "Hemen başlayın.",
+      "description": "14 gün ücretsiz deneyin, istediğiniz zaman iptal edin.",
+      "button": "Ücretsiz Deneyin"
+    }
+  },
   "jsonLd": {
     "orgDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform.",
     "contactLanguage": "Turkish",
