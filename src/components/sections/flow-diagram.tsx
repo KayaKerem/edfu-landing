@@ -21,6 +21,10 @@ interface FlowDiagramProps {
     proposalSub: string;
     inform: string;
     informSub: string;
+    contextPanel: {
+      title: string;
+      messages: { from: string; text: string }[];
+    };
   };
 }
 
@@ -45,13 +49,13 @@ export function FlowDiagram({ dict }: FlowDiagramProps) {
   }, []);
 
   const nodes = [
-    { icon: <MessageSquare className="size-4" />, label: dict.trigger, sublabel: dict.triggerSub, variant: "trigger" as const, delay: 0 },
-    { icon: <MessageSquare className="size-4" />, label: dict.conversation, sublabel: dict.conversationSub, variant: "action" as const, delay: 200 },
+    { icon: <MessageSquare className="size-4" />, label: dict.trigger, sublabel: dict.triggerSub, variant: "trigger" as const, delay: 0, status: "Running", statusPulse: true },
+    { icon: <MessageSquare className="size-4" />, label: dict.conversation, sublabel: dict.conversationSub, variant: "action" as const, delay: 200, status: "Completed" },
     { icon: <GitBranch className="size-4" />, label: dict.condition, variant: "condition" as const, delay: 400 },
   ];
 
   const yesBranch = [
-    { icon: <Search className="size-4" />, label: dict.research, sublabel: dict.researchSub, variant: "action" as const, delay: 600 },
+    { icon: <Search className="size-4" />, label: dict.research, sublabel: dict.researchSub, variant: "action" as const, delay: 600, status: "Running", statusPulse: true },
     { icon: <FileText className="size-4" />, label: dict.proposal, sublabel: dict.proposalSub, variant: "action" as const, delay: 800 },
   ];
 
@@ -73,36 +77,12 @@ export function FlowDiagram({ dict }: FlowDiagramProps) {
         </p>
       </div>
 
-      <div ref={containerRef} className="mx-auto max-w-md px-4">
-        <div className="flex flex-col items-center gap-3">
-          {nodes.map((node, i) => (
-            <div key={i} className="w-full flex flex-col items-center gap-3">
-              <div
-                className="w-full transition-all duration-500"
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? "translateY(0)" : "translateY(10px)",
-                  transitionDelay: `${node.delay}ms`,
-                }}
-              >
-                <FlowNode {...node} className="w-full" />
-              </div>
-              {i < nodes.length - 1 && (
-                <ArrowDown className="size-4 text-muted-foreground/40" />
-              )}
-            </div>
-          ))}
-
-          <div
-            className="grid grid-cols-2 gap-4 w-full mt-2"
-            style={{
-              opacity: isVisible ? 1 : 0,
-              transition: "opacity 0.5s ease-out 0.5s",
-            }}
-          >
+      <div ref={containerRef} className="mx-auto max-w-5xl px-4">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_320px] gap-8 items-start">
+          {/* Flow column */}
+          <div className="max-w-md mx-auto md:mx-0">
             <div className="flex flex-col items-center gap-3">
-              <span className="text-xs font-medium text-emerald-600">{dict.conditionYes}</span>
-              {yesBranch.map((node, i) => (
+              {nodes.map((node, i) => (
                 <div key={i} className="w-full flex flex-col items-center gap-3">
                   <div
                     className="w-full transition-all duration-500"
@@ -112,30 +92,124 @@ export function FlowDiagram({ dict }: FlowDiagramProps) {
                       transitionDelay: `${node.delay}ms`,
                     }}
                   >
-                    <FlowNode {...node} className="w-full" />
+                    <FlowNode
+                      icon={node.icon}
+                      label={node.label}
+                      sublabel={"sublabel" in node ? node.sublabel : undefined}
+                      variant={node.variant}
+                      status={"status" in node ? node.status : undefined}
+                      statusPulse={"statusPulse" in node ? node.statusPulse : undefined}
+                      className="w-full"
+                    />
                   </div>
-                  {i < yesBranch.length - 1 && (
+                  {i < nodes.length - 1 && (
                     <ArrowDown className="size-4 text-muted-foreground/40" />
                   )}
                 </div>
               ))}
-            </div>
 
-            <div className="flex flex-col items-center gap-3">
-              <span className="text-xs font-medium text-red-500">{dict.conditionNo}</span>
-              {noBranch.map((node, i) => (
-                <div
-                  key={i}
-                  className="w-full transition-all duration-500"
-                  style={{
-                    opacity: isVisible ? 1 : 0,
-                    transform: isVisible ? "translateY(0)" : "translateY(10px)",
-                    transitionDelay: `${node.delay}ms`,
-                  }}
-                >
-                  <FlowNode {...node} className="w-full" />
+              <div
+                className="grid grid-cols-2 gap-4 w-full mt-2"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transition: "opacity 0.5s ease-out 0.5s",
+                }}
+              >
+                <div className="flex flex-col items-center gap-3">
+                  <span className="text-xs font-medium text-emerald-600">{dict.conditionYes}</span>
+                  {yesBranch.map((node, i) => (
+                    <div key={i} className="w-full flex flex-col items-center gap-3">
+                      <div
+                        className="w-full transition-all duration-500"
+                        style={{
+                          opacity: isVisible ? 1 : 0,
+                          transform: isVisible ? "translateY(0)" : "translateY(10px)",
+                          transitionDelay: `${node.delay}ms`,
+                        }}
+                      >
+                        <FlowNode
+                          icon={node.icon}
+                          label={node.label}
+                          sublabel={node.sublabel}
+                          variant={node.variant}
+                          status={"status" in node ? node.status : undefined}
+                          statusPulse={"statusPulse" in node ? node.statusPulse : undefined}
+                          className="w-full"
+                        />
+                      </div>
+                      {i < yesBranch.length - 1 && (
+                        <ArrowDown className="size-4 text-muted-foreground/40" />
+                      )}
+                    </div>
+                  ))}
                 </div>
-              ))}
+
+                <div className="flex flex-col items-center gap-3">
+                  <span className="text-xs font-medium text-red-500">{dict.conditionNo}</span>
+                  {noBranch.map((node, i) => (
+                    <div
+                      key={i}
+                      className="w-full transition-all duration-500"
+                      style={{
+                        opacity: isVisible ? 1 : 0,
+                        transform: isVisible ? "translateY(0)" : "translateY(10px)",
+                        transitionDelay: `${node.delay}ms`,
+                      }}
+                    >
+                      <FlowNode
+                        icon={node.icon}
+                        label={node.label}
+                        sublabel={node.sublabel}
+                        variant={node.variant}
+                        className="w-full"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Context panel — desktop only */}
+          <div
+            className="hidden md:block sticky top-28"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateX(0)" : "translateX(20px)",
+              transition: "opacity 0.5s ease-out 400ms, transform 0.5s ease-out 400ms",
+            }}
+          >
+            <div className="rounded-xl border border-border overflow-hidden">
+              {/* Green header */}
+              <div className="flex items-center gap-2 bg-emerald-600 px-4 py-2.5">
+                <span className="size-2 rounded-full bg-white animate-pulse" />
+                <span className="text-sm font-medium text-white">
+                  {dict.contextPanel.title}
+                </span>
+              </div>
+
+              {/* Chat area */}
+              <div className="bg-[#ECE5DD] dark:bg-[#0B141A] px-3 py-4 space-y-3 min-h-[160px]">
+                {dict.contextPanel.messages.map((msg, i) =>
+                  msg.from === "customer" ? (
+                    <div key={i} className="flex justify-end">
+                      <div className="max-w-[85%] rounded-lg rounded-tr-sm bg-[#DCF8C6] dark:bg-[#005C4B] px-3 py-2">
+                        <p className="text-[13px] text-gray-800 dark:text-gray-100 leading-snug">
+                          {msg.text}
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div key={i} className="flex justify-start">
+                      <div className="max-w-[85%] rounded-lg rounded-tl-sm bg-white dark:bg-[#1F2C34] px-3 py-2">
+                        <p className="text-[13px] text-gray-800 dark:text-gray-100 leading-snug">
+                          {msg.text}
+                        </p>
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
             </div>
           </div>
         </div>

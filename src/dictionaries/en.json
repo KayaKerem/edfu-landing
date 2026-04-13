@@ -353,7 +353,14 @@
     "proposal": "Proposal Agent",
     "proposalSub": "Automatic proposal generation",
     "inform": "Inform & Redirect",
-    "informSub": "Redirect unqualified customer"
+    "informSub": "Redirect unqualified customer",
+    "contextPanel": {
+      "title": "Live Conversation",
+      "messages": [
+        { "from": "customer", "text": "We're looking for CRM integration, team of 85." },
+        { "from": "ai", "text": "I'll prepare a custom proposal. Let me quickly research your company." }
+      ]
+    }
   },
   "aiGradientCard": {
     "title": "AI Decision Engine",

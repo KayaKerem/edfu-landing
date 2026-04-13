@@ -354,7 +354,14 @@
     "proposal": "Teklif Agenti",
     "proposalSub": "Otomatik teklif oluşturma",
     "inform": "Bilgilendir & Yönlendir",
-    "informSub": "Uygun olmayan müşteriyi yönlendir"
+    "informSub": "Uygun olmayan müşteriyi yönlendir",
+    "contextPanel": {
+      "title": "Canlı Görüşme",
+      "messages": [
+        { "from": "customer", "text": "CRM entegrasyonu arıyoruz, 85 kişilik ekibiz." },
+        { "from": "ai", "text": "Size özel bir teklif hazırlıyorum. Şirketinizi kısaca araştırıp dönüyorum." }
+      ]
+    }
   },
   "aiGradientCard": {
     "title": "AI Karar Mekanizması",
