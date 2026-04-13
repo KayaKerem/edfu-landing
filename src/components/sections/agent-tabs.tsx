@@ -1,0 +1,88 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Check } from "lucide-react";
+
+interface AgentTab {
+  title: string;
+  description: string;
+  features: string[];
+}
+
+interface AgentTabsProps {
+  tabs: AgentTab[];
+}
+
+export function AgentTabs({ tabs }: AgentTabsProps) {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <section className="py-16 sm:py-20">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="flex overflow-x-auto border-b border-border [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {tabs.map((tab, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveTab(i)}
+              className={`relative whitespace-nowrap px-4 py-3 text-sm font-medium transition-colors duration-300 cursor-pointer ${
+                activeTab === i
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+              style={{ fontFamily: "var(--font-geist)" }}
+            >
+              {tab.title}
+              {activeTab === i && (
+                <motion.div
+                  layoutId="agentTabIndicator"
+                  className="absolute inset-x-0 -bottom-px h-0.5 bg-foreground"
+                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                />
+              )}
+            </button>
+          ))}
+        </div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16"
+          >
+            <div>
+              <h3
+                className="text-2xl font-semibold text-foreground tracking-tight"
+                style={{ fontFamily: "var(--font-geist)" }}
+              >
+                {tabs[activeTab].title}
+              </h3>
+              <p className="mt-4 text-base text-muted-foreground leading-relaxed">
+                {tabs[activeTab].description}
+              </p>
+              <ul className="mt-6 space-y-3">
+                {tabs[activeTab].features.map((feature, i) => (
+                  <li key={i} className="flex items-center gap-3 text-sm text-foreground">
+                    <span className="size-5 rounded-full border border-primary/20 flex items-center justify-center shrink-0">
+                      <Check className="size-3 text-primary" strokeWidth={2.5} />
+                    </span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-xl border border-border bg-card p-6 min-h-[300px] flex items-center justify-center">
+              <p className="text-sm text-muted-foreground">
+                {tabs[activeTab].title} mockup
+              </p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </section>
+  );
+}

@@ -377,5 +377,86 @@
     "planEnterpriseName": "Kurumsal",
     "planEnterpriseDesc": "Sınırsız kullanıcı, dedicated altyapı, white-label seçeneği, SLA garantisi",
     "websiteDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform."
+  },
+  "agentsPage": {
+    "hero": {
+      "badge": "AI Agent Ekosistemi",
+      "title": "Otomatikleştirin. Araştırın. Satın.",
+      "description": "5 AI agent birlikte çalışarak müşteri iletişiminizi uçtan uca yönetir."
+    },
+    "tabs": {
+      "conversation": {
+        "title": "Konuşma Agenti",
+        "description": "Müşterilerinizle WhatsApp, Instagram ve Telegram üzerinden 7/24 AI destekli görüşmeler yapın.",
+        "features": [
+          "Doğal dil işleme ile akıllı yanıtlar",
+          "Otomatik müşteri nitelendirme",
+          "Çoklu kanal desteği",
+          "Görüşme geçmişi ve analitik"
+        ]
+      },
+      "proposal": {
+        "title": "Teklif Agenti",
+        "description": "Nitelikli müşteriler için otomatik teklif oluşturun. AI, müşteri ihtiyaçlarına göre kişiselleştirilmiş teklifler hazırlar.",
+        "features": [
+          "Kişiselleştirilmiş teklif oluşturma",
+          "PDF çıktısı",
+          "Şablonlar ve markalama",
+          "Otomatik takip"
+        ]
+      },
+      "research": {
+        "title": "Araştırma Agenti",
+        "description": "Müşteri hakkında internet ve şirket verilerinden derin araştırma yapın. Teklif öncesi tam bilgi.",
+        "features": [
+          "İnternet aramaları",
+          "Şirket verisi analizi",
+          "Rakip karşılaştırma",
+          "Otomatik rapor oluşturma"
+        ]
+      },
+      "meeting": {
+        "title": "Toplantı Agenti",
+        "description": "Toplantılarınızı otomatik kaydedin, yazıya dökürün ve aksiyon maddelerini çıkartın.",
+        "features": [
+          "Otomatik kayıt ve transkripsiyon",
+          "Aksiyon maddesi çıkartma",
+          "Toplantı özeti oluşturma",
+          "RAG agentına besleme"
+        ]
+      },
+      "rag": {
+        "title": "RAG Agenti",
+        "description": "Şirketinizin tüm bilgi birikimini yapay zekaya dönüştürün. Ekibiniz istediği bilgiye anında ulaşsın.",
+        "features": [
+          "Doküman yükleme ve indeksleme",
+          "Doğal dil ile sorgulama",
+          "Entegrasyon kaynakları",
+          "Otomatik güncelleme"
+        ]
+      }
+    },
+    "numberedFeatures": [
+      {
+        "title": "Anında müşteri yanıtı",
+        "description": "Agent'larınız 7/24 aktif. Müşteri mesajına saniyeler içinde yanıtlar, hiçbir fırsat kaçmaz."
+      },
+      {
+        "title": "Otomatik müşteri nitelendirme",
+        "description": "AI, her müşteriyi analiz eder ve satışa uygun olanları otomatik belirler."
+      },
+      {
+        "title": "Derin araştırma",
+        "description": "Teklif göndermeden önce internet ve şirket verilerinden kapsamlı araştırma yapar."
+      },
+      {
+        "title": "Şirket hafızası oluşturma",
+        "description": "Toplantılar ve dokümanlar RAG agentını besler, şirketinizin bilgi birikimi sürekli büyür."
+      }
+    ],
+    "cta": {
+      "title": "Agent'larınızı şimdi oluşturun.",
+      "button": "Ücretsiz Deneyin"
+    }
   }
 }

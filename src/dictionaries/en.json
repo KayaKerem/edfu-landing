@@ -377,5 +377,86 @@
     "planEnterpriseName": "Enterprise",
     "planEnterpriseDesc": "Unlimited users, dedicated infrastructure, white-label option, SLA guarantee",
     "websiteDescription": "The platform that transforms your company's knowledge into AI."
+  },
+  "agentsPage": {
+    "hero": {
+      "badge": "AI Agent Ecosystem",
+      "title": "Automate. Research. Sell.",
+      "description": "5 AI agents working together to manage your customer communication end-to-end."
+    },
+    "tabs": {
+      "conversation": {
+        "title": "Conversation Agent",
+        "description": "Have 24/7 AI-powered conversations with your customers on WhatsApp, Instagram, and Telegram.",
+        "features": [
+          "Smart responses with NLP",
+          "Automatic customer qualification",
+          "Multi-channel support",
+          "Conversation history and analytics"
+        ]
+      },
+      "proposal": {
+        "title": "Proposal Agent",
+        "description": "Create automatic proposals for qualified customers. AI prepares personalized proposals based on customer needs.",
+        "features": [
+          "Personalized proposal creation",
+          "PDF output",
+          "Templates and branding",
+          "Automatic follow-up"
+        ]
+      },
+      "research": {
+        "title": "Research Agent",
+        "description": "Deep research on customers from internet and company data. Full information before proposals.",
+        "features": [
+          "Internet searches",
+          "Company data analysis",
+          "Competitor comparison",
+          "Automatic report generation"
+        ]
+      },
+      "meeting": {
+        "title": "Meeting Agent",
+        "description": "Automatically record, transcribe, and extract action items from your meetings.",
+        "features": [
+          "Automatic recording and transcription",
+          "Action item extraction",
+          "Meeting summary generation",
+          "Feed RAG agent"
+        ]
+      },
+      "rag": {
+        "title": "RAG Agent",
+        "description": "Transform your company's knowledge into AI. Your team can instantly access any information.",
+        "features": [
+          "Document upload and indexing",
+          "Natural language querying",
+          "Integration sources",
+          "Automatic updates"
+        ]
+      }
+    },
+    "numberedFeatures": [
+      {
+        "title": "Instant customer response",
+        "description": "Your agents are active 24/7. Respond to customer messages in seconds, never miss an opportunity."
+      },
+      {
+        "title": "Automatic customer qualification",
+        "description": "AI analyzes every customer and automatically identifies sales-ready ones."
+      },
+      {
+        "title": "Deep research",
+        "description": "Comprehensive research from internet and company data before sending proposals."
+      },
+      {
+        "title": "Building company memory",
+        "description": "Meetings and documents feed the RAG agent, your company's knowledge grows continuously."
+      }
+    ],
+    "cta": {
+      "title": "Create your agents now.",
+      "button": "Try Free"
+    }
   }
 }
