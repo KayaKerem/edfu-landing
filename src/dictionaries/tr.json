@@ -378,6 +378,75 @@
     "planEnterpriseDesc": "Sınırsız kullanıcı, dedicated altyapı, white-label seçeneği, SLA garantisi",
     "websiteDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform."
   },
+  "meetingPage": {
+    "hero": {
+      "badge": "Toplantı Agenti",
+      "title": "Daha akıllı toplantılar, başından sonuna.",
+      "description": "Toplantılarınızı kaydedin, yazıya dökürün, aksiyon maddelerini çıkartın. Tüm içerik şirket hafızanızı besler."
+    },
+    "featureCards": [
+      {
+        "title": "Otomatik kayıt & transkripsiyon",
+        "description": "Zoom, Meet ve Teams toplantılarınız otomatik kaydedilir ve yazıya dökülür."
+      },
+      {
+        "title": "Hiçbir toplantı notu kaybolmaz",
+        "description": "Notlar otomatik olarak müşteri kayıtlarına bağlanır."
+      },
+      {
+        "title": "Şirket hafızasını besler",
+        "description": "Her toplantı RAG agentını günceller, ekibiniz bilgiye anında ulaşır."
+      }
+    ],
+    "stickySection": {
+      "title": "Bir toplantı. Sınırsız içerik.",
+      "features": [
+        {
+          "title": "Karar vericiye odaklanın",
+          "description": "AI, toplantıdaki karar vericileri ve önemli anları otomatik tespit eder."
+        },
+        {
+          "title": "Her toplantıdan bir planla çıkın",
+          "description": "Aksiyon maddeleri, sorumlular ve tarihler otomatik çıkarılır."
+        },
+        {
+          "title": "100+ dil transkripsiyonu",
+          "description": "Uluslararası ekipler için çoklu dil desteği."
+        }
+      ]
+    },
+    "numberedFeatures": [
+      {
+        "title": "Otomatik müşteri sinyal tespiti",
+        "description": "AI, toplantı içeriğinden satın alma sinyallerini ve ihtiyaçları otomatik tespit eder."
+      },
+      {
+        "title": "Ekibinizi bağlamla yönlendirin",
+        "description": "Toplantı özetleri ve içerikler ekibinize tam bağlam sağlar."
+      },
+      {
+        "title": "Kesintisiz devir teslim",
+        "description": "Toplantı klipleri ve özetlerle ekipler arası geçişleri kolaylaştırın."
+      },
+      {
+        "title": "RAG agentını otomatik besleyin",
+        "description": "Her toplantı içeriği otomatik olarak şirket bilgi tabanına eklenir."
+      }
+    ],
+    "integrationLogos": {
+      "title": "Anında senkronizasyon. Sıfır kurulum.",
+      "tools": ["Zoom", "Google Meet", "Microsoft Teams"]
+    },
+    "testimonial": {
+      "quote": "Toplantı notları artık kaybolmuyor. AI her şeyi yazıyor, özetliyor ve ekibimize aksiyonları atıyor. Verimliliğimiz gözle görülür arttı.",
+      "authorName": "Ayşe B.",
+      "authorTitle": "Operasyon Müdürü, Teknoloji Şirketi"
+    },
+    "cta": {
+      "title": "Toplantılarınızı dönüştürün.",
+      "button": "Ücretsiz Deneyin"
+    }
+  },
   "agentsPage": {
     "hero": {
       "badge": "AI Agent Ekosistemi",

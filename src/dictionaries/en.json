@@ -378,6 +378,75 @@
     "planEnterpriseDesc": "Unlimited users, dedicated infrastructure, white-label option, SLA guarantee",
     "websiteDescription": "The platform that transforms your company's knowledge into AI."
   },
+  "meetingPage": {
+    "hero": {
+      "badge": "Meeting Agent",
+      "title": "Smarter meetings, start to finish.",
+      "description": "Record, transcribe, and extract action items from your meetings. All content feeds your company memory."
+    },
+    "featureCards": [
+      {
+        "title": "Automatic recording & transcription",
+        "description": "Your Zoom, Meet, and Teams meetings are automatically recorded and transcribed."
+      },
+      {
+        "title": "No meeting notes get lost",
+        "description": "Notes are automatically linked to customer records."
+      },
+      {
+        "title": "Feeds company memory",
+        "description": "Every meeting updates the RAG agent, your team instantly accesses information."
+      }
+    ],
+    "stickySection": {
+      "title": "One meeting. Unlimited content.",
+      "features": [
+        {
+          "title": "Focus on the decision maker",
+          "description": "AI automatically identifies decision makers and key moments in meetings."
+        },
+        {
+          "title": "Leave every meeting with a plan",
+          "description": "Action items, owners, and dates are automatically extracted."
+        },
+        {
+          "title": "100+ language transcription",
+          "description": "Multi-language support for international teams."
+        }
+      ]
+    },
+    "numberedFeatures": [
+      {
+        "title": "Automatic customer signal detection",
+        "description": "AI automatically detects purchase signals and needs from meeting content."
+      },
+      {
+        "title": "Guide your team with context",
+        "description": "Meeting summaries and content provide full context to your team."
+      },
+      {
+        "title": "Seamless handoffs",
+        "description": "Facilitate team transitions with meeting clips and summaries."
+      },
+      {
+        "title": "Auto-feed the RAG agent",
+        "description": "Every meeting's content is automatically added to the company knowledge base."
+      }
+    ],
+    "integrationLogos": {
+      "title": "Instant sync. Zero setup.",
+      "tools": ["Zoom", "Google Meet", "Microsoft Teams"]
+    },
+    "testimonial": {
+      "quote": "Meeting notes no longer get lost. AI writes everything, summarizes, and assigns actions to our team. Our productivity visibly increased.",
+      "authorName": "Ayse B.",
+      "authorTitle": "Operations Manager, Technology Company"
+    },
+    "cta": {
+      "title": "Transform your meetings.",
+      "button": "Try Free"
+    }
+  },
   "agentsPage": {
     "hero": {
       "badge": "AI Agent Ecosystem",
