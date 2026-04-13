@@ -59,7 +59,8 @@ export function GradientBorder({
       )}
       style={{
         padding: borderWidth,
-        background: `conic-gradient(from var(--gradient-angle, 0deg), #ff4545, #00ff87, #00d4ff, #b344ff, #ff4545)`,
+        background: `conic-gradient(from var(--gradient-angle, 0deg), #f59e0b, #f97316, #ef4444, #8b5cf6, #06b6d4, #10b981, #f59e0b)`,
+        boxShadow: "0 0 20px 4px rgba(245,158,11,0.08), 0 0 60px 12px rgba(139,92,246,0.06)",
       }}
     >
       <div className="rounded-[calc(1rem-2px)] bg-white dark:bg-[#18181B] h-full w-full">
