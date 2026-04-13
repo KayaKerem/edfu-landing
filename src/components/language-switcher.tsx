@@ -1,11 +1,17 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+
 export function LanguageSwitcher({ lang }: { lang: string }) {
   const isEn = lang === "en";
+  const pathname = usePathname();
 
   function handleSwitch(targetLocale: string) {
     document.cookie = `NEXT_LOCALE=${targetLocale};path=/;max-age=31536000`;
-    window.location.href = targetLocale === "en" ? "/en" : "/";
+    // Strip existing locale prefix to get the path
+    const currentPath = pathname.replace(/^\/(en|tr)/, "") || "/";
+    window.location.href =
+      targetLocale === "en" ? `/en${currentPath}` : currentPath;
   }
 
   return (
