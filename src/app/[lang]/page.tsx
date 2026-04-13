@@ -12,6 +12,7 @@ import { CTA } from "@/components/sections/cta";
 import { Footer } from "@/components/sections/footer";
 import { FlowDiagram } from "@/components/sections/flow-diagram";
 import { AiGradientCard } from "@/components/sections/ai-gradient-card";
+import { LegacyHashRedirect } from "@/components/legacy-hash-redirect";
 
 const BASE_URL = "https://edfu.ai";
 
@@ -113,6 +114,7 @@ export default async function Home({
 
   return (
     <>
+      <LegacyHashRedirect />
       <JsonLd dict={dict} lang={lang} />
       <Navbar dict={dict.navbar} lang={lang} />
       <div className="relative mx-auto max-w-7xl border-x border-border">
