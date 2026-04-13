@@ -1,28 +1,24 @@
 {
   "metadata": {
-    "title": "Edfu - Şirketinizin AI Bilgi Tabanı | Dokümanlardan Anında Cevap",
-    "description": "Şirketinizin bilgi birikimini yapay zekaya dönüştürün. Dokümanlarınızı yükleyin, 300+ AI modeli ile ekibiniz Türkçe sorular sorsun, anında doğru cevap alsın. 14 gün ücretsiz deneyin.",
+    "title": "Edfu - Çok Kanallı AI Müşteri İletişim Platformu",
+    "description": "WhatsApp, Instagram, Telegram ve diğer kanallardan gelen müşterilerinizle AI agent'lar aracılığıyla konuşun. Araştırma, teklif ve toplantı süreçlerinizi otomatikleştirin.",
     "keywords": [
-      "yapay zeka bilgi tabanı",
-      "AI bilgi yönetimi",
-      "kurumsal yapay zeka",
-      "doküman analizi",
-      "RAG platformu",
-      "Türkçe AI asistan",
-      "şirket bilgi tabanı",
-      "AI destekli arama",
+      "AI müşteri iletişimi",
+      "çok kanallı platform",
+      "WhatsApp bot",
+      "AI agent",
+      "müşteri otomasyonu",
+      "toplantı asistanı",
+      "teklif otomasyonu",
+      "Türkçe AI",
       "kurumsal chatbot",
-      "doküman sorgulama",
-      "KVKK uyumlu AI",
-      "OpenRouter",
-      "Claude",
-      "GPT-4",
+      "RAG platformu",
       "Edfu"
     ],
-    "ogTitle": "Edfu - Şirketinizin AI Bilgi Tabanı",
-    "ogDescription": "Dokümanlarınızı yükleyin, 300+ AI modeli ile ekibiniz Türkçe sorular sorsun, anında doğru cevap alsın. KVKK uyumlu, kurumsal düzeyde altyapı.",
-    "twitterTitle": "Edfu - Şirketinizin AI Bilgi Tabanı",
-    "twitterDescription": "Dokümanlarınızı yükleyin, 300+ AI modeli ile ekibiniz Türkçe sorular sorsun, anında doğru cevap alsın."
+    "ogTitle": "Edfu - Çok Kanallı AI Müşteri İletişim Platformu",
+    "ogDescription": "WhatsApp, Instagram, Telegram ve diğer kanallardan gelen müşterilerinizle AI agent'lar aracılığıyla konuşun. Teklif, araştırma ve toplantı süreçlerinizi otomatikleştirin.",
+    "twitterTitle": "Edfu - Çok Kanallı AI Müşteri İletişim Platformu",
+    "twitterDescription": "Müşterilerinizle AI agent'lar aracılığıyla konuşun. Araştırma, teklif ve toplantı süreçlerinizi otomatikleştirin."
   },
   "navbar": {
     "home": "Ana Sayfa",
@@ -368,15 +364,15 @@
     "label": "AI Analiz"
   },
   "jsonLd": {
-    "orgDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform.",
+    "orgDescription": "Çok kanallı AI müşteri iletişim ve otomasyon platformu.",
     "contactLanguage": "Turkish",
-    "softwareDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform. Dokümanlarınızı yükleyin, 300+ AI modeli ile ekibiniz Türkçe sorular sorsun, anında doğru cevap alsın.",
+    "softwareDescription": "WhatsApp, Instagram, Telegram ve diğer kanallardan gelen müşterilerinizle AI agent'lar aracılığıyla konuşun. Araştırma, teklif ve toplantı süreçlerinizi otomatikleştirin.",
     "planStarterName": "Başlangıç",
     "planStarterDesc": "5 kullanıcıya kadar, kişi başı aylık 10M token, Claude Sonnet sabit model, 50 GB depolama",
     "planStarterUnit": "kişi başı / ay",
     "planEnterpriseName": "Kurumsal",
     "planEnterpriseDesc": "Sınırsız kullanıcı, dedicated altyapı, white-label seçeneği, SLA garantisi",
-    "websiteDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform."
+    "websiteDescription": "Çok kanallı AI müşteri iletişim ve otomasyon platformu."
   },
   "meetingPage": {
     "hero": {

@@ -1,28 +1,23 @@
 {
   "metadata": {
-    "title": "Edfu - Your Company's AI Knowledge Base | Instant Answers from Documents",
-    "description": "Transform your company's knowledge into AI. Upload your documents, let your team ask questions with 300+ AI models, get instant accurate answers. Try free for 14 days.",
+    "title": "Edfu - Multi-Channel AI Customer Communication Platform",
+    "description": "Talk to customers from WhatsApp, Instagram, Telegram through AI agents. Automate research, proposals, and meeting processes.",
     "keywords": [
-      "AI knowledge base",
-      "AI knowledge management",
-      "enterprise AI",
-      "document analysis",
-      "RAG platform",
-      "AI assistant",
-      "company knowledge base",
-      "AI-powered search",
+      "AI customer communication",
+      "multi-channel platform",
+      "WhatsApp bot",
+      "AI agent",
+      "customer automation",
+      "meeting assistant",
+      "proposal automation",
       "enterprise chatbot",
-      "document querying",
-      "GDPR compliant AI",
-      "OpenRouter",
-      "Claude",
-      "GPT-4",
+      "RAG platform",
       "Edfu"
     ],
-    "ogTitle": "Edfu - Your Company's AI Knowledge Base",
-    "ogDescription": "Upload your documents, let your team ask questions with 300+ AI models, get instant accurate answers. Enterprise-grade, GDPR compliant infrastructure.",
-    "twitterTitle": "Edfu - Your Company's AI Knowledge Base",
-    "twitterDescription": "Upload your documents, let your team ask questions with 300+ AI models, get instant accurate answers."
+    "ogTitle": "Edfu - Multi-Channel AI Customer Communication Platform",
+    "ogDescription": "Talk to customers from WhatsApp, Instagram, Telegram through AI agents. Automate research, proposals, and meeting processes.",
+    "twitterTitle": "Edfu - Multi-Channel AI Customer Communication Platform",
+    "twitterDescription": "Talk to customers through AI agents. Automate research, proposals, and meeting processes."
   },
   "navbar": {
     "home": "Home",
@@ -368,15 +363,15 @@
     "label": "AI Analysis"
   },
   "jsonLd": {
-    "orgDescription": "The platform that transforms your company's knowledge into AI.",
+    "orgDescription": "Multi-channel AI customer communication and automation platform.",
     "contactLanguage": "English",
-    "softwareDescription": "The platform that transforms your company's knowledge into AI. Upload your documents, let your team ask questions with 300+ AI models, get instant accurate answers.",
+    "softwareDescription": "Talk to customers from WhatsApp, Instagram, Telegram through AI agents. Automate research, proposals, and meeting processes.",
     "planStarterName": "Starter",
     "planStarterDesc": "Up to 5 users, 10M tokens per user/month, Claude Sonnet fixed model, 50 GB storage",
     "planStarterUnit": "per user / month",
     "planEnterpriseName": "Enterprise",
     "planEnterpriseDesc": "Unlimited users, dedicated infrastructure, white-label option, SLA guarantee",
-    "websiteDescription": "The platform that transforms your company's knowledge into AI."
+    "websiteDescription": "Multi-channel AI customer communication and automation platform."
   },
   "meetingPage": {
     "hero": {
