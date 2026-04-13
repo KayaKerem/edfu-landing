@@ -447,6 +447,15 @@
     "cta": {
       "title": "Transform your meetings.",
       "button": "Try Free"
+    },
+    "templates": {
+      "title": "Ready-made meeting templates",
+      "items": [
+        { "name": "SPICED", "description": "Situation, Pain, Impact, Critical Event, Decision — ideal for sales meetings." },
+        { "name": "Customer Discovery", "description": "Needs analysis, budget, timeline, and decision process discovery." },
+        { "name": "Sprint Retrospective", "description": "What went well, what went wrong, actions — for product teams." },
+        { "name": "Kick-off", "description": "Project scope, roles, timeline, and success criteria definition." }
+      ]
     }
   },
   "agentsPage": {

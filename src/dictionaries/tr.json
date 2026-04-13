@@ -448,6 +448,15 @@
     "cta": {
       "title": "Toplantılarınızı dönüştürün.",
       "button": "Ücretsiz Deneyin"
+    },
+    "templates": {
+      "title": "Hazır toplantı şablonları",
+      "items": [
+        { "name": "SPICED", "description": "Durum, Sorun, Etki, Kritik Olay, Karar — satış toplantıları için ideal." },
+        { "name": "Müşteri Keşif", "description": "İhtiyaç analizi, bütçe, zaman çizelgesi ve karar süreci keşfi." },
+        { "name": "Sprint Retrospektif", "description": "Neler iyi gitti, neler kötü gitti, aksiyonlar — ürün ekipleri için." },
+        { "name": "Kick-off", "description": "Proje kapsamı, roller, zaman çizelgesi ve başarı kriterleri belirleme." }
+      ]
     }
   },
   "agentsPage": {

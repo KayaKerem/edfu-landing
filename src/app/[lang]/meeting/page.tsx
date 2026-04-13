@@ -8,6 +8,12 @@ import { MeetingHero } from "@/components/sections/meeting-hero";
 import { ScrollPinnedFeatures } from "@/components/sections/scroll-pinned-features";
 import { NumberedFeatures } from "@/components/sections/numbered-features";
 import { PageCTA } from "@/components/sections/page-cta";
+import { CrmTable } from "@/components/mockups/crm-table";
+import { MeetingTranscript } from "@/components/mockups/meeting-transcript";
+import { CallPlayer as CallPlayerMockup } from "@/components/mockups/call-player";
+import { Zoom } from "@/components/ui/svgs/zoom";
+import { GoogleMeet } from "@/components/ui/svgs/google-meet";
+import { MsTeams } from "@/components/ui/svgs/ms-teams";
 
 const BASE_URL = "https://edfu.ai";
 
@@ -42,6 +48,12 @@ export async function generateMetadata({
   };
 }
 
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  Zoom,
+  "Google Meet": GoogleMeet,
+  "Microsoft Teams": MsTeams,
+};
+
 export default async function MeetingPage({
   params,
 }: {
@@ -52,6 +64,12 @@ export default async function MeetingPage({
 
   const dict = await getDictionary(lang as Locale);
   const mp = dict.meetingPage;
+
+  const stickyVisuals = [
+    <CrmTable key="crm" />,
+    <MeetingTranscript key="transcript" />,
+    <CallPlayerMockup key="player" />,
+  ];
 
   return (
     <>
@@ -89,6 +107,7 @@ export default async function MeetingPage({
           <ScrollPinnedFeatures
             title={mp.stickySection.title}
             features={mp.stickySection.features}
+            visuals={stickyVisuals}
           />
           <NumberedFeatures features={mp.numberedFeatures} />
 
@@ -102,17 +121,57 @@ export default async function MeetingPage({
                 {mp.integrationLogos.title}
               </h2>
               <div className="flex items-center justify-center gap-8 sm:gap-12">
-                {mp.integrationLogos.tools.map((tool: string) => (
-                  <div
-                    key={tool}
-                    className="flex flex-col items-center gap-2 rounded-xl border border-border bg-white dark:bg-[#27272A] p-6 shadow-sm"
-                  >
-                    <div className="size-12 rounded-xl bg-muted flex items-center justify-center">
-                      <span className="text-xs font-bold text-muted-foreground">
-                        {tool.charAt(0)}
-                      </span>
+                {mp.integrationLogos.tools.map((tool: string) => {
+                  const Icon = ICON_MAP[tool];
+                  return (
+                    <div
+                      key={tool}
+                      className="flex flex-col items-center gap-2 rounded-xl border border-border bg-white dark:bg-[#27272A] p-6 shadow-sm"
+                    >
+                      <div className="size-12 rounded-xl bg-muted flex items-center justify-center">
+                        {Icon ? (
+                          <Icon className="size-6" />
+                        ) : (
+                          <span className="text-xs font-bold text-muted-foreground">{tool.charAt(0)}</span>
+                        )}
+                      </div>
+                      <span className="text-sm font-medium text-foreground">{tool}</span>
                     </div>
-                    <span className="text-sm font-medium text-foreground">{tool}</span>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+          {/* Templates */}
+          <section className="py-16 sm:py-20">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6">
+              <h2
+                className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center mb-12"
+                style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
+              >
+                {mp.templates.title}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {mp.templates.items.map((tpl: { name: string; description: string }, i: number) => (
+                  <div
+                    key={i}
+                    className="rounded-xl border border-border bg-white dark:bg-[#27272A] p-5 shadow-[0px_1px_3px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <span
+                        className="text-xs font-bold text-muted-foreground/40"
+                        style={{ fontFamily: "var(--font-mono)" }}
+                      >
+                        [{String(i + 1).padStart(2, "0")}]
+                      </span>
+                      <h3 className="text-sm font-semibold text-foreground" style={{ fontFamily: "var(--font-geist)" }}>
+                        {tpl.name}
+                      </h3>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed pl-9">
+                      {tpl.description}
+                    </p>
                   </div>
                 ))}
               </div>
