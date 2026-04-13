@@ -26,8 +26,9 @@
   },
   "navbar": {
     "home": "Home",
-    "features": "Features",
-    "howItWorks": "How It Works",
+    "agents": "Agents",
+    "meeting": "Meeting",
+    "integrations": "Integrations",
     "pricing": "Pricing",
     "cta": "Try Free",
     "menuOpen": "Open menu",
