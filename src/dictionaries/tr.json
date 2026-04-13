@@ -527,5 +527,56 @@
       "title": "Agent'larınızı şimdi oluşturun.",
       "button": "Ücretsiz Deneyin"
     }
+  },
+  "integrationsPage": {
+    "hero": {
+      "title": "Tüm kanallarınız. Tek platform.",
+      "description": "Mesajlaşma kanalları, toplantı araçları ve iş uygulamalarınızı tek bir platformdan yönetin."
+    },
+    "channels": {
+      "title": "Mesajlaşma Kanalları",
+      "items": [
+        { "name": "WhatsApp", "description": "Business API ile gelen mesajları yönetin", "color": "#25D366" },
+        { "name": "Instagram", "description": "DM ve story yanıtlarını otomatikleştirin", "color": "#E4405F" },
+        { "name": "Telegram", "description": "Bot entegrasyonu ile müşteri iletişimi", "color": "#2AABEE" },
+        { "name": "Web Form", "description": "Web sitenize gömülü iletişim widget'ı", "color": "#18181B" },
+        { "name": "E-posta", "description": "AI ile e-posta sınıflandırma ve yönlendirme", "color": "#EA4335" },
+        { "name": "Webhook", "description": "Özel entegrasyon ve API bağlantısı", "color": "currentColor" }
+      ]
+    },
+    "meetingTools": {
+      "title": "Toplantı Araçları",
+      "items": [
+        { "name": "Zoom", "description": "Toplantı kayıt ve transkripsiyon", "color": "#2D8CFF" },
+        { "name": "Google Meet", "description": "Otomatik kayıt ve özet", "color": "#00897B" },
+        { "name": "Microsoft Teams", "description": "Kurum içi toplantılar", "color": "#6264A7" }
+      ]
+    },
+    "businessTools": {
+      "title": "İş Uygulamaları",
+      "items": [
+        { "name": "Drive", "description": "Dokümanlar" },
+        { "name": "Notion", "description": "Wiki & notlar" },
+        { "name": "Slack", "description": "Mesajlaşma" },
+        { "name": "CRM", "description": "Müşteri verileri" },
+        { "name": "ERP", "description": "İş süreçleri" },
+        { "name": "Jira", "description": "Proje yönetimi" },
+        { "name": "HubSpot", "description": "Pazarlama" },
+        { "name": "+ API", "description": "Özel entegrasyon" }
+      ]
+    },
+    "dataModelTitle": "Veri Akışı",
+    "dataModelBadges": ["Konuşma", "Teklif", "Araştırma", "Toplantı", "RAG"],
+    "dataModelOutputs": {
+      "lead": "Nitelikli Lead",
+      "proposal": "Teklif PDF",
+      "report": "Müşteri Raporu",
+      "summary": "Toplantı Özeti",
+      "knowledge": "Bilgi Tabanı"
+    },
+    "cta": {
+      "title": "Tüm kanallarınızı bağlayın.",
+      "button": "Ücretsiz Deneyin"
+    }
   }
 }

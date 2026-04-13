@@ -527,5 +527,56 @@
       "title": "Create your agents now.",
       "button": "Try Free"
     }
+  },
+  "integrationsPage": {
+    "hero": {
+      "title": "All your channels. One platform.",
+      "description": "Manage messaging channels, meeting tools, and business applications from a single platform."
+    },
+    "channels": {
+      "title": "Messaging Channels",
+      "items": [
+        { "name": "WhatsApp", "description": "Manage incoming messages with Business API", "color": "#25D366" },
+        { "name": "Instagram", "description": "Automate DM and story replies", "color": "#E4405F" },
+        { "name": "Telegram", "description": "Customer communication with bot integration", "color": "#2AABEE" },
+        { "name": "Web Form", "description": "Embeddable communication widget for your site", "color": "#18181B" },
+        { "name": "Email", "description": "AI-powered email classification and routing", "color": "#EA4335" },
+        { "name": "Webhook", "description": "Custom integration and API connection", "color": "currentColor" }
+      ]
+    },
+    "meetingTools": {
+      "title": "Meeting Tools",
+      "items": [
+        { "name": "Zoom", "description": "Meeting recording and transcription", "color": "#2D8CFF" },
+        { "name": "Google Meet", "description": "Automatic recording and summary", "color": "#00897B" },
+        { "name": "Microsoft Teams", "description": "Internal meetings", "color": "#6264A7" }
+      ]
+    },
+    "businessTools": {
+      "title": "Business Tools",
+      "items": [
+        { "name": "Drive", "description": "Documents" },
+        { "name": "Notion", "description": "Wiki & notes" },
+        { "name": "Slack", "description": "Messaging" },
+        { "name": "CRM", "description": "Customer data" },
+        { "name": "ERP", "description": "Business processes" },
+        { "name": "Jira", "description": "Project management" },
+        { "name": "HubSpot", "description": "Marketing" },
+        { "name": "+ API", "description": "Custom integration" }
+      ]
+    },
+    "dataModelTitle": "Data Flow",
+    "dataModelBadges": ["Conversation", "Proposal", "Research", "Meeting", "RAG"],
+    "dataModelOutputs": {
+      "lead": "Qualified Lead",
+      "proposal": "Proposal PDF",
+      "report": "Customer Report",
+      "summary": "Meeting Summary",
+      "knowledge": "Knowledge Base"
+    },
+    "cta": {
+      "title": "Connect all your channels.",
+      "button": "Try Free"
+    }
   }
 }
