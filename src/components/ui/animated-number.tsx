@@ -20,7 +20,7 @@ export function AnimatedNumber({
   stiffness = 75,
   damping = 15,
   precision = 0,
-  format = (num) => num.toLocaleString(),
+  format = (num) => num.toLocaleString("tr-TR"),
   onAnimationStart,
   onAnimationComplete,
 }: AnimatedNumberProps) {
