@@ -16,8 +16,13 @@ import { Linear } from "@/components/ui/svgs/linear";
 import { Stripe } from "@/components/ui/svgs/stripe";
 import { Vercel } from "@/components/ui/svgs/vercel";
 import { Openai } from "@/components/ui/svgs/openai";
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
 import catAnimation from "@/../public/cat-in-box.json";
+
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+  loading: () => <div className="size-28" />,
+});
 
 /* ------------------------------------------------------------------ */
 /*  Card 1 – Chat Mockup with streaming animation                     */
@@ -102,7 +107,7 @@ function ChatMockup({ response, question }: { response: string; question: string
         {showResponse && (
           <div className="flex items-start gap-2 animate-slide-up">
             {/* AI icon */}
-            <img src="/ai-icon.svg" alt="Edfu AI Asistan" className="size-10 shrink-0 rounded-full" />
+            <NextImage src="/ai-icon.svg" alt="Edfu AI Asistan" width={40} height={40} className="size-10 shrink-0 rounded-full" />
             {/* Response bubble with streaming text */}
             <div className="max-w-[280px] rounded-xl border border-border bg-white dark:bg-card shadow-[0_0_10px_rgba(0,0,0,0.05)] transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]" style={{ padding: isThinking || displayedText ? "1rem" : "0.75rem 1rem" }}>
               {isThinking ? (
@@ -158,7 +163,7 @@ function IntegrationOrbits() {
         <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[240px] rounded-full bg-black/[0.03] dark:bg-[#1F2023]/80 transition-all duration-700 ease-out ${isVisible ? "scale-100 opacity-100" : "scale-0 opacity-0"}`} style={{ transitionDelay: "100ms" }} />
 
         {/* Orbiting container - appears after gradient circles */}
-        <div className={`relative flex items-center justify-center transition-all duration-[1200ms] ease-out ${isVisible ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} style={{ width: 500, height: 500, transitionDelay: "1200ms" }}>
+        <div className={`relative flex w-full max-w-[500px] aspect-square items-center justify-center transition-all duration-[1200ms] ease-out ${isVisible ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} style={{ transitionDelay: "1200ms" }}>
           <div className="relative z-10 size-28">
               {catReady && (
                 <Lottie

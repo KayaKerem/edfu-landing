@@ -18,7 +18,7 @@ export function PageCTA({
   return (
     <section className="py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="relative rounded-2xl bg-[#18181B] dark:bg-white/[0.03] dark:border dark:border-border px-6 py-14 sm:px-16 sm:py-24 text-center overflow-hidden">
+        <div className="relative rounded-2xl bg-[#18181B] dark:bg-white/[0.06] dark:border dark:border-border px-6 py-14 sm:px-16 sm:py-24 text-center overflow-hidden">
           {/* Background decorative circles */}
           <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-white/5" />
           <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-white/5" />

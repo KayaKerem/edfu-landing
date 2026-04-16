@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getDictionary, hasLocale } from "@/dictionaries";
 import type { Locale, Dictionary } from "@/dictionaries";
+import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/navbar";
 import { Hero } from "@/components/sections/hero";
 import { Logos } from "@/components/sections/logos";
@@ -100,6 +101,41 @@ function JsonLd({ dict, lang }: { dict: Dictionary; lang: string }) {
       />
     </>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(lang)) return {};
+  const dict = await getDictionary(lang as Locale);
+  const m = dict.metadata;
+
+  return {
+    title: m.title,
+    description: m.description,
+    openGraph: {
+      title: m.ogTitle,
+      description: m.ogDescription,
+      url: lang === "tr" ? BASE_URL : `${BASE_URL}/en`,
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: m.ogTitle,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: m.twitterTitle,
+      description: m.twitterDescription,
+      images: ["/og-image.png"],
+    },
+  };
 }
 
 export default async function Home({

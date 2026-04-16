@@ -2,8 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { Globe } from "@/components/ui/globe";
+import dynamic from "next/dynamic";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
+
+const Globe = dynamic(
+  () => import("@/components/ui/globe").then((mod) => mod.Globe),
+  { ssr: false }
+);
 import type { Dictionary } from "@/dictionaries";
 
 interface SecurityProps {

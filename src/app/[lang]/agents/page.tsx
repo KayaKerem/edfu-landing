@@ -66,6 +66,22 @@ export async function generateMetadata({
         ? "5 AI agents working together to automate your customer communication."
         : "Müşteri iletişiminizi otomatikleştiren 5 AI agent.",
       url: isEn ? `${BASE_URL}/en/agents` : `${BASE_URL}/agents`,
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: isEn ? "AI Agents | Edfu" : "AI Agent'lar | Edfu",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: isEn ? "AI Agents | Edfu" : "AI Agent'lar | Edfu",
+      description: isEn
+        ? "5 AI agents working together to automate your customer communication."
+        : "Müşteri iletişiminizi otomatikleştiren 5 AI agent.",
+      images: ["/og-image.png"],
     },
   };
 }

@@ -56,7 +56,26 @@ export async function generateMetadata({
     },
     openGraph: {
       title: isEn ? "Integrations | Edfu" : "Entegrasyonlar | Edfu",
+      description: isEn
+        ? "WhatsApp, Instagram, Telegram, Zoom, Meet, Teams and more. Connect all your channels."
+        : "WhatsApp, Instagram, Telegram, Zoom, Meet, Teams ve daha fazlası. Tüm kanallarınızı bağlayın.",
       url: isEn ? `${BASE_URL}/en/integrations` : `${BASE_URL}/integrations`,
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: isEn ? "Integrations | Edfu" : "Entegrasyonlar | Edfu",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: isEn ? "Integrations | Edfu" : "Entegrasyonlar | Edfu",
+      description: isEn
+        ? "WhatsApp, Instagram, Telegram, Zoom, Meet, Teams and more. Connect all your channels."
+        : "WhatsApp, Instagram, Telegram, Zoom, Meet, Teams ve daha fazlası. Tüm kanallarınızı bağlayın.",
+      images: ["/og-image.png"],
     },
   };
 }

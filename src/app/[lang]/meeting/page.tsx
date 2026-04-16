@@ -43,7 +43,26 @@ export async function generateMetadata({
     },
     openGraph: {
       title: isEn ? "Meeting Agent | Edfu" : "Toplantı Agenti | Edfu",
+      description: isEn
+        ? "Automatic recording, transcription, action items. Meetings that feed your company memory."
+        : "Otomatik kayıt, transkript, aksiyon maddeleri. Şirket hafızanızı besleyen toplantılar.",
       url: isEn ? `${BASE_URL}/en/meeting` : `${BASE_URL}/meeting`,
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: isEn ? "Meeting Agent | Edfu" : "Toplantı Agenti | Edfu",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: isEn ? "Meeting Agent | Edfu" : "Toplantı Agenti | Edfu",
+      description: isEn
+        ? "Automatic recording, transcription, action items. Meetings that feed your company memory."
+        : "Otomatik kayıt, transkript, aksiyon maddeleri. Şirket hafızanızı besleyen toplantılar.",
+      images: ["/og-image.png"],
     },
   };
 }

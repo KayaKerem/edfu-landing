@@ -4,8 +4,13 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
 import navbarCatAnimation from "@/../public/navbar-cat.json";
+
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+  loading: () => <div className="size-8" />,
+});
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { motion, AnimatePresence } from "motion/react";
 import { LanguageSwitcher } from "@/components/language-switcher";

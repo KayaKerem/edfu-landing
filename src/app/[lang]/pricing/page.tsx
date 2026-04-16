@@ -36,7 +36,26 @@ export async function generateMetadata({
     },
     openGraph: {
       title: isEn ? "Pricing | Edfu" : "Fiyatlandırma | Edfu",
+      description: isEn
+        ? "Starter, Professional, and Enterprise plans. All with 14-day free trial."
+        : "Başlangıç, Profesyonel ve Kurumsal planlar. Tümünde 14 gün ücretsiz deneme.",
       url: isEn ? `${BASE_URL}/en/pricing` : `${BASE_URL}/pricing`,
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: isEn ? "Pricing | Edfu" : "Fiyatlandırma | Edfu",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: isEn ? "Pricing | Edfu" : "Fiyatlandırma | Edfu",
+      description: isEn
+        ? "Starter, Professional, and Enterprise plans. All with 14-day free trial."
+        : "Başlangıç, Profesyonel ve Kurumsal planlar. Tümünde 14 gün ücretsiz deneme.",
+      images: ["/og-image.png"],
     },
   };
 }
