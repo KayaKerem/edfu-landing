@@ -78,6 +78,7 @@ export function ScrollPinnedFeatures({
               ))}
             </div>
 
+            {/* Desktop: sticky visual panel */}
             <div className="hidden md:block">
               <div className="sticky top-28">
                 {visuals ? (
@@ -91,6 +92,13 @@ export function ScrollPinnedFeatures({
                 )}
               </div>
             </div>
+
+            {/* Mobile: show active visual inline below features */}
+            {visuals && (
+              <div className="md:hidden mt-8">
+                {visuals[activeIndex]}
+              </div>
+            )}
           </div>
         </div>
       </div>

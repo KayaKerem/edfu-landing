@@ -146,7 +146,7 @@ export default async function MeetingPage({
               >
                 {mp.integrationLogos.title}
               </h2>
-              <div className="flex items-center justify-center gap-8 sm:gap-12">
+              <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12">
                 {mp.integrationLogos.tools.map((tool: string) => {
                   const Icon = ICON_MAP[tool];
                   return (
@@ -205,7 +205,7 @@ export default async function MeetingPage({
           </section>
 
           {/* Testimonial */}
-          <section className="relative z-20 bg-white dark:bg-[oklch(0.14_0.005_250)] py-16 sm:py-20 px-4 sm:px-12 lg:px-20">
+          <section className="relative z-20 bg-white dark:bg-card py-16 sm:py-20 px-4 sm:px-12 lg:px-20">
             <div className="mx-auto max-w-3xl">
               <blockquote
                 className="text-xl sm:text-2xl font-medium leading-relaxed tracking-tight"
