@@ -5,15 +5,15 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/navbar";
 import { Hero } from "@/components/sections/hero";
 import { Logos } from "@/components/sections/logos";
-import { BentoFeatures } from "@/components/sections/bento-features";
 import { Testimonial } from "@/components/sections/testimonial";
 import { Security } from "@/components/sections/security";
 import { MarqueeTestimonials } from "@/components/sections/marquee-testimonials";
 import { CTA } from "@/components/sections/cta";
 import { Footer } from "@/components/sections/footer";
-import { FlowDiagram } from "@/components/sections/flow-diagram";
+import { AutomateEverything } from "@/components/sections/automate-everything";
 import { AiGradientCard } from "@/components/sections/ai-gradient-card";
 import { LegacyHashRedirect } from "@/components/legacy-hash-redirect";
+import { FlowDiagram } from "@/components/sections/flow-diagram";
 
 const BASE_URL = "https://edfu.ai";
 
@@ -164,7 +164,7 @@ export default async function Home({
         <main className="divide-y divide-border">
           <Hero dict={dict.hero} lang={lang} />
           <Logos dict={dict.logos} />
-          <BentoFeatures dict={dict.features} />
+          <AutomateEverything dict={dict.automateEverything} />
           <Testimonial dict={dict.testimonial} />
           <FlowDiagram dict={dict.flowDiagram} />
           <Security dict={dict.security} />

@@ -22,7 +22,7 @@
   },
   "navbar": {
     "home": "Ana Sayfa",
-    "agents": "Agent'lar",
+    "agents": "Asistan",
     "meeting": "Toplantı",
     "integrations": "Entegrasyonlar",
     "pricing": "Fiyatlandırma",
@@ -360,6 +360,53 @@
       "messages": [
         { "from": "customer", "text": "CRM entegrasyonu arıyoruz, 85 kişilik ekibiz." },
         { "from": "ai", "text": "Size özel bir teklif hazırlıyorum. Şirketinizi kısaca araştırıp dönüyorum." }
+      ]
+    }
+  },
+  "automateEverything": {
+    "title": "Her Şeyi Otomatikleştir",
+    "description": "Bir deal güncellendiğinde tetiklenen, koşula göre dallanan ve uygun kişileri upsell sequence'ına ekleyen akışı canlı bir listede izleyin.",
+    "cta": "Otomasyonları keşfet →",
+    "ariaLabel": "Otomasyon akış bölümü",
+    "srText": "Otomasyon akışı, 4 adım. 1. adım tetikleyici When Deal updated, triggered. 2. adım koşul. 3. adım sequence'a ekleme upsell. 4. adım sequence'a ekleme nurture.",
+    "trigger": {
+      "badge": "Trigger",
+      "title": "When Deal updated",
+      "description": "Akış, CRM'de bir deal değiştiği anda başlar.",
+      "status": "Triggered"
+    },
+    "condition": {
+      "badge": "Condition",
+      "title": "Condition split",
+      "description": "Workflow'u, kişinin bir sonraki adım için uygun olup olmadığını kontrol ederek dallandırın.",
+      "status": "Completed",
+      "upsell": "Upsell",
+      "nurture": "Nurture"
+    },
+    "sequence": {
+      "upsell": {
+        "badge": "Sequences",
+        "title": "Enroll in sequence",
+        "description": "Yüksek niyetli kontakları doğru zamanlamalı bir upsell sequence'ına gönderin.",
+        "status": "Completed"
+      },
+      "nurture": {
+        "badge": "Sequences",
+        "title": "Enroll in sequence",
+        "description": "Kalan kitleyi uzun vadeli bir nurture sequence ile sıcak tutun.",
+        "status": "Completed"
+      }
+    },
+    "list": {
+      "title": "Otomasyon senaryoları",
+      "items": [
+        { "id": "new_deal_email_campaign", "title": "Yeni deal e-posta kampanyası", "color": "green" },
+        { "id": "lead_qualification_router", "title": "Lead qualifying yönlendirici", "color": "blue" },
+        { "id": "webinar_follow_up", "title": "Webinar takip sequence'i", "color": "amber" },
+        { "id": "renewal_reminder", "title": "Yenileme hatırlatma playbook'u", "color": "violet" },
+        { "id": "onboarding_nurture", "title": "Onboarding nurture akışı", "color": "rose" },
+        { "id": "churn_save_play", "title": "Churn önleme playbook'u", "color": "cyan" },
+        { "id": "expansion_alerts", "title": "Genişleme uyarı akışı", "color": "lime" }
       ]
     }
   },

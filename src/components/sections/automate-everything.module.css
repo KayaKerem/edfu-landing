@@ -1,0 +1,337 @@
+.root {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  overflow: hidden;
+  isolation: isolate;
+  background: #ffffff;
+  content-visibility: auto;
+  contain: layout paint style;
+  min-height: 760px;
+  max-height: 820px;
+}
+
+.layout {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+  max-width: 1440px;
+}
+
+.edgeStripe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  pointer-events: none;
+  z-index: 1;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(15, 23, 32, 0.06) 0,
+    rgba(15, 23, 32, 0.06) 2px,
+    transparent 2px,
+    transparent 12px
+  );
+}
+
+.edgeLeft {
+  left: 0;
+}
+
+.edgeRight {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.62;
+  background-image: radial-gradient(circle at 1px 1px, #d8dde3 1px, transparent 1px);
+  background-position: center;
+  background-size: 20px 20px;
+}
+
+.diagramFrame {
+  position: relative;
+  overflow: hidden;
+}
+
+.flowPath {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition:
+    stroke-dashoffset 1600ms cubic-bezier(0.16, 1, 0.3, 1),
+    stroke 250ms ease,
+    opacity 250ms ease;
+  will-change: stroke-dashoffset;
+}
+
+.flowPathIdle {
+  stroke: #d1d5db;
+  stroke-dasharray: 2 4;
+}
+
+.flowPathActive {
+  stroke: #22c55e;
+  stroke-dashoffset: 0;
+}
+
+.pathDot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.85);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: aeDotTravel 1200ms linear forwards;
+  animation-delay: var(--dot-delay);
+  offset-rotate: 0deg;
+  will-change: offset-distance, opacity, transform;
+}
+
+.pulseRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid rgba(59, 130, 246, 0.4);
+  animation: aePulse 1800ms ease-out infinite;
+  pointer-events: none;
+}
+
+.listTrack {
+  animation: aeScroll 12s linear infinite;
+  will-change: transform;
+}
+
+.listCard {
+  transition:
+    transform 400ms cubic-bezier(0.2, 0, 0, 1),
+    border-color 400ms cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 400ms cubic-bezier(0.2, 0, 0, 1),
+    opacity 300ms ease;
+}
+
+.listCardActive {
+  border-color: #6366f1;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.15);
+  transform: scale(1.02);
+}
+
+.listCardMuted {
+  opacity: 0.72;
+}
+
+.nodeCard {
+  transition:
+    transform 400ms cubic-bezier(0.2, 0, 0, 1),
+    border-color 250ms ease,
+    box-shadow 400ms ease,
+    opacity 300ms ease,
+    color 250ms ease;
+}
+
+.nodeCardActive {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+  transform: translateY(-1px);
+}
+
+.nodeCardMuted {
+  opacity: 0.55;
+  color: #9aa3af;
+}
+
+.badge {
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  background: #ffffff;
+}
+
+.badgeUpsell {
+  color: #16a34a;
+  border: 1px solid #c7ebd3;
+  background: #e8f7ee;
+}
+
+.badgeNurture {
+  color: #5b6472;
+  border: 1px solid #e6e8ec;
+  background: #ffffff;
+}
+
+.badgeCondition {
+  color: #5b6472;
+  border: 1px solid #e6e8ec;
+  background: #ffffff;
+}
+
+.badgeTrigger {
+  color: #5b6472;
+  border: 1px solid #e6e8ec;
+  background: #ffffff;
+}
+
+.focusRing:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+.cubes {
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  width: 160px;
+  height: 130px;
+  pointer-events: none;
+  z-index: 1;
+  color: #b8bec7;
+}
+
+@keyframes aePulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.4;
+  }
+  70% {
+    transform: scale(1.35);
+    opacity: 0.08;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes aeDotTravel {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes aeScroll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-406px);
+  }
+}
+
+:global(.dark) .root {
+  background: #0b0f17;
+}
+
+:global(.dark) .dotGrid {
+  background-image: radial-gradient(circle at 1px 1px, #1f2937 1px, transparent 1px);
+}
+
+:global(.dark) .edgeStripe {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.04) 0,
+    rgba(255, 255, 255, 0.04) 2px,
+    transparent 2px,
+    transparent 12px
+  );
+}
+
+:global(.dark) .badge,
+:global(.dark) .badgeCondition,
+:global(.dark) .badgeNurture,
+:global(.dark) .badgeTrigger {
+  background: #0b0f17;
+  color: #f3f4f6;
+  border-color: #1f2937;
+}
+
+:global(.dark) .badgeUpsell {
+  background: rgba(34, 197, 94, 0.12);
+  color: #34d399;
+  border-color: rgba(34, 197, 94, 0.18);
+}
+
+:global(.dark) .cubes {
+  color: #4b5563;
+}
+
+:global(.dark) .nodeCard {
+  background: #111827;
+  border-color: #1f2937;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+:global(.dark) .listCard {
+  background: #111827;
+  border-color: #1f2937;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+:global(.dark) .flowPathIdle {
+  stroke: #374151;
+}
+
+:global(.dark) .flowPathActive {
+  stroke: #34d399;
+}
+
+:global(.dark) .pulseRing {
+  border-color: rgba(52, 211, 153, 0.32);
+}
+
+:global(.dark) .pathDot {
+  background: #34d399;
+  box-shadow: 0 0 6px rgba(52, 211, 153, 0.8);
+}
+
+.root[data-paused="true"] .listTrack,
+.root[data-paused="true"] .pathDot,
+.root[data-paused="true"] .pulseRing {
+  animation-play-state: paused !important;
+}
+
+.root[data-reduced-motion="true"] .listTrack,
+.root[data-reduced-motion="true"] .pathDot,
+.root[data-reduced-motion="true"] .pulseRing {
+  animation: none !important;
+}
+
+.root[data-reduced-motion="true"] .flowPath {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .listTrack,
+  .pathDot,
+  .pulseRing {
+    animation: none !important;
+  }
+
+  .flowPath {
+    transition: none !important;
+  }
+}

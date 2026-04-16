@@ -362,6 +362,53 @@
       ]
     }
   },
+  "automateEverything": {
+    "title": "Automate Everything",
+    "description": "Watch a deal update trigger a branching automation, route qualified contacts into an upsell sequence, and keep the rest of your playbooks moving in a live list.",
+    "cta": "Explore automations →",
+    "ariaLabel": "Automation flow section",
+    "srText": "Automation flow, 4 steps. Step 1 trigger When Deal updated, triggered. Step 2 condition. Step 3 enroll in sequence upsell. Step 4 enroll in sequence nurture.",
+    "trigger": {
+      "badge": "Trigger",
+      "title": "When Deal updated",
+      "description": "The flow starts the moment a deal changes in your CRM.",
+      "status": "Triggered"
+    },
+    "condition": {
+      "badge": "Condition",
+      "title": "Condition split",
+      "description": "Branch the workflow by checking whether the contact is qualified for the next step.",
+      "status": "Completed",
+      "upsell": "Upsell",
+      "nurture": "Nurture"
+    },
+    "sequence": {
+      "upsell": {
+        "badge": "Sequences",
+        "title": "Enroll in sequence",
+        "description": "Send high-intent contacts into an upsell sequence with the right follow-up timing.",
+        "status": "Completed"
+      },
+      "nurture": {
+        "badge": "Sequences",
+        "title": "Enroll in sequence",
+        "description": "Keep the rest of the audience warm with a long-tail nurture sequence.",
+        "status": "Completed"
+      }
+    },
+    "list": {
+      "title": "Automation scenarios",
+      "items": [
+        { "id": "new_deal_email_campaign", "title": "New deal email campaign", "color": "green" },
+        { "id": "lead_qualification_router", "title": "Lead qualification router", "color": "blue" },
+        { "id": "webinar_follow_up", "title": "Webinar follow-up sequence", "color": "amber" },
+        { "id": "renewal_reminder", "title": "Renewal reminder playbook", "color": "violet" },
+        { "id": "onboarding_nurture", "title": "Onboarding nurture track", "color": "rose" },
+        { "id": "churn_save_play", "title": "Churn save playbook", "color": "cyan" },
+        { "id": "expansion_alerts", "title": "Expansion alerts flow", "color": "lime" }
+      ]
+    }
+  },
   "aiGradientCard": {
     "title": "AI Decision Engine",
     "description": "Agents make smart decisions for every customer.",
