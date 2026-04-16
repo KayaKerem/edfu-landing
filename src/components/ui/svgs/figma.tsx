@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 
 const Figma = (props: SVGProps<SVGSVGElement>) => (
-  <svg {...props} viewBox="0 0 54 80" fill="none">
+  <svg aria-hidden="true" {...props} viewBox="0 0 54 80" fill="none">
     <g clipPath="url(#clip0_912_3)">
       <path
         d="M13.3333 80.0002C20.6933 80.0002 26.6667 74.0268 26.6667 66.6668V53.3335H13.3333C5.97333 53.3335 0 59.3068 0 66.6668C0 74.0268 5.97333 80.0002 13.3333 80.0002Z"

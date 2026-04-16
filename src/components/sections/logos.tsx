@@ -43,9 +43,8 @@ export function Logos({ dict }: LogosProps) {
             const isLastRow4 = i >= logos.length - (logos.length % 4 || 4);
             const isRightInRow4 = i % 4 === 3;
             return (
-            <a
+            <div
               key={logo.name}
-              href="#"
               className={`group relative flex flex-col items-center justify-center px-4 py-8 sm:px-6 sm:py-10 overflow-hidden ${
                 !isRightInRow2 ? "border-r border-border" : ""
               } ${!isLastRow2 ? "border-b border-border" : ""} ${
@@ -61,7 +60,7 @@ export function Logos({ dict }: LogosProps) {
               <span style={{ fontFamily: "var(--font-geist)" }} className="absolute bottom-4 flex items-center gap-1 text-sm font-medium text-foreground/80 opacity-0 transition-all duration-300 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0">
                 {dict.learnMore} <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
               </span>
-            </a>
+            </div>
             );
           })}
         </div>

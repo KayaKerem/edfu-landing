@@ -15,13 +15,15 @@ interface FooterProps {
 export function Footer({ dict, lang }: FooterProps) {
   const prefix = lang === "tr" ? "" : `/${lang}`;
 
-  const footerRoutes: Record<string, string> = {
-    "Fiyatlandırma": `${prefix}/pricing`,
-    "Pricing": `${prefix}/pricing`,
-    "Entegrasyonlar": `${prefix}/integrations`,
-    "Integrations": `${prefix}/integrations`,
-    "Özellikler": `${prefix}/agents`,
-    "Features": `${prefix}/agents`,
+  /* Route map keyed by column index + link index.
+     This avoids matching on translated label text, which breaks
+     if translations change. The indices correspond to the order
+     in the dictionary's footer.columns arrays. */
+  const routesByPosition: Record<string, string> = {
+    // Column 1 ("Product"/"Ürün") — index 0: Features, 1: Pricing, 2: Integrations
+    "1-0": `${prefix}/agents`,
+    "1-1": `${prefix}/pricing`,
+    "1-2": `${prefix}/integrations`,
   };
 
   return (
@@ -57,31 +59,31 @@ export function Footer({ dict, lang }: FooterProps) {
           </div>
 
           {/* Link columns */}
-          {dict.columns.map((col) => (
+          {dict.columns.map((col, colIdx) => (
             <div key={col.heading}>
               <h4 className="font-heading font-bold text-sm mb-4">
                 {col.heading}
               </h4>
               <ul className="space-y-3">
-                {col.links.map((link) => (
-                  <li key={link}>
-                    {footerRoutes[link] ? (
-                      <Link
-                        href={footerRoutes[link]}
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        {link}
-                      </Link>
-                    ) : (
-                      <a
-                        href="#"
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        {link}
-                      </a>
-                    )}
-                  </li>
-                ))}
+                {col.links.map((link, linkIdx) => {
+                  const route = routesByPosition[`${colIdx}-${linkIdx}`];
+                  return (
+                    <li key={link}>
+                      {route ? (
+                        <Link
+                          href={route}
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          {link}
+                        </Link>
+                      ) : (
+                        <span className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-default">
+                          {link}
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

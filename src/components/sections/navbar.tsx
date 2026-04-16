@@ -5,7 +5,6 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
-import navbarCatAnimation from "@/../public/navbar-cat.json";
 
 const Lottie = dynamic(() => import("lottie-react"), {
   ssr: false,
@@ -18,6 +17,11 @@ import type { Dictionary } from "@/dictionaries";
 
 function NavbarCatLogo() {
   const lottieRef = useRef<any>(null);
+  const [animData, setAnimData] = useState<unknown>(null);
+
+  useEffect(() => {
+    import("@/../public/navbar-cat.json").then((m) => setAnimData(m.default));
+  }, []);
 
   const handleComplete = useCallback(() => {
     setTimeout(() => {
@@ -25,10 +29,12 @@ function NavbarCatLogo() {
     }, 4000);
   }, []);
 
+  if (!animData) return <div className="size-8" />;
+
   return (
     <Lottie
       lottieRef={lottieRef}
-      animationData={navbarCatAnimation}
+      animationData={animData}
       loop={false}
       autoplay
       onComplete={handleComplete}

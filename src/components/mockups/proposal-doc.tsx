@@ -1,12 +1,30 @@
 import { cn } from "@/lib/utils";
 
-const lineItems = [
-  { item: "Kurumsal AI Lisansı", quantity: "85 kullanıcı", amount: "₺135.320" },
-  { item: "CRM Entegrasyonu", quantity: "1 modül", amount: "₺24.000" },
-  { item: "Onboarding & Eğitim", quantity: "1 paket", amount: "₺18.500" },
-] as const;
+interface ProposalLineItem {
+  item: string;
+  quantity: string;
+  amount: string;
+}
 
-export function ProposalDoc({ className }: { className?: string }) {
+interface ProposalDocDict {
+  title: string;
+  aiBadge: string;
+  colItem: string;
+  colQuantity: string;
+  colAmount: string;
+  lineItems: ProposalLineItem[];
+  totalLabel: string;
+  totalAmount: string;
+  validity: string;
+}
+
+export function ProposalDoc({
+  className,
+  dict,
+}: {
+  className?: string;
+  dict: ProposalDocDict;
+}) {
   return (
     <div
       className={cn(
@@ -36,14 +54,24 @@ export function ProposalDoc({ className }: { className?: string }) {
             className="text-sm font-semibold text-foreground"
             style={{ fontFamily: "var(--font-geist)" }}
           >
-            Teklif — TechVista SaaS
+            {dict.title}
           </h3>
         </div>
         <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-medium text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400">
-          <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+          <svg
+            className="h-3 w-3"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m4.5 12.75 6 6 9-13.5"
+            />
           </svg>
-          AI Oluşturdu
+          {dict.aiBadge}
         </span>
       </div>
 
@@ -53,22 +81,19 @@ export function ProposalDoc({ className }: { className?: string }) {
           <thead>
             <tr className="border-b border-border">
               <th className="px-5 py-2.5 text-left text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                Kalem
+                {dict.colItem}
               </th>
               <th className="px-5 py-2.5 text-left text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                Miktar
+                {dict.colQuantity}
               </th>
               <th className="px-5 py-2.5 text-right text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                Tutar
+                {dict.colAmount}
               </th>
             </tr>
           </thead>
           <tbody>
-            {lineItems.map((row) => (
-              <tr
-                key={row.item}
-                className="border-b border-border"
-              >
+            {dict.lineItems.map((row) => (
+              <tr key={row.item} className="border-b border-border">
                 <td className="px-5 py-3 text-sm text-foreground">
                   {row.item}
                 </td>
@@ -90,13 +115,13 @@ export function ProposalDoc({ className }: { className?: string }) {
       {/* Total */}
       <div className="flex items-center justify-between border-t border-border bg-muted/30 px-5 py-3">
         <span className="text-sm font-medium text-foreground">
-          Toplam (KDV Hariç)
+          {dict.totalLabel}
         </span>
         <span
           className="text-sm font-bold text-foreground"
           style={{ fontFamily: "var(--font-mono)" }}
         >
-          ₺177.820
+          {dict.totalAmount}
         </span>
       </div>
 
@@ -105,7 +130,7 @@ export function ProposalDoc({ className }: { className?: string }) {
         <div className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-emerald-500" />
           <span className="text-xs text-muted-foreground">
-            Geçerlilik: 30 gün
+            {dict.validity}
           </span>
         </div>
         <div className="h-5 w-24 rounded bg-muted" />

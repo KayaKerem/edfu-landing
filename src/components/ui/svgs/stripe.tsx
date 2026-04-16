@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 
 const Stripe = (props: SVGProps<SVGSVGElement>) => (
-  <svg {...props} fill="none" viewBox="100 100 312 312">
+  <svg aria-hidden="true" {...props} fill="none" viewBox="100 100 312 312">
     <path
       fill="#533afd"
       fillRule="evenodd"

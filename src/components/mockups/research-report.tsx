@@ -1,25 +1,28 @@
 import { cn } from "@/lib/utils";
 
-const findings = [
-  {
-    color: "bg-emerald-500",
-    text: "Yıllık gelir: ~₺12M, son 2 yılda %40 büyüme",
-  },
-  {
-    color: "bg-emerald-500",
-    text: "CRM çözümü aktif olarak arıyor (LinkedIn paylaşımları)",
-  },
-  {
-    color: "bg-amber-500",
-    text: "Mevcut rakip: HubSpot Free — ölçeklenme sorunu yaşıyor",
-  },
-  {
-    color: "bg-emerald-500",
-    text: "Karar verici: CTO (Ahmet Yılmaz) — 3 demo talep etti",
-  },
-];
+interface ResearchReportDict {
+  title: string;
+  agentBadge: string;
+  companyName: string;
+  companyMeta: string;
+  scoreLabel: string;
+  findings: string[];
+}
 
-export function ResearchReport({ className }: { className?: string }) {
+const FINDING_COLORS = [
+  "bg-emerald-500",
+  "bg-emerald-500",
+  "bg-amber-500",
+  "bg-emerald-500",
+] as const;
+
+export function ResearchReport({
+  className,
+  dict,
+}: {
+  className?: string;
+  dict: ResearchReportDict;
+}) {
   return (
     <div
       className={cn(
@@ -34,10 +37,10 @@ export function ResearchReport({ className }: { className?: string }) {
           className="flex-1 text-sm font-semibold text-foreground"
           style={{ fontFamily: "var(--font-geist)" }}
         >
-          Şirket Araştırması
+          {dict.title}
         </h3>
         <span className="inline-flex items-center rounded-full bg-primary px-2 py-0.5 text-[10px] font-medium text-primary-foreground">
-          Araştırma Agenti
+          {dict.agentBadge}
         </span>
       </div>
 
@@ -51,15 +54,15 @@ export function ResearchReport({ className }: { className?: string }) {
             className="text-sm font-semibold text-foreground"
             style={{ fontFamily: "var(--font-geist)" }}
           >
-            TechVista SaaS A.Ş.
+            {dict.companyName}
           </p>
           <p className="text-[11px] text-muted-foreground">
-            B2B SaaS • İstanbul • 85 çalışan
+            {dict.companyMeta}
           </p>
         </div>
         <div className="text-right">
           <p className="text-[10px] font-medium text-muted-foreground">
-            ICP Score
+            {dict.scoreLabel}
           </p>
           <p
             className="text-xl font-bold text-primary"
@@ -72,16 +75,16 @@ export function ResearchReport({ className }: { className?: string }) {
 
       {/* Findings */}
       <div className="flex flex-col gap-2 px-4 py-3">
-        {findings.map((finding, i) => (
+        {dict.findings.map((text, i) => (
           <div key={i} className="flex items-start gap-2">
             <span
               className={cn(
                 "mt-1.5 h-2 w-2 shrink-0 rounded-full",
-                finding.color
+                FINDING_COLORS[i] ?? "bg-emerald-500"
               )}
             />
             <p className="text-xs leading-relaxed text-foreground/80">
-              {finding.text}
+              {text}
             </p>
           </div>
         ))}

@@ -11,6 +11,7 @@ interface FlowNodeProps {
   badge?: string;
   attrs?: string[];
   moreCount?: number;
+  moreLabel?: string;
   children?: React.ReactNode;
   className?: string;
 }
@@ -32,6 +33,7 @@ export function FlowNode({
   badge,
   attrs,
   moreCount,
+  moreLabel = "More Attributes",
   children,
   className,
 }: FlowNodeProps) {
@@ -108,7 +110,7 @@ export function FlowNode({
               <span className="inline-block h-[3px] w-[3px] rounded-full bg-[#98A2B3] dark:bg-[#64748B]" />
               <span className="inline-block h-[3px] w-[3px] rounded-full bg-[#98A2B3] dark:bg-[#64748B]" />
               <span className="ml-1 text-[9px] text-[#98A2B3] dark:text-[#64748B] lg:text-[11px]">
-                {moreCount} More Attributes
+                {moreCount} {moreLabel}
               </span>
             </div>
           )}

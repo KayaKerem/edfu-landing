@@ -629,5 +629,109 @@
       "title": "Tüm kanallarınızı bağlayın.",
       "button": "Ücretsiz Deneyin"
     }
+  },
+  "mockups": {
+    "whatsappChat": {
+      "contactName": "Ahmet Yılmaz",
+      "contactInitials": "AY",
+      "online": "çevrimiçi",
+      "aiBadge": "AI Aktif",
+      "customerMsg1": "Merhaba, kurumsal yazılım çözümleriniz hakkında bilgi almak istiyorum.",
+      "aiMsg1": "Merhaba Ahmet Bey! Size yardımcı olmaktan mutluluk duyarım. Şirketinizin büyüklüğü ve sektörü hakkında bilgi alabilir miyim?",
+      "customerMsg2": "SaaS sektöründe 85 kişilik bir ekibiz. CRM entegrasyonu arıyoruz.",
+      "aiMsg2": "Harika! Tam size uygun paketlerimiz var. Şirketinizi kısaca araştırıp size özel bir teklif hazırlıyorum."
+    },
+    "crmTable": {
+      "title": "Aktif Lead'ler",
+      "updatedByAi": "AI tarafından güncellendi",
+      "colName": "İsim",
+      "colCompany": "Şirket",
+      "colStatus": "Durum",
+      "colScore": "Skor",
+      "leads": [
+        { "name": "Ahmet Yılmaz", "company": "TechVista SaaS", "status": "Nitelikli" },
+        { "name": "Elif Korkmaz", "company": "DataFlow A.Ş.", "status": "Görüşmede" },
+        { "name": "Murat Çelik", "company": "NovaRetail", "status": "Yeni" },
+        { "name": "Zeynep Arslan", "company": "FinEdge Ltd.", "status": "Nitelikli" }
+      ]
+    },
+    "proposalDoc": {
+      "title": "Teklif — TechVista SaaS",
+      "aiBadge": "AI Oluşturdu",
+      "colItem": "Kalem",
+      "colQuantity": "Miktar",
+      "colAmount": "Tutar",
+      "lineItems": [
+        { "item": "Kurumsal AI Lisansı", "quantity": "85 kullanıcı", "amount": "₺135.320" },
+        { "item": "CRM Entegrasyonu", "quantity": "1 modül", "amount": "₺24.000" },
+        { "item": "Onboarding & Eğitim", "quantity": "1 paket", "amount": "₺18.500" }
+      ],
+      "totalLabel": "Toplam (KDV Hariç)",
+      "totalAmount": "₺177.820",
+      "validity": "Geçerlilik: 30 gün"
+    },
+    "meetingList": {
+      "title": "Son Toplantılar",
+      "statusRecorded": "Kaydedildi",
+      "statusProcessing": "İşleniyor",
+      "meetings": [
+        { "title": "TechVista — Satış Demo", "date": "13 Nis, 14:00", "participants": "Mehmet K., Ahmet Y.", "duration": "45 dk" },
+        { "title": "DataFlow — Onboarding", "date": "13 Nis, 11:00", "participants": "Elif D., Zeynep A.", "duration": "30 dk" },
+        { "title": "NovaRetail — Kick-off", "date": "12 Nis, 16:00", "participants": "Murat Ç., Can Y.", "duration": "60 dk" },
+        { "title": "FinEdge — İhtiyaç Analizi", "date": "12 Nis, 10:30", "participants": "Selin T., Burak Ö.", "duration": "25 dk" }
+      ]
+    },
+    "researchReport": {
+      "title": "Şirket Araştırması",
+      "agentBadge": "Araştırma Agenti",
+      "companyName": "TechVista SaaS A.Ş.",
+      "companyMeta": "B2B SaaS • İstanbul • 85 çalışan",
+      "scoreLabel": "ICP Score",
+      "findings": [
+        "Yıllık gelir: ~₺12M, son 2 yılda %40 büyüme",
+        "CRM çözümü aktif olarak arıyor (LinkedIn paylaşımları)",
+        "Mevcut rakip: HubSpot Free — ölçeklenme sorunu yaşıyor",
+        "Karar verici: CTO (Ahmet Yılmaz) — 3 demo talep etti"
+      ]
+    },
+    "ragSearch": {
+      "query": "Tedarikçi sözleşme şartları nelerdir?",
+      "agentBadge": "RAG Agenti",
+      "sourcesFound": "3 kaynak bulundu",
+      "answerPrefix": "Tedarikçi sözleşmesine göre ödeme vadesi",
+      "answerHighlight1": "45 gün",
+      "answerMid1": "'dür. Gecikme durumunda aylık",
+      "answerHighlight2": "%2",
+      "answerMid2": "faiz uygulanır. Minimum sipariş tutarı",
+      "answerHighlight3": "₺50.000",
+      "answerSuffix": "'dir.",
+      "sourceFile1": "Tedarikçi_Sözleşme.pdf",
+      "sourceFile2": "Satın_Alma_Politikası.docx"
+    },
+    "callPlayer": {
+      "title": "Satış Görüşmesi — TechVista",
+      "speaker1Name": "Mehmet K.",
+      "speaker1Role": "Satış",
+      "speaker2Name": "Ahmet Y.",
+      "speaker2Role": "Müşteri",
+      "transcriptLabel": "Transkript",
+      "lines": [
+        { "time": "02:15", "speaker": "Mehmet K.", "text": "\u201CEkibiniz şu an kaç kişi kullanıyor?\u201D" },
+        { "time": "02:22", "speaker": "Ahmet Y.", "text": "\u201C85 kişilik bir ekibiz, CRM entegrasyonu en önemli ihtiyacımız.\u201D" },
+        { "time": "02:35", "speaker": "Mehmet K.", "text": "\u201CAnladım, size özel kurumsal paketimiz tam ihtiyacınıza uygun.\u201D" }
+      ]
+    },
+    "meetingTranscript": {
+      "title": "Toplantı Transkripti",
+      "subtitle": "Q3 Satış Toplantısı",
+      "aiSummaryLabel": "AI Özet",
+      "lines": [
+        { "time": "14:22", "speaker": "Mehmet K.", "text": "\u201cBu çeyrekte hedefimiz 200 yeni müşteri.\u201d", "isAction": false },
+        { "time": "14:25", "speaker": "Elif D.", "text": "\u201cPazarlama bütçesini %30 artırmamız gerekecek.\u201d", "isAction": false },
+        { "time": "", "speaker": "AI Özet", "text": "Aksiyon: Pazarlama bütçe artışı onayı \u2192 Elif D. \u2014 18 Nis\u2019e kadar", "isAction": true },
+        { "time": "14:31", "speaker": "Can Y.", "text": "\u201cDemo ortamını önümüzdeki haftaya hazırlayalım.\u201d", "isAction": false },
+        { "time": "", "speaker": "AI Özet", "text": "Aksiyon: Demo ortamı hazırlığı \u2192 Can Y. \u2014 20 Nis\u2019e kadar", "isAction": true }
+      ]
+    }
   }
 }

@@ -628,5 +628,109 @@
       "title": "Connect all your channels.",
       "button": "Try Free"
     }
+  },
+  "mockups": {
+    "whatsappChat": {
+      "contactName": "John Smith",
+      "contactInitials": "JS",
+      "online": "online",
+      "aiBadge": "AI Active",
+      "customerMsg1": "Hi, I'd like to learn about your enterprise software solutions.",
+      "aiMsg1": "Hello John! Happy to help. Could you tell me about your company's size and industry?",
+      "customerMsg2": "We're a team of 85 in the SaaS industry. Looking for CRM integration.",
+      "aiMsg2": "Great! We have packages that are a perfect fit. Let me quickly research your company and prepare a custom proposal."
+    },
+    "crmTable": {
+      "title": "Active Leads",
+      "updatedByAi": "Updated by AI",
+      "colName": "Name",
+      "colCompany": "Company",
+      "colStatus": "Status",
+      "colScore": "Score",
+      "leads": [
+        { "name": "John Smith", "company": "TechVista SaaS", "status": "Qualified" },
+        { "name": "Emily Clark", "company": "DataFlow Inc.", "status": "In Meeting" },
+        { "name": "Mark Wilson", "company": "NovaRetail", "status": "New" },
+        { "name": "Sarah Johnson", "company": "FinEdge Ltd.", "status": "Qualified" }
+      ]
+    },
+    "proposalDoc": {
+      "title": "Proposal — TechVista SaaS",
+      "aiBadge": "AI Generated",
+      "colItem": "Item",
+      "colQuantity": "Quantity",
+      "colAmount": "Amount",
+      "lineItems": [
+        { "item": "Enterprise AI License", "quantity": "85 users", "amount": "$12,500" },
+        { "item": "CRM Integration", "quantity": "1 module", "amount": "$2,200" },
+        { "item": "Onboarding & Training", "quantity": "1 package", "amount": "$1,700" }
+      ],
+      "totalLabel": "Total (excl. Tax)",
+      "totalAmount": "$16,400",
+      "validity": "Valid for: 30 days"
+    },
+    "meetingList": {
+      "title": "Recent Meetings",
+      "statusRecorded": "Recorded",
+      "statusProcessing": "Processing",
+      "meetings": [
+        { "title": "TechVista — Sales Demo", "date": "Apr 13, 2:00 PM", "participants": "Mike K., John S.", "duration": "45 min" },
+        { "title": "DataFlow — Onboarding", "date": "Apr 13, 11:00 AM", "participants": "Emily C., Sarah J.", "duration": "30 min" },
+        { "title": "NovaRetail — Kick-off", "date": "Apr 12, 4:00 PM", "participants": "Mark W., Dan Y.", "duration": "60 min" },
+        { "title": "FinEdge — Needs Analysis", "date": "Apr 12, 10:30 AM", "participants": "Lisa T., Brian O.", "duration": "25 min" }
+      ]
+    },
+    "researchReport": {
+      "title": "Company Research",
+      "agentBadge": "Research Agent",
+      "companyName": "TechVista SaaS Inc.",
+      "companyMeta": "B2B SaaS • San Francisco • 85 employees",
+      "scoreLabel": "ICP Score",
+      "findings": [
+        "Annual revenue: ~$1.4M, 40% growth in the last 2 years",
+        "Actively looking for a CRM solution (LinkedIn posts)",
+        "Current competitor: HubSpot Free — experiencing scaling issues",
+        "Decision maker: CTO (John Smith) — requested 3 demos"
+      ]
+    },
+    "ragSearch": {
+      "query": "What are the supplier contract terms?",
+      "agentBadge": "RAG Agent",
+      "sourcesFound": "3 sources found",
+      "answerPrefix": "According to the supplier contract, the payment term is",
+      "answerHighlight1": "45 days",
+      "answerMid1": ". In case of late payment, a monthly",
+      "answerHighlight2": "2%",
+      "answerMid2": "interest is applied. The minimum order amount is",
+      "answerHighlight3": "$50,000",
+      "answerSuffix": ".",
+      "sourceFile1": "Supplier_Contract.pdf",
+      "sourceFile2": "Procurement_Policy.docx"
+    },
+    "callPlayer": {
+      "title": "Sales Call — TechVista",
+      "speaker1Name": "Mike K.",
+      "speaker1Role": "Sales",
+      "speaker2Name": "John S.",
+      "speaker2Role": "Customer",
+      "transcriptLabel": "Transcript",
+      "lines": [
+        { "time": "02:15", "speaker": "Mike K.", "text": "\u201CHow many people on your team are currently using it?\u201D" },
+        { "time": "02:22", "speaker": "John S.", "text": "\u201CWe're a team of 85, and CRM integration is our top priority.\u201D" },
+        { "time": "02:35", "speaker": "Mike K.", "text": "\u201CGot it, our enterprise package is a perfect fit for your needs.\u201D" }
+      ]
+    },
+    "meetingTranscript": {
+      "title": "Meeting Transcript",
+      "subtitle": "Q3 Sales Meeting",
+      "aiSummaryLabel": "AI Summary",
+      "lines": [
+        { "time": "14:22", "speaker": "Mike K.", "text": "\u201cOur target this quarter is 200 new customers.\u201d", "isAction": false },
+        { "time": "14:25", "speaker": "Emily C.", "text": "\u201cWe'll need to increase the marketing budget by 30%.\u201d", "isAction": false },
+        { "time": "", "speaker": "AI Summary", "text": "Action: Marketing budget increase approval \u2192 Emily C. \u2014 by Apr 18", "isAction": true },
+        { "time": "14:31", "speaker": "Dan Y.", "text": "\u201cLet's have the demo environment ready by next week.\u201d", "isAction": false },
+        { "time": "", "speaker": "AI Summary", "text": "Action: Demo environment preparation \u2192 Dan Y. \u2014 by Apr 20", "isAction": true }
+      ]
+    }
   }
 }

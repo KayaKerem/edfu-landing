@@ -17,6 +17,7 @@ interface DataModelVizProps {
   sectionLabel?: string;
   cards: [DataModelCardData, DataModelCardData, DataModelCardData];
   addObjectLabel?: string;
+  moreLabel?: string;
   className?: string;
 }
 
@@ -30,10 +31,12 @@ const AttrIcon = (
 /* --- Internal card component (Attio's DataModelCard pattern) --- */
 function ModelCard({
   card,
+  moreLabel = "More",
   className,
   style,
 }: {
   card: DataModelCardData;
+  moreLabel?: string;
   className?: string;
   style?: React.CSSProperties;
 }) {
@@ -97,7 +100,7 @@ function ModelCard({
                 />
               ))}
               <span className="ml-1 text-[9px] text-[#98A2B3] dark:text-[#64748B] lg:text-[11px]">
-                {card.moreCount} More
+                {card.moreCount} {moreLabel}
               </span>
             </div>
           )}
@@ -208,6 +211,7 @@ export function DataModelViz({
   sectionLabel,
   cards,
   addObjectLabel,
+  moreLabel,
   className,
 }: DataModelVizProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -248,10 +252,18 @@ export function DataModelViz({
         <div className="relative">
           {/* Dot-grid background */}
           <div
-            className="pointer-events-none absolute inset-0 -z-10 opacity-60"
+            className="pointer-events-none absolute inset-0 -z-10 opacity-60 dark:hidden"
             style={{
               backgroundImage:
                 "radial-gradient(#E4E7EC 1px, transparent 1px)",
+              backgroundSize: "16px 16px",
+            }}
+          />
+          <div
+            className="pointer-events-none absolute inset-0 -z-10 opacity-60 hidden dark:block"
+            style={{
+              backgroundImage:
+                "radial-gradient(#334155 1px, transparent 1px)",
               backgroundSize: "16px 16px",
             }}
           />
@@ -266,7 +278,7 @@ export function DataModelViz({
                 transition: "all 0.6s cubic-bezier(0.2,0,0,1) 0s",
               }}
             >
-              <ModelCard card={cards[0]} />
+              <ModelCard card={cards[0]} moreLabel={moreLabel} />
             </div>
 
             {/* Top-right card */}
@@ -278,7 +290,7 @@ export function DataModelViz({
                 transition: "all 0.6s cubic-bezier(0.2,0,0,1) 0.15s",
               }}
             >
-              <ModelCard card={cards[1]} />
+              <ModelCard card={cards[1]} moreLabel={moreLabel} />
             </div>
 
             {/* Bottom-left card */}
@@ -290,7 +302,7 @@ export function DataModelViz({
                 transition: "all 0.6s cubic-bezier(0.2,0,0,1) 0.3s",
               }}
             >
-              <ModelCard card={cards[2]} />
+              <ModelCard card={cards[2]} moreLabel={moreLabel} />
             </div>
 
             {/* Bottom-right: Add object */}

@@ -127,9 +127,16 @@ export function FlowDiagram({ dict }: FlowDiagramProps) {
           <div className="relative max-w-md mx-auto md:mx-0">
             {/* Dot-grid background */}
             <div
-              className="pointer-events-none absolute inset-0 -z-10 opacity-60"
+              className="pointer-events-none absolute inset-0 -z-10 opacity-60 dark:hidden"
               style={{
                 backgroundImage: "radial-gradient(#E4E7EC 1px, transparent 1px)",
+                backgroundSize: "16px 16px",
+              }}
+            />
+            <div
+              className="pointer-events-none absolute inset-0 -z-10 opacity-60 hidden dark:block"
+              style={{
+                backgroundImage: "radial-gradient(#334155 1px, transparent 1px)",
                 backgroundSize: "16px 16px",
               }}
             />

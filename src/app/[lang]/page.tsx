@@ -87,6 +87,7 @@ function JsonLd({ dict, lang }: { dict: Dictionary; lang: string }) {
 
   return (
     <>
+      {/* Safe: JSON.stringify escapes </script> sequences */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -136,6 +137,10 @@ export async function generateMetadata({
       images: ["/og-image.png"],
     },
   };
+}
+
+export async function generateStaticParams() {
+  return [{ lang: "tr" }, { lang: "en" }];
 }
 
 export default async function Home({

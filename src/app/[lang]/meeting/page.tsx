@@ -83,11 +83,12 @@ export default async function MeetingPage({
 
   const dict = await getDictionary(lang as Locale);
   const mp = dict.meetingPage;
+  const m = dict.mockups;
 
   const stickyVisuals = [
-    <CrmTable key="crm" />,
-    <MeetingTranscript key="transcript" />,
-    <CallPlayerMockup key="player" />,
+    <CrmTable key="crm" dict={m.crmTable} />,
+    <MeetingTranscript key="transcript" dict={m.meetingTranscript} />,
+    <CallPlayerMockup key="player" dict={m.callPlayer} />,
   ];
 
   return (
@@ -97,7 +98,13 @@ export default async function MeetingPage({
         <div className="pointer-events-none absolute inset-y-0 left-4 md:left-6 z-10 w-px bg-border" />
         <div className="pointer-events-none absolute inset-y-0 right-4 md:right-6 z-10 w-px bg-border" />
         <main className="divide-y divide-border">
-          <MeetingHero dict={mp.hero} />
+          <MeetingHero
+            dict={mp.hero}
+            mockupsDict={{
+              meetingList: m.meetingList,
+              callPlayer: m.callPlayer,
+            }}
+          />
 
           {/* 3 Feature Cards */}
           <section className="py-16 sm:py-20">

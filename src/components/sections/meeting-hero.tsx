@@ -11,9 +11,13 @@ interface MeetingHeroProps {
     title: string;
     description: string;
   };
+  mockupsDict: {
+    meetingList: Parameters<typeof MeetingList>[0]["dict"];
+    callPlayer: Parameters<typeof CallPlayer>[0]["dict"];
+  };
 }
 
-export function MeetingHero({ dict }: MeetingHeroProps) {
+export function MeetingHero({ dict, mockupsDict }: MeetingHeroProps) {
   return (
     <section className="relative overflow-hidden">
       <div
@@ -63,8 +67,8 @@ export function MeetingHero({ dict }: MeetingHeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.2, 0, 0, 1] as [number, number, number, number], delay: 0.4 }}
         >
-          <MeetingList className="shadow-lg" />
-          <CallPlayer className="shadow-lg" />
+          <MeetingList className="shadow-lg" dict={mockupsDict.meetingList} />
+          <CallPlayer className="shadow-lg" dict={mockupsDict.callPlayer} />
         </motion.div>
       </div>
     </section>

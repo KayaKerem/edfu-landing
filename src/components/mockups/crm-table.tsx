@@ -1,37 +1,37 @@
 import { cn } from "@/lib/utils";
 
-const leads = [
-  {
-    name: "Ahmet Yılmaz",
-    company: "TechVista SaaS",
-    status: "Nitelikli",
-    statusColor: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400",
-    score: 92,
-  },
-  {
-    name: "Elif Korkmaz",
-    company: "DataFlow A.Ş.",
-    status: "Görüşmede",
-    statusColor: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400",
-    score: 78,
-  },
-  {
-    name: "Murat Çelik",
-    company: "NovaRetail",
-    status: "Yeni",
-    statusColor: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400",
-    score: 65,
-  },
-  {
-    name: "Zeynep Arslan",
-    company: "FinEdge Ltd.",
-    status: "Nitelikli",
-    statusColor: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400",
-    score: 88,
-  },
-] as const;
+interface CrmTableLead {
+  name: string;
+  company: string;
+  status: string;
+}
 
-export function CrmTable({ className }: { className?: string }) {
+interface CrmTableDict {
+  title: string;
+  updatedByAi: string;
+  colName: string;
+  colCompany: string;
+  colStatus: string;
+  colScore: string;
+  leads: CrmTableLead[];
+}
+
+const SCORES = [92, 78, 65, 88] as const;
+
+const STATUS_COLORS: Record<number, string> = {
+  0: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400",
+  1: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400",
+  2: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400",
+  3: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400",
+};
+
+export function CrmTable({
+  className,
+  dict,
+}: {
+  className?: string;
+  dict: CrmTableDict;
+}) {
   return (
     <div
       className={cn(
@@ -46,17 +46,17 @@ export function CrmTable({ className }: { className?: string }) {
             className="text-sm font-semibold text-foreground"
             style={{ fontFamily: "var(--font-geist)" }}
           >
-            Aktif Lead&apos;ler
+            {dict.title}
           </h3>
           <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-[11px] font-semibold text-primary-foreground">
-            4
+            {dict.leads.length}
           </span>
         </div>
         <span
           className="text-[11px] text-muted-foreground"
           style={{ fontFamily: "var(--font-mono)" }}
         >
-          AI tarafından güncellendi
+          {dict.updatedByAi}
         </span>
       </div>
 
@@ -66,59 +66,62 @@ export function CrmTable({ className }: { className?: string }) {
           <thead>
             <tr className="border-b border-border">
               <th className="px-5 py-2.5 text-left text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                İsim
+                {dict.colName}
               </th>
               <th className="px-5 py-2.5 text-left text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                Şirket
+                {dict.colCompany}
               </th>
               <th className="px-5 py-2.5 text-left text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                Durum
+                {dict.colStatus}
               </th>
               <th className="px-5 py-2.5 text-right text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                Skor
+                {dict.colScore}
               </th>
             </tr>
           </thead>
           <tbody>
-            {leads.map((lead) => (
-              <tr
-                key={lead.name}
-                className="border-b border-border last:border-0 hover:bg-muted/50"
-              >
-                <td className="px-5 py-3 text-sm font-medium text-foreground">
-                  {lead.name}
-                </td>
-                <td className="px-5 py-3 text-sm text-muted-foreground">
-                  {lead.company}
-                </td>
-                <td className="px-5 py-3">
-                  <span
-                    className={cn(
-                      "inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium",
-                      lead.statusColor
-                    )}
-                  >
-                    {lead.status}
-                  </span>
-                </td>
-                <td className="px-5 py-3">
-                  <div className="flex items-center justify-end gap-2">
-                    <div className="h-1.5 w-16 overflow-hidden rounded-full bg-muted">
-                      <div
-                        className="h-full rounded-full bg-primary"
-                        style={{ width: `${lead.score}%` }}
-                      />
-                    </div>
+            {dict.leads.map((lead, i) => {
+              const score = SCORES[i] ?? 50;
+              return (
+                <tr
+                  key={lead.name}
+                  className="border-b border-border last:border-0 hover:bg-muted/50"
+                >
+                  <td className="px-5 py-3 text-sm font-medium text-foreground">
+                    {lead.name}
+                  </td>
+                  <td className="px-5 py-3 text-sm text-muted-foreground">
+                    {lead.company}
+                  </td>
+                  <td className="px-5 py-3">
                     <span
-                      className="text-sm font-medium text-foreground"
-                      style={{ fontFamily: "var(--font-mono)" }}
+                      className={cn(
+                        "inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium",
+                        STATUS_COLORS[i] ?? STATUS_COLORS[0]
+                      )}
                     >
-                      {lead.score}
+                      {lead.status}
                     </span>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                  <td className="px-5 py-3">
+                    <div className="flex items-center justify-end gap-2">
+                      <div className="h-1.5 w-16 overflow-hidden rounded-full bg-muted">
+                        <div
+                          className="h-full rounded-full bg-primary"
+                          style={{ width: `${score}%` }}
+                        />
+                      </div>
+                      <span
+                        className="text-sm font-medium text-foreground"
+                        style={{ fontFamily: "var(--font-mono)" }}
+                      >
+                        {score}
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

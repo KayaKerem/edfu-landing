@@ -4,29 +4,33 @@ const BAR_COUNT = 60;
 const PLAYED_RATIO = 0.28;
 
 const speakerSegments = {
-  mehmet: [0, 15, 35, 55, 80],
-  ahmet: [10, 25, 45, 70],
+  speaker1: [0, 15, 35, 55, 80],
+  speaker2: [10, 25, 45, 70],
 } as const;
 
-const transcript = [
-  {
-    time: "02:15",
-    speaker: "Mehmet K.",
-    text: "\u201CEkibiniz şu an kaç kişi kullanıyor?\u201D",
-  },
-  {
-    time: "02:22",
-    speaker: "Ahmet Y.",
-    text: "\u201C85 kişilik bir ekibiz, CRM entegrasyonu en önemli ihtiyacımız.\u201D",
-  },
-  {
-    time: "02:35",
-    speaker: "Mehmet K.",
-    text: "\u201CAnladım, size özel kurumsal paketimiz tam ihtiyacınıza uygun.\u201D",
-  },
-] as const;
+interface CallPlayerLine {
+  time: string;
+  speaker: string;
+  text: string;
+}
 
-export function CallPlayer({ className }: { className?: string }) {
+interface CallPlayerDict {
+  title: string;
+  speaker1Name: string;
+  speaker1Role: string;
+  speaker2Name: string;
+  speaker2Role: string;
+  transcriptLabel: string;
+  lines: CallPlayerLine[];
+}
+
+export function CallPlayer({
+  className,
+  dict,
+}: {
+  className?: string;
+  dict: CallPlayerDict;
+}) {
   return (
     <div
       className={cn(
@@ -44,7 +48,7 @@ export function CallPlayer({ className }: { className?: string }) {
           className="flex-1 text-sm font-semibold text-foreground"
           style={{ fontFamily: "var(--font-geist)" }}
         >
-          Satış Görüşmesi — TechVista
+          {dict.title}
         </h3>
         <span
           className="text-xs text-muted-foreground"
@@ -55,7 +59,10 @@ export function CallPlayer({ className }: { className?: string }) {
       </div>
 
       {/* Waveform */}
-      <div className="flex items-end gap-[2px] px-5 py-4" style={{ height: 64 }}>
+      <div
+        className="flex items-end gap-[2px] px-5 py-4"
+        style={{ height: 64 }}
+      >
         {Array.from({ length: BAR_COUNT }, (_, i) => {
           const normalised = i / BAR_COUNT;
           const height =
@@ -76,14 +83,18 @@ export function CallPlayer({ className }: { className?: string }) {
 
       {/* Speaker timeline */}
       <div className="space-y-2 border-t border-border px-5 py-3">
-        {/* Mehmet */}
+        {/* Speaker 1 */}
         <div className="flex items-center gap-3">
           <div className="w-20 flex-shrink-0">
-            <p className="text-xs font-medium text-foreground">Mehmet K.</p>
-            <p className="text-[10px] text-muted-foreground">Satış</p>
+            <p className="text-xs font-medium text-foreground">
+              {dict.speaker1Name}
+            </p>
+            <p className="text-[10px] text-muted-foreground">
+              {dict.speaker1Role}
+            </p>
           </div>
           <div className="relative h-2 flex-1 rounded-full bg-muted">
-            {speakerSegments.mehmet.map((pos) => (
+            {speakerSegments.speaker1.map((pos) => (
               <div
                 key={pos}
                 className="absolute top-0 h-2 rounded-full bg-primary"
@@ -92,14 +103,18 @@ export function CallPlayer({ className }: { className?: string }) {
             ))}
           </div>
         </div>
-        {/* Ahmet */}
+        {/* Speaker 2 */}
         <div className="flex items-center gap-3">
           <div className="w-20 flex-shrink-0">
-            <p className="text-xs font-medium text-foreground">Ahmet Y.</p>
-            <p className="text-[10px] text-muted-foreground">Müşteri</p>
+            <p className="text-xs font-medium text-foreground">
+              {dict.speaker2Name}
+            </p>
+            <p className="text-[10px] text-muted-foreground">
+              {dict.speaker2Role}
+            </p>
           </div>
           <div className="relative h-2 flex-1 rounded-full bg-muted">
-            {speakerSegments.ahmet.map((pos) => (
+            {speakerSegments.speaker2.map((pos) => (
               <div
                 key={pos}
                 className="absolute top-0 h-2 rounded-full bg-emerald-500"
@@ -114,15 +129,18 @@ export function CallPlayer({ className }: { className?: string }) {
       <div className="border-t border-border px-5 py-3">
         <div className="mb-2 flex items-center gap-2">
           <span className="text-xs font-medium text-foreground">
-            Transkript
+            {dict.transcriptLabel}
           </span>
           <span className="inline-flex h-4 items-center rounded bg-primary/10 px-1.5 text-[10px] font-semibold text-primary">
             AI
           </span>
         </div>
         <div className="space-y-1.5">
-          {transcript.map((line) => (
-            <div key={line.time} className="flex gap-2 text-[12px] leading-relaxed">
+          {dict.lines.map((line) => (
+            <div
+              key={line.time}
+              className="flex gap-2 text-[12px] leading-relaxed"
+            >
               <span
                 className="flex-shrink-0 text-muted-foreground"
                 style={{ fontFamily: "var(--font-mono)" }}

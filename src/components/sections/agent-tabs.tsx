@@ -15,23 +15,42 @@ interface AgentTab {
   features: string[];
 }
 
-interface AgentTabsProps {
-  tabs: AgentTab[];
+interface MockupsDict {
+  whatsappChat: Parameters<typeof WhatsAppChat>[0]["dict"];
+  proposalDoc: Parameters<typeof ProposalDoc>[0]["dict"];
+  researchReport: Parameters<typeof ResearchReport>[0]["dict"];
+  callPlayer: Parameters<typeof CallPlayer>[0]["dict"];
+  ragSearch: Parameters<typeof RagSearch>[0]["dict"];
 }
 
-const TAB_MOCKUPS = [WhatsAppChat, ProposalDoc, ResearchReport, CallPlayer, RagSearch];
+interface AgentTabsProps {
+  tabs: AgentTab[];
+  mockupsDict: MockupsDict;
+}
 
-export function AgentTabs({ tabs }: AgentTabsProps) {
+export function AgentTabs({ tabs, mockupsDict }: AgentTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
-  const Mockup = TAB_MOCKUPS[activeTab];
+
+  const mockups = [
+    <WhatsAppChat key="whatsapp" dict={mockupsDict.whatsappChat} />,
+    <ProposalDoc key="proposal" dict={mockupsDict.proposalDoc} />,
+    <ResearchReport key="research" dict={mockupsDict.researchReport} />,
+    <CallPlayer key="call" dict={mockupsDict.callPlayer} />,
+    <RagSearch key="rag" dict={mockupsDict.ragSearch} />,
+  ];
 
   return (
     <section className="py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="flex overflow-x-auto border-b border-border [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div
+          role="tablist"
+          className="flex overflow-x-auto border-b border-border [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {tabs.map((tab, i) => (
             <button
               key={i}
+              role="tab"
+              aria-selected={activeTab === i}
               onClick={() => setActiveTab(i)}
               className={`relative whitespace-nowrap px-4 py-3 text-sm font-medium transition-colors duration-300 cursor-pointer ${
                 activeTab === i
@@ -55,6 +74,7 @@ export function AgentTabs({ tabs }: AgentTabsProps) {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
+            role="tabpanel"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -83,7 +103,7 @@ export function AgentTabs({ tabs }: AgentTabsProps) {
               </ul>
             </div>
 
-            {Mockup && <Mockup />}
+            {mockups[activeTab]}
           </motion.div>
         </AnimatePresence>
       </div>

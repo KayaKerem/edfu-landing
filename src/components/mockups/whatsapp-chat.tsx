@@ -1,6 +1,23 @@
 import { cn } from "@/lib/utils";
 
-export function WhatsAppChat({ className }: { className?: string }) {
+interface WhatsAppChatDict {
+  contactName: string;
+  contactInitials: string;
+  online: string;
+  aiBadge: string;
+  customerMsg1: string;
+  aiMsg1: string;
+  customerMsg2: string;
+  aiMsg2: string;
+}
+
+export function WhatsAppChat({
+  className,
+  dict,
+}: {
+  className?: string;
+  dict: WhatsAppChatDict;
+}) {
   return (
     <div
       className={cn(
@@ -11,23 +28,25 @@ export function WhatsAppChat({ className }: { className?: string }) {
       {/* Header */}
       <div className="flex items-center gap-3 bg-[#075E54] px-4 py-3 dark:bg-[#1F2C34]">
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-sm font-semibold text-white">
-          AY
+          {dict.contactInitials}
         </div>
         <div className="flex-1">
           <p
             className="text-sm font-semibold text-white"
             style={{ fontFamily: "var(--font-geist)" }}
           >
-            Ahmet Yılmaz
+            {dict.contactName}
           </p>
-          <p className="text-xs text-white/70">çevrimiçi</p>
+          <p className="text-xs text-white/70">{dict.online}</p>
         </div>
         <div className="flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
           </span>
-          <span className="text-[10px] font-medium text-white">AI Aktif</span>
+          <span className="text-[10px] font-medium text-white">
+            {dict.aiBadge}
+          </span>
         </div>
       </div>
 
@@ -37,8 +56,7 @@ export function WhatsAppChat({ className }: { className?: string }) {
         <div className="flex justify-end">
           <div className="max-w-[80%] rounded-lg rounded-tr-none bg-[#DCF8C6] px-3 py-2 dark:bg-[#005C4B]">
             <p className="text-[13px] leading-relaxed text-gray-900 dark:text-gray-100">
-              Merhaba, kurumsal yazılım çözümleriniz hakkında bilgi almak
-              istiyorum.
+              {dict.customerMsg1}
             </p>
             <div className="mt-1 flex items-center justify-end gap-1">
               <span
@@ -55,8 +73,7 @@ export function WhatsAppChat({ className }: { className?: string }) {
         <div className="flex justify-start">
           <div className="max-w-[80%] rounded-lg rounded-tl-none bg-white px-3 py-2 dark:bg-[#202C33]">
             <p className="text-[13px] leading-relaxed text-gray-900 dark:text-gray-100">
-              Merhaba Ahmet Bey! Size yardımcı olmaktan mutluluk duyarım.
-              Şirketinizin büyüklüğü ve sektörü hakkında bilgi alabilir miyim?
+              {dict.aiMsg1}
             </p>
             <div className="mt-1 flex items-center justify-end gap-1">
               <span
@@ -74,7 +91,7 @@ export function WhatsAppChat({ className }: { className?: string }) {
         <div className="flex justify-end">
           <div className="max-w-[80%] rounded-lg rounded-tr-none bg-[#DCF8C6] px-3 py-2 dark:bg-[#005C4B]">
             <p className="text-[13px] leading-relaxed text-gray-900 dark:text-gray-100">
-              SaaS sektöründe 85 kişilik bir ekibiz. CRM entegrasyonu arıyoruz.
+              {dict.customerMsg2}
             </p>
             <div className="mt-1 flex items-center justify-end gap-1">
               <span
@@ -91,8 +108,7 @@ export function WhatsAppChat({ className }: { className?: string }) {
         <div className="flex justify-start">
           <div className="max-w-[80%] rounded-lg rounded-tl-none bg-white px-3 py-2 dark:bg-[#202C33]">
             <p className="text-[13px] leading-relaxed text-gray-900 dark:text-gray-100">
-              Harika! Tam size uygun paketlerimiz var. Şirketinizi kısaca
-              araştırıp size özel bir teklif hazırlıyorum.
+              {dict.aiMsg2}
             </p>
             <div className="mt-1 flex items-center justify-end gap-1">
               <span
