@@ -382,9 +382,13 @@
   },
   "meetingPage": {
     "hero": {
-      "badge": "Meeting Agent",
-      "title": "Smarter meetings, start to finish.",
-      "description": "Record, transcribe, and extract action items from your meetings. All content feeds your company memory."
+      "badge": "Live",
+      "headlinePrimary": "Smarter meetings,",
+      "headlineMuted": "from start to finish.",
+      "subhead": "Automatic recording, transcription, action items.",
+      "ctaPrimary": "Start for free",
+      "ctaSecondary": "Book a demo",
+      "ctaTertiary": "View pricing"
     },
     "featureCards": [
       {
@@ -731,6 +735,12 @@
         { "time": "14:31", "speaker": "Dan Y.", "text": "\u201cLet's have the demo environment ready by next week.\u201d", "isAction": false },
         { "time": "", "speaker": "AI Summary", "text": "Action: Demo environment preparation \u2192 Dan Y. \u2014 by Apr 20", "isAction": true }
       ]
+    },
+    "callWidget": {
+      "tabActive": "Insights",
+      "tabInactive": "Transcript",
+      "speakerName": "Jamie Davies",
+      "highlightedPhrase": "the next steps?"
     }
   }
 }
