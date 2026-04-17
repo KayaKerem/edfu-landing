@@ -16,7 +16,7 @@ export function MeetCrmConnector() {
     >
       <svg
         viewBox="0 0 321 321"
-        className="absolute inset-0 h-full w-full"
+        className="absolute inset-0 h-full w-full text-card"
         role="presentation"
         aria-hidden="true"
       >
@@ -29,12 +29,12 @@ export function MeetCrmConnector() {
             y2="254.95"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="0%" stopColor="white" stopOpacity="0" />
-            <stop offset="100%" stopColor="white" stopOpacity="1" />
+            <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+            <stop offset="100%" stopColor="currentColor" stopOpacity="1" />
           </linearGradient>
           <radialGradient id="mcc-ring-fill" cx="0.5" cy="0.5" r="0.5">
-            <stop offset="52%" stopColor="white" stopOpacity="0" />
-            <stop offset="100%" stopColor="white" stopOpacity="1" />
+            <stop offset="52%" stopColor="currentColor" stopOpacity="0" />
+            <stop offset="100%" stopColor="currentColor" stopOpacity="1" />
           </radialGradient>
         </defs>
 
@@ -109,7 +109,7 @@ export function MeetCrmConnector() {
       <div
         data-animate="rise"
         style={{ left: "49.8%", top: "30.5%", animationDelay: "0ms" }}
-        className="absolute -translate-x-1/2 -translate-y-1/2 flex size-10 items-center justify-center rounded-lg border border-border bg-white shadow-md"
+        className="absolute -translate-x-1/2 -translate-y-1/2 flex size-10 items-center justify-center rounded-lg border border-border bg-background shadow-md"
       >
         <GoogleMeet className="size-5" />
       </div>
@@ -118,7 +118,7 @@ export function MeetCrmConnector() {
       <div
         data-animate="rise"
         style={{ left: "49.8%", top: "61.4%", animationDelay: "160ms" }}
-        className="absolute -translate-x-1/2 -translate-y-1/2 flex size-11 items-center justify-center rounded-lg border border-border bg-white shadow-md"
+        className="absolute -translate-x-1/2 -translate-y-1/2 flex size-11 items-center justify-center rounded-lg border border-border bg-background shadow-md"
       >
         <GreenLeaf className="size-6" />
       </div>

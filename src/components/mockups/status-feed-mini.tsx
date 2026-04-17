@@ -35,7 +35,7 @@ function Pill({
 
 function MiroMark() {
   return (
-    <span className="inline-flex size-5 items-center justify-center rounded border border-border bg-white">
+    <span className="inline-flex size-5 items-center justify-center rounded border border-border bg-background">
       <span className="text-[10px] font-bold text-[#F8C95B]">M</span>
     </span>
   );

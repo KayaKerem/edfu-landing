@@ -20,7 +20,7 @@ export function GreenLeaf({ className }: { className?: string }) {
         strokeLinecap="round"
       />
       {/* Lock badge — small shield in bottom-right */}
-      <rect x="14" y="14" width="8" height="8" rx="2" fill="white" stroke="#CAD0D9" strokeWidth="0.6" />
+      <rect x="14" y="14" width="8" height="8" rx="2" fill="#F5F7FA" stroke="#CAD0D9" strokeWidth="0.6" />
       <path
         d="M16.5 17V16.2C16.5 15.3 17.2 14.6 18 14.6C18.8 14.6 19.5 15.3 19.5 16.2V17"
         stroke="#1F5F3D"

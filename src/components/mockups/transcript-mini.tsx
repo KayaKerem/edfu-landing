@@ -61,9 +61,9 @@ export function TranscriptMini() {
             <span className="size-5 rounded-full bg-[#F0B37E]" />
             <span className="text-[13px] font-semibold">Guy Hawkins</span>
           </div>
-          <span className="block h-2 w-[96%] rounded-sm bg-[#EFEEEC]" />
-          <span className="block h-2 w-[80%] rounded-sm bg-[#EFEEEC]" />
-          <span className="block h-2 w-[60%] rounded-sm bg-[#EFEEEC]" />
+          <span className="block h-2 w-[96%] rounded-sm bg-muted" />
+          <span className="block h-2 w-[80%] rounded-sm bg-muted" />
+          <span className="block h-2 w-[60%] rounded-sm bg-muted" />
         </div>
       </div>
     </div>
