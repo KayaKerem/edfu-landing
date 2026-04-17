@@ -14,6 +14,14 @@ export const BRAND_PENDING_KEYS = [
   "meetingPage.hero.ctaPrimary",
   "meetingPage.hero.ctaSecondary",
   "meetingPage.hero.ctaTertiary",
+  "mockups.callWidget.meetingTitle",
+  "mockups.callWidget.tabActive",
+  "mockups.callWidget.tabInactive",
+  "mockups.callWidget.summaryTitle",
+  "mockups.callWidget.highlightPillLabel",
+  "mockups.callWidget.insightsTitle",
+  "mockups.callWidget.timeElapsed",
+  "mockups.callWidget.timeTotal",
 ] as const;
 
 export type BrandPendingKey = (typeof BRAND_PENDING_KEYS)[number];

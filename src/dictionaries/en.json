@@ -737,10 +737,14 @@
       ]
     },
     "callWidget": {
+      "meetingTitle": "Product Demo w/ GreenLeaf",
       "tabActive": "Insights",
       "tabInactive": "Transcript",
-      "speakerName": "Jamie Davies",
-      "highlightedPhrase": "the next steps?"
+      "summaryTitle": "Summary",
+      "highlightPillLabel": "Discovery Call",
+      "insightsTitle": "Insights",
+      "timeElapsed": "10:15",
+      "timeTotal": "28:14"
     }
   }
 }
