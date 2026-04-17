@@ -11,6 +11,7 @@ import { MarqueeTestimonials } from "@/components/sections/marquee-testimonials"
 import { CTA } from "@/components/sections/cta";
 import { Footer } from "@/components/sections/footer";
 import { AutomateEverything } from "@/components/sections/automate-everything";
+import { ConnectData } from "@/components/sections/connect-data";
 import { AiGradientCard } from "@/components/sections/ai-gradient-card";
 import { LegacyHashRedirect } from "@/components/legacy-hash-redirect";
 import { FlowDiagram } from "@/components/sections/flow-diagram";
@@ -158,22 +159,25 @@ export default async function Home({
       <LegacyHashRedirect />
       <JsonLd dict={dict} lang={lang} />
       <Navbar dict={dict.navbar} lang={lang} />
-      <div className="relative mx-auto max-w-7xl border-x border-border">
-        <div className="pointer-events-none absolute inset-y-0 left-4 md:left-6 z-10 w-px bg-border" />
-        <div className="pointer-events-none absolute inset-y-0 right-4 md:right-6 z-10 w-px bg-border" />
-        <main className="divide-y divide-border">
-          <Hero dict={dict.hero} lang={lang} />
-          <Logos dict={dict.logos} />
-          <AutomateEverything dict={dict.automateEverything} />
-          <Testimonial dict={dict.testimonial} />
-          <FlowDiagram dict={dict.flowDiagram} />
-          <Security dict={dict.security} />
-          <AiGradientCard dict={dict.aiGradientCard} />
-          <MarqueeTestimonials dict={dict.marqueeTestimonials} />
-          <CTA dict={dict.cta} />
-        </main>
-        <Footer dict={dict.footer} lang={lang} />
-      </div>
+      <main className="relative">
+        <Hero dict={dict.hero} lang={lang} />
+        <div className="relative mx-auto max-w-7xl border-x border-border/70">
+          <div className="pointer-events-none absolute inset-y-0 left-4 md:left-6 z-10 w-px bg-border/70" />
+          <div className="pointer-events-none absolute inset-y-0 right-4 md:right-6 z-10 w-px bg-border/70" />
+          <div className="divide-y divide-border/70">
+            <Logos dict={dict.logos} />
+            <AutomateEverything dict={dict.automateEverything} />
+            <ConnectData dict={dict.connectData} />
+            <Testimonial dict={dict.testimonial} />
+            <FlowDiagram dict={dict.flowDiagram} />
+            <Security dict={dict.security} />
+            <AiGradientCard dict={dict.aiGradientCard} />
+            <MarqueeTestimonials dict={dict.marqueeTestimonials} />
+            <CTA dict={dict.cta} />
+          </div>
+          <Footer dict={dict.footer} lang={lang} />
+        </div>
+      </main>
     </>
   );
 }

@@ -1,47 +1,47 @@
 .root {
   position: relative;
-  left: 50%;
+    left: 50%;
   width: 100vw;
   transform: translateX(-50%);
+  display: flex;
   overflow: hidden;
   isolation: isolate;
   background: #ffffff;
   content-visibility: auto;
   contain: layout paint style;
-  min-height: 760px;
+    min-height: 760px;
   max-height: 820px;
+  overflow: hidden;
+
+  /* Design tokens */
+  --edge-active: #34c77b;
+  --trace-color: #34c77b;
+  --edge-idle: #d0d5dd;
+  --node-border-active: #34c77b;
+  --node-border-idle: #e4e7ec;
+  --status-bg: #e7f8ef;
+  --status-border: #a6e9c2;
+  --status-text: #067647;
+  --chip-bg: #f2f4f7;
+  --chip-text: #475467;
+  --plus-bg: #6e78f7;
+  --plus-halo: rgba(110, 120, 247, 0.18);
+
+  /* Animation tokens */
+  --ease-flow: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-pop:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --speed-node-activate: 400ms;
+  --speed-pulse: 1600ms;
+  --speed-flow-particle: 2200ms;
 }
 
 .layout {
   position: relative;
+    display: flex;
   z-index: 2;
   margin: 0 auto;
-  max-width: 1440px;
-}
-
-.edgeStripe {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 200px;
-  pointer-events: none;
-  z-index: 1;
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(15, 23, 32, 0.06) 0,
-    rgba(15, 23, 32, 0.06) 2px,
-    transparent 2px,
-    transparent 12px
-  );
-}
-
-.edgeLeft {
-  left: 0;
-}
-
-.edgeRight {
-  right: 0;
-  transform: scaleX(-1);
+  width: 100%;
+  max-width: 1280px;
 }
 
 .dotGrid {
@@ -49,265 +49,291 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.62;
-  background-image: radial-gradient(circle at 1px 1px, #d8dde3 1px, transparent 1px);
+  opacity: 0.55;
+  background-image: radial-gradient(circle at 1px 1px, #e4e7ec 1.25px, transparent 1.25px);
+  background-size: 16px 16px;
   background-position: center;
-  background-size: 20px 20px;
+  -webkit-mask-image: linear-gradient(to right,
+    transparent 0%, rgba(0,0,0,0.35) 18%, rgba(0,0,0,0.9) 45%,
+    rgba(0,0,0,0.9) 70%, rgba(0,0,0,0.35) 86%, transparent 100%);
+  mask-image: linear-gradient(to right,
+    transparent 0%, rgba(0,0,0,0.35) 18%, rgba(0,0,0,0.9) 45%,
+    rgba(0,0,0,0.9) 70%, rgba(0,0,0,0.35) 86%, transparent 100%);
 }
 
-.diagramFrame {
-  position: relative;
-  overflow: hidden;
-}
+.diagramFrame { position: relative; }
 
+/* ── Edges — always drawn, color transitions ────────── */
+/* Attio style: full structure visible from start, green "pulse" propagates */
 .flowPath {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.5;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
+  /* Always fully drawn — no dashoffset animation */
+  stroke-dasharray: none;
+  transition: stroke 500ms var(--ease-flow);
+}
+
+.flowPathGreen { stroke: var(--edge-active); }
+.flowPathGray  { stroke: var(--edge-idle);   }
+
+/* Instant reset during idle (no reverse animation visible) */
+.root[data-phase="idle"] .flowPath,
+.root[data-phase="resetting"] .flowPath {
+  transition: none !important;
+}
+
+/* ── Node card ────────────────────────────────────────── */
+.nodeCard {
+  background: #ffffff;
+  border-width: 1.5px !important;
+  border-color: var(--node-border-idle);
+  border-radius: 14px;
+  min-height: 110px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 2px rgba(16,24,40,0.06), 0 1px 3px rgba(16,24,40,0.04);
+  /* Border-color stays gray always — SVG trace handles the green draw animation */
   transition:
-    stroke-dashoffset 1600ms cubic-bezier(0.16, 1, 0.3, 1),
-    stroke 250ms ease,
-    opacity 250ms ease;
-  will-change: stroke-dashoffset;
+    box-shadow var(--speed-node-activate) ease,
+    transform  160ms ease-out;
 }
 
-.flowPathIdle {
-  stroke: #d1d5db;
-  stroke-dasharray: 2 4;
+/* Active = subtle shadow bloom. Border handled by SVG trace — no jump. */
+.nodeCardActive {
+  box-shadow:
+    0 0 0 3px rgba(52,199,123,0.10),
+    0 4px 12px rgba(52,199,123,0.08),
+    0 1px 2px rgba(16,24,40,0.06);
 }
 
-.flowPathActive {
-  stroke: #22c55e;
-  stroke-dashoffset: 0;
+/* Hover lift */
+.nodeCard:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 4px rgba(52,199,123,0.06),
+    0 4px 12px rgba(16,24,40,0.09),
+    0 1px 3px rgba(16,24,40,0.06);
 }
 
-.pathDot {
+/* Nurture node — always muted/idle */
+.nodeCardMuted {
+  opacity: 0.55;
+  border-color: var(--node-border-idle) !important;
+}
+
+/* Icon container — smooth color transition when node activates */
+.nodeIcon {
+  transition: background 350ms ease, color 350ms ease;
+}
+
+.root[data-phase="idle"] .nodeCard {
+  transition: none !important;
+  animation: none !important;
+}
+/* ── Status badges (slide up from below — Attio style) ──── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+ gap: 4px;
+  border-radius: 8px;
+  padding: 0 10px;
+  height: 24px;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: #ffffff;
+  color: #5b6472;
+  border: 1px solid #e4e7ec;
+}
+
+.badgeGreen {
+  color: var(--status-text);
+  background: var(--status-bg);
+  border: 1px solid var(--status-border);
+}
+/* Badges slide up from 8px below */
+.statusBadge {
   position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: #22c55e;
-  box-shadow: 0 0 6px rgba(34, 197, 94, 0.85);
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  animation: aeDotTravel 1200ms linear forwards;
-  animation-delay: var(--dot-delay);
-  offset-rotate: 0deg;
-  will-change: offset-distance, opacity, transform;
+  z-index: 5;
+  animation: aeBadgeSlideUp 280ms var(--ease-pop) both;
 }
 
+/* Floating labels (branch labels, trigger tab) pop in */
+.badgeFloating {
+  position: absolute;
+  z-index: 5;
+  animation: aeBadgeSlideUp 280ms var(--ease-pop) both;
+}
+
+@keyframes aeBadgeSlideUp {
+  0%   { transform: translateY(8px); opacity: 0; }
+  100% { transform: translateY(0);   opacity: 1; }
+}
+
+/* Badge position helpers */
+.badgeTopRight {
+  top: -12px;
+  right: 16px;
+}
+
+.badgeTopLeft {
+  top: -12px;
+  left: 16px;
+}
+
+/* Trigger "type" tab — always visible, top-left */
+.nodeTriggerTab {
+  position: absolute;
+  top: -12px;
+  left: 16px;
+  z-index: 5;
+  border-radius: 8px 8px 0 0;
+  background: #ffffff;
+  border: 1px solid #e4e7ec;
+  color: #5b6472;
+  /* No animation — always visible from start */
+  animation: none;
+}
+
+/* Branch labels */
+.badgeUpsell {
+  color: #0b1220;
+  background: #ffffff;
+  border: 1.5px solid var(--node-border-active);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.badgeNurture {
+  color: #98a2b3;
+  background: #ffffff;
+  border: 1.5px solid var(--node-border-idle);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* Branch label in idle state (before branch phase) */
+.badgeLabelIdle {
+  color: #98a2b3;
+  background: #ffffff;
+  border: 1.5px solid var(--node-border-idle);
+  font-weight: 600;
+  font-size: 13px;
+  /* No animation — already visible */
+  animation: none;
+}
+
+.inlinePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 6px;
+  padding: 2px 8px;
+  height: 22px;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 500;
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  border: 1px solid #e4e7ec;
+  white-space: nowrap;
+}
+
+.plusButton {
+  background: var(--plus-bg) !important;
+  box-shadow: 0 4px 14px rgba(110,120,247,0.35) !important;
+  transition: transform 180ms ease !important;
+}
+.plusButton:hover {
+  transform: scale(1.08) !important;
+}
+
+.plusPopIn {
+  animation: aePlusIn 300ms var(--ease-pop) both;
+}
+
+@keyframes aePlusIn {
+  0%   { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1);   opacity: 1; }
+}
+/* Halo pulse ring */
 .pulseRing {
   position: absolute;
-  inset: 0;
+  inset: -10px;
   border-radius: 999px;
-  border: 2px solid rgba(59, 130, 246, 0.4);
-  animation: aePulse 1800ms ease-out infinite;
+  background: var(--plus-halo);
+  animation: aeHaloPulse var(--speed-pulse) ease-in-out infinite;
   pointer-events: none;
 }
 
-.listTrack {
-  animation: aeScroll 12s linear infinite;
+@keyframes aeHaloPulse {
+  0%, 100% { transform: scale(1);    opacity: 0.55; }
+  50%       { transform: scale(1.15); opacity: 0.85; }
+}
+/* ── Flow dot (travelling particle) ───────────────────── */
+/* 2200ms travel + 600ms gap = 2800ms loop */
+.pathDot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--edge-active);
+  box-shadow: 0 0 8px rgba(52,199,123,0.55);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: aeDotTravel 2800ms linear infinite;
+  animation-delay: var(--dot-delay, 0ms);
+  offset-rotate: 0deg;
+  pointer-events: none;
+  will-change: offset-distance, opacity;
+}
+
+@keyframes aeDotTravel {
+  0%    { offset-distance: 0%;   opacity: 0; }
+  4%    { opacity: 1; }
+  75%   { opacity: 1; }
+  78.6% { offset-distance: 100%; opacity: 0; }
+  100%  { offset-distance: 100%; opacity: 0; }
+}
+ 
+/* ── List (right column) ───────────────────────────────── */
+.listMask {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+  .listTrack {
+  animation: aeScroll 14s linear infinite;
   will-change: transform;
 }
 
 .listCard {
   transition:
-    transform 400ms cubic-bezier(0.2, 0, 0, 1),
-    border-color 400ms cubic-bezier(0.2, 0, 0, 1),
-    box-shadow 400ms cubic-bezier(0.2, 0, 0, 1),
-    opacity 300ms ease;
+    transform     320ms cubic-bezier(0.2, 0, 0, 1),
+    border-color  280ms cubic-bezier(0.2, 0, 0, 1),
+    box-shadow    320ms cubic-bezier(0.2, 0, 0, 1),
+    opacity       220ms ease;
 }
 
 .listCardActive {
   border-color: #6366f1;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.15);
-  transform: scale(1.02);
+  box-shadow: 0 14px 34px rgba(99,102,241,0.14), 0 2px 6px rgba(15,23,42,0.06);
+  transform: scale(1.065);
 }
 
-.listCardMuted {
-  opacity: 0.72;
-}
-
-.nodeCard {
-  transition:
-    transform 400ms cubic-bezier(0.2, 0, 0, 1),
-    border-color 250ms ease,
-    box-shadow 400ms ease,
-    opacity 300ms ease,
-    color 250ms ease;
-}
-
-.nodeCardActive {
-  border-color: #22c55e;
-  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
-  transform: translateY(-1px);
-}
-
-.nodeCardMuted {
-  opacity: 0.55;
-  color: #9aa3af;
-}
-
-.badge {
-  z-index: 5;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 500;
-  background: #ffffff;
-}
-
-.badgeUpsell {
-  color: #16a34a;
-  border: 1px solid #c7ebd3;
-  background: #e8f7ee;
-}
-
-.badgeNurture {
-  color: #5b6472;
-  border: 1px solid #e6e8ec;
-  background: #ffffff;
-}
-
-.badgeCondition {
-  color: #5b6472;
-  border: 1px solid #e6e8ec;
-  background: #ffffff;
-}
-
-.badgeTrigger {
-  color: #5b6472;
-  border: 1px solid #e6e8ec;
-  background: #ffffff;
-}
-
-.focusRing:focus-visible {
-  outline: 2px solid #6366f1;
-  outline-offset: 2px;
-}
-
-.cubes {
-  position: absolute;
-  right: 40px;
-  bottom: 40px;
-  width: 160px;
-  height: 130px;
-  pointer-events: none;
-  z-index: 1;
-  color: #b8bec7;
-}
-
-@keyframes aePulse {
-  0% {
-    transform: scale(0.7);
-    opacity: 0.4;
-  }
-  70% {
-    transform: scale(1.35);
-    opacity: 0.08;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-}
-
-@keyframes aeDotTravel {
-  0% {
-    offset-distance: 0%;
-    opacity: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  100% {
-    offset-distance: 100%;
-    opacity: 0;
-  }
-}
+.listCardMuted { opacity: 0.5; }
 
 @keyframes aeScroll {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-406px);
-  }
+  from { transform: translateY(0); }
+  to   { transform: translateY(calc(-1 * var(--ae-scroll-distance, 342px))); }
 }
 
-:global(.dark) .root {
-  background: #0b0f17;
-}
+.cubes { pointer-events: none; color: #b8bec7; }
 
-:global(.dark) .dotGrid {
-  background-image: radial-gradient(circle at 1px 1px, #1f2937 1px, transparent 1px);
-}
+.focusRing:focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; }
 
-:global(.dark) .edgeStripe {
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.04) 0,
-    rgba(255, 255, 255, 0.04) 2px,
-    transparent 2px,
-    transparent 12px
-  );
-}
-
-:global(.dark) .badge,
-:global(.dark) .badgeCondition,
-:global(.dark) .badgeNurture,
-:global(.dark) .badgeTrigger {
-  background: #0b0f17;
-  color: #f3f4f6;
-  border-color: #1f2937;
-}
-
-:global(.dark) .badgeUpsell {
-  background: rgba(34, 197, 94, 0.12);
-  color: #34d399;
-  border-color: rgba(34, 197, 94, 0.18);
-}
-
-:global(.dark) .cubes {
-  color: #4b5563;
-}
-
-:global(.dark) .nodeCard {
-  background: #111827;
-  border-color: #1f2937;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
-}
-
-:global(.dark) .listCard {
-  background: #111827;
-  border-color: #1f2937;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
-}
-
-:global(.dark) .flowPathIdle {
-  stroke: #374151;
-}
-
-:global(.dark) .flowPathActive {
-  stroke: #34d399;
-}
-
-:global(.dark) .pulseRing {
-  border-color: rgba(52, 211, 153, 0.32);
-}
-
-:global(.dark) .pathDot {
-  background: #34d399;
-  box-shadow: 0 0 6px rgba(52, 211, 153, 0.8);
-}
-
+/* ── Pause / reduced-motion ────────────────────────────── */
 .root[data-paused="true"] .listTrack,
 .root[data-paused="true"] .pathDot,
 .root[data-paused="true"] .pulseRing {
@@ -316,22 +342,85 @@
 
 .root[data-reduced-motion="true"] .listTrack,
 .root[data-reduced-motion="true"] .pathDot,
-.root[data-reduced-motion="true"] .pulseRing {
+.root[data-reduced-motion="true"] .pulseRing,
+.root[data-reduced-motion="true"] .statusBadge,
+.root[data-reduced-motion="true"] .badgeFloating,
+.root[data-reduced-motion="true"] .nodeCardActive,
+.root[data-reduced-motion="true"] .plusPopIn {
   animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
-.root[data-reduced-motion="true"] .flowPath {
-  transition: none !important;
-}
+.root[data-reduced-motion="true"] .nodeCardMuted { opacity: 0.55 !important; }
+.root[data-reduced-motion="true"] .flowPath      { transition: none !important; }
+.root[data-reduced-motion="true"] .nodeCard      { transition: none !important; }
 
 @media (prefers-reduced-motion: reduce) {
-  .listTrack,
-  .pathDot,
-  .pulseRing {
+  .listTrack, .pathDot, .pulseRing,
+  .statusBadge, .badgeFloating, .nodeCardActive, .plusPopIn {
     animation: none !important;
   }
-
-  .flowPath {
-    transition: none !important;
-  }
+.nodeCardMuted { opacity: 0.55 !important; }
+  .flowPath, .nodeCard { transition: none !important; }
 }
+
+/* ── Dark mode ─────────────────────────────────────────── */
+:global(.dark) .root    { background: #0b0f17; --trace-color: #34d399; }
+:global(.dark) .dotGrid {
+  background-image: radial-gradient(circle at 1px 1px, #1f2937 1.25px, transparent 1.25px);
+}
+:global(.dark) .badge {
+  background: #0b0f17;
+  color: #d1d5db;
+  border-color: #1f2937;
+}
+:global(.dark) .badgeGreen {
+  background: rgba(52,199,123,0.14);
+  color: #6ee7b7;
+  border-color: rgba(166,233,194,0.35);
+}
+:global(.dark) .badgeUpsell {
+  background: #0b0f17;
+  color: #f1f5f9;
+  border-color: rgba(52,199,123,0.65);
+}
+:global(.dark) .badgeNurture,
+:global(.dark) .badgeLabelIdle {
+  background: #0b0f17;
+  color: #6b7280;
+  border-color: #1f2937;
+}
+:global(.dark) .nodeTriggerTab {
+  background: #0b0f17;
+  border-color: #1f2937;
+  color: #9ca3af;
+}
+  :global(.dark) .inlinePill {
+  background: #111827;
+  color: #d1d5db;
+  border-color: #1f2937;
+}
+:global(.dark) .nodeCard {
+  background: #0f172a;
+  border-color: #1f2937;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+:global(.dark) .nodeCardActive {
+  box-shadow: 0 0 0 3px rgba(52,211,153,0.18), 0 4px 14px rgba(52,211,153,0.12);
+}
+:global(.dark) .nodeCardMuted { border-color: #1f2937 !important; }
+:global(.dark) .flowPathGray  { stroke: #374151; }
+:global(.dark) .flowPathGreen { stroke: #34d399; }
+:global(.dark) .listCard {
+  background: #0f172a;
+  border-color: #1f2937;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+:global(.dark) .listCardActive {
+  border-color: #818cf8;
+  box-shadow: 0 6px 18px rgba(129,140,248,0.22);
+}
+:global(.dark) .pulseRing { background: rgba(110,120,247,0.22); }
+:global(.dark) .pathDot   { background: #34d399; box-shadow: 0 0 8px rgba(52,211,153,0.7); }
+:global(.dark) .cubes     { color: #4b5563; }

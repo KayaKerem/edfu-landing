@@ -8,6 +8,7 @@ import { getDictionary, hasLocale } from "@/dictionaries";
 import type { Locale } from "@/dictionaries";
 import { notFound } from "next/navigation";
 
+
 const geist = Geist({
   subsets: ["latin"],
   variable: "--font-geist-sans",
@@ -109,7 +110,7 @@ export default async function RootLayout({
 
   return (
     <html lang={lang} suppressHydrationWarning>
-      <body className={`min-h-screen font-sans antialiased ${geist.variable}`}>
+      <body className={`min-h-screen font-sans antialiased ${geist.variable}`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

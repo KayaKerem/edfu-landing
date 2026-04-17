@@ -44,6 +44,49 @@
     "subtitle": "Tüm kanallarınız ve toplantı araçlarınız tek platformda",
     "learnMore": "Daha Fazla"
   },
+  "connectData": {
+    "title": "Her tür veriyi bağlayın",
+    "description": "Konuşmaları, veritabanlarını, dokümanları ve ürün sinyallerini tek bir yapılandırılmış çalışma alanında birleştirin.",
+    "cta": "Entegrasyonları keşfet →",
+    "ctaHref": "/tr/integrations",
+    "ariaLabel": "Her tür veriyi bağlayın",
+    "srText": "Veri kaynakları ve kayıt kartları Edfu veri katmanı üzerinden birbirine bağlanıyor.",
+    "sources": [
+      { "id": "sales_engagement", "label": "Satış etkileşimi" },
+      { "id": "email_calendar", "label": "E-posta ve takvim" },
+      { "id": "data_warehouses", "label": "Veri ambarları" },
+      { "id": "customer_support", "label": "Müşteri desteği" },
+      { "id": "billing_invoicing", "label": "Faturalama ve tahsilat" },
+      { "id": "product_data", "label": "Ürün verisi" }
+    ],
+    "records": [
+      {
+        "id": "workspace",
+        "title": "Çalışma alanı bilgisi",
+        "badge": "Çalışma",
+        "records": 12840,
+        "recordLabel": "kayıt",
+        "tone": "blue"
+      },
+      {
+        "id": "company",
+        "title": "Şirket profili",
+        "badge": "Şirket",
+        "records": 642,
+        "recordLabel": "kayıt",
+        "tone": "green"
+      },
+      {
+        "id": "deal",
+        "title": "Deal bağlamı",
+        "badge": "Deals",
+        "records": 912,
+        "recordLabel": "kayıt",
+        "tone": "orange"
+      }
+    ],
+    "integrationsLabel": "Bağlı entegrasyonlar"
+  },
   "features": {
     "title": "Şirketinizin Dijital Hafızasını Oluşturun",
     "description": "Edfu, şirketinizdeki tüm bilgiyi tek bir platformda toplar. Ekibiniz ihtiyaç duyduğu bilgiye saniyeler içinde ulaşır.",

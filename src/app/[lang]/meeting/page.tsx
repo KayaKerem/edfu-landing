@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
 import { MeetingHero } from "@/components/sections/meeting-hero";
+import { MeetingBento } from "@/components/sections/meeting-bento";
 import { ScrollPinnedFeatures } from "@/components/sections/scroll-pinned-features";
 import { NumberedFeatures } from "@/components/sections/numbered-features";
 import { PageCTA } from "@/components/sections/page-cta";
@@ -106,29 +107,7 @@ export default async function MeetingPage({
             }}
           />
 
-          {/* 3 Feature Cards */}
-          <section className="py-16 sm:py-20">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {mp.featureCards.map((card: { title: string; description: string }, i: number) => (
-                  <div
-                    key={i}
-                    className="rounded-xl border border-border bg-white dark:bg-[#27272A] p-6 shadow-[0px_1px_3px_rgba(0,0,0,0.04)]"
-                  >
-                    <h3
-                      className="text-base font-semibold text-foreground tracking-tight"
-                      style={{ fontFamily: "var(--font-geist)" }}
-                    >
-                      {card.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                      {card.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
+          <MeetingBento />
 
           <ScrollPinnedFeatures
             title={mp.stickySection.title}

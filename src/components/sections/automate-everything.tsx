@@ -52,7 +52,14 @@ type AutomateEverythingDict = {
   };
 };
 
-type Phase = "idle" | "trigger" | "condition" | "branch" | "completed" | "resetting";
+type Phase =
+  | "idle"      // all nodes visible but gray/neutral
+  | "trigger"   // trigger activates
+  | "condition" // switch activates
+  | "branch"    // branch edges turn green + labels
+  | "leaves"    // upsell activates
+  | "plus"      // + button appears
+  | "resetting";
 
 function DealInvoiceIcon() {
   return (
@@ -113,21 +120,16 @@ function PaperPlaneIcon() {
     </svg>
   );
 }
-
-function NodesIcon() {
+function ListItemIcon() {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <circle cx="4" cy="8" r="1.8" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="12" cy="8" r="1.8" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M5.9 8h4.2"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
+      <circle cx="4" cy="8" r="1.6" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="12" cy="8" r="1.6" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M5.7 8h4.6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
     </svg>
   );
 }
+
 
 function TargetIcon() {
   return (
@@ -154,143 +156,141 @@ function CheckIcon() {
 
 function PlusIcon() {
   return (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path d="M8 4v8M4 8h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
 
-function IsoCubes() {
+/* ─────────── Node border trace: draws clockwise from top-center ─────────── */
+function NodeBorderTrace({ width, height, active }: { width: number; height: number; active: boolean }) {
+  const R = 14;
+  const perimeter = 2 * (width - 2 * R) + 2 * (height - 2 * R) + 2 * Math.PI * R;
+  // Rounded-rect path starting at top-center, going clockwise
+  const d = `M${width / 2} 0 H${width - R} Q${width} 0 ${width} ${R} V${height - R} Q${width} ${height} ${width - R} ${height} H${R} Q0 ${height} 0 ${height - R} V${R} Q0 0 ${R} 0 H${width / 2}`;
   return (
-    <svg viewBox="0 0 160 130" fill="none" aria-hidden="true" className="h-full w-full">
+    <svg
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        top: -0.75,
+        left: -0.75,
+        width: width + 1.5,
+        height: height + 1.5,
+        pointerEvents: "none",
+        zIndex: 6,
+        overflow: "visible",
+      }}
+      viewBox={`-0.75 -0.75 ${width + 1.5} ${height + 1.5}`}
+    >
       <path
-        d="M28 86 56 70 84 86 56 102 28 86Z"
-        stroke="currentColor"
-        strokeWidth="1.25"
-      />
-      <path
-        d="M56 70v32M84 86v32M28 86v32M28 118l28-16 28 16"
-        stroke="currentColor"
-        strokeWidth="1.25"
-      />
-      <path
-        d="M78 48 102 34 126 48 102 62 78 48Z"
-        stroke="currentColor"
-        strokeWidth="1.25"
-      />
-      <path
-        d="M102 34v28M126 48v28M78 48v28M78 76l24-14 24 14"
-        stroke="currentColor"
-        strokeWidth="1.25"
-      />
-      <path
-        d="M96 92 120 78 144 92 120 106 96 92Z"
-        stroke="currentColor"
-        strokeWidth="1.25"
-      />
-      <path
-        d="M120 78v28M144 92v28M96 92v28M96 120l24-14 24 14"
-        stroke="currentColor"
-        strokeWidth="1.25"
+        d={d}
+        fill="none"
+        stroke="var(--trace-color, #34c77b)"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={{
+          strokeDasharray: perimeter,
+          strokeDashoffset: active ? 0 : perimeter,
+          transition: active ? "stroke-dashoffset 600ms linear" : "none",
+        }}
       />
     </svg>
   );
 }
 
+/* ─────────── Status badge (slides up when it appears) ─────────── */
+
+function StatusBadge({
+  children,
+  className,
+  style,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <span
+      className={cn(styles.badge, styles.badgeGreen, styles.statusBadge, className)}
+      role="status"
+      style={style}
+    >
+      {children}
+      </span>
+  );
+}
+
+
 function NodeCard({
   title,
   description,
-  badge,
-  status,
+  inlinePill,
   icon,
   iconBg,
   iconFg,
   active,
   muted,
-  widthClass,
-  className,
-  style,
+  width,
   ariaLabel,
 }: {
   title: string;
   description: string;
-  badge: string;
-  status: string;
+  inlinePill: string;
   icon: React.ReactNode;
   iconBg: string;
   iconFg: string;
   active?: boolean;
   muted?: boolean;
-  widthClass: string;
-  className?: string;
-  style?: React.CSSProperties;
+  width: number;
   ariaLabel: string;
 }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [cardH, setCardH] = useState(110);
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const obs = new ResizeObserver(([e]) => setCardH(Math.round(e.contentRect.height)));
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <div
+      ref={cardRef}
       role="group"
       aria-label={ariaLabel}
       className={cn(
         styles.nodeCard,
-        "relative rounded-[12px] border bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)]",
-        widthClass,
+        "relative rounded-[14px] border bg-white",
         active && styles.nodeCardActive,
-        muted && styles.nodeCardMuted,
-        className
+        muted && !active && styles.nodeCardMuted
       )}
-      style={style}
+      style={{ width }}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex min-w-0 items-start gap-3">
-          <div
-            className="flex size-7 shrink-0 items-center justify-center rounded-[6px]"
-            style={{ background: iconBg, color: iconFg }}
-          >
-            {icon}
-          </div>
-          <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="truncate text-[15px] font-semibold leading-[20px] tracking-[-0.01em] text-[#0F1720]">
-                {title}
-              </span>
-            </div>
-            <p className="mt-2 max-w-[320px] text-[13px] leading-[18px] text-[#5B6472] line-clamp-2">
-              {description}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex shrink-0 flex-col items-end gap-2">
-          <span
-            className={cn(
-              styles.badge,
-              badge === "Upsell" && styles.badgeUpsell,
-              badge === "Nurture" && styles.badgeNurture,
-              badge === "Condition" && styles.badgeCondition,
-              badge === "Trigger" && styles.badgeTrigger,
-              "absolute -top-3 right-4"
-            )}
-          >
-            {badge === "Trigger" ? (
-              <span className="inline-flex items-center gap-1">
-                <TargetIcon />
-                {badge}
-              </span>
-            ) : (
-              badge
-            )}
-          </span>
-          <span className="inline-flex items-center gap-1 text-[12px] leading-[16px] font-medium text-[#16A34A]">
-            <span className="inline-flex size-3 items-center justify-center rounded-full bg-[#E8F7EE] text-[#16A34A]">
-              <CheckIcon />
-            </span>
-            {status}
-          </span>
-        </div>
+      <NodeBorderTrace width={width} height={cardH} active={active ?? false} />
+      <div className="flex items-center gap-2.5" style={{ height: 28 }}>
+        <span
+          className={cn(styles.nodeIcon, "flex size-7 shrink-0 items-center justify-center rounded-[8px]")}
+          style={{ background: iconBg, color: iconFg }}
+        >
+          <span className="size-4 inline-flex">{icon}</span>
+        </span>
+        <span className="flex-1 truncate text-[15px] font-semibold leading-[20px] tracking-[-0.1px] text-[#0B1220] dark:text-[#F1F5F9]">
+          {title}
+        </span>
+        <span className={styles.inlinePill}>{inlinePill}</span>
       </div>
+      <p className="mt-2 text-[13px] leading-[18px] text-[#667085] dark:text-[#94A3B8] line-clamp-2">
+        {description}
+      </p>
     </div>
   );
 }
+
+/* ─────────── List card ─────────── */
+
 
 function ListCard({
   item,
@@ -323,25 +323,26 @@ function ListCard({
         aria-current={active ? "true" : undefined}
         className={cn(
           styles.listCard,
-          "flex h-12 w-[280px] items-center gap-3 rounded-[10px] border border-[#E6E8EC] bg-white px-3 text-left shadow-[0_1px_2px_rgba(0,0,0,0.04)] focus-visible:outline-none",
+          styles.focusRing,
+          "flex h-11 w-full items-center gap-2.5 rounded-[10px] border border-[#E6E8EC] bg-white px-2.5 text-left shadow-[0_1px_2px_rgba(0,0,0,0.04)]",
           active && styles.listCardActive,
-          muted && styles.listCardMuted,
-          styles.focusRing
+          muted && !active && styles.listCardMuted
         )}
-      >
+>
         <span
-          className="flex size-4 shrink-0 items-center justify-center"
+      className="flex size-5 shrink-0 items-center justify-center rounded-[5px]"
           style={{ background: swatch.bg, color: swatch.color }}
         >
-          <NodesIcon />
+    <span className="inline-flex size-3.5"><ListItemIcon /></span>
         </span>
-        <span className="min-w-0 truncate text-[13px] leading-[18px] text-[#0F1720]">
+        <span className="min-w-0 flex-1 truncate text-[12.5px] leading-[16px] text-[#0F1720] dark:text-[#F1F5F9]">
           {item.title}
         </span>
       </button>
     </li>
   );
 }
+/* ─────────── Main component ─────────── */
 
 export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -356,8 +357,11 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
   const [pageHidden, setPageHidden] = useState(false);
 
   const listItems = dict.list.items;
-  const displayItems = useMemo(() => [...listItems, ...listItems], [listItems]);
-  const locale = typeof params?.lang === "string" ? params.lang : "en";
+  const displayItems = useMemo(() => [...listItems, ...listItems, ...listItems], [listItems]);
+  const listCardHeight = 22;
+  const listCardGap = 8;
+  const listScrollDistance =
+    listItems.length * listCardHeight + Math.max(listItems.length - 1, 0) * listCardGap;
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -371,10 +375,8 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
     const el = sectionRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setVisible(entry.isIntersecting);
-      },
-      { threshold: 0.45, rootMargin: "0px 0px -10% 0px" }
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0.35, rootMargin: "0px 0px -10% 0px" }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -393,6 +395,9 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
     };
   }, []);
 
+  // Attio-style execution pulse timeline:
+  // All nodes visible from the start (idle = gray border).
+  // Phases drive "activation" (green border + badge slide-up), not node visibility.
   useEffect(() => {
     if (!visible || reducedMotion) return;
 
@@ -400,387 +405,394 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
       loopTimers.current.forEach((id) => window.clearTimeout(id));
       loopTimers.current = [];
     };
-
     clearTimers();
 
-    const schedule = (delay: number, nextPhase: Phase | "restart") => {
+    const schedule = (delay: number, next: Phase | "restart") => {
       loopTimers.current.push(
         window.setTimeout(() => {
-          if (nextPhase === "restart") {
-            setLoopIteration((current) => current + 1);
-            setPhase("idle");
-            return;
-          }
-          setPhase(nextPhase);
+          if (next === "restart") { setLoopIteration((c) => c + 1); setPhase("idle"); return; }
+          setPhase(next);
         }, delay)
       );
     };
 
-    schedule(0, "trigger");
-    schedule(400, "condition");
-    schedule(900, "condition");
-    schedule(1100, "branch");
-    schedule(1400, "branch");
-    schedule(1600, "completed");
-    schedule(7600, "resetting");
-    schedule(8200, "idle");
-    schedule(8600, "restart");
+    // t=0     Trigger node activates (green border + "Triggered" badge slides up)
+    // t=1400  Switch activates (E1 already green, "Completed" badge slides up)
+    // t=2400  Branch edges turn green; "Upsell"/"Nurture" labels appear
+    // t=3120  Upsell activates; Nurture fades in (muted)
+    // t=4200  + button appears with halo pulse
+    // t=6500  Hold phase — all active, reset about to begin
+    // t=7100  Instant reset to idle (all borders gray, no badges)
+    // t=7700  Restart loop
+    schedule(0,    "trigger");
+    schedule(1400, "condition");
+    schedule(2400, "branch");
+    schedule(3120, "leaves");
+    schedule(4200, "plus");
+    schedule(6500, "resetting");
+    schedule(7100, "idle");
+    schedule(7700, "restart");
 
     return () => clearTimers();
   }, [visible, reducedMotion, loopIteration]);
 
   useEffect(() => {
     if (!visible || reducedMotion || paused || pageHidden) return;
-
+    const cycleMs = 14000;
     const start = window.performance.now();
-    const interval = window.setInterval(() => {
+    const tick = window.setInterval(() => {
       const elapsed = window.performance.now() - start;
-      const cycle = 12000;
-      const step = cycle / listItems.length;
-      const index = Math.floor((elapsed % cycle) / step) % listItems.length;
-      setActiveListIndex(index);
-    }, 100);
-
-    return () => window.clearInterval(interval);
+      const stepMs = cycleMs / listItems.length;
+      const idx = Math.floor((elapsed % cycleMs) / stepMs) % listItems.length;
+      setActiveListIndex(idx);
+    }, 120);
+    return () => window.clearInterval(tick);
   }, [visible, reducedMotion, paused, pageHidden, listItems.length]);
 
   const isPaused = paused || pageHidden;
+  // Not visible / reduced-motion → show final activated state
+  const renderPhase = !visible || reducedMotion ? "plus" : phase;
 
-  const renderPhase = !visible || reducedMotion ? "completed" : phase;
+  // ── Node active states (NOT visibility — all nodes always rendered) ──
+  const triggerActive  = renderPhase !== "idle";
+  const switchActive   = !["idle", "trigger"].includes(renderPhase);
+  const upsellActive   = ["branch", "leaves", "plus", "resetting"].includes(renderPhase);
+  // nurture: always muted/idle (gray), never activates in this demo
+  const showPlus       = ["plus", "resetting"].includes(renderPhase);
 
-  const pathState = {
-    first: renderPhase !== "idle" ? "active" : "idle",
-    second:
-      renderPhase === "condition" ||
-      renderPhase === "branch" ||
-      renderPhase === "completed" ||
-      renderPhase === "resetting"
-        ? "active"
-        : "idle",
-    branch:
-      renderPhase === "branch" || renderPhase === "completed" || renderPhase === "resetting"
-        ? "active"
-        : "idle",
-  } as const;
+  // ── Edge green states (edges always drawn; color transitions gray → green) ──
+  const e1Green  = triggerActive;   // Trigger → Switch
+  const e2Green  = switchActive;    // Switch trunk
+  const e3Green  = upsellActive;    // upsell branch
+  // e4 (nurture branch) and e5 (upsell→+) stay gray always
+  // Branch labels visible once branches exist
+  const branchVisible = ["branch", "leaves", "plus", "resetting"].includes(renderPhase);
 
-  const nodeActive = {
-    trigger: renderPhase !== "idle",
-    condition:
-      renderPhase === "condition" ||
-      renderPhase === "branch" ||
-      renderPhase === "completed" ||
-      renderPhase === "resetting",
-    upsell: renderPhase === "branch" || renderPhase === "completed" || renderPhase === "resetting",
-    nurture: renderPhase === "branch" || renderPhase === "completed" || renderPhase === "resetting",
-  };
+  // ── Canvas geometry ──────────────────────────────────────────────
+  const W = 440;
+  const H = 520;
+  const cx = W / 2; // 220
 
-  const nodeMuted = {
-    trigger: false,
-    condition: false,
-    upsell: false,
-    nurture: renderPhase === "idle" || renderPhase === "resetting",
-  };
+  const n1Top = 28,  n1H = 68,  n1Bottom = 96;
+  const n2Top = 172, n2H = 68,  n2Bottom = 240;
+  const branchY  = 284;
+  const n34Top   = 344, n34H = 68;
 
-  const diagramWidth = 720;
-  const diagramHeight = 640;
+  const upsellCardCx  = 110; // card: 10–210px (no left-clip)
+  const nurtureCardCx = 350; // card: 230–490px (clips ~50px right — intentional)
+  const R = 12; // orthogonal corner radius
+  const path1 = `M${cx} ${n1Bottom} V${n2Top}`;
+  const path2 = `M${cx} ${n2Bottom} V${branchY}`;
+  const path3 = `M${cx} ${branchY} Q${cx} ${branchY+R} ${cx-R} ${branchY+R} H${upsellCardCx+R} Q${upsellCardCx} ${branchY+R} ${upsellCardCx} ${branchY+2*R} V${n34Top}`;
+  const path4 = `M${cx} ${branchY} Q${cx} ${branchY+R} ${cx+R} ${branchY+R} H${nurtureCardCx-R} Q${nurtureCardCx} ${branchY+R} ${nurtureCardCx} ${branchY+2*R} V${n34Top}`;
 
-  const path1 = "M360 152C360 173 360 179 360 206";
-  const path2 = "M360 300C360 325 360 334 360 360";
-  const path3 = "M360 398C360 430 320 446 190 470";
-  const path4 = "M360 398C360 430 400 446 530 470";
+  const upsellBottom = n34Top + n34H; // 412
+  const plusY = 478;
+  const path5 = `M${upsellCardCx} ${upsellBottom} V${plusY-R} Q${upsellCardCx} ${plusY} ${upsellCardCx+R} ${plusY} H${cx}`;
 
+  const upsellLabelX  = Math.round((cx + upsellCardCx)  / 2); // 165
+  const nurtureLabelX = Math.round((cx + nurtureCardCx) / 2); // 285
+  const branchLabelY  = branchY + R;
   return (
     <section
       ref={sectionRef}
       aria-label={dict.ariaLabel}
-      className={cn(styles.root, "py-0")}
+      className={cn(styles.root)}
       data-paused={isPaused ? "true" : "false"}
       data-reduced-motion={reducedMotion ? "true" : "false"}
       data-phase={renderPhase}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
-      onBlurCapture={(event) => {
-        if (!sectionRef.current?.contains(event.relatedTarget as Node | null)) {
-          setPaused(false);
-        }
+      onBlurCapture={(e) => {
+        if (!sectionRef.current?.contains(e.relatedTarget as Node | null)) setPaused(false);
       }}
     >
-      <div className={styles.edgeStripe + " " + styles.edgeLeft} aria-hidden="true" />
-      <div className={styles.edgeStripe + " " + styles.edgeRight} aria-hidden="true" />
-      <div className={styles.dotGrid} aria-hidden="true" />
-
-      <div className={cn(styles.layout, "px-4 py-16 sm:px-6 sm:py-20")}>
-        <div className="grid min-h-[760px] grid-cols-1 gap-10 lg:grid-cols-[minmax(240px,3fr)_minmax(0,5fr)_minmax(220px,2fr)] xl:grid-cols-[minmax(280px,3fr)_minmax(0,6fr)_minmax(280px,3fr)]">
-          <div className="flex h-full flex-col justify-center pt-8 lg:pt-0 xl:pr-4">
-            <div className="max-w-[360px]">
-              <h2
-                className="text-[32px] font-semibold leading-[36px] tracking-[-0.01em] text-[#0F1720]"
-                style={{ fontFamily: "var(--font-geist)" }}
-              >
-                {dict.title}
-              </h2>
-              <p className="mt-4 max-w-[320px] text-[16px] leading-[24px] text-[#5B6472]">
-                {dict.description}
-              </p>
-
-              <div className="mt-8 flex items-center gap-4">
-                <Link
-                  href={`/${locale}/automations`}
-                  className="inline-flex items-center gap-2 text-[16px] font-semibold leading-[24px] text-[#0F1720] transition-opacity hover:opacity-70 focus-visible:outline-none"
+      <div className={cn(styles.layout)}>
+        <div className="mx-4 sm:mx-6 relative overflow-hidden border border-border">
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-14 z-[1] text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-14 z-[1] text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-y-0 left-14 w-px z-[1] bg-border/70" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-y-0 right-14 w-px z-[1] bg-border/70" aria-hidden="true" />
+          <div className={styles.dotGrid} aria-hidden="true" />
+          <div className="h-full relative z-[1] grid grid-cols-1 lg:grid-cols-[minmax(240px,1fr)_minmax(440px,1fr)_minmax(240px,1fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border">
+            {/* ─── Left: text ─── */}
+            <div className="flex flex-col justify-between px-10 py-10 sm:px-20 sm:py-14 lg:px-20 lg:py-16">
+              <div className="max-w-[320px] flex flex-col justify-start">
+                <h2
+                  className="text-[26px] sm:text-[30px] font-semibold leading-[32px] tracking-[-0.02em] text-[#0F1720] dark:text-[#F1F5F9]"
+                  style={{ fontFamily: "var(--font-geist)" }}
                 >
-                  {dict.cta}
-                  <span className="inline-block h-px w-8 bg-current transition-all duration-300 hover:w-10" />
-                </Link>
+                  {dict.title}
+                </h2>
+                <p className="mt-4 text-[14.5px] leading-[22px] text-[#5B6472] dark:text-[#94A3B8]">
+                  {dict.description}
+                </p>
+                <span className="sr-only">{dict.srText}</span>
               </div>
+              <button className={cn(styles.focusRing, "group inline-flex items-center gap-2 text-[14px] font-semibold leading-[20px] text-[#0F1720] dark:text-[#F1F5F9] hover:bg-[#F3F4F6] rounded-2xl text-center px-3 py-1 hover:transition-all transition-opacity")}>
+                {dict.cta}
+              </button>
             </div>
+            {/* ─── Center: diagram ─── */}
+            <div className="flex items-center justify-center min-h-[500px] overflow-hidden">
+              <div className={cn(styles.diagramFrame, "relative w-full max-w-[440px] overflow-x-auto lg:overflow-visible")}>
+                <div className="relative" style={{ width: W, height: H, minWidth: W }}>
 
-            <p className="sr-only">{dict.srText}</p>
-          </div>
+                  {/* SVG edges — always drawn, color transitions gray↔green */}
+                  <svg
+                    className="absolute inset-0 h-full w-full pointer-events-none"
+                    viewBox={`0 0 ${W} ${H}`}
+                    aria-hidden="true"
+                  >
+                    {/* E1: Trigger → Switch */}
+                    <path d={path1} className={cn(styles.flowPath, e1Green ? styles.flowPathGreen : styles.flowPathGray)} />
+                    {/* E2 trunk: Switch → branch */}
+                    <path d={path2} className={cn(styles.flowPath, e2Green ? styles.flowPathGreen : styles.flowPathGray)} />
+                    {/* E3 upsell branch */}
+                    <path d={path3} className={cn(styles.flowPath, e3Green ? styles.flowPathGreen : styles.flowPathGray)} />
+                    {/* E4 nurture branch — always gray */}
+                    <path d={path4} className={cn(styles.flowPath, styles.flowPathGray)} />
+                    {/* E5: Upsell → + — green when plus appears */}
+                    <path d={path5} className={cn(styles.flowPath, showPlus ? styles.flowPathGreen : styles.flowPathGray)} />
 
-          <div className="flex items-center justify-center">
-            <div className={cn(styles.diagramFrame, "w-full max-w-[720px] overflow-x-auto xl:overflow-visible")}>
-              <div className="relative mx-auto min-w-[720px] aspect-[720/640]">
-                <svg
-                  className="absolute inset-0 h-full w-full"
-                  viewBox={`0 0 ${diagramWidth} ${diagramHeight}`}
-                  aria-hidden="true"
-                >
-                  <path
-                    d={path1}
-                    className={cn(styles.flowPath, pathState.first === "active" ? styles.flowPathActive : styles.flowPathIdle)}
-                    data-active={pathState.first === "active"}
-                  />
-                  <path
-                    d={path2}
-                    className={cn(styles.flowPath, pathState.second === "active" ? styles.flowPathActive : styles.flowPathIdle)}
-                    data-active={pathState.second === "active"}
-                  />
-                  <path
-                    d={path3}
-                    className={cn(styles.flowPath, pathState.branch === "active" ? styles.flowPathActive : styles.flowPathIdle)}
-                    data-active={pathState.branch === "active"}
-                  />
-                  <path
-                    d={path4}
-                    className={cn(styles.flowPath, pathState.branch === "active" ? styles.flowPathActive : styles.flowPathIdle)}
-                    data-active={pathState.branch === "active"}
-                  />
-
-                  <circle cx="360" cy="152" r="3" fill="#ffffff" stroke={pathState.first === "active" ? "#22C55E" : "#D1D5DB"} strokeWidth="1.5" />
-                  <circle cx="360" cy="206" r="3" fill="#ffffff" stroke={pathState.first === "active" ? "#22C55E" : "#D1D5DB"} strokeWidth="1.5" />
-                  <circle cx="360" cy="300" r="3" fill="#ffffff" stroke={pathState.second === "active" ? "#22C55E" : "#D1D5DB"} strokeWidth="1.5" />
-                  <circle cx="360" cy="360" r="3" fill="#ffffff" stroke={pathState.second === "active" ? "#22C55E" : "#D1D5DB"} strokeWidth="1.5" />
-                  <circle cx="360" cy="398" r="3" fill="#ffffff" stroke={pathState.branch === "active" ? "#22C55E" : "#D1D5DB"} strokeWidth="1.5" />
-                  <circle cx="190" cy="470" r="3" fill="#ffffff" stroke={pathState.branch === "active" ? "#22C55E" : "#D1D5DB"} strokeWidth="1.5" />
-                  <circle cx="530" cy="470" r="3" fill="#ffffff" stroke={pathState.branch === "active" ? "#22C55E" : "#D1D5DB"} strokeWidth="1.5" />
-                </svg>
-
-                <div className="absolute left-1/2 top-[48px] -translate-x-1/2">
-                  <NodeCard
-                    ariaLabel={dict.trigger.title}
-                    title={dict.trigger.title}
-                    description={dict.trigger.description}
-                    badge={dict.trigger.badge}
-                    status={dict.trigger.status}
-                    icon={<DealInvoiceIcon />}
-                    iconBg="#EAF1FF"
-                    iconFg="#2F6BFF"
-                    active={nodeActive.trigger}
-                    muted={false}
-                    widthClass="w-[360px]"
-                  />
-                </div>
-
-                <div className="absolute left-1/2 top-[200px] -translate-x-1/2">
-                  <NodeCard
-                    ariaLabel={dict.condition.title}
-                    title={dict.condition.title}
-                    description={dict.condition.description}
-                    badge={dict.condition.badge}
-                    status={dict.condition.status}
-                    icon={<ForkSwitchIcon />}
-                    iconBg="#FDECF4"
-                    iconFg="#F472B6"
-                    active={nodeActive.condition}
-                    muted={false}
-                    widthClass="w-[360px]"
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  aria-label="Add next step"
-                  className={cn(
-                    styles.focusRing,
-                    "absolute left-1/2 top-[344px] flex size-10 -translate-x-1/2 items-center justify-center rounded-full bg-[#3B82F6] text-white shadow-[0_4px_14px_rgba(59,130,246,0.35)] transition-transform duration-300 hover:scale-105"
-                  )}
-                >
-                  <span className={styles.pulseRing} aria-hidden="true" />
-                  <span className="relative z-10 size-4">
-                    <PlusIcon />
-                  </span>
-                </button>
-
-                <div
-                  className={cn(
-                    "absolute top-[450px]",
-                    "left-[calc(50%-182px)]"
-                  )}
-                >
-                  <NodeCard
-                    ariaLabel={dict.sequence.upsell.title}
-                    title={dict.sequence.upsell.title}
-                    description={dict.sequence.upsell.description}
-                    badge={dict.condition.upsell}
-                    status={dict.sequence.upsell.status}
-                    icon={<PaperPlaneIcon />}
-                    iconBg="#E8F1FE"
-                    iconFg="#60A5FA"
-                    active={nodeActive.upsell}
-                    muted={false}
-                    widthClass="w-[340px]"
-                  />
-                </div>
-
-                <div
-                  className={cn(
-                    "absolute top-[450px]",
-                    "left-[calc(50%+18px)]"
-                  )}
-                >
-                  <NodeCard
-                    ariaLabel={dict.sequence.nurture.title}
-                    title={dict.sequence.nurture.title}
-                    description={dict.sequence.nurture.description}
-                    badge={dict.condition.nurture}
-                    status={dict.sequence.nurture.status}
-                    icon={<PaperPlaneIcon />}
-                    iconBg="#E8F1FE"
-                    iconFg="#60A5FA"
-                    active={nodeActive.nurture}
-                    muted={nodeMuted.nurture}
-                    widthClass="w-[340px]"
-                  />
-                </div>
-
-                {!reducedMotion && visible && renderPhase !== "idle" && (
-                  <>
-                    <span
-                      className={styles.pathDot}
-                      style={
-                        {
-                          left: "360px",
-                          top: "160px",
-                          offsetPath: `path("${path1}")`,
-                          "--dot-delay": "120ms",
-                        } as React.CSSProperties
-                      }
-                    />
-                    <span
-                      className={styles.pathDot}
-                      style={
-                        {
-                          left: "360px",
-                          top: "312px",
-                          offsetPath: `path("${path2}")`,
-                          "--dot-delay": "360ms",
-                        } as React.CSSProperties
-                      }
-                    />
-                    <span
-                      className={styles.pathDot}
-                      style={
-                        {
-                          left: "360px",
-                          top: "408px",
-                          offsetPath: `path("${path3}")`,
-                          "--dot-delay": "760ms",
-                        } as React.CSSProperties
-                      }
-                    />
-                    <span
-                      className={styles.pathDot}
-                      style={
-                        {
-                          left: "360px",
-                          top: "408px",
-                          offsetPath: `path("${path4}")`,
-                          "--dot-delay": "900ms",
-                        } as React.CSSProperties
-                      }
-                    />
-                  </>
-                )}
-
-                <div
-                  className={cn(
-                    "absolute",
-                    styles.badge,
-                    styles.badgeUpsell,
-                    "left-[calc(50%-132px)] top-[404px]"
-                  )}
-                >
-                  {dict.condition.upsell}
-                </div>
-                <div
-                  className={cn(
-                    "absolute",
-                    styles.badge,
-                    styles.badgeNurture,
-                    "left-[calc(50%+76px)] top-[404px]"
-                  )}
-                >
-                  {dict.condition.nurture}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative flex h-full flex-col justify-center">
-            <div className="hidden lg:block">
-              <div className="max-w-[280px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_14%,black_86%,transparent)]">
-                <ul
-                  role="list"
-                  aria-label={dict.list.title}
-                  className={cn(styles.listTrack, "space-y-[10px]")}
-                >
-                  {displayItems.map((item, index) => {
-                    const active = index % listItems.length === activeListIndex;
-                    const muted = !active && index % listItems.length !== activeListIndex;
-                    return (
-                      <ListCard
-                        key={`${item.id}-${index}`}
-                        item={item}
-                        active={active}
-                        muted={muted}
-                        onClick={() => setActiveListIndex(index % listItems.length)}
+                    {/* Connection port dots */}
+                    {([
+                      [cx,            n1Bottom,    e1Green],
+                      [cx,            n2Top,       e1Green],
+                      [cx,            n2Bottom,    e2Green],
+                      [cx,            branchY,     e2Green],
+                      [upsellCardCx,  n34Top,      e3Green],
+                      [nurtureCardCx, n34Top,      false],
+                    ] as [number, number, boolean][]).map(([x, y, on], i) => (
+                      <circle key={i} cx={x} cy={y} r={3} fill="#ffffff"
+                        stroke={on ? "#34C77B" : "#D0D5DD"} strokeWidth={1.4}
+                        style={{ transition: "stroke 400ms ease" }}
                       />
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
+                    ))}
+                  </svg>
 
-            <div className="mt-2 lg:hidden">
-              <div className="flex gap-3 overflow-x-auto pb-2 [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
-                {listItems.map((item, index) => (
-                  <div key={item.id} className="shrink-0">
-                    <ListCard
-                      item={item}
-                      active={index === activeListIndex}
-                      muted={index !== activeListIndex}
-                      onClick={() => setActiveListIndex(index)}
+                  {/* ── N1: Trigger (ALWAYS RENDERED) ── */}
+                  <div className="absolute" style={{ top: n1Top, left: cx, transform: "translateX(-50%)" }}>
+                    <div className="relative">
+                      {/* Static "Trigger" tab — always visible */}
+                      <span className={cn(styles.badge, styles.nodeTriggerTab)}>
+                        <TargetIcon />
+                        {dict.trigger.badge}
+                      </span>
+                      {/* "Triggered" status badge — slides in when active */}
+                      {triggerActive && (
+                        <StatusBadge className={styles.badgeTopRight}>
+                          <CheckIcon />
+                          {dict.trigger.status}
+                        </StatusBadge>
+                      )}
+                      <NodeCard
+                        ariaLabel={`Trigger: ${dict.trigger.title}`}
+                        title={dict.trigger.title}
+                        description={dict.trigger.description}
+                        inlinePill={dict.trigger.badge}
+                        icon={<DealInvoiceIcon />}
+                        iconBg={triggerActive ? "#EEF0FE" : "#F2F4F7"}
+                        iconFg={triggerActive ? "#6E78F7" : "#98A2B3"}
+                        active={triggerActive}
+                        width={220}
+                      />
+                    </div>
+                  </div>
+
+                  {/* ── N2: Switch (ALWAYS RENDERED) ── */}
+                  <div className="absolute" style={{ top: n2Top, left: cx, transform: "translateX(-50%)" }}>
+                    <div className="relative">
+                      {switchActive && (
+                        <StatusBadge className={styles.badgeTopRight}>
+                          <CheckIcon />
+                          {dict.condition.status}
+                        </StatusBadge>
+                      )}
+                      <NodeCard
+                        ariaLabel={dict.condition.title}
+                        title={dict.condition.title}
+                        description={dict.condition.description}
+                        inlinePill={dict.condition.badge}
+                        icon={<ForkSwitchIcon />}
+                        iconBg={switchActive ? "#EEF0FE" : "#F2F4F7"}
+                        iconFg={switchActive ? "#6E78F7" : "#98A2B3"}
+                        active={switchActive}
+                        width={220}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Branch labels — always rendered, styling changes with state */}
+                  <span
+                    className={cn(
+                      styles.badge,
+                      styles.badgeFloating,
+                      branchVisible ? styles.badgeUpsell : styles.badgeLabelIdle,
+                      "absolute"
+                    )}
+                    style={{ top: branchLabelY - 11, left: upsellLabelX, transform: "translateX(-50%)" }}
+                  >
+                    {dict.condition.upsell}
+                  </span>
+                  <span
+                    className={cn(styles.badge, styles.badgeNurture, styles.badgeFloating, "absolute")}
+                    style={{ top: branchLabelY - 11, left: nurtureLabelX, transform: "translateX(-50%)" }}
+                  >
+                    {dict.condition.nurture}
+                  </span>
+
+                  {/* ── N3: Upsell (ALWAYS RENDERED) ── */}
+                  <div className="absolute" style={{ top: n34Top, left: upsellCardCx, transform: "translateX(-50%)" }}>
+                    <div className="relative">
+                      {upsellActive && (
+                        <StatusBadge className={styles.badgeTopLeft}>
+                          <CheckIcon />
+                          {dict.sequence.upsell.status}
+                        </StatusBadge>
+                      )}
+                      <NodeCard
+                        ariaLabel={dict.sequence.upsell.title}
+                        title={dict.sequence.upsell.title}
+                        description={dict.sequence.upsell.description}
+                        inlinePill={dict.sequence.upsell.badge}
+                        icon={<PaperPlaneIcon />}
+                        iconBg={upsellActive ? "#EEF0FE" : "#F2F4F7"}
+                        iconFg={upsellActive ? "#6E78F7" : "#98A2B3"}
+                        active={upsellActive}
+                        width={200}
+                      />
+                    </div>
+                  </div>
+
+                  {/* ── N4: Nurture (ALWAYS RENDERED, always muted) ── */}
+                  <div className="absolute" style={{ top: n34Top, left: nurtureCardCx, transform: "translateX(-50%)" }}>
+                    <NodeCard
+                      ariaLabel={dict.sequence.nurture.title}
+                      title={dict.sequence.nurture.title}
+                      description={dict.sequence.nurture.description}
+                      inlinePill={dict.sequence.nurture.badge}
+                      icon={<PaperPlaneIcon />}
+                      iconBg="#F2F4F7"
+                      iconFg="#98A2B3"
+                      muted
+                      width={240}
                     />
                   </div>
-                ))}
+
+                  {/* ── + button (appears at plus phase) ── */}
+                  {showPlus && (
+                    <div
+                      className="absolute border-none"
+                      style={{ top: plusY, left: cx, transform: "translate(-50%, -50%)" }}
+                    >
+                      <button
+                        type="button"
+                        aria-label="Add next step"
+                        className={cn(styles.focusRing, styles.plusButton, styles.plusPopIn,
+                          "relative flex size-9 items-center justify-center rounded-full text-white border-none"
+                        )}
+                      >
+                        <span className={styles.pulseRing} aria-hidden="true" />
+                        <span className="relative z-10 inline-flex size-4 border-none">
+                          <PlusIcon />
+                        </span>
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Flow dots — travel on green (active) edges only */}
+                  {!reducedMotion && visible && renderPhase !== "idle" && (
+                    <>
+                      {/* E1: delayed 600ms so it starts after trigger border finishes drawing */}
+                      <span className={styles.pathDot}
+                        style={{ offsetPath: `path("${path1}")`, "--dot-delay": "600ms" } as React.CSSProperties}
+                      />
+                      {/* E2 trunk: delayed 600ms after condition border finishes */}
+                      {switchActive && (
+                        <span className={styles.pathDot}
+                          style={{ offsetPath: `path("${path2}")`, "--dot-delay": "600ms" } as React.CSSProperties}
+                        />
+                      )}
+                      {/* E3 upsell branch: no delay, travels to upsell card as its border draws */}
+                      {e3Green && (
+                        <span className={styles.pathDot}
+                          style={{ offsetPath: `path("${path3}")`, "--dot-delay": "0ms" } as React.CSSProperties}
+                        />
+                      )}
+                      {/* E5 upsell→plus: appears with plus button */}
+                      {showPlus && (
+                        <span className={styles.pathDot}
+                          style={{ offsetPath: `path("${path5}")`, "--dot-delay": "0ms" } as React.CSSProperties}
+                        />
+                      )}
+                    </>
+                  )}
+                </div>
               </div>
             </div>
 
-            <div className={cn(styles.cubes, "hidden xl:block")}>
-              <IsoCubes />
+            {/* ─── Right: list + cubes ─── */}
+            <div className="relative flex flex-col justify-between px-6 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-16 min-h-[560px]">
+              <div className="hidden lg:block">
+                <div className={cn(styles.listMask, "relative mx-auto h-[340px]")}>
+                  <ul
+                    role="list"
+                    aria-label={dict.list.title}
+                    className={cn(styles.listTrack, "mx-auto flex w-full flex-col gap-2")}
+                    style={{ "--ae-scroll-distance": `${listScrollDistance}px` } as React.CSSProperties}
+                  >
+                    {displayItems.map((item, index) => {
+                      const baseIdx = index % listItems.length;
+                      const active = baseIdx === activeListIndex;
+                      return (
+                        <ListCard key={`${item.id}-${index}`} item={item}
+                          active={active} muted={!active}
+                          onClick={() => setActiveListIndex(baseIdx)}
+                        />
+                      );
+                    })}
+                  </ul>
+                </div>
+                </div>
+
+              {/* Mobile list */}
+              <div className="lg:hidden">
+                <div className="flex gap-3 overflow-x-auto pb-2"
+                  style={{
+                    WebkitMaskImage: "linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)",
+                    maskImage: "linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)",
+                  }}
+                >
+                  {listItems.map((item, index) => (
+                    <div key={item.id} className="shrink-0 w-[220px]">
+                      <ListCard item={item}
+                        active={index === activeListIndex}
+                        muted={index !== activeListIndex}
+                        onClick={() => setActiveListIndex(index)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Cubes */}
+              <div className={cn(styles.cubes, "hidden lg:block absolute bottom-1/6 right-1/3 w-[140px] h-[110px]")} aria-hidden="true">
+                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" className="overflow-visible">
+                  <path d="M53.2944 38.3421L83.0481 23.4418C84.224 22.8527 85.6105 22.8527 86.7864 23.4418L116.54 38.3421C117.947 39.0465 118.835 40.4814 118.835 42.0509V72.0653C118.835 73.6344 117.947 75.0698 116.54 75.7741L86.7864 90.6745C85.6105 91.2635 84.224 91.2635 83.0481 90.6745L53.2944 75.7741C51.888 75.0698 51 73.6348 51 72.0653V42.0509C51 40.4818 51.888 39.0465 53.2944 38.3421Z" fill="#FAFAFB" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M3.29443 67.1331L33.0481 52.2328C34.224 51.6438 35.6105 51.6438 36.7864 52.2328L66.5401 67.1331C67.9466 67.8375 68.8345 69.2725 68.8345 70.8419V99.8563C68.8345 101.425 67.9466 102.861 66.5401 103.565L36.7864 118.465C35.6105 119.055 34.224 119.055 33.0481 118.465L3.29443 103.565C1.88795 102.861 1 101.426 1 99.8563V70.8419C1 69.2728 1.88795 67.8375 3.29443 67.1331Z" fill="#F3F4F6" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path opacity="0.6" d="M1.65625 67.627L34.9181 84.4541L67.5 68M34.9167 118.914V84.4473" stroke="#505967" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M3.29443 16.3421L33.0481 1.44179C34.224 0.852738 35.6105 0.852738 36.7864 1.44179L66.5401 16.3421C67.9466 17.0465 68.8345 18.4814 68.8345 20.0509V49.0653C68.8345 50.6344 67.9466 52.0698 66.5401 52.7741L36.7864 67.6745C35.6105 68.2635 34.224 68.2635 33.0481 67.6745L3.29443 52.7741C1.88795 52.0698 1 50.6348 1 49.0653V20.0509C1 18.4818 1.88795 17.0465 3.29443 16.3421Z" fill="white" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path opacity="0.6" d="M1.65625 17.8359L34.9181 34.663L68.1803 17.8359M34.9167 68.1227V34.6563" stroke="#505967" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M53.2944 38.8421L83.0481 23.9418C84.224 23.3527 85.6105 23.3527 86.7864 23.9418L116.54 38.8421C117.947 39.5465 118.835 40.9814 118.835 42.5509V58.5653L85.0481 75.1745L51 58.5653V42.5509C51 40.9818 51.888 39.5465 53.2944 38.8421Z" fill="#FAFAFB"/>
+                  <path d="M116.54 75.7741C117.947 75.0698 118.835 73.6344 118.835 72.0653V42.0509C118.835 40.4814 117.947 39.0465 116.54 38.3421L86.7864 23.4418C85.6105 22.8527 84.224 22.8527 83.0481 23.4418L53.2944 38.3421C51.888 39.0465 51 40.4818 51 42.0509V59.35L66 66.85" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path opacity="0.6" d="M51.6562 39.8359L84.9181 56.663L118.18 39.8359M84.9167 91.1227V56.6563" stroke="#505967" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>

@@ -43,6 +43,49 @@
     "subtitle": "All your channels and meeting tools in one platform",
     "learnMore": "Learn More"
   },
+  "connectData": {
+    "title": "Connect any type of data",
+    "description": "Pull conversations, databases, documents, and product signals into one structured workspace.",
+    "cta": "Explore integrations →",
+    "ctaHref": "/en/integrations",
+    "ariaLabel": "Connect any type of data",
+    "srText": "Data sources and record cards connected through the Edfu data layer.",
+    "sources": [
+      { "id": "sales_engagement", "label": "Sales engagement" },
+      { "id": "email_calendar", "label": "Email and calendar" },
+      { "id": "data_warehouses", "label": "Data warehouses" },
+      { "id": "customer_support", "label": "Customer support" },
+      { "id": "billing_invoicing", "label": "Billing and invoicing" },
+      { "id": "product_data", "label": "Product data" }
+    ],
+    "records": [
+      {
+        "id": "workspace",
+        "title": "Workspace knowledge",
+        "badge": "Workspace",
+        "records": 12840,
+        "recordLabel": "records",
+        "tone": "blue"
+      },
+      {
+        "id": "company",
+        "title": "Company profile",
+        "badge": "Company",
+        "records": 642,
+        "recordLabel": "records",
+        "tone": "green"
+      },
+      {
+        "id": "deal",
+        "title": "Deal context",
+        "badge": "Deals",
+        "records": 912,
+        "recordLabel": "records",
+        "tone": "orange"
+      }
+    ],
+    "integrationsLabel": "Connected integrations"
+  },
   "features": {
     "title": "Build Your Company's Digital Memory",
     "description": "Edfu brings all your company's knowledge together on one platform. Your team finds the information they need in seconds.",
@@ -371,13 +414,13 @@
     "trigger": {
       "badge": "Trigger",
       "title": "When Deal updated",
-      "description": "The flow starts the moment a deal changes in your CRM.",
+      "description": "Trigger when a Deal's status is updated",
       "status": "Triggered"
     },
     "condition": {
       "badge": "Condition",
-      "title": "Condition split",
-      "description": "Branch the workflow by checking whether the contact is qualified for the next step.",
+      "title": "Switch",
+      "description": "Route to upsell or nurture",
       "status": "Completed",
       "upsell": "Upsell",
       "nurture": "Nurture"
@@ -386,13 +429,13 @@
       "upsell": {
         "badge": "Sequences",
         "title": "Enroll in sequence",
-        "description": "Send high-intent contacts into an upsell sequence with the right follow-up timing.",
+        "description": "Enroll person in 'Power user upsell'",
         "status": "Completed"
       },
       "nurture": {
         "badge": "Sequences",
         "title": "Enroll in sequence",
-        "description": "Keep the rest of the audience warm with a long-tail nurture sequence.",
+        "description": "Enroll person in 'Nurture'",
         "status": "Completed"
       }
     },
