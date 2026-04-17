@@ -43,7 +43,7 @@ function CardArt({
   patternId: string;
 }) {
   return (
-    <div className="relative mb-6 aspect-square md:max-lg:aspect-[1.618] w-full overflow-hidden">
+    <div className="relative mb-6 aspect-square md:aspect-[1.618] lg:aspect-square w-full overflow-hidden">
       <DottedBackdrop patternId={patternId} />
       {children}
     </div>

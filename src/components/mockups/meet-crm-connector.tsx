@@ -39,29 +39,29 @@ export function MeetCrmConnector() {
         </defs>
 
         {/* Outer dashed ring — class drives pulse animation */}
-        <circle
-          cx="160.175"
-          cy="197.46"
-          r="76.84"
-          stroke="#CAD0D9"
-          strokeWidth="0.97"
-          strokeDasharray="5.84 5.84"
-          fill="url(#mcc-ring-fill)"
-          className="pulse-ring-outer"
-          style={{ transformBox: "fill-box" as const, transformOrigin: "center" }}
-        />
+        <g className="pulse-ring-outer" transform="translate(160.175 197.46)">
+          <circle
+            cx="0"
+            cy="0"
+            r="76.84"
+            stroke="#CAD0D9"
+            strokeWidth="0.97"
+            strokeDasharray="5.84 5.84"
+            fill="url(#mcc-ring-fill)"
+          />
+        </g>
         {/* Inner dashed ring */}
-        <circle
-          cx="160.175"
-          cy="197.461"
-          r="54.47"
-          stroke="#CAD0D9"
-          strokeWidth="0.97"
-          strokeDasharray="5.84 5.84"
-          fill="url(#mcc-ring-fill)"
-          className="pulse-ring-inner"
-          style={{ transformBox: "fill-box" as const, transformOrigin: "center" }}
-        />
+        <g className="pulse-ring-inner" transform="translate(160.175 197.461)">
+          <circle
+            cx="0"
+            cy="0"
+            r="54.47"
+            stroke="#CAD0D9"
+            strokeWidth="0.97"
+            strokeDasharray="5.84 5.84"
+            fill="url(#mcc-ring-fill)"
+          />
+        </g>
 
         {/* Base connector line */}
         <line
@@ -100,7 +100,7 @@ export function MeetCrmConnector() {
             width: "100%",
             height: "200%",
             background:
-              "linear-gradient(to bottom, #E4E7EC 0%, #94B9FF 25%, #94B9FF 75%, #E4E7EC 100%)",
+              "linear-gradient(to bottom, transparent 0%, transparent 40%, #94B9FF 45%, #94B9FF 55%, transparent 60%, transparent 100%)",
           }}
         />
       </div>

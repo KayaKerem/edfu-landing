@@ -275,6 +275,7 @@
 }
 .pulse-ring-inner {
   transform-origin: center;
+  /* delay = -duration/2 phases inner ring half a cycle apart from outer */
   animation: pulse-rings 2.8s ease-in-out -1.4s infinite;
 }
 .bead-flow-line {
