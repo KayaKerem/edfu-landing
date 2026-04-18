@@ -1,17 +1,13 @@
 .root {
   position: relative;
-    left: 50%;
-  width: 100vw;
-  transform: translateX(-50%);
+  width: 100%;
   display: flex;
   overflow: hidden;
   isolation: isolate;
-  background: #ffffff;
   content-visibility: auto;
   contain: layout paint style;
-    min-height: 760px;
-  max-height: 820px;
-  overflow: hidden;
+  min-height: 620px;
+  max-height: 720px;
 
   /* Design tokens */
   --edge-active: #34c77b;
@@ -331,6 +327,15 @@
 }
 
 .listCardMuted { opacity: 0.55; }
+
+.listCardInactive {
+  transform: scale(0.94);
+  transform-origin: center center;
+}
+
+.listCardTitle { font-weight: 400; }
+
+.listCardActive .listCardTitle { font-weight: 600; }
 
 @keyframes aeScroll {
   from { transform: translateY(0); }

@@ -302,11 +302,13 @@ function ListCard({
   item,
   active,
   muted,
+  opacity,
   onClick,
 }: {
   item: ListItem;
   active?: boolean;
   muted?: boolean;
+  opacity?: number;
   onClick: () => void;
 }) {
   const palette: Record<string, { bg: string; color: string }> = {
@@ -322,7 +324,7 @@ function ListCard({
   const swatch = palette[item.color] ?? palette.blue;
 
   return (
-    <li role="listitem" className="list-none">
+    <li role="listitem" className="list-none" style={opacity !== undefined ? { opacity, transition: "opacity 320ms ease" } : undefined}>
       <button
         type="button"
         onClick={onClick}
@@ -330,18 +332,19 @@ function ListCard({
         className={cn(
           styles.listCard,
           styles.focusRing,
-          "flex h-11 w-full items-center gap-2.5 rounded-[10px] border border-[#E6E8EC] bg-white px-2.5 text-left shadow-[0_1px_2px_rgba(0,0,0,0.04)]",
+          "flex h-10 w-full items-center gap-2.5 rounded-[10px] border border-[#E6E8EC] bg-white px-2.5 text-left shadow-[0_1px_2px_rgba(0,0,0,0.04)]",
           active && styles.listCardActive,
-          muted && !active && styles.listCardMuted
+          !active && styles.listCardInactive,
+          muted && !active && opacity === undefined && styles.listCardMuted
         )}
->
+      >
         <span
-      className="flex size-5 shrink-0 items-center justify-center rounded-[5px]"
+          className="flex size-5 shrink-0 items-center justify-center rounded-[5px]"
           style={{ background: swatch.bg, color: swatch.color }}
         >
-    <span className="inline-flex size-3.5"><ListItemIcon /></span>
+          <span className="inline-flex size-3.5"><ListItemIcon /></span>
         </span>
-        <span className="min-w-0 flex-1 truncate text-[12.5px] leading-[16px] text-[#0F1720] dark:text-[#F1F5F9]">
+        <span className={cn(styles.listCardTitle, "min-w-0 flex-1 truncate text-[12.5px] leading-[16px] text-[#0F1720] dark:text-[#F1F5F9]")}>
           {item.title}
         </span>
       </button>
@@ -353,13 +356,13 @@ function ListCard({
 export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
   const sectionRef = useRef<HTMLElement>(null);
   const loopTimers = useRef<number[]>([]);
+  const hasPlayedRef = useRef(false);
   const params = useParams<{ lang?: string }>();
   const [visible, setVisible] = useState(false);
   const [phase, setPhase] = useState<Phase>("idle");
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [loopIteration, setLoopIteration] = useState(0);
-  const [activeListIndex, setActiveListIndex] = useState(0);
+  const [activeListIndex, setActiveListIndex] = useState(3);
   const [pageHidden, setPageHidden] = useState(false);
 
   // E5 (upsell→+) draw-in animation: measure path length on mount so the
@@ -417,7 +420,8 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
   // All nodes visible from the start (idle = gray border).
   // Phases drive "activation" (green border + badge slide-up), not node visibility.
   useEffect(() => {
-    if (!visible || reducedMotion) return;
+    if (!visible || reducedMotion || hasPlayedRef.current) return;
+    hasPlayedRef.current = true;
 
     const clearTimers = () => {
       loopTimers.current.forEach((id) => window.clearTimeout(id));
@@ -425,10 +429,9 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
     };
     clearTimers();
 
-    const schedule = (delay: number, next: Phase | "restart") => {
+    const schedule = (delay: number, next: Phase) => {
       loopTimers.current.push(
         window.setTimeout(() => {
-          if (next === "restart") { setLoopIteration((c) => c + 1); setPhase("idle"); return; }
           setPhase(next);
         }, delay)
       );
@@ -441,7 +444,6 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
     // t=4200  + button appears with halo pulse
     // t=6500  Hold phase — all active, reset about to begin
     // t=7100  Instant reset to idle (all borders gray, no badges)
-    // t=7700  Restart loop
     schedule(0,    "trigger");
     schedule(1400, "condition");
     schedule(2400, "branch");
@@ -449,10 +451,9 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
     schedule(4200, "plus");
     schedule(6500, "resetting");
     schedule(7100, "idle");
-    schedule(7700, "restart");
 
     return () => clearTimers();
-  }, [visible, reducedMotion, loopIteration]);
+  }, [visible, reducedMotion]);
 
   useEffect(() => {
     if (!visible || reducedMotion || paused || pageHidden) return;
@@ -540,13 +541,13 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
       }}
     >
       <div className={cn(styles.layout)}>
-        <div className="mx-4 sm:mx-6 relative overflow-hidden border border-border">
+        <div className="mx-4 sm:mx-6 relative overflow-hidden">
           <div className="pointer-events-none absolute inset-y-0 left-0 w-14 z-[1] text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-14 z-[1] text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-y-0 left-14 w-px z-[1] bg-border/70" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-y-0 right-14 w-px z-[1] bg-border/70" aria-hidden="true" />
           <div className={styles.dotGrid} aria-hidden="true" />
-          <div className="h-full relative z-[1] grid grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(560px,1.4fr)_minmax(220px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border">
+          <div className="h-full relative z-[1] grid grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(500px,1.4fr)_minmax(320px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border">
             {/* ─── Left: text ─── */}
             <div className="flex flex-col justify-between pl-6 py-6 sm:pl-10 sm:py-7 lg:pl-12 lg:py-8">
               <div className="max-w-[320px] flex flex-col justify-start px-6">
@@ -566,9 +567,9 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
               </button>
             </div>
             {/* ─── Center: diagram ─── */}
-            <div className="flex items-center justify-center min-h-[600px] pl-3 sm:pl-5 lg:pl-6 py-6 sm:py-7 lg:py-8">
+            <div className="flex items-center justify-center min-h-auto pl-3 sm:pl-5 lg:pl-6">
               <div className={cn(styles.diagramFrame, "relative w-full max-w-[560px] overflow-x-auto lg:overflow-hidden")}>
-                <div className="relative" style={{ width: W, height: H, minWidth: W }}>
+                <div className="relative pt-0 mt-0" style={{ width: W, height: H, minWidth: W }}>
 
                   {/* SVG edges — always drawn, color transitions gray↔green */}
                   <svg
@@ -790,61 +791,82 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
             </div>
 
             {/* ─── Right: list + cubes ─── */}
-            <div className="relative flex flex-col justify-between px-6 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-16 min-h-[560px]">
-              <div className="hidden lg:block">
-                <div className={cn(styles.listMask, "relative mx-auto h-[340px]")}>
-                  <ul
-                    role="list"
-                    aria-label={dict.list.title}
-                    className={cn(styles.listTrack, "mx-auto flex w-full flex-col gap-2")}
-                    style={{ "--ae-scroll-distance": `${listScrollDistance}px` } as React.CSSProperties}
-                  >
-                    {displayItems.map((item, index) => {
-                      const baseIdx = index % listItems.length;
-                      const active = baseIdx === activeListIndex;
-                      return (
-                        <ListCard key={`${item.id}-${index}`} item={item}
-                          active={active} muted={!active}
-                          onClick={() => setActiveListIndex(baseIdx)}
-                        />
-                      );
-                    })}
-                  </ul>
-                </div>
+            <div className="relative flex flex-col min-h-[560px]">
+              {/* List section */}
+              <div className="px-4 py-5 pb-0 sm:px-5 sm:py-7 lg:px-6 lg:py-8">
+                {/* Desktop infinite scroll list */}
+                <div className="hidden lg:block">
+                  <div className="relative mx-auto h-[320px] overflow-hidden">
+                    <ul
+                      role="list"
+                      aria-label={dict.list.title}
+                      className={cn(styles.listTrack, "mx-auto flex w-full flex-col gap-2 px-2")}
+                      style={{ "--ae-scroll-distance": `${listScrollDistance}px` } as React.CSSProperties}
+                    >
+                      {displayItems.map((item, index) => {
+                        const baseIdx = index % listItems.length;
+                        const active = baseIdx === activeListIndex;
+                        const dist = Math.min(
+                          Math.abs(baseIdx - activeListIndex),
+                          listItems.length - Math.abs(baseIdx - activeListIndex)
+                        );
+                        const itemOpacity = dist === 0 ? 1 : dist === 1 ? 0.72 : dist === 2 ? 0.45 : 0.25;
+                        return (
+                          <ListCard key={`${item.id}-${index}`} item={item}
+                            active={active} opacity={itemOpacity}
+                            onClick={() => setActiveListIndex(baseIdx)}
+                          />
+                        );
+                      })}
+                    </ul>
+                  </div>
                 </div>
 
-              {/* Mobile list */}
-              <div className="lg:hidden">
-                <div className="flex gap-3 overflow-x-auto pb-2"
-                  style={{
-                    WebkitMaskImage: "linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)",
-                    maskImage: "linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)",
-                  }}
-                >
-                  {listItems.map((item, index) => (
-                    <div key={item.id} className="shrink-0 w-[220px]">
-                      <ListCard item={item}
-                        active={index === activeListIndex}
-                        muted={index !== activeListIndex}
-                        onClick={() => setActiveListIndex(index)}
-                      />
-                    </div>
-                  ))}
+                {/* Mobile horizontal scroll list */}
+                <div className="lg:hidden">
+                  <div className="flex gap-3 overflow-x-auto pb-2"
+                    style={{
+                      WebkitMaskImage: "linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)",
+                      maskImage: "linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)",
+                    }}
+                  >
+                    {listItems.map((item, index) => (
+                      <div key={item.id} className="shrink-0 w-[220px]">
+                        <ListCard item={item}
+                          active={index === activeListIndex}
+                          muted={index !== activeListIndex}
+                          onClick={() => setActiveListIndex(index)}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Cubes */}
-              <div className={cn(styles.cubes, "hidden lg:block absolute bottom-1/6 right-1/3 w-[140px] h-[110px]")} aria-hidden="true">
-                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" className="overflow-visible">
-                  <path d="M53.2944 38.3421L83.0481 23.4418C84.224 22.8527 85.6105 22.8527 86.7864 23.4418L116.54 38.3421C117.947 39.0465 118.835 40.4814 118.835 42.0509V72.0653C118.835 73.6344 117.947 75.0698 116.54 75.7741L86.7864 90.6745C85.6105 91.2635 84.224 91.2635 83.0481 90.6745L53.2944 75.7741C51.888 75.0698 51 73.6348 51 72.0653V42.0509C51 40.4818 51.888 39.0465 53.2944 38.3421Z" fill="#FAFAFB" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M3.29443 67.1331L33.0481 52.2328C34.224 51.6438 35.6105 51.6438 36.7864 52.2328L66.5401 67.1331C67.9466 67.8375 68.8345 69.2725 68.8345 70.8419V99.8563C68.8345 101.425 67.9466 102.861 66.5401 103.565L36.7864 118.465C35.6105 119.055 34.224 119.055 33.0481 118.465L3.29443 103.565C1.88795 102.861 1 101.426 1 99.8563V70.8419C1 69.2728 1.88795 67.8375 3.29443 67.1331Z" fill="#F3F4F6" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path opacity="0.6" d="M1.65625 67.627L34.9181 84.4541L67.5 68M34.9167 118.914V84.4473" stroke="#505967" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M3.29443 16.3421L33.0481 1.44179C34.224 0.852738 35.6105 0.852738 36.7864 1.44179L66.5401 16.3421C67.9466 17.0465 68.8345 18.4814 68.8345 20.0509V49.0653C68.8345 50.6344 67.9466 52.0698 66.5401 52.7741L36.7864 67.6745C35.6105 68.2635 34.224 68.2635 33.0481 67.6745L3.29443 52.7741C1.88795 52.0698 1 50.6348 1 49.0653V20.0509C1 18.4818 1.88795 17.0465 3.29443 16.3421Z" fill="white" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path opacity="0.6" d="M1.65625 17.8359L34.9181 34.663L68.1803 17.8359M34.9167 68.1227V34.6563" stroke="#505967" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M53.2944 38.8421L83.0481 23.9418C84.224 23.3527 85.6105 23.3527 86.7864 23.9418L116.54 38.8421C117.947 39.5465 118.835 40.9814 118.835 42.5509V58.5653L85.0481 75.1745L51 58.5653V42.5509C51 40.9818 51.888 39.5465 53.2944 38.8421Z" fill="#FAFAFB"/>
-                  <path d="M116.54 75.7741C117.947 75.0698 118.835 73.6344 118.835 72.0653V42.0509C118.835 40.4814 117.947 39.0465 116.54 38.3421L86.7864 23.4418C85.6105 22.8527 84.224 22.8527 83.0481 23.4418L53.2944 38.3421C51.888 39.0465 51 40.4818 51 42.0509V59.35L66 66.85" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path opacity="0.6" d="M51.6562 39.8359L84.9181 56.663L118.18 39.8359M84.9167 91.1227V56.6563" stroke="#505967" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+              {/* Dashed grid + cubes (desktop only) */}
+              <div className="hidden lg:block relative flex-1 min-h-[180px] border-t border-border">
+                {/* 3-column x 2-row dashed grid */}
+                <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 pointer-events-none" aria-hidden="true">
+                  <div className="border-b border-r border-dashed border-[#e4e7ec]" />
+                  <div className="border-b border-r border-dashed border-[#e4e7ec]" />
+                  <div className="border-b border-dashed border-[#e4e7ec]" />
+                  <div className="border-r border-dashed border-[#e4e7ec]" />
+                  <div className="border-r border-dashed border-[#e4e7ec]" />
+                  <div />
+                </div>
+                {/* Cubes centered in grid */}
+                <div className={cn(styles.cubes, "absolute inset-0 flex items-center justify-center")} aria-hidden="true">
+                  <svg width="140" height="120" viewBox="0 0 120 120" fill="none" className="overflow-visible">
+                    <path d="M53.2944 38.3421L83.0481 23.4418C84.224 22.8527 85.6105 22.8527 86.7864 23.4418L116.54 38.3421C117.947 39.0465 118.835 40.4814 118.835 42.0509V72.0653C118.835 73.6344 117.947 75.0698 116.54 75.7741L86.7864 90.6745C85.6105 91.2635 84.224 91.2635 83.0481 90.6745L53.2944 75.7741C51.888 75.0698 51 73.6348 51 72.0653V42.0509C51 40.4818 51.888 39.0465 53.2944 38.3421Z" fill="#FAFAFB" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3.29443 67.1331L33.0481 52.2328C34.224 51.6438 35.6105 51.6438 36.7864 52.2328L66.5401 67.1331C67.9466 67.8375 68.8345 69.2725 68.8345 70.8419V99.8563C68.8345 101.425 67.9466 102.861 66.5401 103.565L36.7864 118.465C35.6105 119.055 34.224 119.055 33.0481 118.465L3.29443 103.565C1.88795 102.861 1 101.426 1 99.8563V70.8419C1 69.2728 1.88795 67.8375 3.29443 67.1331Z" fill="#F3F4F6" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path opacity="0.6" d="M1.65625 67.627L34.9181 84.4541L67.5 68M34.9167 118.914V84.4473" stroke="#505967" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3.29443 16.3421L33.0481 1.44179C34.224 0.852738 35.6105 0.852738 36.7864 1.44179L66.5401 16.3421C67.9466 17.0465 68.8345 18.4814 68.8345 20.0509V49.0653C68.8345 50.6344 67.9466 52.0698 66.5401 52.7741L36.7864 67.6745C35.6105 68.2635 34.224 68.2635 33.0481 67.6745L3.29443 52.7741C1.88795 52.0698 1 50.6348 1 49.0653V20.0509C1 18.4818 1.88795 17.0465 3.29443 16.3421Z" fill="white" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path opacity="0.6" d="M1.65625 17.8359L34.9181 34.663L68.1803 17.8359M34.9167 68.1227V34.6563" stroke="#505967" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M53.2944 38.8421L83.0481 23.9418C84.224 23.3527 85.6105 23.3527 86.7864 23.9418L116.54 38.8421C117.947 39.5465 118.835 40.9814 118.835 42.5509V58.5653L85.0481 75.1745L51 58.5653V42.5509C51 40.9818 51.888 39.5465 53.2944 38.8421Z" fill="#FAFAFB"/>
+                    <path d="M116.54 75.7741C117.947 75.0698 118.835 73.6344 118.835 72.0653V42.0509C118.835 40.4814 117.947 39.0465 116.54 38.3421L86.7864 23.4418C85.6105 22.8527 84.224 22.8527 83.0481 23.4418L53.2944 38.3421C51.888 39.0465 51 40.4818 51 42.0509V59.35L66 66.85" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path opacity="0.6" d="M51.6562 39.8359L84.9181 56.663L118.18 39.8359M84.9167 91.1227V56.6563" stroke="#505967" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>

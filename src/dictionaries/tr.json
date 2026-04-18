@@ -444,13 +444,13 @@
     "list": {
       "title": "Otomasyon senaryoları",
       "items": [
-        { "id": "new_deal_email_campaign", "title": "Yeni deal e-posta kampanyası", "color": "green" },
-        { "id": "lead_qualification_router", "title": "Lead qualifying yönlendirici", "color": "blue" },
-        { "id": "webinar_follow_up", "title": "Webinar takip sequence'i", "color": "amber" },
-        { "id": "renewal_reminder", "title": "Yenileme hatırlatma playbook'u", "color": "violet" },
-        { "id": "onboarding_nurture", "title": "Onboarding nurture akışı", "color": "rose" },
-        { "id": "churn_save_play", "title": "Churn önleme playbook'u", "color": "cyan" },
-        { "id": "expansion_alerts", "title": "Genişleme uyarı akışı", "color": "lime" }
+        { "id": "reengage_cold_leads", "title": "Pasif lead'leri yeniden kazan", "color": "rose" },
+        { "id": "mql_lead_routing", "title": "MQL lead yönlendirme", "color": "amber" },
+        { "id": "onboarding_handoff", "title": "Onboarding devri", "color": "blue" },
+        { "id": "new_deal_email_campaign", "title": "Yeni fırsat e-posta kampanyası", "color": "green" },
+        { "id": "lead_form_submissions", "title": "Lead formu gönderileri", "color": "violet" },
+        { "id": "monitor_customer_health", "title": "Müşteri sağlığını izle", "color": "cyan" },
+        { "id": "identify_expansion", "title": "Genişleme fırsatı tespit et", "color": "lime" }
       ]
     }
   },
