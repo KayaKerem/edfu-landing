@@ -34,9 +34,7 @@ export function ResearchReport({
       <div className="flex items-center gap-2.5 border-b border-border px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-blue-500" />
         <h3
-          className="flex-1 text-sm font-semibold text-foreground"
-          style={{ fontFamily: "var(--font-geist)" }}
-        >
+          className="flex-1 text-sm font-semibold text-foreground"        >
           {dict.title}
         </h3>
         <span className="inline-flex items-center rounded-full bg-primary px-2 py-0.5 text-[10px] font-medium text-primary-foreground">
@@ -52,7 +50,6 @@ export function ResearchReport({
         <div className="min-w-0 flex-1">
           <p
             className="text-sm font-semibold text-foreground"
-            style={{ fontFamily: "var(--font-geist)" }}
           >
             {dict.companyName}
           </p>

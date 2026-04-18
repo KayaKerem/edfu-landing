@@ -121,7 +121,7 @@ export default async function MeetingPage({
             <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
               <h2
                 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground mb-10"
-                style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
+                style={{ letterSpacing: "-0.05em" }}
               >
                 {mp.integrationLogos.title}
               </h2>
@@ -131,7 +131,7 @@ export default async function MeetingPage({
                   return (
                     <div
                       key={tool}
-                      className="flex flex-col items-center gap-2 rounded-xl border border-border bg-white dark:bg-[#27272A] p-6 shadow-sm"
+                      className="flex flex-col items-center gap-2 rounded-xl border border-border bg-card p-6 shadow-sm"
                     >
                       <div className="size-12 rounded-xl bg-muted flex items-center justify-center">
                         {Icon ? (
@@ -153,7 +153,7 @@ export default async function MeetingPage({
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
               <h2
                 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center mb-12"
-                style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
+                style={{ letterSpacing: "-0.05em" }}
               >
                 {mp.templates.title}
               </h2>
@@ -161,7 +161,7 @@ export default async function MeetingPage({
                 {mp.templates.items.map((tpl: { name: string; description: string }, i: number) => (
                   <div
                     key={i}
-                    className="rounded-xl border border-border bg-white dark:bg-[#27272A] p-5 shadow-[0px_1px_3px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow"
+                    className="rounded-xl border border-border bg-card p-5 shadow-[0px_1px_3px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow"
                   >
                     <div className="flex items-center gap-3 mb-2">
                       <span
@@ -170,7 +170,7 @@ export default async function MeetingPage({
                       >
                         [{String(i + 1).padStart(2, "0")}]
                       </span>
-                      <h3 className="text-sm font-semibold text-foreground" style={{ fontFamily: "var(--font-geist)" }}>
+                      <h3 className="text-sm font-semibold text-foreground">
                         {tpl.name}
                       </h3>
                     </div>
@@ -188,7 +188,6 @@ export default async function MeetingPage({
             <div className="mx-auto max-w-3xl">
               <blockquote
                 className="text-xl sm:text-2xl font-medium leading-relaxed tracking-tight"
-                style={{ fontFamily: "var(--font-geist)" }}
               >
                 &ldquo;{mp.testimonial.quote}&rdquo;
               </blockquote>

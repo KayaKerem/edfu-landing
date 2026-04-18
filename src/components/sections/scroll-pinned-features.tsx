@@ -46,7 +46,7 @@ export function ScrollPinnedFeatures({
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <h2
           className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center mb-16"
-          style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
+          style={{ letterSpacing: "-0.05em" }}
         >
           {title}
         </h2>
@@ -65,9 +65,7 @@ export function ScrollPinnedFeatures({
                     style={{ opacity: activeIndex === i ? 1 : 0.2 }}
                   >
                     <h3
-                      className="text-xl font-semibold text-foreground tracking-tight"
-                      style={{ fontFamily: "var(--font-geist)" }}
-                    >
+                      className="text-xl font-semibold text-foreground tracking-tight"                    >
                       {feature.title}
                     </h3>
                     <p className="mt-3 text-base text-muted-foreground leading-relaxed">

@@ -684,17 +684,6 @@ function NotesMockup({ noteTitle, noteTags, saved, noteContent }: { noteTitle: s
 }
 
 /* ------------------------------------------------------------------ */
-/*  Hatched pattern for between inner & outer lines                    */
-/* ------------------------------------------------------------------ */
-function HatchedEdge({ side }: { side: "left" | "right" }) {
-  return (
-    <div
-      className={`absolute top-0 ${side === "left" ? "-left-4 md:-left-14" : "-right-4 md:-right-14"} h-full hidden md:block w-14 text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]`}
-    />
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /*  Section Component                                                  */
 /* ------------------------------------------------------------------ */
 interface BentoFeaturesProps {
@@ -720,7 +709,7 @@ export function BentoFeatures({ dict }: BentoFeaturesProps) {
       <div className="pt-12">
         {/* Header */}
         <div className="mx-auto mb-10 max-w-2xl px-4 text-center">
-          <h2 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
+          <h2 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em" }}>
             {dict.title}
           </h2>
           <p className="mt-4 text-base text-muted-foreground font-medium text-balance tracking-tight">
@@ -745,7 +734,7 @@ export function BentoFeatures({ dict }: BentoFeaturesProps) {
               <div className="relative flex-1">{visuals[i]}</div>
               {/* Text area */}
               <div className="relative z-20 px-4 sm:px-6 pb-6 sm:pb-8 -mt-4">
-                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>{feature.title}</h3>
+                <h3 className="text-lg font-semibold tracking-tighter text-foreground">{feature.title}</h3>
                 <p className="mt-1.5 text-sm sm:text-base text-muted-foreground">{feature.description}</p>
               </div>
             </div>

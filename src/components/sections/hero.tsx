@@ -2,7 +2,6 @@
 
 import type { Dictionary } from "@/dictionaries";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
-import { Highlighter } from "@/components/ui/highlighter";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
@@ -54,14 +53,14 @@ export function Hero({ dict, lang }: HeroProps) {
         {/* Heading */}
         <motion.h1
           className="text-4xl md:text-5xl lg:text-[3rem] xl:text-6xl font-medium text-balance text-center text-foreground leading-none"
-          style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
+          style={{ letterSpacing: "-0.05em" }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
         >
-          {dict.titleLine1Before}<Highlighter action="underline" color="#4AA4E0" strokeWidth={2} animationDuration={800} padding={4} delay={850}>{dict.titleLine1Highlight}</Highlighter>
+          {dict.titleLine1Before}{dict.titleLine1Highlight}
           <br />
-          <Highlighter action="highlight" color="#87CEFA" strokeWidth={2} animationDuration={800} padding={4} delay={1000}>{dict.titleLine2Highlight}</Highlighter>{dict.titleLine2After}
+          {dict.titleLine2Highlight}{dict.titleLine2After}
         </motion.h1>
 
         {/* Description */}

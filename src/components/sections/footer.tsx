@@ -35,7 +35,7 @@ export function Footer({ dict, lang }: FooterProps) {
             {/* Logo */}
             <Link href={`${prefix}/`} className="flex items-end gap-2">
               <Image src="/logo.png" alt="Edfu" width={32} height={32} className="size-8" />
-              <span className="text-xl leading-none translate-y-[2px] font-semibold tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>Edfu</span>
+              <span className="text-xl leading-none translate-y-[2px] font-semibold tracking-tight">Edfu</span>
             </Link>
 
             {/* Description */}

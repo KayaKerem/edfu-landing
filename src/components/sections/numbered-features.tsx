@@ -11,7 +11,7 @@ interface NumberedFeaturesProps {
 export function NumberedFeatures({ features, className }: NumberedFeaturesProps) {
   return (
     <section className={className}>
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-20">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
           {features.map((feature, i) => (
             <div key={i} className="flex gap-6">
@@ -25,9 +25,7 @@ export function NumberedFeatures({ features, className }: NumberedFeaturesProps)
               {/* Content */}
               <div>
                 <h3
-                  className="text-lg font-semibold text-foreground tracking-tight"
-                  style={{ fontFamily: "var(--font-geist)" }}
-                >
+                  className="text-lg font-semibold text-foreground tracking-tight"                >
                   {feature.title}
                 </h3>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">

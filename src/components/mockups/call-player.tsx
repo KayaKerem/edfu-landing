@@ -45,9 +45,7 @@ export function CallPlayer({
           <span className="relative inline-flex h-3 w-3 rounded-full bg-red-500" />
         </span>
         <h3
-          className="flex-1 text-sm font-semibold text-foreground"
-          style={{ fontFamily: "var(--font-geist)" }}
-        >
+          className="flex-1 text-sm font-semibold text-foreground"        >
           {dict.title}
         </h3>
         <span

@@ -51,9 +51,7 @@ export function ProposalDoc({
         </div>
         <div className="flex-1">
           <h3
-            className="text-sm font-semibold text-foreground"
-            style={{ fontFamily: "var(--font-geist)" }}
-          >
+            className="text-sm font-semibold text-foreground"          >
             {dict.title}
           </h3>
         </div>

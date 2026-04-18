@@ -16,7 +16,7 @@ export function PageCTA({
   subtext,
 }: PageCTAProps) {
   return (
-    <section className="py-20">
+    <section className="py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="relative rounded-2xl bg-[#18181B] dark:bg-white/[0.06] dark:border dark:border-border px-6 py-14 sm:px-16 sm:py-24 text-center overflow-hidden">
           {/* Background decorative circles */}
@@ -26,8 +26,8 @@ export function PageCTA({
           {/* Content */}
           <div className="relative z-10">
             <h2
-              className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white dark:text-foreground tracking-tight leading-tight"
-              style={{ fontFamily: "var(--font-geist)" }}
+              className="text-[30px] sm:text-[36px] lg:text-[48px] font-medium text-white dark:text-foreground leading-tight"
+              style={{ letterSpacing: "-0.05em" }}
             >
               {title}
             </h2>

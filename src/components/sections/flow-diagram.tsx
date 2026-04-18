@@ -111,12 +111,12 @@ export function FlowDiagram({ dict }: FlowDiagramProps) {
     <section className="py-16 sm:py-20">
       <div className="mx-auto mb-12 max-w-xl px-4 text-center">
         <h2
-          className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-[#0F172A] dark:text-[#F1F5F9]"
-          style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
+          className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground"
+          style={{ letterSpacing: "-0.05em" }}
         >
           {dict.title}
         </h2>
-        <p className="mt-4 text-base font-medium text-balance text-[#475467] dark:text-[#94A3B8]">
+        <p className="mt-4 text-base font-medium text-balance text-muted-foreground">
           {dict.description}
         </p>
       </div>

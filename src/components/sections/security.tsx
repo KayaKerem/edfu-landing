@@ -125,7 +125,7 @@ export function Security({ dict }: SecurityProps) {
       <div className="pt-12">
         {/* Header */}
         <div className="mx-auto mb-10 max-w-2xl px-4 text-center">
-          <h2 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}>
+          <h2 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em" }}>
             {dict.title}
           </h2>
           <p className="mt-4 text-base text-muted-foreground font-medium text-balance tracking-tight">
@@ -162,7 +162,7 @@ export function Security({ dict }: SecurityProps) {
                 <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-24 w-full bg-gradient-to-t from-background to-transparent" />
               </div>
               <div className="relative z-20 px-4 sm:px-6 pb-6 sm:pb-8 -mt-4">
-                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>{dict.cards[0].title}</h3>
+                <h3 className="text-lg font-semibold tracking-tighter text-foreground">{dict.cards[0].title}</h3>
                 <p className="mt-1.5 text-base text-muted-foreground">{dict.cards[0].description}</p>
               </div>
             </div>
@@ -175,7 +175,7 @@ export function Security({ dict }: SecurityProps) {
                 </div>
               </div>
               <div className="relative z-20 px-4 sm:px-6 pb-6 sm:pb-8 -mt-4">
-                <h3 className="text-lg font-semibold tracking-tighter text-foreground" style={{ fontFamily: "var(--font-geist)" }}>{dict.cards[1].title}</h3>
+                <h3 className="text-lg font-semibold tracking-tighter text-foreground">{dict.cards[1].title}</h3>
                 <p className="mt-1.5 text-base text-muted-foreground">{dict.cards[1].description}</p>
               </div>
             </div>

@@ -43,8 +43,8 @@ export function AgentsHero({ dict, ctaText, prefix }: AgentsHeroProps) {
         </motion.div>
 
         <motion.h1
-          className="text-4xl md:text-5xl lg:text-6xl font-medium text-foreground leading-none"
-          style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
+          className="text-[36px] sm:text-[48px] md:text-[56px] font-medium text-foreground leading-none"
+          style={{ letterSpacing: "-0.05em" }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease, delay: 0.2 }}

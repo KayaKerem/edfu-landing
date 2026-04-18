@@ -31,9 +31,7 @@ export function MeetingTranscript({
       {/* Header */}
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <h3
-          className="text-sm font-semibold text-foreground"
-          style={{ fontFamily: "var(--font-geist)" }}
-        >
+          className="text-sm font-semibold text-foreground"        >
           {dict.title}
         </h3>
         <span className="text-[11px] text-muted-foreground">

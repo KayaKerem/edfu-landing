@@ -56,9 +56,7 @@ export function AgentTabs({ tabs, mockupsDict }: AgentTabsProps) {
                 activeTab === i
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground"
-              }`}
-              style={{ fontFamily: "var(--font-geist)" }}
-            >
+              }`}            >
               {tab.title}
               {activeTab === i && (
                 <motion.div
@@ -84,7 +82,6 @@ export function AgentTabs({ tabs, mockupsDict }: AgentTabsProps) {
             <div>
               <h3
                 className="text-2xl font-semibold text-foreground tracking-tight"
-                style={{ fontFamily: "var(--font-geist)" }}
               >
                 {tabs[activeTab].title}
               </h3>

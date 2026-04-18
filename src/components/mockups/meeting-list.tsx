@@ -35,9 +35,7 @@ export function MeetingList({
       {/* Header */}
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <h3
-          className="text-sm font-semibold text-foreground"
-          style={{ fontFamily: "var(--font-geist)" }}
-        >
+          className="text-sm font-semibold text-foreground"        >
           {dict.title}
         </h3>
         <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-[10px] font-semibold text-primary-foreground">
@@ -61,7 +59,6 @@ export function MeetingList({
               <div className="min-w-0 flex-1">
                 <p
                   className="truncate text-xs font-medium text-foreground"
-                  style={{ fontFamily: "var(--font-geist)" }}
                 >
                   {meeting.title}
                 </p>

@@ -92,7 +92,7 @@ export default async function IntegrationsPage({
             <div className="relative z-10 mx-auto max-w-3xl pt-12">
               <h1
                 className="text-[36px] sm:text-[48px] md:text-[56px] font-medium leading-none tracking-tight text-foreground"
-                style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
+                style={{ letterSpacing: "-0.05em" }}
               >
                 {ip.hero.title}
               </h1>

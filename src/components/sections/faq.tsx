@@ -21,7 +21,7 @@ export function FAQ({ dict }: FAQProps) {
         <div className="max-w-xl mx-auto flex flex-col items-center justify-center gap-2">
           <h2
             className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground tracking-tighter text-center text-balance"
-            style={{ fontFamily: "var(--font-geist)", letterSpacing: "-0.05em" }}
+            style={{ letterSpacing: "-0.05em" }}
           >
             {dict.title}
           </h2>
@@ -40,7 +40,7 @@ export function FAQ({ dict }: FAQProps) {
               <div key={index} className="grid gap-2">
                 <button
                   onClick={() => toggle(index)}
-                  className={`flex flex-1 items-start justify-between gap-4 text-left text-sm font-medium transition-all w-full border bg-white dark:bg-[#27272A] border-border rounded-lg px-4 py-3.5 cursor-pointer ${
+                  className={`flex flex-1 items-start justify-between gap-4 text-left text-sm font-medium transition-all w-full border bg-card border-border rounded-lg px-4 py-3.5 cursor-pointer ${
                     isOpen ? "ring ring-primary/20" : ""
                   }`}
                 >
@@ -53,13 +53,13 @@ export function FAQ({ dict }: FAQProps) {
                 </button>
 
                 <div
-                  className="grid transition-all duration-200 overflow-hidden text-sm"
+                  className="grid transition-all duration-300 overflow-hidden text-sm"
                   style={{
                     gridTemplateRows: isOpen ? "1fr" : "0fr",
                   }}
                 >
                   <div className="overflow-hidden">
-                    <div className="p-3 border border-border text-foreground rounded-lg bg-white dark:bg-[#27272A]">
+                    <div className="p-3 border border-border text-foreground rounded-lg bg-card">
                       {faq.answer}
                     </div>
                   </div>

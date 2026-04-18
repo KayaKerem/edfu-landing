@@ -65,7 +65,7 @@ function IntegrationCard({ item }: { item: IntegrationGridItem }) {
         "rounded-xl p-5 transition-all duration-200 hover:shadow-md",
         isDashed
           ? "border-2 border-dashed border-border bg-transparent"
-          : "border border-[rgba(46,50,56,0.07)] dark:border-border bg-white dark:bg-[#27272A]"
+          : "border border-border bg-card"
       )}
     >
       <div className="flex items-start gap-3">
@@ -110,7 +110,7 @@ function SectionHeader({ index, title }: { index: number; title: string }) {
       >
         [{num}]
       </span>
-      <h3 className="text-base font-semibold text-foreground" style={{ fontFamily: "var(--font-geist)" }}>
+      <h3 className="text-base font-semibold text-foreground">
         {title}
       </h3>
     </div>
@@ -124,7 +124,7 @@ interface IntegrationGridProps {
 
 export function IntegrationGrid({ sections, className }: IntegrationGridProps) {
   return (
-    <section className={cn("py-16", className)}>
+    <section className={cn("py-16 sm:py-20", className)}>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 space-y-12">
         {sections.map((section, sectionIndex) => {
           const cols = section.columns ?? (section.items.length > 4 ? 4 : section.items.length);

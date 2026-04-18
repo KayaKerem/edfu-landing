@@ -97,17 +97,15 @@ export default async function PricingPage({
       <div className="relative mx-auto max-w-7xl border-x border-border">
         <div className="pointer-events-none absolute inset-y-0 left-4 md:left-6 z-10 w-px bg-border" />
         <div className="pointer-events-none absolute inset-y-0 right-4 md:right-6 z-10 w-px bg-border" />
-        <main className="pt-20">
+        <main className="divide-y divide-border pt-20">
           <Pricing dict={dict.pricing} />
-          <div className="divide-y divide-border">
-            <FAQ dict={dict.faq} />
-            <PageCTA
-              title={dict.pricingPage.cta.title}
-              description={dict.pricingPage.cta.description}
-              buttonText={dict.pricingPage.cta.button}
-              buttonHref="https://app.edfu.ai"
-            />
-          </div>
+          <FAQ dict={dict.faq} />
+          <PageCTA
+            title={dict.pricingPage.cta.title}
+            description={dict.pricingPage.cta.description}
+            buttonText={dict.pricingPage.cta.button}
+            buttonHref="https://app.edfu.ai"
+          />
         </main>
         <Footer dict={dict.footer} lang={lang} />
       </div>

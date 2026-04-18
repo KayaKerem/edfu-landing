@@ -29,10 +29,7 @@ export function Pricing({ dict }: PricingProps) {
         <div className="max-w-xl mx-auto">
           <h2
             className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center"
-            style={{
-              letterSpacing: "-0.05em",
-              fontFamily: "var(--font-geist)",
-            }}
+            style={{ letterSpacing: "-0.05em" }}
           >
             {dict.title}
           </h2>
@@ -100,7 +97,7 @@ export function Pricing({ dict }: PricingProps) {
           const isEnterprise = idx === 2;
 
           const cardClasses = isPopular
-            ? "rounded-xl grid grid-rows-[180px_auto_1fr] relative h-fit min-[650px]:h-full min-[900px]:h-fit bg-white dark:bg-[#27272A] md:shadow-[0px_61px_24px_-10px_rgba(0,0,0,0.01),0px_34px_20px_-8px_rgba(0,0,0,0.05),0px_15px_15px_-6px_rgba(0,0,0,0.09),0px_4px_8px_-2px_rgba(0,0,0,0.10),0px_0px_0px_1px_rgba(0,0,0,0.08)] dark:md:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.08),0px_4px_8px_-2px_rgba(0,0,0,0.3)]"
+            ? "rounded-xl grid grid-rows-[180px_auto_1fr] relative h-fit min-[650px]:h-full min-[900px]:h-fit bg-card md:shadow-[0px_61px_24px_-10px_rgba(0,0,0,0.01),0px_34px_20px_-8px_rgba(0,0,0,0.05),0px_15px_15px_-6px_rgba(0,0,0,0.09),0px_4px_8px_-2px_rgba(0,0,0,0.10),0px_0px_0px_1px_rgba(0,0,0,0.08)] dark:md:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.08),0px_4px_8px_-2px_rgba(0,0,0,0.3)]"
             : "rounded-xl grid grid-rows-[180px_auto_1fr] relative h-fit min-[650px]:h-full min-[900px]:h-fit bg-[#F3F4F6] dark:bg-white/[0.05] border border-border";
 
           return (

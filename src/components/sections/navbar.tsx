@@ -126,7 +126,6 @@ export function Navbar({ dict, lang }: NavbarProps) {
               <NavbarCatLogo />
               <span
                 className="text-xl leading-none -translate-y-[1px] font-semibold tracking-tight"
-                style={{ fontFamily: "var(--font-geist)" }}
               >
                 Edfu
               </span>
@@ -155,7 +154,6 @@ export function Navbar({ dict, lang }: NavbarProps) {
                 >
                   <Link
                     href={link.href}
-                    style={{ fontFamily: "var(--font-geist)" }}
                     className={`relative z-10 flex h-full cursor-pointer items-center justify-center px-3 py-2 text-sm font-medium tracking-tight transition-colors duration-200 ${
                       currentRoute === link.routeId
                         ? "text-foreground"

@@ -32,9 +32,7 @@ export function WhatsAppChat({
         </div>
         <div className="flex-1">
           <p
-            className="text-sm font-semibold text-white"
-            style={{ fontFamily: "var(--font-geist)" }}
-          >
+            className="text-sm font-semibold text-white"          >
             {dict.contactName}
           </p>
           <p className="text-xs text-white/70">{dict.online}</p>

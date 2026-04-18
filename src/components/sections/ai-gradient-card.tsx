@@ -19,7 +19,7 @@ export function AiGradientCard({ dict }: AiGradientCardProps) {
         <div className="mx-auto mb-12 max-w-xl text-center">
           <h2
             className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground"
-            style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
+            style={{ letterSpacing: "-0.05em" }}
           >
             {dict.title}
           </h2>

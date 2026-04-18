@@ -43,9 +43,7 @@ export function CrmTable({
       <div className="flex items-center justify-between border-b border-border px-5 py-4">
         <div className="flex items-center gap-2.5">
           <h3
-            className="text-sm font-semibold text-foreground"
-            style={{ fontFamily: "var(--font-geist)" }}
-          >
+            className="text-sm font-semibold text-foreground"          >
             {dict.title}
           </h3>
           <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-[11px] font-semibold text-primary-foreground">
