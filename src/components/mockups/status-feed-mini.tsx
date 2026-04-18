@@ -51,7 +51,7 @@ export function StatusFeedMini() {
       className="absolute inset-0"
       aria-hidden="true"
     >
-      <div className="absolute right-[8%] top-[18%] w-[62%] rounded-xl border border-border bg-card shadow-md divide-y divide-border overflow-hidden">
+      <div className="absolute left-1/2 top-[18%] w-[72%] -translate-x-1/2 rounded-xl border border-border bg-card shadow-md divide-y divide-border overflow-hidden">
         {/* Row 1 — Won */}
         <div
           data-animate="slide-right"

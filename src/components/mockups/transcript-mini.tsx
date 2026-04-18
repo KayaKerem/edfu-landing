@@ -14,7 +14,7 @@ export function TranscriptMini() {
     >
       <div
         data-animate="rise"
-        className="absolute left-[8%] top-[10%] w-[60%] rounded-xl border border-border bg-card shadow-md"
+        className="absolute left-1/2 top-[10%] w-[72%] -translate-x-1/2 rounded-xl border border-border bg-card shadow-md"
       >
         {/* Tab header */}
         <div className="flex gap-4 border-b border-border px-4 pt-3">

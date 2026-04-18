@@ -7,7 +7,6 @@ import { Footer } from "@/components/sections/footer";
 import { MeetingHero } from "@/components/sections/meeting-hero";
 import { MeetingBento } from "@/components/sections/meeting-bento";
 import { ScrollPinnedFeatures } from "@/components/sections/scroll-pinned-features";
-import { NumberedFeatures } from "@/components/sections/numbered-features";
 import { PageCTA } from "@/components/sections/page-cta";
 import { CrmTable } from "@/components/mockups/crm-table";
 import { MeetingTranscript } from "@/components/mockups/meeting-transcript";
@@ -102,8 +101,7 @@ export default async function MeetingPage({
           <MeetingHero
             dict={mp.hero}
             mockupsDict={{
-              meetingList: m.meetingList,
-              callPlayer: m.callPlayer,
+              callWidget: m.callWidget,
             }}
           />
 
@@ -114,7 +112,6 @@ export default async function MeetingPage({
             features={mp.stickySection.features}
             visuals={stickyVisuals}
           />
-          <NumberedFeatures features={mp.numberedFeatures} />
 
           {/* Integration Logos */}
           <section className="py-16 sm:py-20">

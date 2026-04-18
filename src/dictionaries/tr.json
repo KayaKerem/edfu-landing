@@ -474,9 +474,13 @@
   },
   "meetingPage": {
     "hero": {
-      "badge": "Toplantı Agenti",
-      "title": "Daha akıllı toplantılar, başından sonuna.",
-      "description": "Toplantılarınızı kaydedin, yazıya dökürün, aksiyon maddelerini çıkartın. Tüm içerik şirket hafızanızı besler."
+      "badge": "Live",
+      "headlinePrimary": "Smarter meetings,",
+      "headlineMuted": "from start to finish.",
+      "subhead": "Automatic recording, transcription, action items.",
+      "ctaPrimary": "Start for free",
+      "ctaSecondary": "Book a demo",
+      "ctaTertiary": "View pricing"
     },
     "featureCards": [
       {
@@ -823,6 +827,16 @@
         { "time": "14:31", "speaker": "Can Y.", "text": "\u201cDemo ortamını önümüzdeki haftaya hazırlayalım.\u201d", "isAction": false },
         { "time": "", "speaker": "AI Özet", "text": "Aksiyon: Demo ortamı hazırlığı \u2192 Can Y. \u2014 20 Nis\u2019e kadar", "isAction": true }
       ]
+    },
+    "callWidget": {
+      "meetingTitle": "Product Demo w/ GreenLeaf",
+      "tabActive": "Insights",
+      "tabInactive": "Transcript",
+      "summaryTitle": "Summary",
+      "highlightPillLabel": "Discovery Call",
+      "insightsTitle": "Insights",
+      "timeElapsed": "10:15",
+      "timeTotal": "28:14"
     }
   }
 }

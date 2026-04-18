@@ -1,29 +1,7 @@
-import { useId } from "react";
+import { DottedBackdrop } from "@/components/ui/dotted-backdrop";
 import { TranscriptMini } from "@/components/mockups/transcript-mini";
 import { MeetCrmConnector } from "@/components/mockups/meet-crm-connector";
 import { StatusFeedMini } from "@/components/mockups/status-feed-mini";
-
-function DottedBackdrop({ patternId }: { patternId: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className="absolute inset-0 h-full w-full text-border/60"
-      role="presentation"
-    >
-      <defs>
-        <pattern
-          id={patternId}
-          width="10"
-          height="10"
-          patternUnits="userSpaceOnUse"
-        >
-          <rect width="1" height="1" fill="currentColor" />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill={`url(#${patternId})`} />
-    </svg>
-  );
-}
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
@@ -37,14 +15,12 @@ function Card({ children }: { children: React.ReactNode }) {
 
 function CardArt({
   children,
-  patternId,
 }: {
   children: React.ReactNode;
-  patternId: string;
 }) {
   return (
-    <div className="relative mb-6 aspect-square md:aspect-[1.618] lg:aspect-square w-full overflow-hidden">
-      <DottedBackdrop patternId={patternId} />
+    <div className="relative mb-6 aspect-[1.4] md:aspect-[1.618] lg:aspect-square w-full overflow-hidden">
+      <DottedBackdrop />
       {children}
     </div>
   );
@@ -62,7 +38,6 @@ function CardCopy({ title, body }: { title: string; body: string }) {
 }
 
 export function MeetingBento() {
-  const baseId = useId().replace(/:/g, "");
   return (
     <section className="relative">
       <header className="mx-auto max-w-7xl px-4 md:px-6 pt-16 pb-10 md:pt-20 md:pb-12 lg:pt-32 lg:pb-16 xl:pt-40 xl:pb-20">
@@ -78,7 +53,7 @@ export function MeetingBento() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-border p-px">
         <Card>
-          <CardArt patternId={`${baseId}-1`}>
+          <CardArt>
             <TranscriptMini />
           </CardArt>
           <CardCopy
@@ -87,7 +62,7 @@ export function MeetingBento() {
           />
         </Card>
         <Card>
-          <CardArt patternId={`${baseId}-2`}>
+          <CardArt>
             <MeetCrmConnector />
           </CardArt>
           <CardCopy
@@ -96,7 +71,7 @@ export function MeetingBento() {
           />
         </Card>
         <Card>
-          <CardArt patternId={`${baseId}-3`}>
+          <CardArt>
             <StatusFeedMini />
           </CardArt>
           <CardCopy

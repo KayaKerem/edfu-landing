@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import { DottedBackdrop } from "@/components/ui/dotted-backdrop";
 
 interface StickyFeature {
   title: string;
@@ -19,146 +20,116 @@ export function ScrollPinnedFeatures({
   visuals,
 }: ScrollPinnedFeaturesProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const sentinelRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const hasCompletedRef = useRef(false);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    const el = sectionRef.current;
+    if (!el) return;
+    const mq = window.matchMedia("(min-width: 768px)");
+    if (!mq.matches) return;
 
-    const sentinels = sentinelRefs.current.filter(
-      (sentinel): sentinel is HTMLDivElement => sentinel !== null
-    );
-    if (!sentinels.length) return;
-
-    let frameId = 0;
-    const updateActiveIndex = () => {
-      const viewportCenter = window.innerHeight / 2;
-      const bandTop = window.innerHeight * 0.1;
-      const bandBottom = window.innerHeight * 0.9;
-
-      let bestIndex: number | null = null;
-      let bestDistance = Infinity;
-
-      sentinels.forEach((sentinel, index) => {
-        const rect = sentinel.getBoundingClientRect();
-        const intersectsBand = rect.bottom > bandTop && rect.top < bandBottom;
-        if (!intersectsBand) return;
-
-        const sentinelCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(sentinelCenter - viewportCenter);
-        if (distance < bestDistance) {
-          bestDistance = distance;
-          bestIndex = index;
-        }
-      });
-
-      if (bestIndex !== null) {
-        if (bestIndex === sentinels.length - 1) {
-          hasCompletedRef.current = true;
-        }
-        setActiveIndex((current) => (current === bestIndex ? current : bestIndex));
-        return;
-      }
-
-      const sectionRect = section.getBoundingClientRect();
-      const sectionHasPassed = sectionRect.bottom <= window.innerHeight * 0.45;
-
-      if (sectionHasPassed || hasCompletedRef.current) {
-        hasCompletedRef.current = true;
-        const lastIndex = sentinels.length - 1;
-        setActiveIndex((current) => (current === lastIndex ? current : lastIndex));
-      }
+    const handleScroll = () => {
+      const rect = el.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      if (scrollable <= 0) return;
+      const scrolled = Math.max(0, -rect.top);
+      const progress = Math.min(1, scrolled / scrollable);
+      const idx = Math.min(
+        features.length - 1,
+        Math.floor(progress * features.length)
+      );
+      setActiveIndex(idx);
     };
 
-    const observer = new IntersectionObserver(() => {
-      cancelAnimationFrame(frameId);
-      frameId = window.requestAnimationFrame(updateActiveIndex);
-    });
-
-    sentinels.forEach((sentinel) => observer.observe(sentinel));
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      observer.disconnect();
-    };
-  }, []);
-
-  const hasActiveIndex = activeIndex !== null;
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [features.length]);
 
   return (
-    <section ref={sectionRef} className="py-16 sm:py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <h2
-          className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center mb-16"
-          style={{ letterSpacing: "-0.05em" }}
-        >
-          {title}
-        </h2>
-
-        <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
-            <div className="space-y-0">
-              {features.map((feature, i) => (
-                <div
-                  key={i}
-                  ref={(el) => {
-                    sentinelRefs.current[i] = el;
-                  }}
-                  className="min-h-[400px] flex items-center"
-                >
-                  <div
+    <section
+      ref={sectionRef}
+      className="relative h-auto md:h-[var(--scroll-h)]"
+      style={{ "--scroll-h": `${Math.max(features.length, 1) * 90}vh` } as React.CSSProperties}
+    >
+      {/* Desktop: sticky scroll-tied */}
+      <div className="hidden md:block md:sticky md:top-0 md:h-screen md:overflow-hidden">
+        <div className="mx-auto grid h-full max-w-6xl grid-cols-2 px-6 divide-x divide-dashed divide-border">
+          <div className="flex flex-col justify-center gap-12 py-16 pr-12">
+            <h2
+              className="text-[28px] sm:text-[32px] md:text-[40px] font-medium leading-[1.1] text-foreground tracking-tight text-balance"
+              style={{ letterSpacing: "-0.04em", fontFamily: "var(--font-geist)" }}
+            >
+              {title}
+            </h2>
+            <ul className="flex flex-col gap-8">
+              {features.map((feature, i) => {
+                const isActive = activeIndex === i;
+                return (
+                  <li
+                    key={i}
                     className="transition-opacity duration-500"
-                    style={{
-                      opacity:
-                        activeIndex === i
-                          ? 1
-                          : !hasActiveIndex
-                            ? 0.45
-                            : 0.2,
-                    }}
+                    style={{ opacity: isActive ? 1 : 0.35 }}
                   >
                     <h3
-                      className="text-xl font-semibold text-foreground tracking-tight"                    >
+                      className="text-lg md:text-xl font-semibold text-foreground tracking-tight"
+                      style={{ fontFamily: "var(--font-geist)" }}
+                    >
                       {feature.title}
                     </h3>
-                    <p className="mt-3 text-base text-muted-foreground leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Desktop: sticky visual panel */}
-            <div className="hidden md:block">
-              <div className="sticky top-28">
-                {activeIndex !== null && visuals ? (
-                  visuals[activeIndex]
-                ) : (
-                  <div className="rounded-xl border border-border bg-card p-8 min-h-[400px] flex items-center justify-center">
-                    <div className="text-center">
-                      <p className="text-sm font-medium text-foreground">
-                        Scroll to explore
+                    {isActive && (
+                      <p className="mt-2 text-sm md:text-base text-muted-foreground leading-relaxed max-w-md">
+                        {feature.description}
                       </p>
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        The visual panel will lock onto the current feature as you move down the page.
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
 
-            {/* Mobile: show active visual inline below features */}
-            {visuals && activeIndex !== null && (
-              <div className="md:hidden mt-8">
-                {visuals[activeIndex]}
-              </div>
+          <div
+            className="relative flex items-center justify-center pl-12"
+            aria-hidden="true"
+          >
+            <DottedBackdrop />
+            {visuals && (
+              <div className="relative z-10">{visuals[activeIndex]}</div>
             )}
           </div>
         </div>
+      </div>
+
+      {/* Mobile: linear stack, feature + matching visual */}
+      <div className="md:hidden flex flex-col gap-12 px-4 py-12">
+        <h2
+          className="text-[28px] font-medium leading-[1.1] text-foreground tracking-tight text-balance"
+          style={{ letterSpacing: "-0.04em", fontFamily: "var(--font-geist)" }}
+        >
+          {title}
+        </h2>
+        <ul className="flex flex-col gap-10">
+          {features.map((feature, i) => (
+            <li key={i} className="flex flex-col gap-4">
+              <div>
+                <h3
+                  className="text-lg font-semibold text-foreground tracking-tight"
+                  style={{ fontFamily: "var(--font-geist)" }}
+                >
+                  {feature.title}
+                </h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+              {visuals && visuals[i] && (
+                <div className="mt-2" aria-hidden="true">
+                  {visuals[i]}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
