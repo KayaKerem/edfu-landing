@@ -12,6 +12,7 @@ import { CTA } from "@/components/sections/cta";
 import { Footer } from "@/components/sections/footer";
 import { AutomateEverything } from "@/components/sections/automate-everything";
 import { ConnectData } from "@/components/sections/connect-data";
+import type { ConnectDataDict } from "@/components/sections/connect-data";
 import { AiGradientCard } from "@/components/sections/ai-gradient-card";
 import { LegacyHashRedirect } from "@/components/legacy-hash-redirect";
 import { FlowDiagram } from "@/components/sections/flow-diagram";
@@ -167,7 +168,7 @@ export default async function Home({
           <div className="divide-y divide-border/70">
             <Logos dict={dict.logos} />
             <AutomateEverything dict={dict.automateEverything} />
-            <ConnectData dict={dict.connectData} />
+            <ConnectData dict={dict.connectData as ConnectDataDict} />
             <Testimonial dict={dict.testimonial} />
             <FlowDiagram dict={dict.flowDiagram} />
             <Security dict={dict.security} />

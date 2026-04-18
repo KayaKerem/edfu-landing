@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import styles from "./automate-everything.module.css";
 
@@ -303,13 +301,15 @@ function ListCard({
   active,
   muted,
   opacity,
-  onClick,
+  scale = 1,
+  stackOffset = 0,
 }: {
   item: ListItem;
   active?: boolean;
   muted?: boolean;
   opacity?: number;
-  onClick: () => void;
+  scale?: number;
+  stackOffset?: number;
 }) {
   const palette: Record<string, { bg: string; color: string }> = {
     green: { bg: "#E8F7EE", color: "#16A34A" },
@@ -324,30 +324,35 @@ function ListCard({
   const swatch = palette[item.color] ?? palette.blue;
 
   return (
-    <li role="listitem" className="list-none" style={opacity !== undefined ? { opacity, transition: "opacity 320ms ease" } : undefined}>
-      <button
-        type="button"
-        onClick={onClick}
+    <li
+      role="listitem"
+      className="list-none h-auto"
+      style={{
+        opacity,
+        marginTop: stackOffset ? `${stackOffset}px` : undefined,
+        transition: "opacity 320ms ease, margin-top 320ms ease",
+      }}
+    >
+      <div
         aria-current={active ? "true" : undefined}
         className={cn(
           styles.listCard,
-          styles.focusRing,
-          "flex h-10 w-full items-center gap-2.5 rounded-[10px] border border-[#E6E8EC] bg-white px-2.5 text-left shadow-[0_1px_2px_rgba(0,0,0,0.04)]",
+          "flex h-8 w-full items-center gap-1.5 rounded-[11px] border border-[#E6E8EC] bg-white px-2.5 text-left shadow-[0_1px_2px_rgba(0,0,0,0.04)]",
           active && styles.listCardActive,
-          !active && styles.listCardInactive,
           muted && !active && opacity === undefined && styles.listCardMuted
         )}
+        style={{ "--list-card-scale": scale } as React.CSSProperties}
       >
         <span
-          className="flex size-5 shrink-0 items-center justify-center rounded-[5px]"
+          className="flex size-[15px] shrink-0 items-center justify-center rounded-[5px]"
           style={{ background: swatch.bg, color: swatch.color }}
         >
-          <span className="inline-flex size-3.5"><ListItemIcon /></span>
+          <span className="inline-flex size-[9px]"><ListItemIcon /></span>
         </span>
-        <span className={cn(styles.listCardTitle, "min-w-0 flex-1 truncate text-[12.5px] leading-[16px] text-[#0F1720] dark:text-[#F1F5F9]")}>
+        <span className={cn(styles.listCardTitle, "min-w-0 flex-1 truncate text-[12px] leading-[15px] text-[#0F1720] dark:text-[#F1F5F9]")}>
           {item.title}
         </span>
-      </button>
+      </div>
     </li>
   );
 }
@@ -357,12 +362,10 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
   const sectionRef = useRef<HTMLElement>(null);
   const loopTimers = useRef<number[]>([]);
   const hasPlayedRef = useRef(false);
-  const params = useParams<{ lang?: string }>();
   const [visible, setVisible] = useState(false);
   const [phase, setPhase] = useState<Phase>("idle");
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [activeListIndex, setActiveListIndex] = useState(3);
   const [pageHidden, setPageHidden] = useState(false);
 
   // E5 (upsell→+) draw-in animation: measure path length on mount so the
@@ -378,11 +381,7 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
   }, []);
 
   const listItems = dict.list.items;
-  const displayItems = useMemo(() => [...listItems, ...listItems, ...listItems], [listItems]);
-  const listCardHeight = 22;
-  const listCardGap = 8;
-  const listScrollDistance =
-    listItems.length * listCardHeight + Math.max(listItems.length - 1, 0) * listCardGap;
+  const activeListIndex = 3;
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -454,19 +453,6 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
 
     return () => clearTimers();
   }, [visible, reducedMotion]);
-
-  useEffect(() => {
-    if (!visible || reducedMotion || paused || pageHidden) return;
-    const cycleMs = 14000;
-    const start = window.performance.now();
-    const tick = window.setInterval(() => {
-      const elapsed = window.performance.now() - start;
-      const stepMs = cycleMs / listItems.length;
-      const idx = Math.floor((elapsed % cycleMs) / stepMs) % listItems.length;
-      setActiveListIndex(idx);
-    }, 120);
-    return () => window.clearInterval(tick);
-  }, [visible, reducedMotion, paused, pageHidden, listItems.length]);
 
   const isPaused = paused || pageHidden;
   // Not visible / reduced-motion → show final activated state
@@ -547,7 +533,7 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
           <div className="pointer-events-none absolute inset-y-0 left-14 w-px z-[1] bg-border/70" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-y-0 right-14 w-px z-[1] bg-border/70" aria-hidden="true" />
           <div className={styles.dotGrid} aria-hidden="true" />
-          <div className="h-full relative z-[1] grid grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(500px,1.4fr)_minmax(320px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border">
+          <div className="h-full relative z-[1] grid grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(500px,1.4fr)_minmax(360px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border">
             {/* ─── Left: text ─── */}
             <div className="flex flex-col justify-between pl-6 py-6 sm:pl-10 sm:py-7 lg:pl-12 lg:py-8">
               <div className="max-w-[320px] flex flex-col justify-start px-6">
@@ -793,53 +779,39 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
             {/* ─── Right: list + cubes ─── */}
             <div className="relative flex flex-col min-h-[560px]">
               {/* List section */}
-              <div className="px-4 py-5 pb-0 sm:px-5 sm:py-7 lg:px-6 lg:py-8">
-                {/* Desktop infinite scroll list */}
-                <div className="hidden lg:block">
-                  <div className="relative mx-auto h-[320px] overflow-hidden">
-                    <ul
-                      role="list"
-                      aria-label={dict.list.title}
-                      className={cn(styles.listTrack, "mx-auto flex w-full flex-col gap-2 px-2")}
-                      style={{ "--ae-scroll-distance": `${listScrollDistance}px` } as React.CSSProperties}
-                    >
-                      {displayItems.map((item, index) => {
-                        const baseIdx = index % listItems.length;
-                        const active = baseIdx === activeListIndex;
-                        const dist = Math.min(
-                          Math.abs(baseIdx - activeListIndex),
-                          listItems.length - Math.abs(baseIdx - activeListIndex)
-                        );
-                        const itemOpacity = dist === 0 ? 1 : dist === 1 ? 0.72 : dist === 2 ? 0.45 : 0.25;
-                        return (
-                          <ListCard key={`${item.id}-${index}`} item={item}
-                            active={active} opacity={itemOpacity}
-                            onClick={() => setActiveListIndex(baseIdx)}
-                          />
-                        );
-                      })}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Mobile horizontal scroll list */}
-                <div className="lg:hidden">
-                  <div className="flex gap-3 overflow-x-auto pb-2"
+              <div className=" pl-[0.5rem] pt-[1rem]">
+                <div className="relative mx-auto flex min-h-[320px] overflow-visible min-w-[360px]">
+                  <ul
+                    role="list"
+                    aria-label={dict.list.title}
+                    className={cn(
+                      styles.listMask,
+                      "ml-[0.25rem] grid w-[72%] max-w-[320px] grid-cols-1 gap-0 sm:max-w-[332px] lg:max-w-[344px]"
+                    )}
                     style={{
-                      WebkitMaskImage: "linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)",
-                      maskImage: "linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)",
+                      transform: "translateY(6px) scale(0.93)",
+                      transformOrigin: "top center",
                     }}
                   >
-                    {listItems.map((item, index) => (
-                      <div key={item.id} className="shrink-0 w-[220px]">
-                        <ListCard item={item}
+                    {listItems.map((item, index) => {
+                      const distance = Math.abs(index - activeListIndex);
+                      const scaleByDistance = [1.02, 0.95, 0.88, 0.8];
+                      const opacityByDistance = [1, 0.84, 0.62, 0.4];
+                      const stackOffsetByDistance = [0, -6, -12, -18];
+
+                      return (
+                      <ListCard
+                          key={item.id}
+                          item={item}
                           active={index === activeListIndex}
                           muted={index !== activeListIndex}
-                          onClick={() => setActiveListIndex(index)}
+                          scale={scaleByDistance[distance] ?? 0.81}
+                          opacity={opacityByDistance[distance] ?? 0.7}
+                          stackOffset={stackOffsetByDistance[distance] ?? -24}
                         />
-                      </div>
-                    ))}
-                  </div>
+                      );
+                    })}
+                  </ul>
                 </div>
               </div>
 

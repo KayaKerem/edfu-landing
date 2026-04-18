@@ -300,20 +300,19 @@
  
 /* ── List (right column) ───────────────────────────────── */
 .listMask {
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
-}
-  .listTrack {
-  animation: aeScroll 14s linear infinite;
-  will-change: transform;
+  padding-top: 6px;
+  padding-bottom: 8px;
 }
 
 .listCard {
+  --list-card-scale: 1;
   transition:
     transform     320ms cubic-bezier(0.2, 0, 0, 1),
     border-color  280ms cubic-bezier(0.2, 0, 0, 1),
     box-shadow    320ms cubic-bezier(0.2, 0, 0, 1),
     opacity       220ms ease;
+  transform: scale(var(--list-card-scale));
+  transform-origin: center center;
 }
 
 /* Attio-style active card: neutral border + soft shadow, subtle scale.
@@ -323,37 +322,24 @@
   box-shadow:
     0 8px 20px rgba(15,23,42,0.08),
     0 1px 3px rgba(15,23,42,0.04);
-  transform: scale(1.02);
 }
 
 .listCardMuted { opacity: 0.55; }
 
-.listCardInactive {
-  transform: scale(0.94);
-  transform-origin: center center;
-}
-
 .listCardTitle { font-weight: 400; }
 
 .listCardActive .listCardTitle { font-weight: 600; }
-
-@keyframes aeScroll {
-  from { transform: translateY(0); }
-  to   { transform: translateY(calc(-1 * var(--ae-scroll-distance, 342px))); }
-}
 
 .cubes { pointer-events: none; color: #b8bec7; }
 
 .focusRing:focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; }
 
 /* ── Pause / reduced-motion ────────────────────────────── */
-.root[data-paused="true"] .listTrack,
 .root[data-paused="true"] .pathDot,
 .root[data-paused="true"] .pulseRing {
   animation-play-state: paused !important;
 }
 
-.root[data-reduced-motion="true"] .listTrack,
 .root[data-reduced-motion="true"] .pathDot,
 .root[data-reduced-motion="true"] .pulseRing,
 .root[data-reduced-motion="true"] .statusBadge,
@@ -370,7 +356,7 @@
 .root[data-reduced-motion="true"] .nodeCard      { transition: none !important; }
 
 @media (prefers-reduced-motion: reduce) {
-  .listTrack, .pathDot, .pulseRing,
+  .pathDot, .pulseRing,
   .statusBadge, .badgeFloating, .nodeCardActive, .plusPopIn {
     animation: none !important;
   }

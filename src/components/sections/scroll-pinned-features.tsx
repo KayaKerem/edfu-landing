@@ -18,31 +18,77 @@ export function ScrollPinnedFeatures({
   features,
   visuals,
 }: ScrollPinnedFeaturesProps) {
+  const sectionRef = useRef<HTMLElement>(null);
   const sentinelRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const hasCompletedRef = useRef(false);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+    const section = sectionRef.current;
+    if (!section) return;
 
-    sentinelRefs.current.forEach((sentinel, i) => {
-      if (!sentinel) return;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveIndex(i);
-          }
-        },
-        { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
-      );
-      observer.observe(sentinel);
-      observers.push(observer);
+    const sentinels = sentinelRefs.current.filter(
+      (sentinel): sentinel is HTMLDivElement => sentinel !== null
+    );
+    if (!sentinels.length) return;
+
+    let frameId = 0;
+    const updateActiveIndex = () => {
+      const viewportCenter = window.innerHeight / 2;
+      const bandTop = window.innerHeight * 0.1;
+      const bandBottom = window.innerHeight * 0.9;
+
+      let bestIndex: number | null = null;
+      let bestDistance = Infinity;
+
+      sentinels.forEach((sentinel, index) => {
+        const rect = sentinel.getBoundingClientRect();
+        const intersectsBand = rect.bottom > bandTop && rect.top < bandBottom;
+        if (!intersectsBand) return;
+
+        const sentinelCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(sentinelCenter - viewportCenter);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestIndex = index;
+        }
+      });
+
+      if (bestIndex !== null) {
+        if (bestIndex === sentinels.length - 1) {
+          hasCompletedRef.current = true;
+        }
+        setActiveIndex((current) => (current === bestIndex ? current : bestIndex));
+        return;
+      }
+
+      const sectionRect = section.getBoundingClientRect();
+      const sectionHasPassed = sectionRect.bottom <= window.innerHeight * 0.45;
+
+      if (sectionHasPassed || hasCompletedRef.current) {
+        hasCompletedRef.current = true;
+        const lastIndex = sentinels.length - 1;
+        setActiveIndex((current) => (current === lastIndex ? current : lastIndex));
+      }
+    };
+
+    const observer = new IntersectionObserver(() => {
+      cancelAnimationFrame(frameId);
+      frameId = window.requestAnimationFrame(updateActiveIndex);
     });
 
-    return () => observers.forEach((o) => o.disconnect());
+    sentinels.forEach((sentinel) => observer.observe(sentinel));
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      observer.disconnect();
+    };
   }, []);
 
+  const hasActiveIndex = activeIndex !== null;
+
   return (
-    <section className="py-16 sm:py-20">
+    <section ref={sectionRef} className="py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <h2
           className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center mb-16"
@@ -57,12 +103,21 @@ export function ScrollPinnedFeatures({
               {features.map((feature, i) => (
                 <div
                   key={i}
-                  ref={(el) => { sentinelRefs.current[i] = el; }}
+                  ref={(el) => {
+                    sentinelRefs.current[i] = el;
+                  }}
                   className="min-h-[400px] flex items-center"
                 >
                   <div
                     className="transition-opacity duration-500"
-                    style={{ opacity: activeIndex === i ? 1 : 0.2 }}
+                    style={{
+                      opacity:
+                        activeIndex === i
+                          ? 1
+                          : !hasActiveIndex
+                            ? 0.45
+                            : 0.2,
+                    }}
                   >
                     <h3
                       className="text-xl font-semibold text-foreground tracking-tight"
@@ -81,20 +136,25 @@ export function ScrollPinnedFeatures({
             {/* Desktop: sticky visual panel */}
             <div className="hidden md:block">
               <div className="sticky top-28">
-                {visuals ? (
+                {activeIndex !== null && visuals ? (
                   visuals[activeIndex]
                 ) : (
                   <div className="rounded-xl border border-border bg-card p-8 min-h-[400px] flex items-center justify-center">
-                    <p className="text-sm text-muted-foreground">
-                      {features[activeIndex]?.title}
-                    </p>
+                    <div className="text-center">
+                      <p className="text-sm font-medium text-foreground">
+                        Scroll to explore
+                      </p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        The visual panel will lock onto the current feature as you move down the page.
+                      </p>
+                    </div>
                   </div>
                 )}
               </div>
             </div>
 
             {/* Mobile: show active visual inline below features */}
-            {visuals && (
+            {visuals && activeIndex !== null && (
               <div className="md:hidden mt-8">
                 {visuals[activeIndex]}
               </div>

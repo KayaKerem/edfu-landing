@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import type { CSSProperties } from "react";
 import "../globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
@@ -7,13 +7,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getDictionary, hasLocale } from "@/dictionaries";
 import type { Locale } from "@/dictionaries";
 import { notFound } from "next/navigation";
-
-
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
-  display: "swap",
-});
 
 const BASE_URL = "https://edfu.ai";
 
@@ -110,7 +103,11 @@ export default async function RootLayout({
 
   return (
     <html lang={lang} suppressHydrationWarning>
-      <body className={`min-h-screen font-sans antialiased ${geist.variable}`} suppressHydrationWarning>
+      <body
+        className="min-h-screen font-sans antialiased"
+        style={{ "--font-geist-sans": "Inter, ui-sans-serif, system-ui, sans-serif" } as CSSProperties}
+        suppressHydrationWarning
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
