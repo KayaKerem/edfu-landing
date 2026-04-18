@@ -454,6 +454,59 @@
       ]
     }
   },
+  "deployAi": {
+    "title": "AI'ı Devreye Al",
+    "description": "Ask AI ile arama ve üretim yap, MCP ile tüm stack'ini bağla, ya da agent'ları prospecting ve lead scoring gibi karmaşık işlere koş.",
+    "cta": "AI'ı Keşfet",
+    "ariaLabel": "Örnek AI agent akışı",
+    "srText": "AI akışı: Yeni lead bulunduğunda üç AI görevi tetiklenir — PLG hareketini başlat, fırsat büyüklüğünü değerlendir, kilit paydaşları belirle.",
+    "trigger": { "title": "New lead found" },
+    "tasks": [
+      {
+        "title": "Activate PLG motion",
+        "question": "Does the company sell software to other businesses?",
+        "badge": "AI",
+        "answer": [
+          { "type": "text", "value": "Yes, they are a " },
+          { "type": "token", "value": "B2B SaaS" },
+          { "type": "text", "value": " business" }
+        ]
+      },
+      {
+        "title": "Evaluate size of opportunity",
+        "question": "Did the company raise any funds recently?",
+        "badge": "AI",
+        "answer": [
+          { "type": "token", "value": "$25M" },
+          { "type": "text", "value": " raised in " },
+          { "type": "token", "value": "Series A" },
+          { "type": "text", "value": " funding round" }
+        ]
+      },
+      {
+        "title": "Identify key stakeholders",
+        "question": "Who are the key stakeholders at the company?",
+        "badge": "AI",
+        "truncate": true,
+        "answer": [
+          { "type": "token", "value": "Adam Kingsley, CEO; Anne Zaragoza, CTO; Tom …" }
+        ]
+      }
+    ],
+    "response": {
+      "title": "Basepoint",
+      "domain": "basepoint.com",
+      "fields": [
+        { "label": "Sektör", "value": "B2B SaaS" },
+        { "label": "Kuruluş", "value": "2021" },
+        { "label": "Büyüklük", "value": "50–200" },
+        { "label": "Konum", "value": "San Francisco, US" },
+        { "label": "Kategoriler", "value": "Analytics, CRM" },
+        { "label": "Tahmini ARR", "value": "$25M Series A", "accent": true },
+        { "label": "Kilit paydaş", "value": "Adam Kingsley", "accent": true }
+      ]
+    }
+  },
   "aiGradientCard": {
     "title": "AI Karar Mekanizması",
     "description": "Agent'lar her müşteri için akıllı kararlar alır.",

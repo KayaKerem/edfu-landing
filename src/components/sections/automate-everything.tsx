@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import styles from "./automate-everything.module.css";
+import { SectionFrame } from "./section-frame";
 
 type ListItem = {
   id: string;
@@ -512,10 +513,11 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
   const nurtureLabelX = Math.round((cx + nurtureCardCx) / 2); // 285
   const branchLabelY  = branchY + R;
   return (
-    <section
+    <SectionFrame
       ref={sectionRef}
-      aria-label={dict.ariaLabel}
+      ariaLabel={dict.ariaLabel}
       className={cn(styles.root)}
+      gridClassName="grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(500px,1.4fr)_minmax(360px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border"
       data-paused={isPaused ? "true" : "false"}
       data-reduced-motion={reducedMotion ? "true" : "false"}
       data-phase={renderPhase}
@@ -526,15 +528,7 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
         if (!sectionRef.current?.contains(e.relatedTarget as Node | null)) setPaused(false);
       }}
     >
-      <div className={cn(styles.layout)}>
-        <div className="mx-4 sm:mx-6 relative overflow-hidden">
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-14 z-[1] text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" aria-hidden="true" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-14 z-[1] text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]" aria-hidden="true" />
-          <div className="pointer-events-none absolute inset-y-0 left-14 w-px z-[1] bg-border/70" aria-hidden="true" />
-          <div className="pointer-events-none absolute inset-y-0 right-14 w-px z-[1] bg-border/70" aria-hidden="true" />
-          <div className={styles.dotGrid} aria-hidden="true" />
-          <div className="h-full relative z-[1] grid grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(500px,1.4fr)_minmax(360px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border">
-            {/* ─── Left: text ─── */}
+      {/* ─── Left: text ─── */}
             <div className="flex flex-col justify-between pl-6 py-6 sm:pl-10 sm:py-7 lg:pl-12 lg:py-8">
               <div className="max-w-[320px] flex flex-col justify-start px-6">
                 <h2
@@ -841,10 +835,6 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
                 </div>
               </div>
             </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
+    </SectionFrame>
   );
 }

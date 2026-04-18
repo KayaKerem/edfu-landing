@@ -1,0 +1,653 @@
+/* ─────────────────────────────────────────────────────────────
+ * Deploy AI — Attio-style agent workflow flow diagram.
+ * Matches spec in deploy-ai-flow-spec.md.
+ * ───────────────────────────────────────────────────────────── */
+
+.root {
+  position: relative;
+  width: 100%;
+  min-height: 620px;
+  max-height: 720px;
+
+  /* Design tokens (spec §7) */
+  --da-bg-canvas: #FAFAFC;
+  --da-bg-canvas-end: #F6F6F9;
+  --da-dot-color: rgba(15, 23, 42, 0.08);
+  --da-card-bg: #FFFFFF;
+  --da-card-border-soft: #D9E1FF;
+  --da-card-border: #C9D2F5;
+  --da-hairline: #EFF1F5;
+  --da-pill-bg: #FAFAFB;
+  --da-pill-border: #ECECF1;
+  --da-text-primary: #0F172A;
+  --da-text-secondary: #6B7280;
+  --da-text-body: #111827;
+  --da-accent-indigo: #4F46E5;
+  --da-accent-sparkle: #6366F1;
+  --da-accent-token: #7C3AED;
+  --da-icon-chip-bg: #EEF1FF;
+  --da-badge-bg: #F3F4F6;
+  --da-badge-border: #E5E7EB;
+  --da-connector: #B7C3F3;
+  --da-connector-hover: #8A9CEB;
+}
+
+/* Left column — headline + description + Explore link */
+.textCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px 24px;
+}
+@media (min-width: 640px) { .textCol { padding: 36px 40px; } }
+@media (min-width: 1024px) { .textCol { padding: 40px 48px; } }
+
+.title {
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--da-text-primary);
+  max-width: 340px;
+}
+@media (min-width: 640px) { .title { font-size: 30px; line-height: 36px; } }
+
+.description {
+  margin-top: 14px;
+  font-size: 14.5px;
+  line-height: 22px;
+  color: var(--da-text-secondary);
+  max-width: 340px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--da-text-primary);
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+  align-self: flex-start;
+}
+.cta:hover {
+  background: #F3F4F6;
+  color: var(--da-accent-indigo);
+}
+.cta:focus-visible {
+  outline: 2px solid var(--da-accent-indigo);
+  outline-offset: 3px;
+}
+.cta .arrow {
+  transition: transform 180ms ease;
+}
+.cta:hover .arrow { transform: translateX(2px); }
+
+/* ── Right column: workflow canvas ──────────────────────────── */
+.canvas {
+  position: relative;
+  width: 100%;
+  min-height: 560px;
+  padding: 28px 24px 40px;
+  overflow: hidden;
+  background: linear-gradient(to bottom, var(--da-bg-canvas), var(--da-bg-canvas-end));
+  isolation: isolate;
+}
+@media (min-width: 768px) { .canvas { padding: 32px 32px 48px; } }
+
+.canvasDots {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle, var(--da-dot-color) 1px, transparent 1px);
+  background-size: 14px 14px;
+  pointer-events: none;
+  opacity: 0;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    rgba(0, 0, 0, 0.9) 80px,
+    rgba(0, 0, 0, 0.9) calc(100% - 80px),
+    transparent 100%
+  ), linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0,
+    rgba(0, 0, 0, 1) calc(100% - 80px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    rgba(0, 0, 0, 0.9) 80px,
+    rgba(0, 0, 0, 0.9) calc(100% - 80px),
+    transparent 100%
+  ), linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0,
+    rgba(0, 0, 0, 1) calc(100% - 80px),
+    transparent 100%
+  );
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  transition: opacity 500ms ease-out;
+  animation: daDotDrift 30s linear infinite;
+}
+
+.root[data-visible="true"] .canvasDots { opacity: 1; }
+
+@keyframes daDotDrift {
+  from { background-position: 0 0; }
+  to   { background-position: 14px 14px; }
+}
+
+/* ── Flow container: relative stage for SVG + nodes ─────────── */
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1;
+}
+
+/* SVG spine sits behind cards */
+.spine {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+.spinePath {
+  fill: none;
+  stroke: var(--da-connector);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 200ms ease-out, opacity 200ms ease-out;
+}
+
+/* Spine breathing during idle-ambient */
+.root[data-phase="ambient"] .spinePath {
+  animation: daSpineBreathe 4s ease-in-out infinite;
+}
+@keyframes daSpineBreathe {
+  0%, 100% { opacity: 0.85; }
+  50%      { opacity: 1; }
+}
+
+.root[data-hover-card="1"] .spinePath[data-segment="1"],
+.root[data-hover-card="2"] .spinePath[data-segment="2"],
+.root[data-hover-card="3"] .spinePath[data-segment="3"] {
+  stroke: var(--da-connector-hover);
+}
+
+/* ── Root trigger pill ──────────────────────────────────────── */
+.triggerPill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--da-card-bg);
+  border: 1px solid var(--da-card-border-soft);
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--da-text-primary);
+  white-space: nowrap;
+  transition: transform 180ms ease, border-color 180ms ease;
+  z-index: 2;
+}
+.triggerPill:hover {
+  transform: scale(1.02);
+  border-color: #C9D2F5;
+}
+
+/* ── Task card ──────────────────────────────────────────────── */
+.taskCard {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--da-card-bg);
+  border: 1px solid var(--da-card-border);
+  box-shadow:
+    0 2px 8px rgba(79, 70, 229, 0.06),
+    0 1px 2px rgba(17, 24, 39, 0.04);
+  transition: transform 200ms ease-out;
+  z-index: 2;
+}
+
+/* Hover lift via pseudo-element shadow (composite-thread friendly) */
+.taskCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.12);
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+  pointer-events: none;
+}
+.taskCard:hover { transform: translateY(-2px); }
+.taskCard:hover::after { opacity: 1; }
+.taskCard:hover .iconChip { background: #E4E9FF; }
+
+.taskHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconChip {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: var(--da-icon-chip-bg);
+  color: var(--da-accent-indigo);
+  transition: background 180ms ease;
+}
+.iconChip svg { width: 14px; height: 14px; display: block; }
+
+.taskTitle {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--da-text-primary);
+  letter-spacing: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.aiBadge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--da-badge-bg);
+  border: 1px solid var(--da-badge-border);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--da-text-secondary);
+  letter-spacing: 0;
+}
+
+.hairline {
+  margin: 12px 0;
+  height: 1px;
+  width: 100%;
+  background: var(--da-hairline);
+}
+
+.taskQuestion {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--da-text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Answer pill ────────────────────────────────────────────── */
+.answerPill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--da-pill-bg);
+  border: 1px solid var(--da-pill-border);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);
+  font-size: 13.5px;
+  line-height: 18px;
+  color: var(--da-text-body);
+  max-width: calc(100% - 16px);
+  transition: background 150ms ease;
+  z-index: 2;
+}
+.answerPill:hover { background: #F4F4F8; }
+
+.answerPill.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 48px);
+}
+.answerPill.truncate > .answerText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.answerText { display: inline; }
+
+.token {
+  color: var(--da-text-body);
+  font-weight: 500;
+  transition: color 200ms ease 80ms;
+}
+
+.root[data-visible="true"] .token {
+  color: var(--da-accent-token);
+}
+
+.sparkle {
+  flex-shrink: 0;
+  color: var(--da-accent-sparkle);
+  display: inline-flex;
+  transform-origin: center center;
+  opacity: 0;
+}
+
+.root[data-visible="true"] .sparkle {
+  animation:
+    daSparklePop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both,
+    daSparkleTwinkle 1.2s ease-in-out 1.6s infinite;
+}
+
+@keyframes daSparklePop {
+  0%   { transform: scale(0.6); opacity: 0; }
+  60%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes daSparkleTwinkle {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  50%      { transform: scale(1.06); opacity: 0.85; }
+}
+
+/* ── Reveal timeline (spec §8.1) ────────────────────────────── */
+.triggerPill,
+.taskCard,
+.answerPill {
+  opacity: 0;
+  transform: translateY(10px) scale(0.985);
+  will-change: transform, opacity;
+}
+.answerPill {
+  transform: translateY(6px);
+}
+
+.root[data-visible="true"] .triggerPill {
+  animation: daPillIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1) 120ms both;
+}
+.root[data-visible="true"] .taskCard[data-idx="1"]  { animation: daCardIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1) 520ms  both; }
+.root[data-visible="true"] .answerPill[data-idx="1"] { animation: daAnswerIn 360ms ease-out 820ms  both; }
+.root[data-visible="true"] .taskCard[data-idx="2"]  { animation: daCardIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1) 1180ms both; }
+.root[data-visible="true"] .answerPill[data-idx="2"] { animation: daAnswerIn 360ms ease-out 1480ms both; }
+.root[data-visible="true"] .taskCard[data-idx="3"]  { animation: daCardIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1) 1820ms both; }
+.root[data-visible="true"] .answerPill[data-idx="3"] { animation: daAnswerIn 360ms ease-out 2120ms both; }
+
+@keyframes daPillIn {
+  from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+@keyframes daCardIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+@keyframes daAnswerIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Spine segments: stroke-dashoffset self-draw (JS sets --len per path) */
+.spinePath {
+  stroke-dasharray: var(--len, 400);
+  stroke-dashoffset: var(--len, 400);
+}
+.root[data-visible="true"] .spinePath[data-segment="1"] {
+  animation: daDraw 550ms ease-in-out 280ms forwards;
+}
+.root[data-visible="true"] .spinePath[data-segment="2"] {
+  animation: daDraw 500ms ease-in-out 980ms forwards;
+}
+.root[data-visible="true"] .spinePath[data-segment="3"] {
+  animation: daDraw 500ms ease-in-out 1620ms forwards;
+}
+@keyframes daDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ── Right column: response / data card ────────────────────── */
+.responseCol {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px;
+  background:
+    linear-gradient(to bottom, #FAFAFC 0%, #F6F6F9 100%);
+  isolation: isolate;
+}
+@media (min-width: 1024px) { .responseCol { padding: 32px 28px; } }
+
+.responseCol::before {
+  /* subtle dot grid to echo the canvas */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle, var(--da-dot-color) 1px, transparent 1px);
+  background-size: 14px 14px;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    rgba(0, 0, 0, 0.9) 40px,
+    rgba(0, 0, 0, 0.9) calc(100% - 40px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    rgba(0, 0, 0, 0.9) 40px,
+    rgba(0, 0, 0, 0.9) calc(100% - 40px),
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+  pointer-events: none;
+}
+.root[data-visible="true"] .responseCol::before { opacity: 1; }
+
+.responseCard {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 340px;
+  padding: 18px 18px 16px;
+  border-radius: 16px;
+  background: var(--da-card-bg);
+  border: 1px solid var(--da-card-border);
+  box-shadow:
+    0 10px 32px rgba(17, 24, 39, 0.06),
+    0 2px 6px rgba(17, 24, 39, 0.04);
+  opacity: 0;
+  transform: translateY(10px) scale(0.985);
+  will-change: transform, opacity;
+}
+
+.root[data-visible="true"] .responseCard {
+  animation: daCardIn 480ms cubic-bezier(0.2, 0.8, 0.2, 1) 2320ms both;
+}
+
+.responseHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.responseAvatar {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #EEF1FF 0%, #E4E9FF 100%);
+  color: var(--da-accent-indigo);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  border: 1px solid var(--da-card-border-soft);
+}
+
+.responseHeadText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.responseTitle {
+  font-size: 15.5px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--da-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.responseDomain {
+  font-size: 12.5px;
+  line-height: 18px;
+  color: var(--da-text-secondary);
+}
+
+.responseSparkle {
+  flex-shrink: 0;
+  color: var(--da-accent-sparkle);
+  display: inline-flex;
+  opacity: 0;
+}
+.root[data-visible="true"] .responseSparkle {
+  animation:
+    daSparklePop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) 2520ms both,
+    daSparkleTwinkle 1.4s ease-in-out 3200ms infinite;
+}
+
+.responseHairline {
+  margin: 14px 0 10px;
+  height: 1px;
+  background: var(--da-hairline);
+}
+
+.responseFields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.responseRow {
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.responseLabel {
+  color: var(--da-text-secondary);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.responseValue {
+  color: var(--da-text-body);
+  font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.responseToken {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 8px;
+  border-radius: 6px;
+  background: #EEF1FF;
+  border: 1px solid var(--da-card-border-soft);
+  color: var(--da-accent-token);
+  font-weight: 500;
+  font-size: 12.5px;
+}
+
+/* ── Reduced motion: skip stagger, render in final state ────── */
+@media (prefers-reduced-motion: reduce) {
+  .root[data-visible="true"] .triggerPill,
+  .root[data-visible="true"] .taskCard,
+  .root[data-visible="true"] .answerPill,
+  .root[data-visible="true"] .spinePath,
+  .root[data-visible="true"] .sparkle,
+  .root[data-visible="true"] .responseCard,
+  .root[data-visible="true"] .responseSparkle,
+  .triggerPill,
+  .taskCard,
+  .answerPill,
+  .responseCard,
+  .responseSparkle {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .canvasDots,
+  .responseCol::before { animation: none !important; }
+}
+
+/* ── Dark mode ──────────────────────────────────────────────── */
+:global(.dark) .responseCol {
+  background: linear-gradient(to bottom, #0B0D12 0%, #0B0D12 100%);
+}
+:global(.dark) .responseAvatar {
+  background: linear-gradient(135deg, #1C2140 0%, #242B4D 100%);
+  color: #A5B4FC;
+}
+:global(.dark) .responseToken {
+  background: #1C2140;
+  color: #A78BFA;
+}
+:global(.dark) .root {
+  --da-bg-canvas: #0B0D12;
+  --da-bg-canvas-end: #0B0D12;
+  --da-dot-color: rgba(255, 255, 255, 0.06);
+  --da-card-bg: #13161D;
+  --da-card-border: #2A2F45;
+  --da-card-border-soft: #2A2F45;
+  --da-hairline: #1E2230;
+  --da-pill-bg: #15181F;
+  --da-pill-border: #242838;
+  --da-text-primary: #F3F4F6;
+  --da-text-secondary: #9CA3AF;
+  --da-text-body: #E5E7EB;
+  --da-accent-token: #A78BFA;
+  --da-connector: #3B4268;
+  --da-icon-chip-bg: #1C2140;
+  --da-badge-bg: #1A1E2A;
+  --da-badge-border: #272C3D;
+}
