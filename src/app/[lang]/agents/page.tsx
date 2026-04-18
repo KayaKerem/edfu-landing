@@ -7,9 +7,8 @@ import { Footer } from "@/components/sections/footer";
 import { AgentsHero } from "@/components/sections/agents-hero";
 import { AgentTabs } from "@/components/sections/agent-tabs";
 import { NumberedFeatures } from "@/components/sections/numbered-features";
-import { DataModelViz } from "@/components/sections/data-model-viz";
 import { PageCTA } from "@/components/sections/page-cta";
-import { CustomerIcon, ConversationIcon, ProposalIcon } from "@/components/ui/svgs/data-model-icons";
+import { BentoFeatures } from "@/components/sections/bento-features";
 
 const BASE_URL = "https://edfu.ai";
 
@@ -78,7 +77,6 @@ export default async function AgentsPage({
   const dict = await getDictionary(lang as Locale);
   const prefix = lang === "tr" ? "" : `/${lang}`;
   const ap = dict.agentsPage;
-  const dm = ap.dataModel;
   const m = dict.mockups;
 
   const tabs = [
@@ -108,17 +106,7 @@ export default async function AgentsPage({
             }}
           />
           <NumberedFeatures features={ap.numberedFeatures} />
-          <DataModelViz
-            sectionNumber="[03]"
-            sectionLabel={dm.sectionLabel}
-            cards={[
-              { icon: CustomerIcon, iconColor: "#0FC27B", title: dm.cards[0].title, badge: dm.cards[0].badge, attrs: dm.cards[0].attrs, moreCount: dm.cards[0].moreCount },
-              { icon: ConversationIcon, iconColor: "#9162F9", title: dm.cards[1].title, badge: dm.cards[1].badge, attrs: dm.cards[1].attrs, moreCount: dm.cards[1].moreCount },
-              { icon: ProposalIcon, iconColor: "#266DF0", title: dm.cards[2].title, badge: dm.cards[2].badge, attrs: dm.cards[2].attrs, moreCount: dm.cards[2].moreCount },
-            ]}
-            addObjectLabel={dm.addObject}
-            moreLabel={lang === "en" ? "More" : "Daha Fazla"}
-          />
+          <BentoFeatures dict={dict.features} />
           <PageCTA
             title={ap.cta.title}
             buttonText={ap.cta.button}

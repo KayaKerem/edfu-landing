@@ -22,7 +22,7 @@
   },
   "navbar": {
     "home": "Ana Sayfa",
-    "agents": "Agent'lar",
+    "agents": "Asistan",
     "meeting": "Toplantı",
     "integrations": "Entegrasyonlar",
     "pricing": "Fiyatlandırma",
@@ -43,6 +43,49 @@
   "logos": {
     "subtitle": "Tüm kanallarınız ve toplantı araçlarınız tek platformda",
     "learnMore": "Daha Fazla"
+  },
+  "connectData": {
+    "title": "Her tür veriyi bağlayın",
+    "description": "Konuşmaları, veritabanlarını, dokümanları ve ürün sinyallerini tek bir yapılandırılmış çalışma alanında birleştirin.",
+    "cta": "Entegrasyonları keşfet →",
+    "ctaHref": "/tr/integrations",
+    "ariaLabel": "Her tür veriyi bağlayın",
+    "srText": "Veri kaynakları ve kayıt kartları Edfu veri katmanı üzerinden birbirine bağlanıyor.",
+    "sources": [
+      { "id": "sales_engagement", "label": "Satış etkileşimi" },
+      { "id": "email_calendar", "label": "E-posta ve takvim" },
+      { "id": "data_warehouses", "label": "Veri ambarları" },
+      { "id": "customer_support", "label": "Müşteri desteği" },
+      { "id": "billing_invoicing", "label": "Faturalama ve tahsilat" },
+      { "id": "product_data", "label": "Ürün verisi" }
+    ],
+    "records": [
+      {
+        "id": "workspace",
+        "title": "Çalışma alanı bilgisi",
+        "badge": "Çalışma",
+        "records": 12840,
+        "recordLabel": "kayıt",
+        "tone": "blue"
+      },
+      {
+        "id": "company",
+        "title": "Şirket profili",
+        "badge": "Şirket",
+        "records": 642,
+        "recordLabel": "kayıt",
+        "tone": "green"
+      },
+      {
+        "id": "deal",
+        "title": "Deal bağlamı",
+        "badge": "Deals",
+        "records": 912,
+        "recordLabel": "kayıt",
+        "tone": "orange"
+      }
+    ],
+    "integrationsLabel": "Bağlı entegrasyonlar"
   },
   "features": {
     "title": "Şirketinizin Dijital Hafızasını Oluşturun",
@@ -360,6 +403,54 @@
       "messages": [
         { "from": "customer", "text": "CRM entegrasyonu arıyoruz, 85 kişilik ekibiz." },
         { "from": "ai", "text": "Size özel bir teklif hazırlıyorum. Şirketinizi kısaca araştırıp dönüyorum." }
+      ]
+    }
+  },
+  "automateEverything": {
+    "title": "Her Şeyi Otomatikleştir",
+    "description": "Bir deal güncellendiğinde tetiklenen, koşula göre dallanan ve uygun kişileri upsell sequence'ına ekleyen akışı canlı bir listede izleyin.",
+    "cta": "Otomasyonları keşfet →",
+    "ariaLabel": "Otomasyon akış bölümü",
+    "srText": "Otomasyon akışı, 4 adım. 1. adım tetikleyici When Deal updated, triggered. 2. adım koşul. 3. adım sequence'a ekleme upsell. 4. adım sequence'a ekleme nurture.",
+    "trigger": {
+      "badge": "Deals",
+      "tabBadge": "Trigger",
+      "title": "When Deal updated",
+      "description": "Deal durumu güncellendiğinde tetikle",
+      "status": "Triggered"
+    },
+    "condition": {
+      "badge": "Condition",
+      "title": "Switch",
+      "description": "Upsell veya nurture'a yönlendir",
+      "status": "Completed",
+      "upsell": "Upsell",
+      "nurture": "Nurture"
+    },
+    "sequence": {
+      "upsell": {
+        "badge": "Sequences",
+        "title": "Enroll in sequence",
+        "description": "Kişiyi \"Power user upsell\"e ekle",
+        "status": "Completed"
+      },
+      "nurture": {
+        "badge": "Sequences",
+        "title": "Enroll in sequence",
+        "description": "Kişiyi nurture sequence'ına ekle",
+        "status": "Completed"
+      }
+    },
+    "list": {
+      "title": "Otomasyon senaryoları",
+      "items": [
+        { "id": "reengage_cold_leads", "title": "Pasif lead'leri yeniden kazan", "color": "rose" },
+        { "id": "mql_lead_routing", "title": "MQL lead yönlendirme", "color": "amber" },
+        { "id": "onboarding_handoff", "title": "Onboarding devri", "color": "blue" },
+        { "id": "new_deal_email_campaign", "title": "Yeni fırsat e-posta kampanyası", "color": "green" },
+        { "id": "lead_form_submissions", "title": "Lead formu gönderileri", "color": "violet" },
+        { "id": "monitor_customer_health", "title": "Müşteri sağlığını izle", "color": "cyan" },
+        { "id": "identify_expansion", "title": "Genişleme fırsatı tespit et", "color": "lime" }
       ]
     }
   },

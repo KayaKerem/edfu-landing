@@ -36,7 +36,7 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-geist: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -193,7 +193,6 @@
     scroll-behavior: auto !important;
   }
 }
-
 /* === meeting-bento animations (ci-bento-3) === */
 
 @keyframes rise-fade {
