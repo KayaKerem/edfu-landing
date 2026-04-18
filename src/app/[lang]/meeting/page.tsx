@@ -102,8 +102,8 @@ export default async function MeetingPage({
           <MeetingHero
             dict={mp.hero}
             mockupsDict={{
-              meetingList: m.meetingList,
-              callPlayer: m.callPlayer,
+              crmTable: m.crmTable,
+              callWidget: m.callWidget,
             }}
           />
 
