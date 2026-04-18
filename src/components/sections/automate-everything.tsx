@@ -20,6 +20,7 @@ type AutomateEverythingDict = {
   srText: string;
   trigger: {
     badge: string;
+    tabBadge: string;
     title: string;
     description: string;
     status: string;
@@ -178,7 +179,7 @@ function NodeBorderTrace({ width, height, active }: { width: number; height: num
         width: width + 1.5,
         height: height + 1.5,
         pointerEvents: "none",
-        zIndex: 6,
+        zIndex: 1,
         overflow: "visible",
       }}
       viewBox={`-0.75 -0.75 ${width + 1.5} ${height + 1.5}`}
@@ -247,14 +248,17 @@ function NodeCard({
   ariaLabel: string;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [cardH, setCardH] = useState(110);
+  const [cardSize, setCardSize] = useState({ width, height: 110 });
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
-    const obs = new ResizeObserver(([e]) => setCardH(Math.round(e.contentRect.height)));
+    const obs = new ResizeObserver(() =>
+      setCardSize({ width: el.offsetWidth, height: el.offsetHeight })
+    );
     obs.observe(el);
+    setCardSize({ width: el.offsetWidth, height: el.offsetHeight });
     return () => obs.disconnect();
-  }, []);
+  }, [width]);
 
   return (
     <div
@@ -269,22 +273,24 @@ function NodeCard({
       )}
       style={{ width }}
     >
-      <NodeBorderTrace width={width} height={cardH} active={active ?? false} />
-      <div className="flex items-center gap-2.5" style={{ height: 28 }}>
-        <span
-          className={cn(styles.nodeIcon, "flex size-7 shrink-0 items-center justify-center rounded-[8px]")}
-          style={{ background: iconBg, color: iconFg }}
-        >
-          <span className="size-4 inline-flex">{icon}</span>
-        </span>
-        <span className="flex-1 truncate text-[15px] font-semibold leading-[20px] tracking-[-0.1px] text-[#0B1220] dark:text-[#F1F5F9]">
-          {title}
-        </span>
-        <span className={styles.inlinePill}>{inlinePill}</span>
+      <NodeBorderTrace width={cardSize.width} height={cardSize.height} active={active ?? false} />
+      <div className="relative" style={{ zIndex: 2 }}>
+        <div className="flex items-center gap-2.5" style={{ height: 28 }}>
+          <span
+            className={cn(styles.nodeIcon, "flex size-7 shrink-0 items-center justify-center rounded-[8px]")}
+            style={{ background: iconBg, color: iconFg }}
+          >
+            <span className="size-4 inline-flex">{icon}</span>
+          </span>
+          <span className="flex-1 min-w-0 text-[15px] font-semibold leading-[20px] tracking-[-0.1px] text-[#0B1220] dark:text-[#F1F5F9] whitespace-nowrap">
+            {title}
+          </span>
+          <span className={styles.inlinePill}>{inlinePill}</span>
+        </div>
+        <p className="mt-2 text-[13px] leading-[18px] text-[#667085] dark:text-[#94A3B8] line-clamp-2">
+          {description}
+        </p>
       </div>
-      <p className="mt-2 text-[13px] leading-[18px] text-[#667085] dark:text-[#94A3B8] line-clamp-2">
-        {description}
-      </p>
     </div>
   );
 }
@@ -355,6 +361,18 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
   const [loopIteration, setLoopIteration] = useState(0);
   const [activeListIndex, setActiveListIndex] = useState(0);
   const [pageHidden, setPageHidden] = useState(false);
+
+  // E5 (upsell→+) draw-in animation: measure path length on mount so the
+  // stroke-dashoffset animation knows how far to travel.
+  // Initialize large enough that dasharray doesn't repeat and leak a visible
+  // segment before useEffect runs the real measurement.
+  const path5Ref = useRef<SVGPathElement>(null);
+  const [path5Len, setPath5Len] = useState(2000);
+  useEffect(() => {
+    if (path5Ref.current) {
+      setPath5Len(Math.ceil(path5Ref.current.getTotalLength()));
+    }
+  }, []);
 
   const listItems = dict.list.items;
   const displayItems = useMemo(() => [...listItems, ...listItems, ...listItems], [listItems]);
@@ -469,25 +487,38 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
   const branchVisible = ["branch", "leaves", "plus", "resetting"].includes(renderPhase);
 
   // ── Canvas geometry ──────────────────────────────────────────────
-  const W = 440;
-  const H = 520;
-  const cx = W / 2; // 220
+  const W = 560;
+  const H = 600;
+  const cx = W / 2; // 280
 
-  const n1Top = 28,  n1H = 68,  n1Bottom = 96;
-  const n2Top = 172, n2H = 68,  n2Bottom = 240;
-  const branchY  = 284;
-  const n34Top   = 344, n34H = 68;
+  // Card widths
+  const topCardW = 300;    // trigger + switch
+  const leafCardW = 300;   // upsell + nurture
 
-  const upsellCardCx  = 110; // card: 10–210px (no left-clip)
-  const nurtureCardCx = 350; // card: 230–490px (clips ~50px right — intentional)
-  const R = 12; // orthogonal corner radius
-  const path1 = `M${cx} ${n1Bottom} V${n2Top}`;
+  // Arrow-head overshoot: paths end 6px above card top so the ▼ arrow tip
+  // lands neatly on the card border instead of underneath it.
+  const ARROW_GAP = 6;
+
+  const n1Top = 36,  n1H = 80,  n1Bottom = n1Top + n1H; // 116
+  const n2Top = 200, n2H = 80,  n2Bottom = n2Top + n2H; // 280
+  const branchY  = 320;
+  const n34Top   = 392, n34H = 92;
+
+  const upsellCardCx  = 150; // card: 0–300px (no overlap with nurture)
+  // Nurture centered at 470 → card 320–620; canvas clips at 560 so the right
+  // ~60px is cut off — leaves the "Sequences" pill roughly half-visible
+  // (Attio-style peek effect, prevents overlap with upsell card).
+  const nurtureCardCx = 470;
+  const R = 14; // orthogonal corner radius
+
+  // Arrow tips land ARROW_GAP above the card top (so marker-end ▼ sits on border)
+  const path1 = `M${cx} ${n1Bottom} V${n2Top - ARROW_GAP}`;
   const path2 = `M${cx} ${n2Bottom} V${branchY}`;
-  const path3 = `M${cx} ${branchY} Q${cx} ${branchY+R} ${cx-R} ${branchY+R} H${upsellCardCx+R} Q${upsellCardCx} ${branchY+R} ${upsellCardCx} ${branchY+2*R} V${n34Top}`;
-  const path4 = `M${cx} ${branchY} Q${cx} ${branchY+R} ${cx+R} ${branchY+R} H${nurtureCardCx-R} Q${nurtureCardCx} ${branchY+R} ${nurtureCardCx} ${branchY+2*R} V${n34Top}`;
+  const path3 = `M${cx} ${branchY} Q${cx} ${branchY+R} ${cx-R} ${branchY+R} H${upsellCardCx+R} Q${upsellCardCx} ${branchY+R} ${upsellCardCx} ${branchY+2*R} V${n34Top - ARROW_GAP}`;
+  const path4 = `M${cx} ${branchY} Q${cx} ${branchY+R} ${cx+R} ${branchY+R} H${nurtureCardCx-R} Q${nurtureCardCx} ${branchY+R} ${nurtureCardCx} ${branchY+2*R} V${n34Top - ARROW_GAP}`;
 
-  const upsellBottom = n34Top + n34H; // 412
-  const plusY = 478;
+  const upsellBottom = n34Top + n34H; // 484
+  const plusY = 556;
   const path5 = `M${upsellCardCx} ${upsellBottom} V${plusY-R} Q${upsellCardCx} ${plusY} ${upsellCardCx+R} ${plusY} H${cx}`;
 
   const upsellLabelX  = Math.round((cx + upsellCardCx)  / 2); // 165
@@ -515,10 +546,10 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
           <div className="pointer-events-none absolute inset-y-0 left-14 w-px z-[1] bg-border/70" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-y-0 right-14 w-px z-[1] bg-border/70" aria-hidden="true" />
           <div className={styles.dotGrid} aria-hidden="true" />
-          <div className="h-full relative z-[1] grid grid-cols-1 lg:grid-cols-[minmax(240px,1fr)_minmax(440px,1fr)_minmax(240px,1fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border">
+          <div className="h-full relative z-[1] grid grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(560px,1.4fr)_minmax(220px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border">
             {/* ─── Left: text ─── */}
-            <div className="flex flex-col justify-between px-10 py-10 sm:px-20 sm:py-14 lg:px-20 lg:py-16">
-              <div className="max-w-[320px] flex flex-col justify-start">
+            <div className="flex flex-col justify-between pl-6 py-6 sm:pl-10 sm:py-7 lg:pl-12 lg:py-8">
+              <div className="max-w-[320px] flex flex-col justify-start px-6">
                 <h2
                   className="text-[26px] sm:text-[30px] font-semibold leading-[32px] tracking-[-0.02em] text-[#0F1720] dark:text-[#F1F5F9]"
                   style={{ fontFamily: "var(--font-geist)" }}
@@ -530,13 +561,13 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
                 </p>
                 <span className="sr-only">{dict.srText}</span>
               </div>
-              <button className={cn(styles.focusRing, "group inline-flex items-center gap-2 text-[14px] font-semibold leading-[20px] text-[#0F1720] dark:text-[#F1F5F9] hover:bg-[#F3F4F6] rounded-2xl text-center px-3 py-1 hover:transition-all transition-opacity")}>
+              <button className={cn(styles.focusRing, "group inline-flex justify-between items-center gap-2 text-[14px] font-semibold leading-[20px] text-[#0F1720] dark:text-[#F1F5F9] hover:bg-[#F3F4F6] rounded-2xl text-start px-6 py-1 hover:transition-all transition-opacity")}>
                 {dict.cta}
               </button>
             </div>
             {/* ─── Center: diagram ─── */}
-            <div className="flex items-center justify-center min-h-[500px] overflow-hidden">
-              <div className={cn(styles.diagramFrame, "relative w-full max-w-[440px] overflow-x-auto lg:overflow-visible")}>
+            <div className="flex items-center justify-center min-h-[600px] pl-3 sm:pl-5 lg:pl-6 py-6 sm:py-7 lg:py-8">
+              <div className={cn(styles.diagramFrame, "relative w-full max-w-[560px] overflow-x-auto lg:overflow-hidden")}>
                 <div className="relative" style={{ width: W, height: H, minWidth: W }}>
 
                   {/* SVG edges — always drawn, color transitions gray↔green */}
@@ -545,16 +576,41 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
                     viewBox={`0 0 ${W} ${H}`}
                     aria-hidden="true"
                   >
+                    <defs>
+                      {/* Arrow-head markers — one per color so the tip matches the stroke */}
+                      <marker id="ae-arrow-green" viewBox="0 0 10 10" refX="5" refY="5"
+                        markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M0 0 L10 5 L0 10 Z" fill="var(--edge-active, #34c77b)" />
+                      </marker>
+                      <marker id="ae-arrow-gray" viewBox="0 0 10 10" refX="5" refY="5"
+                        markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M0 0 L10 5 L0 10 Z" fill="var(--edge-idle, #d0d5dd)" />
+                      </marker>
+                    </defs>
                     {/* E1: Trigger → Switch */}
-                    <path d={path1} className={cn(styles.flowPath, e1Green ? styles.flowPathGreen : styles.flowPathGray)} />
-                    {/* E2 trunk: Switch → branch */}
+                    <path d={path1} className={cn(styles.flowPath, e1Green ? styles.flowPathGreen : styles.flowPathGray)}
+                      markerEnd={`url(#${e1Green ? "ae-arrow-green" : "ae-arrow-gray"})`} />
+                    {/* E2 trunk: Switch → branch (no arrow — joins branch) */}
                     <path d={path2} className={cn(styles.flowPath, e2Green ? styles.flowPathGreen : styles.flowPathGray)} />
                     {/* E3 upsell branch */}
-                    <path d={path3} className={cn(styles.flowPath, e3Green ? styles.flowPathGreen : styles.flowPathGray)} />
+                    <path d={path3} className={cn(styles.flowPath, e3Green ? styles.flowPathGreen : styles.flowPathGray)}
+                      markerEnd={`url(#${e3Green ? "ae-arrow-green" : "ae-arrow-gray"})`} />
                     {/* E4 nurture branch — always gray */}
-                    <path d={path4} className={cn(styles.flowPath, styles.flowPathGray)} />
-                    {/* E5: Upsell → + — green when plus appears */}
-                    <path d={path5} className={cn(styles.flowPath, showPlus ? styles.flowPathGreen : styles.flowPathGray)} />
+                    <path d={path4} className={cn(styles.flowPath, styles.flowPathGray)}
+                      markerEnd="url(#ae-arrow-gray)" />
+                    {/* E5: Upsell → + — draws in from the top (upsell side)
+                        when the plus phase begins. Before plus, the path is
+                        completely hidden via stroke-dashoffset = length. */}
+                    <path
+                      ref={path5Ref}
+                      d={path5}
+                      className={cn(styles.flowPath, styles.flowPathGreen)}
+                      style={{
+                        strokeDasharray: path5Len,
+                        strokeDashoffset: showPlus ? 0 : path5Len,
+                        transition: showPlus ? "stroke-dashoffset 700ms ease-out" : "none",
+                      }}
+                    />
 
                     {/* Connection port dots */}
                     {([
@@ -578,7 +634,7 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
                       {/* Static "Trigger" tab — always visible */}
                       <span className={cn(styles.badge, styles.nodeTriggerTab)}>
                         <TargetIcon />
-                        {dict.trigger.badge}
+                        {dict.trigger.tabBadge}
                       </span>
                       {/* "Triggered" status badge — slides in when active */}
                       {triggerActive && (
@@ -596,7 +652,7 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
                         iconBg={triggerActive ? "#EEF0FE" : "#F2F4F7"}
                         iconFg={triggerActive ? "#6E78F7" : "#98A2B3"}
                         active={triggerActive}
-                        width={220}
+                        width={topCardW}
                       />
                     </div>
                   </div>
@@ -619,7 +675,7 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
                         iconBg={switchActive ? "#EEF0FE" : "#F2F4F7"}
                         iconFg={switchActive ? "#6E78F7" : "#98A2B3"}
                         active={switchActive}
-                        width={220}
+                        width={topCardW}
                       />
                     </div>
                   </div>
@@ -661,7 +717,7 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
                         iconBg={upsellActive ? "#EEF0FE" : "#F2F4F7"}
                         iconFg={upsellActive ? "#6E78F7" : "#98A2B3"}
                         active={upsellActive}
-                        width={200}
+                        width={leafCardW}
                       />
                     </div>
                   </div>
@@ -677,7 +733,7 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
                       iconBg="#F2F4F7"
                       iconFg="#98A2B3"
                       muted
-                      width={240}
+                      width={leafCardW}
                     />
                   </div>
 
@@ -721,10 +777,10 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
                           style={{ offsetPath: `path("${path3}")`, "--dot-delay": "0ms" } as React.CSSProperties}
                         />
                       )}
-                      {/* E5 upsell→plus: appears with plus button */}
+                      {/* E5 upsell→plus: dot starts once the draw-in finishes */}
                       {showPlus && (
                         <span className={styles.pathDot}
-                          style={{ offsetPath: `path("${path5}")`, "--dot-delay": "0ms" } as React.CSSProperties}
+                          style={{ offsetPath: `path("${path5}")`, "--dot-delay": "700ms" } as React.CSSProperties}
                         />
                       )}
                     </>

@@ -413,15 +413,16 @@
     "ariaLabel": "Otomasyon akış bölümü",
     "srText": "Otomasyon akışı, 4 adım. 1. adım tetikleyici When Deal updated, triggered. 2. adım koşul. 3. adım sequence'a ekleme upsell. 4. adım sequence'a ekleme nurture.",
     "trigger": {
-      "badge": "Trigger",
+      "badge": "Deals",
+      "tabBadge": "Trigger",
       "title": "When Deal updated",
-      "description": "Akış, CRM'de bir deal değiştiği anda başlar.",
+      "description": "Deal durumu güncellendiğinde tetikle",
       "status": "Triggered"
     },
     "condition": {
       "badge": "Condition",
-      "title": "Condition split",
-      "description": "Workflow'u, kişinin bir sonraki adım için uygun olup olmadığını kontrol ederek dallandırın.",
+      "title": "Switch",
+      "description": "Upsell veya nurture'a yönlendir",
       "status": "Completed",
       "upsell": "Upsell",
       "nurture": "Nurture"
@@ -430,13 +431,13 @@
       "upsell": {
         "badge": "Sequences",
         "title": "Enroll in sequence",
-        "description": "Yüksek niyetli kontakları doğru zamanlamalı bir upsell sequence'ına gönderin.",
+        "description": "Kişiyi \"Power user upsell\"e ekle",
         "status": "Completed"
       },
       "nurture": {
         "badge": "Sequences",
         "title": "Enroll in sequence",
-        "description": "Kalan kitleyi uzun vadeli bir nurture sequence ile sıcak tutun.",
+        "description": "Kişiyi nurture sequence'ına ekle",
         "status": "Completed"
       }
     },

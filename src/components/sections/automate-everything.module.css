@@ -204,6 +204,9 @@
   border: 1.5px solid var(--node-border-active);
   font-weight: 600;
   font-size: 13px;
+  /* No slide-up — stay in place; just transition colors when state flips */
+  animation: none;
+  transition: border-color 320ms ease, color 320ms ease, background 320ms ease;
 }
 
 .badgeNurture {
@@ -223,6 +226,7 @@
   font-size: 13px;
   /* No animation — already visible */
   animation: none;
+  transition: border-color 320ms ease, color 320ms ease, background 320ms ease;
 }
 
 .inlinePill {
@@ -316,13 +320,17 @@
     opacity       220ms ease;
 }
 
+/* Attio-style active card: neutral border + soft shadow, subtle scale.
+   No indigo tint — ambient playbook list, not dashboard accent. */
 .listCardActive {
-  border-color: #6366f1;
-  box-shadow: 0 14px 34px rgba(99,102,241,0.14), 0 2px 6px rgba(15,23,42,0.06);
-  transform: scale(1.065);
+  border-color: #d0d5dd;
+  box-shadow:
+    0 8px 20px rgba(15,23,42,0.08),
+    0 1px 3px rgba(15,23,42,0.04);
+  transform: scale(1.02);
 }
 
-.listCardMuted { opacity: 0.5; }
+.listCardMuted { opacity: 0.55; }
 
 @keyframes aeScroll {
   from { transform: translateY(0); }
