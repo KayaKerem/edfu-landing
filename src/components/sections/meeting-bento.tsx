@@ -19,7 +19,7 @@ function CardArt({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative mb-6 aspect-square md:aspect-[1.618] lg:aspect-square w-full overflow-hidden">
+    <div className="relative mb-6 aspect-[1.4] md:aspect-[1.618] lg:aspect-square w-full overflow-hidden">
       <DottedBackdrop />
       {children}
     </div>
