@@ -113,6 +113,39 @@ function ArrowRightIcon() {
   );
 }
 
+/* Planet / orbit glyph — mirrors the cubes motif in automate-everything,
+ * shown below the response card in the right column. */
+function OrbitGlyph() {
+  return (
+    <svg
+      width="122"
+      height="120"
+      viewBox="0 0 122 120"
+      fill="none"
+      className="overflow-visible"
+      aria-hidden="true"
+    >
+      <path
+        d="M60 100C82.0914 100 100 82.0914 100 60C100 37.9086 82.0914 20 60 20C37.9086 20 20 37.9086 20 60C20 82.0914 37.9086 100 60 100Z"
+        fill="#FAFAFB"
+        stroke="#505967"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        opacity="0.6"
+        d="M70.5009 16.5804C91.4394 2.34847 109.934 -3.10875 117.412 4.31397C128.23 15.0534 111.888 48.6878 80.9114 79.4386C49.9344 110.189 16.0525 126.412 5.23413 115.672C-2.1514 108.341 3.12116 90.3388 17.0668 69.8685L20 65.5M68 102C89.2605 116.631 109.305 123.188 116.875 115.672C127.694 104.933 109.977 73.2508 79 42.5C48.023 11.7492 15.5161 -6.42545 4.69772 4.31397C-2.77032 11.7275 2.70414 30.051 17.001 50.8048L20 55"
+        stroke="#505967"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeDasharray="5 5"
+      />
+    </svg>
+  );
+}
+
 /* ───────── Sub-components ───────── */
 
 function TaskCard({
@@ -140,15 +173,18 @@ function TaskCard({
       onBlur={() => onHoverChange?.(false)}
       tabIndex={0}
     >
-      <header className={styles.taskHeader}>
-        <span className={styles.iconChip} aria-hidden="true">
-          <FileSearchIcon />
-        </span>
-        <h3 id={titleId} className={styles.taskTitle}>{title}</h3>
-        <span className={styles.aiBadge} aria-label="AI generated step">{badge}</span>
-      </header>
-      <div className={styles.hairline} aria-hidden="true" />
-      <p className={styles.taskQuestion}>{question}</p>
+      {/* Attio pattern: outer wrapper = halo border, inner = white card */}
+      <div className={styles.taskCardInner}>
+        <header className={styles.taskHeader}>
+          <span className={styles.iconChip} aria-hidden="true">
+            <FileSearchIcon />
+          </span>
+          <h3 id={titleId} className={styles.taskTitle}>{title}</h3>
+          <span className={styles.aiBadge} aria-label="AI generated step">{badge}</span>
+        </header>
+        <div className={styles.hairline} aria-hidden="true" />
+        <p className={styles.taskQuestion}>{question}</p>
+      </div>
     </article>
   );
 }
@@ -284,9 +320,9 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
       data-hover-card={hoverAttr}
     >
       {/* ─── Left: headline + description + CTA ─── */}
-      <div className={styles.textCol}>
-        <div>
-          <h2 className={styles.title} style={{ fontFamily: "var(--font-geist)" }}>
+                <div className="flex flex-col justify-between pl-6 py-6 sm:pl-10 sm:py-7 lg:pl-12 lg:py-8">
+              <div className="max-w-[320px] flex flex-col justify-start px-6">
+                <h2 className={styles.title} style={{ fontFamily: "var(--font-geist)" }}>
             {dict.title}
           </h2>
           <p className={styles.description}>{dict.description}</p>
@@ -329,10 +365,12 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
             role="group"
             aria-label="Workflow trigger"
           >
-            <span className={styles.iconChip} aria-hidden="true">
-              <FileSparkleIcon />
-            </span>
-            <span>{dict.trigger.title}</span>
+            <div className={styles.triggerPillInner}>
+              <span className={styles.iconChip} aria-hidden="true">
+                <FileSparkleIcon />
+              </span>
+              <span>{dict.trigger.title}</span>
+            </div>
           </div>
 
           {/* Task cards + answer pills */}
@@ -377,42 +415,60 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
         </div>
       </div>
 
-      {/* ─── Right: response / Basepoint-style data card ─── */}
+      {/* ─── Right: response card (top) + dashed grid + orbit glyph (bottom) ─── */}
       <div className={styles.responseCol}>
-        <article
-          className={styles.responseCard}
-          aria-labelledby="deploy-ai-response-title"
-        >
-          <header className={styles.responseHead}>
-            <span className={styles.responseAvatar} aria-hidden="true">
-              {dict.response.title.slice(0, 1)}
-            </span>
-            <div className={styles.responseHeadText}>
-              <h3 id="deploy-ai-response-title" className={styles.responseTitle}>
-                {dict.response.title}
-              </h3>
-              <span className={styles.responseDomain}>{dict.response.domain}</span>
-            </div>
-            <span className={styles.responseSparkle} aria-hidden="true">
-              <SparkleGlyph />
-            </span>
-          </header>
-          <div className={styles.responseHairline} aria-hidden="true" />
-          <dl className={styles.responseFields}>
-            {dict.response.fields.map((field, i) => (
-              <div key={i} className={styles.responseRow}>
-                <dt className={styles.responseLabel}>{field.label}</dt>
-                <dd className={styles.responseValue}>
-                  {field.accent ? (
-                    <span className={styles.responseToken}>{field.value}</span>
-                  ) : (
-                    field.value
-                  )}
-                </dd>
+        <div className={styles.responseTop}>
+          <article
+            className={styles.responseCard}
+            aria-labelledby="deploy-ai-response-title"
+          >
+            <header className={styles.responseHead}>
+              <span className={styles.responseAvatar} aria-hidden="true">
+                {dict.response.title.slice(0, 1)}
+              </span>
+              <div className={styles.responseHeadText}>
+                <h3 id="deploy-ai-response-title" className={styles.responseTitle}>
+                  {dict.response.title}
+                </h3>
+                <span className={styles.responseDomain}>{dict.response.domain}</span>
               </div>
-            ))}
-          </dl>
-        </article>
+              <span className={styles.responseSparkle} aria-hidden="true">
+                <SparkleGlyph />
+              </span>
+            </header>
+            <div className={styles.responseHairline} aria-hidden="true" />
+            <dl className={styles.responseFields}>
+              {dict.response.fields.map((field, i) => (
+                <div key={i} className={styles.responseRow}>
+                  <dt className={styles.responseLabel}>{field.label}</dt>
+                  <dd className={styles.responseValue}>
+                    {field.accent ? (
+                      <span className={styles.responseToken}>{field.value}</span>
+                    ) : (
+                      field.value
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </article>
+        </div>
+
+        {/* Dashed grid + orbit glyph (desktop only) — mirrors the cubes motif
+            at the bottom of automate-everything's right column. */}
+        <div className={styles.responseBottom}>
+          <div className={styles.responseDashedGrid} aria-hidden="true">
+            <div className={styles.dashedCell} />
+            <div className={styles.dashedCell} />
+            <div className={styles.dashedCell} />
+            <div className={styles.dashedCell} />
+            <div className={styles.dashedCell} />
+            <div />
+          </div>
+          <div className={styles.responseOrbit} aria-hidden="true">
+            <OrbitGlyph />
+          </div>
+        </div>
       </div>
     </SectionFrame>
   );

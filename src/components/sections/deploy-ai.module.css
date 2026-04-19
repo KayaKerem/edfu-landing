@@ -9,27 +9,29 @@
   min-height: 620px;
   max-height: 720px;
 
-  /* Design tokens (spec §7) */
-  --da-bg-canvas: #FAFAFC;
-  --da-bg-canvas-end: #F6F6F9;
-  --da-dot-color: rgba(15, 23, 42, 0.08);
+  /* Design tokens — Attio parity (from attio.com homepage HTML inspection) */
+       /* Attio uses primary-background, not gradient */
+  --da-bg-canvas-end: #FFFFFF;
+  --da-dot-color: rgba(15, 23, 42, 0.06);
   --da-card-bg: #FFFFFF;
-  --da-card-border-soft: #D9E1FF;
-  --da-card-border: #C9D2F5;
-  --da-hairline: #EFF1F5;
-  --da-pill-bg: #FAFAFB;
-  --da-pill-border: #ECECF1;
-  --da-text-primary: #0F172A;
-  --da-text-secondary: #6B7280;
-  --da-text-body: #111827;
-  --da-accent-indigo: #4F46E5;
-  --da-accent-sparkle: #6366F1;
-  --da-accent-token: #7C3AED;
-  --da-icon-chip-bg: #EEF1FF;
-  --da-badge-bg: #F3F4F6;
-  --da-badge-border: #E5E7EB;
-  --da-connector: #B7C3F3;
-  --da-connector-hover: #8A9CEB;
+  --da-card-halo: #E6E7EA;           /* Attio's subtle grey halo behind cards */
+  --da-card-border: #E4E7EC;         /* Neutral grey border, not indigo */
+  --da-hairline: #EDEFF3;            /* Attio hairline between header/question */
+  --da-pill-bg: #FFFFFF;
+  --da-pill-border: #EDEFF3;
+  --da-text-primary: #232529;        /* Attio primary-foreground */
+  --da-text-secondary: #75777C;      /* Attio muted (card questions + AI badge) */
+  --da-text-body: #5C5E63;           /* Attio answer pill text */
+  --da-accent-indigo: #407FF2;       /* Attio CTA/link blue */
+  --da-accent-sparkle: #70A1F0;
+  --da-token-grad-start: #DC8FA5;    /* Attio pink→blue gradient for AI tokens */
+  --da-token-grad-end:   #70A1F0;
+  --da-icon-chip-bg: #E5EEFF;        /* Attio icon chip fill */
+  --da-icon-chip-border: #D6E5FF;    /* Attio icon chip border */
+  --da-badge-bg: #F4F5F6;            /* Attio AI badge bg */
+  --da-badge-border: #EEEFF1;        /* Attio AI badge border */
+  --da-connector: #D6DBE1;           /* Neutral grey spine line */
+  --da-connector-hover: #A9B2BD;
 }
 
 /* Left column — headline + description + Explore link */
@@ -65,7 +67,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
+  padding: 4px 24px;
   border-radius: 10px;
   font-size: 14px;
   line-height: 20px;
@@ -94,7 +96,7 @@
   min-height: 560px;
   padding: 28px 24px 40px;
   overflow: hidden;
-  background: linear-gradient(to bottom, var(--da-bg-canvas), var(--da-bg-canvas-end));
+  background: var(--da-bg-canvas);   /* Attio: flat white, no gradient */
   isolation: isolate;
 }
 @media (min-width: 768px) { .canvas { padding: 32px 32px 48px; } }
@@ -190,63 +192,113 @@
 }
 
 /* ── Root trigger pill ──────────────────────────────────────── */
+/* Attio trigger pill: same halo technique as card, but single-row */
 .triggerPill {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
+  padding: 1px;                /* halo peek-through */
   border-radius: 12px;
+  overflow: hidden;
+  background: var(--da-card-halo);
+  filter:
+    drop-shadow(0 4px 4px rgba(24, 39, 75, 0.04))
+    drop-shadow(0 2px 4px rgba(24, 39, 75, 0.02));
+  transition: transform 180ms ease, filter 180ms ease;
+  z-index: 2;
+}
+.triggerPill::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 384px; height: 384px;
+  transform: translate(-50%, -50%);
+  background: var(--da-card-halo);
+  z-index: 0;
+  pointer-events: none;
+}
+.triggerPillInner {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;                    /* Attio gap-2 */
+  padding: 10px 12px 10px 10px;/* Attio p-2.5 pr-3 */
+  border-radius: 11px;
   background: var(--da-card-bg);
-  border: 1px solid var(--da-card-border-soft);
-  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
-  font-size: 14.5px;
-  font-weight: 500;
+  font-size: 14px;             /* Attio text-[14px] */
+  line-height: 20px;           /* Attio leading-5 */
+  font-weight: 500;            /* Attio font-medium */
+  letter-spacing: -0.02em;     /* Attio tracking-[-0.02em] */
   color: var(--da-text-primary);
   white-space: nowrap;
-  transition: transform 180ms ease, border-color 180ms ease;
-  z-index: 2;
 }
 .triggerPill:hover {
   transform: scale(1.02);
-  border-color: #C9D2F5;
+  filter:
+    drop-shadow(0 6px 8px rgba(24, 39, 75, 0.05))
+    drop-shadow(0 2px 4px rgba(24, 39, 75, 0.03));
 }
 
-/* ── Task card ──────────────────────────────────────────────── */
+/* ── Task card ──────────────────────────────────────────────── *
+ * Attio technique (from attio.com homepage HTML):
+ *   outer wrapper overflow:hidden rounded-[12px] p-px with
+ *   absolute h-96 w-96 #E6E7EA blob centered → creates a soft
+ *   gradient "halo" border around the card. Inner has rounded-[11px]
+ *   and solid white bg to reveal 1px of the halo.
+ *   filter: drop-shadow(0 4px 4px rgba(24,39,75,0.04)) drop-shadow(0 2px 4px rgba(24,39,75,0.02));
+ */
 .taskCard {
   position: relative;
   width: 100%;
-  max-width: 480px;
-  padding: 14px 16px;
-  border-radius: 14px;
-  background: var(--da-card-bg);
-  border: 1px solid var(--da-card-border);
-  box-shadow:
-    0 2px 8px rgba(79, 70, 229, 0.06),
-    0 1px 2px rgba(17, 24, 39, 0.04);
-  transition: transform 200ms ease-out;
+  max-width: 328px;            /* Attio card max-w */
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 1px;                /* Attio p-px: the halo shows through 1px around inner */
+  background: var(--da-card-halo);
+  filter:
+    drop-shadow(0 4px 4px rgba(24, 39, 75, 0.04))
+    drop-shadow(0 2px 4px rgba(24, 39, 75, 0.02));
+  transition: transform 200ms ease-out, filter 200ms ease-out;
   z-index: 2;
 }
 
-/* Hover lift via pseudo-element shadow (composite-thread friendly) */
-.taskCard::after {
+/* Halo blob — large soft disc behind the card */
+.taskCard::before {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.12);
-  opacity: 0;
-  transition: opacity 200ms ease-out;
+  top: 50%;
+  left: 50%;
+  width: 384px;                /* w-96 */
+  height: 384px;               /* h-96 */
+  transform: translate(-50%, -50%);
+  background: var(--da-card-halo);
+  z-index: 0;
   pointer-events: none;
 }
-.taskCard:hover { transform: translateY(-2px); }
-.taskCard:hover::after { opacity: 1; }
-.taskCard:hover .iconChip { background: #E4E9FF; }
+
+/* Inner surface (the actual white card) */
+.taskCardInner {
+  position: relative;
+  z-index: 1;
+  border-radius: 11px;         /* Attio rounded-[11px] */
+  background: var(--da-card-bg);
+  overflow: hidden;
+}
+
+.taskCard:hover {
+  transform: translateY(-2px);
+  filter:
+    drop-shadow(0 8px 12px rgba(24, 39, 75, 0.06))
+    drop-shadow(0 4px 6px rgba(24, 39, 75, 0.04));
+}
+.taskCard:hover .iconChip { background: #D6E5FF; }
 
 .taskHeader {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  padding: 12px;               /* Attio p-3 */
 }
 
 .iconChip {
@@ -258,21 +310,22 @@
   height: 20px;
   border-radius: 6px;
   background: var(--da-icon-chip-bg);
+  border: 1px solid var(--da-icon-chip-border);
   color: var(--da-accent-indigo);
   transition: background 180ms ease;
 }
-.iconChip svg { width: 14px; height: 14px; display: block; }
+.iconChip svg { width: 12px; height: 12px; display: block; }
 
 .taskTitle {
   flex: 1 1 auto;
   min-width: 0;
-  font-size: 16px;
-  line-height: 22px;
-  font-weight: 600;
+  font-size: 14px;             /* Attio text-[14px] */
+  line-height: 20px;           /* Attio leading-5 */
+  font-weight: 500;            /* Attio font-medium */
+  letter-spacing: -0.02em;     /* Attio tracking-[-0.02em] */
   color: var(--da-text-primary);
-  letter-spacing: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -281,27 +334,32 @@
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  height: 22px;
-  padding: 0 10px;
-  border-radius: 999px;
+  margin-left: auto;           /* Attio ml-auto */
+  height: 18px;
+  padding: 0 6px;              /* Attio px-1.5 py-0.5 */
+  border-radius: 8px;          /* Attio rounded-[8px] */
   background: var(--da-badge-bg);
   border: 1px solid var(--da-badge-border);
-  font-size: 11px;
+  font-size: 12px;             /* Attio text-[12px] */
+  line-height: 12px;           /* Attio leading-3 */
   font-weight: 500;
   color: var(--da-text-secondary);
   letter-spacing: 0;
 }
 
 .hairline {
-  margin: 12px 0;
+  margin: 0;
   height: 1px;
   width: 100%;
   background: var(--da-hairline);
 }
 
 .taskQuestion {
-  font-size: 14px;
-  line-height: 1.45;
+  padding: 12px;               /* Attio p-3 */
+  padding-right: 16px;         /* Attio pr-1 extra on text */
+  font-size: 12px;             /* Attio text-[12px] */
+  line-height: 16px;           /* Attio leading-4 */
+  font-weight: 500;            /* Attio font-medium */
   color: var(--da-text-secondary);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -314,20 +372,21 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 10px;
+  gap: 6px;                    /* Attio gap-1.5 */
+  padding: 8px 10px 8px 8px;   /* Attio p-2 pr-2.5 */
+  border-radius: 12px;         /* Attio rounded-[12px] */
   background: var(--da-pill-bg);
   border: 1px solid var(--da-pill-border);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);
-  font-size: 13.5px;
-  line-height: 18px;
-  color: var(--da-text-body);
-  max-width: calc(100% - 16px);
+  font-size: 12px;             /* Attio text-[12px] */
+  line-height: 16px;           /* Attio leading-4 */
+  font-weight: 500;            /* Attio font-medium */
+  color: var(--da-text-body);  /* #5C5E63 */
+  max-width: calc(100% );
   transition: background 150ms ease;
   z-index: 2;
 }
-.answerPill:hover { background: #F4F4F8; }
+.answerPill:hover { background: #FAFAFB; }
 
 .answerPill.truncate {
   white-space: nowrap;
@@ -343,14 +402,23 @@
 
 .answerText { display: inline; }
 
+/* Attio token: pink→blue gradient via background-clip:text.
+ * Use -webkit-text-fill-color (not `color: transparent`) to switch text fill
+ * — it's more reliable in CSS Modules and wins over inherited color. */
 .token {
-  color: var(--da-text-body);
   font-weight: 500;
-  transition: color 200ms ease 80ms;
+  color: var(--da-text-body);
+  -webkit-text-fill-color: var(--da-text-body);
+  background-image: linear-gradient(131.88deg, var(--da-token-grad-start) 7.36%, var(--da-token-grad-end) 81.74%);
+  background-size: 400%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: -webkit-text-fill-color 240ms ease 200ms;
 }
 
 .root[data-visible="true"] .token {
-  color: var(--da-accent-token);
+  -webkit-text-fill-color: transparent;
 }
 
 .sparkle {
@@ -377,16 +445,23 @@
   50%      { transform: scale(1.06); opacity: 0.85; }
 }
 
-/* ── Reveal timeline (spec §8.1) ────────────────────────────── */
+/* ── Reveal timeline ───────────────────────────────────────── *
+ * Attio initial state (from attio.com HTML):
+ *   answer pill: filter:blur(4px); opacity:0; transform:translateY(12px) scale(0.98)
+ *   cards/trigger: opacity:0; transform:translateY(8px) scale(0.98) — looser,
+ *   reverse-engineered from the stagger timing
+ */
 .triggerPill,
-.taskCard,
-.answerPill {
+.taskCard {
   opacity: 0;
-  transform: translateY(10px) scale(0.985);
-  will-change: transform, opacity;
+  transform: translateY(8px) scale(0.985);
+  will-change: transform, opacity, filter;
 }
 .answerPill {
-  transform: translateY(6px);
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  filter: blur(4px);
+  will-change: transform, opacity, filter;
 }
 
 .root[data-visible="true"] .triggerPill {
@@ -404,12 +479,21 @@
   to   { opacity: 1; transform: translateY(0)    scale(1); }
 }
 @keyframes daCardIn {
-  from { opacity: 0; transform: translateY(10px) scale(0.985); }
-  to   { opacity: 1; transform: translateY(0)    scale(1); }
+  from { opacity: 0; transform: translateY(8px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
 }
+/* Attio answer-pill entrance: blur(4)→blur(0) + Y12→0 + scale(0.98)→1 */
 @keyframes daAnswerIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
 
 /* Spine segments: stroke-dashoffset self-draw (JS sets --len per path) */
@@ -434,14 +518,80 @@
 .responseCol {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 28px 20px;
+  flex-direction: column;
+  min-height: 560px;
   background:
     linear-gradient(to bottom, #FAFAFC 0%, #F6F6F9 100%);
   isolation: isolate;
 }
-@media (min-width: 1024px) { .responseCol { padding: 32px 28px; } }
+
+/* Top area: response card centered horizontally */
+.responseTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px;
+  flex: 1 1 auto;
+}
+@media (min-width: 1024px) { .responseTop { padding: 32px 28px; } }
+
+/* Bottom area: dashed grid + orbit glyph, desktop only.
+ * Mirrors automate-everything's cubes section. */
+.responseBottom {
+  display: none;
+  position: relative;
+  flex: 0 0 auto;
+  min-height: 180px;
+  border-top: 1px solid var(--border, #e4e7ec);
+}
+@media (min-width: 1024px) { .responseBottom { display: block; } }
+
+.responseDashedGrid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dashedCell { border-style: dashed; border-color: #e4e7ec; }
+.responseDashedGrid > div:nth-child(1) { border-right-width: 1px; border-bottom-width: 1px; }
+.responseDashedGrid > div:nth-child(2) { border-right-width: 1px; border-bottom-width: 1px; }
+.responseDashedGrid > div:nth-child(3) { border-bottom-width: 1px; }
+.responseDashedGrid > div:nth-child(4) { border-right-width: 1px; }
+.responseDashedGrid > div:nth-child(5) { border-right-width: 1px; }
+
+.responseOrbit {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+  color: #505967;
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+}
+.root[data-visible="true"] .responseOrbit {
+  animation: daOrbitIn 600ms ease-out 2600ms forwards;
+}
+
+@keyframes daOrbitIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* Soft ambient rotation for the dashed orbit rings */
+@keyframes daOrbitBreathe {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+  50%      { transform: translateY(-2px) scale(1.01); opacity: 1; }
+}
+.root[data-phase="ambient"] .responseOrbit {
+  animation: daOrbitBreathe 6s ease-in-out 3600ms infinite;
+}
 
 .responseCol::before {
   /* subtle dot grid to echo the canvas */
@@ -475,14 +625,14 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 340px;
-  padding: 18px 18px 16px;
-  border-radius: 16px;
+  max-width: 251px;                   /* Attio w-[251px] */
+  padding: 14px 14px 12px;
+  border-radius: 12px;                /* Attio rounded-[12px] */
   background: var(--da-card-bg);
   border: 1px solid var(--da-card-border);
   box-shadow:
-    0 10px 32px rgba(17, 24, 39, 0.06),
-    0 2px 6px rgba(17, 24, 39, 0.04);
+    0 4px 12px rgba(17, 24, 39, 0.05),
+    0 1px 3px rgba(17, 24, 39, 0.03);
   opacity: 0;
   transform: translateY(10px) scale(0.985);
   will-change: transform, opacity;
@@ -503,15 +653,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #EEF1FF 0%, #E4E9FF 100%);
-  color: var(--da-accent-indigo);
-  font-weight: 700;
-  font-size: 15px;
+  width: 28px;                         /* Attio 28×28 avatar */
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #F5F6F8 0%, #E9ECF1 100%);
+  color: var(--da-text-primary);
+  font-weight: 600;
+  font-size: 13px;
   letter-spacing: -0.01em;
-  border: 1px solid var(--da-card-border-soft);
+  border: 1px solid var(--da-card-border);
 }
 
 .responseHeadText {
@@ -522,9 +672,10 @@
 }
 
 .responseTitle {
-  font-size: 15.5px;
-  line-height: 20px;
-  font-weight: 600;
+  font-size: 13px;                     /* Attio text-[13px] */
+  line-height: 18px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   color: var(--da-text-primary);
   white-space: nowrap;
   overflow: hidden;
@@ -532,8 +683,8 @@
 }
 
 .responseDomain {
-  font-size: 12.5px;
-  line-height: 18px;
+  font-size: 11.5px;                   /* Attio text-[11.5px] */
+  line-height: 14px;
   color: var(--da-text-secondary);
 }
 
@@ -550,7 +701,7 @@
 }
 
 .responseHairline {
-  margin: 14px 0 10px;
+  margin: 10px 0 8px;
   height: 1px;
   background: var(--da-hairline);
 }
@@ -558,16 +709,16 @@
 .responseFields {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;                            /* Attio tight stacking */
 }
 
 .responseRow {
   display: grid;
-  grid-template-columns: 104px 1fr;
-  align-items: baseline;
-  gap: 10px;
-  font-size: 13px;
-  line-height: 18px;
+  grid-template-columns: 72px 1fr;     /* Attio ~72px label column */
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;                   /* Attio text-[11.5px] */
+  line-height: 16px;
 }
 
 .responseLabel {
@@ -585,16 +736,20 @@
   white-space: nowrap;
 }
 
+/* Attio chip-style accent — smaller, softer, neutral palette
+ * (matches basepoint.com blue chip + $1-10M green chip). */
 .responseToken {
   display: inline-flex;
   align-items: center;
-  padding: 1px 8px;
+  height: 18px;
+  padding: 0 6px;
   border-radius: 6px;
-  background: #EEF1FF;
-  border: 1px solid var(--da-card-border-soft);
-  color: var(--da-accent-token);
+  background: var(--da-badge-bg);
+  border: 1px solid var(--da-badge-border);
+  color: var(--da-text-primary);
   font-weight: 500;
-  font-size: 12.5px;
+  font-size: 11px;
+  line-height: 12px;
 }
 
 /* ── Reduced motion: skip stagger, render in final state ────── */
@@ -618,6 +773,12 @@
   }
   .canvasDots,
   .responseCol::before { animation: none !important; }
+  .responseOrbit {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* ── Dark mode ──────────────────────────────────────────────── */
@@ -625,12 +786,14 @@
   background: linear-gradient(to bottom, #0B0D12 0%, #0B0D12 100%);
 }
 :global(.dark) .responseAvatar {
-  background: linear-gradient(135deg, #1C2140 0%, #242B4D 100%);
-  color: #A5B4FC;
+  background: linear-gradient(135deg, #1A1D25 0%, #20232C 100%);
+  color: #E5E7EB;
+  border-color: var(--da-card-border);
 }
 :global(.dark) .responseToken {
-  background: #1C2140;
-  color: #A78BFA;
+  background: #1A1E2A;
+  border-color: #272C3D;
+  color: #E5E7EB;
 }
 :global(.dark) .root {
   --da-bg-canvas: #0B0D12;
@@ -638,16 +801,16 @@
   --da-dot-color: rgba(255, 255, 255, 0.06);
   --da-card-bg: #13161D;
   --da-card-border: #2A2F45;
-  --da-card-border-soft: #2A2F45;
+  --da-card-halo: #1E2230;
   --da-hairline: #1E2230;
   --da-pill-bg: #15181F;
   --da-pill-border: #242838;
   --da-text-primary: #F3F4F6;
   --da-text-secondary: #9CA3AF;
   --da-text-body: #E5E7EB;
-  --da-accent-token: #A78BFA;
   --da-connector: #3B4268;
   --da-icon-chip-bg: #1C2140;
+  --da-icon-chip-border: #2A2F45;
   --da-badge-bg: #1A1E2A;
   --da-badge-border: #272C3D;
 }
