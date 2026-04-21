@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/providers/theme-provider";
 import dynamic from "next/dynamic";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
 

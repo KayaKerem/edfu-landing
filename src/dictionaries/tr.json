@@ -64,7 +64,7 @@
         "id": "workspace",
         "title": "Workspace",
         "badge": "Standard",
-        "records": 3004,
+        "records": 2857,
         "recordLabel": "Kayıt",
         "tone": "blue"
       },
@@ -72,7 +72,7 @@
         "id": "company",
         "title": "Company",
         "badge": "Standard",
-        "records": 3165,
+        "records": 3096,
         "recordLabel": "Kayıt",
         "tone": "green"
       },
@@ -80,7 +80,7 @@
         "id": "deal",
         "title": "Deal",
         "badge": "Standard",
-        "records": 5589,
+        "records": 5490,
         "recordLabel": "Kayıt",
         "tone": "orange"
       }

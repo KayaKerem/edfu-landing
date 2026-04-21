@@ -63,6 +63,11 @@
   position: relative;
   min-height: 660px;
   background: var(--cd-bg);
+  background-image:
+    linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cd-grid) 1px, transparent 1px);
+  background-size: 36px 36px;
+  background-position: 0 0;
   overflow: hidden;
 }
 
@@ -70,35 +75,70 @@
   position: absolute;
   inset: 0 0 auto;
   height: 242px;
-  background-image:
-    linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--cd-grid) 1px, transparent 1px);
-  background-size: 67px 44px;
-  opacity: 0.95;
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 88%, rgba(255, 255, 255, 1) 100%);
+  opacity: 1;
   pointer-events: none;
+}
+
+.sourceAccent {
+  position: absolute;
+  z-index: 1;
+  width: 1.5px;
+  background: rgba(94, 155, 255, 0.85);
+  opacity: 0;
+  transform-origin: top center;
+  transform: scaleY(0);
+  pointer-events: none;
+}
+
+.sourceAccentTop {
+  top: 131px;
+  left: calc(50% + 85px);
+  height: 37px;
+}
+
+.sourceAccentBottom {
+  top: 203px;
+  left: calc(50% + 85px);
+  height: 37px;
 }
 
 .sourceRows {
   position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
-  padding-top: 44px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 37px;
+  padding-top: 92px;
+}
+
+.sourcePair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sourcePair1,
+.sourcePair3 {
+  gap: 109px;
+}
+
+.sourcePair2 {
+  gap: 181px;
 }
 
 .sourceRow {
-  min-height: 88px;
-  padding: 0 40px;
+  width: 143px;
+  height: 35px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  border-bottom: 1px solid var(--cd-grid);
+  background: #ffffff;
   opacity: 0;
   transform: translateY(8px);
-}
-.sourceRow:nth-child(odd) {
-  border-right: 1px solid var(--cd-grid);
 }
 
 .sourceIcon {
@@ -106,54 +146,98 @@
   color: #6b7280;
 }
 .sourceLabel {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 14px;
   font-weight: 600;
   color: #3b3f45;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .modelStage {
   position: relative;
-  min-height: 418px;
-  border-top: 1px solid var(--cd-grid);
+  min-height: 402px;
   overflow: hidden;
 }
 
 .modelDots {
   position: absolute;
   inset: 0;
+  background-color: transparent;
   background-image: radial-gradient(circle, var(--cd-dot) 1px, transparent 1px);
-  background-size: 12px 12px;
+  background-size: 10px 10px;
   pointer-events: none;
 }
 
 .modelLines {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 1;
+}
+
+.connectorSvg {
+  position: absolute;
+  overflow: visible;
   pointer-events: none;
+}
+
+.connectorLeft {
+  top: 18px;
+  left: calc(50% - 186px);
+}
+
+.connectorCenter {
+  top: 18px;
+  left: calc(50% - 0.5px);
+}
+
+.connectorRight {
+  top: 18px;
+  left: calc(50% + 54px);
+}
+
+.connectorBase {
+  fill: none;
+  stroke: #e4e7ec;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .connectorPath {
   fill: none;
-  stroke: #eceef4;
-  stroke-width: 1.6;
+  stroke: #709ff5;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
+  opacity: 0.75;
+  filter: drop-shadow(0 0 6px rgba(112, 159, 245, 0.16));
   stroke-dasharray: var(--len, 300);
   stroke-dashoffset: var(--len, 300);
 }
 
+.connectorPulse {
+  fill: none;
+  stroke: #709ff5;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  filter: drop-shadow(0 0 6px rgba(112, 159, 245, 0.22));
+  --pulse-len: 28;
+  stroke-dasharray: var(--pulse-len) calc(var(--len) - var(--pulse-len));
+  stroke-dashoffset: var(--len);
+}
+
 .hubCard {
   position: absolute;
-  top: 36px;
+  top: 26px;
   left: 50%;
-  width: 86px;
-  height: 86px;
+  width: 74px;
+  height: 74px;
   transform: translateX(-50%) translateY(12px) scale(0.96);
-  border-radius: 18px;
+  border-radius: 16px;
+  background: #ffffff;
   border: 1px solid var(--cd-border);
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.05);
   display: flex;
@@ -166,24 +250,25 @@
 
 .recordCard {
   position: absolute;
-  width: 222px;
-  border-radius: 18px;
+  width: 180px;
+  border-radius: 12px;
   border: 1px solid var(--cd-border);
-  box-shadow: var(--cd-shadow);
+  background: #ffffff;
+  box-shadow: 0 4px 4px rgba(24, 39, 75, 0.04), 0 2px 4px rgba(24, 39, 75, 0.02);
   overflow: hidden;
   opacity: 0;
   transform: translateY(14px) scale(0.98);
 }
 .recordWorkspace {
-  top: 168px;
-  left: 60px;
+  top: 120px;
+  left: calc(50% - 186px);
 }
 .recordCompany {
-  top: 168px;
-  right: 60px;
+  top: 120px;
+  left: calc(50% + 6px);
 }
 .recordDeal {
-  top: 286px;
+  top: 218px;
   left: 50%;
   transform: translateX(-50%) translateY(14px) scale(0.98);
 }
@@ -192,53 +277,55 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 14px 10px;
+  padding: 9px 9px 7px;
 }
 .recordMark {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 5px;
   border: 1px solid;
 }
 .recordTitle {
-  font-size: 15px;
-  line-height: 20px;
-  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
   color: #30343a;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 .recordBadge {
   margin-left: auto;
   display: inline-flex;
   align-items: center;
-  height: 26px;
-  padding: 0 10px;
-  border-radius: 999px;
+  height: 19px;
+  padding: 0 6px;
+  border-radius: 8px;
   background: #f4f5f6;
   border: 1px solid #eceef1;
-  font-size: 12.5px;
+  font-size: 10px;
   line-height: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: #555b63;
+  letter-spacing: -0.02em;
 }
 .recordHairline {
   height: 1px;
   background: var(--cd-hairline);
 }
 .recordMeta {
-  padding: 12px 14px 14px;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 600;
+  padding: 8px 9px 10px;
+  font-size: 11px;
+  line-height: 12px;
+  font-weight: 500;
   color: #42464d;
+  letter-spacing: -0.02em;
 }
 .recordMeta span {
   color: #8a91a0;
-  font-weight: 600;
-  margin-left: 3px;
+  font-weight: 500;
+  margin-left: 2px;
 }
 
 .sideCol {
@@ -247,32 +334,35 @@
   flex-direction: column;
   min-height: 660px;
   background: var(--cd-bg);
+  background-image:
+    linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cd-grid) 1px, transparent 1px);
+  background-size: 36px 36px;
+  background-position: 0 0;
 }
 
 .integrationsTop {
   position: relative;
   flex: 1 1 auto;
   min-height: 300px;
-  background-image:
-    linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--cd-grid) 1px, transparent 1px);
-  background-size: 67px 44px;
+  background: transparent;
 }
 
 .integrationGrid {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(2, 68px);
+  grid-template-columns: repeat(2, 62px);
   justify-content: center;
-  gap: 18px;
-  padding: 36px 24px 28px;
+  gap: 12px 22px;
+  padding: 32px 24px 28px;
 }
 
 .integrationBadge {
   width: 62px;
   height: 62px;
   border-radius: 16px;
+  background: #ffffff;
   border: 1px solid var(--cd-border);
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
   display: flex;
@@ -284,23 +374,23 @@
 
 .cubeWrap {
   position: relative;
-  min-height: 360px;
-  border-top: 1px solid var(--cd-grid);
+  min-height: 272px;
 }
 
 .cubeGrid {
   position: absolute;
   inset: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  background:
+    linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cd-grid) 1px, transparent 1px);
+  background-size: 36px 36px;
+  background-position: 0 0;
 }
-.cubeCell { border-style: solid; border-color: var(--cd-grid); }
-.cubeGrid > div:nth-child(1) { border-right-width: 1px; border-bottom-width: 1px; }
-.cubeGrid > div:nth-child(2) { border-right-width: 1px; border-bottom-width: 1px; }
-.cubeGrid > div:nth-child(3) { border-bottom-width: 1px; }
-.cubeGrid > div:nth-child(4) { border-right-width: 1px; }
-.cubeGrid > div:nth-child(5) { border-right-width: 1px; }
+
+.cubeCell,
+.cubeGrid > div {
+  border: 0;
+}
 
 .cubeGlyph {
   position: absolute;
@@ -317,24 +407,50 @@
 }
 
 .root[data-visible="true"] .hubCard {
-  animation: cdPopIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1) 620ms both;
+  animation:
+    cdPopIn 380ms cubic-bezier(0.2, 0.8, 0.2, 1) 610ms both,
+    cdHubIdle 3.8s ease-in-out 1.2s infinite;
+}
+
+.root[data-visible="true"] .sourceAccent {
+  animation: cdSourcePulse 4.8s linear 1.1s infinite;
+}
+
+.root[data-visible="true"] .sourceAccentTop {
+  animation-delay: 1.15s;
+}
+
+.root[data-visible="true"] .sourceAccentBottom {
+  animation-delay: 2.65s;
 }
 
 .root[data-visible="true"] .connectorLeft {
-  animation: cdDraw 420ms linear 820ms forwards;
+  animation: cdDraw 300ms linear 790ms forwards;
+}
+.root[data-visible="true"] .connectorCenter {
+  animation: cdDraw 320ms linear 860ms forwards;
 }
 .root[data-visible="true"] .connectorRight {
-  animation: cdDraw 420ms linear 900ms forwards;
+  animation: cdDraw 300ms linear 930ms forwards;
 }
-.root[data-visible="true"] .connectorBottom {
-  animation: cdDraw 380ms linear 1040ms forwards;
+
+.root[data-visible="true"] .connectorLeftPulse {
+  animation: cdTravel 4.6s linear 1.45s infinite;
+}
+
+.root[data-visible="true"] .connectorCenterPulse {
+  animation: cdTravel 4.6s linear 2.15s infinite;
+}
+
+.root[data-visible="true"] .connectorRightPulse {
+  animation: cdTravel 4.6s linear 2.85s infinite;
 }
 
 .root[data-visible="true"] .recordCard {
-  animation: cdCardIn 440ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--card-delay) both;
+  animation: cdCardIn 360ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--card-delay) both;
 }
 .root[data-visible="true"] .recordDeal {
-  animation: cdCardInCenter 440ms cubic-bezier(0.2, 0.8, 0.2, 1) 1260ms both;
+  animation: cdCardInCenter 360ms cubic-bezier(0.2, 0.8, 0.2, 1) 1140ms both;
 }
 
 .root[data-visible="true"] .integrationBadge {
@@ -353,8 +469,47 @@
   from { opacity: 0; transform: translateX(-50%) translateY(12px) scale(0.96); }
   to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
 }
+@keyframes cdSourceLine {
+  from { opacity: 0; transform: scaleY(0); }
+  to { opacity: 1; transform: scaleY(1); }
+}
+@keyframes cdSourcePulse {
+  0%, 12% { opacity: 0; transform: scaleY(0); }
+  18%, 30% { opacity: 0.9; transform: scaleY(1); }
+  42%, 100% { opacity: 0; transform: scaleY(0); }
+}
 @keyframes cdDraw {
-  to { stroke-dashoffset: 0; }
+  0% { stroke-dashoffset: var(--len, 300); opacity: 0.85; }
+  72% { stroke-dashoffset: 0; opacity: 0.85; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes cdTravel {
+  0%, 12% {
+    opacity: 0;
+    stroke-dashoffset: calc(var(--len) + 34);
+  }
+  18%, 56% {
+    opacity: 0.95;
+    stroke-dashoffset: 0;
+  }
+  68%, 100% {
+    opacity: 0;
+    stroke-dashoffset: -34;
+  }
+}
+@keyframes cdHubIdle {
+  0%, 18%, 100% {
+    border-color: var(--cd-border);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.05);
+  }
+  24%, 38% {
+    border-color: rgba(112, 159, 245, 0.55);
+    box-shadow:
+      0 8px 24px rgba(15, 23, 42, 0.08),
+      0 2px 6px rgba(15, 23, 42, 0.05),
+      0 0 0 1px rgba(112, 159, 245, 0.18),
+      0 0 18px rgba(112, 159, 245, 0.12);
+  }
 }
 @keyframes cdCardIn {
   from { opacity: 0; transform: translateY(14px) scale(0.98); }
@@ -380,26 +535,40 @@
   }
 
   .sourceRows {
-    padding-top: 20px;
-    grid-template-columns: 1fr;
+    padding-top: 24px;
+    gap: 18px;
   }
 
-  .sourceRow:nth-child(odd) {
-    border-right-width: 0;
+  .sourcePair,
+  .sourcePair1,
+  .sourcePair2,
+  .sourcePair3 {
+    gap: 14px;
+    flex-direction: column;
   }
 
   .modelStage {
     min-height: 470px;
   }
 
+  .connectorLeft,
+  .connectorCenter,
+  .connectorRight,
+  .sourceAccent {
+    display: none;
+  }
+
   .recordWorkspace {
     left: 20px;
+    top: 116px;
   }
   .recordCompany {
+    left: auto;
     right: 20px;
+    top: 116px;
   }
   .recordDeal {
-    top: 300px;
+    top: 270px;
   }
 
   .cubeWrap {
@@ -411,6 +580,7 @@
   .sourceRow,
   .hubCard,
   .connectorPath,
+  .connectorPulse,
   .recordCard,
   .integrationBadge,
   .cubeGlyph {

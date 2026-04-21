@@ -33,6 +33,41 @@ export type ConnectDataDict = {
   integrationsLabel: string;
 };
 
+const RECORD_NUMBER_FORMATTER = new Intl.NumberFormat("en-US");
+
+const SOURCE_ROWS: ConnectDataSource["id"][][] = [
+  ["sales_engagement", "email_calendar"],
+  ["data_warehouses", "customer_support"],
+  ["billing_invoicing", "product_data"],
+];
+
+const CONNECTOR_SEGMENTS = [
+  {
+    id: "left",
+    className: "connectorLeft",
+    width: 132,
+    height: 70,
+    viewBox: "0 0 132 70",
+    path: "M6 70V49.3438C6 42.7163 11.3726 37.3438 18 37.3438H114C120.627 37.3438 126 31.9712 126 25.3438V0",
+  },
+  {
+    id: "center",
+    className: "connectorCenter",
+    width: 1,
+    height: 165,
+    viewBox: "0 0 1 165",
+    path: "M0.5 0V165",
+  },
+  {
+    id: "right",
+    className: "connectorRight",
+    width: 132,
+    height: 70,
+    viewBox: "0 0 132 70",
+    path: "M126 70V49.3438C126 42.7163 120.627 37.3438 114 37.3438H18C11.373 37.3438 6.00001 31.9712 6.00001 25.3438V0",
+  },
+] as const;
+
 function ArrowRightIcon() {
   return (
     <svg viewBox="0 0 14 14" fill="none" aria-hidden="true" width={14} height={14}>
@@ -178,7 +213,7 @@ function HubMarkIcon() {
   );
 }
 
- function CubeGlyph() {
+function CubeGlyph() {
   return (
     <svg
       width="120"
@@ -186,6 +221,7 @@ function HubMarkIcon() {
       viewBox="0 0 120 122"
       fill="none"
       className="overflow-visible"
+      aria-hidden="true"
     >
       <path
         d="M87.1271 16.0359V20.9825L61.3409 34.057C60.5268 34.4699 59.5647 34.4694 58.7508 34.056L32.9642 20.9585V16.0357C32.9642 14.9538 33.5741 13.9645 34.5408 13.4786L58.7603 1.30485C59.569 0.898384 60.5221 0.898384 61.3307 1.30485L85.5503 13.4786C86.5169 13.9645 87.1271 14.9541 87.1271 16.0359Z"
@@ -220,6 +256,52 @@ function HubMarkIcon() {
         />
         <path
           d="M33.4058 14.4998L60.0339 28.0136L86.6773 14.4922"
+          stroke="#505967"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M60.0424 28.0156V34.3684"
+          stroke="#505967"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M86.427 72.5791L93.972 76.4324"
+          stroke="#505967"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M1.46802 64.1279L26.1033 76.4323V104.13"
+          stroke="#505967"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M33.648 72.5742L26.0978 76.4302"
+          stroke="#505967"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+      <path
+        d="M119.091 32.067V53.8972C119.091 54.9776 118.483 55.9659 117.518 56.4523L110.976 59.7521L87.5631 71.5479C86.5979 72.0341 85.9889 73.0229 85.9889 74.1038V106.534C85.9889 107.616 85.379 108.605 84.4126 109.091L61.3324 120.696C60.5254 121.102 59.574 121.102 58.7668 120.696L35.6866 109.092C34.7202 108.606 34.1103 107.617 34.1103 106.535V74.1098C34.1103 73.0258 33.4978 72.0349 32.5283 71.5501L9.02782 59.7999L2.7296 56.641C1.76176 56.1556 1.15088 55.1656 1.15088 54.083V31.9946C1.15088 30.9197 1.75319 29.9354 2.71056 29.4461L24.8174 18.1503C25.6322 17.7338 26.5972 17.7324 27.4135 18.1463L32.968 20.962L58.7547 34.0596C59.5686 34.4729 60.5307 34.4732 61.3448 34.0605L87.131 20.986L92.6869 18.1696C93.5025 17.7562 94.4665 17.7574 95.2809 18.1727L117.529 29.5183C118.487 30.0071 119.091 30.9911 119.091 32.067Z"
+        fill="white"
+        stroke="#505967"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <g opacity={0.6}>
+        <path
+          d="M60.1206 120.884V60.2871"
+          stroke="#505967"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M118.648 30.5433L60.042 60.2858L1.62817 30.4912"
           stroke="#505967"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -320,7 +402,7 @@ const INTEGRATION_LOGOS: Array<{ id: string; render: () => ReactElement }> = [
   { id: "linear", render: LinearLogo },
 ];
 
-function SourceRow({ source, idx }: { source: ConnectDataSource; idx: number }) {
+function SourceChip({ source, idx }: { source: ConnectDataSource; idx: number }) {
   const Icon = SOURCE_ICONS[source.id] ?? SourceArrowIcon;
   return (
     <div className={styles.sourceRow} style={{ "--delay": `${120 + idx * 90}ms` } as CSSProperties}>
@@ -328,6 +410,16 @@ function SourceRow({ source, idx }: { source: ConnectDataSource; idx: number }) 
         <Icon />
       </span>
       <span className={styles.sourceLabel}>{source.label}</span>
+    </div>
+  );
+}
+
+function SourcePair({ sources, rowIndex }: { sources: ConnectDataSource[]; rowIndex: number }) {
+  return (
+    <div className={cn(styles.sourcePair, styles[`sourcePair${rowIndex + 1}`])}>
+      {sources.map((source, idx) => (
+        <SourceChip key={source.id} source={source} idx={rowIndex * 2 + idx} />
+      ))}
     </div>
   );
 }
@@ -355,7 +447,7 @@ function RecordCard({ record, idx }: { record: ConnectDataRecord; idx: number })
       </header>
       <div className={styles.recordHairline} aria-hidden="true" />
       <p className={styles.recordMeta}>
-        {record.records.toLocaleString()} <span>{record.recordLabel}</span>
+        {RECORD_NUMBER_FORMATTER.format(record.records)} <span>{record.recordLabel}</span>
       </p>
     </article>
   );
@@ -371,6 +463,7 @@ function IntegrationBadge({ idx, render: RenderIcon }: { idx: number; render: ()
 
 export function ConnectData({ dict }: { dict: ConnectDataDict }) {
   const sectionRef = useRef<HTMLElement>(null);
+  const svgRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const hasPlayedRef = useRef(false);
 
@@ -389,6 +482,16 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
     );
     obs.observe(el);
     return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const paths = svg.querySelectorAll<SVGPathElement>("path[data-connector]");
+    paths.forEach((path) => {
+      const len = Math.ceil(path.getTotalLength());
+      path.style.setProperty("--len", String(len));
+    });
   }, []);
 
   return (
@@ -417,19 +520,36 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
 
       <div className={styles.canvas}>
         <div className={styles.sourceGrid} aria-hidden="true" />
+        <div className={cn(styles.sourceAccent, styles.sourceAccentTop)} aria-hidden="true" />
+        <div className={cn(styles.sourceAccent, styles.sourceAccentBottom)} aria-hidden="true" />
         <div className={styles.sourceRows}>
-          {dict.sources.slice(0, 6).map((source, idx) => (
-            <SourceRow key={source.id} source={source} idx={idx} />
+          {SOURCE_ROWS.map((row, rowIndex) => (
+            <SourcePair
+              key={row.join("-")}
+              rowIndex={rowIndex}
+              sources={row.map((id) => dict.sources.find((source) => source.id === id)).filter(Boolean) as ConnectDataSource[]}
+            />
           ))}
         </div>
 
         <div className={styles.modelStage}>
           <div className={styles.modelDots} aria-hidden="true" />
-          <svg className={styles.modelLines} viewBox="0 0 560 260" preserveAspectRatio="none" aria-hidden="true">
-            <path className={cn(styles.connectorPath, styles.connectorLeft)} d="M280 34 L280 88 Q280 102 266 102 L176 102 Q146 102 146 132 L146 146" />
-            <path className={cn(styles.connectorPath, styles.connectorRight)} d="M280 34 L280 88 Q280 102 294 102 L384 102 Q414 102 414 132 L414 146" />
-            <path className={cn(styles.connectorPath, styles.connectorBottom)} d="M280 34 L280 182" />
-          </svg>
+          <div ref={svgRef} className={styles.modelLines} aria-hidden="true">
+            {CONNECTOR_SEGMENTS.map((segment) => (
+              <svg
+                key={segment.id}
+                className={cn(styles.connectorSvg, styles[segment.className])}
+                width={segment.width}
+                height={segment.height}
+                viewBox={segment.viewBox}
+                fill="none"
+              >
+                <path className={styles.connectorBase} d={segment.path} />
+                <path className={styles.connectorPath} d={segment.path} data-connector={segment.id} />
+                <path className={cn(styles.connectorPulse, styles[`${segment.className}Pulse`])} d={segment.path} data-connector={segment.id} />
+              </svg>
+            ))}
+          </div>
 
           <div className={styles.hubCard}>
             <span className={styles.hubMark} aria-hidden="true">

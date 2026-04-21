@@ -63,7 +63,7 @@
         "id": "workspace",
         "title": "Workspace",
         "badge": "Standard",
-        "records": 3004,
+        "records": 2857,
         "recordLabel": "Records",
         "tone": "blue"
       },
@@ -71,7 +71,7 @@
         "id": "company",
         "title": "Company",
         "badge": "Standard",
-        "records": 3165,
+        "records": 3096,
         "recordLabel": "Records",
         "tone": "green"
       },
@@ -79,7 +79,7 @@
         "id": "deal",
         "title": "Deal",
         "badge": "Standard",
-        "records": 5589,
+        "records": 5490,
         "recordLabel": "Records",
         "tone": "orange"
       }
