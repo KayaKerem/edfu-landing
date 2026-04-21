@@ -46,8 +46,8 @@
   },
   "connectData": {
     "title": "Her tür veriyi bağlayın",
-    "description": "Konuşmaları, veritabanlarını, dokümanları ve ürün sinyallerini tek bir yapılandırılmış çalışma alanında birleştirin.",
-    "cta": "Entegrasyonları keşfet →",
+    "description": "Ürün verisini, faturalama verisini ve aradaki her şeyi işletmeniz için gerçek zamanlı tek bir doğruluk kaynağında senkronize edin.",
+    "cta": "Veriyi keşfet",
     "ctaHref": "/tr/integrations",
     "ariaLabel": "Her tür veriyi bağlayın",
     "srText": "Veri kaynakları ve kayıt kartları Edfu veri katmanı üzerinden birbirine bağlanıyor.",
@@ -62,26 +62,26 @@
     "records": [
       {
         "id": "workspace",
-        "title": "Çalışma alanı bilgisi",
-        "badge": "Çalışma",
-        "records": 12840,
-        "recordLabel": "kayıt",
+        "title": "Workspace",
+        "badge": "Standard",
+        "records": 3004,
+        "recordLabel": "Kayıt",
         "tone": "blue"
       },
       {
         "id": "company",
-        "title": "Şirket profili",
-        "badge": "Şirket",
-        "records": 642,
-        "recordLabel": "kayıt",
+        "title": "Company",
+        "badge": "Standard",
+        "records": 3165,
+        "recordLabel": "Kayıt",
         "tone": "green"
       },
       {
         "id": "deal",
-        "title": "Deal bağlamı",
-        "badge": "Deals",
-        "records": 912,
-        "recordLabel": "kayıt",
+        "title": "Deal",
+        "badge": "Standard",
+        "records": 5589,
+        "recordLabel": "Kayıt",
         "tone": "orange"
       }
     ],

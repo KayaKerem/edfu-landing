@@ -1,4 +1,425 @@
 .root {
   position: relative;
-  background: #fff;
+  width: 100%;
+  min-height: 660px;
+  --cd-dot: rgba(96, 130, 198, 0.15);
+  --cd-grid: #edf0f5;
+  --cd-border: #e4e7ec;
+  --cd-hairline: #eceef4;
+  --cd-text: #232529;
+  --cd-muted: #6b7280;
+  --cd-accent: #4a87ff;
+  --cd-shadow: 0 6px 18px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.04);
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px 24px;
+}
+@media (min-width: 640px) { .textCol { padding: 36px 40px; } }
+@media (min-width: 1024px) { .textCol { padding: 40px 48px; } }
+
+.title {
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--cd-text);
+  max-width: 340px;
+}
+@media (min-width: 640px) { .title { font-size: 30px; line-height: 36px; } }
+
+.description {
+  margin-top: 14px;
+  font-size: 14.5px;
+  line-height: 22px;
+  color: var(--cd-muted);
+  max-width: 340px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--cd-text);
+  transition: background 180ms ease, color 180ms ease;
+  align-self: flex-start;
+}
+.cta:hover {
+  background: #f3f4f6;
+  color: var(--cd-accent);
+}
+.arrow { display: inline-flex; }
+
+.canvas {
+  position: relative;
+  min-height: 660px;
+  background: var(--cd-bg);
+  overflow: hidden;
+}
+
+.sourceGrid {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 242px;
+  background-image:
+    linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cd-grid) 1px, transparent 1px);
+  background-size: 67px 44px;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.sourceRows {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  padding-top: 44px;
+}
+
+.sourceRow {
+  min-height: 88px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--cd-grid);
+  opacity: 0;
+  transform: translateY(8px);
+}
+.sourceRow:nth-child(odd) {
+  border-right: 1px solid var(--cd-grid);
+}
+
+.sourceIcon {
+  display: inline-flex;
+  color: #6b7280;
+}
+.sourceLabel {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: #3b3f45;
+  letter-spacing: -0.01em;
+}
+
+.modelStage {
+  position: relative;
+  min-height: 418px;
+  border-top: 1px solid var(--cd-grid);
+  overflow: hidden;
+}
+
+.modelDots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--cd-dot) 1px, transparent 1px);
+  background-size: 12px 12px;
+  pointer-events: none;
+}
+
+.modelLines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.connectorPath {
+  fill: none;
+  stroke: #eceef4;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--len, 300);
+  stroke-dashoffset: var(--len, 300);
+}
+
+.hubCard {
+  position: absolute;
+  top: 36px;
+  left: 50%;
+  width: 86px;
+  height: 86px;
+  transform: translateX(-50%) translateY(12px) scale(0.96);
+  border-radius: 18px;
+  border: 1px solid var(--cd-border);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.hubMark { display: inline-flex; }
+
+.recordCard {
+  position: absolute;
+  width: 222px;
+  border-radius: 18px;
+  border: 1px solid var(--cd-border);
+  box-shadow: var(--cd-shadow);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(14px) scale(0.98);
+}
+.recordWorkspace {
+  top: 168px;
+  left: 60px;
+}
+.recordCompany {
+  top: 168px;
+  right: 60px;
+}
+.recordDeal {
+  top: 286px;
+  left: 50%;
+  transform: translateX(-50%) translateY(14px) scale(0.98);
+}
+
+.recordHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px 10px;
+}
+.recordMark {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid;
+}
+.recordTitle {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+  color: #30343a;
+  letter-spacing: -0.01em;
+}
+.recordBadge {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #f4f5f6;
+  border: 1px solid #eceef1;
+  font-size: 12.5px;
+  line-height: 14px;
+  font-weight: 600;
+  color: #555b63;
+}
+.recordHairline {
+  height: 1px;
+  background: var(--cd-hairline);
+}
+.recordMeta {
+  padding: 12px 14px 14px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: #42464d;
+}
+.recordMeta span {
+  color: #8a91a0;
+  font-weight: 600;
+  margin-left: 3px;
+}
+
+.sideCol {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 660px;
+  background: var(--cd-bg);
+}
+
+.integrationsTop {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 300px;
+  background-image:
+    linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cd-grid) 1px, transparent 1px);
+  background-size: 67px 44px;
+}
+
+.integrationGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 68px);
+  justify-content: center;
+  gap: 18px;
+  padding: 36px 24px 28px;
+}
+
+.integrationBadge {
+  width: 62px;
+  height: 62px;
+  border-radius: 16px;
+  border: 1px solid var(--cd-border);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(10px) scale(0.96);
+}
+
+.cubeWrap {
+  position: relative;
+  min-height: 360px;
+  border-top: 1px solid var(--cd-grid);
+}
+
+.cubeGrid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+.cubeCell { border-style: solid; border-color: var(--cd-grid); }
+.cubeGrid > div:nth-child(1) { border-right-width: 1px; border-bottom-width: 1px; }
+.cubeGrid > div:nth-child(2) { border-right-width: 1px; border-bottom-width: 1px; }
+.cubeGrid > div:nth-child(3) { border-bottom-width: 1px; }
+.cubeGrid > div:nth-child(4) { border-right-width: 1px; }
+.cubeGrid > div:nth-child(5) { border-right-width: 1px; }
+
+.cubeGlyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+}
+
+.root[data-visible="true"] .sourceRow {
+  animation: cdFadeUp 420ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--delay) both;
+}
+
+.root[data-visible="true"] .hubCard {
+  animation: cdPopIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1) 620ms both;
+}
+
+.root[data-visible="true"] .connectorLeft {
+  animation: cdDraw 420ms linear 820ms forwards;
+}
+.root[data-visible="true"] .connectorRight {
+  animation: cdDraw 420ms linear 900ms forwards;
+}
+.root[data-visible="true"] .connectorBottom {
+  animation: cdDraw 380ms linear 1040ms forwards;
+}
+
+.root[data-visible="true"] .recordCard {
+  animation: cdCardIn 440ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--card-delay) both;
+}
+.root[data-visible="true"] .recordDeal {
+  animation: cdCardInCenter 440ms cubic-bezier(0.2, 0.8, 0.2, 1) 1260ms both;
+}
+
+.root[data-visible="true"] .integrationBadge {
+  animation: cdLogoIn 360ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--logo-delay) both;
+}
+
+.root[data-visible="true"] .cubeGlyph {
+  animation: cdCubeIn 520ms cubic-bezier(0.2, 0.8, 0.2, 1) 1280ms both;
+}
+
+@keyframes cdFadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cdPopIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px) scale(0.96); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+}
+@keyframes cdDraw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes cdCardIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes cdCardInCenter {
+  from { opacity: 0; transform: translateX(-50%) translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+}
+@keyframes cdLogoIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes cdCubeIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 1023px) {
+  .canvas,
+  .sideCol {
+    min-height: auto;
+  }
+
+  .sourceRows {
+    padding-top: 20px;
+    grid-template-columns: 1fr;
+  }
+
+  .sourceRow:nth-child(odd) {
+    border-right-width: 0;
+  }
+
+  .modelStage {
+    min-height: 470px;
+  }
+
+  .recordWorkspace {
+    left: 20px;
+  }
+  .recordCompany {
+    right: 20px;
+  }
+  .recordDeal {
+    top: 300px;
+  }
+
+  .cubeWrap {
+    min-height: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sourceRow,
+  .hubCard,
+  .connectorPath,
+  .recordCard,
+  .integrationBadge,
+  .cubeGlyph {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .recordDeal {
+    transform: translateX(-50%) !important;
+  }
 }
