@@ -12,26 +12,30 @@
   /* Design tokens — Attio parity (from attio.com homepage HTML inspection) */
        /* Attio uses primary-background, not gradient */
   --da-bg-canvas-end: #FFFFFF;
-  --da-dot-color: rgba(15, 23, 42, 0.06);
+  --da-dot-color: rgba(96, 130, 198, 0.17);
   --da-card-bg: #FFFFFF;
-  --da-card-halo: #E6E7EA;           /* Attio's subtle grey halo behind cards */
-  --da-card-border: #E4E7EC;         /* Neutral grey border, not indigo */
-  --da-hairline: #EDEFF3;            /* Attio hairline between header/question */
+  --da-card-halo: #E8ECF6;
+  --da-card-border: #D9DEEA;
+  --da-hairline: #ECEEF4;
   --da-pill-bg: #FFFFFF;
-  --da-pill-border: #EDEFF3;
+  --da-pill-border: #ECEEF4;
   --da-text-primary: #232529;        /* Attio primary-foreground */
   --da-text-secondary: #75777C;      /* Attio muted (card questions + AI badge) */
   --da-text-body: #5C5E63;           /* Attio answer pill text */
-  --da-accent-indigo: #407FF2;       /* Attio CTA/link blue */
+  --da-accent-indigo: #4A87FF;
   --da-accent-sparkle: #70A1F0;
-  --da-token-grad-start: #DC8FA5;    /* Attio pink→blue gradient for AI tokens */
-  --da-token-grad-end:   #70A1F0;
-  --da-icon-chip-bg: #E5EEFF;        /* Attio icon chip fill */
-  --da-icon-chip-border: #D6E5FF;    /* Attio icon chip border */
+  --da-token-grad-start: #D49AB7;
+  --da-token-grad-end: #8D9CF7;
+  --da-icon-chip-bg: #EAF1FF;
+  --da-icon-chip-border: #D5E2FF;
   --da-badge-bg: #F4F5F6;            /* Attio AI badge bg */
   --da-badge-border: #EEEFF1;        /* Attio AI badge border */
-  --da-connector: #D6DBE1;           /* Neutral grey spine line */
-  --da-connector-hover: #A9B2BD;
+  --da-connector: #95B4FF;
+  --da-connector-hover: #6794FF;
+  --da-task-border-start: #DCCBFF;
+  --da-task-border-end: #85AEFF;
+  --da-trigger-border-start: #A4C3FF;
+  --da-trigger-border-end: #72A6FF;
 }
 
 /* Left column — headline + description + Explore link */
@@ -94,19 +98,19 @@
   position: relative;
   width: 100%;
   min-height: 560px;
-  padding: 28px 24px 40px;
+  padding: 30px 22px 40px;
   overflow: hidden;
   background: var(--da-bg-canvas);   /* Attio: flat white, no gradient */
   isolation: isolate;
 }
-@media (min-width: 768px) { .canvas { padding: 32px 32px 48px; } }
+@media (min-width: 768px) { .canvas { padding: 34px 28px 48px; } }
 
 .canvasDots {
   position: absolute;
   inset: 0;
   z-index: 0;
   background-image: radial-gradient(circle, var(--da-dot-color) 1px, transparent 1px);
-  background-size: 14px 14px;
+  background-size: 12px 12px;
   pointer-events: none;
   opacity: 0;
   -webkit-mask-image: linear-gradient(
@@ -143,14 +147,14 @@
 
 @keyframes daDotDrift {
   from { background-position: 0 0; }
-  to   { background-position: 14px 14px; }
+  to   { background-position: 12px 12px; }
 }
 
 /* ── Flow container: relative stage for SVG + nodes ─────────── */
 .stage {
   position: relative;
   width: 100%;
-  max-width: 720px;
+  max-width: 520px;
   margin-left: auto;
   margin-right: auto;
   z-index: 1;
@@ -170,7 +174,7 @@
 .spinePath {
   fill: none;
   stroke: var(--da-connector);
-  stroke-width: 1.25;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
   transition: stroke 200ms ease-out, opacity 200ms ease-out;
@@ -178,7 +182,7 @@
 
 /* Spine breathing during idle-ambient */
 .root[data-phase="ambient"] .spinePath {
-  animation: daSpineBreathe 4s ease-in-out infinite;
+  animation: none;
 }
 @keyframes daSpineBreathe {
   0%, 100% { opacity: 0.85; }
@@ -200,7 +204,7 @@
   padding: 1px;                /* halo peek-through */
   border-radius: 12px;
   overflow: hidden;
-  background: var(--da-card-halo);
+  background: linear-gradient(135deg, var(--da-trigger-border-start) 0%, var(--da-trigger-border-end) 100%);
   filter:
     drop-shadow(0 4px 4px rgba(24, 39, 75, 0.04))
     drop-shadow(0 2px 4px rgba(24, 39, 75, 0.02));
@@ -213,7 +217,7 @@
   top: 50%; left: 50%;
   width: 384px; height: 384px;
   transform: translate(-50%, -50%);
-  background: var(--da-card-halo);
+  background: linear-gradient(135deg, var(--da-trigger-border-start) 0%, var(--da-trigger-border-end) 100%);
   z-index: 0;
   pointer-events: none;
 }
@@ -222,8 +226,8 @@
   z-index: 1;
   display: inline-flex;
   align-items: center;
-  gap: 8px;                    /* Attio gap-2 */
-  padding: 10px 12px 10px 10px;/* Attio p-2.5 pr-3 */
+  gap: 8px;
+  padding: 10px 14px 10px 10px;
   border-radius: 11px;
   background: var(--da-card-bg);
   font-size: 14px;             /* Attio text-[14px] */
@@ -255,7 +259,7 @@
   border-radius: 12px;
   overflow: hidden;
   padding: 1px;                /* Attio p-px: the halo shows through 1px around inner */
-  background: var(--da-card-halo);
+  background: linear-gradient(135deg, var(--da-task-border-start) 0%, var(--da-task-border-end) 100%);
   filter:
     drop-shadow(0 4px 4px rgba(24, 39, 75, 0.04))
     drop-shadow(0 2px 4px rgba(24, 39, 75, 0.02));
@@ -272,7 +276,7 @@
   width: 384px;                /* w-96 */
   height: 384px;               /* h-96 */
   transform: translate(-50%, -50%);
-  background: var(--da-card-halo);
+  background: linear-gradient(135deg, var(--da-task-border-start) 0%, var(--da-task-border-end) 100%);
   z-index: 0;
   pointer-events: none;
 }
@@ -284,6 +288,7 @@
   border-radius: 11px;         /* Attio rounded-[11px] */
   background: var(--da-card-bg);
   overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72);
 }
 
 .taskCard:hover {
@@ -372,8 +377,8 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 6px;                    /* Attio gap-1.5 */
-  padding: 8px 10px 8px 8px;   /* Attio p-2 pr-2.5 */
+  gap: 5px;
+  padding: 7px 11px 7px 8px;
   border-radius: 12px;         /* Attio rounded-[12px] */
   background: var(--da-pill-bg);
   border: 1px solid var(--da-pill-border);
@@ -502,13 +507,13 @@
   stroke-dashoffset: var(--len, 400);
 }
 .root[data-visible="true"] .spinePath[data-segment="1"] {
-  animation: daDraw 550ms ease-in-out 280ms forwards;
+  animation: daDraw 300ms linear 260ms forwards;
 }
 .root[data-visible="true"] .spinePath[data-segment="2"] {
-  animation: daDraw 500ms ease-in-out 980ms forwards;
+  animation: daDraw 300ms linear 960ms forwards;
 }
 .root[data-visible="true"] .spinePath[data-segment="3"] {
-  animation: daDraw 500ms ease-in-out 1620ms forwards;
+  animation: daDraw 300ms linear 1600ms forwards;
 }
 @keyframes daDraw {
   to { stroke-dashoffset: 0; }
@@ -520,28 +525,30 @@
   display: flex;
   flex-direction: column;
   min-height: 560px;
-  background:
-    linear-gradient(to bottom, #FAFAFC 0%, #F6F6F9 100%);
+  background: var(--da-bg-canvas);
   isolation: isolate;
 }
 
 /* Top area: response card centered horizontally */
 .responseTop {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 28px 20px;
+  align-items: flex-start;
+  justify-content: start;
+  padding: 30px 20px 18px;
   flex: 1 1 auto;
 }
-@media (min-width: 1024px) { .responseTop { padding: 32px 28px; } }
+@media (min-width: 1024px) { .responseTop { padding: 30px 28px 20px; } }
 
 /* Bottom area: dashed grid + orbit glyph, desktop only.
  * Mirrors automate-everything's cubes section. */
 .responseBottom {
-  display: none;
+    display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  /* display: none; */
   position: relative;
   flex: 0 0 auto;
-  min-height: 180px;
+  min-height: 232px;
   border-top: 1px solid var(--border, #e4e7ec);
 }
 @media (min-width: 1024px) { .responseBottom { display: block; } }
@@ -567,8 +574,9 @@
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  padding-bottom: 40px;
   pointer-events: none;
   z-index: 1;
   color: #505967;
@@ -576,7 +584,7 @@
   transform: translateY(12px) scale(0.96);
 }
 .root[data-visible="true"] .responseOrbit {
-  animation: daOrbitIn 600ms ease-out 2600ms forwards;
+  animation: daOrbitIn 600ms ease-out 2800ms forwards;
 }
 
 @keyframes daOrbitIn {
@@ -600,7 +608,7 @@
   inset: 0;
   z-index: 0;
   background-image: radial-gradient(circle, var(--da-dot-color) 1px, transparent 1px);
-  background-size: 14px 14px;
+  background-size: 12px 12px;
   -webkit-mask-image: linear-gradient(
     to bottom,
     transparent 0,
@@ -619,14 +627,14 @@
   transition: opacity 500ms ease-out;
   pointer-events: none;
 }
-.root[data-visible="true"] .responseCol::before { opacity: 1; }
+.root[data-visible="true"] .responseCol::before { opacity: 0.68; }
 
 .responseCard {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 251px;                   /* Attio w-[251px] */
-  padding: 14px 14px 12px;
+  max-width: 252px;
+  padding: 12px 14px 14px;
   border-radius: 12px;                /* Attio rounded-[12px] */
   background: var(--da-card-bg);
   border: 1px solid var(--da-card-border);
@@ -645,7 +653,8 @@
 .responseHead {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  min-height: 28px;
 }
 
 .responseAvatar {
@@ -653,15 +662,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;                         /* Attio 28×28 avatar */
-  height: 28px;
-  border-radius: 6px;
-  background: linear-gradient(135deg, #F5F6F8 0%, #E9ECF1 100%);
-  color: var(--da-text-primary);
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: -0.01em;
-  border: 1px solid var(--da-card-border);
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #1D1E22;
+  color: #FFFFFF;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 .responseHeadText {
@@ -672,9 +678,9 @@
 }
 
 .responseTitle {
-  font-size: 13px;                     /* Attio text-[13px] */
+  font-size: 13px;
   line-height: 18px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--da-text-primary);
   white-space: nowrap;
@@ -682,26 +688,8 @@
   text-overflow: ellipsis;
 }
 
-.responseDomain {
-  font-size: 11.5px;                   /* Attio text-[11.5px] */
-  line-height: 14px;
-  color: var(--da-text-secondary);
-}
-
-.responseSparkle {
-  flex-shrink: 0;
-  color: var(--da-accent-sparkle);
-  display: inline-flex;
-  opacity: 0;
-}
-.root[data-visible="true"] .responseSparkle {
-  animation:
-    daSparklePop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) 2520ms both,
-    daSparkleTwinkle 1.4s ease-in-out 3200ms infinite;
-}
-
 .responseHairline {
-  margin: 10px 0 8px;
+  margin: 12px -14px 12px;
   height: 1px;
   background: var(--da-hairline);
 }
@@ -709,23 +697,56 @@
 .responseFields {
   display: flex;
   flex-direction: column;
-  gap: 6px;                            /* Attio tight stacking */
+  gap: 8px;
 }
 
 .responseRow {
   display: grid;
-  grid-template-columns: 72px 1fr;     /* Attio ~72px label column */
+  grid-template-columns: 102px minmax(0, 1fr);
   align-items: center;
   gap: 8px;
-  font-size: 11.5px;                   /* Attio text-[11.5px] */
+  font-size: 11.5px;
   line-height: 16px;
+  opacity: 0;
+  transform: translateY(6px);
+  will-change: transform, opacity;
+}
+
+.root[data-visible="true"] .responseRow {
+  animation: daResponseRowIn 380ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--row-delay, 2500ms) both;
+}
+
+@keyframes daResponseRowIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .responseLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--da-text-secondary);
   font-weight: 500;
   letter-spacing: 0;
+  min-width: 0;
 }
+
+.responseRowIcon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  color: var(--da-text-secondary);
+}
+.responseRowIcon svg { display: block; }
 
 .responseValue {
   color: var(--da-text-body);
@@ -736,20 +757,50 @@
   white-space: nowrap;
 }
 
-/* Attio chip-style accent — smaller, softer, neutral palette
- * (matches basepoint.com blue chip + $1-10M green chip). */
-.responseToken {
+.responseValueChips {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* Empty-state value placeholder (Attio rows with no data still reserve height) */
+.responseValueEmpty {
+  display: inline-block;
+  width: 0;
+  height: 16px;
+}
+
+/* ── Attio chip variants — exact colors from basepoint.com inspection ── */
+.responseChip {
   display: inline-flex;
   align-items: center;
   height: 18px;
   padding: 0 6px;
   border-radius: 6px;
-  background: var(--da-badge-bg);
-  border: 1px solid var(--da-badge-border);
-  color: var(--da-text-primary);
+  border: 1px solid;
   font-weight: 500;
   font-size: 11px;
   line-height: 12px;
+  letter-spacing: 0;
+}
+
+.responseChipBlue {
+  background: #EEF4FF;
+  border-color: #D4E3FF;
+  color: #4B79E8;
+}
+
+.responseChipGreen {
+  background: #DDF7E3;
+  border-color: #C6F0CF;
+  color: #075A39;
+}
+
+.responseChipPurple {
+  background: #F2EAFE;
+  border-color: #E8D8FF;
+  color: #7A51D7;
 }
 
 /* ── Reduced motion: skip stagger, render in final state ────── */
@@ -760,12 +811,12 @@
   .root[data-visible="true"] .spinePath,
   .root[data-visible="true"] .sparkle,
   .root[data-visible="true"] .responseCard,
-  .root[data-visible="true"] .responseSparkle,
+  .root[data-visible="true"] .responseRow,
   .triggerPill,
   .taskCard,
   .answerPill,
   .responseCard,
-  .responseSparkle {
+  .responseRow {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -786,15 +837,25 @@
   background: linear-gradient(to bottom, #0B0D12 0%, #0B0D12 100%);
 }
 :global(.dark) .responseAvatar {
-  background: linear-gradient(135deg, #1A1D25 0%, #20232C 100%);
-  color: #E5E7EB;
-  border-color: var(--da-card-border);
+  background: #F3F4F6;
+  color: #111827;
 }
-:global(.dark) .responseToken {
-  background: #1A1E2A;
-  border-color: #272C3D;
-  color: #E5E7EB;
+:global(.dark) .responseChipBlue {
+  background: #12172A;
+  border-color: #2A3A6A;
+  color: #8FB5FF;
 }
+:global(.dark) .responseChipGreen {
+  background: #0F2519;
+  border-color: #1F4A33;
+  color: #7CD8A2;
+}
+:global(.dark) .responseChipPurple {
+  background: #23193A;
+  border-color: #3D2A67;
+  color: #C5A8FF;
+}
+:global(.dark) .responseRowIcon { color: #9CA3AF; }
 :global(.dark) .root {
   --da-bg-canvas: #0B0D12;
   --da-bg-canvas-end: #0B0D12;
@@ -808,9 +869,13 @@
   --da-text-primary: #F3F4F6;
   --da-text-secondary: #9CA3AF;
   --da-text-body: #E5E7EB;
-  --da-connector: #3B4268;
+  --da-connector: #6C83C8;
   --da-icon-chip-bg: #1C2140;
   --da-icon-chip-border: #2A2F45;
   --da-badge-bg: #1A1E2A;
   --da-badge-border: #272C3D;
+  --da-task-border-start: #5A447F;
+  --da-task-border-end: #4F72C8;
+  --da-trigger-border-start: #4D6699;
+  --da-trigger-border-end: #4F72C8;
 }

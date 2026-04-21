@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties, ReactElement } from "react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import styles from "./deploy-ai.module.css";
@@ -26,11 +27,30 @@ export type DeployAiTaskDict = {
   truncate?: boolean;
 };
 
+export type DeployAiResponseFieldIcon =
+  | "link"
+  | "tag"
+  | "dollar"
+  | "pin"
+  | "grid"
+  | "coin"
+  | "users";
+
+export type DeployAiResponseFieldChip = "blue" | "green" | "purple";
+
+export type DeployAiResponseFieldChipItem = {
+  value: string;
+  chip: DeployAiResponseFieldChip;
+};
+
 export type DeployAiResponseField = {
   label: string;
-  value: string;
-  /** If true, the value renders as a pill/token (indigo accent). */
-  accent?: boolean;
+  icon: DeployAiResponseFieldIcon;
+  value?: string;
+  /** If set, the value renders as a colored chip (Attio parity). */
+  chip?: DeployAiResponseFieldChip;
+  /** Some rows render multiple chips instead of a single plain string. */
+  chips?: DeployAiResponseFieldChipItem[];
 };
 
 export type DeployAiResponseDict = {
@@ -113,6 +133,142 @@ function ArrowRightIcon() {
   );
 }
 
+function BasepointMarkIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width={14} height={14}>
+      <path
+        d="M11.9 3.7c-2.4 0-4.5.6-5.9 1.6-1.3 1-2 2.4-2 3.9s.7 2.9 2 3.9c1.4 1 3.5 1.6 5.9 1.6s4.5-.6 5.9-1.6c1.3-1 2-2.4 2-3.9s-.7-2.9-2-3.9c-1.4-1-3.5-1.6-5.9-1.6Z"
+        fill="currentColor"
+        opacity="0.94"
+      />
+      <path
+        d="M7.3 8.2h9.1M7.3 11.9h9.1M7.3 15.6h6.1"
+        stroke="#111111"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M7.3 8.2h9.1M7.3 11.9h9.1M7.3 15.6h6.1"
+        stroke="#FFFFFF"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+/* ───────── Response row icons (12×12, stroke #75777C) — Attio parity ─────── */
+
+function RowLinkIcon() {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" width={12} height={12}>
+      <path
+        d="M5.1 6.9a1.7 1.7 0 0 0 2.4 0l1.8-1.8a1.7 1.7 0 0 0-2.4-2.4l-.4.4M6.9 5.1a1.7 1.7 0 0 0-2.4 0L2.7 6.9a1.7 1.7 0 0 0 2.4 2.4l.4-.4"
+        stroke="currentColor"
+        strokeWidth="1.1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function RowTagIcon() {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" width={12} height={12}>
+      <path
+        d="M10 6.2 6.2 10a.9.9 0 0 1-1.3 0L2 7.1V2h5.1l2.9 2.9a.9.9 0 0 1 0 1.3Z"
+        stroke="currentColor"
+        strokeWidth="1.1"
+        strokeLinejoin="round"
+      />
+      <circle cx="4.4" cy="4.4" r="0.6" fill="currentColor" />
+    </svg>
+  );
+}
+
+function RowDollarIcon() {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" width={12} height={12}>
+      <path
+        d="M6 1.8v8.4M8.3 3.9c-.4-.6-1.3-1-2.3-1-1.3 0-2.3.7-2.3 1.6 0 .9 1 1.4 2.3 1.4 1.3 0 2.3.5 2.3 1.4 0 .9-1 1.6-2.3 1.6-1 0-1.9-.4-2.3-1"
+        stroke="currentColor"
+        strokeWidth="1.1"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function RowPinIcon() {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" width={12} height={12}>
+      <path
+        d="M6 10.5s3.4-3.1 3.4-5.6a3.4 3.4 0 0 0-6.8 0C2.6 7.4 6 10.5 6 10.5Z"
+        stroke="currentColor"
+        strokeWidth="1.1"
+        strokeLinejoin="round"
+      />
+      <circle cx="6" cy="4.9" r="1.1" stroke="currentColor" strokeWidth="1.1" />
+    </svg>
+  );
+}
+
+function RowGridIcon() {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" width={12} height={12}>
+      <rect x="1.8" y="1.8" width="3.4" height="3.4" rx="0.7" stroke="currentColor" strokeWidth="1.1" />
+      <rect x="6.8" y="1.8" width="3.4" height="3.4" rx="0.7" stroke="currentColor" strokeWidth="1.1" />
+      <rect x="1.8" y="6.8" width="3.4" height="3.4" rx="0.7" stroke="currentColor" strokeWidth="1.1" />
+      <rect x="6.8" y="6.8" width="3.4" height="3.4" rx="0.7" stroke="currentColor" strokeWidth="1.1" />
+    </svg>
+  );
+}
+
+function RowCoinIcon() {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" width={12} height={12}>
+      <ellipse cx="6" cy="3.4" rx="3.6" ry="1.4" stroke="currentColor" strokeWidth="1.1" />
+      <path
+        d="M2.4 3.4v5.2c0 .8 1.6 1.4 3.6 1.4s3.6-.6 3.6-1.4V3.4M2.4 6c0 .8 1.6 1.4 3.6 1.4S9.6 6.8 9.6 6"
+        stroke="currentColor"
+        strokeWidth="1.1"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function RowUsersIcon() {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" width={12} height={12}>
+      <circle cx="4.4" cy="4.2" r="1.6" stroke="currentColor" strokeWidth="1.1" />
+      <path
+        d="M1.4 10c0-1.7 1.3-3 3-3s3 1.3 3 3"
+        stroke="currentColor"
+        strokeWidth="1.1"
+        strokeLinecap="round"
+      />
+      <path
+        d="M8 4.2a1.5 1.5 0 0 1 0 2.9M10.6 10c0-1.5-1-2.6-2.3-2.9"
+        stroke="currentColor"
+        strokeWidth="1.1"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+const ROW_ICONS: Record<DeployAiResponseFieldIcon, () => ReactElement> = {
+  link: RowLinkIcon,
+  tag: RowTagIcon,
+  dollar: RowDollarIcon,
+  pin: RowPinIcon,
+  grid: RowGridIcon,
+  coin: RowCoinIcon,
+  users: RowUsersIcon,
+};
+
 /* Planet / orbit glyph — mirrors the cubes motif in automate-everything,
  * shown below the response card in the right column. */
 function OrbitGlyph() {
@@ -179,6 +335,7 @@ function TaskCard({
           <span className={styles.iconChip} aria-hidden="true">
             <FileSearchIcon />
           </span>
+
           <h3 id={titleId} className={styles.taskTitle}>{title}</h3>
           <span className={styles.aiBadge} aria-label="AI generated step">{badge}</span>
         </header>
@@ -229,19 +386,19 @@ function AnswerPill({
 const STAGE_W = 500;
 const STAGE_H = 540;
 const ROOT_X = 8;
-const ROOT_Y = 20;
-const ROOT_H = 36;
-const CARD_LEFT = 108; // left edge of task cards
-const CARD_W = 360;
+const ROOT_Y = 22;
+const ROOT_H = 38;
+const CARD_LEFT = 106; // left edge of task cards
+const CARD_W = 362;
 
 type CardLayout = { top: number; height: number };
 const CARD_LAYOUTS: CardLayout[] = [
-  { top: 96,  height: 84 },  // card 1
-  { top: 240, height: 88 },  // card 2
-  { top: 388, height: 84 },  // card 3
+  { top: 98,  height: 86 },  // card 1
+  { top: 242, height: 88 },  // card 2
+  { top: 390, height: 86 },  // card 3
 ];
 const ANSWER_OFFSET_X = 24; // from card left
-const ANSWER_TOP_OFFSET = 92; // card-height + spacing
+const ANSWER_TOP_OFFSET = 94; // card-height + spacing
 
 export function DeployAi({ dict }: { dict: DeployAiDict }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -255,6 +412,7 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
+    let ambientTimer: number | undefined;
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !hasPlayedRef.current) {
@@ -262,14 +420,17 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
           setVisible(true);
           setPhase("revealing");
           // Match the total timeline in spec §8.1 (~2.4s) before flipping to ambient
-          window.setTimeout(() => setPhase("ambient"), 2480);
+          ambientTimer = window.setTimeout(() => setPhase("ambient"), 2480);
           obs.unobserve(el);
         }
       },
       { threshold: 0.35, rootMargin: "-10% 0px -10% 0px" }
     );
     obs.observe(el);
-    return () => obs.disconnect();
+    return () => {
+      obs.disconnect();
+      if (ambientTimer) window.clearTimeout(ambientTimer);
+    };
   }, []);
 
   // Measure spine path lengths so stroke-dashoffset animation knows its own
@@ -291,19 +452,18 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
   // the card title, not dead center).
   const SPINE_X = ROOT_X + 32; // drops vertically from just inside root pill
   const R = 12; // rounded corner radius
-  const segmentPath = (fromY: number, toY: number, landX: number) => {
-    // Vertical down, then rounded corner, then horizontal into card.
-    return `M ${SPINE_X} ${fromY} L ${SPINE_X} ${toY - R} Q ${SPINE_X} ${toY} ${SPINE_X + R} ${toY} L ${landX} ${toY}`;
-  };
-  const cardLandX = CARD_LEFT - 6; // overlap card border by 1px (spec §11)
+  const SEGMENT_OVERLAP = 8;
+  const segmentPath = (fromY: number, toY: number, landX: number) =>
+    `M ${SPINE_X} ${fromY} L ${SPINE_X} ${toY - R} Q ${SPINE_X} ${toY} ${SPINE_X + R} ${toY} L ${landX} ${toY}`;
+  const cardLandX = CARD_LEFT + 30; // extend branches deeper under the card so they visibly connect
   const cardSpineY = (i: number) => {
     const layout = CARD_LAYOUTS[i];
     return layout.top + Math.round(layout.height * 0.55);
   };
   const spinePaths = [
-    segmentPath(ROOT_Y + ROOT_H / 2, cardSpineY(0), cardLandX),
-    segmentPath(cardSpineY(0), cardSpineY(1), cardLandX),
-    segmentPath(cardSpineY(1), cardSpineY(2), cardLandX),
+    segmentPath(ROOT_Y + ROOT_H / 2, cardSpineY(0) + SEGMENT_OVERLAP, cardLandX),
+    segmentPath(cardSpineY(0) - SEGMENT_OVERLAP, cardSpineY(1) + SEGMENT_OVERLAP, cardLandX),
+    segmentPath(cardSpineY(1) - SEGMENT_OVERLAP, cardSpineY(2), cardLandX),
   ];
 
   // Data-attribute for hover state → CSS highlights the matching segment
@@ -312,6 +472,7 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
   return (
     <SectionFrame
       ref={sectionRef}
+      id="deploy-ai"
       ariaLabel={dict.ariaLabel}
       className={cn(styles.root)}
       gridClassName="grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(500px,1.4fr)_minmax(360px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border"
@@ -320,9 +481,9 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
       data-hover-card={hoverAttr}
     >
       {/* ─── Left: headline + description + CTA ─── */}
-                <div className="flex flex-col justify-between pl-6 py-6 sm:pl-10 sm:py-7 lg:pl-12 lg:py-8">
-              <div className="max-w-[320px] flex flex-col justify-start px-6">
-                <h2 className={styles.title} style={{ fontFamily: "var(--font-geist)" }}>
+      <div className={styles.textCol}>
+        <div className="max-w-[320px] flex flex-col justify-start px-6">
+          <h2 className={styles.title} style={{ fontFamily: "var(--font-geist)" }}>
             {dict.title}
           </h2>
           <p className={styles.description}>{dict.description}</p>
@@ -350,7 +511,12 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
             aria-hidden="true"
           >
             {spinePaths.map((d, i) => (
-              <path key={i} d={d} className={styles.spinePath} data-segment={i + 1} />
+              <path
+                key={i}
+                d={d}
+                className={styles.spinePath}
+                data-segment={i + 1}
+              />
             ))}
           </svg>
 
@@ -424,32 +590,71 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
           >
             <header className={styles.responseHead}>
               <span className={styles.responseAvatar} aria-hidden="true">
-                {dict.response.title.slice(0, 1)}
+                <BasepointMarkIcon />
               </span>
               <div className={styles.responseHeadText}>
                 <h3 id="deploy-ai-response-title" className={styles.responseTitle}>
                   {dict.response.title}
                 </h3>
-                <span className={styles.responseDomain}>{dict.response.domain}</span>
               </div>
-              <span className={styles.responseSparkle} aria-hidden="true">
-                <SparkleGlyph />
-              </span>
             </header>
             <div className={styles.responseHairline} aria-hidden="true" />
             <dl className={styles.responseFields}>
-              {dict.response.fields.map((field, i) => (
-                <div key={i} className={styles.responseRow}>
-                  <dt className={styles.responseLabel}>{field.label}</dt>
-                  <dd className={styles.responseValue}>
-                    {field.accent ? (
-                      <span className={styles.responseToken}>{field.value}</span>
-                    ) : (
-                      field.value
-                    )}
-                  </dd>
-                </div>
-              ))}
+              {dict.response.fields.map((field, i) => {
+                const Icon = ROW_ICONS[field.icon];
+                const chipClass =
+                  field.chip === "blue"
+                    ? styles.responseChipBlue
+                    : field.chip === "green"
+                      ? styles.responseChipGreen
+                      : field.chip === "purple"
+                        ? styles.responseChipPurple
+                        : undefined;
+                return (
+                  <div
+                    key={i}
+                    className={styles.responseRow}
+                    style={{ "--row-delay": `${2500 + i * 70}ms` } as CSSProperties}
+                  >
+                    <dt className={styles.responseLabel}>
+                      <span className={styles.responseRowIcon} aria-hidden="true">
+                        <Icon />
+                      </span>
+                      <span>{field.label}</span>
+                    </dt>
+                    <dd className={styles.responseValue}>
+                      {field.chips?.length ? (
+                        <span className={styles.responseValueChips}>
+                          {field.chips.map((chipItem) => {
+                            const multiChipClass =
+                              chipItem.chip === "blue"
+                                ? styles.responseChipBlue
+                                : chipItem.chip === "green"
+                                  ? styles.responseChipGreen
+                                  : styles.responseChipPurple;
+                            return (
+                              <span
+                                key={`${field.label}-${chipItem.value}`}
+                                className={cn(styles.responseChip, multiChipClass)}
+                              >
+                                {chipItem.value}
+                              </span>
+                            );
+                          })}
+                        </span>
+                      ) : !field.value ? (
+                        <span className={styles.responseValueEmpty} aria-hidden="true" />
+                      ) : chipClass ? (
+                        <span className={cn(styles.responseChip, chipClass)}>
+                          {field.value}
+                        </span>
+                      ) : (
+                        field.value
+                      )}
+                    </dd>
+                  </div>
+                );
+              })}
             </dl>
           </article>
         </div>

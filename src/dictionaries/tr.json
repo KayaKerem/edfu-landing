@@ -497,13 +497,20 @@
       "title": "Basepoint",
       "domain": "basepoint.com",
       "fields": [
-        { "label": "Sektör", "value": "B2B SaaS" },
-        { "label": "Kuruluş", "value": "2021" },
-        { "label": "Büyüklük", "value": "50–200" },
-        { "label": "Konum", "value": "San Francisco, US" },
-        { "label": "Kategoriler", "value": "Analytics, CRM" },
-        { "label": "Tahmini ARR", "value": "$25M Series A", "accent": true },
-        { "label": "Kilit paydaş", "value": "Adam Kingsley", "accent": true }
+        { "label": "Alan adları", "icon": "link", "value": "basepoint.com", "chip": "blue" },
+        { "label": "İsim", "icon": "tag", "value": "Basepoint" },
+        { "label": "Tahmini ARR", "icon": "dollar", "value": "$1–10M", "chip": "green" },
+        { "label": "Konum", "icon": "pin", "value": "California, USA" },
+        {
+          "label": "Kategoriler",
+          "icon": "grid",
+          "chips": [
+            { "value": "SaaS", "chip": "purple" },
+            { "value": "B2B", "chip": "blue" }
+          ]
+        },
+        { "label": "Alınan yatırım", "icon": "coin", "value": "$25M Series A" },
+        { "label": "Paydaşlar", "icon": "users", "value": "Adam Kingsley, ..." }
       ]
     }
   },

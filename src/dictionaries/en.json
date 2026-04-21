@@ -496,13 +496,20 @@
       "title": "Basepoint",
       "domain": "basepoint.com",
       "fields": [
-        { "label": "Industry", "value": "B2B SaaS" },
-        { "label": "Founded", "value": "2021" },
-        { "label": "Size", "value": "50–200" },
-        { "label": "Location", "value": "San Francisco, US" },
-        { "label": "Categories", "value": "Analytics, CRM" },
-        { "label": "Estimated ARR", "value": "$25M Series A", "accent": true },
-        { "label": "Key stakeholder", "value": "Adam Kingsley", "accent": true }
+        { "label": "Domains", "icon": "link", "value": "basepoint.com", "chip": "blue" },
+        { "label": "Name", "icon": "tag", "value": "Basepoint" },
+        { "label": "Estimated ARR", "icon": "dollar", "value": "$1–10M", "chip": "green" },
+        { "label": "Location", "icon": "pin", "value": "California, USA" },
+        {
+          "label": "Categories",
+          "icon": "grid",
+          "chips": [
+            { "value": "SaaS", "chip": "purple" },
+            { "value": "B2B", "chip": "blue" }
+          ]
+        },
+        { "label": "Funding raised", "icon": "coin", "value": "$25M Series A" },
+        { "label": "Stakeholders", "icon": "users", "value": "Adam Kingsley, ..." }
       ]
     }
   },
