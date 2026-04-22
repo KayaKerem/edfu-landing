@@ -16,6 +16,7 @@ import { Linear } from "@/components/ui/svgs/linear";
 import { Stripe } from "@/components/ui/svgs/stripe";
 import { Vercel } from "@/components/ui/svgs/vercel";
 import { Openai } from "@/components/ui/svgs/openai";
+import { EdfuThemeLoader, EdfuThemeLogo } from "@/components/ui/edfu-brand";
 import dynamic from "next/dynamic";
 import catAnimation from "@/../public/cat-in-box.json";
 
@@ -106,8 +107,13 @@ function ChatMockup({ response, question }: { response: string; question: string
         {/* AI response */}
         {showResponse && (
           <div className="flex items-start gap-2 animate-slide-up">
-            {/* AI icon */}
-            <NextImage src="/ai-icon.svg" alt="Edfu AI Asistan" width={40} height={40} className="size-10 shrink-0 rounded-full" />
+            <div className="flex size-10 shrink-0 items-center justify-center">
+              {isThinking ? (
+                <EdfuThemeLoader alt="Edfu AI Loader" width={22} height={22} className="size-6" />
+              ) : (
+                <EdfuThemeLogo alt="Edfu AI" width={22} height={22} className="size-6" />
+              )}
+            </div>
             {/* Response bubble with streaming text */}
             <div className="max-w-[280px] rounded-xl border border-border bg-white dark:bg-card shadow-[0_0_10px_rgba(0,0,0,0.05)] transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]" style={{ padding: isThinking || displayedText ? "1rem" : "0.75rem 1rem" }}>
               {isThinking ? (

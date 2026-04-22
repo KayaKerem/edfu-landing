@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
+import { EdfuThemeLogo } from "@/components/ui/edfu-brand";
 import type { Dictionary } from "@/dictionaries";
 
 const badges = ["KVKK", "EU Data", "GDPR"] as const;
@@ -34,7 +34,7 @@ export function Footer({ dict, lang }: FooterProps) {
           <div className="lg:col-span-2">
             {/* Logo */}
             <Link href={`${prefix}/`} className="flex items-end gap-2">
-              <Image src="/logo.png" alt="Edfu" width={32} height={32} className="size-8" />
+              <EdfuThemeLogo alt="Edfu" width={22} height={22} className="size-6" />
               <span className="text-xl leading-none translate-y-[2px] font-semibold tracking-tight">Edfu</span>
             </Link>
 

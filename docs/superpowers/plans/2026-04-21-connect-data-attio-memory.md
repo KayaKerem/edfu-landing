@@ -29,6 +29,7 @@
   - Each chip is 143x35, with 109px pair spacing on rows 1 and 3 and 181px on row 2.
   - Lower connectors are built from separate SVG segments, not one continuous canvas path.
   - Lower record cards are more compact: roughly 180px wide, 12px radius, and very small badge/meta typography.
+  - A dedicated connector spec extracted from the PDF now lives at `docs/superpowers/specs/connect-data-connector-spec.md`.
 - Applied from the PDF extraction:
   - Rebuilt the upper source matrix as three centered row pairs with extracted chip dimensions and pair gaps.
   - Replaced the lower connector composition with separate left, center, and right SVG segments.

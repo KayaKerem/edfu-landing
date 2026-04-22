@@ -75,9 +75,6 @@
   position: absolute;
   inset: 0 0 auto;
   height: 242px;
-  background:
-    linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 88%, rgba(255, 255, 255, 1) 100%);
-  opacity: 1;
   pointer-events: none;
 }
 
@@ -94,13 +91,13 @@
 
 .sourceAccentTop {
   top: 131px;
-  left: calc(50% + 85px);
+  left: calc(50% + 54px);
   height: 37px;
 }
 
 .sourceAccentBottom {
   top: 203px;
-  left: calc(50% + 85px);
+  left: calc(50% + 54px);
   height: 37px;
 }
 
@@ -110,8 +107,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 37px;
-  padding-top: 92px;
+  gap: 30px;
+  padding-top: 62px;
+  padding-bottom: 62px;
 }
 
 .sourcePair {
@@ -130,13 +128,17 @@
 }
 
 .sourceRow {
-  width: 143px;
   height: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #ffffff;
+  padding-left: 15px;
+  padding-right: 15px;
+background: #fff;
+border: transparent;
+border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
   opacity: 0;
   transform: translateY(8px);
 }
@@ -156,8 +158,16 @@
 
 .modelStage {
   position: relative;
-  min-height: 402px;
+  min-height: 430px;
   overflow: hidden;
+}
+
+.modelStage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, 0.28) 30%, rgba(255, 255, 255, 0) 46%);
+  pointer-events: none;
 }
 
 .modelDots {
@@ -166,34 +176,98 @@
   background-color: transparent;
   background-image: radial-gradient(circle, var(--cd-dot) 1px, transparent 1px);
   background-size: 10px 10px;
+  opacity: 0.9;
   pointer-events: none;
 }
 
-.modelLines {
+.connectorGuides,
+.lowerChart {
   position: absolute;
   inset: 0;
   z-index: 1;
 }
 
-.connectorSvg {
+.guideSvg {
   position: absolute;
   overflow: visible;
   pointer-events: none;
 }
 
+.guidePath {
+  fill: none;
+  stroke: transparent;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.guideRightLower {
+  right: 50%;
+  bottom: 0;
+  transform: translateX(-0.5px);
+}
+
+.guideRightUpper {
+  right: 50%;
+  bottom: 36px;
+}
+
+.guideRightLong {
+  right: 50%;
+  bottom: 36px;
+}
+
+.guideLeftLong {
+  left: 50%;
+  bottom: 36px;
+}
+
+.guideLeftUpper {
+  left: 50%;
+  bottom: 36px;
+}
+
+.guideLeftLower {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(0.5px);
+}
+
+.lowerChart {
+  top: 8px;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-rows: 70px min-content 28px min-content;
+  align-items: center;
+  justify-items: center;
+}
+
+.connectorSvg {
+  position: relative;
+  overflow: visible;
+  pointer-events: none;
+}
+
 .connectorLeft {
-  top: 18px;
-  left: calc(50% - 186px);
+  grid-column: 1 / span 4;
+  grid-row: 1 / span 3;
+  justify-self: end;
+  align-self: start;
+  transform: translateX(-14px);
 }
 
 .connectorCenter {
-  top: 18px;
-  left: calc(50% - 0.5px);
+  grid-column: 1 / span 8;
+  grid-row: 1 / span 3;
+  justify-self: center;
+  align-self: start;
 }
 
 .connectorRight {
-  top: 18px;
-  left: calc(50% + 54px);
+  grid-column: 5 / span 4;
+  grid-row: 1 / span 3;
+  justify-self: start;
+  align-self: start;
+  transform: translateX(14px);
 }
 
 .connectorBase {
@@ -206,32 +280,30 @@
 
 .connectorPath {
   fill: none;
-  stroke: #709ff5;
+  stroke: #e4e7ec;
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0.75;
-  filter: drop-shadow(0 0 6px rgba(112, 159, 245, 0.16));
+  opacity: 0.95;
   stroke-dasharray: var(--len, 300);
   stroke-dashoffset: var(--len, 300);
 }
 
 .connectorPulse {
   fill: none;
-  stroke: #709ff5;
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 0;
   filter: drop-shadow(0 0 6px rgba(112, 159, 245, 0.22));
-  --pulse-len: 28;
+  --pulse-len: 20;
   stroke-dasharray: var(--pulse-len) calc(var(--len) - var(--pulse-len));
   stroke-dashoffset: var(--len);
 }
 
 .hubCard {
   position: absolute;
-  top: 26px;
+  top: 8px;
   left: 50%;
   width: 74px;
   height: 74px;
@@ -244,12 +316,24 @@
   align-items: center;
   justify-content: center;
   opacity: 0;
+  z-index: 3;
 }
 
 .hubMark { display: inline-flex; }
 
-.recordCard {
+.recordGrid {
   position: absolute;
+  inset: 18px 0 0;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-rows: 70px min-content 28px min-content;
+  align-items: center;
+  justify-items: center;
+  z-index: 2;
+}
+
+.recordCard {
+  position: relative;
   width: 180px;
   border-radius: 12px;
   border: 1px solid var(--cd-border);
@@ -260,17 +344,17 @@
   transform: translateY(14px) scale(0.98);
 }
 .recordWorkspace {
-  top: 120px;
-  left: calc(50% - 186px);
+  grid-column: 1 / span 4;
+  grid-row: 2;
 }
 .recordCompany {
-  top: 120px;
-  left: calc(50% + 6px);
+  grid-column: 5 / span 4;
+  grid-row: 2;
 }
 .recordDeal {
-  top: 218px;
-  left: 50%;
-  transform: translateX(-50%) translateY(14px) scale(0.98);
+  grid-column: 3 / span 4;
+  grid-row: 4;
+  transform: translateY(14px) scale(0.98);
 }
 
 .recordHeader {
@@ -435,15 +519,15 @@
 }
 
 .root[data-visible="true"] .connectorLeftPulse {
-  animation: cdTravel 4.6s linear 1.45s infinite;
+  animation: cdTravel 5.2s linear 1.45s infinite;
 }
 
 .root[data-visible="true"] .connectorCenterPulse {
-  animation: cdTravel 4.6s linear 2.15s infinite;
+  animation: cdTravel 5.2s linear 2.15s infinite;
 }
 
 .root[data-visible="true"] .connectorRightPulse {
-  animation: cdTravel 4.6s linear 2.85s infinite;
+  animation: cdTravel 5.2s linear 2.85s infinite;
 }
 
 .root[data-visible="true"] .recordCard {
@@ -479,22 +563,21 @@
   42%, 100% { opacity: 0; transform: scaleY(0); }
 }
 @keyframes cdDraw {
-  0% { stroke-dashoffset: var(--len, 300); opacity: 0.85; }
-  72% { stroke-dashoffset: 0; opacity: 0.85; }
-  100% { stroke-dashoffset: 0; opacity: 0; }
+  0% { stroke-dashoffset: var(--len, 300); opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
 }
 @keyframes cdTravel {
-  0%, 12% {
+  0%, 10% {
     opacity: 0;
-    stroke-dashoffset: calc(var(--len) + 34);
+    stroke-dashoffset: calc(var(--len) + 24);
   }
-  18%, 56% {
+  16%, 42% {
     opacity: 0.95;
-    stroke-dashoffset: 0;
+    stroke-dashoffset: 8;
   }
-  68%, 100% {
+  52%, 100% {
     opacity: 0;
-    stroke-dashoffset: -34;
+    stroke-dashoffset: -24;
   }
 }
 @keyframes cdHubIdle {
@@ -516,8 +599,8 @@
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 @keyframes cdCardInCenter {
-  from { opacity: 0; transform: translateX(-50%) translateY(14px) scale(0.98); }
-  to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 @keyframes cdLogoIn {
   from { opacity: 0; transform: translateY(10px) scale(0.96); }
@@ -535,8 +618,8 @@
   }
 
   .sourceRows {
-    padding-top: 24px;
-    gap: 18px;
+    padding-top: 20px;
+    gap: 4px;
   }
 
   .sourcePair,
@@ -554,21 +637,33 @@
   .connectorLeft,
   .connectorCenter,
   .connectorRight,
+  .guideSvg,
   .sourceAccent {
     display: none;
   }
 
+  .lowerChart,
+  .recordGrid {
+    display: block;
+    inset: 0;
+    top: auto;
+  }
+
   .recordWorkspace {
+    position: absolute;
     left: 20px;
     top: 116px;
   }
   .recordCompany {
-    left: auto;
+    position: absolute;
     right: 20px;
     top: 116px;
   }
   .recordDeal {
+    position: absolute;
     top: 270px;
+    left: 50%;
+    transform: translateX(-50%) translateY(14px) scale(0.98);
   }
 
   .cubeWrap {
@@ -590,6 +685,12 @@
     stroke-dashoffset: 0 !important;
   }
   .recordDeal {
-    transform: translateX(-50%) !important;
+    transform: none !important;
+  }
+
+  @media (max-width: 1023px) {
+    .recordDeal {
+      transform: translateX(-50%) !important;
+    }
   }
 }

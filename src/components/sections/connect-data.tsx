@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { CSSProperties, ReactElement } from "react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { AnimatedNumber } from "@/components/ui/animated-number";
 import styles from "./connect-data.module.css";
 import { SectionFrame } from "./section-frame";
 
@@ -48,7 +49,7 @@ const CONNECTOR_SEGMENTS = [
     width: 132,
     height: 70,
     viewBox: "0 0 132 70",
-    path: "M6 70V49.3438C6 42.7163 11.3726 37.3438 18 37.3438H114C120.627 37.3438 126 31.9712 126 25.3438V0",
+    path: "M6 70V49.3438C6 42.7163 11.3726 37.3438 18 37.3438H126C132 37.3438 132 31.9712 132 25.3438V0",
   },
   {
     id: "center",
@@ -64,7 +65,58 @@ const CONNECTOR_SEGMENTS = [
     width: 132,
     height: 70,
     viewBox: "0 0 132 70",
-    path: "M126 70V49.3438C126 42.7163 120.627 37.3438 114 37.3438H18C11.373 37.3438 6.00001 31.9712 6.00001 25.3438V0",
+    path: "M126 70V49.3438C126 42.7163 120.627 37.3438 114 37.3438H6C0 37.3438 0 31.9712 0 25.3438V0",
+  },
+] as const;
+
+const PASSIVE_GUIDES = [
+  {
+    id: "right-lower",
+    width: 108,
+    height: 72,
+    viewBox: "0 0 108 72",
+    path: "M0.5 0V71.5 H72",
+    className: "guideRightLower",
+  },
+  {
+    id: "right-upper",
+    width: 108,
+    height: 109,
+    viewBox: "0 0 108 109",
+    path: "M0 0.5H36 V108.5 H72",
+    className: "guideRightUpper",
+  },
+  {
+    id: "right-long",
+    width: 72,
+    height: 181,
+    viewBox: "0 0 72 181",
+    path: "M0 0.5H72 V180.5",
+    className: "guideRightLong",
+  },
+  {
+    id: "left-long",
+    width: 72,
+    height: 181,
+    viewBox: "0 0 72 181",
+    path: "M0.5 180V0.5 H72",
+    className: "guideLeftLong",
+  },
+  {
+    id: "left-upper",
+    width: 108,
+    height: 109,
+    viewBox: "0 0 108 109",
+    path: "M0 108.5H72 V0.5 H108",
+    className: "guideLeftUpper",
+  },
+  {
+    id: "left-lower",
+    width: 108,
+    height: 72,
+    viewBox: "0 0 108 72",
+    path: "M0.5 71.5H107.5 V0",
+    className: "guideLeftLower",
   },
 ] as const;
 
@@ -424,7 +476,15 @@ function SourcePair({ sources, rowIndex }: { sources: ConnectDataSource[]; rowIn
   );
 }
 
-function RecordCard({ record, idx }: { record: ConnectDataRecord; idx: number }) {
+function RecordCard({
+  record,
+  idx,
+  visible,
+}: {
+  record: ConnectDataRecord;
+  idx: number;
+  visible: boolean;
+}) {
   const tones: Record<ConnectDataRecord["tone"], { bg: string; border: string; color: string }> = {
     blue: { bg: "#E8F6FF", border: "#D7EDFF", color: "#4CB4EA" },
     green: { bg: "#EEF5FF", border: "#DEE9FF", color: "#4A73E8" },
@@ -447,7 +507,14 @@ function RecordCard({ record, idx }: { record: ConnectDataRecord; idx: number })
       </header>
       <div className={styles.recordHairline} aria-hidden="true" />
       <p className={styles.recordMeta}>
-        {RECORD_NUMBER_FORMATTER.format(record.records)} <span>{record.recordLabel}</span>
+        <AnimatedNumber
+          value={visible ? record.records : 0}
+          mass={0.7}
+          stiffness={90}
+          damping={16}
+          format={(num) => RECORD_NUMBER_FORMATTER.format(num)}
+        />{" "}
+        <span>{record.recordLabel}</span>
       </p>
     </article>
   );
@@ -499,7 +566,7 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
       ref={sectionRef}
       ariaLabel={dict.ariaLabel}
       className={styles.root}
-      gridClassName="grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(560px,1.45fr)_minmax(320px,0.85fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border"
+      gridClassName="grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(500px,1.4fr)_minmax(360px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border"
       data-visible={visible ? "true" : "false"}
     >
       <div className={styles.textCol}>
@@ -534,7 +601,22 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
 
         <div className={styles.modelStage}>
           <div className={styles.modelDots} aria-hidden="true" />
-          <div ref={svgRef} className={styles.modelLines} aria-hidden="true">
+          <div className={styles.connectorGuides} aria-hidden="true">
+            {PASSIVE_GUIDES.map((guide) => (
+              <svg
+                key={guide.id}
+                className={cn(styles.guideSvg, styles[guide.className])}
+                width={guide.width}
+                height={guide.height}
+                viewBox={guide.viewBox}
+                fill="none"
+              >
+                <path className={styles.guidePath} d={guide.path} />
+              </svg>
+            ))}
+          </div>
+
+          <div ref={svgRef} className={styles.lowerChart} aria-hidden="true">
             {CONNECTOR_SEGMENTS.map((segment) => (
               <svg
                 key={segment.id}
@@ -544,9 +626,30 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
                 viewBox={segment.viewBox}
                 fill="none"
               >
+                <defs>
+                  <linearGradient
+                    id={`connect-data-${segment.id}-pulse`}
+                    gradientUnits="userSpaceOnUse"
+                    x1={segment.id === "center" ? "0" : "100%"}
+                    x2={segment.id === "center" ? "100%" : "0"}
+                    y1="0"
+                    y2="100%"
+                  >
+                    <stop stopColor="#FFFFFF" stopOpacity="0" offset="0%" />
+                    <stop stopColor="#A3ECE9" stopOpacity="0" offset="28%" />
+                    <stop stopColor="#A3ECE9" offset="48%" />
+                    <stop stopColor="#709FF5" offset="72%" />
+                    <stop stopColor="#FFFFFF" stopOpacity="0" offset="100%" />
+                  </linearGradient>
+                </defs>
                 <path className={styles.connectorBase} d={segment.path} />
                 <path className={styles.connectorPath} d={segment.path} data-connector={segment.id} />
-                <path className={cn(styles.connectorPulse, styles[`${segment.className}Pulse`])} d={segment.path} data-connector={segment.id} />
+                <path
+                  className={cn(styles.connectorPulse, styles[`${segment.className}Pulse`])}
+                  d={segment.path}
+                  data-connector={segment.id}
+                  stroke={`url(#connect-data-${segment.id}-pulse)`}
+                />
               </svg>
             ))}
           </div>
@@ -557,9 +660,11 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
             </span>
           </div>
 
-          {dict.records.slice(0, 3).map((record, idx) => (
-            <RecordCard key={record.id} record={record} idx={idx} />
-          ))}
+          <div className={styles.recordGrid}>
+            {dict.records.slice(0, 3).map((record, idx) => (
+              <RecordCard key={record.id} record={record} idx={idx} visible={visible} />
+            ))}
+          </div>
         </div>
       </div>
 

@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
+import { EdfuThemeLogo } from "@/components/ui/edfu-brand";
 
 const Lottie = dynamic(() => import("lottie-react"), {
   ssr: false,
@@ -14,34 +15,6 @@ import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { motion, AnimatePresence } from "motion/react";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import type { Dictionary } from "@/dictionaries";
-
-function NavbarCatLogo() {
-  const lottieRef = useRef<any>(null);
-  const [animData, setAnimData] = useState<unknown>(null);
-
-  useEffect(() => {
-    import("@/../public/navbar-cat.json").then((m) => setAnimData(m.default));
-  }, []);
-
-  const handleComplete = useCallback(() => {
-    setTimeout(() => {
-      lottieRef.current?.goToAndPlay(0);
-    }, 4000);
-  }, []);
-
-  if (!animData) return <div className="size-8" />;
-
-  return (
-    <Lottie
-      lottieRef={lottieRef}
-      animationData={animData}
-      loop={false}
-      autoplay
-      onComplete={handleComplete}
-      className="size-8"
-    />
-  );
-}
 
 interface NavLink {
   label: string;
@@ -123,7 +96,7 @@ export function Navbar({ dict, lang }: NavbarProps) {
         >
           <div className="relative flex h-14 items-center justify-between px-4 sm:px-5">
             <Link href={`${prefix}/`} className="flex items-end gap-2">
-              <NavbarCatLogo />
+              <EdfuThemeLogo alt="Edfu" width={22} height={22} className="size-6" />
               <span
                 className="text-xl leading-none -translate-y-[1px] font-semibold tracking-tight"
               >
