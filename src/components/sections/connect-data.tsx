@@ -49,7 +49,7 @@ const CONNECTOR_SEGMENTS = [
     width: 132,
     height: 70,
     viewBox: "0 0 132 70",
-    path: "M6 70V49.3438C6 42.7163 11.3726 37.3438 18 37.3438H126C132 37.3438 132 31.9712 132 25.3438V0",
+    path: "M6 70V49.3438C6 42.7163 11.3726 37.3438 18 37.3438H114C120.627 37.3438 126 31.9712 126 25.3438V0",
   },
   {
     id: "center",
@@ -65,7 +65,7 @@ const CONNECTOR_SEGMENTS = [
     width: 132,
     height: 70,
     viewBox: "0 0 132 70",
-    path: "M126 70V49.3438C126 42.7163 120.627 37.3438 114 37.3438H6C0 37.3438 0 31.9712 0 25.3438V0",
+    path: "M126 70V49.3438C126 42.7163 120.627 37.3438 114 37.3438H18C11.373 37.3438 6.00001 31.9712 6.00001 25.3438V0",
   },
 ] as const;
 
@@ -630,20 +630,17 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
                   <linearGradient
                     id={`connect-data-${segment.id}-pulse`}
                     gradientUnits="userSpaceOnUse"
-                    x1={segment.id === "center" ? "0" : "100%"}
-                    x2={segment.id === "center" ? "100%" : "0"}
+                    x1="0"
+                    x2="0"
                     y1="0"
                     y2="100%"
                   >
-                    <stop stopColor="#FFFFFF" stopOpacity="0" offset="0%" />
-                    <stop stopColor="#A3ECE9" stopOpacity="0" offset="28%" />
-                    <stop stopColor="#A3ECE9" offset="48%" />
-                    <stop stopColor="#709FF5" offset="72%" />
-                    <stop stopColor="#FFFFFF" stopOpacity="0" offset="100%" />
+                    <stop stopColor="#111114" stopOpacity="0" offset="0%" />
+                    <stop stopColor="#111114" stopOpacity="1" offset="50%" />
+                    <stop stopColor="#111114" stopOpacity="0" offset="100%" />
                   </linearGradient>
                 </defs>
                 <path className={styles.connectorBase} d={segment.path} />
-                <path className={styles.connectorPath} d={segment.path} data-connector={segment.id} />
                 <path
                   className={cn(styles.connectorPulse, styles[`${segment.className}Pulse`])}
                   d={segment.path}

@@ -584,7 +584,7 @@
   transform: translateY(12px) scale(0.96);
 }
 .root[data-visible="true"] .responseOrbit {
-  animation: daOrbitIn 600ms ease-out 2800ms forwards;
+  animation: daOrbitIn 600ms ease-out 2320ms forwards;
 }
 
 @keyframes daOrbitIn {
@@ -592,14 +592,15 @@
   to   { opacity: 1; transform: translateY(0)    scale(1); }
 }
 
-/* Soft ambient rotation for the dashed orbit rings */
+/* Soft ambient rotation for the dashed orbit rings (taskCard/spine only) */
 @keyframes daOrbitBreathe {
   0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
   50%      { transform: translateY(-2px) scale(1.01); opacity: 1; }
 }
-.root[data-phase="ambient"] .responseOrbit {
-  animation: daOrbitBreathe 6s ease-in-out 3600ms infinite;
-}
+/* daOrbitBreathe is intentionally NOT applied to .responseOrbit —
+   the ambient phase change fires before daOrbitIn completes, which
+   causes the orbit to disappear and reappear. daOrbitIn forwards-fill
+   keeps opacity:1 permanently after the reveal. */
 
 .responseCol::before {
   /* subtle dot grid to echo the canvas */

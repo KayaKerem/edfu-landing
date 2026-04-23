@@ -51,12 +51,30 @@
     "ariaLabel": "Connect any type of data",
     "srText": "Data sources and record cards connected through the Edfu data layer.",
     "sources": [
-      { "id": "sales_engagement", "label": "Sales engagement" },
-      { "id": "email_calendar", "label": "Email & calendar" },
-      { "id": "data_warehouses", "label": "Data warehouses" },
-      { "id": "customer_support", "label": "Customer support" },
-      { "id": "billing_invoicing", "label": "Billing & invoicing" },
-      { "id": "product_data", "label": "Product data" }
+      {
+        "id": "sales_engagement",
+        "label": "Sales engagement"
+      },
+      {
+        "id": "email_calendar",
+        "label": "Email & calendar"
+      },
+      {
+        "id": "data_warehouses",
+        "label": "Data warehouses"
+      },
+      {
+        "id": "customer_support",
+        "label": "Customer support"
+      },
+      {
+        "id": "billing_invoicing",
+        "label": "Billing & invoicing"
+      },
+      {
+        "id": "product_data",
+        "label": "Product data"
+      }
     ],
     "records": [
       {
@@ -115,23 +133,87 @@
     "fileProcessing": "Processing",
     "dragFileName": "Supplier_Agreement_2025.pdf",
     "uploadedFiles": [
-      { "name": "Supplier_Contract.pdf", "size": "2.4 MB", "color": "text-red-500", "status": "ready" },
-      { "name": "GDPR_Policy.pdf", "size": "890 KB", "color": "text-red-500", "status": "ready" },
-      { "name": "Product_Catalog.docx", "size": "1.8 MB", "color": "text-blue-600", "status": "ready" },
-      { "name": "Budget_2025_Q1.xlsx", "size": "3.2 MB", "color": "text-emerald-600", "status": "processing" },
-      { "name": "HR_Handbook.pdf", "size": "1.5 MB", "color": "text-red-500", "status": "ready" },
-      { "name": "Sales_Report.xlsx", "size": "540 KB", "color": "text-emerald-600", "status": "ready" },
-      { "name": "Client_Brief.docx", "size": "420 KB", "color": "text-blue-600", "status": "processing" },
-      { "name": "ISO_27001_Procedure.pdf", "size": "7.6 MB", "color": "text-red-500", "status": "ready" },
-      { "name": "Org_Chart.pdf", "size": "220 KB", "color": "text-red-500", "status": "ready" },
-      { "name": "Annual_Report.pdf", "size": "12 MB", "color": "text-red-500", "status": "processing" },
-      { "name": "Meeting_Minutes.docx", "size": "380 KB", "color": "text-blue-600", "status": "ready" },
-      { "name": "Price_List_2025.xlsx", "size": "1.1 MB", "color": "text-emerald-600", "status": "ready" }
+      {
+        "name": "Supplier_Contract.pdf",
+        "size": "2.4 MB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "GDPR_Policy.pdf",
+        "size": "890 KB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Product_Catalog.docx",
+        "size": "1.8 MB",
+        "color": "text-blue-600",
+        "status": "ready"
+      },
+      {
+        "name": "Budget_2025_Q1.xlsx",
+        "size": "3.2 MB",
+        "color": "text-emerald-600",
+        "status": "processing"
+      },
+      {
+        "name": "HR_Handbook.pdf",
+        "size": "1.5 MB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Sales_Report.xlsx",
+        "size": "540 KB",
+        "color": "text-emerald-600",
+        "status": "ready"
+      },
+      {
+        "name": "Client_Brief.docx",
+        "size": "420 KB",
+        "color": "text-blue-600",
+        "status": "processing"
+      },
+      {
+        "name": "ISO_27001_Procedure.pdf",
+        "size": "7.6 MB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Org_Chart.pdf",
+        "size": "220 KB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Annual_Report.pdf",
+        "size": "12 MB",
+        "color": "text-red-500",
+        "status": "processing"
+      },
+      {
+        "name": "Meeting_Minutes.docx",
+        "size": "380 KB",
+        "color": "text-blue-600",
+        "status": "ready"
+      },
+      {
+        "name": "Price_List_2025.xlsx",
+        "size": "1.1 MB",
+        "color": "text-emerald-600",
+        "status": "ready"
+      }
     ],
     "saved": "Saved",
     "noteTitle": "Q3 Sales Meeting",
     "noteContent": "Price objections stood out in client meetings. Comparisons with competitor products are being made. Sales team wants a new proposal template — to be prepared next week.",
-    "noteTags": ["sales", "meeting", "Q3"]
+    "noteTags": [
+      "sales",
+      "meeting",
+      "Q3"
+    ]
   },
   "testimonial": {
     "quote": "New team members used to go through weeks of adaptation. After Edfu, they can access the company's entire knowledge base and ask questions from day one. Knowledge loss and repetitive explanations are a thing of the past.",
@@ -180,63 +262,70 @@
     ]
   },
   "pricing": {
-    "title": "Choose the Right Plan for You",
-    "description": "All plans start with a 14-day free trial. Start with monthly or yearly payment options to fit your budget.",
+    "title": "Simple, transparent pricing.",
+    "description": "Start for free. Scale as you grow. No hidden fees.",
     "monthly": "Monthly",
-    "yearly": "Yearly",
-    "discount": "20% Off",
+    "yearly": "Annual",
+    "discount": "Save 20%",
     "perMonth": "/mo",
     "comingSoon": "Coming Soon",
-    "contactUs": "Contact Us",
-    "mostPopular": "Most Popular",
+    "contactUs": "Custom",
+    "mostPopular": "Popular",
     "plans": [
       {
-        "name": "Starter",
-        "description": "per user, excl. VAT",
-        "cta": "Try Free for 14 Days",
-        "inheritLabel": "Everything in Pro plan +",
-        "features": [
+        "name": "Standard",
+        "tagline": "For teams getting started",
+        "comingSoonLabel": null,
+        "cta": "Start free trial",
+        "ctaHref": "https://app.edfu.ai",
+        "highlights": [
           "Up to 5 users",
-          "10M tokens per user/month",
-          "Claude Sonnet fixed model",
-          "50 GB storage",
-          "5 integrations",
-          "200 URL crawls/month",
-          "10,000 page RAG limit",
+          "1 knowledge base",
+          "500 documents",
+          "Claude Sonnet AI model",
           "Email support"
-        ]
+        ],
+        "description": "per user/month, excl. VAT",
+        "inheritLabel": "Everything in Standard +",
+        "features": []
       },
       {
-        "name": "Professional",
-        "description": "per user, excl. VAT",
-        "cta": "Notify Me",
-        "inheritLabel": "Everything in Starter plan +",
-        "features": [
-          "300+ AI model access (OpenRouter)",
-          "25M tokens per user/month",
-          "200 GB storage",
-          "20 integrations",
-          "1,000 URL crawls/month",
-          "50,000 page RAG limit",
-          "Custom templates",
+        "name": "Pro",
+        "tagline": "For growing teams scaling up",
+        "comingSoonLabel": "Coming Soon",
+        "cta": "Get notified",
+        "ctaHref": null,
+        "highlights": [
+          "300+ AI models (OpenRouter)",
+          "Unlimited users",
+          "10 knowledge bases",
+          "AI agents & custom instructions",
           "Priority support"
-        ]
+        ],
+        "description": "per user/month, excl. VAT",
+        "inheritLabel": "Everything in Pro +",
+        "features": []
       },
       {
         "name": "Enterprise",
-        "description": "Custom pricing for your needs",
-        "cta": "Talk to Sales",
-        "inheritLabel": "Everything in Professional plan +",
-        "features": [
-          "Unlimited users",
+        "tagline": "For enterprises needing control",
+        "comingSoonLabel": null,
+        "cta": "Talk to sales",
+        "ctaHref": null,
+        "highlights": [
+          "Unlimited knowledge bases",
           "Dedicated infrastructure",
           "White-label option",
-          "SLA guarantee",
-          "Custom integration development",
-          "1-on-1 onboarding"
-        ]
+          "SSO & audit logs",
+          "Dedicated account manager"
+        ],
+        "description": "Custom pricing for your needs",
+        "inheritLabel": "",
+        "features": []
       }
-    ]
+    ],
+    "billingCycleLabel": "Select preferred billing cycle",
+    "popularLabel": "Popular"
   },
   "marqueeTestimonials": {
     "title": "Experiences from Teams Using Edfu",
@@ -345,7 +434,9 @@
         "question": "What does 300+ AI models mean, which one should I choose?",
         "answer": "Through OpenRouter integration, Edfu provides access to Claude, GPT-4, Gemini, Llama, and hundreds of different AI models from a single platform. Each model excels at different tasks. The Starter plan includes Claude Sonnet as a fixed model, while the Professional plan unlocks access to all models."
       }
-    ]
+    ],
+    "expandAll": "Expand all",
+    "collapseAll": "Collapse all"
   },
   "cta": {
     "line1": "Upload.",
@@ -359,15 +450,30 @@
     "columns": [
       {
         "heading": "Company",
-        "links": ["About Us", "Contact", "Blog", "Careers"]
+        "links": [
+          "About Us",
+          "Contact",
+          "Blog",
+          "Careers"
+        ]
       },
       {
         "heading": "Product",
-        "links": ["Features", "Pricing", "Integrations", "API Documentation"]
+        "links": [
+          "Features",
+          "Pricing",
+          "Integrations",
+          "API Documentation"
+        ]
       },
       {
         "heading": "Resources",
-        "links": ["Help Center", "User Guide", "Status Page", "Privacy Policy"]
+        "links": [
+          "Help Center",
+          "User Guide",
+          "Status Page",
+          "Privacy Policy"
+        ]
       }
     ]
   },
@@ -400,8 +506,14 @@
     "contextPanel": {
       "title": "Live Conversation",
       "messages": [
-        { "from": "customer", "text": "We're looking for CRM integration, team of 85." },
-        { "from": "ai", "text": "I'll prepare a custom proposal. Let me quickly research your company." }
+        {
+          "from": "customer",
+          "text": "We're looking for CRM integration, team of 85."
+        },
+        {
+          "from": "ai",
+          "text": "I'll prepare a custom proposal. Let me quickly research your company."
+        }
       ]
     }
   },
@@ -443,13 +555,41 @@
     "list": {
       "title": "Automation scenarios",
       "items": [
-        { "id": "reengage_cold_leads", "title": "Re-engage cold leads", "color": "rose" },
-        { "id": "mql_lead_routing", "title": "MQL lead routing", "color": "amber" },
-        { "id": "onboarding_handoff", "title": "Onboarding hand-off", "color": "blue" },
-        { "id": "new_deal_email_campaign", "title": "New Deal email campaign", "color": "green" },
-        { "id": "lead_form_submissions", "title": "Lead form submissions", "color": "violet" },
-        { "id": "monitor_customer_health", "title": "Monitor customer health", "color": "cyan" },
-        { "id": "identify_expansion", "title": "Identify expansion opportunity", "color": "lime" }
+        {
+          "id": "reengage_cold_leads",
+          "title": "Re-engage cold leads",
+          "color": "rose"
+        },
+        {
+          "id": "mql_lead_routing",
+          "title": "MQL lead routing",
+          "color": "amber"
+        },
+        {
+          "id": "onboarding_handoff",
+          "title": "Onboarding hand-off",
+          "color": "blue"
+        },
+        {
+          "id": "new_deal_email_campaign",
+          "title": "New Deal email campaign",
+          "color": "green"
+        },
+        {
+          "id": "lead_form_submissions",
+          "title": "Lead form submissions",
+          "color": "violet"
+        },
+        {
+          "id": "monitor_customer_health",
+          "title": "Monitor customer health",
+          "color": "cyan"
+        },
+        {
+          "id": "identify_expansion",
+          "title": "Identify expansion opportunity",
+          "color": "lime"
+        }
       ]
     }
   },
@@ -459,16 +599,27 @@
     "cta": "Explore AI",
     "ariaLabel": "Example AI agent workflow",
     "srText": "AI workflow: New lead found triggers three AI tasks — activate PLG motion, evaluate size of opportunity, identify key stakeholders.",
-    "trigger": { "title": "New lead found" },
+    "trigger": {
+      "title": "New lead found"
+    },
     "tasks": [
       {
         "title": "Activate PLG motion",
         "question": "Does the company sell software to other businesses?",
         "badge": "AI",
         "answer": [
-          { "type": "text", "value": "Yes, they are a " },
-          { "type": "token", "value": "B2B SaaS" },
-          { "type": "text", "value": " business" }
+          {
+            "type": "text",
+            "value": "Yes, they are a "
+          },
+          {
+            "type": "token",
+            "value": "B2B SaaS"
+          },
+          {
+            "type": "text",
+            "value": " business"
+          }
         ]
       },
       {
@@ -476,10 +627,22 @@
         "question": "Did the company raise any funds recently?",
         "badge": "AI",
         "answer": [
-          { "type": "token", "value": "$25M" },
-          { "type": "text", "value": " raised in " },
-          { "type": "token", "value": "Series A" },
-          { "type": "text", "value": " funding round" }
+          {
+            "type": "token",
+            "value": "$25M"
+          },
+          {
+            "type": "text",
+            "value": " raised in "
+          },
+          {
+            "type": "token",
+            "value": "Series A"
+          },
+          {
+            "type": "text",
+            "value": " funding round"
+          }
         ]
       },
       {
@@ -488,7 +651,10 @@
         "badge": "AI",
         "truncate": true,
         "answer": [
-          { "type": "token", "value": "Adam Kingsley, CEO; Anne Zaragoza, CTO; Tom …" }
+          {
+            "type": "token",
+            "value": "Adam Kingsley, CEO; Anne Zaragoza, CTO; Tom …"
+          }
         ]
       }
     ],
@@ -496,20 +662,52 @@
       "title": "Basepoint",
       "domain": "basepoint.com",
       "fields": [
-        { "label": "Domains", "icon": "link", "value": "basepoint.com", "chip": "blue" },
-        { "label": "Name", "icon": "tag", "value": "Basepoint" },
-        { "label": "Estimated ARR", "icon": "dollar", "value": "$1–10M", "chip": "green" },
-        { "label": "Location", "icon": "pin", "value": "California, USA" },
+        {
+          "label": "Domains",
+          "icon": "link",
+          "value": "basepoint.com",
+          "chip": "blue"
+        },
+        {
+          "label": "Name",
+          "icon": "tag",
+          "value": "Basepoint"
+        },
+        {
+          "label": "Estimated ARR",
+          "icon": "dollar",
+          "value": "$1–10M",
+          "chip": "green"
+        },
+        {
+          "label": "Location",
+          "icon": "pin",
+          "value": "California, USA"
+        },
         {
           "label": "Categories",
           "icon": "grid",
           "chips": [
-            { "value": "SaaS", "chip": "purple" },
-            { "value": "B2B", "chip": "blue" }
+            {
+              "value": "SaaS",
+              "chip": "purple"
+            },
+            {
+              "value": "B2B",
+              "chip": "blue"
+            }
           ]
         },
-        { "label": "Funding raised", "icon": "coin", "value": "$25M Series A" },
-        { "label": "Stakeholders", "icon": "users", "value": "Adam Kingsley, ..." }
+        {
+          "label": "Funding raised",
+          "icon": "coin",
+          "value": "$25M Series A"
+        },
+        {
+          "label": "Stakeholders",
+          "icon": "users",
+          "value": "Adam Kingsley, ..."
+        }
       ]
     }
   },
@@ -592,7 +790,11 @@
     ],
     "integrationLogos": {
       "title": "Instant sync. Zero setup.",
-      "tools": ["Zoom", "Google Meet", "Microsoft Teams"]
+      "tools": [
+        "Zoom",
+        "Google Meet",
+        "Microsoft Teams"
+      ]
     },
     "testimonial": {
       "quote": "Meeting notes no longer get lost. AI writes everything, summarizes, and assigns actions to our team. Our productivity visibly increased.",
@@ -606,10 +808,22 @@
     "templates": {
       "title": "Ready-made meeting templates",
       "items": [
-        { "name": "SPICED", "description": "Situation, Pain, Impact, Critical Event, Decision — ideal for sales meetings." },
-        { "name": "Customer Discovery", "description": "Needs analysis, budget, timeline, and decision process discovery." },
-        { "name": "Sprint Retrospective", "description": "What went well, what went wrong, actions — for product teams." },
-        { "name": "Kick-off", "description": "Project scope, roles, timeline, and success criteria definition." }
+        {
+          "name": "SPICED",
+          "description": "Situation, Pain, Impact, Critical Event, Decision — ideal for sales meetings."
+        },
+        {
+          "name": "Customer Discovery",
+          "description": "Needs analysis, budget, timeline, and decision process discovery."
+        },
+        {
+          "name": "Sprint Retrospective",
+          "description": "What went well, what went wrong, actions — for product teams."
+        },
+        {
+          "name": "Kick-off",
+          "description": "Project scope, roles, timeline, and success criteria definition."
+        }
       ]
     }
   },
@@ -696,19 +910,31 @@
         {
           "title": "Customer",
           "badge": "Standard",
-          "attrs": ["Name", "Email", "Company"],
+          "attrs": [
+            "Name",
+            "Email",
+            "Company"
+          ],
           "moreCount": 8
         },
         {
           "title": "Conversation",
           "badge": "Standard",
-          "attrs": ["Channel", "Status", "Agent"],
+          "attrs": [
+            "Channel",
+            "Status",
+            "Agent"
+          ],
           "moreCount": 5
         },
         {
           "title": "Proposal",
           "badge": "Custom",
-          "attrs": ["Amount", "Products", "Date"],
+          "attrs": [
+            "Amount",
+            "Products",
+            "Date"
+          ],
           "moreCount": 4
         }
       ]
@@ -726,33 +952,93 @@
     "channels": {
       "title": "Messaging Channels",
       "items": [
-        { "name": "WhatsApp", "description": "Manage incoming messages with Business API", "color": "#25D366" },
-        { "name": "Instagram", "description": "Automate DM and story replies", "color": "#E4405F" },
-        { "name": "Telegram", "description": "Customer communication with bot integration", "color": "#2AABEE" },
-        { "name": "Web Form", "description": "Embeddable communication widget for your site", "color": "#18181B" },
-        { "name": "Email", "description": "AI-powered email classification and routing", "color": "#EA4335" },
-        { "name": "Webhook", "description": "Custom integration and API connection", "color": "currentColor" }
+        {
+          "name": "WhatsApp",
+          "description": "Manage incoming messages with Business API",
+          "color": "#25D366"
+        },
+        {
+          "name": "Instagram",
+          "description": "Automate DM and story replies",
+          "color": "#E4405F"
+        },
+        {
+          "name": "Telegram",
+          "description": "Customer communication with bot integration",
+          "color": "#2AABEE"
+        },
+        {
+          "name": "Web Form",
+          "description": "Embeddable communication widget for your site",
+          "color": "#18181B"
+        },
+        {
+          "name": "Email",
+          "description": "AI-powered email classification and routing",
+          "color": "#EA4335"
+        },
+        {
+          "name": "Webhook",
+          "description": "Custom integration and API connection",
+          "color": "currentColor"
+        }
       ]
     },
     "meetingTools": {
       "title": "Meeting Tools",
       "items": [
-        { "name": "Zoom", "description": "Meeting recording and transcription", "color": "#2D8CFF" },
-        { "name": "Google Meet", "description": "Automatic recording and summary", "color": "#00897B" },
-        { "name": "Microsoft Teams", "description": "Internal meetings", "color": "#6264A7" }
+        {
+          "name": "Zoom",
+          "description": "Meeting recording and transcription",
+          "color": "#2D8CFF"
+        },
+        {
+          "name": "Google Meet",
+          "description": "Automatic recording and summary",
+          "color": "#00897B"
+        },
+        {
+          "name": "Microsoft Teams",
+          "description": "Internal meetings",
+          "color": "#6264A7"
+        }
       ]
     },
     "businessTools": {
       "title": "Business Tools",
       "items": [
-        { "name": "Drive", "description": "Documents" },
-        { "name": "Notion", "description": "Wiki & notes" },
-        { "name": "Slack", "description": "Messaging" },
-        { "name": "CRM", "description": "Customer data" },
-        { "name": "ERP", "description": "Business processes" },
-        { "name": "Jira", "description": "Project management" },
-        { "name": "HubSpot", "description": "Marketing" },
-        { "name": "+ API", "description": "Custom integration" }
+        {
+          "name": "Drive",
+          "description": "Documents"
+        },
+        {
+          "name": "Notion",
+          "description": "Wiki & notes"
+        },
+        {
+          "name": "Slack",
+          "description": "Messaging"
+        },
+        {
+          "name": "CRM",
+          "description": "Customer data"
+        },
+        {
+          "name": "ERP",
+          "description": "Business processes"
+        },
+        {
+          "name": "Jira",
+          "description": "Project management"
+        },
+        {
+          "name": "HubSpot",
+          "description": "Marketing"
+        },
+        {
+          "name": "+ API",
+          "description": "Custom integration"
+        }
       ]
     },
     "dataModel": {
@@ -762,19 +1048,31 @@
         {
           "title": "Customer",
           "badge": "Standard",
-          "attrs": ["Name", "Email", "Company"],
+          "attrs": [
+            "Name",
+            "Email",
+            "Company"
+          ],
           "moreCount": 8
         },
         {
           "title": "Conversation",
           "badge": "Standard",
-          "attrs": ["Channel", "Status", "Agent"],
+          "attrs": [
+            "Channel",
+            "Status",
+            "Agent"
+          ],
           "moreCount": 5
         },
         {
           "title": "Proposal",
           "badge": "Custom",
-          "attrs": ["Amount", "Products", "Date"],
+          "attrs": [
+            "Amount",
+            "Products",
+            "Date"
+          ],
           "moreCount": 4
         }
       ]
@@ -803,10 +1101,26 @@
       "colStatus": "Status",
       "colScore": "Score",
       "leads": [
-        { "name": "John Smith", "company": "TechVista SaaS", "status": "Qualified" },
-        { "name": "Emily Clark", "company": "DataFlow Inc.", "status": "In Meeting" },
-        { "name": "Mark Wilson", "company": "NovaRetail", "status": "New" },
-        { "name": "Sarah Johnson", "company": "FinEdge Ltd.", "status": "Qualified" }
+        {
+          "name": "John Smith",
+          "company": "TechVista SaaS",
+          "status": "Qualified"
+        },
+        {
+          "name": "Emily Clark",
+          "company": "DataFlow Inc.",
+          "status": "In Meeting"
+        },
+        {
+          "name": "Mark Wilson",
+          "company": "NovaRetail",
+          "status": "New"
+        },
+        {
+          "name": "Sarah Johnson",
+          "company": "FinEdge Ltd.",
+          "status": "Qualified"
+        }
       ]
     },
     "proposalDoc": {
@@ -816,9 +1130,21 @@
       "colQuantity": "Quantity",
       "colAmount": "Amount",
       "lineItems": [
-        { "item": "Enterprise AI License", "quantity": "85 users", "amount": "$12,500" },
-        { "item": "CRM Integration", "quantity": "1 module", "amount": "$2,200" },
-        { "item": "Onboarding & Training", "quantity": "1 package", "amount": "$1,700" }
+        {
+          "item": "Enterprise AI License",
+          "quantity": "85 users",
+          "amount": "$12,500"
+        },
+        {
+          "item": "CRM Integration",
+          "quantity": "1 module",
+          "amount": "$2,200"
+        },
+        {
+          "item": "Onboarding & Training",
+          "quantity": "1 package",
+          "amount": "$1,700"
+        }
       ],
       "totalLabel": "Total (excl. Tax)",
       "totalAmount": "$16,400",
@@ -829,10 +1155,30 @@
       "statusRecorded": "Recorded",
       "statusProcessing": "Processing",
       "meetings": [
-        { "title": "TechVista — Sales Demo", "date": "Apr 13, 2:00 PM", "participants": "Mike K., John S.", "duration": "45 min" },
-        { "title": "DataFlow — Onboarding", "date": "Apr 13, 11:00 AM", "participants": "Emily C., Sarah J.", "duration": "30 min" },
-        { "title": "NovaRetail — Kick-off", "date": "Apr 12, 4:00 PM", "participants": "Mark W., Dan Y.", "duration": "60 min" },
-        { "title": "FinEdge — Needs Analysis", "date": "Apr 12, 10:30 AM", "participants": "Lisa T., Brian O.", "duration": "25 min" }
+        {
+          "title": "TechVista — Sales Demo",
+          "date": "Apr 13, 2:00 PM",
+          "participants": "Mike K., John S.",
+          "duration": "45 min"
+        },
+        {
+          "title": "DataFlow — Onboarding",
+          "date": "Apr 13, 11:00 AM",
+          "participants": "Emily C., Sarah J.",
+          "duration": "30 min"
+        },
+        {
+          "title": "NovaRetail — Kick-off",
+          "date": "Apr 12, 4:00 PM",
+          "participants": "Mark W., Dan Y.",
+          "duration": "60 min"
+        },
+        {
+          "title": "FinEdge — Needs Analysis",
+          "date": "Apr 12, 10:30 AM",
+          "participants": "Lisa T., Brian O.",
+          "duration": "25 min"
+        }
       ]
     },
     "researchReport": {
@@ -870,9 +1216,21 @@
       "speaker2Role": "Customer",
       "transcriptLabel": "Transcript",
       "lines": [
-        { "time": "02:15", "speaker": "Mike K.", "text": "\u201CHow many people on your team are currently using it?\u201D" },
-        { "time": "02:22", "speaker": "John S.", "text": "\u201CWe're a team of 85, and CRM integration is our top priority.\u201D" },
-        { "time": "02:35", "speaker": "Mike K.", "text": "\u201CGot it, our enterprise package is a perfect fit for your needs.\u201D" }
+        {
+          "time": "02:15",
+          "speaker": "Mike K.",
+          "text": "“How many people on your team are currently using it?”"
+        },
+        {
+          "time": "02:22",
+          "speaker": "John S.",
+          "text": "“We're a team of 85, and CRM integration is our top priority.”"
+        },
+        {
+          "time": "02:35",
+          "speaker": "Mike K.",
+          "text": "“Got it, our enterprise package is a perfect fit for your needs.”"
+        }
       ]
     },
     "meetingTranscript": {
@@ -880,11 +1238,36 @@
       "subtitle": "Q3 Sales Meeting",
       "aiSummaryLabel": "AI Summary",
       "lines": [
-        { "time": "14:22", "speaker": "Mike K.", "text": "\u201cOur target this quarter is 200 new customers.\u201d", "isAction": false },
-        { "time": "14:25", "speaker": "Emily C.", "text": "\u201cWe'll need to increase the marketing budget by 30%.\u201d", "isAction": false },
-        { "time": "", "speaker": "AI Summary", "text": "Action: Marketing budget increase approval \u2192 Emily C. \u2014 by Apr 18", "isAction": true },
-        { "time": "14:31", "speaker": "Dan Y.", "text": "\u201cLet's have the demo environment ready by next week.\u201d", "isAction": false },
-        { "time": "", "speaker": "AI Summary", "text": "Action: Demo environment preparation \u2192 Dan Y. \u2014 by Apr 20", "isAction": true }
+        {
+          "time": "14:22",
+          "speaker": "Mike K.",
+          "text": "“Our target this quarter is 200 new customers.”",
+          "isAction": false
+        },
+        {
+          "time": "14:25",
+          "speaker": "Emily C.",
+          "text": "“We'll need to increase the marketing budget by 30%.”",
+          "isAction": false
+        },
+        {
+          "time": "",
+          "speaker": "AI Summary",
+          "text": "Action: Marketing budget increase approval → Emily C. — by Apr 18",
+          "isAction": true
+        },
+        {
+          "time": "14:31",
+          "speaker": "Dan Y.",
+          "text": "“Let's have the demo environment ready by next week.”",
+          "isAction": false
+        },
+        {
+          "time": "",
+          "speaker": "AI Summary",
+          "text": "Action: Demo environment preparation → Dan Y. — by Apr 20",
+          "isAction": true
+        }
       ]
     },
     "callWidget": {

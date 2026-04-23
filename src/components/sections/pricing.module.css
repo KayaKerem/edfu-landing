@@ -1,0 +1,304 @@
+/* ─── Pricing page — Attio-parity design ─── */
+
+.root {
+  background: #ffffff;
+  width: 100%;
+}
+
+/* ── Hero ── */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 88px 24px 60px;
+}
+
+.headline {
+  font-size: 52px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #111827;
+  max-width: 640px;
+}
+@media (max-width: 768px) { .headline { font-size: 38px; } }
+@media (max-width: 480px) { .headline { font-size: 30px; } }
+
+.subtitle {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #6b7280;
+  max-width: 400px;
+}
+
+/* ── Billing toggle ── */
+.toggle {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.toggleBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #9ca3af;
+  background: transparent;
+  border: none;
+  white-space: nowrap;
+  transition: color 180ms ease;
+  z-index: 1;
+}
+
+.toggleBtnActive {
+  color: #111827;
+}
+
+.togglePill {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10), 0 1px 2px rgba(0, 0, 0, 0.06);
+  z-index: -1;
+}
+
+.toggleSaveTag {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #2563eb;
+  letter-spacing: 0;
+}
+
+/* ── Cards grid ── */
+.cardsSection {
+  padding: 0 24px 60px;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+  }
+}
+
+/* ── Single plan card ── */
+.card {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHighlighted {
+  border-color: #93c5fd;
+  box-shadow:
+    0 0 0 1px rgba(147, 197, 253, 0.5),
+    0 4px 20px rgba(59, 130, 246, 0.08);
+}
+
+.planNameRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.planName {
+  font-size: 15px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.planSaveBadge {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #2563eb;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  margin-top: 16px;
+}
+
+.priceCurrency {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.02em;
+  align-self: flex-start;
+  margin-top: 10px;
+  line-height: 1;
+}
+
+.priceAmount {
+  font-size: 52px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: #111827;
+}
+
+.priceWord {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #111827;
+}
+
+.billingPeriod {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+.billingNote {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.planDesc {
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.featureList {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.featureCheck {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* CTA */
+.ctaWrap {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.ctaBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 38px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 150ms ease;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.ctaBtnRegular {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+}
+.ctaBtnRegular:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.ctaBtnPro {
+  background: #111827;
+  color: #ffffff;
+  border: 1px solid #111827;
+}
+.ctaBtnPro:hover {
+  background: #1f2937;
+}
+
+/* ── Logo strip ── */
+.logoStrip {
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 52px;
+  flex-wrap: wrap;
+}
+@media (max-width: 640px) { .logoRow { gap: 28px; } }
+
+.logoItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  opacity: 0.75;
+  transition: opacity 150ms;
+}
+.logoItem:hover { opacity: 1; }

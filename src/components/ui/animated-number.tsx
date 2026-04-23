@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { motion, MotionValue, useSpring, useTransform } from "motion/react";
+import { useEffect, useState } from "react";
+import { useSpring, useMotionValueEvent } from "motion/react";
 
 interface AnimatedNumberProps {
   value: number;
@@ -25,18 +25,17 @@ export function AnimatedNumber({
   onAnimationComplete,
 }: AnimatedNumberProps) {
   const spring = useSpring(value, { mass, stiffness, damping });
-  const display: MotionValue<string> = useTransform(spring, (current) =>
-    format(parseFloat(current.toFixed(precision)))
-  );
+  const [display, setDisplay] = useState(() => format(value));
 
   useEffect(() => {
     spring.set(value);
     if (onAnimationStart) onAnimationStart();
-    const unsubscribe = spring.on("change", () => {
-      if (spring.get() === value && onAnimationComplete) onAnimationComplete();
-    });
-    return () => unsubscribe();
-  }, [spring, value, onAnimationStart, onAnimationComplete]);
+  }, [spring, value, onAnimationStart]);
 
-  return <motion.span>{display}</motion.span>;
+  useMotionValueEvent(spring, "change", (current) => {
+    setDisplay(format(parseFloat(current.toFixed(precision))));
+    if (current === value && onAnimationComplete) onAnimationComplete();
+  });
+
+  return <span>{display}</span>;
 }

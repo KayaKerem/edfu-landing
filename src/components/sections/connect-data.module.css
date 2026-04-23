@@ -233,7 +233,7 @@ border-radius: 20px;
 }
 
 .lowerChart {
-  top: 8px;
+  top: 18px;
   display: grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
   grid-template-rows: 70px min-content 28px min-content;
@@ -272,21 +272,11 @@ border-radius: 20px;
 
 .connectorBase {
   fill: none;
-  stroke: #e4e7ec;
-  stroke-width: 1.5;
+  stroke: #D4D4D8;
+  stroke-width: 1;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.connectorPath {
-  fill: none;
-  stroke: #e4e7ec;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0.95;
-  stroke-dasharray: var(--len, 300);
-  stroke-dashoffset: var(--len, 300);
+  opacity: 0;
 }
 
 .connectorPulse {
@@ -294,11 +284,12 @@ border-radius: 20px;
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0;
-  filter: drop-shadow(0 0 6px rgba(112, 159, 245, 0.22));
-  --pulse-len: 20;
-  stroke-dasharray: var(--pulse-len) calc(var(--len) - var(--pulse-len));
-  stroke-dashoffset: var(--len);
+  opacity: 1;
+  filter: drop-shadow(0 0 3px rgba(17, 17, 20, 0.35));
+  --pulse-len: 24;
+  stroke-dasharray: var(--pulse-len) 9999;
+  stroke-dashoffset: calc((var(--len, 200) + var(--pulse-len)) * -1);
+  will-change: stroke-dashoffset;
 }
 
 .hubCard {
@@ -493,7 +484,7 @@ border-radius: 20px;
 .root[data-visible="true"] .hubCard {
   animation:
     cdPopIn 380ms cubic-bezier(0.2, 0.8, 0.2, 1) 610ms both,
-    cdHubIdle 3.8s ease-in-out 1.2s infinite;
+    cdHubIdle 3.2s ease-in-out 1.2s infinite;
 }
 
 .root[data-visible="true"] .sourceAccent {
@@ -509,25 +500,25 @@ border-radius: 20px;
 }
 
 .root[data-visible="true"] .connectorLeft {
-  animation: cdDraw 300ms linear 790ms forwards;
+  animation: cdConnectorReveal 180ms ease-out 790ms forwards;
 }
 .root[data-visible="true"] .connectorCenter {
-  animation: cdDraw 320ms linear 860ms forwards;
+  animation: cdConnectorReveal 180ms ease-out 860ms forwards;
 }
 .root[data-visible="true"] .connectorRight {
-  animation: cdDraw 300ms linear 930ms forwards;
+  animation: cdConnectorReveal 180ms ease-out 930ms forwards;
 }
 
 .root[data-visible="true"] .connectorLeftPulse {
-  animation: cdTravel 5.2s linear 1.45s infinite;
-}
-
-.root[data-visible="true"] .connectorCenterPulse {
-  animation: cdTravel 5.2s linear 2.15s infinite;
+  animation: cdTravel 2.4s cubic-bezier(0.45, 0, 0.25, 1) 1.7s infinite;
 }
 
 .root[data-visible="true"] .connectorRightPulse {
-  animation: cdTravel 5.2s linear 2.85s infinite;
+  animation: cdTravel 2.4s cubic-bezier(0.45, 0, 0.25, 1) 2.1s infinite;
+}
+
+.root[data-visible="true"] .connectorCenterPulse {
+  animation: cdTravel 2.0s cubic-bezier(0.45, 0, 0.25, 1) 2.5s infinite;
 }
 
 .root[data-visible="true"] .recordCard {
@@ -562,36 +553,20 @@ border-radius: 20px;
   18%, 30% { opacity: 0.9; transform: scaleY(1); }
   42%, 100% { opacity: 0; transform: scaleY(0); }
 }
-@keyframes cdDraw {
-  0% { stroke-dashoffset: var(--len, 300); opacity: 1; }
-  100% { stroke-dashoffset: 0; opacity: 1; }
+@keyframes cdConnectorReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 @keyframes cdTravel {
-  0%, 10% {
-    opacity: 0;
-    stroke-dashoffset: calc(var(--len) + 24);
-  }
-  16%, 42% {
-    opacity: 0.95;
-    stroke-dashoffset: 8;
-  }
-  52%, 100% {
-    opacity: 0;
-    stroke-dashoffset: -24;
-  }
+  0%   { stroke-dashoffset: calc((var(--len, 200) + var(--pulse-len)) * -1); }
+  100% { stroke-dashoffset: var(--pulse-len); }
 }
 @keyframes cdHubIdle {
-  0%, 18%, 100% {
-    border-color: var(--cd-border);
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.05);
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.04);
   }
-  24%, 38% {
-    border-color: rgba(112, 159, 245, 0.55);
-    box-shadow:
-      0 8px 24px rgba(15, 23, 42, 0.08),
-      0 2px 6px rgba(15, 23, 42, 0.05),
-      0 0 0 1px rgba(112, 159, 245, 0.18),
-      0 0 18px rgba(112, 159, 245, 0.12);
+  50% {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10), 0 10px 28px rgba(0, 0, 0, 0.06);
   }
 }
 @keyframes cdCardIn {
@@ -675,14 +650,16 @@ border-radius: 20px;
   .sourceRow,
   .hubCard,
   .connectorPath,
-  .connectorPulse,
   .recordCard,
   .integrationBadge,
   .cubeGlyph {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
-    stroke-dashoffset: 0 !important;
+  }
+  .connectorPulse {
+    animation: none !important;
+    opacity: 0 !important;
   }
   .recordDeal {
     transform: none !important;

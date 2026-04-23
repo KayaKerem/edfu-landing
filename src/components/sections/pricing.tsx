@@ -1,204 +1,276 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Check } from "lucide-react";
+import { useState, type ReactElement } from "react";
+import Link from "next/link";
 import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
 import { AnimatedNumber } from "@/components/ui/animated-number";
+import styles from "./pricing.module.css";
 import type { Dictionary } from "@/dictionaries";
 
-interface PricingProps {
+export type Billing = "monthly" | "annual";
+
+export interface PricingProps {
   dict: Dictionary["pricing"];
+  billing?: Billing;
+  onBillingChange?: (b: Billing) => void;
 }
 
-export function Pricing({ dict }: PricingProps) {
-  const [isYearly, setIsYearly] = useState(true);
+/* ── Billing toggle ─────────────────────────────────────────── */
+export function BillingToggle({
+  billing,
+  setBilling,
+  saveLabel,
+}: {
+  billing: Billing;
+  setBilling: (b: Billing) => void;
+  saveLabel: string;
+}) {
+  return (
+    <div className={styles.toggle}>
+      <button
+        className={cn(styles.toggleBtn, billing === "monthly" && styles.toggleBtnActive)}
+        onClick={() => setBilling("monthly")}
+      >
+        {billing === "monthly" && (
+          <motion.div
+            layoutId="pricing-pill"
+            className={styles.togglePill}
+            transition={{ type: "spring", stiffness: 420, damping: 30 }}
+          />
+        )}
+        <span style={{ position: "relative", zIndex: 1 }}>Monthly</span>
+      </button>
+      <button
+        className={cn(styles.toggleBtn, billing === "annual" && styles.toggleBtnActive)}
+        onClick={() => setBilling("annual")}
+      >
+        {billing === "annual" && (
+          <motion.div
+            layoutId="pricing-pill"
+            className={styles.togglePill}
+            transition={{ type: "spring", stiffness: 420, damping: 30 }}
+          />
+        )}
+        <span style={{ position: "relative", zIndex: 1, display: "inline-flex", alignItems: "center", gap: 6 }}>
+          Annual
+          <span className={styles.toggleSaveTag}>{saveLabel}</span>
+        </span>
+      </button>
+    </div>
+  );
+}
 
-  const planPrices = [
-    { monthlyPrice: 1990, yearlyPrice: 1592 },
-    { monthlyPrice: null, yearlyPrice: null },
-    { monthlyPrice: null, yearlyPrice: null },
-  ];
+/* ── Plan prices (hardcoded, only Standard has a price) ─────── */
+const PLAN_PRICES = [
+  { monthly: 1990, annual: 1592 },
+  { monthly: null, annual: null },
+  { monthly: null, annual: null },
+];
+
+/* ── Check icon (Attio-style small circle) ─────────────────── */
+function CheckIcon() {
+  return (
+    <span className={styles.featureCheck} aria-hidden="true">
+      <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
+        <path d="M1 3l2 2 4-4" stroke="#6b7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </span>
+  );
+}
+
+/* ── Single plan card ─────────────────────────────────────────  */
+interface PlanCardProps {
+  plan: Dictionary["pricing"]["plans"][number];
+  billing: Billing;
+  idx: number;
+}
+
+function PlanCard({ plan, billing, idx }: PlanCardProps) {
+  const prices = PLAN_PRICES[idx];
+  const isHighlighted = idx === 1; // Pro is highlighted
+  const isEnterprise = idx === 2;
+  const price = billing === "annual" ? prices.annual : prices.monthly;
+  const showSaveBadge = billing === "annual" && prices.monthly !== null;
 
   return (
-    <section
-      id="pricing"
-      className="flex flex-col items-center justify-center gap-10 pb-10 w-full relative"
-    >
-      {/* Header */}
-      <div className="border-b w-full h-full px-4 py-10 md:p-14">
-        <div className="max-w-xl mx-auto">
-          <h2
-            className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center"
-            style={{ letterSpacing: "-0.05em" }}
+    <article className={cn(styles.card, isHighlighted && styles.cardHighlighted)}>
+      {/* Plan name + save badge */}
+      <div className={styles.planNameRow}>
+        <span className={styles.planName}>{plan.name}</span>
+        {showSaveBadge && (
+          <span className={styles.planSaveBadge}>Save 20%</span>
+        )}
+      </div>
+
+      {/* Price */}
+      <div className={styles.priceRow}>
+        {price !== null ? (
+          <>
+            <span className={styles.priceCurrency}>₺</span>
+            <span className={styles.priceAmount}>
+              <AnimatedNumber value={price} mass={0.8} stiffness={80} damping={16} />
+            </span>
+            <span className={styles.billingPeriod}>/mo</span>
+          </>
+        ) : isEnterprise ? (
+          <span className={styles.priceWord}>Custom</span>
+        ) : (
+          <span className={styles.priceWord}>{plan.comingSoonLabel ?? "Coming Soon"}</span>
+        )}
+      </div>
+
+      {/* Billing note */}
+      <p className={styles.billingNote}>
+        {price !== null
+          ? `Per user/month, billed ${billing === "annual" ? "annually" : "monthly"}`
+          : isEnterprise
+          ? "Billed annually"
+          : ""}
+      </p>
+
+      {/* Description */}
+      <p className={styles.planDesc}>{plan.tagline}</p>
+
+      {/* Features */}
+      <ul className={styles.featureList}>
+        {plan.highlights.map((f) => (
+          <li key={f} className={styles.featureItem}>
+            <CheckIcon />
+            {f}
+          </li>
+        ))}
+      </ul>
+
+      {/* CTA */}
+      <div className={styles.ctaWrap}>
+        {plan.ctaHref ? (
+          <Link
+            href={plan.ctaHref}
+            className={cn(styles.ctaBtn, isHighlighted ? styles.ctaBtnPro : styles.ctaBtnRegular)}
           >
-            {dict.title}
-          </h2>
-          <p className="text-muted-foreground text-center text-balance font-medium mt-4">
-            {dict.description}
-          </p>
+            {plan.cta}
+          </Link>
+        ) : (
+          <button
+            className={cn(styles.ctaBtn, isHighlighted ? styles.ctaBtnPro : styles.ctaBtnRegular)}
+          >
+            {plan.cta}
+          </button>
+        )}
+      </div>
+    </article>
+  );
+}
+
+/* ── Logo strip ─────────────────────────────────────────────── */
+function LogoItem({ children }: { children: ReactElement }) {
+  return <span className={styles.logoItem}>{children}</span>;
+}
+
+function LogoStrip() {
+  return (
+    <div className={styles.logoStrip} aria-hidden="true">
+      <div className={styles.logoRow}>
+        <LogoItem>
+          {/* Google Drive */}
+          <svg width="90" height="20" viewBox="0 0 90 20" fill="none">
+            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Google Drive</text>
+          </svg>
+        </LogoItem>
+        <LogoItem>
+          {/* Notion */}
+          <svg width="56" height="20" viewBox="0 0 56 20" fill="none">
+            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">notion</text>
+          </svg>
+        </LogoItem>
+        <LogoItem>
+          {/* Slack */}
+          <svg width="44" height="20" viewBox="0 0 44 20" fill="none">
+            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Slack</text>
+          </svg>
+        </LogoItem>
+        <LogoItem>
+          {/* Dropbox */}
+          <svg width="64" height="20" viewBox="0 0 64 20" fill="none">
+            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Dropbox</text>
+          </svg>
+        </LogoItem>
+        <LogoItem>
+          {/* Confluence */}
+          <svg width="80" height="20" viewBox="0 0 80 20" fill="none">
+            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Confluence</text>
+          </svg>
+        </LogoItem>
+        <LogoItem>
+          {/* HubSpot */}
+          <svg width="62" height="20" viewBox="0 0 62 20" fill="none">
+            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">HubSpot</text>
+          </svg>
+        </LogoItem>
+      </div>
+      <div className={styles.logoRow}>
+        <LogoItem>
+          <svg width="56" height="20" viewBox="0 0 56 20" fill="none">
+            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">GitHub</text>
+          </svg>
+        </LogoItem>
+        <LogoItem>
+          <svg width="46" height="20" viewBox="0 0 46 20" fill="none">
+            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Jira</text>
+          </svg>
+        </LogoItem>
+        <LogoItem>
+          <svg width="66" height="20" viewBox="0 0 66 20" fill="none">
+            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Salesforce</text>
+          </svg>
+        </LogoItem>
+        <LogoItem>
+          <svg width="60" height="20" viewBox="0 0 60 20" fill="none">
+            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Intercom</text>
+          </svg>
+        </LogoItem>
+        <LogoItem>
+          <svg width="52" height="20" viewBox="0 0 52 20" fill="none">
+            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Linear</text>
+          </svg>
+        </LogoItem>
+        <LogoItem>
+          <svg width="76" height="20" viewBox="0 0 76 20" fill="none">
+            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">OneDrive</text>
+          </svg>
+        </LogoItem>
+      </div>
+    </div>
+  );
+}
+
+/* ── Main export ─────────────────────────────────────────────── */
+export function Pricing({ dict, billing: externalBilling, onBillingChange }: PricingProps) {
+  const [internalBilling, setInternalBilling] = useState<Billing>("annual");
+  const billing = externalBilling ?? internalBilling;
+  const setBilling = onBillingChange ?? setInternalBilling;
+
+  return (
+    <div className={styles.root}>
+      {/* Hero */}
+      <div className={styles.hero}>
+        <h1 className={styles.headline}>{dict.title}</h1>
+        <p className={styles.subtitle}>{dict.description}</p>
+        <BillingToggle billing={billing} setBilling={setBilling} saveLabel={dict.discount} />
+      </div>
+
+      {/* Cards */}
+      <div className={styles.cardsSection}>
+        <div className={styles.cardsGrid}>
+          {dict.plans.map((plan, idx) => (
+            <PlanCard key={plan.name} plan={plan} billing={billing} idx={idx} />
+          ))}
         </div>
       </div>
 
-      {/* Card Grid */}
-      <div className="grid min-[650px]:grid-cols-2 min-[900px]:grid-cols-3 gap-4 w-full max-w-6xl mx-auto px-4 sm:px-6 relative">
-        {/* Toggle - positioned above grid */}
-        <div className="absolute -top-14 left-1/2 -translate-x-1/2">
-          <div
-            className="relative flex w-fit items-center rounded-full border p-0.5 backdrop-blur-sm cursor-pointer h-9 bg-muted"
-            onClick={() => setIsYearly(!isYearly)}
-          >
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsYearly(false);
-              }}
-              className="relative z-10 flex items-center justify-center rounded-full px-4 h-full text-sm font-medium cursor-pointer"
-            >
-              {!isYearly && (
-                <motion.div
-                  layoutId="pricingTogglePill"
-                  className="absolute inset-0 rounded-full bg-white dark:bg-[#3F3F46] shadow-md border border-border"
-                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
-                />
-              )}
-              <span className={`relative z-10 transition-colors duration-200 ${!isYearly ? "text-primary" : "text-muted-foreground"}`}>
-                {dict.monthly}
-              </span>
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsYearly(true);
-              }}
-              className="relative z-10 flex items-center justify-center rounded-full px-4 h-full text-sm font-medium cursor-pointer"
-            >
-              {isYearly && (
-                <motion.div
-                  layoutId="pricingTogglePill"
-                  className="absolute inset-0 rounded-full bg-white dark:bg-[#3F3F46] shadow-md border border-border"
-                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
-                />
-              )}
-              <span className={`relative z-10 flex items-center gap-1.5 whitespace-nowrap transition-colors duration-200 ${isYearly ? "text-primary" : "text-muted-foreground"}`}>
-                {dict.yearly}
-                <span className="text-xs font-semibold text-primary bg-primary/15 py-0.5 px-1.5 rounded-full whitespace-nowrap">
-                  {dict.discount}
-                </span>
-              </span>
-            </button>
-          </div>
-        </div>
-
-        {/* Cards */}
-        {dict.plans.map((plan, idx) => {
-          const prices = planPrices[idx];
-          const price = isYearly ? prices.yearlyPrice : prices.monthlyPrice;
-          const isPopular = idx === 1;
-          const isEnterprise = idx === 2;
-
-          const cardClasses = isPopular
-            ? "rounded-xl grid grid-rows-[180px_auto_1fr] relative h-fit min-[650px]:h-full min-[900px]:h-fit bg-card md:shadow-[0px_61px_24px_-10px_rgba(0,0,0,0.01),0px_34px_20px_-8px_rgba(0,0,0,0.05),0px_15px_15px_-6px_rgba(0,0,0,0.09),0px_4px_8px_-2px_rgba(0,0,0,0.10),0px_0px_0px_1px_rgba(0,0,0,0.08)] dark:md:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.08),0px_4px_8px_-2px_rgba(0,0,0,0.3)]"
-            : "rounded-xl grid grid-rows-[180px_auto_1fr] relative h-fit min-[650px]:h-full min-[900px]:h-fit bg-[#F3F4F6] dark:bg-white/[0.05] border border-border";
-
-          return (
-            <div key={plan.name} className={cardClasses}>
-              {/* Upper section: plan info */}
-              <div className="p-6 flex flex-col justify-center">
-                {/* Plan name + badge */}
-                <div className="flex items-center">
-                  <span className="text-sm text-foreground">{plan.name}</span>
-                  {isPopular && (
-                    <span className="bg-gradient-to-b from-primary/50 to-primary text-white h-6 inline-flex w-fit items-center justify-center px-2 rounded-full text-sm ml-2 shadow-[0px_6px_6px_-3px_rgba(0,0,0,0.08),0px_3px_3px_-1.5px_rgba(0,0,0,0.08),0px_1px_1px_-0.5px_rgba(0,0,0,0.08),0px_0px_0px_1px_rgba(255,255,255,0.12)_inset,0px_1px_0px_0px_rgba(255,255,255,0.12)_inset]">
-                      {dict.mostPopular}
-                    </span>
-                  )}
-                </div>
-
-                {/* Price */}
-                <div className="mt-3 flex items-end gap-1">
-                  {price !== null ? (
-                    <>
-                      <span className="text-4xl font-semibold text-foreground">
-                        ₺<AnimatedNumber value={price} mass={0.8} stiffness={75} damping={15} />
-                      </span>
-                      <span className="mb-1 text-sm text-muted-foreground">{dict.perMonth}</span>
-                    </>
-                  ) : isPopular ? (
-                    <span className="text-4xl font-semibold text-foreground">{dict.comingSoon}</span>
-                  ) : (
-                    <span className="text-4xl font-semibold text-foreground">{dict.contactUs}</span>
-                  )}
-                </div>
-
-                {/* Description */}
-                <p className="text-sm mt-2 text-muted-foreground">
-                  {plan.description}
-                </p>
-              </div>
-
-              {/* Button section */}
-              <div className="px-6 pb-6">
-                {isPopular ? (
-                  <a
-                    href="#"
-                    className="flex h-10 w-full items-center justify-center rounded-full text-sm font-normal tracking-wide bg-primary text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] active:scale-95 transition-all ease-out"
-                  >
-                    {plan.cta}
-                  </a>
-                ) : isEnterprise ? (
-                  <a
-                    href="#"
-                    className="flex h-10 w-full items-center justify-center rounded-full text-sm font-normal tracking-wide bg-[#171717] text-white dark:bg-white dark:text-[#171717] shadow-[0px_1px_2px_0px_rgba(255,255,255,0.16)_inset,0px_3px_3px_-1.5px_rgba(16,24,40,0.24),0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] active:scale-95 transition-all ease-out"
-                  >
-                    {plan.cta}
-                  </a>
-                ) : (
-                  <a
-                    href="#"
-                    className="flex h-10 w-full items-center justify-center rounded-full text-sm font-normal tracking-wide bg-white dark:bg-[#27272A] text-foreground shadow-[0px_1px_2px_0px_rgba(255,255,255,0.16)_inset,0px_3px_3px_-1.5px_rgba(16,24,40,0.24),0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] active:scale-95 transition-all ease-out"
-                  >
-                    {plan.cta}
-                  </a>
-                )}
-              </div>
-
-              {/* Features section */}
-              <div className="px-6 pb-6">
-                <hr className="border-border dark:border-white/20 mb-6" />
-
-                {/* Inherit label */}
-                <p className="mb-4 text-sm font-medium text-muted-foreground">
-                  {plan.inheritLabel}
-                </p>
-
-                {/* Feature list */}
-                <ul className="space-y-3">
-                  {plan.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-center gap-2 text-sm text-foreground"
-                    >
-                      {isPopular ? (
-                        <span className="size-5 rounded-full border bg-muted-foreground/40 border-border flex items-center justify-center shrink-0">
-                          <Check className="size-3 text-white" strokeWidth={2.5} />
-                        </span>
-                      ) : (
-                        <span className="size-5 rounded-full border border-primary/20 flex items-center justify-center shrink-0">
-                          <Check
-                            className="size-3 text-foreground"
-                            strokeWidth={2.5}
-                          />
-                        </span>
-                      )}
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </section>
+      {/* Logo strip */}
+      <LogoStrip />
+    </div>
   );
 }

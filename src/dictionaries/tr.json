@@ -52,12 +52,30 @@
     "ariaLabel": "Her tür veriyi bağlayın",
     "srText": "Veri kaynakları ve kayıt kartları Edfu veri katmanı üzerinden birbirine bağlanıyor.",
     "sources": [
-      { "id": "sales_engagement", "label": "Satış etkileşimi" },
-      { "id": "email_calendar", "label": "E-posta ve takvim" },
-      { "id": "data_warehouses", "label": "Veri ambarları" },
-      { "id": "customer_support", "label": "Müşteri desteği" },
-      { "id": "billing_invoicing", "label": "Faturalama ve tahsilat" },
-      { "id": "product_data", "label": "Ürün verisi" }
+      {
+        "id": "sales_engagement",
+        "label": "Satış etkileşimi"
+      },
+      {
+        "id": "email_calendar",
+        "label": "E-posta ve takvim"
+      },
+      {
+        "id": "data_warehouses",
+        "label": "Veri ambarları"
+      },
+      {
+        "id": "customer_support",
+        "label": "Müşteri desteği"
+      },
+      {
+        "id": "billing_invoicing",
+        "label": "Faturalama ve tahsilat"
+      },
+      {
+        "id": "product_data",
+        "label": "Ürün verisi"
+      }
     ],
     "records": [
       {
@@ -116,23 +134,87 @@
     "fileProcessing": "İşleniyor",
     "dragFileName": "Tedarikçi_Anlaşması_2025.pdf",
     "uploadedFiles": [
-      { "name": "Tedarikçi_Sözleşme.pdf", "size": "2.4 MB", "color": "text-red-500", "status": "ready" },
-      { "name": "KVKK_Politikası.pdf", "size": "890 KB", "color": "text-red-500", "status": "ready" },
-      { "name": "Ürün_Kataloğu.docx", "size": "1.8 MB", "color": "text-blue-600", "status": "ready" },
-      { "name": "Bütçe_2025_Q1.xlsx", "size": "3.2 MB", "color": "text-emerald-600", "status": "processing" },
-      { "name": "İK_El_Kitabı.pdf", "size": "1.5 MB", "color": "text-red-500", "status": "ready" },
-      { "name": "Satış_Raporu.xlsx", "size": "540 KB", "color": "text-emerald-600", "status": "ready" },
-      { "name": "Müşteri_Brifingi.docx", "size": "420 KB", "color": "text-blue-600", "status": "processing" },
-      { "name": "ISO_27001_Prosedür.pdf", "size": "7.6 MB", "color": "text-red-500", "status": "ready" },
-      { "name": "Organizasyon_Şeması.pdf", "size": "220 KB", "color": "text-red-500", "status": "ready" },
-      { "name": "Yıllık_Faaliyet.pdf", "size": "12 MB", "color": "text-red-500", "status": "processing" },
-      { "name": "Toplantı_Tutanağı.docx", "size": "380 KB", "color": "text-blue-600", "status": "ready" },
-      { "name": "Fiyat_Listesi_2025.xlsx", "size": "1.1 MB", "color": "text-emerald-600", "status": "ready" }
+      {
+        "name": "Tedarikçi_Sözleşme.pdf",
+        "size": "2.4 MB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "KVKK_Politikası.pdf",
+        "size": "890 KB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Ürün_Kataloğu.docx",
+        "size": "1.8 MB",
+        "color": "text-blue-600",
+        "status": "ready"
+      },
+      {
+        "name": "Bütçe_2025_Q1.xlsx",
+        "size": "3.2 MB",
+        "color": "text-emerald-600",
+        "status": "processing"
+      },
+      {
+        "name": "İK_El_Kitabı.pdf",
+        "size": "1.5 MB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Satış_Raporu.xlsx",
+        "size": "540 KB",
+        "color": "text-emerald-600",
+        "status": "ready"
+      },
+      {
+        "name": "Müşteri_Brifingi.docx",
+        "size": "420 KB",
+        "color": "text-blue-600",
+        "status": "processing"
+      },
+      {
+        "name": "ISO_27001_Prosedür.pdf",
+        "size": "7.6 MB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Organizasyon_Şeması.pdf",
+        "size": "220 KB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Yıllık_Faaliyet.pdf",
+        "size": "12 MB",
+        "color": "text-red-500",
+        "status": "processing"
+      },
+      {
+        "name": "Toplantı_Tutanağı.docx",
+        "size": "380 KB",
+        "color": "text-blue-600",
+        "status": "ready"
+      },
+      {
+        "name": "Fiyat_Listesi_2025.xlsx",
+        "size": "1.1 MB",
+        "color": "text-emerald-600",
+        "status": "ready"
+      }
     ],
     "saved": "Kaydedildi",
     "noteTitle": "Q3 Satış Toplantısı",
     "noteContent": "Müşteri görüşmelerinde fiyat itirazları öne çıktı. Rakip ürünlerle karşılaştırma yapılıyor. Satış ekibi yeni teklif şablonu istiyor — önümüzdeki hafta hazırlanacak.",
-    "noteTags": ["satış", "toplantı", "Q3"]
+    "noteTags": [
+      "satış",
+      "toplantı",
+      "Q3"
+    ]
   },
   "testimonial": {
     "quote": "Ekibe yeni katılan biri eskiden haftalarca adaptasyon sürecinden geçerdi. Edfu'dan sonra ilk gününde şirketin tüm bilgi birikimine erişip sorularını sorabiliyor. Bilgi kaybı ve tekrar eden açıklamalar tarihe karıştı.",
@@ -181,63 +263,70 @@
     ]
   },
   "pricing": {
-    "title": "İhtiyacınıza Uygun Plan Seçin",
-    "description": "Tüm planlar 14 gün ücretsiz deneme ile başlar. Aylık veya yıllık ödeme seçeneği ile bütçenize uygun başlayın.",
+    "title": "Sade ve şeffaf fiyatlandırma.",
+    "description": "Ücretsiz başlayın. Büyüdükçe ölçeklendirin. Gizli ücret yok.",
     "monthly": "Aylık",
     "yearly": "Yıllık",
     "discount": "%20 İndirim",
     "perMonth": "/ay",
     "comingSoon": "Yakında",
-    "contactUs": "İletişime Geçin",
-    "mostPopular": "En Popüler",
+    "contactUs": "Özel",
+    "mostPopular": "Popüler",
     "plans": [
       {
-        "name": "Başlangıç",
-        "description": "kişi başı, KDV hariç",
-        "cta": "14 Gün Ücretsiz Deneyin",
-        "inheritLabel": "Pro planın tüm özellikleri +",
-        "features": [
+        "name": "Standard",
+        "tagline": "Başlamak isteyen ekipler için",
+        "comingSoonLabel": null,
+        "cta": "Ücretsiz deneyin",
+        "ctaHref": "https://app.edfu.ai",
+        "highlights": [
           "5 kullanıcıya kadar",
-          "Kişi başı aylık 10M token",
-          "Claude Sonnet sabit model",
-          "50 GB depolama",
-          "5 entegrasyon",
-          "Ayda 200 URL crawl",
-          "10.000 sayfa RAG limiti",
+          "1 bilgi tabanı",
+          "500 doküman",
+          "Claude Sonnet AI modeli",
           "E-posta desteği"
-        ]
+        ],
+        "description": "kişi başı/ay, KDV hariç",
+        "inheritLabel": "Standard planın tüm özellikleri +",
+        "features": []
       },
       {
-        "name": "Profesyonel",
-        "description": "kişi başı, KDV hariç",
-        "cta": "Beni Bilgilendir",
-        "inheritLabel": "Başlangıç planının tüm özellikleri +",
-        "features": [
-          "300+ AI model erişimi (OpenRouter)",
-          "Kişi başı aylık 25M token",
-          "200 GB depolama",
-          "20 entegrasyon",
-          "Ayda 1.000 URL crawl",
-          "50.000 sayfa RAG limiti",
-          "Özel şablonlar",
-          "Öncelikli destek"
-        ]
-      },
-      {
-        "name": "Kurumsal",
-        "description": "Özel ihtiyaçlarınıza göre fiyatlandırma",
-        "cta": "Satış Ekibiyle Görüşün",
-        "inheritLabel": "Profesyonel planın tüm özellikleri +",
-        "features": [
+        "name": "Pro",
+        "tagline": "Büyüyen ekipler için",
+        "comingSoonLabel": "Yakında",
+        "cta": "Bildirim alın",
+        "ctaHref": null,
+        "highlights": [
+          "300+ AI modeli (OpenRouter)",
           "Sınırsız kullanıcı",
+          "10 bilgi tabanı",
+          "AI ajanları ve özel talimatlar",
+          "Öncelikli destek"
+        ],
+        "description": "kişi başı/ay, KDV hariç",
+        "inheritLabel": "Pro planın tüm özellikleri +",
+        "features": []
+      },
+      {
+        "name": "Enterprise",
+        "tagline": "Kurumsal ihtiyaçlar için",
+        "comingSoonLabel": null,
+        "cta": "Satış ekibiyle görüşün",
+        "ctaHref": null,
+        "highlights": [
+          "Sınırsız bilgi tabanı",
           "Dedicated altyapı",
           "White-label seçeneği",
-          "SLA garantisi",
-          "Özel entegrasyon geliştirme",
-          "Birebir onboarding"
-        ]
+          "SSO ve denetim günlükleri",
+          "Özel hesap yöneticisi"
+        ],
+        "description": "İhtiyacınıza özel fiyatlandırma",
+        "inheritLabel": "",
+        "features": []
       }
-    ]
+    ],
+    "billingCycleLabel": "Faturalama dönemini seçin",
+    "popularLabel": "Popüler"
   },
   "marqueeTestimonials": {
     "title": "Edfu Kullanan Ekiplerin Deneyimleri",
@@ -346,7 +435,9 @@
         "question": "300+ AI modeli ne demek, hangisini seçmeliyim?",
         "answer": "Edfu, OpenRouter entegrasyonu sayesinde Claude, GPT-4, Gemini, Llama ve yüzlerce farklı AI modeline tek platformdan erişim sunar. Her model farklı görevlerde öne çıkar. Başlangıç planında Claude Sonnet sabit model olarak sunulur, Profesyonel planda tüm modellere erişim açılır."
       }
-    ]
+    ],
+    "expandAll": "Tümünü aç",
+    "collapseAll": "Tümünü kapat"
   },
   "cta": {
     "line1": "Yükleyin.",
@@ -360,15 +451,30 @@
     "columns": [
       {
         "heading": "Şirket",
-        "links": ["Hakkımızda", "İletişim", "Blog", "Kariyer"]
+        "links": [
+          "Hakkımızda",
+          "İletişim",
+          "Blog",
+          "Kariyer"
+        ]
       },
       {
         "heading": "Ürün",
-        "links": ["Özellikler", "Fiyatlandırma", "Entegrasyonlar", "API Dokümantasyonu"]
+        "links": [
+          "Özellikler",
+          "Fiyatlandırma",
+          "Entegrasyonlar",
+          "API Dokümantasyonu"
+        ]
       },
       {
         "heading": "Kaynaklar",
-        "links": ["Yardım Merkezi", "Kullanım Kılavuzu", "Durum Sayfası", "Gizlilik Politikası"]
+        "links": [
+          "Yardım Merkezi",
+          "Kullanım Kılavuzu",
+          "Durum Sayfası",
+          "Gizlilik Politikası"
+        ]
       }
     ]
   },
@@ -401,8 +507,14 @@
     "contextPanel": {
       "title": "Canlı Görüşme",
       "messages": [
-        { "from": "customer", "text": "CRM entegrasyonu arıyoruz, 85 kişilik ekibiz." },
-        { "from": "ai", "text": "Size özel bir teklif hazırlıyorum. Şirketinizi kısaca araştırıp dönüyorum." }
+        {
+          "from": "customer",
+          "text": "CRM entegrasyonu arıyoruz, 85 kişilik ekibiz."
+        },
+        {
+          "from": "ai",
+          "text": "Size özel bir teklif hazırlıyorum. Şirketinizi kısaca araştırıp dönüyorum."
+        }
       ]
     }
   },
@@ -444,13 +556,41 @@
     "list": {
       "title": "Otomasyon senaryoları",
       "items": [
-        { "id": "reengage_cold_leads", "title": "Pasif lead'leri yeniden kazan", "color": "rose" },
-        { "id": "mql_lead_routing", "title": "MQL lead yönlendirme", "color": "amber" },
-        { "id": "onboarding_handoff", "title": "Onboarding devri", "color": "blue" },
-        { "id": "new_deal_email_campaign", "title": "Yeni fırsat e-posta kampanyası", "color": "green" },
-        { "id": "lead_form_submissions", "title": "Lead formu gönderileri", "color": "violet" },
-        { "id": "monitor_customer_health", "title": "Müşteri sağlığını izle", "color": "cyan" },
-        { "id": "identify_expansion", "title": "Genişleme fırsatı tespit et", "color": "lime" }
+        {
+          "id": "reengage_cold_leads",
+          "title": "Pasif lead'leri yeniden kazan",
+          "color": "rose"
+        },
+        {
+          "id": "mql_lead_routing",
+          "title": "MQL lead yönlendirme",
+          "color": "amber"
+        },
+        {
+          "id": "onboarding_handoff",
+          "title": "Onboarding devri",
+          "color": "blue"
+        },
+        {
+          "id": "new_deal_email_campaign",
+          "title": "Yeni fırsat e-posta kampanyası",
+          "color": "green"
+        },
+        {
+          "id": "lead_form_submissions",
+          "title": "Lead formu gönderileri",
+          "color": "violet"
+        },
+        {
+          "id": "monitor_customer_health",
+          "title": "Müşteri sağlığını izle",
+          "color": "cyan"
+        },
+        {
+          "id": "identify_expansion",
+          "title": "Genişleme fırsatı tespit et",
+          "color": "lime"
+        }
       ]
     }
   },
@@ -460,16 +600,27 @@
     "cta": "AI'ı Keşfet",
     "ariaLabel": "Örnek AI agent akışı",
     "srText": "AI akışı: Yeni lead bulunduğunda üç AI görevi tetiklenir — PLG hareketini başlat, fırsat büyüklüğünü değerlendir, kilit paydaşları belirle.",
-    "trigger": { "title": "New lead found" },
+    "trigger": {
+      "title": "New lead found"
+    },
     "tasks": [
       {
         "title": "Activate PLG motion",
         "question": "Does the company sell software to other businesses?",
         "badge": "AI",
         "answer": [
-          { "type": "text", "value": "Yes, they are a " },
-          { "type": "token", "value": "B2B SaaS" },
-          { "type": "text", "value": " business" }
+          {
+            "type": "text",
+            "value": "Yes, they are a "
+          },
+          {
+            "type": "token",
+            "value": "B2B SaaS"
+          },
+          {
+            "type": "text",
+            "value": " business"
+          }
         ]
       },
       {
@@ -477,10 +628,22 @@
         "question": "Did the company raise any funds recently?",
         "badge": "AI",
         "answer": [
-          { "type": "token", "value": "$25M" },
-          { "type": "text", "value": " raised in " },
-          { "type": "token", "value": "Series A" },
-          { "type": "text", "value": " funding round" }
+          {
+            "type": "token",
+            "value": "$25M"
+          },
+          {
+            "type": "text",
+            "value": " raised in "
+          },
+          {
+            "type": "token",
+            "value": "Series A"
+          },
+          {
+            "type": "text",
+            "value": " funding round"
+          }
         ]
       },
       {
@@ -489,7 +652,10 @@
         "badge": "AI",
         "truncate": true,
         "answer": [
-          { "type": "token", "value": "Adam Kingsley, CEO; Anne Zaragoza, CTO; Tom …" }
+          {
+            "type": "token",
+            "value": "Adam Kingsley, CEO; Anne Zaragoza, CTO; Tom …"
+          }
         ]
       }
     ],
@@ -497,20 +663,52 @@
       "title": "Basepoint",
       "domain": "basepoint.com",
       "fields": [
-        { "label": "Alan adları", "icon": "link", "value": "basepoint.com", "chip": "blue" },
-        { "label": "İsim", "icon": "tag", "value": "Basepoint" },
-        { "label": "Tahmini ARR", "icon": "dollar", "value": "$1–10M", "chip": "green" },
-        { "label": "Konum", "icon": "pin", "value": "California, USA" },
+        {
+          "label": "Alan adları",
+          "icon": "link",
+          "value": "basepoint.com",
+          "chip": "blue"
+        },
+        {
+          "label": "İsim",
+          "icon": "tag",
+          "value": "Basepoint"
+        },
+        {
+          "label": "Tahmini ARR",
+          "icon": "dollar",
+          "value": "$1–10M",
+          "chip": "green"
+        },
+        {
+          "label": "Konum",
+          "icon": "pin",
+          "value": "California, USA"
+        },
         {
           "label": "Kategoriler",
           "icon": "grid",
           "chips": [
-            { "value": "SaaS", "chip": "purple" },
-            { "value": "B2B", "chip": "blue" }
+            {
+              "value": "SaaS",
+              "chip": "purple"
+            },
+            {
+              "value": "B2B",
+              "chip": "blue"
+            }
           ]
         },
-        { "label": "Alınan yatırım", "icon": "coin", "value": "$25M Series A" },
-        { "label": "Paydaşlar", "icon": "users", "value": "Adam Kingsley, ..." }
+        {
+          "label": "Alınan yatırım",
+          "icon": "coin",
+          "value": "$25M Series A"
+        },
+        {
+          "label": "Paydaşlar",
+          "icon": "users",
+          "value": "Adam Kingsley, ..."
+        }
       ]
     }
   },
@@ -593,7 +791,11 @@
     ],
     "integrationLogos": {
       "title": "Anında senkronizasyon. Sıfır kurulum.",
-      "tools": ["Zoom", "Google Meet", "Microsoft Teams"]
+      "tools": [
+        "Zoom",
+        "Google Meet",
+        "Microsoft Teams"
+      ]
     },
     "testimonial": {
       "quote": "Toplantı notları artık kaybolmuyor. AI her şeyi yazıyor, özetliyor ve ekibimize aksiyonları atıyor. Verimliliğimiz gözle görülür arttı.",
@@ -607,10 +809,22 @@
     "templates": {
       "title": "Hazır toplantı şablonları",
       "items": [
-        { "name": "SPICED", "description": "Durum, Sorun, Etki, Kritik Olay, Karar — satış toplantıları için ideal." },
-        { "name": "Müşteri Keşif", "description": "İhtiyaç analizi, bütçe, zaman çizelgesi ve karar süreci keşfi." },
-        { "name": "Sprint Retrospektif", "description": "Neler iyi gitti, neler kötü gitti, aksiyonlar — ürün ekipleri için." },
-        { "name": "Kick-off", "description": "Proje kapsamı, roller, zaman çizelgesi ve başarı kriterleri belirleme." }
+        {
+          "name": "SPICED",
+          "description": "Durum, Sorun, Etki, Kritik Olay, Karar — satış toplantıları için ideal."
+        },
+        {
+          "name": "Müşteri Keşif",
+          "description": "İhtiyaç analizi, bütçe, zaman çizelgesi ve karar süreci keşfi."
+        },
+        {
+          "name": "Sprint Retrospektif",
+          "description": "Neler iyi gitti, neler kötü gitti, aksiyonlar — ürün ekipleri için."
+        },
+        {
+          "name": "Kick-off",
+          "description": "Proje kapsamı, roller, zaman çizelgesi ve başarı kriterleri belirleme."
+        }
       ]
     }
   },
@@ -697,19 +911,31 @@
         {
           "title": "Müşteri",
           "badge": "Standard",
-          "attrs": ["İsim", "E-posta", "Şirket"],
+          "attrs": [
+            "İsim",
+            "E-posta",
+            "Şirket"
+          ],
           "moreCount": 8
         },
         {
           "title": "Konuşma",
           "badge": "Standard",
-          "attrs": ["Kanal", "Durum", "Agent"],
+          "attrs": [
+            "Kanal",
+            "Durum",
+            "Agent"
+          ],
           "moreCount": 5
         },
         {
           "title": "Teklif",
           "badge": "Custom",
-          "attrs": ["Tutar", "Ürünler", "Tarih"],
+          "attrs": [
+            "Tutar",
+            "Ürünler",
+            "Tarih"
+          ],
           "moreCount": 4
         }
       ]
@@ -727,33 +953,93 @@
     "channels": {
       "title": "Mesajlaşma Kanalları",
       "items": [
-        { "name": "WhatsApp", "description": "Business API ile gelen mesajları yönetin", "color": "#25D366" },
-        { "name": "Instagram", "description": "DM ve story yanıtlarını otomatikleştirin", "color": "#E4405F" },
-        { "name": "Telegram", "description": "Bot entegrasyonu ile müşteri iletişimi", "color": "#2AABEE" },
-        { "name": "Web Form", "description": "Web sitenize gömülü iletişim widget'ı", "color": "#18181B" },
-        { "name": "E-posta", "description": "AI ile e-posta sınıflandırma ve yönlendirme", "color": "#EA4335" },
-        { "name": "Webhook", "description": "Özel entegrasyon ve API bağlantısı", "color": "currentColor" }
+        {
+          "name": "WhatsApp",
+          "description": "Business API ile gelen mesajları yönetin",
+          "color": "#25D366"
+        },
+        {
+          "name": "Instagram",
+          "description": "DM ve story yanıtlarını otomatikleştirin",
+          "color": "#E4405F"
+        },
+        {
+          "name": "Telegram",
+          "description": "Bot entegrasyonu ile müşteri iletişimi",
+          "color": "#2AABEE"
+        },
+        {
+          "name": "Web Form",
+          "description": "Web sitenize gömülü iletişim widget'ı",
+          "color": "#18181B"
+        },
+        {
+          "name": "E-posta",
+          "description": "AI ile e-posta sınıflandırma ve yönlendirme",
+          "color": "#EA4335"
+        },
+        {
+          "name": "Webhook",
+          "description": "Özel entegrasyon ve API bağlantısı",
+          "color": "currentColor"
+        }
       ]
     },
     "meetingTools": {
       "title": "Toplantı Araçları",
       "items": [
-        { "name": "Zoom", "description": "Toplantı kayıt ve transkripsiyon", "color": "#2D8CFF" },
-        { "name": "Google Meet", "description": "Otomatik kayıt ve özet", "color": "#00897B" },
-        { "name": "Microsoft Teams", "description": "Kurum içi toplantılar", "color": "#6264A7" }
+        {
+          "name": "Zoom",
+          "description": "Toplantı kayıt ve transkripsiyon",
+          "color": "#2D8CFF"
+        },
+        {
+          "name": "Google Meet",
+          "description": "Otomatik kayıt ve özet",
+          "color": "#00897B"
+        },
+        {
+          "name": "Microsoft Teams",
+          "description": "Kurum içi toplantılar",
+          "color": "#6264A7"
+        }
       ]
     },
     "businessTools": {
       "title": "İş Uygulamaları",
       "items": [
-        { "name": "Drive", "description": "Dokümanlar" },
-        { "name": "Notion", "description": "Wiki & notlar" },
-        { "name": "Slack", "description": "Mesajlaşma" },
-        { "name": "CRM", "description": "Müşteri verileri" },
-        { "name": "ERP", "description": "İş süreçleri" },
-        { "name": "Jira", "description": "Proje yönetimi" },
-        { "name": "HubSpot", "description": "Pazarlama" },
-        { "name": "+ API", "description": "Özel entegrasyon" }
+        {
+          "name": "Drive",
+          "description": "Dokümanlar"
+        },
+        {
+          "name": "Notion",
+          "description": "Wiki & notlar"
+        },
+        {
+          "name": "Slack",
+          "description": "Mesajlaşma"
+        },
+        {
+          "name": "CRM",
+          "description": "Müşteri verileri"
+        },
+        {
+          "name": "ERP",
+          "description": "İş süreçleri"
+        },
+        {
+          "name": "Jira",
+          "description": "Proje yönetimi"
+        },
+        {
+          "name": "HubSpot",
+          "description": "Pazarlama"
+        },
+        {
+          "name": "+ API",
+          "description": "Özel entegrasyon"
+        }
       ]
     },
     "dataModel": {
@@ -763,19 +1049,31 @@
         {
           "title": "Müşteri",
           "badge": "Standard",
-          "attrs": ["İsim", "E-posta", "Şirket"],
+          "attrs": [
+            "İsim",
+            "E-posta",
+            "Şirket"
+          ],
           "moreCount": 8
         },
         {
           "title": "Konuşma",
           "badge": "Standard",
-          "attrs": ["Kanal", "Durum", "Agent"],
+          "attrs": [
+            "Kanal",
+            "Durum",
+            "Agent"
+          ],
           "moreCount": 5
         },
         {
           "title": "Teklif",
           "badge": "Custom",
-          "attrs": ["Tutar", "Ürünler", "Tarih"],
+          "attrs": [
+            "Tutar",
+            "Ürünler",
+            "Tarih"
+          ],
           "moreCount": 4
         }
       ]
@@ -804,10 +1102,26 @@
       "colStatus": "Durum",
       "colScore": "Skor",
       "leads": [
-        { "name": "Ahmet Yılmaz", "company": "TechVista SaaS", "status": "Nitelikli" },
-        { "name": "Elif Korkmaz", "company": "DataFlow A.Ş.", "status": "Görüşmede" },
-        { "name": "Murat Çelik", "company": "NovaRetail", "status": "Yeni" },
-        { "name": "Zeynep Arslan", "company": "FinEdge Ltd.", "status": "Nitelikli" }
+        {
+          "name": "Ahmet Yılmaz",
+          "company": "TechVista SaaS",
+          "status": "Nitelikli"
+        },
+        {
+          "name": "Elif Korkmaz",
+          "company": "DataFlow A.Ş.",
+          "status": "Görüşmede"
+        },
+        {
+          "name": "Murat Çelik",
+          "company": "NovaRetail",
+          "status": "Yeni"
+        },
+        {
+          "name": "Zeynep Arslan",
+          "company": "FinEdge Ltd.",
+          "status": "Nitelikli"
+        }
       ]
     },
     "proposalDoc": {
@@ -817,9 +1131,21 @@
       "colQuantity": "Miktar",
       "colAmount": "Tutar",
       "lineItems": [
-        { "item": "Kurumsal AI Lisansı", "quantity": "85 kullanıcı", "amount": "₺135.320" },
-        { "item": "CRM Entegrasyonu", "quantity": "1 modül", "amount": "₺24.000" },
-        { "item": "Onboarding & Eğitim", "quantity": "1 paket", "amount": "₺18.500" }
+        {
+          "item": "Kurumsal AI Lisansı",
+          "quantity": "85 kullanıcı",
+          "amount": "₺135.320"
+        },
+        {
+          "item": "CRM Entegrasyonu",
+          "quantity": "1 modül",
+          "amount": "₺24.000"
+        },
+        {
+          "item": "Onboarding & Eğitim",
+          "quantity": "1 paket",
+          "amount": "₺18.500"
+        }
       ],
       "totalLabel": "Toplam (KDV Hariç)",
       "totalAmount": "₺177.820",
@@ -830,10 +1156,30 @@
       "statusRecorded": "Kaydedildi",
       "statusProcessing": "İşleniyor",
       "meetings": [
-        { "title": "TechVista — Satış Demo", "date": "13 Nis, 14:00", "participants": "Mehmet K., Ahmet Y.", "duration": "45 dk" },
-        { "title": "DataFlow — Onboarding", "date": "13 Nis, 11:00", "participants": "Elif D., Zeynep A.", "duration": "30 dk" },
-        { "title": "NovaRetail — Kick-off", "date": "12 Nis, 16:00", "participants": "Murat Ç., Can Y.", "duration": "60 dk" },
-        { "title": "FinEdge — İhtiyaç Analizi", "date": "12 Nis, 10:30", "participants": "Selin T., Burak Ö.", "duration": "25 dk" }
+        {
+          "title": "TechVista — Satış Demo",
+          "date": "13 Nis, 14:00",
+          "participants": "Mehmet K., Ahmet Y.",
+          "duration": "45 dk"
+        },
+        {
+          "title": "DataFlow — Onboarding",
+          "date": "13 Nis, 11:00",
+          "participants": "Elif D., Zeynep A.",
+          "duration": "30 dk"
+        },
+        {
+          "title": "NovaRetail — Kick-off",
+          "date": "12 Nis, 16:00",
+          "participants": "Murat Ç., Can Y.",
+          "duration": "60 dk"
+        },
+        {
+          "title": "FinEdge — İhtiyaç Analizi",
+          "date": "12 Nis, 10:30",
+          "participants": "Selin T., Burak Ö.",
+          "duration": "25 dk"
+        }
       ]
     },
     "researchReport": {
@@ -871,9 +1217,21 @@
       "speaker2Role": "Müşteri",
       "transcriptLabel": "Transkript",
       "lines": [
-        { "time": "02:15", "speaker": "Mehmet K.", "text": "\u201CEkibiniz şu an kaç kişi kullanıyor?\u201D" },
-        { "time": "02:22", "speaker": "Ahmet Y.", "text": "\u201C85 kişilik bir ekibiz, CRM entegrasyonu en önemli ihtiyacımız.\u201D" },
-        { "time": "02:35", "speaker": "Mehmet K.", "text": "\u201CAnladım, size özel kurumsal paketimiz tam ihtiyacınıza uygun.\u201D" }
+        {
+          "time": "02:15",
+          "speaker": "Mehmet K.",
+          "text": "“Ekibiniz şu an kaç kişi kullanıyor?”"
+        },
+        {
+          "time": "02:22",
+          "speaker": "Ahmet Y.",
+          "text": "“85 kişilik bir ekibiz, CRM entegrasyonu en önemli ihtiyacımız.”"
+        },
+        {
+          "time": "02:35",
+          "speaker": "Mehmet K.",
+          "text": "“Anladım, size özel kurumsal paketimiz tam ihtiyacınıza uygun.”"
+        }
       ]
     },
     "meetingTranscript": {
@@ -881,11 +1239,36 @@
       "subtitle": "Q3 Satış Toplantısı",
       "aiSummaryLabel": "AI Özet",
       "lines": [
-        { "time": "14:22", "speaker": "Mehmet K.", "text": "\u201cBu çeyrekte hedefimiz 200 yeni müşteri.\u201d", "isAction": false },
-        { "time": "14:25", "speaker": "Elif D.", "text": "\u201cPazarlama bütçesini %30 artırmamız gerekecek.\u201d", "isAction": false },
-        { "time": "", "speaker": "AI Özet", "text": "Aksiyon: Pazarlama bütçe artışı onayı \u2192 Elif D. \u2014 18 Nis\u2019e kadar", "isAction": true },
-        { "time": "14:31", "speaker": "Can Y.", "text": "\u201cDemo ortamını önümüzdeki haftaya hazırlayalım.\u201d", "isAction": false },
-        { "time": "", "speaker": "AI Özet", "text": "Aksiyon: Demo ortamı hazırlığı \u2192 Can Y. \u2014 20 Nis\u2019e kadar", "isAction": true }
+        {
+          "time": "14:22",
+          "speaker": "Mehmet K.",
+          "text": "“Bu çeyrekte hedefimiz 200 yeni müşteri.”",
+          "isAction": false
+        },
+        {
+          "time": "14:25",
+          "speaker": "Elif D.",
+          "text": "“Pazarlama bütçesini %30 artırmamız gerekecek.”",
+          "isAction": false
+        },
+        {
+          "time": "",
+          "speaker": "AI Özet",
+          "text": "Aksiyon: Pazarlama bütçe artışı onayı → Elif D. — 18 Nis’e kadar",
+          "isAction": true
+        },
+        {
+          "time": "14:31",
+          "speaker": "Can Y.",
+          "text": "“Demo ortamını önümüzdeki haftaya hazırlayalım.”",
+          "isAction": false
+        },
+        {
+          "time": "",
+          "speaker": "AI Özet",
+          "text": "Aksiyon: Demo ortamı hazırlığı → Can Y. — 20 Nis’e kadar",
+          "isAction": true
+        }
       ]
     },
     "callWidget": {

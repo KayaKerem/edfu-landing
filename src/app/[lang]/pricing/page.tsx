@@ -3,10 +3,8 @@ import { getDictionary, hasLocale } from "@/dictionaries";
 import type { Locale, Dictionary } from "@/dictionaries";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/navbar";
-import { Pricing } from "@/components/sections/pricing";
-import { FAQ } from "@/components/sections/faq";
-import { PageCTA } from "@/components/sections/page-cta";
 import { Footer } from "@/components/sections/footer";
+import { PricingClient } from "./pricing-client";
 
 const BASE_URL = "https://edfu.ai";
 
@@ -25,11 +23,11 @@ export async function generateMetadata({
 
   return {
     title: isEn
-      ? "Pricing - Choose the Right Plan | Edfu"
-      : "Fiyatlandırma - İşletmenize Uygun Plan | Edfu",
+      ? "Pricing - Standard, Pro & Enterprise Plans | Edfu"
+      : "Fiyatlandırma - Standard, Pro ve Enterprise Planlar | Edfu",
     description: isEn
-      ? "Starter, Professional, and Enterprise plans. All with 14-day free trial."
-      : "Başlangıç, Profesyonel ve Kurumsal planlar. Tümünde 14 gün ücretsiz deneme.",
+      ? "Simple, transparent pricing for every team. Start with Standard, scale with Pro, or go fully custom with Enterprise."
+      : "Her ekip için şeffaf fiyatlandırma. Standard ile başlayın, Pro ile büyüyün veya Enterprise ile tam özelleştirme.",
     alternates: {
       canonical: isEn ? "/en/pricing" : "/pricing",
       languages: { tr: "/pricing", en: "/en/pricing", "x-default": "/pricing" },
@@ -37,24 +35,17 @@ export async function generateMetadata({
     openGraph: {
       title: isEn ? "Pricing | Edfu" : "Fiyatlandırma | Edfu",
       description: isEn
-        ? "Starter, Professional, and Enterprise plans. All with 14-day free trial."
-        : "Başlangıç, Profesyonel ve Kurumsal planlar. Tümünde 14 gün ücretsiz deneme.",
+        ? "Simple, transparent pricing for every team."
+        : "Her ekip için şeffaf fiyatlandırma.",
       url: isEn ? `${BASE_URL}/en/pricing` : `${BASE_URL}/pricing`,
-      images: [
-        {
-          url: "/og-image.png",
-          width: 1200,
-          height: 630,
-          alt: isEn ? "Pricing | Edfu" : "Fiyatlandırma | Edfu",
-        },
-      ],
+      images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
       title: isEn ? "Pricing | Edfu" : "Fiyatlandırma | Edfu",
       description: isEn
-        ? "Starter, Professional, and Enterprise plans. All with 14-day free trial."
-        : "Başlangıç, Profesyonel ve Kurumsal planlar. Tümünde 14 gün ücretsiz deneme.",
+        ? "Simple, transparent pricing for every team."
+        : "Her ekip için şeffaf fiyatlandırma.",
       images: ["/og-image.png"],
     },
   };
@@ -88,27 +79,15 @@ export default async function PricingPage({
   if (!hasLocale(lang)) notFound();
 
   const dict = await getDictionary(lang as Locale);
-  const prefix = lang === "tr" ? "" : `/${lang}`;
 
   return (
     <>
       <PricingJsonLd dict={dict} />
       <Navbar dict={dict.navbar} lang={lang} />
-      <div className="relative mx-auto max-w-7xl border-x border-border">
-        <div className="pointer-events-none absolute inset-y-0 left-4 md:left-6 z-10 w-px bg-border" />
-        <div className="pointer-events-none absolute inset-y-0 right-4 md:right-6 z-10 w-px bg-border" />
-        <main className="divide-y divide-border pt-20">
-          <Pricing dict={dict.pricing} />
-          <FAQ dict={dict.faq} />
-          <PageCTA
-            title={dict.pricingPage.cta.title}
-            description={dict.pricingPage.cta.description}
-            buttonText={dict.pricingPage.cta.button}
-            buttonHref="https://app.edfu.ai"
-          />
-        </main>
-        <Footer dict={dict.footer} lang={lang} />
-      </div>
+      <main style={{ paddingTop: 60 }}>
+        <PricingClient pricingDict={dict.pricing} faqDict={dict.faq} />
+      </main>
+      <Footer dict={dict.footer} lang={lang} />
     </>
   );
 }
