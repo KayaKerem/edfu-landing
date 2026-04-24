@@ -112,18 +112,111 @@
   padding: 0 24px 60px;
 }
 
+/* Wrapper around the grid — hosts the animated Attio-style frame lines. */
+.cardsFrame {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  /* Tuned line color — blend of text toward border for visibility in
+     both light and dark themes. After the mask's 35% attenuation it
+     reads as a subtle but clearly drawn hairline. */
+  --pricing-grid-line-color: color-mix(
+    in oklab,
+    var(--pricing-text) 15%,
+    transparent
+  );
+}
+
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  max-width: 1100px;
-  margin: 0 auto;
 }
 
 @media (max-width: 900px) {
   .cardsGrid {
     grid-template-columns: 1fr;
     max-width: 440px;
+    margin: 0 auto;
+  }
+}
+
+/* ── Attio-style animated grid lines ──
+   Each line is a 1px linear-gradient "rail" revealed via an animated
+   `clip-path: inset(...)`. Horizontals sweep left-to-right; verticals
+   top-to-bottom. This avoids the @property/mask-position approach
+   (which was unreliable in CSS modules) while giving a visually
+   identical "drawing in" effect. */
+
+.gridLine {
+  position: absolute;
+  pointer-events: none;
+  animation-duration: 1.5s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+
+/* Outer frame offsets — push the four perimeter lines OUTSIDE the
+   cards (and past their own borders) so they read as a decorative
+   frame instead of doubling up on existing card borders. Inner
+   vertical separators stay at their calc() positions inside the grid. */
+.gridLineOuterTop    { top: -20px; }
+.gridLineOuterBottom { bottom: -20px; }
+.gridLineOuterLeft   { left: -20px; }
+.gridLineOuterRight  { right: -20px; }
+
+.gridLineHorizontal {
+  left: -20px;
+  right: -20px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--pricing-grid-line-color) 6%,
+    var(--pricing-grid-line-color) 94%,
+    transparent 100%
+  );
+  animation-name: pricingGridLineRevealH;
+}
+
+.gridLineVertical {
+  /* Extend to meet the offset horizontals so verticals and horizontals
+     form a clean rectangular frame. */
+  top: -20px;
+  bottom: -20px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--pricing-grid-line-color) 6%,
+    var(--pricing-grid-line-color) 94%,
+    transparent 100%
+  );
+  animation-name: pricingGridLineRevealV;
+}
+
+@keyframes pricingGridLineRevealH {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes pricingGridLineRevealV {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+/* On single-column layout, inner vertical lines aren't meaningful. */
+@media (max-width: 900px) {
+  .gridLineVertical {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gridLine {
+    animation: none;
+    --pricing-grid-line-start: 100%;
+    --pricing-grid-line-end: 130%;
   }
 }
 

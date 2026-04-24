@@ -65,7 +65,9 @@ function PricingJsonLd({ dict }: { dict: Dictionary }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
+      }}
     />
   );
 }

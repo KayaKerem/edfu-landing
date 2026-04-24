@@ -278,10 +278,53 @@ export function Pricing({ dict, billing: externalBilling, onBillingChange }: Pri
 
       {/* Cards */}
       <div className={styles.cardsSection}>
-        <div className={styles.cardsGrid}>
-          {dict.plans.map((plan, idx) => (
-            <PlanCard key={plan.name} plan={plan} billing={billing} idx={idx} />
-          ))}
+        <div className={styles.cardsFrame}>
+          {/* Animated grid lines — Attio-style "draw-in" on mount.
+              Two horizontal rails (top/bottom) + four verticals
+              (outer + between each card). Each sweeps in via a mask
+              animated through CSS @property custom properties. */}
+          <div
+            className={cn(styles.gridLine, styles.gridLineHorizontal, styles.gridLineOuterTop)}
+            style={{ animationDelay: "0ms" }}
+            aria-hidden
+          />
+          <div
+            className={cn(styles.gridLine, styles.gridLineHorizontal, styles.gridLineOuterBottom)}
+            style={{ animationDelay: "450ms" }}
+            aria-hidden
+          />
+          <div
+            className={cn(styles.gridLine, styles.gridLineVertical, styles.gridLineOuterLeft)}
+            style={{ animationDelay: "150ms" }}
+            aria-hidden
+          />
+          <div
+            className={cn(styles.gridLine, styles.gridLineVertical)}
+            style={{
+              left: "calc((100% - 32px) / 3 + 8px)",
+              animationDelay: "300ms",
+            }}
+            aria-hidden
+          />
+          <div
+            className={cn(styles.gridLine, styles.gridLineVertical)}
+            style={{
+              left: "calc(2 * (100% - 32px) / 3 + 24px)",
+              animationDelay: "450ms",
+            }}
+            aria-hidden
+          />
+          <div
+            className={cn(styles.gridLine, styles.gridLineVertical, styles.gridLineOuterRight)}
+            style={{ animationDelay: "600ms" }}
+            aria-hidden
+          />
+
+          <div className={styles.cardsGrid}>
+            {dict.plans.map((plan, idx) => (
+              <PlanCard key={plan.name} plan={plan} billing={billing} idx={idx} />
+            ))}
+          </div>
         </div>
       </div>
 
