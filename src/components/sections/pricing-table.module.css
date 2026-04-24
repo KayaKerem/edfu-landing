@@ -155,8 +155,7 @@
   color: var(--pricing-table-card-text);
 }
 .stickyCtaRegular:hover {
-  background: var(--pricing-table-muted-surface);
-  border: 1px solid var(--pricing-table-border);
+  border: 1px solid black;
   transition: all;
 }
 
@@ -166,7 +165,8 @@
   border: 1px solid #111827;
 }
 .stickyCtaPro:hover { background: #1f2937;
-border: 1px solid black; }
+border: 1px solid black;
+transition: all; }
 
 :global(html[data-expandable-screen-open="true"]) .stickyHeaderPinned {
   opacity: 0;

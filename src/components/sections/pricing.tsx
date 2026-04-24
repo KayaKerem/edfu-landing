@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { AnimatedNumber } from "@/components/ui/animated-number";
 import { BRAND_LOGOS as LOCAL_BRAND_LOGOS } from "./brand-logos";
 import { TalkToSalesSheet } from "./talk-to-sales-sheet";
 import styles from "./pricing.module.css";
@@ -30,31 +28,29 @@ export function BillingToggle({
 }) {
   return (
     <div className={styles.toggle}>
+      {/* Sliding thumb — translates right when Annual is active */}
+      <div
+        className={styles.toggleThumb}
+        style={{
+          transform:
+            billing === "annual"
+              ? "translateX(calc(100% + 2px))"
+              : "translateX(0)",
+        }}
+      />
       <button
+        type="button"
         className={cn(styles.toggleBtn, billing === "monthly" && styles.toggleBtnActive)}
         onClick={() => setBilling("monthly")}
       >
-        {billing === "monthly" && (
-          <motion.div
-            layoutId="pricing-pill"
-            className={styles.togglePill}
-            transition={{ type: "spring", stiffness: 420, damping: 30 }}
-          />
-        )}
-        <span style={{ position: "relative", zIndex: 1 }}>Monthly</span>
+        Monthly
       </button>
       <button
+        type="button"
         className={cn(styles.toggleBtn, billing === "annual" && styles.toggleBtnActive)}
         onClick={() => setBilling("annual")}
       >
-        {billing === "annual" && (
-          <motion.div
-            layoutId="pricing-pill"
-            className={styles.togglePill}
-            transition={{ type: "spring", stiffness: 420, damping: 30 }}
-          />
-        )}
-        <span style={{ position: "relative", zIndex: 1, display: "inline-flex", alignItems: "center", gap: 6 }}>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
           Annual
           <span className={styles.toggleSaveTag}>{saveLabel}</span>
         </span>
@@ -63,7 +59,52 @@ export function BillingToggle({
   );
 }
 
-/* ── Plan prices (hardcoded, only Standard has a price) ─────── */
+/* ── Slot-machine price display ─────────────────────────────── */
+function PriceSlot({
+  monthly,
+  annual,
+  billing,
+}: {
+  monthly: number;
+  annual: number;
+  billing: Billing;
+}) {
+  const fmtMonthly = monthly.toLocaleString("tr-TR");
+  const fmtAnnual = annual.toLocaleString("tr-TR");
+
+  return (
+    <>
+      <span className={styles.priceCurrency}>₺</span>
+      {/*
+        Two digits stacked in the same grid cell; overflow-y-hidden clips them.
+        Monthly rests BELOW (translateY 100%) when inactive →
+          Annual→Monthly: comes up from below ✓
+        Annual rests ABOVE (translateY -100%) when inactive →
+          Monthly→Annual: comes down from above ✓
+      */}
+      <span className={styles.priceSlotGrid}>
+        <span
+          className={cn(
+            styles.priceSlotDigit,
+            billing === "monthly" ? styles.priceSlotActive : styles.priceSlotBelowHidden,
+          )}
+        >
+          {fmtMonthly}
+        </span>
+        <span
+          className={cn(
+            styles.priceSlotDigit,
+            billing === "annual" ? styles.priceSlotActive : styles.priceSlotAboveHidden,
+          )}
+        >
+          {fmtAnnual}
+        </span>
+      </span>
+    </>
+  );
+}
+
+/* ── Plan prices ─────────────────────────────────────────────── */
 const PLAN_PRICES = [
   { monthly: 1990, annual: 1592 },
   { monthly: null, annual: null },
@@ -93,29 +134,43 @@ interface PlanCardProps {
 
 function PlanCard({ plan, billing, idx }: PlanCardProps) {
   const prices = PLAN_PRICES[idx];
-  const isHighlighted = idx === 1; // Pro is highlighted
+  const isHighlighted = idx === 1;
   const isEnterprise = idx === 2;
-  const price = billing === "annual" ? prices.annual : prices.monthly;
-  const showSaveBadge = billing === "annual" && prices.monthly !== null;
+  const showPrice = prices.monthly !== null;
 
   return (
     <article className={cn(styles.card, isHighlighted && styles.cardHighlighted)}>
       {/* Plan name + save badge */}
       <div className={styles.planNameRow}>
         <span className={styles.planName}>{plan.name}</span>
-        {showSaveBadge && (
-          <span className={styles.planSaveBadge}>Save 20%</span>
+        {showPrice && (
+          <span
+            className={cn(
+              styles.planSaveBadge,
+              billing === "annual" ? styles.planSaveBadgeVisible : styles.planSaveBadgeHidden,
+            )}
+            style={
+              billing === "annual"
+                ? {
+                    transition:
+                      "opacity 300ms cubic-bezier(0,0,0,1), translate 600ms cubic-bezier(0,0,0,1)",
+                  }
+                : {
+                    transition:
+                      "opacity 300ms 150ms cubic-bezier(0,0,0,1), translate 500ms 100ms cubic-bezier(0,0,0,1)",
+                  }
+            }
+          >
+            Save 20%
+          </span>
         )}
       </div>
 
       {/* Price */}
       <div className={styles.priceRow}>
-        {price !== null ? (
+        {showPrice ? (
           <>
-            <span className={styles.priceCurrency}>₺</span>
-            <span className={styles.priceAmount}>
-              <AnimatedNumber value={price} mass={0.8} stiffness={80} damping={16} />
-            </span>
+            <PriceSlot monthly={prices.monthly!} annual={prices.annual!} billing={billing} />
             <span className={styles.billingPeriod}>/mo</span>
           </>
         ) : isEnterprise ? (
@@ -127,7 +182,7 @@ function PlanCard({ plan, billing, idx }: PlanCardProps) {
 
       {/* Billing note */}
       <p className={styles.billingNote}>
-        {price !== null
+        {showPrice
           ? `Per user/month, billed ${billing === "annual" ? "annually" : "monthly"}`
           : isEnterprise
           ? "Billed annually"

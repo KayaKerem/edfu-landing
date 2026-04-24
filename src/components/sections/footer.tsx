@@ -24,6 +24,8 @@ export function Footer({ dict, lang }: FooterProps) {
     "1-0": `${prefix}/agents`,
     "1-1": `${prefix}/pricing`,
     "1-2": `${prefix}/integrations`,
+    // Column 2 ("Resources") — index 1: Subprocessors
+    "2-1": `${prefix}/subprocessors`,
   };
 
   return (

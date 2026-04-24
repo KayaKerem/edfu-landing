@@ -495,12 +495,21 @@
         "heading": "Kaynaklar",
         "links": [
           "Yardım Merkezi",
-          "Kullanım Kılavuzu",
+          "Alt Veri İşleyenler",
           "Durum Sayfası",
           "Gizlilik Politikası"
         ]
       }
     ]
+  },
+  "subprocessors": {
+    "title": "Edfu Alt İşleyicileri",
+    "date": "24 Nisan 2026 itibarıyla güncel",
+    "description": "Verilerinizin nerede ve nasıl kullanıldığını tam olarak bilin. Edfu'nun alt işleyicileri.",
+    "colName": "AD",
+    "colPurpose": "AMAÇ",
+    "colLocation": "KONUM",
+    "colWebsite": "WEBSİTE"
   },
   "pricingPage": {
     "hero": {

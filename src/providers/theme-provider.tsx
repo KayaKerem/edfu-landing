@@ -61,6 +61,7 @@ export function ThemeProvider({
 
     try {
       window.localStorage.setItem(STORAGE_KEY, theme);
+      document.cookie = `${STORAGE_KEY}=${theme};path=/;max-age=31536000;SameSite=Lax`;
     } catch {}
   }, [attribute, theme]);
 

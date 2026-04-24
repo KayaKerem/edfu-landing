@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getDictionary, hasLocale } from "@/dictionaries";
 import type { Locale } from "@/dictionaries";
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
 
 const BASE_URL = "https://edfu.ai";
 
@@ -101,8 +102,24 @@ export default async function RootLayout({
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
 
+  const cookieStore = await cookies();
+  const themeCookie = cookieStore.get("theme")?.value;
+  const theme = themeCookie === "dark" ? "dark" : "light";
+
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html
+      lang={lang}
+      className={theme}
+      style={{ colorScheme: theme }}
+      suppressHydrationWarning
+    >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){var r=document.documentElement;r.classList.remove('light','dark');r.classList.add(t);r.style.colorScheme=t;}}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body
         className="min-h-screen font-sans antialiased"
         style={{ "--font-geist-sans": "Inter, ui-sans-serif, system-ui, sans-serif" } as CSSProperties}

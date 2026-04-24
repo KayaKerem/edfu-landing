@@ -47,21 +47,21 @@ function SalesFormPanel({ dict }: { dict: TalkToSalesSheetDict }) {
 
   return (
     <div className="mx-auto flex h-full w-full max-w-[560px] items-center justify-center">
-      <div className="relative w-full rounded-[28px] border border-black/8 bg-[#f3f3f4] p-5 shadow-[0_30px_80px_rgba(15,23,42,0.14)] sm:p-6">
+      <div className="relative w-full rounded-[28px] border border-black/8 dark:border-white/8 bg-[#f3f3f4] dark:bg-[#1c1c1f] p-5 shadow-[0_30px_80px_rgba(15,23,42,0.14)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.5)] sm:p-6">
         <button
           type="button"
           onClick={collapse}
-          className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-2xl border border-black/10 bg-white text-[#52525b] shadow-sm transition-colors hover:bg-[#f8f8f8]"
+          className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-[#27272a] text-[#52525b] dark:text-[#a1a1aa] shadow-sm transition-colors hover:bg-[#f8f8f8] dark:hover:bg-[#3f3f46]"
           aria-label="Close sales form"
         >
           <X className="size-4" />
         </button>
 
         <div className="pr-12">
-          <h2 className="text-[28px] font-semibold tracking-[-0.04em] text-[#171717] sm:text-[32px]">
+          <h2 className="text-[28px] font-semibold tracking-[-0.04em] text-[#171717] dark:text-[#f4f4f5] sm:text-[32px]">
             {dict.title}
           </h2>
-          <p className="mt-1 text-[15px] text-[#5f6368] sm:text-[16px]">
+          <p className="mt-1 text-[15px] text-[#5f6368] dark:text-[#9194a1] sm:text-[16px]">
             {dict.subtitle}
           </p>
         </div>
@@ -136,12 +136,12 @@ function SalesFormPanel({ dict }: { dict: TalkToSalesSheetDict }) {
 
           <button
             type="submit"
-            className="mt-2 mb-5 relative flex h-[50px] w-full items-center justify-center rounded-2xl bg-[#1f2027] text-[16px] font-medium text-white transition-colors hover:bg-[#16171d]"
+            className="mt-2 mb-5 relative flex h-[50px] w-full items-center justify-center rounded-2xl bg-[#1f2027] dark:bg-[#3b82f6] text-[16px] font-medium text-white transition-colors hover:bg-[#16171d] dark:hover:bg-[#2563eb]"
           >
             {dict.submit}
           </button>
 
-          <p className="absolute bottom-5 left-8 max-w-[500px] text-[10px] leading-5 text-[#666b73]">
+          <p className="absolute bottom-5 left-8 max-w-[500px] text-[10px] leading-5 text-[#666b73] dark:text-[#71717a]">
             {dict.privacyPrefix}{" "}
             <a href="#" className="underline underline-offset-2">
               {dict.privacyPolicy}
@@ -161,7 +161,7 @@ function SalesFormPanel({ dict }: { dict: TalkToSalesSheetDict }) {
 function FormField({ label, input }: { label: string; input: ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-[13px] font-medium text-[#6b7280]">
+      <span className="mb-1 block text-[13px] font-medium text-[#6b7280] dark:text-[#9194a1]">
         {label}
       </span>
       {input}
@@ -173,7 +173,7 @@ function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       {...props}
-      className="h-[40px] w-full rounded-2xl border border-[#d9dce1] bg-white px-4 text-[15px] text-[#171717] shadow-[0_1px_2px_rgba(15,23,42,0.04)] outline-none transition-colors placeholder:text-[#8b919b] focus:border-[#c2c8d0]"
+      className="h-[40px] w-full rounded-2xl border border-[#d9dce1] dark:border-[#3f3f46] bg-white dark:bg-[#27272a] px-4 text-[15px] text-[#171717] dark:text-[#f4f4f5] shadow-[0_1px_2px_rgba(15,23,42,0.04)] outline-none transition-colors placeholder:text-[#8b919b] dark:placeholder:text-[#71717a] focus:border-[#c2c8d0] dark:focus:border-[#52525b]"
     />
   );
 }
@@ -183,7 +183,7 @@ function Textarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
     <textarea
       {...props}
       rows={3}
-      className="min-h-[104px] w-full resize-none rounded-2xl border border-[#d9dce1] bg-white px-4 py-3 text-[15px] text-[#171717] shadow-[0_1px_2px_rgba(15,23,42,0.04)] outline-none transition-colors placeholder:text-[#8b919b] focus:border-[#c2c8d0]"
+      className="min-h-[104px] w-full resize-none rounded-2xl border border-[#d9dce1] dark:border-[#3f3f46] bg-white dark:bg-[#27272a] px-4 py-3 text-[15px] text-[#171717] dark:text-[#f4f4f5] shadow-[0_1px_2px_rgba(15,23,42,0.04)] outline-none transition-colors placeholder:text-[#8b919b] dark:placeholder:text-[#71717a] focus:border-[#c2c8d0] dark:focus:border-[#52525b]"
     />
   );
 }
@@ -199,7 +199,7 @@ function Select({
     <div className="relative">
       <select
         defaultValue=""
-        className="h-[44px] w-full appearance-none rounded-2xl border border-[#d9dce1] bg-white px-4 pr-10 text-[15px] text-[#6b7280] shadow-[0_1px_2px_rgba(15,23,42,0.04)] outline-none transition-colors focus:border-[#c2c8d0]"
+        className="h-[44px] w-full appearance-none rounded-2xl border border-[#d9dce1] dark:border-[#3f3f46] bg-white dark:bg-[#27272a] px-4 pr-10 text-[15px] text-[#6b7280] dark:text-[#9194a1] shadow-[0_1px_2px_rgba(15,23,42,0.04)] outline-none transition-colors focus:border-[#c2c8d0] dark:focus:border-[#52525b]"
       >
         <option value="" disabled>
           {defaultLabel}

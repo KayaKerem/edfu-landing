@@ -42,6 +42,7 @@ export function Navbar({ dict, lang }: NavbarProps) {
   const currentRoute = pathname.replace(/^\/(tr|en)/, "") || "/";
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const [pricingStickyPinned, setPricingStickyPinned] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
   const navRef = useRef<HTMLUListElement>(null);
@@ -52,6 +53,24 @@ export function Navbar({ dict, lang }: NavbarProps) {
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Observe the pricing page's sticky-header pinned state (broadcast via
+  // `html[data-pricing-sticky-pinned]`). When pinned, we turn the outer
+  // <header> into a full-width opaque platform so the pricing sticky bar
+  // doesn't bleed through the semi-transparent navbar pill.
+  useEffect(() => {
+    const root = document.documentElement;
+    const update = () => {
+      setPricingStickyPinned(root.dataset.pricingStickyPinned === "true");
+    };
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(root, {
+      attributes: true,
+      attributeFilter: ["data-pricing-sticky-pinned"],
+    });
+    return () => observer.disconnect();
   }, []);
 
   const updatePill = useCallback(() => {
@@ -77,7 +96,13 @@ export function Navbar({ dict, lang }: NavbarProps) {
   }, [pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-4 transition-colors duration-300 ${
+        pricingStickyPinned
+          ? "bg-background border-b border-border"
+          : ""
+      }`}
+    >
       <motion.nav
         initial={false}
         animate={{

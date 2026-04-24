@@ -449,6 +449,19 @@ export function PricingTable({ dict, billing, onBillingChange }: PricingTablePro
     };
   }, [stickyHeaderHeight]);
 
+  // Broadcast pinned state to the document root so the navbar can react.
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isStickyHeaderPinned) {
+      root.dataset.pricingStickyPinned = "true";
+    } else {
+      delete root.dataset.pricingStickyPinned;
+    }
+    return () => {
+      delete root.dataset.pricingStickyPinned;
+    };
+  }, [isStickyHeaderPinned]);
+
   return (
     <div
       ref={tableRootRef}

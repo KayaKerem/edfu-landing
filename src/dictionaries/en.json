@@ -494,12 +494,21 @@
         "heading": "Resources",
         "links": [
           "Help Center",
-          "User Guide",
+          "Subprocessors",
           "Status Page",
           "Privacy Policy"
         ]
       }
     ]
+  },
+  "subprocessors": {
+    "title": "Edfu Subprocessors",
+    "date": "Current as of Apr 24, 2026",
+    "description": "Know exactly where your data is and how it is being used. Edfu's subprocessors.",
+    "colName": "NAME",
+    "colPurpose": "PURPOSE",
+    "colLocation": "LOCATION",
+    "colWebsite": "WEBSITE"
   },
   "pricingPage": {
     "hero": {
