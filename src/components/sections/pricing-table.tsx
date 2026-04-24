@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { type Billing, BillingToggle } from "./pricing";
+import { TalkToSalesSheet } from "./talk-to-sales-sheet";
+import { type Billing } from "./pricing";
 import styles from "./pricing-table.module.css";
 import type { Dictionary } from "@/dictionaries";
 
@@ -247,18 +249,39 @@ function FeatureValueCell({ value }: { value: FeatureValue }) {
   return <span className={styles.textValue}>{value}</span>;
 }
 
+function getStickyPlanDescription({
+  idx,
+  billing,
+  plan,
+}: {
+  idx: number;
+  billing: Billing;
+  plan: Dictionary["pricing"]["plans"][number];
+}) {
+  if (idx === 0) {
+    const price = billing === "annual" ? "₺1,592" : "₺1,990";
+    return `${price} ${plan.description}`;
+  }
+
+  return plan.description;
+}
+
 /* ── Sticky header ──────────────────────────────────────────── */
 function StickyHeader({
   billing,
   setBilling,
   dict,
+  headerRef,
+  isPinned,
 }: {
   billing: Billing;
   setBilling: (b: Billing) => void;
   dict: Dictionary["pricing"];
+  headerRef?: React.RefObject<HTMLDivElement | null>;
+  isPinned?: boolean;
 }) {
   return (
-    <div className={styles.stickyHeader}>
+    <div ref={headerRef} className={cn(styles.stickyHeader, isPinned && styles.stickyHeaderPinned)}>
       <div className={styles.stickyInner}>
         {/* Left column: billing toggle */}
         <div className={styles.stickyLabel}>
@@ -296,15 +319,14 @@ function StickyHeader({
         {/* Plan columns — driven by dict */}
         {dict.plans.map((plan, idx) => {
           const isPro = idx === 1;
-          const price = idx === 0 ? (billing === "annual" ? "₺1,592/mo" : "₺1,990/mo") : null;
+          const summary = getStickyPlanDescription({ idx, billing, plan });
           return (
             <div key={plan.name} className={styles.stickyPlanCol}>
               <span className={styles.stickyPlanName}>
                 {plan.name}
                 {isPro && <span className={styles.popularBadge}>{dict.popularLabel}</span>}
               </span>
-              {price && <span className={styles.stickyPlanPrice}>{price}, {billing === "annual" ? dict.yearly : dict.monthly}</span>}
-              {idx === 2 && <span className={styles.stickyPlanPrice}>{plan.description}</span>}
+              <span className={styles.stickyPlanPrice}>{summary}</span>
               {plan.ctaHref ? (
                 <Link
                   href={plan.ctaHref}
@@ -312,8 +334,24 @@ function StickyHeader({
                 >
                   {plan.cta}
                 </Link>
+              ) : idx === 2 ? (
+                <TalkToSalesSheet
+                  layoutId={`talk-to-sales-sticky-${plan.name.toLowerCase()}`}
+                  dict={plan.salesForm!}
+                  trigger={
+                    <button
+                      type="button"
+                      className={cn(styles.stickyCta, isPro ? styles.stickyCtaPro : styles.stickyCtaRegular)}
+                    >
+                      {plan.cta}
+                    </button>
+                  }
+                />
               ) : (
-                <button className={cn(styles.stickyCta, isPro ? styles.stickyCtaPro : styles.stickyCtaRegular)}>
+                <button
+                  type="button"
+                  className={cn(styles.stickyCta, isPro ? styles.stickyCtaPro : styles.stickyCtaRegular)}
+                >
                   {plan.cta}
                 </button>
               )}
@@ -357,16 +395,87 @@ export interface PricingTableProps {
 }
 
 export function PricingTable({ dict, billing, onBillingChange }: PricingTableProps) {
+  const tableRootRef = useRef<HTMLDivElement | null>(null);
+  const stickyHeaderRef = useRef<HTMLDivElement | null>(null);
+  const [stickyHeaderHeight, setStickyHeaderHeight] = useState(0);
+  const [isStickyHeaderPinned, setIsStickyHeaderPinned] = useState(false);
+
+  useEffect(() => {
+    const header = stickyHeaderRef.current;
+    if (!header) return;
+
+    const updateHeight = () => {
+      setStickyHeaderHeight(header.getBoundingClientRect().height);
+    };
+
+    updateHeight();
+
+    const resizeObserver = new ResizeObserver(updateHeight);
+    resizeObserver.observe(header);
+
+    window.addEventListener("resize", updateHeight);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, []);
+
+  useEffect(() => {
+    const root = tableRootRef.current;
+    const header = stickyHeaderRef.current;
+    if (!root || !header) return;
+
+    const navbarOffset = 60;
+
+    const updatePinnedState = () => {
+      const rootRect = root.getBoundingClientRect();
+      const headerHeight = header.getBoundingClientRect().height;
+      const shouldPin =
+        rootRect.top <= navbarOffset &&
+        rootRect.bottom - headerHeight > navbarOffset;
+
+      setIsStickyHeaderPinned(shouldPin);
+    };
+
+    updatePinnedState();
+
+    window.addEventListener("scroll", updatePinnedState, { passive: true });
+    window.addEventListener("resize", updatePinnedState);
+
+    return () => {
+      window.removeEventListener("scroll", updatePinnedState);
+      window.removeEventListener("resize", updatePinnedState);
+    };
+  }, [stickyHeaderHeight]);
+
   return (
-    <div className={styles.tableRoot}>
+    <div
+      ref={tableRootRef}
+      className={styles.tableRoot}
+      style={{ "--pricing-sticky-header-height": `${stickyHeaderHeight}px` } as CSSProperties}
+    >
       {/* Sticky header */}
-      <StickyHeader billing={billing} setBilling={onBillingChange} dict={dict} />
+      <div
+        className={styles.stickyHeaderShell}
+        style={{ height: stickyHeaderHeight ? `${stickyHeaderHeight}px` : undefined }}
+      >
+        <StickyHeader
+          billing={billing}
+          setBilling={onBillingChange}
+          dict={dict}
+          headerRef={stickyHeaderRef}
+          isPinned={isStickyHeaderPinned}
+        />
+      </div>
 
       {/* Table body */}
       <div className={styles.tableBody} role="table" aria-label="Feature comparison">
         {CATEGORIES.map((cat) => (
           <div key={cat.title} className={styles.categorySection}>
-            <h3 className={styles.categoryTitle}>{cat.title}</h3>
+            <div className={styles.categoryHeading}>
+              <h3 className={styles.categoryTitle}>{cat.title}</h3>
+            </div>
             {cat.rows.map((row) => (
               <FeatureTableRow key={row.name} row={row} />
             ))}

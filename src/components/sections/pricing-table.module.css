@@ -1,23 +1,46 @@
 /* ─── Pricing comparison table — Attio-parity ─── */
 
 .tableRoot {
-  background: #ffffff;
+  --pricing-table-surface: var(--background);
+  --pricing-table-card-surface: var(--card);
+  --pricing-table-text: var(--foreground);
+  --pricing-table-card-text: var(--card-foreground);
+  --pricing-table-muted-surface: var(--muted);
+  --pricing-table-muted-text: var(--muted-foreground);
+  --pricing-table-border: var(--border);
+  --pricing-navbar-offset: 60px;
+  --pricing-sticky-header-height: 0px;
+  --pricing-category-offset: calc(var(--pricing-navbar-offset) + var(--pricing-sticky-header-height));
+
+  background: var(--pricing-table-surface);
   width: 100%;
+  padding-top: 20px;
 }
 
 /* ── Sticky comparison header ── */
+.stickyHeaderShell {
+  position: relative;
+}
+
 .stickyHeader {
-  position: sticky;
-  top: 60px; /* below navbar */
-  z-index: 20;
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+  background: var(--pricing-table-surface);
+  /* border-bottom: 1px solid var(--pricing-table-border); */
+  width: 100%;
+}
+
+.stickyHeaderPinned {
+  position: fixed;
+  top: var(--pricing-navbar-offset);
+  left: 0;
+  right: 0;
+  z-index: 30;
 }
 
 .stickyInner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 30 24px;
   display: grid;
   grid-template-columns: 30% repeat(3, 1fr);
   align-items: end;
@@ -28,22 +51,22 @@
 }
 
 .stickyLabelText {
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 500;
-  color: #9ca3af;
+  color: var(--pricing-table-muted-text);
   line-height: 1.4;
-  max-width: 100px;
+  max-width: 150px;
 }
 
 .stickyToggle {
   display: flex;
   align-items: center;
   gap: 0;
-  background: #f3f4f6;
-  border: 1px solid #e5e7eb;
+  background: var(--pricing-table-muted-surface);
+  border: 1px solid var(--pricing-table-border);
   border-radius: 999px;
   padding: 2px;
-  margin-top: 6px;
+  margin-top: 10px;
   width: fit-content;
 }
 
@@ -54,7 +77,7 @@
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  color: #9ca3af;
+  color: var(--pricing-table-muted-text);
   background: transparent;
   border: none;
   transition: color 180ms;
@@ -63,29 +86,29 @@
 }
 
 .stickyToggleBtnActive {
-  color: #111827;
+  color: var(--pricing-table-text);
 }
 
 .stickyTogglePill {
   position: absolute;
   inset: 0;
   border-radius: 999px;
-  background: #ffffff;
+  background: var(--pricing-table-card-surface);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   z-index: -1;
 }
 
 .stickyPlanCol {
-  padding: 12px 16px 12px 8px;
+  padding: 12px 16px 12px 12px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .stickyPlanName {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
-  color: #111827;
+  color: var(--pricing-table-text);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -105,8 +128,8 @@
 }
 
 .stickyPlanPrice {
-  font-size: 11px;
-  color: #9ca3af;
+  font-size: 13px;
+  color: var(--pricing-table-muted-text);
   line-height: 1.4;
 }
 
@@ -114,30 +137,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 30px;
-  border-radius: 6px;
-  font-size: 12px;
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
   transition: all 130ms ease;
-  margin-top: 6px;
+  margin-top: 10px;
   white-space: nowrap;
 }
 
 .stickyCtaRegular {
-  border: 1px solid #d1d5db;
-  background: #ffffff;
-  color: #374151;
+  border: 1px solid var(--pricing-table-border);
+  background: var(--pricing-table-card-surface);
+  color: var(--pricing-table-card-text);
 }
-.stickyCtaRegular:hover { background: #f9fafb; }
+.stickyCtaRegular:hover {
+  background: var(--pricing-table-muted-surface);
+  border: 1px solid var(--pricing-table-border);
+  transition: all;
+}
 
 .stickyCtaPro {
   background: #111827;
   color: #ffffff;
   border: 1px solid #111827;
 }
-.stickyCtaPro:hover { background: #1f2937; }
+.stickyCtaPro:hover { background: #1f2937;
+border: 1px solid black; }
+
+:global(html[data-expandable-screen-open="true"]) .stickyHeaderPinned {
+  opacity: 0;
+}
 
 /* ── Table body ── */
 .tableBody {
@@ -147,16 +180,30 @@
 }
 
 .categorySection {
-  margin-top: 36px;
+  position: relative;
+}
+
+.categorySection + .categorySection {
+  margin-top: 0;
+}
+
+.categoryHeading {
+  position: sticky;
+  top: var(--pricing-category-offset);
+  z-index: 15;
+  background: color-mix(in srgb, var(--pricing-table-surface) 92%, transparent);
+  backdrop-filter: blur(8px);
 }
 
 .categoryTitle {
   font-size: 16px;
   font-weight: 600;
-  color: #111827;
-  padding: 14px 0;
-  border-top: 1px solid #e5e7eb;
+  color: var(--pricing-table-text);
+  padding: 18px 0 14px;
   letter-spacing: -0.01em;
+  border-top: 1px solid var(--pricing-table-border);
+  border-bottom: 1px solid var(--pricing-table-border);
+  margin: 0;
 }
 
 /* Table row */
@@ -165,12 +212,12 @@
   grid-template-columns: 30% repeat(3, 1fr);
   min-height: 44px;
   align-items: center;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--pricing-table-border);
 }
 
-.tableRow:hover {
-  background: #fafafa;
-}
+/* .tableRow:hover {
+  background: var(--pricing-table-muted-surface);
+} */
 
 /* Sub-row (indented) */
 .subRow {
@@ -178,17 +225,17 @@
   grid-template-columns: 30% repeat(3, 1fr);
   min-height: 40px;
   align-items: center;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--pricing-table-border);
 }
 
-.subRow:hover { background: #fafafa; }
+.subRow:hover { background: var(--pricing-table-muted-surface); }
 
 .rowFeature {
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 13.5px;
-  color: #374151;
+  color: var(--pricing-table-text);
   padding: 10px 0;
 }
 
@@ -197,7 +244,7 @@
   align-items: center;
   gap: 6px;
   font-size: 12.5px;
-  color: #6b7280;
+  color: var(--pricing-table-muted-text);
   padding: 8px 0 8px 16px;
 }
 
@@ -207,7 +254,7 @@
   justify-content: center;
   padding: 10px 8px;
   font-size: 13px;
-  color: #374151;
+  color: var(--pricing-table-card-text);
   text-align: center;
 }
 
@@ -216,12 +263,12 @@
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  border: 1px solid #d1d5db;
-  background: #f9fafb;
+  border: 1px solid var(--pricing-table-border);
+  background: var(--pricing-table-card-surface);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #9ca3af;
+  color: var(--pricing-table-muted-text);
   font-size: 9px;
   font-weight: 600;
   cursor: help;
@@ -235,7 +282,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #111827;
+  background: #374151;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -254,7 +301,7 @@
 
 .textValue {
   font-size: 13px;
-  color: #374151;
+  color: var(--pricing-table-card-text);
   text-align: center;
 }
 

@@ -10,7 +10,6 @@ interface FAQProps {
 
 export function FAQ({ dict }: FAQProps) {
   const [openIndexes, setOpenIndexes] = useState<Set<number>>(new Set());
-  const [allExpanded, setAllExpanded] = useState(false);
 
   const toggle = (index: number) => {
     setOpenIndexes((prev) => {
@@ -21,29 +20,18 @@ export function FAQ({ dict }: FAQProps) {
     });
   };
 
-  const handleExpandAll = () => {
-    if (allExpanded) {
-      setOpenIndexes(new Set());
-      setAllExpanded(false);
-    } else {
-      setOpenIndexes(new Set(dict.items.map((_, i) => i)));
-      setAllExpanded(true);
-    }
-  };
-
   return (
     <section
       style={{
-        background: "#ffffff",
+        background: "var(--background)",
         width: "100%",
-        borderTop: "1px solid #e5e7eb",
         paddingBottom: 80,
       }}
     >
       {/* Heading */}
       <div
         style={{
-          maxWidth: 1100,
+          maxWidth: "50rem",
           margin: "0 auto",
           padding: "60px 24px 0",
           display: "flex",
@@ -58,7 +46,7 @@ export function FAQ({ dict }: FAQProps) {
               fontSize: "clamp(28px, 4vw, 36px)",
               fontWeight: 700,
               letterSpacing: "-0.02em",
-              color: "#111827",
+              color: "var(--foreground)",
               lineHeight: 1.1,
             }}
           >
@@ -69,7 +57,7 @@ export function FAQ({ dict }: FAQProps) {
               style={{
                 marginTop: 10,
                 fontSize: 15,
-                color: "#6b7280",
+                color: "var(--muted-foreground)",
                 lineHeight: 1.6,
                 maxWidth: 440,
               }}
@@ -80,7 +68,7 @@ export function FAQ({ dict }: FAQProps) {
         </div>
 
         {/* Expand all button */}
-        <button
+        {/* <button
           onClick={handleExpandAll}
           style={{
             flexShrink: 0,
@@ -103,13 +91,13 @@ export function FAQ({ dict }: FAQProps) {
           }}
         >
           {allExpanded ? dict.collapseAll : dict.expandAll}
-        </button>
+        </button> */}
       </div>
 
       {/* Accordion items */}
       <div
         style={{
-          maxWidth: 1100,
+          maxWidth: "50rem",
           margin: "0 auto",
           padding: "24px 24px 0",
         }}
@@ -119,7 +107,7 @@ export function FAQ({ dict }: FAQProps) {
           return (
             <div
               key={index}
-              style={{ borderBottom: "1px solid #e5e7eb" }}
+              style={{ borderBottom: "1px solid var(--border)" }}
             >
               <button
                 onClick={() => toggle(index)}
@@ -140,7 +128,7 @@ export function FAQ({ dict }: FAQProps) {
                   style={{
                     fontSize: 15,
                     fontWeight: 500,
-                    color: "#111827",
+                    color: "var(--foreground)",
                     lineHeight: 1.4,
                     letterSpacing: "-0.01em",
                   }}
@@ -155,10 +143,10 @@ export function FAQ({ dict }: FAQProps) {
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
-                    color: "#9ca3af",
+                    color: "var(--muted-foreground)",
                   }}
                 >
-                  {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                  [{isOpen ? <Minus size={20} /> : <Plus size={20} />}]
                 </span>
               </button>
 
@@ -176,7 +164,7 @@ export function FAQ({ dict }: FAQProps) {
                     style={{
                       fontSize: 14,
                       lineHeight: 1.7,
-                      color: "#6b7280",
+                      color: "var(--muted-foreground)",
                       paddingBottom: 20,
                     }}
                   >

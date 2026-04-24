@@ -293,7 +293,7 @@
         "name": "Pro",
         "tagline": "For growing teams scaling up",
         "comingSoonLabel": "Coming Soon",
-        "cta": "Get notified",
+        "cta": "Continue with Pro",
         "ctaHref": null,
         "highlights": [
           "300+ AI models (OpenRouter)",
@@ -320,6 +320,30 @@
           "Dedicated account manager"
         ],
         "description": "Custom pricing for your needs",
+        "salesForm": {
+          "title": "Nearly there!",
+          "subtitle": "Just a few more details...",
+          "firstName": "First name",
+          "firstNamePlaceholder": "First",
+          "lastName": "Last name",
+          "lastNamePlaceholder": "Last",
+          "companyEmail": "Company email",
+          "companyEmailPlaceholder": "Your work email",
+          "phoneNumber": "Phone number (optional)",
+          "phoneNumberPlaceholder": "Your phone number",
+          "region": "Region",
+          "regionPlaceholder": "Select",
+          "numberOfUsers": "Number of users",
+          "numberOfUsersPlaceholder": "Select",
+          "details": "Details",
+          "detailsPlaceholder": "Tell us about your needs and questions",
+          "submit": "Submit",
+          "privacyPrefix": "This site is protected by reCAPTCHA and the Google",
+          "privacyPolicy": "Privacy Policy",
+          "privacyJoiner": "and",
+          "termsOfService": "Terms of Service",
+          "privacySuffix": "apply."
+        },
         "inheritLabel": "",
         "features": []
       }
@@ -407,7 +431,7 @@
     ]
   },
   "faq": {
-    "title": "Frequently Asked Questions",
+    "title": "Frequently Asked Questions.",
     "description": "We gathered the most common questions about Edfu. If you can't find your answer here, reach out to us.",
     "items": [
       {

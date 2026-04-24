@@ -294,7 +294,7 @@
         "name": "Pro",
         "tagline": "Büyüyen ekipler için",
         "comingSoonLabel": "Yakında",
-        "cta": "Bildirim alın",
+        "cta": "Pro ile devam edin",
         "ctaHref": null,
         "highlights": [
           "300+ AI modeli (OpenRouter)",
@@ -321,6 +321,30 @@
           "Özel hesap yöneticisi"
         ],
         "description": "İhtiyacınıza özel fiyatlandırma",
+        "salesForm": {
+          "title": "Neredeyse tamam!",
+          "subtitle": "Sadece birkaç bilgi daha...",
+          "firstName": "Ad",
+          "firstNamePlaceholder": "Ad",
+          "lastName": "Soyad",
+          "lastNamePlaceholder": "Soyad",
+          "companyEmail": "Şirket e-postası",
+          "companyEmailPlaceholder": "İş e-posta adresiniz",
+          "phoneNumber": "Telefon numarası (opsiyonel)",
+          "phoneNumberPlaceholder": "Telefon numaranız",
+          "region": "Bölge",
+          "regionPlaceholder": "Seçin",
+          "numberOfUsers": "Kullanıcı sayısı",
+          "numberOfUsersPlaceholder": "Seçin",
+          "details": "Detaylar",
+          "detailsPlaceholder": "İhtiyaçlarınızı ve sorularınızı bize anlatın",
+          "submit": "Gönder",
+          "privacyPrefix": "Bu site reCAPTCHA tarafından korunmaktadır ve Google",
+          "privacyPolicy": "Gizlilik Politikası",
+          "privacyJoiner": "ile",
+          "termsOfService": "Hizmet Şartları",
+          "privacySuffix": "geçerlidir."
+        },
         "inheritLabel": "",
         "features": []
       }
@@ -408,7 +432,7 @@
     ]
   },
   "faq": {
-    "title": "Sıkça Sorulan Sorular",
+    "title": "Sıkça Sorulan Sorular.",
     "description": "Edfu hakkında merak edilenleri bir araya getirdik. Burada bulamadığınız bir soru varsa bize ulaşın.",
     "items": [
       {

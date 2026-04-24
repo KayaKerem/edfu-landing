@@ -1,7 +1,8 @@
 .root {
   position: relative;
   width: 100%;
-  min-height: 660px;
+ min-height: 620px;
+  max-height: 720px;
   --cd-dot: rgba(96, 130, 198, 0.15);
   --cd-grid: #edf0f5;
   --cd-border: #e4e7ec;
@@ -16,7 +17,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 24px;
+  gap: 16px;
   padding: 32px 24px;
 }
 @media (min-width: 640px) { .textCol { padding: 36px 40px; } }
@@ -61,7 +62,7 @@
 
 .canvas {
   position: relative;
-  min-height: 660px;
+  min-height: 560px;
   background: var(--cd-bg);
   background-image:
     linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
@@ -236,7 +237,7 @@ border-radius: 20px;
   top: 18px;
   display: grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
-  grid-template-rows: 70px min-content 28px min-content;
+  grid-template-rows: 120px min-content 28px min-content;
   align-items: center;
   justify-items: center;
 }
@@ -276,7 +277,6 @@ border-radius: 20px;
   stroke-width: 1;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0;
 }
 
 .connectorPulse {
@@ -317,7 +317,7 @@ border-radius: 20px;
   inset: 18px 0 0;
   display: grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
-  grid-template-rows: 70px min-content 28px min-content;
+  grid-template-rows: 120px min-content 28px min-content;
   align-items: center;
   justify-items: center;
   z-index: 2;
@@ -407,7 +407,7 @@ border-radius: 20px;
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 660px;
+  min-height: 560px;
   background: var(--cd-bg);
   background-image:
     linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
@@ -499,14 +499,17 @@ border-radius: 20px;
   animation-delay: 2.65s;
 }
 
+.connectorSvg {
+  opacity: 0;
+}
 .root[data-visible="true"] .connectorLeft {
-  animation: cdConnectorReveal 180ms ease-out 790ms forwards;
+  animation: cdConnectorReveal 400ms ease-out 790ms forwards;
 }
 .root[data-visible="true"] .connectorCenter {
-  animation: cdConnectorReveal 180ms ease-out 860ms forwards;
+  animation: cdConnectorReveal 400ms ease-out 860ms forwards;
 }
 .root[data-visible="true"] .connectorRight {
-  animation: cdConnectorReveal 180ms ease-out 930ms forwards;
+  animation: cdConnectorReveal 400ms ease-out 930ms forwards;
 }
 
 .root[data-visible="true"] .connectorLeftPulse {

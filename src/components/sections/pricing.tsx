@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, type ReactElement } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { AnimatedNumber } from "@/components/ui/animated-number";
+import { BRAND_LOGOS as LOCAL_BRAND_LOGOS } from "./brand-logos";
+import { TalkToSalesSheet } from "./talk-to-sales-sheet";
 import styles from "./pricing.module.css";
 import type { Dictionary } from "@/dictionaries";
 
@@ -69,15 +71,18 @@ const PLAN_PRICES = [
 ];
 
 /* ── Check icon (Attio-style small circle) ─────────────────── */
-function CheckIcon() {
+const CheckIcon = () => {
   return (
-    <span className={styles.featureCheck} aria-hidden="true">
-      <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
-        <path d="M1 3l2 2 4-4" stroke="#6b7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M11.2649 3.07601C11.4991 3.22236 11.5703 3.53084 11.4239 3.76501L8.27903 8.79686L8.26603 8.81766C7.96584 9.29798 7.72247 9.68737 7.50209 9.9779C7.27756 10.2739 7.03718 10.5228 6.72175 10.6676C6.24572 10.8861 5.70298 10.9091 5.21014 10.7318C4.88356 10.6142 4.62295 10.3867 4.37412 10.1108C4.1299 9.83997 3.85439 9.47262 3.51455 9.01949L3.49983 8.99986L2.59994 7.80001C2.43425 7.57909 2.47902 7.26569 2.69994 7.10001C2.92085 6.93432 3.23425 6.97909 3.39994 7.20001L4.29983 8.39986C4.65789 8.87728 4.90647 9.2079 5.11672 9.44102C5.32588 9.67294 5.45274 9.75629 5.54875 9.79084C5.79517 9.87952 6.06655 9.868 6.30456 9.75874C6.3973 9.71616 6.51663 9.62236 6.70538 9.37354C6.8951 9.12343 7.11474 8.77292 7.43103 8.26686L10.5759 3.23501C10.7223 3.00084 11.0308 2.92965 11.2649 3.07601Z"
+        fill="currentColor"
+      />
+    </svg>
   );
-}
+};
 
 /* ── Single plan card ─────────────────────────────────────────  */
 interface PlanCardProps {
@@ -136,7 +141,9 @@ function PlanCard({ plan, billing, idx }: PlanCardProps) {
       <ul className={styles.featureList}>
         {plan.highlights.map((f) => (
           <li key={f} className={styles.featureItem}>
-            <CheckIcon />
+            <span className={styles.featureCheck}>
+              <CheckIcon />
+            </span>
             {f}
           </li>
         ))}
@@ -151,8 +158,22 @@ function PlanCard({ plan, billing, idx }: PlanCardProps) {
           >
             {plan.cta}
           </Link>
+        ) : isEnterprise ? (
+          <TalkToSalesSheet
+            layoutId={`talk-to-sales-card-${plan.name.toLowerCase()}`}
+            dict={plan.salesForm!}
+            trigger={
+              <button
+                type="button"
+                className={cn(styles.ctaBtn, isHighlighted ? styles.ctaBtnPro : styles.ctaBtnRegular)}
+              >
+                {plan.cta}
+              </button>
+            }
+          />
         ) : (
           <button
+            type="button"
             className={cn(styles.ctaBtn, isHighlighted ? styles.ctaBtnPro : styles.ctaBtnRegular)}
           >
             {plan.cta}
@@ -163,83 +184,23 @@ function PlanCard({ plan, billing, idx }: PlanCardProps) {
   );
 }
 
-/* ── Logo strip ─────────────────────────────────────────────── */
-function LogoItem({ children }: { children: ReactElement }) {
-  return <span className={styles.logoItem}>{children}</span>;
-}
-
 function LogoStrip() {
   return (
-    <div className={styles.logoStrip} aria-hidden="true">
-      <div className={styles.logoRow}>
-        <LogoItem>
-          {/* Google Drive */}
-          <svg width="90" height="20" viewBox="0 0 90 20" fill="none">
-            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Google Drive</text>
-          </svg>
-        </LogoItem>
-        <LogoItem>
-          {/* Notion */}
-          <svg width="56" height="20" viewBox="0 0 56 20" fill="none">
-            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">notion</text>
-          </svg>
-        </LogoItem>
-        <LogoItem>
-          {/* Slack */}
-          <svg width="44" height="20" viewBox="0 0 44 20" fill="none">
-            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Slack</text>
-          </svg>
-        </LogoItem>
-        <LogoItem>
-          {/* Dropbox */}
-          <svg width="64" height="20" viewBox="0 0 64 20" fill="none">
-            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Dropbox</text>
-          </svg>
-        </LogoItem>
-        <LogoItem>
-          {/* Confluence */}
-          <svg width="80" height="20" viewBox="0 0 80 20" fill="none">
-            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Confluence</text>
-          </svg>
-        </LogoItem>
-        <LogoItem>
-          {/* HubSpot */}
-          <svg width="62" height="20" viewBox="0 0 62 20" fill="none">
-            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">HubSpot</text>
-          </svg>
-        </LogoItem>
-      </div>
-      <div className={styles.logoRow}>
-        <LogoItem>
-          <svg width="56" height="20" viewBox="0 0 56 20" fill="none">
-            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">GitHub</text>
-          </svg>
-        </LogoItem>
-        <LogoItem>
-          <svg width="46" height="20" viewBox="0 0 46 20" fill="none">
-            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Jira</text>
-          </svg>
-        </LogoItem>
-        <LogoItem>
-          <svg width="66" height="20" viewBox="0 0 66 20" fill="none">
-            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Salesforce</text>
-          </svg>
-        </LogoItem>
-        <LogoItem>
-          <svg width="60" height="20" viewBox="0 0 60 20" fill="none">
-            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Intercom</text>
-          </svg>
-        </LogoItem>
-        <LogoItem>
-          <svg width="52" height="20" viewBox="0 0 52 20" fill="none">
-            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">Linear</text>
-          </svg>
-        </LogoItem>
-        <LogoItem>
-          <svg width="76" height="20" viewBox="0 0 76 20" fill="none">
-            <text x="0" y="15" fontFamily="inherit" fontSize="15" fontWeight="600" fill="#9ca3af" letterSpacing="-0.3">OneDrive</text>
-          </svg>
-        </LogoItem>
+    <div className={styles.logoStrip}>
+      <div className={styles.logoGrid} aria-label="Integrations">
+        {LOCAL_BRAND_LOGOS.map(({ name, path }) => (
+          <span key={name} className={styles.logoItem} aria-label={name}>
+            <svg
+              className={styles.logoMark}
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              {path}
+            </svg>
+            <span className={styles.logoLabel}>{name}</span>
+          </span>
+        ))}
       </div>
     </div>
   );
