@@ -496,7 +496,7 @@ function RecordCard({
   return (
     <article
       className={cn(styles.recordCard, styles[`record${record.id[0].toUpperCase()}${record.id.slice(1)}`])}
-      style={{ "--card-delay": `${980 + idx * 140}ms` } as CSSProperties}
+      style={{ "--card-delay": `${720 + idx * 110}ms` } as CSSProperties}
     >
       <header className={styles.recordHeader}>
         <span className={styles.recordMark} style={{ background: tone.bg, borderColor: tone.border, color: tone.color }} aria-hidden="true">
@@ -537,15 +537,28 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
+    const trigger = () => {
+      if (hasPlayedRef.current) return;
+      hasPlayedRef.current = true;
+      setVisible(true);
+    };
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < vh * 0.9 && rect.bottom > vh * 0.1) {
+      trigger();
+      return;
+    }
     const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasPlayedRef.current) {
-          hasPlayedRef.current = true;
-          setVisible(true);
-          obs.unobserve(el);
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            trigger();
+            obs.disconnect();
+            break;
+          }
         }
       },
-      { threshold: 0.3, rootMargin: "-10% 0px -10% 0px" }
+      { threshold: [0, 0.1, 0.25], rootMargin: "0px 0px -80px 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -626,26 +639,11 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
                 viewBox={segment.viewBox}
                 fill="none"
               >
-                <defs>
-                  <linearGradient
-                    id={`connect-data-${segment.id}-pulse`}
-                    gradientUnits="userSpaceOnUse"
-                    x1="0"
-                    x2="0"
-                    y1="0"
-                    y2="100%"
-                  >
-                    <stop stopColor="var(--cd-pulse-color)" stopOpacity="0" offset="0%" />
-                    <stop stopColor="var(--cd-pulse-color)" stopOpacity="1" offset="50%" />
-                    <stop stopColor="var(--cd-pulse-color)" stopOpacity="0" offset="100%" />
-                  </linearGradient>
-                </defs>
                 <path className={styles.connectorBase} d={segment.path} />
                 <path
                   className={cn(styles.connectorPulse, styles[`${segment.className}Pulse`])}
                   d={segment.path}
                   data-connector={segment.id}
-                  stroke={`url(#connect-data-${segment.id}-pulse)`}
                 />
               </svg>
             ))}

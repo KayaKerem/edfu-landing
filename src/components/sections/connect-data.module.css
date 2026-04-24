@@ -1,8 +1,8 @@
 .root {
   position: relative;
   width: 100%;
-  min-height: 620px;
-  max-height: 720px;
+  min-height: 520px;
+  max-height: 600px;
   --cd-dot: rgba(96, 130, 198, 0.15);
   --cd-grid: #edf0f5;
   --cd-border: #e4e7ec;
@@ -26,8 +26,8 @@
     rgba(255, 255, 255, 0) 46%
   );
   --cd-connector-base: #d4d4d8;
-  --cd-pulse-shadow: drop-shadow(0 0 3px rgba(17, 17, 20, 0.35));
-  --cd-pulse-color: #111114;
+  --cd-pulse-shadow: drop-shadow(0 0 4px rgba(74, 135, 255, 0.45));
+  --cd-pulse-color: #4a87ff;
   --cd-integration-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
   --cd-hub-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.05);
   --cd-icon-mark: #2b2f39;
@@ -84,7 +84,7 @@
 
 .canvas {
   position: relative;
-  min-height: 560px;
+  min-height: 480px;
   background: var(--cd-bg);
   background-image:
     linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
@@ -97,7 +97,7 @@
 .sourceGrid {
   position: absolute;
   inset: 0 0 auto;
-  height: 242px;
+  height: 200px;
   pointer-events: none;
 }
 
@@ -113,15 +113,15 @@
 }
 
 .sourceAccentTop {
-  top: 131px;
+  top: 97px;
   left: calc(50% + 54px);
-  height: 37px;
+  height: 32px;
 }
 
 .sourceAccentBottom {
-  top: 203px;
+  top: 154px;
   left: calc(50% + 54px);
-  height: 37px;
+  height: 32px;
 }
 
 .sourceRows {
@@ -130,9 +130,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  padding-top: 62px;
-  padding-bottom: 62px;
+  gap: 22px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .sourcePair {
@@ -181,7 +181,7 @@ border-radius: 20px;
 
 .modelStage {
   position: relative;
-  min-height: 430px;
+  min-height: 360px;
   overflow: hidden;
 }
 
@@ -256,7 +256,7 @@ border-radius: 20px;
 }
 
 .lowerChart {
-  top: 18px;
+  top: 42px;
   display: grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
   grid-template-rows: 120px min-content 28px min-content;
@@ -303,14 +303,15 @@ border-radius: 20px;
 
 .connectorPulse {
   fill: none;
+  stroke: var(--cd-pulse-color);
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 1;
   filter: var(--cd-pulse-shadow);
-  --pulse-len: 24;
+  --pulse-len: 26;
   stroke-dasharray: var(--pulse-len) 9999;
-  stroke-dashoffset: calc((var(--len, 200) + var(--pulse-len)) * -1);
+  stroke-dashoffset: calc((var(--len, 200) + var(--pulse-len)) * -1px);
   will-change: stroke-dashoffset;
 }
 
@@ -430,7 +431,7 @@ border-radius: 20px;
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 560px;
+  min-height: 480px;
   background: var(--cd-bg);
   background-image:
     linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
@@ -442,7 +443,7 @@ border-radius: 20px;
 .integrationsTop {
   position: relative;
   flex: 1 1 auto;
-  min-height: 300px;
+  min-height: 260px;
   background: transparent;
 }
 
@@ -450,15 +451,15 @@ border-radius: 20px;
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(2, 62px);
+  grid-template-columns: repeat(2, 56px);
   justify-content: center;
-  gap: 12px 22px;
-  padding: 32px 24px 28px;
+  gap: 10px 18px;
+  padding: 22px 20px 20px;
 }
 
 .integrationBadge {
-  width: 62px;
-  height: 62px;
+  width: 56px;
+  height: 56px;
   border-radius: 16px;
   background: var(--cd-surface);
   border: 1px solid var(--cd-border);
@@ -506,7 +507,7 @@ border-radius: 20px;
 
 .cubeWrap {
   position: relative;
-  min-height: 272px;
+  min-height: 220px;
 }
 
 .cubeGrid {
@@ -540,8 +541,8 @@ border-radius: 20px;
 
 .root[data-visible="true"] .hubCard {
   animation:
-    cdPopIn 380ms cubic-bezier(0.2, 0.8, 0.2, 1) 610ms both,
-    cdHubIdle 3.2s ease-in-out 1.2s infinite;
+    cdPopIn 380ms cubic-bezier(0.2, 0.8, 0.2, 1) 420ms both,
+    cdHubIdle 3.2s ease-in-out 1s infinite;
 }
 
 .root[data-visible="true"] .sourceAccent {
@@ -560,32 +561,32 @@ border-radius: 20px;
   opacity: 0;
 }
 .root[data-visible="true"] .connectorLeft {
-  animation: cdConnectorReveal 400ms ease-out 790ms forwards;
+  animation: cdConnectorReveal 380ms ease-out 560ms forwards;
 }
 .root[data-visible="true"] .connectorCenter {
-  animation: cdConnectorReveal 400ms ease-out 860ms forwards;
+  animation: cdConnectorReveal 380ms ease-out 640ms forwards;
 }
 .root[data-visible="true"] .connectorRight {
-  animation: cdConnectorReveal 400ms ease-out 930ms forwards;
+  animation: cdConnectorReveal 380ms ease-out 720ms forwards;
 }
 
 .root[data-visible="true"] .connectorLeftPulse {
-  animation: cdTravel 2.4s cubic-bezier(0.45, 0, 0.25, 1) 1.7s infinite;
+  animation: cdTravel 2.2s cubic-bezier(0.45, 0, 0.25, 1) 1.15s infinite;
 }
 
 .root[data-visible="true"] .connectorRightPulse {
-  animation: cdTravel 2.4s cubic-bezier(0.45, 0, 0.25, 1) 2.1s infinite;
+  animation: cdTravel 2.2s cubic-bezier(0.45, 0, 0.25, 1) 1.45s infinite;
 }
 
 .root[data-visible="true"] .connectorCenterPulse {
-  animation: cdTravel 2.0s cubic-bezier(0.45, 0, 0.25, 1) 2.5s infinite;
+  animation: cdTravel 1.9s cubic-bezier(0.45, 0, 0.25, 1) 1.75s infinite;
 }
 
 .root[data-visible="true"] .recordCard {
   animation: cdCardIn 360ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--card-delay) both;
 }
 .root[data-visible="true"] .recordDeal {
-  animation: cdCardInCenter 360ms cubic-bezier(0.2, 0.8, 0.2, 1) 1140ms both;
+  animation: cdCardInCenter 360ms cubic-bezier(0.2, 0.8, 0.2, 1) 880ms both;
 }
 
 .root[data-visible="true"] .integrationBadge {
@@ -593,7 +594,7 @@ border-radius: 20px;
 }
 
 .root[data-visible="true"] .cubeGlyph {
-  animation: cdCubeIn 520ms cubic-bezier(0.2, 0.8, 0.2, 1) 1280ms both;
+  animation: cdCubeIn 520ms cubic-bezier(0.2, 0.8, 0.2, 1) 960ms both;
 }
 
 @keyframes cdFadeUp {
@@ -618,8 +619,8 @@ border-radius: 20px;
   to { opacity: 1; }
 }
 @keyframes cdTravel {
-  0%   { stroke-dashoffset: calc((var(--len, 200) + var(--pulse-len)) * -1); }
-  100% { stroke-dashoffset: var(--pulse-len); }
+  0%   { stroke-dashoffset: calc((var(--len, 200) + var(--pulse-len)) * -1px); }
+  100% { stroke-dashoffset: calc(var(--pulse-len) * 1px); }
 }
 @keyframes cdHubIdle {
   0%, 100% {
