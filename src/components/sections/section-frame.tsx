@@ -51,20 +51,20 @@ export const SectionFrame = forwardRef<HTMLElement, SectionFrameProps>(
           <div className={cn("mx-4 sm:mx-6", styles.inner)}>
             {/* Diagonal hatch stripes — left & right gutters */}
             <div
-              className="pointer-events-none absolute inset-y-0 left-0 w-14 z-[1] text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]"
+              className="pointer-events-none absolute inset-y-0 left-0 w-14 z-[2] text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]"
               aria-hidden="true"
             />
             <div
-              className="pointer-events-none absolute inset-y-0 right-0 w-14 z-[1] text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]"
+              className="pointer-events-none absolute inset-y-0 right-0 w-14 z-[2] text-foreground/5 bg-[size:10px_10px] [background-image:repeating-linear-gradient(315deg,currentColor_0_1px,#0000_0_50%)]"
               aria-hidden="true"
             />
             {/* Vertical rule lines just inside the hatched gutters */}
             <div
-              className="pointer-events-none absolute inset-y-0 left-14 w-px z-[1] bg-border/70"
+              className="pointer-events-none absolute inset-y-0 left-14 w-px z-[2] bg-border/70"
               aria-hidden="true"
             />
             <div
-              className="pointer-events-none absolute inset-y-0 right-14 w-px z-[1] bg-border/70"
+              className="pointer-events-none absolute inset-y-0 right-14 w-px z-[2] bg-border/70"
               aria-hidden="true"
             />
             {/* Ambient dot grid background */}

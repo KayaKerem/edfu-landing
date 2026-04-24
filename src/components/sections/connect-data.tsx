@@ -258,9 +258,9 @@ const RECORD_ICONS: Record<string, () => ReactElement> = {
 function HubMarkIcon() {
   return (
     <svg viewBox="0 0 28 28" fill="none" aria-hidden="true" width={28} height={28}>
-      <path d="M8.4 6.3 15 17.5 11.2 22.8 4.6 11.7 8.4 6.3Z" fill="#2B2F39" />
-      <path d="m16.2 17.4 4-5.8 3.2 5.4-4 5.8-3.2-5.4Z" fill="#2B2F39" opacity="0.9" />
-      <path d="m9.2 5.2 4.4-1.7 6.6 11.1-4.5 1.8L9.2 5.2Z" fill="#2B2F39" opacity="0.78" />
+      <path d="M8.4 6.3 15 17.5 11.2 22.8 4.6 11.7 8.4 6.3Z" fill="currentColor" />
+      <path d="m16.2 17.4 4-5.8 3.2 5.4-4 5.8-3.2-5.4Z" fill="currentColor" opacity="0.9" />
+      <path d="m9.2 5.2 4.4-1.7 6.6 11.1-4.5 1.8L9.2 5.2Z" fill="currentColor" opacity="0.78" />
     </svg>
   );
 }
@@ -277,24 +277,24 @@ function CubeGlyph() {
     >
       <path
         d="M87.1271 16.0359V20.9825L61.3409 34.057C60.5268 34.4699 59.5647 34.4694 58.7508 34.056L32.9642 20.9585V16.0357C32.9642 14.9538 33.5741 13.9645 34.5408 13.4786L58.7603 1.30485C59.569 0.898384 60.5221 0.898384 61.3307 1.30485L85.5503 13.4786C86.5169 13.9645 87.1271 14.9541 87.1271 16.0359Z"
-        fill="#FAFAFB"
-        stroke="#505967"
+        fill="var(--cd-cube-surface)"
+        stroke="var(--cd-cube-stroke)"
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M119.085 65.6369V89.7095C119.085 90.7745 118.494 91.7514 117.55 92.2452L95.2908 103.892C94.4676 104.323 93.4869 104.327 92.66 103.903L85.9824 100.485V74.0949C85.9824 73.014 86.5914 72.0254 87.5566 71.539L110.97 59.7432L117.524 63.0875C118.482 63.5763 119.085 64.5613 119.085 65.6369Z"
-        fill="#FAFAFB"
-        stroke="#505967"
+        fill="var(--cd-cube-surface)"
+        stroke="var(--cd-cube-stroke)"
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M34.1025 74.1096V100.493L27.4249 103.912C26.5979 104.335 25.6172 104.331 24.7941 103.9L2.53517 92.2538C1.59161 91.7599 1 90.783 1 89.7181V65.6453C1 64.5698 1.60303 63.5851 2.56087 63.0963L9.01973 59.7998L32.5202 71.5499C33.4897 72.0347 34.1025 73.0256 34.1025 74.1096Z"
-        fill="#FAFAFB"
-        stroke="#505967"
+        fill="var(--cd-cube-surface)"
+        stroke="var(--cd-cube-stroke)"
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -302,19 +302,19 @@ function CubeGlyph() {
       <g opacity={0.3}>
         <path
           d="M118.637 64.1123L93.9709 76.4322V104.226"
-          stroke="#505967"
+          stroke="var(--cd-cube-stroke)"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M33.4058 14.4998L60.0339 28.0136L86.6773 14.4922"
-          stroke="#505967"
+          stroke="var(--cd-cube-stroke)"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M60.0424 28.0156V34.3684"
-          stroke="#505967"
+          stroke="var(--cd-cube-stroke)"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -635,9 +635,9 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
                     y1="0"
                     y2="100%"
                   >
-                    <stop stopColor="#111114" stopOpacity="0" offset="0%" />
-                    <stop stopColor="#111114" stopOpacity="1" offset="50%" />
-                    <stop stopColor="#111114" stopOpacity="0" offset="100%" />
+                    <stop stopColor="var(--cd-pulse-color)" stopOpacity="0" offset="0%" />
+                    <stop stopColor="var(--cd-pulse-color)" stopOpacity="1" offset="50%" />
+                    <stop stopColor="var(--cd-pulse-color)" stopOpacity="0" offset="100%" />
                   </linearGradient>
                 </defs>
                 <path className={styles.connectorBase} d={segment.path} />

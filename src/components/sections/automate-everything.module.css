@@ -22,6 +22,19 @@
   --chip-text: #475467;
   --plus-bg: #6e78f7;
   --plus-halo: rgba(110, 120, 247, 0.18);
+  --surface-card: #ffffff;
+  --surface-muted: #f2f4f7;
+  --surface-badge: #ffffff;
+  --text-strong: #0b1220;
+  --text-muted: #667085;
+  --list-card-border: #e6e8ec;
+  --list-card-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --grid-line: #e4e7ec;
+  --port-fill: #ffffff;
+  --cube-surface-primary: #ffffff;
+  --cube-surface-secondary: #fafafb;
+  --cube-surface-tertiary: #f3f4f6;
+  --cube-stroke: #505967;
 
   /* Animation tokens */
   --ease-flow: cubic-bezier(0.65, 0, 0.35, 1);
@@ -82,7 +95,7 @@
 
 /* ── Node card ────────────────────────────────────────── */
 .nodeCard {
-  background: #ffffff;
+  background: var(--surface-card);
   border-width: 1.5px !important;
   border-color: var(--node-border-idle);
   border-radius: 14px;
@@ -139,7 +152,7 @@
   line-height: 14px;
   font-weight: 600;
   white-space: nowrap;
-  background: #ffffff;
+  background: var(--surface-badge);
   color: #5b6472;
   border: 1px solid #e4e7ec;
 }
@@ -186,7 +199,7 @@
   left: 16px;
   z-index: 5;
   border-radius: 8px 8px 0 0;
-  background: #ffffff;
+  background: var(--surface-badge);
   border: 1px solid #e4e7ec;
   color: #5b6472;
   /* No animation — always visible from start */
@@ -196,7 +209,7 @@
 /* Branch labels */
 .badgeUpsell {
   color: #0b1220;
-  background: #ffffff;
+  background: var(--surface-badge);
   border: 1.5px solid var(--node-border-active);
   font-weight: 600;
   font-size: 13px;
@@ -207,7 +220,7 @@
 
 .badgeNurture {
   color: #98a2b3;
-  background: #ffffff;
+  background: var(--surface-badge);
   border: 1.5px solid var(--node-border-idle);
   font-weight: 600;
   font-size: 13px;
@@ -216,7 +229,7 @@
 /* Branch label in idle state (before branch phase) */
 .badgeLabelIdle {
   color: #98a2b3;
-  background: #ffffff;
+  background: var(--surface-badge);
   border: 1.5px solid var(--node-border-idle);
   font-weight: 600;
   font-size: 13px;
@@ -237,7 +250,7 @@
   font-weight: 500;
   background: var(--chip-bg);
   color: var(--chip-text);
-  border: 1px solid #e4e7ec;
+  border: 1px solid var(--grid-line);
   white-space: nowrap;
 }
 
@@ -334,6 +347,10 @@
 
 .focusRing:focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; }
 
+.dashedCell {
+  border-color: var(--grid-line);
+}
+
 /* ── Pause / reduced-motion ────────────────────────────── */
 .root[data-paused="true"] .pathDot,
 .root[data-paused="true"] .pulseRing {
@@ -365,14 +382,29 @@
 }
 
 /* ── Dark mode ─────────────────────────────────────────── */
-:global(.dark) .root    { background: #0b0f17; --trace-color: #34d399; }
+:global(.dark) .root    { background: #18181b; --trace-color: #34d399; }
+:global(.dark) .root {
+  --surface-card: #27272a;
+  --surface-muted: #202024;
+  --surface-badge: #18181b;
+  --text-strong: #f1f5f9;
+  --text-muted: #94a3b8;
+  --list-card-border: #3a3a3f;
+  --list-card-shadow: 0 1px 2px rgba(0, 0, 0, 0.34);
+  --grid-line: #34343a;
+  --port-fill: #18181b;
+  --cube-surface-primary: #2b2b31;
+  --cube-surface-secondary: #24242a;
+  --cube-surface-tertiary: #212126;
+  --cube-stroke: #8a8a93;
+}
 :global(.dark) .dotGrid {
-  background-image: radial-gradient(circle at 1px 1px, #1f2937 1.25px, transparent 1.25px);
+  background-image: radial-gradient(circle at 1px 1px, #34343a 1.25px, transparent 1.25px);
 }
 :global(.dark) .badge {
-  background: #0b0f17;
+  background: #18181b;
   color: #d1d5db;
-  border-color: #1f2937;
+  border-color: #34343a;
 }
 :global(.dark) .badgeGreen {
   background: rgba(52,199,123,0.14);
@@ -380,40 +412,40 @@
   border-color: rgba(166,233,194,0.35);
 }
 :global(.dark) .badgeUpsell {
-  background: #0b0f17;
+  background: #18181b;
   color: #f1f5f9;
   border-color: rgba(52,199,123,0.65);
 }
 :global(.dark) .badgeNurture,
 :global(.dark) .badgeLabelIdle {
-  background: #0b0f17;
+  background: #18181b;
   color: #6b7280;
-  border-color: #1f2937;
+  border-color: #34343a;
 }
 :global(.dark) .nodeTriggerTab {
-  background: #0b0f17;
-  border-color: #1f2937;
+  background: #18181b;
+  border-color: #34343a;
   color: #9ca3af;
 }
   :global(.dark) .inlinePill {
-  background: #111827;
+  background: #202024;
   color: #d1d5db;
-  border-color: #1f2937;
+  border-color: #34343a;
 }
 :global(.dark) .nodeCard {
-  background: #0f172a;
-  border-color: #1f2937;
+  background: #27272a;
+  border-color: #34343a;
   box-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
 :global(.dark) .nodeCardActive {
   box-shadow: 0 0 0 3px rgba(52,211,153,0.18), 0 4px 14px rgba(52,211,153,0.12);
 }
-:global(.dark) .nodeCardMuted { border-color: #1f2937 !important; }
-:global(.dark) .flowPathGray  { stroke: #374151; }
+:global(.dark) .nodeCardMuted { border-color: #34343a !important; }
+:global(.dark) .flowPathGray  { stroke: #4a4a52; }
 :global(.dark) .flowPathGreen { stroke: #34d399; }
 :global(.dark) .listCard {
-  background: #0f172a;
-  border-color: #1f2937;
+  background: #27272a;
+  border-color: #34343a;
   box-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
 :global(.dark) .listCardActive {

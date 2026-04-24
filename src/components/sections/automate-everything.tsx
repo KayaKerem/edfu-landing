@@ -266,7 +266,7 @@ function NodeCard({
       aria-label={ariaLabel}
       className={cn(
         styles.nodeCard,
-        "relative rounded-[14px] border bg-white",
+        "relative rounded-[14px] border",
         active && styles.nodeCardActive,
         muted && !active && styles.nodeCardMuted
       )}
@@ -281,12 +281,18 @@ function NodeCard({
           >
             <span className="size-4 inline-flex">{icon}</span>
           </span>
-          <span className="flex-1 min-w-0 text-[15px] font-semibold leading-[20px] tracking-[-0.1px] text-[#0B1220] dark:text-[#F1F5F9] whitespace-nowrap">
+          <span
+            className="flex-1 min-w-0 whitespace-nowrap text-[15px] font-semibold leading-[20px] tracking-[-0.1px]"
+            style={{ color: "var(--text-strong)" }}
+          >
             {title}
           </span>
           <span className={styles.inlinePill}>{inlinePill}</span>
         </div>
-        <p className="mt-2 text-[13px] leading-[18px] text-[#667085] dark:text-[#94A3B8] line-clamp-2">
+        <p
+          className="mt-2 line-clamp-2 text-[13px] leading-[18px]"
+          style={{ color: "var(--text-muted)" }}
+        >
           {description}
         </p>
       </div>
@@ -338,11 +344,18 @@ function ListCard({
         aria-current={active ? "true" : undefined}
         className={cn(
           styles.listCard,
-          "flex h-8 w-full items-center gap-1.5 rounded-[11px] border border-[#E6E8EC] bg-white px-2.5 text-left shadow-[0_1px_2px_rgba(0,0,0,0.04)]",
+          "flex h-8 w-full items-center gap-1.5 rounded-[11px] border px-2.5 text-left",
           active && styles.listCardActive,
           muted && !active && opacity === undefined && styles.listCardMuted
         )}
-        style={{ "--list-card-scale": scale } as React.CSSProperties}
+        style={
+          {
+            "--list-card-scale": scale,
+            background: "var(--surface-card)",
+            borderColor: "var(--list-card-border)",
+            boxShadow: "var(--list-card-shadow)",
+          } as React.CSSProperties
+        }
       >
         <span
           className="flex size-[15px] shrink-0 items-center justify-center rounded-[5px]"
@@ -350,7 +363,10 @@ function ListCard({
         >
           <span className="inline-flex size-[9px]"><ListItemIcon /></span>
         </span>
-        <span className={cn(styles.listCardTitle, "min-w-0 flex-1 truncate text-[12px] leading-[15px] text-[#0F1720] dark:text-[#F1F5F9]")}>
+        <span
+          className={cn(styles.listCardTitle, "min-w-0 flex-1 truncate text-[12px] leading-[15px]")}
+          style={{ color: "var(--text-strong)" }}
+        >
           {item.title}
         </span>
       </div>
@@ -602,8 +618,8 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
                       [upsellCardCx,  n34Top,      e3Green],
                       [nurtureCardCx, n34Top,      false],
                     ] as [number, number, boolean][]).map(([x, y, on], i) => (
-                      <circle key={i} cx={x} cy={y} r={3} fill="#ffffff"
-                        stroke={on ? "#34C77B" : "#D0D5DD"} strokeWidth={1.4}
+                      <circle key={i} cx={x} cy={y} r={3} fill="var(--port-fill)"
+                        stroke={on ? "var(--edge-active)" : "var(--edge-idle)"} strokeWidth={1.4}
                         style={{ transition: "stroke 400ms ease" }}
                       />
                     ))}
@@ -813,24 +829,24 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
               <div className="hidden lg:block relative flex-1 min-h-[180px] border-t border-border">
                 {/* 3-column x 2-row dashed grid */}
                 <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 pointer-events-none" aria-hidden="true">
-                  <div className="border-b border-r border-dashed border-[#e4e7ec]" />
-                  <div className="border-b border-r border-dashed border-[#e4e7ec]" />
-                  <div className="border-b border-dashed border-[#e4e7ec]" />
-                  <div className="border-r border-dashed border-[#e4e7ec]" />
-                  <div className="border-r border-dashed border-[#e4e7ec]" />
+                  <div className={cn(styles.dashedCell, "border-b border-r border-dashed")} />
+                  <div className={cn(styles.dashedCell, "border-b border-r border-dashed")} />
+                  <div className={cn(styles.dashedCell, "border-b border-dashed")} />
+                  <div className={cn(styles.dashedCell, "border-r border-dashed")} />
+                  <div className={cn(styles.dashedCell, "border-r border-dashed")} />
                   <div />
                 </div>
                 {/* Cubes centered in grid */}
                 <div className={cn(styles.cubes, "absolute inset-0 flex items-center justify-center")} aria-hidden="true">
                   <svg width="140" height="120" viewBox="0 0 120 120" fill="none" className="overflow-visible">
-                    <path d="M53.2944 38.3421L83.0481 23.4418C84.224 22.8527 85.6105 22.8527 86.7864 23.4418L116.54 38.3421C117.947 39.0465 118.835 40.4814 118.835 42.0509V72.0653C118.835 73.6344 117.947 75.0698 116.54 75.7741L86.7864 90.6745C85.6105 91.2635 84.224 91.2635 83.0481 90.6745L53.2944 75.7741C51.888 75.0698 51 73.6348 51 72.0653V42.0509C51 40.4818 51.888 39.0465 53.2944 38.3421Z" fill="#FAFAFB" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M3.29443 67.1331L33.0481 52.2328C34.224 51.6438 35.6105 51.6438 36.7864 52.2328L66.5401 67.1331C67.9466 67.8375 68.8345 69.2725 68.8345 70.8419V99.8563C68.8345 101.425 67.9466 102.861 66.5401 103.565L36.7864 118.465C35.6105 119.055 34.224 119.055 33.0481 118.465L3.29443 103.565C1.88795 102.861 1 101.426 1 99.8563V70.8419C1 69.2728 1.88795 67.8375 3.29443 67.1331Z" fill="#F3F4F6" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path opacity="0.6" d="M1.65625 67.627L34.9181 84.4541L67.5 68M34.9167 118.914V84.4473" stroke="#505967" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M3.29443 16.3421L33.0481 1.44179C34.224 0.852738 35.6105 0.852738 36.7864 1.44179L66.5401 16.3421C67.9466 17.0465 68.8345 18.4814 68.8345 20.0509V49.0653C68.8345 50.6344 67.9466 52.0698 66.5401 52.7741L36.7864 67.6745C35.6105 68.2635 34.224 68.2635 33.0481 67.6745L3.29443 52.7741C1.88795 52.0698 1 50.6348 1 49.0653V20.0509C1 18.4818 1.88795 17.0465 3.29443 16.3421Z" fill="white" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path opacity="0.6" d="M1.65625 17.8359L34.9181 34.663L68.1803 17.8359M34.9167 68.1227V34.6563" stroke="#505967" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M53.2944 38.8421L83.0481 23.9418C84.224 23.3527 85.6105 23.3527 86.7864 23.9418L116.54 38.8421C117.947 39.5465 118.835 40.9814 118.835 42.5509V58.5653L85.0481 75.1745L51 58.5653V42.5509C51 40.9818 51.888 39.5465 53.2944 38.8421Z" fill="#FAFAFB"/>
-                    <path d="M116.54 75.7741C117.947 75.0698 118.835 73.6344 118.835 72.0653V42.0509C118.835 40.4814 117.947 39.0465 116.54 38.3421L86.7864 23.4418C85.6105 22.8527 84.224 22.8527 83.0481 23.4418L53.2944 38.3421C51.888 39.0465 51 40.4818 51 42.0509V59.35L66 66.85" stroke="#505967" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path opacity="0.6" d="M51.6562 39.8359L84.9181 56.663L118.18 39.8359M84.9167 91.1227V56.6563" stroke="#505967" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M53.2944 38.3421L83.0481 23.4418C84.224 22.8527 85.6105 22.8527 86.7864 23.4418L116.54 38.3421C117.947 39.0465 118.835 40.4814 118.835 42.0509V72.0653C118.835 73.6344 117.947 75.0698 116.54 75.7741L86.7864 90.6745C85.6105 91.2635 84.224 91.2635 83.0481 90.6745L53.2944 75.7741C51.888 75.0698 51 73.6348 51 72.0653V42.0509C51 40.4818 51.888 39.0465 53.2944 38.3421Z" fill="var(--cube-surface-secondary)" stroke="var(--cube-stroke)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3.29443 67.1331L33.0481 52.2328C34.224 51.6438 35.6105 51.6438 36.7864 52.2328L66.5401 67.1331C67.9466 67.8375 68.8345 69.2725 68.8345 70.8419V99.8563C68.8345 101.425 67.9466 102.861 66.5401 103.565L36.7864 118.465C35.6105 119.055 34.224 119.055 33.0481 118.465L3.29443 103.565C1.88795 102.861 1 101.426 1 99.8563V70.8419C1 69.2728 1.88795 67.8375 3.29443 67.1331Z" fill="var(--cube-surface-tertiary)" stroke="var(--cube-stroke)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path opacity="0.6" d="M1.65625 67.627L34.9181 84.4541L67.5 68M34.9167 118.914V84.4473" stroke="var(--cube-stroke)" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3.29443 16.3421L33.0481 1.44179C34.224 0.852738 35.6105 0.852738 36.7864 1.44179L66.5401 16.3421C67.9466 17.0465 68.8345 18.4814 68.8345 20.0509V49.0653C68.8345 50.6344 67.9466 52.0698 66.5401 52.7741L36.7864 67.6745C35.6105 68.2635 34.224 68.2635 33.0481 67.6745L3.29443 52.7741C1.88795 52.0698 1 50.6348 1 49.0653V20.0509C1 18.4818 1.88795 17.0465 3.29443 16.3421Z" fill="var(--cube-surface-primary)" stroke="var(--cube-stroke)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path opacity="0.6" d="M1.65625 17.8359L34.9181 34.663L68.1803 17.8359M34.9167 68.1227V34.6563" stroke="var(--cube-stroke)" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M53.2944 38.8421L83.0481 23.9418C84.224 23.3527 85.6105 23.3527 86.7864 23.9418L116.54 38.8421C117.947 39.5465 118.835 40.9814 118.835 42.5509V58.5653L85.0481 75.1745L51 58.5653V42.5509C51 40.9818 51.888 39.5465 53.2944 38.8421Z" fill="var(--cube-surface-secondary)"/>
+                    <path d="M116.54 75.7741C117.947 75.0698 118.835 73.6344 118.835 72.0653V42.0509C118.835 40.4814 117.947 39.0465 116.54 38.3421L86.7864 23.4418C85.6105 22.8527 84.224 22.8527 83.0481 23.4418L53.2944 38.3421C51.888 39.0465 51 40.4818 51 42.0509V59.35L66 66.85" stroke="var(--cube-stroke)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path opacity="0.6" d="M51.6562 39.8359L84.9181 56.663L118.18 39.8359M84.9167 91.1227V56.6563" stroke="var(--cube-stroke)" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
               </div>

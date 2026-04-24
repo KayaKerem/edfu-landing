@@ -10,7 +10,6 @@
   max-height: 720px;
 
   /* Design tokens — Attio parity (from attio.com homepage HTML inspection) */
-       /* Attio uses primary-background, not gradient */
   --da-bg-canvas-end: #FFFFFF;
   --da-dot-color: rgba(96, 130, 198, 0.17);
   --da-card-bg: #FFFFFF;
@@ -36,6 +35,10 @@
   --da-task-border-end: #85AEFF;
   --da-trigger-border-start: #A4C3FF;
   --da-trigger-border-end: #72A6FF;
+  --da-cta-hover-bg: #F3F4F6;
+  --da-answer-pill-hover: #FAFAFB;
+  --da-dashed-grid: #e4e7ec;
+  --da-orbit-color: #505967;
 }
 
 /* Left column — headline + description + Explore link */
@@ -81,7 +84,7 @@
   align-self: flex-start;
 }
 .cta:hover {
-  background: #F3F4F6;
+  background: var(--da-cta-hover-bg);
   color: var(--da-accent-indigo);
 }
 .cta:focus-visible {
@@ -391,7 +394,7 @@
   transition: background 150ms ease;
   z-index: 2;
 }
-.answerPill:hover { background: #FAFAFB; }
+.answerPill:hover { background: var(--da-answer-pill-hover); }
 
 .answerPill.truncate {
   white-space: nowrap;
@@ -563,7 +566,7 @@
   z-index: 0;
 }
 
-.dashedCell { border-style: dashed; border-color: #e4e7ec; }
+.dashedCell { border-style: dashed; border-color: var(--da-dashed-grid); }
 .responseDashedGrid > div:nth-child(1) { border-right-width: 1px; border-bottom-width: 1px; }
 .responseDashedGrid > div:nth-child(2) { border-right-width: 1px; border-bottom-width: 1px; }
 .responseDashedGrid > div:nth-child(3) { border-bottom-width: 1px; }
@@ -579,7 +582,7 @@
   padding-bottom: 40px;
   pointer-events: none;
   z-index: 1;
-  color: #505967;
+  color: var(--da-orbit-color);
   opacity: 0;
   transform: translateY(12px) scale(0.96);
 }
@@ -835,7 +838,7 @@
 
 /* ── Dark mode ──────────────────────────────────────────────── */
 :global(.dark) .responseCol {
-  background: linear-gradient(to bottom, #0B0D12 0%, #0B0D12 100%);
+  background: linear-gradient(to bottom, #18181b 0%, #18181b 100%);
 }
 :global(.dark) .responseAvatar {
   background: #F3F4F6;
@@ -858,25 +861,29 @@
 }
 :global(.dark) .responseRowIcon { color: #9CA3AF; }
 :global(.dark) .root {
-  --da-bg-canvas: #0B0D12;
-  --da-bg-canvas-end: #0B0D12;
+  --da-bg-canvas: #18181b;
+  --da-bg-canvas-end: #18181b;
   --da-dot-color: rgba(255, 255, 255, 0.06);
-  --da-card-bg: #13161D;
-  --da-card-border: #2A2F45;
-  --da-card-halo: #1E2230;
-  --da-hairline: #1E2230;
-  --da-pill-bg: #15181F;
-  --da-pill-border: #242838;
+  --da-card-bg: #27272a;
+  --da-card-border: #3a3a3f;
+  --da-card-halo: #34343a;
+  --da-hairline: #34343a;
+  --da-pill-bg: #202024;
+  --da-pill-border: #34343a;
   --da-text-primary: #F3F4F6;
   --da-text-secondary: #9CA3AF;
   --da-text-body: #E5E7EB;
-  --da-connector: #6C83C8;
-  --da-icon-chip-bg: #1C2140;
-  --da-icon-chip-border: #2A2F45;
-  --da-badge-bg: #1A1E2A;
-  --da-badge-border: #272C3D;
+  --da-connector: #5f6880;
+  --da-icon-chip-bg: #202024;
+  --da-icon-chip-border: #3a3a3f;
+  --da-badge-bg: #202024;
+  --da-badge-border: #34343a;
   --da-task-border-start: #5A447F;
   --da-task-border-end: #4F72C8;
   --da-trigger-border-start: #4D6699;
   --da-trigger-border-end: #4F72C8;
+  --da-cta-hover-bg: #202024;
+  --da-answer-pill-hover: #232327;
+  --da-dashed-grid: #34343a;
+  --da-orbit-color: #a1a1aa;
 }
