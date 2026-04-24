@@ -554,7 +554,7 @@
   "automateEverything": {
     "title": "Her Şeyi Otomatikleştir",
     "description": "Bir deal güncellendiğinde tetiklenen, koşula göre dallanan ve uygun kişileri upsell sequence'ına ekleyen akışı canlı bir listede izleyin.",
-    "cta": "Otomasyonları keşfet →",
+    "cta": "Otomasyonları keşfet ",
     "ariaLabel": "Otomasyon akış bölümü",
     "srText": "Otomasyon akışı, 4 adım. 1. adım tetikleyici When Deal updated, triggered. 2. adım koşul. 3. adım sequence'a ekleme upsell. 4. adım sequence'a ekleme nurture.",
     "trigger": {

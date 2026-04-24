@@ -600,8 +600,8 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
 
       <div className={styles.canvas}>
         <div className={styles.sourceGrid} aria-hidden="true" />
-        <div className={cn(styles.sourceAccent, styles.sourceAccentTop)} aria-hidden="true" />
-        <div className={cn(styles.sourceAccent, styles.sourceAccentBottom)} aria-hidden="true" />
+        {/* <div className={cn(styles.sourceAccent, styles.sourceAccentTop)} aria-hidden="true" /> */}
+        {/* <div className={cn(styles.sourceAccent, styles.sourceAccentBottom)} aria-hidden="true" /> */}
         <div className={styles.sourceRows}>
           {SOURCE_ROWS.map((row, rowIndex) => (
             <SourcePair

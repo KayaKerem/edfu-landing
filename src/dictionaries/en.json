@@ -553,7 +553,7 @@
   "automateEverything": {
     "title": "Automate Everything",
     "description": "Watch a deal update trigger a branching automation, route qualified contacts into an upsell sequence, and keep the rest of your playbooks moving in a live list.",
-    "cta": "Explore automations →",
+    "cta": "Explore automations ",
     "ariaLabel": "Automation flow section",
     "srText": "Automation flow, 4 steps. Step 1 trigger When Deal updated, triggered. Step 2 condition. Step 3 enroll in sequence upsell. Step 4 enroll in sequence nurture.",
     "trigger": {

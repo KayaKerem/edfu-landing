@@ -10,9 +10,11 @@
   max-height: 720px;
 
   /* Design tokens */
+    --da-accent-indigo: #4A87FF;
   --edge-active: #34c77b;
   --trace-color: #34c77b;
   --edge-idle: #d0d5dd;
+    --da-cta-hover-bg: #F3F4F6;
   --node-border-active: #34c77b;
   --node-border-idle: #e4e7ec;
   --status-bg: #e7f8ef;
@@ -253,6 +255,31 @@
   border: 1px solid var(--grid-line);
   white-space: nowrap;
 }
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--da-text-primary);
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+  align-self: flex-start;
+}
+.cta:hover {
+  background: var(--da-cta-hover-bg);
+  color: var(--da-accent-indigo) !important;
+}
+.cta:focus-visible {
+  outline: 2px solid var(--da-accent-indigo);
+  outline-offset: 3px;
+}
+.cta .arrow {
+  transition: transform 180ms ease;
+}
+.cta:hover .arrow { transform: translateX(2px); }
 
 .plusButton {
   background: var(--plus-bg) !important;
@@ -397,6 +424,7 @@
   --cube-surface-secondary: #24242a;
   --cube-surface-tertiary: #212126;
   --cube-stroke: #8a8a93;
+    --da-cta-hover-bg: #202024;
 }
 :global(.dark) .dotGrid {
   background-image: radial-gradient(circle at 1px 1px, #34343a 1.25px, transparent 1.25px);

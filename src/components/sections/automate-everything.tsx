@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import styles from "./automate-everything.module.css";
 import { SectionFrame } from "./section-frame";
+import Link from "next/link";
 
 type ListItem = {
   id: string;
@@ -158,6 +159,19 @@ function PlusIcon() {
   return (
 <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path d="M8 4v8M4 8h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+function ArrowRightIcon() {
+  return (
+    <svg viewBox="0 0 14 14" fill="none" aria-hidden="true" width={14} height={14}>
+      <path
+        d="M3 7h8m0 0L7.5 3.5M11 7l-3.5 3.5"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -558,9 +572,13 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
                 </p>
                 <span className="sr-only">{dict.srText}</span>
               </div>
-              <button className={cn(styles.focusRing, "group inline-flex justify-between items-center gap-2 text-[14px] font-semibold leading-[20px] text-[#0F1720] dark:text-[#F1F5F9] hover:bg-[#F3F4F6] rounded-2xl text-start px-6 py-1 hover:transition-all transition-opacity")}>
-                {dict.cta}
-              </button>
+    
+            <Link href="#automate-everything" className={styles.cta}>
+          <span>{dict.cta}</span>
+          <span className={styles.arrow} aria-hidden="true">
+            <ArrowRightIcon />
+          </span>
+        </Link>
             </div>
             {/* ─── Center: diagram ─── */}
             <div className="flex items-center justify-center min-h-auto pl-3 sm:pl-5 lg:pl-6">
