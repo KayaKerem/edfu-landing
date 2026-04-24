@@ -1,18 +1,23 @@
 import { notFound } from "next/navigation";
 import { getDictionary, hasLocale } from "@/dictionaries";
 import type { Locale, Dictionary } from "@/dictionaries";
+import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/navbar";
 import { Hero } from "@/components/sections/hero";
 import { Logos } from "@/components/sections/logos";
-import { BentoFeatures } from "@/components/sections/bento-features";
 import { Testimonial } from "@/components/sections/testimonial";
-import { HowItWorks } from "@/components/sections/how-it-works";
 import { Security } from "@/components/sections/security";
-import { Pricing } from "@/components/sections/pricing";
 import { MarqueeTestimonials } from "@/components/sections/marquee-testimonials";
-import { FAQ } from "@/components/sections/faq";
 import { CTA } from "@/components/sections/cta";
 import { Footer } from "@/components/sections/footer";
+import { AutomateEverything } from "@/components/sections/automate-everything";
+import { ConnectData } from "@/components/sections/connect-data";
+import type { ConnectDataDict } from "@/components/sections/connect-data";
+import { DeployAi } from "@/components/sections/deploy-ai";
+import type { DeployAiDict } from "@/components/sections/deploy-ai";
+import { AiGradientCard } from "@/components/sections/ai-gradient-card";
+import { LegacyHashRedirect } from "@/components/legacy-hash-redirect";
+import { FlowDiagram } from "@/components/sections/flow-diagram";
 
 const BASE_URL = "https://edfu.ai";
 
@@ -75,19 +80,6 @@ function JsonLd({ dict, lang }: { dict: Dictionary; lang: string }) {
     },
   };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: dict.faq.items.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -99,24 +91,66 @@ function JsonLd({ dict, lang }: { dict: Dictionary; lang: string }) {
 
   return (
     <>
+      {/* Safe: JSON.stringify escapes </script> sequences */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationSchema).replace(/</g, "\\u003c"),
+        }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(softwareSchema).replace(/</g, "\\u003c"),
+        }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteSchema).replace(/</g, "\\u003c"),
+        }}
       />
     </>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(lang)) return {};
+  const dict = await getDictionary(lang as Locale);
+  const m = dict.metadata;
+
+  return {
+    title: m.title,
+    description: m.description,
+    openGraph: {
+      title: m.ogTitle,
+      description: m.ogDescription,
+      url: lang === "tr" ? BASE_URL : `${BASE_URL}/en`,
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: m.ogTitle,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: m.twitterTitle,
+      description: m.twitterDescription,
+      images: ["/og-image.png"],
+    },
+  };
+}
+
+export async function generateStaticParams() {
+  return [{ lang: "tr" }, { lang: "en" }];
 }
 
 export default async function Home({
@@ -131,25 +165,29 @@ export default async function Home({
 
   return (
     <>
+      <LegacyHashRedirect />
       <JsonLd dict={dict} lang={lang} />
       <Navbar dict={dict.navbar} lang={lang} />
-      <div className="relative mx-auto max-w-7xl border-x border-border">
-        <div className="pointer-events-none absolute inset-y-0 left-4 md:left-6 z-10 w-px bg-border" />
-        <div className="pointer-events-none absolute inset-y-0 right-4 md:right-6 z-10 w-px bg-border" />
-        <main className="divide-y divide-border">
-          <Hero dict={dict.hero} />
-          <Logos dict={dict.logos} />
-          <BentoFeatures dict={dict.features} />
-          <Testimonial dict={dict.testimonial} />
-          <HowItWorks dict={dict.howItWorks} />
-          <Security dict={dict.security} />
-          <Pricing dict={dict.pricing} />
-          <MarqueeTestimonials dict={dict.marqueeTestimonials} />
-          <FAQ dict={dict.faq} />
-          <CTA dict={dict.cta} />
-        </main>
-        <Footer dict={dict.footer} />
-      </div>
+      <main className="relative">
+        <Hero dict={dict.hero} lang={lang} />
+        <div className="relative mx-auto max-w-7xl border-x border-border/70">
+          <div className="pointer-events-none absolute inset-y-0 left-4 md:left-6 z-10 w-px bg-border/70" />
+          <div className="pointer-events-none absolute inset-y-0 right-4 md:right-6 z-10 w-px bg-border/70" />
+          <div className="divide-y divide-border/70">
+            <Logos dict={dict.logos} />
+            <AutomateEverything dict={dict.automateEverything} />
+            <DeployAi dict={dict.deployAi as DeployAiDict} />
+            <ConnectData dict={dict.connectData as ConnectDataDict} />
+            <Testimonial dict={dict.testimonial} />
+            <FlowDiagram dict={dict.flowDiagram} />
+            <Security dict={dict.security} />
+            <AiGradientCard dict={dict.aiGradientCard} />
+            <MarqueeTestimonials dict={dict.marqueeTestimonials} />
+            <CTA dict={dict.cta} />
+          </div>
+          <Footer dict={dict.footer} lang={lang} />
+        </div>
+      </main>
     </>
   );
 }

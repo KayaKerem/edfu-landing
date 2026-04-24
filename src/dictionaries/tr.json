@@ -1,51 +1,109 @@
 {
   "metadata": {
-    "title": "Edfu - Şirketinizin AI Bilgi Tabanı | Dokümanlardan Anında Cevap",
-    "description": "Şirketinizin bilgi birikimini yapay zekaya dönüştürün. Dokümanlarınızı yükleyin, 300+ AI modeli ile ekibiniz Türkçe sorular sorsun, anında doğru cevap alsın. 14 gün ücretsiz deneyin.",
+    "title": "Edfu - Çok Kanallı AI Müşteri İletişim Platformu",
+    "description": "WhatsApp, Instagram, Telegram ve diğer kanallardan gelen müşterilerinizle AI agent'lar aracılığıyla konuşun. Araştırma, teklif ve toplantı süreçlerinizi otomatikleştirin.",
     "keywords": [
-      "yapay zeka bilgi tabanı",
-      "AI bilgi yönetimi",
-      "kurumsal yapay zeka",
-      "doküman analizi",
-      "RAG platformu",
-      "Türkçe AI asistan",
-      "şirket bilgi tabanı",
-      "AI destekli arama",
+      "AI müşteri iletişimi",
+      "çok kanallı platform",
+      "WhatsApp bot",
+      "AI agent",
+      "müşteri otomasyonu",
+      "toplantı asistanı",
+      "teklif otomasyonu",
+      "Türkçe AI",
       "kurumsal chatbot",
-      "doküman sorgulama",
-      "KVKK uyumlu AI",
-      "OpenRouter",
-      "Claude",
-      "GPT-4",
+      "RAG platformu",
       "Edfu"
     ],
-    "ogTitle": "Edfu - Şirketinizin AI Bilgi Tabanı",
-    "ogDescription": "Dokümanlarınızı yükleyin, 300+ AI modeli ile ekibiniz Türkçe sorular sorsun, anında doğru cevap alsın. KVKK uyumlu, kurumsal düzeyde altyapı.",
-    "twitterTitle": "Edfu - Şirketinizin AI Bilgi Tabanı",
-    "twitterDescription": "Dokümanlarınızı yükleyin, 300+ AI modeli ile ekibiniz Türkçe sorular sorsun, anında doğru cevap alsın."
+    "ogTitle": "Edfu - Çok Kanallı AI Müşteri İletişim Platformu",
+    "ogDescription": "WhatsApp, Instagram, Telegram ve diğer kanallardan gelen müşterilerinizle AI agent'lar aracılığıyla konuşun. Teklif, araştırma ve toplantı süreçlerinizi otomatikleştirin.",
+    "twitterTitle": "Edfu - Çok Kanallı AI Müşteri İletişim Platformu",
+    "twitterDescription": "Müşterilerinizle AI agent'lar aracılığıyla konuşun. Araştırma, teklif ve toplantı süreçlerinizi otomatikleştirin."
   },
   "navbar": {
     "home": "Ana Sayfa",
-    "features": "Özellikler",
-    "howItWorks": "Nasıl Çalışır",
+    "agents": "Asistan",
+    "meeting": "Toplantı",
+    "integrations": "Entegrasyonlar",
     "pricing": "Fiyatlandırma",
     "cta": "Ücretsiz Deneyin",
     "menuOpen": "Menüyü aç",
     "menuClose": "Menüyü kapat"
   },
   "hero": {
-    "badge": "300+ AI modeli, tek platform",
-    "titleLine1Before": "Her Sorunun ",
-    "titleLine1Highlight": "Cevabı",
-    "titleLine2Highlight": "Sizde",
-    "titleLine2After": " Zaten Var.",
-    "description": "Dokümanlarınızı yükleyin, kaynaklarınızı bağlayın, ekibiniz sorusunu sorsun.\nEdfu şirketinizin tüm bilgi birikiminden doğru cevabı anında bulsun.",
+    "badge": "Çok Kanallı AI İletişim Platformu",
+    "titleLine1Before": "Müşteri ",
+    "titleLine1Highlight": "İletişiminizi",
+    "titleLine2Highlight": "Otomatikleştirin",
+    "titleLine2After": ".",
+    "description": "WhatsApp, Instagram, Telegram ve diğer kanallardan gelen müşterilerinizle AI agent'lar aracılığıyla konuşun.\nAraştırma, teklif ve toplantı süreçlerinizi tamamen otomatikleştirin.",
     "ctaPrimary": "Ücretsiz Deneyin",
     "ctaSecondary": "Giriş Yap"
   },
   "logos": {
-    "subtitle": "300'den fazla yapay zeka modeline tek platformdan erişin",
+    "subtitle": "Tüm kanallarınız ve toplantı araçlarınız tek platformda",
     "learnMore": "Daha Fazla"
+  },
+  "connectData": {
+    "title": "Her tür veriyi bağlayın",
+    "description": "Ürün verisini, faturalama verisini ve aradaki her şeyi işletmeniz için gerçek zamanlı tek bir doğruluk kaynağında senkronize edin.",
+    "cta": "Veriyi keşfet",
+    "ctaHref": "/tr/integrations",
+    "ariaLabel": "Her tür veriyi bağlayın",
+    "srText": "Veri kaynakları ve kayıt kartları Edfu veri katmanı üzerinden birbirine bağlanıyor.",
+    "sources": [
+      {
+        "id": "sales_engagement",
+        "label": "Satış etkileşimi"
+      },
+      {
+        "id": "email_calendar",
+        "label": "E-posta ve takvim"
+      },
+      {
+        "id": "data_warehouses",
+        "label": "Veri ambarları"
+      },
+      {
+        "id": "customer_support",
+        "label": "Müşteri desteği"
+      },
+      {
+        "id": "billing_invoicing",
+        "label": "Faturalama ve tahsilat"
+      },
+      {
+        "id": "product_data",
+        "label": "Ürün verisi"
+      }
+    ],
+    "records": [
+      {
+        "id": "workspace",
+        "title": "Workspace",
+        "badge": "Standard",
+        "records": 2857,
+        "recordLabel": "Kayıt",
+        "tone": "blue"
+      },
+      {
+        "id": "company",
+        "title": "Company",
+        "badge": "Standard",
+        "records": 3096,
+        "recordLabel": "Kayıt",
+        "tone": "green"
+      },
+      {
+        "id": "deal",
+        "title": "Deal",
+        "badge": "Standard",
+        "records": 5490,
+        "recordLabel": "Kayıt",
+        "tone": "orange"
+      }
+    ],
+    "integrationsLabel": "Bağlı entegrasyonlar"
   },
   "features": {
     "title": "Şirketinizin Dijital Hafızasını Oluşturun",
@@ -76,23 +134,87 @@
     "fileProcessing": "İşleniyor",
     "dragFileName": "Tedarikçi_Anlaşması_2025.pdf",
     "uploadedFiles": [
-      { "name": "Tedarikçi_Sözleşme.pdf", "size": "2.4 MB", "color": "text-red-500", "status": "ready" },
-      { "name": "KVKK_Politikası.pdf", "size": "890 KB", "color": "text-red-500", "status": "ready" },
-      { "name": "Ürün_Kataloğu.docx", "size": "1.8 MB", "color": "text-blue-600", "status": "ready" },
-      { "name": "Bütçe_2025_Q1.xlsx", "size": "3.2 MB", "color": "text-emerald-600", "status": "processing" },
-      { "name": "İK_El_Kitabı.pdf", "size": "1.5 MB", "color": "text-red-500", "status": "ready" },
-      { "name": "Satış_Raporu.xlsx", "size": "540 KB", "color": "text-emerald-600", "status": "ready" },
-      { "name": "Müşteri_Brifingi.docx", "size": "420 KB", "color": "text-blue-600", "status": "processing" },
-      { "name": "ISO_27001_Prosedür.pdf", "size": "7.6 MB", "color": "text-red-500", "status": "ready" },
-      { "name": "Organizasyon_Şeması.pdf", "size": "220 KB", "color": "text-red-500", "status": "ready" },
-      { "name": "Yıllık_Faaliyet.pdf", "size": "12 MB", "color": "text-red-500", "status": "processing" },
-      { "name": "Toplantı_Tutanağı.docx", "size": "380 KB", "color": "text-blue-600", "status": "ready" },
-      { "name": "Fiyat_Listesi_2025.xlsx", "size": "1.1 MB", "color": "text-emerald-600", "status": "ready" }
+      {
+        "name": "Tedarikçi_Sözleşme.pdf",
+        "size": "2.4 MB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "KVKK_Politikası.pdf",
+        "size": "890 KB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Ürün_Kataloğu.docx",
+        "size": "1.8 MB",
+        "color": "text-blue-600",
+        "status": "ready"
+      },
+      {
+        "name": "Bütçe_2025_Q1.xlsx",
+        "size": "3.2 MB",
+        "color": "text-emerald-600",
+        "status": "processing"
+      },
+      {
+        "name": "İK_El_Kitabı.pdf",
+        "size": "1.5 MB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Satış_Raporu.xlsx",
+        "size": "540 KB",
+        "color": "text-emerald-600",
+        "status": "ready"
+      },
+      {
+        "name": "Müşteri_Brifingi.docx",
+        "size": "420 KB",
+        "color": "text-blue-600",
+        "status": "processing"
+      },
+      {
+        "name": "ISO_27001_Prosedür.pdf",
+        "size": "7.6 MB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Organizasyon_Şeması.pdf",
+        "size": "220 KB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Yıllık_Faaliyet.pdf",
+        "size": "12 MB",
+        "color": "text-red-500",
+        "status": "processing"
+      },
+      {
+        "name": "Toplantı_Tutanağı.docx",
+        "size": "380 KB",
+        "color": "text-blue-600",
+        "status": "ready"
+      },
+      {
+        "name": "Fiyat_Listesi_2025.xlsx",
+        "size": "1.1 MB",
+        "color": "text-emerald-600",
+        "status": "ready"
+      }
     ],
     "saved": "Kaydedildi",
     "noteTitle": "Q3 Satış Toplantısı",
     "noteContent": "Müşteri görüşmelerinde fiyat itirazları öne çıktı. Rakip ürünlerle karşılaştırma yapılıyor. Satış ekibi yeni teklif şablonu istiyor — önümüzdeki hafta hazırlanacak.",
-    "noteTags": ["satış", "toplantı", "Q3"]
+    "noteTags": [
+      "satış",
+      "toplantı",
+      "Q3"
+    ]
   },
   "testimonial": {
     "quote": "Ekibe yeni katılan biri eskiden haftalarca adaptasyon sürecinden geçerdi. Edfu'dan sonra ilk gününde şirketin tüm bilgi birikimine erişip sorularını sorabiliyor. Bilgi kaybı ve tekrar eden açıklamalar tarihe karıştı.",
@@ -141,63 +263,94 @@
     ]
   },
   "pricing": {
-    "title": "İhtiyacınıza Uygun Plan Seçin",
-    "description": "Tüm planlar 14 gün ücretsiz deneme ile başlar. Aylık veya yıllık ödeme seçeneği ile bütçenize uygun başlayın.",
+    "title": "Sade ve şeffaf fiyatlandırma.",
+    "description": "Ücretsiz başlayın. Büyüdükçe ölçeklendirin. Gizli ücret yok.",
     "monthly": "Aylık",
     "yearly": "Yıllık",
     "discount": "%20 İndirim",
     "perMonth": "/ay",
     "comingSoon": "Yakında",
-    "contactUs": "İletişime Geçin",
-    "mostPopular": "En Popüler",
+    "contactUs": "Özel",
+    "mostPopular": "Popüler",
     "plans": [
       {
-        "name": "Başlangıç",
-        "description": "kişi başı, KDV hariç",
-        "cta": "14 Gün Ücretsiz Deneyin",
-        "inheritLabel": "Pro planın tüm özellikleri +",
-        "features": [
+        "name": "Standard",
+        "tagline": "Başlamak isteyen ekipler için",
+        "comingSoonLabel": null,
+        "cta": "Ücretsiz deneyin",
+        "ctaHref": "https://app.edfu.ai",
+        "highlights": [
           "5 kullanıcıya kadar",
-          "Kişi başı aylık 10M token",
-          "Claude Sonnet sabit model",
-          "50 GB depolama",
-          "5 entegrasyon",
-          "Ayda 200 URL crawl",
-          "10.000 sayfa RAG limiti",
+          "1 bilgi tabanı",
+          "500 doküman",
+          "Claude Sonnet AI modeli",
           "E-posta desteği"
-        ]
+        ],
+        "description": "kişi başı/ay, KDV hariç",
+        "inheritLabel": "Standard planın tüm özellikleri +",
+        "features": []
       },
       {
-        "name": "Profesyonel",
-        "description": "kişi başı, KDV hariç",
-        "cta": "Beni Bilgilendir",
-        "inheritLabel": "Başlangıç planının tüm özellikleri +",
-        "features": [
-          "300+ AI model erişimi (OpenRouter)",
-          "Kişi başı aylık 25M token",
-          "200 GB depolama",
-          "20 entegrasyon",
-          "Ayda 1.000 URL crawl",
-          "50.000 sayfa RAG limiti",
-          "Özel şablonlar",
-          "Öncelikli destek"
-        ]
-      },
-      {
-        "name": "Kurumsal",
-        "description": "Özel ihtiyaçlarınıza göre fiyatlandırma",
-        "cta": "Satış Ekibiyle Görüşün",
-        "inheritLabel": "Profesyonel planın tüm özellikleri +",
-        "features": [
+        "name": "Pro",
+        "tagline": "Büyüyen ekipler için",
+        "comingSoonLabel": "Yakında",
+        "cta": "Pro ile devam edin",
+        "ctaHref": null,
+        "highlights": [
+          "300+ AI modeli (OpenRouter)",
           "Sınırsız kullanıcı",
+          "10 bilgi tabanı",
+          "AI ajanları ve özel talimatlar",
+          "Öncelikli destek"
+        ],
+        "description": "kişi başı/ay, KDV hariç",
+        "inheritLabel": "Pro planın tüm özellikleri +",
+        "features": []
+      },
+      {
+        "name": "Enterprise",
+        "tagline": "Kurumsal ihtiyaçlar için",
+        "comingSoonLabel": null,
+        "cta": "Satış ekibiyle görüşün",
+        "ctaHref": null,
+        "highlights": [
+          "Sınırsız bilgi tabanı",
           "Dedicated altyapı",
           "White-label seçeneği",
-          "SLA garantisi",
-          "Özel entegrasyon geliştirme",
-          "Birebir onboarding"
-        ]
+          "SSO ve denetim günlükleri",
+          "Özel hesap yöneticisi"
+        ],
+        "description": "İhtiyacınıza özel fiyatlandırma",
+        "salesForm": {
+          "title": "Neredeyse tamam!",
+          "subtitle": "Sadece birkaç bilgi daha...",
+          "firstName": "Ad",
+          "firstNamePlaceholder": "Ad",
+          "lastName": "Soyad",
+          "lastNamePlaceholder": "Soyad",
+          "companyEmail": "Şirket e-postası",
+          "companyEmailPlaceholder": "İş e-posta adresiniz",
+          "phoneNumber": "Telefon numarası (opsiyonel)",
+          "phoneNumberPlaceholder": "Telefon numaranız",
+          "region": "Bölge",
+          "regionPlaceholder": "Seçin",
+          "numberOfUsers": "Kullanıcı sayısı",
+          "numberOfUsersPlaceholder": "Seçin",
+          "details": "Detaylar",
+          "detailsPlaceholder": "İhtiyaçlarınızı ve sorularınızı bize anlatın",
+          "submit": "Gönder",
+          "privacyPrefix": "Bu site reCAPTCHA tarafından korunmaktadır ve Google",
+          "privacyPolicy": "Gizlilik Politikası",
+          "privacyJoiner": "ile",
+          "termsOfService": "Hizmet Şartları",
+          "privacySuffix": "geçerlidir."
+        },
+        "inheritLabel": "",
+        "features": []
       }
-    ]
+    ],
+    "billingCycleLabel": "Faturalama dönemini seçin",
+    "popularLabel": "Popüler"
   },
   "marqueeTestimonials": {
     "title": "Edfu Kullanan Ekiplerin Deneyimleri",
@@ -279,7 +432,7 @@
     ]
   },
   "faq": {
-    "title": "Sıkça Sorulan Sorular",
+    "title": "Sıkça Sorulan Sorular.",
     "description": "Edfu hakkında merak edilenleri bir araya getirdik. Burada bulamadığınız bir soru varsa bize ulaşın.",
     "items": [
       {
@@ -306,7 +459,9 @@
         "question": "300+ AI modeli ne demek, hangisini seçmeliyim?",
         "answer": "Edfu, OpenRouter entegrasyonu sayesinde Claude, GPT-4, Gemini, Llama ve yüzlerce farklı AI modeline tek platformdan erişim sunar. Her model farklı görevlerde öne çıkar. Başlangıç planında Claude Sonnet sabit model olarak sunulur, Profesyonel planda tüm modellere erişim açılır."
       }
-    ]
+    ],
+    "expandAll": "Tümünü aç",
+    "collapseAll": "Tümünü kapat"
   },
   "cta": {
     "line1": "Yükleyin.",
@@ -320,27 +475,844 @@
     "columns": [
       {
         "heading": "Şirket",
-        "links": ["Hakkımızda", "İletişim", "Blog", "Kariyer"]
+        "links": [
+          "Hakkımızda",
+          "İletişim",
+          "Blog",
+          "Kariyer"
+        ]
       },
       {
         "heading": "Ürün",
-        "links": ["Özellikler", "Fiyatlandırma", "Entegrasyonlar", "API Dokümantasyonu"]
+        "links": [
+          "Özellikler",
+          "Fiyatlandırma",
+          "Entegrasyonlar",
+          "API Dokümantasyonu"
+        ]
       },
       {
         "heading": "Kaynaklar",
-        "links": ["Yardım Merkezi", "Kullanım Kılavuzu", "Durum Sayfası", "Gizlilik Politikası"]
+        "links": [
+          "Yardım Merkezi",
+          "Alt Veri İşleyenler",
+          "Durum Sayfası",
+          "Gizlilik Politikası"
+        ]
       }
     ]
   },
+  "subprocessors": {
+    "title": "Edfu Alt İşleyicileri",
+    "date": "24 Nisan 2026 itibarıyla güncel",
+    "description": "Verilerinizin nerede ve nasıl kullanıldığını tam olarak bilin. Edfu'nun alt işleyicileri.",
+    "colName": "AD",
+    "colPurpose": "AMAÇ",
+    "colLocation": "KONUM",
+    "colWebsite": "WEBSİTE"
+  },
+  "pricingPage": {
+    "hero": {
+      "title": "İşletmenize uygun planı seçin."
+    },
+    "cta": {
+      "title": "Hemen başlayın.",
+      "description": "14 gün ücretsiz deneyin, istediğiniz zaman iptal edin.",
+      "button": "Ücretsiz Deneyin"
+    }
+  },
+  "flowDiagram": {
+    "title": "AI Nasıl Çalışır?",
+    "description": "Müşteri mesajından teklif oluşturmaya kadar tüm süreç otomatik.",
+    "trigger": "Müşteri Mesajı",
+    "triggerSub": "WhatsApp, Instagram, Telegram",
+    "conversation": "Konuşma Agenti",
+    "conversationSub": "Müşteri ile AI görüşme",
+    "condition": "Müşteri uygun mu?",
+    "conditionYes": "Evet",
+    "conditionNo": "Hayır",
+    "research": "Araştırma Agenti",
+    "researchSub": "Şirket + internet aramaları",
+    "proposal": "Teklif Agenti",
+    "proposalSub": "Otomatik teklif oluşturma",
+    "inform": "Bilgilendir & Yönlendir",
+    "informSub": "Uygun olmayan müşteriyi yönlendir",
+    "contextPanel": {
+      "title": "Canlı Görüşme",
+      "messages": [
+        {
+          "from": "customer",
+          "text": "CRM entegrasyonu arıyoruz, 85 kişilik ekibiz."
+        },
+        {
+          "from": "ai",
+          "text": "Size özel bir teklif hazırlıyorum. Şirketinizi kısaca araştırıp dönüyorum."
+        }
+      ]
+    }
+  },
+  "automateEverything": {
+    "title": "Her Şeyi Otomatikleştir",
+    "description": "Bir deal güncellendiğinde tetiklenen, koşula göre dallanan ve uygun kişileri upsell sequence'ına ekleyen akışı canlı bir listede izleyin.",
+    "cta": "Otomasyonları keşfet ",
+    "ariaLabel": "Otomasyon akış bölümü",
+    "srText": "Otomasyon akışı, 4 adım. 1. adım tetikleyici When Deal updated, triggered. 2. adım koşul. 3. adım sequence'a ekleme upsell. 4. adım sequence'a ekleme nurture.",
+    "trigger": {
+      "badge": "Deals",
+      "tabBadge": "Trigger",
+      "title": "When Deal updated",
+      "description": "Deal durumu güncellendiğinde tetikle",
+      "status": "Triggered"
+    },
+    "condition": {
+      "badge": "Condition",
+      "title": "Switch",
+      "description": "Upsell veya nurture'a yönlendir",
+      "status": "Completed",
+      "upsell": "Upsell",
+      "nurture": "Nurture"
+    },
+    "sequence": {
+      "upsell": {
+        "badge": "Sequences",
+        "title": "Enroll in sequence",
+        "description": "Kişiyi \"Power user upsell\"e ekle",
+        "status": "Completed"
+      },
+      "nurture": {
+        "badge": "Sequences",
+        "title": "Enroll in sequence",
+        "description": "Kişiyi nurture sequence'ına ekle",
+        "status": "Completed"
+      }
+    },
+    "list": {
+      "title": "Otomasyon senaryoları",
+      "items": [
+        {
+          "id": "reengage_cold_leads",
+          "title": "Pasif lead'leri yeniden kazan",
+          "color": "rose"
+        },
+        {
+          "id": "mql_lead_routing",
+          "title": "MQL lead yönlendirme",
+          "color": "amber"
+        },
+        {
+          "id": "onboarding_handoff",
+          "title": "Onboarding devri",
+          "color": "blue"
+        },
+        {
+          "id": "new_deal_email_campaign",
+          "title": "Yeni fırsat e-posta kampanyası",
+          "color": "green"
+        },
+        {
+          "id": "lead_form_submissions",
+          "title": "Lead formu gönderileri",
+          "color": "violet"
+        },
+        {
+          "id": "monitor_customer_health",
+          "title": "Müşteri sağlığını izle",
+          "color": "cyan"
+        },
+        {
+          "id": "identify_expansion",
+          "title": "Genişleme fırsatı tespit et",
+          "color": "lime"
+        }
+      ]
+    }
+  },
+  "deployAi": {
+    "title": "AI'ı Devreye Al",
+    "description": "Ask AI ile arama ve üretim yap, MCP ile tüm stack'ini bağla, ya da agent'ları prospecting ve lead scoring gibi karmaşık işlere koş.",
+    "cta": "AI'ı Keşfet",
+    "ariaLabel": "Örnek AI agent akışı",
+    "srText": "AI akışı: Yeni lead bulunduğunda üç AI görevi tetiklenir — PLG hareketini başlat, fırsat büyüklüğünü değerlendir, kilit paydaşları belirle.",
+    "trigger": {
+      "title": "New lead found"
+    },
+    "tasks": [
+      {
+        "title": "Activate PLG motion",
+        "question": "Does the company sell software to other businesses?",
+        "badge": "AI",
+        "answer": [
+          {
+            "type": "text",
+            "value": "Yes, they are a "
+          },
+          {
+            "type": "token",
+            "value": "B2B SaaS"
+          },
+          {
+            "type": "text",
+            "value": " business"
+          }
+        ]
+      },
+      {
+        "title": "Evaluate size of opportunity",
+        "question": "Did the company raise any funds recently?",
+        "badge": "AI",
+        "answer": [
+          {
+            "type": "token",
+            "value": "$25M"
+          },
+          {
+            "type": "text",
+            "value": " raised in "
+          },
+          {
+            "type": "token",
+            "value": "Series A"
+          },
+          {
+            "type": "text",
+            "value": " funding round"
+          }
+        ]
+      },
+      {
+        "title": "Identify key stakeholders",
+        "question": "Who are the key stakeholders at the company?",
+        "badge": "AI",
+        "truncate": true,
+        "answer": [
+          {
+            "type": "token",
+            "value": "Adam Kingsley, CEO; Anne Zaragoza, CTO; Tom …"
+          }
+        ]
+      }
+    ],
+    "response": {
+      "title": "Basepoint",
+      "domain": "basepoint.com",
+      "fields": [
+        {
+          "label": "Alan adları",
+          "icon": "link",
+          "value": "basepoint.com",
+          "chip": "blue"
+        },
+        {
+          "label": "İsim",
+          "icon": "tag",
+          "value": "Basepoint"
+        },
+        {
+          "label": "Tahmini ARR",
+          "icon": "dollar",
+          "value": "$1–10M",
+          "chip": "green"
+        },
+        {
+          "label": "Konum",
+          "icon": "pin",
+          "value": "California, USA"
+        },
+        {
+          "label": "Kategoriler",
+          "icon": "grid",
+          "chips": [
+            {
+              "value": "SaaS",
+              "chip": "purple"
+            },
+            {
+              "value": "B2B",
+              "chip": "blue"
+            }
+          ]
+        },
+        {
+          "label": "Alınan yatırım",
+          "icon": "coin",
+          "value": "$25M Series A"
+        },
+        {
+          "label": "Paydaşlar",
+          "icon": "users",
+          "value": "Adam Kingsley, ..."
+        }
+      ]
+    }
+  },
+  "aiGradientCard": {
+    "title": "AI Karar Mekanizması",
+    "description": "Agent'lar her müşteri için akıllı kararlar alır.",
+    "question": "Bu müşteri bizim ICP'mize uyuyor mu?",
+    "answer": "Evet. Şirket: 50-200 çalışan, SaaS sektörü, yıllık gelir 5M+ TRY. Karar verici: CTO. Önceki etkileşimler: 3 toplantı, demo talep etti. Öneri: Hızlı teklif gönderin.",
+    "label": "AI Analiz"
+  },
   "jsonLd": {
-    "orgDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform.",
+    "orgDescription": "Çok kanallı AI müşteri iletişim ve otomasyon platformu.",
     "contactLanguage": "Turkish",
-    "softwareDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform. Dokümanlarınızı yükleyin, 300+ AI modeli ile ekibiniz Türkçe sorular sorsun, anında doğru cevap alsın.",
+    "softwareDescription": "WhatsApp, Instagram, Telegram ve diğer kanallardan gelen müşterilerinizle AI agent'lar aracılığıyla konuşun. Araştırma, teklif ve toplantı süreçlerinizi otomatikleştirin.",
     "planStarterName": "Başlangıç",
     "planStarterDesc": "5 kullanıcıya kadar, kişi başı aylık 10M token, Claude Sonnet sabit model, 50 GB depolama",
     "planStarterUnit": "kişi başı / ay",
     "planEnterpriseName": "Kurumsal",
     "planEnterpriseDesc": "Sınırsız kullanıcı, dedicated altyapı, white-label seçeneği, SLA garantisi",
-    "websiteDescription": "Şirketinizin bilgi birikimini yapay zekaya dönüştüren platform."
+    "websiteDescription": "Çok kanallı AI müşteri iletişim ve otomasyon platformu."
+  },
+  "meetingPage": {
+    "hero": {
+      "badge": "Live",
+      "headlinePrimary": "Smarter meetings,",
+      "headlineMuted": "from start to finish.",
+      "subhead": "Automatic recording, transcription, action items.",
+      "ctaPrimary": "Start for free",
+      "ctaSecondary": "Book a demo",
+      "ctaTertiary": "View pricing"
+    },
+    "featureCards": [
+      {
+        "title": "Otomatik kayıt & transkripsiyon",
+        "description": "Zoom, Meet ve Teams toplantılarınız otomatik kaydedilir ve yazıya dökülür."
+      },
+      {
+        "title": "Hiçbir toplantı notu kaybolmaz",
+        "description": "Notlar otomatik olarak müşteri kayıtlarına bağlanır."
+      },
+      {
+        "title": "Şirket hafızasını besler",
+        "description": "Her toplantı RAG agentını günceller, ekibiniz bilgiye anında ulaşır."
+      }
+    ],
+    "stickySection": {
+      "title": "Bir toplantı. Sınırsız içerik.",
+      "features": [
+        {
+          "title": "Karar vericiye odaklanın",
+          "description": "AI, toplantıdaki karar vericileri ve önemli anları otomatik tespit eder."
+        },
+        {
+          "title": "Her toplantıdan bir planla çıkın",
+          "description": "Aksiyon maddeleri, sorumlular ve tarihler otomatik çıkarılır."
+        },
+        {
+          "title": "100+ dil transkripsiyonu",
+          "description": "Uluslararası ekipler için çoklu dil desteği."
+        }
+      ]
+    },
+    "numberedFeatures": [
+      {
+        "title": "Otomatik müşteri sinyal tespiti",
+        "description": "AI, toplantı içeriğinden satın alma sinyallerini ve ihtiyaçları otomatik tespit eder."
+      },
+      {
+        "title": "Ekibinizi bağlamla yönlendirin",
+        "description": "Toplantı özetleri ve içerikler ekibinize tam bağlam sağlar."
+      },
+      {
+        "title": "Kesintisiz devir teslim",
+        "description": "Toplantı klipleri ve özetlerle ekipler arası geçişleri kolaylaştırın."
+      },
+      {
+        "title": "RAG agentını otomatik besleyin",
+        "description": "Her toplantı içeriği otomatik olarak şirket bilgi tabanına eklenir."
+      }
+    ],
+    "integrationLogos": {
+      "title": "Anında senkronizasyon. Sıfır kurulum.",
+      "tools": [
+        "Zoom",
+        "Google Meet",
+        "Microsoft Teams"
+      ]
+    },
+    "testimonial": {
+      "quote": "Toplantı notları artık kaybolmuyor. AI her şeyi yazıyor, özetliyor ve ekibimize aksiyonları atıyor. Verimliliğimiz gözle görülür arttı.",
+      "authorName": "Ayşe B.",
+      "authorTitle": "Operasyon Müdürü, Teknoloji Şirketi"
+    },
+    "cta": {
+      "title": "Toplantılarınızı dönüştürün.",
+      "button": "Ücretsiz Deneyin"
+    },
+    "templates": {
+      "title": "Hazır toplantı şablonları",
+      "items": [
+        {
+          "name": "SPICED",
+          "description": "Durum, Sorun, Etki, Kritik Olay, Karar — satış toplantıları için ideal."
+        },
+        {
+          "name": "Müşteri Keşif",
+          "description": "İhtiyaç analizi, bütçe, zaman çizelgesi ve karar süreci keşfi."
+        },
+        {
+          "name": "Sprint Retrospektif",
+          "description": "Neler iyi gitti, neler kötü gitti, aksiyonlar — ürün ekipleri için."
+        },
+        {
+          "name": "Kick-off",
+          "description": "Proje kapsamı, roller, zaman çizelgesi ve başarı kriterleri belirleme."
+        }
+      ]
+    }
+  },
+  "agentsPage": {
+    "hero": {
+      "badge": "AI Agent Ekosistemi",
+      "title": "Otomatikleştirin. Araştırın. Satın.",
+      "description": "5 AI agent birlikte çalışarak müşteri iletişiminizi uçtan uca yönetir."
+    },
+    "tabs": {
+      "conversation": {
+        "title": "Konuşma Agenti",
+        "description": "Müşterilerinizle WhatsApp, Instagram ve Telegram üzerinden 7/24 AI destekli görüşmeler yapın.",
+        "features": [
+          "Doğal dil işleme ile akıllı yanıtlar",
+          "Otomatik müşteri nitelendirme",
+          "Çoklu kanal desteği",
+          "Görüşme geçmişi ve analitik"
+        ]
+      },
+      "proposal": {
+        "title": "Teklif Agenti",
+        "description": "Nitelikli müşteriler için otomatik teklif oluşturun. AI, müşteri ihtiyaçlarına göre kişiselleştirilmiş teklifler hazırlar.",
+        "features": [
+          "Kişiselleştirilmiş teklif oluşturma",
+          "PDF çıktısı",
+          "Şablonlar ve markalama",
+          "Otomatik takip"
+        ]
+      },
+      "research": {
+        "title": "Araştırma Agenti",
+        "description": "Müşteri hakkında internet ve şirket verilerinden derin araştırma yapın. Teklif öncesi tam bilgi.",
+        "features": [
+          "İnternet aramaları",
+          "Şirket verisi analizi",
+          "Rakip karşılaştırma",
+          "Otomatik rapor oluşturma"
+        ]
+      },
+      "meeting": {
+        "title": "Toplantı Agenti",
+        "description": "Toplantılarınızı otomatik kaydedin, yazıya dökürün ve aksiyon maddelerini çıkartın.",
+        "features": [
+          "Otomatik kayıt ve transkripsiyon",
+          "Aksiyon maddesi çıkartma",
+          "Toplantı özeti oluşturma",
+          "RAG agentına besleme"
+        ]
+      },
+      "rag": {
+        "title": "RAG Agenti",
+        "description": "Şirketinizin tüm bilgi birikimini yapay zekaya dönüştürün. Ekibiniz istediği bilgiye anında ulaşsın.",
+        "features": [
+          "Doküman yükleme ve indeksleme",
+          "Doğal dil ile sorgulama",
+          "Entegrasyon kaynakları",
+          "Otomatik güncelleme"
+        ]
+      }
+    },
+    "numberedFeatures": [
+      {
+        "title": "Anında müşteri yanıtı",
+        "description": "Agent'larınız 7/24 aktif. Müşteri mesajına saniyeler içinde yanıtlar, hiçbir fırsat kaçmaz."
+      },
+      {
+        "title": "Otomatik müşteri nitelendirme",
+        "description": "AI, her müşteriyi analiz eder ve satışa uygun olanları otomatik belirler."
+      },
+      {
+        "title": "Derin araştırma",
+        "description": "Teklif göndermeden önce internet ve şirket verilerinden kapsamlı araştırma yapar."
+      },
+      {
+        "title": "Şirket hafızası oluşturma",
+        "description": "Toplantılar ve dokümanlar RAG agentını besler, şirketinizin bilgi birikimi sürekli büyür."
+      }
+    ],
+    "dataModel": {
+      "sectionLabel": "Veri Modeli",
+      "addObject": "Obje ekle",
+      "cards": [
+        {
+          "title": "Müşteri",
+          "badge": "Standard",
+          "attrs": [
+            "İsim",
+            "E-posta",
+            "Şirket"
+          ],
+          "moreCount": 8
+        },
+        {
+          "title": "Konuşma",
+          "badge": "Standard",
+          "attrs": [
+            "Kanal",
+            "Durum",
+            "Agent"
+          ],
+          "moreCount": 5
+        },
+        {
+          "title": "Teklif",
+          "badge": "Custom",
+          "attrs": [
+            "Tutar",
+            "Ürünler",
+            "Tarih"
+          ],
+          "moreCount": 4
+        }
+      ]
+    },
+    "cta": {
+      "title": "Agent'larınızı şimdi oluşturun.",
+      "button": "Ücretsiz Deneyin"
+    }
+  },
+  "integrationsPage": {
+    "hero": {
+      "title": "Tüm kanallarınız. Tek platform.",
+      "description": "Mesajlaşma kanalları, toplantı araçları ve iş uygulamalarınızı tek bir platformdan yönetin."
+    },
+    "channels": {
+      "title": "Mesajlaşma Kanalları",
+      "items": [
+        {
+          "name": "WhatsApp",
+          "description": "Business API ile gelen mesajları yönetin",
+          "color": "#25D366"
+        },
+        {
+          "name": "Instagram",
+          "description": "DM ve story yanıtlarını otomatikleştirin",
+          "color": "#E4405F"
+        },
+        {
+          "name": "Telegram",
+          "description": "Bot entegrasyonu ile müşteri iletişimi",
+          "color": "#2AABEE"
+        },
+        {
+          "name": "Web Form",
+          "description": "Web sitenize gömülü iletişim widget'ı",
+          "color": "#18181B"
+        },
+        {
+          "name": "E-posta",
+          "description": "AI ile e-posta sınıflandırma ve yönlendirme",
+          "color": "#EA4335"
+        },
+        {
+          "name": "Webhook",
+          "description": "Özel entegrasyon ve API bağlantısı",
+          "color": "currentColor"
+        }
+      ]
+    },
+    "meetingTools": {
+      "title": "Toplantı Araçları",
+      "items": [
+        {
+          "name": "Zoom",
+          "description": "Toplantı kayıt ve transkripsiyon",
+          "color": "#2D8CFF"
+        },
+        {
+          "name": "Google Meet",
+          "description": "Otomatik kayıt ve özet",
+          "color": "#00897B"
+        },
+        {
+          "name": "Microsoft Teams",
+          "description": "Kurum içi toplantılar",
+          "color": "#6264A7"
+        }
+      ]
+    },
+    "businessTools": {
+      "title": "İş Uygulamaları",
+      "items": [
+        {
+          "name": "Drive",
+          "description": "Dokümanlar"
+        },
+        {
+          "name": "Notion",
+          "description": "Wiki & notlar"
+        },
+        {
+          "name": "Slack",
+          "description": "Mesajlaşma"
+        },
+        {
+          "name": "CRM",
+          "description": "Müşteri verileri"
+        },
+        {
+          "name": "ERP",
+          "description": "İş süreçleri"
+        },
+        {
+          "name": "Jira",
+          "description": "Proje yönetimi"
+        },
+        {
+          "name": "HubSpot",
+          "description": "Pazarlama"
+        },
+        {
+          "name": "+ API",
+          "description": "Özel entegrasyon"
+        }
+      ]
+    },
+    "dataModel": {
+      "sectionLabel": "Veri Modeli",
+      "addObject": "Obje ekle",
+      "cards": [
+        {
+          "title": "Müşteri",
+          "badge": "Standard",
+          "attrs": [
+            "İsim",
+            "E-posta",
+            "Şirket"
+          ],
+          "moreCount": 8
+        },
+        {
+          "title": "Konuşma",
+          "badge": "Standard",
+          "attrs": [
+            "Kanal",
+            "Durum",
+            "Agent"
+          ],
+          "moreCount": 5
+        },
+        {
+          "title": "Teklif",
+          "badge": "Custom",
+          "attrs": [
+            "Tutar",
+            "Ürünler",
+            "Tarih"
+          ],
+          "moreCount": 4
+        }
+      ]
+    },
+    "cta": {
+      "title": "Tüm kanallarınızı bağlayın.",
+      "button": "Ücretsiz Deneyin"
+    }
+  },
+  "mockups": {
+    "whatsappChat": {
+      "contactName": "Ahmet Yılmaz",
+      "contactInitials": "AY",
+      "online": "çevrimiçi",
+      "aiBadge": "AI Aktif",
+      "customerMsg1": "Merhaba, kurumsal yazılım çözümleriniz hakkında bilgi almak istiyorum.",
+      "aiMsg1": "Merhaba Ahmet Bey! Size yardımcı olmaktan mutluluk duyarım. Şirketinizin büyüklüğü ve sektörü hakkında bilgi alabilir miyim?",
+      "customerMsg2": "SaaS sektöründe 85 kişilik bir ekibiz. CRM entegrasyonu arıyoruz.",
+      "aiMsg2": "Harika! Tam size uygun paketlerimiz var. Şirketinizi kısaca araştırıp size özel bir teklif hazırlıyorum."
+    },
+    "crmTable": {
+      "title": "Aktif Lead'ler",
+      "updatedByAi": "AI tarafından güncellendi",
+      "colName": "İsim",
+      "colCompany": "Şirket",
+      "colStatus": "Durum",
+      "colScore": "Skor",
+      "leads": [
+        {
+          "name": "Ahmet Yılmaz",
+          "company": "TechVista SaaS",
+          "status": "Nitelikli"
+        },
+        {
+          "name": "Elif Korkmaz",
+          "company": "DataFlow A.Ş.",
+          "status": "Görüşmede"
+        },
+        {
+          "name": "Murat Çelik",
+          "company": "NovaRetail",
+          "status": "Yeni"
+        },
+        {
+          "name": "Zeynep Arslan",
+          "company": "FinEdge Ltd.",
+          "status": "Nitelikli"
+        }
+      ]
+    },
+    "proposalDoc": {
+      "title": "Teklif — TechVista SaaS",
+      "aiBadge": "AI Oluşturdu",
+      "colItem": "Kalem",
+      "colQuantity": "Miktar",
+      "colAmount": "Tutar",
+      "lineItems": [
+        {
+          "item": "Kurumsal AI Lisansı",
+          "quantity": "85 kullanıcı",
+          "amount": "₺135.320"
+        },
+        {
+          "item": "CRM Entegrasyonu",
+          "quantity": "1 modül",
+          "amount": "₺24.000"
+        },
+        {
+          "item": "Onboarding & Eğitim",
+          "quantity": "1 paket",
+          "amount": "₺18.500"
+        }
+      ],
+      "totalLabel": "Toplam (KDV Hariç)",
+      "totalAmount": "₺177.820",
+      "validity": "Geçerlilik: 30 gün"
+    },
+    "meetingList": {
+      "title": "Son Toplantılar",
+      "statusRecorded": "Kaydedildi",
+      "statusProcessing": "İşleniyor",
+      "meetings": [
+        {
+          "title": "TechVista — Satış Demo",
+          "date": "13 Nis, 14:00",
+          "participants": "Mehmet K., Ahmet Y.",
+          "duration": "45 dk"
+        },
+        {
+          "title": "DataFlow — Onboarding",
+          "date": "13 Nis, 11:00",
+          "participants": "Elif D., Zeynep A.",
+          "duration": "30 dk"
+        },
+        {
+          "title": "NovaRetail — Kick-off",
+          "date": "12 Nis, 16:00",
+          "participants": "Murat Ç., Can Y.",
+          "duration": "60 dk"
+        },
+        {
+          "title": "FinEdge — İhtiyaç Analizi",
+          "date": "12 Nis, 10:30",
+          "participants": "Selin T., Burak Ö.",
+          "duration": "25 dk"
+        }
+      ]
+    },
+    "researchReport": {
+      "title": "Şirket Araştırması",
+      "agentBadge": "Araştırma Agenti",
+      "companyName": "TechVista SaaS A.Ş.",
+      "companyMeta": "B2B SaaS • İstanbul • 85 çalışan",
+      "scoreLabel": "ICP Score",
+      "findings": [
+        "Yıllık gelir: ~₺12M, son 2 yılda %40 büyüme",
+        "CRM çözümü aktif olarak arıyor (LinkedIn paylaşımları)",
+        "Mevcut rakip: HubSpot Free — ölçeklenme sorunu yaşıyor",
+        "Karar verici: CTO (Ahmet Yılmaz) — 3 demo talep etti"
+      ]
+    },
+    "ragSearch": {
+      "query": "Tedarikçi sözleşme şartları nelerdir?",
+      "agentBadge": "RAG Agenti",
+      "sourcesFound": "3 kaynak bulundu",
+      "answerPrefix": "Tedarikçi sözleşmesine göre ödeme vadesi",
+      "answerHighlight1": "45 gün",
+      "answerMid1": "'dür. Gecikme durumunda aylık",
+      "answerHighlight2": "%2",
+      "answerMid2": "faiz uygulanır. Minimum sipariş tutarı",
+      "answerHighlight3": "₺50.000",
+      "answerSuffix": "'dir.",
+      "sourceFile1": "Tedarikçi_Sözleşme.pdf",
+      "sourceFile2": "Satın_Alma_Politikası.docx"
+    },
+    "callPlayer": {
+      "title": "Satış Görüşmesi — TechVista",
+      "speaker1Name": "Mehmet K.",
+      "speaker1Role": "Satış",
+      "speaker2Name": "Ahmet Y.",
+      "speaker2Role": "Müşteri",
+      "transcriptLabel": "Transkript",
+      "lines": [
+        {
+          "time": "02:15",
+          "speaker": "Mehmet K.",
+          "text": "“Ekibiniz şu an kaç kişi kullanıyor?”"
+        },
+        {
+          "time": "02:22",
+          "speaker": "Ahmet Y.",
+          "text": "“85 kişilik bir ekibiz, CRM entegrasyonu en önemli ihtiyacımız.”"
+        },
+        {
+          "time": "02:35",
+          "speaker": "Mehmet K.",
+          "text": "“Anladım, size özel kurumsal paketimiz tam ihtiyacınıza uygun.”"
+        }
+      ]
+    },
+    "meetingTranscript": {
+      "title": "Toplantı Transkripti",
+      "subtitle": "Q3 Satış Toplantısı",
+      "aiSummaryLabel": "AI Özet",
+      "lines": [
+        {
+          "time": "14:22",
+          "speaker": "Mehmet K.",
+          "text": "“Bu çeyrekte hedefimiz 200 yeni müşteri.”",
+          "isAction": false
+        },
+        {
+          "time": "14:25",
+          "speaker": "Elif D.",
+          "text": "“Pazarlama bütçesini %30 artırmamız gerekecek.”",
+          "isAction": false
+        },
+        {
+          "time": "",
+          "speaker": "AI Özet",
+          "text": "Aksiyon: Pazarlama bütçe artışı onayı → Elif D. — 18 Nis’e kadar",
+          "isAction": true
+        },
+        {
+          "time": "14:31",
+          "speaker": "Can Y.",
+          "text": "“Demo ortamını önümüzdeki haftaya hazırlayalım.”",
+          "isAction": false
+        },
+        {
+          "time": "",
+          "speaker": "AI Özet",
+          "text": "Aksiyon: Demo ortamı hazırlığı → Can Y. — 20 Nis’e kadar",
+          "isAction": true
+        }
+      ]
+    },
+    "callWidget": {
+      "meetingTitle": "Product Demo w/ GreenLeaf",
+      "tabActive": "Insights",
+      "tabInactive": "Transcript",
+      "summaryTitle": "Summary",
+      "highlightPillLabel": "Discovery Call",
+      "insightsTitle": "Insights",
+      "timeElapsed": "10:15",
+      "timeTotal": "28:14"
+    }
   }
 }

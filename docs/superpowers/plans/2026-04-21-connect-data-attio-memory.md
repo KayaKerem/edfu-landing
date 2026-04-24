@@ -1,0 +1,50 @@
+# Connect Data Attio Memory
+
+- Goal: keep the outer boxed frame intact and match Attio's `Connect any type of data` section internally.
+- Layout parity:
+  - Left text column mirrors the spacing rhythm used by `AutomateEverything` and `Deploy AI`.
+  - Center column contains a 2x3 source list on a faint grid, a central hub card, three connected record cards, and soft dotted background below the split.
+  - Right column contains a 2x4 logo grid and a cube glyph in a separate lower panel.
+- Animation parity:
+  - Source rows reveal first.
+  - Hub card pops in next.
+  - Connector lines draw after the hub.
+  - Record cards reveal after the connectors.
+  - Integration badges stagger in separately.
+  - Cube glyph appears last.
+- Data parity decisions:
+  - The section text and card labels were updated to match the Attio screenshot more closely.
+  - Record counts are now pinned to the current homepage extraction values seen on April 22, 2026: 2,857 for Workspace, 3,096 for Company, and 5,490 for Deal.
+- Visual extraction notes from the live homepage on April 22, 2026:
+  - The upper source matrix sits on a very light rectangular grid and keeps most of the motion in opacity, with only subtle downward line growth near the right column.
+  - The hub appears before the lower connectors finish drawing.
+  - The three lower connectors draw in quick succession instead of one long slow sweep.
+  - The right logo grid is visually steady; the lower cube reads as the final accent rather than the focal reveal.
+- Current improvement pass:
+  - Added the short blue source connector accents visible in the live section above the hub transition.
+  - Tightened connector timing and card positions to reduce the "staged demo" feel and move closer to Attio's faster chained rhythm.
+  - Updated dictionary counts to match the live homepage extraction instead of the earlier screenshot sample.
+- PDF DOM extraction notes:
+  - Upper source chips are three centered pairs rather than a flat 2-column table.
+  - Each chip is 143x35, with 109px pair spacing on rows 1 and 3 and 181px on row 2.
+  - Lower connectors are built from separate SVG segments, not one continuous canvas path.
+  - Lower record cards are more compact: roughly 180px wide, 12px radius, and very small badge/meta typography.
+  - A dedicated connector spec extracted from the PDF now lives at `docs/superpowers/specs/connect-data-connector-spec.md`.
+- Applied from the PDF extraction:
+  - Rebuilt the upper source matrix as three centered row pairs with extracted chip dimensions and pair gaps.
+  - Replaced the lower connector composition with separate left, center, and right SVG segments.
+  - Tightened record card width, padding, radius, and type scale to align with the extracted Attio DOM.
+- Video extraction notes from the screen recording on April 22, 2026:
+  - The section does not feel like a one-shot reveal; after appearing, it settles into a looping idle state.
+  - Blue highlights travel as short pulses, not as full persistent blue connectors.
+  - The hub card picks up a soft blue edge/glow in sync with nearby connector pulses.
+  - Upper blue accents behave like brief vertical blips on the grid rather than long static lines.
+- Applied from the video analysis:
+  - Added looping pulse segments on the lower connector SVGs instead of relying only on the initial draw animation.
+  - Converted the upper source accents into repeating short pulse animations.
+  - Added a subtle synchronized hub border/glow idle animation to better match the recorded Attio behavior.
+- Remaining parity gaps:
+  - Source row typography and horizontal spacing still need pixel tuning against the live section.
+  - Connector geometry can still be tightened around the hub shoulders and lower card shoulders.
+  - Integration badge sizing and cube panel spacing need one more pass for closer visual parity.
+  - Number animation still uses static text rather than an Attio-like digit flow treatment.

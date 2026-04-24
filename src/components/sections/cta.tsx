@@ -6,7 +6,7 @@ interface CTAProps {
 
 export function CTA({ dict }: CTAProps) {
   return (
-    <section className="py-20">
+    <section className="py-16 sm:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="relative rounded-2xl bg-primary px-6 py-14 sm:px-16 sm:py-24 text-center overflow-hidden">
           {/* Background decorative circles */}
@@ -21,7 +21,10 @@ export function CTA({ dict }: CTAProps) {
 
           {/* Content */}
           <div className="relative z-10">
-            <h2 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground tracking-tight leading-tight">
+            <h2
+              className="text-[30px] sm:text-[48px] lg:text-[60px] font-medium text-primary-foreground leading-tight"
+              style={{ letterSpacing: "-0.05em" }}
+            >
               {dict.line1}
               <br />
               {dict.line2}

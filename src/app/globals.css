@@ -33,10 +33,17 @@
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
 
+  --color-pattern-dot: var(--pattern-dot);
+  --color-pattern-dash-border: var(--pattern-dash-border);
+  --color-surface-hero: var(--surface-hero);
+  --color-text-fade: var(--text-fade);
+  --color-accent-blue: var(--accent-blue);
+  --shadow-float: var(--shadow-float);
+
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-geist: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -117,6 +124,20 @@
   --sidebar-accent-foreground: oklch(0.6723 0.1606 244.9955);
   --sidebar-border: oklch(0.9271 0.0101 238.5177);
   --sidebar-ring: oklch(0.6818 0.1584 243.3540);
+
+  /* Sprint 1 tokens */
+  --pattern-dot: oklch(0.9317 0.0118 231.6594 / 0.6);
+  --pattern-dash-border: oklch(0.78 0 0 / 0.6);
+  --surface-hero: var(--card);
+  --text-fade: oklch(0.55 0 0);
+  --accent-blue: oklch(0.62 0.17 248);
+  --shadow-float: 0 20px 40px -8px oklch(0 0 0 / 0.12), 0 4px 12px -2px oklch(0 0 0 / 0.08);
+  --dur-xs: 120ms;
+  --dur-sm: 240ms;
+  --dur-md: 360ms;
+  --dur-lg: 560ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.2, 1.2, 0.3, 1);
 }
 
 .dark {
@@ -147,6 +168,13 @@
   --sidebar-accent-foreground: oklch(0.6692 0.1607 245.0110);
   --sidebar-border: oklch(0.3795 0.0220 240.5943);
   --sidebar-ring: oklch(0.6818 0.1584 243.3540);
+
+  /* Sprint 1 tokens */
+  --pattern-dot: oklch(0.269 0 0 / 0.6);
+  --pattern-dash-border: oklch(0.42 0 0 / 0.5);
+  --text-fade: oklch(0.62 0 0);
+  --accent-blue: oklch(0.68 0.17 248);
+  --shadow-float: 0 20px 50px -8px oklch(0 0 0 / 0.4), 0 4px 16px -2px oklch(0 0 0 / 0.3);
 }
 
 @layer base {
@@ -163,6 +191,141 @@
   }
 }
 
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes gradient-spin {
+  to {
+    --gradient-angle: 360deg;
+  }
+}
+
+@keyframes svg-connector-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 ::view-transition-old(root), ::view-transition-new(root) {
     animation: none;
     mix-blend-mode: normal;}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* === meeting-bento animations (ci-bento-3) === */
+
+@keyframes rise-fade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-rings {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes bead-flow {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes chip-pop {
+  0% {
+    transform: scale(0.9);
+  }
+  60% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Initial hidden state for one-shot animations */
+[data-animate="rise"],
+[data-animate="slide-right"] {
+  opacity: 0;
+}
+
+/* One-shot animations trigger only when the owning region reports data-visible="true" */
+[data-visible="true"] [data-animate="rise"] {
+  animation: rise-fade 540ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+[data-visible="true"] [data-animate="slide-right"] {
+  animation: slide-right 420ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+[data-visible="true"] [data-animate="chip-pop"] {
+  animation: chip-pop 220ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+/* Looped animations — run unconditionally in-DOM */
+.pulse-ring-outer {
+  transform-origin: center;
+  animation: pulse-rings 2.8s ease-in-out infinite;
+}
+.pulse-ring-inner {
+  transform-origin: center;
+  /* delay = -duration/2 phases inner ring half a cycle apart from outer */
+  animation: pulse-rings 2.8s ease-in-out -1.4s infinite;
+}
+.bead-flow-line {
+  animation: bead-flow 2.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-visible="true"] [data-animate],
+  [data-animate] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .pulse-ring-outer,
+  .pulse-ring-inner,
+  .bead-flow-line {
+    animation: none !important;
+  }
+}
+
+/* === Sprint 1 hero shimmer === */
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}

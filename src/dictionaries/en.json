@@ -1,51 +1,108 @@
 {
   "metadata": {
-    "title": "Edfu - Your Company's AI Knowledge Base | Instant Answers from Documents",
-    "description": "Transform your company's knowledge into AI. Upload your documents, let your team ask questions with 300+ AI models, get instant accurate answers. Try free for 14 days.",
+    "title": "Edfu - Multi-Channel AI Customer Communication Platform",
+    "description": "Talk to customers from WhatsApp, Instagram, Telegram through AI agents. Automate research, proposals, and meeting processes.",
     "keywords": [
-      "AI knowledge base",
-      "AI knowledge management",
-      "enterprise AI",
-      "document analysis",
-      "RAG platform",
-      "AI assistant",
-      "company knowledge base",
-      "AI-powered search",
+      "AI customer communication",
+      "multi-channel platform",
+      "WhatsApp bot",
+      "AI agent",
+      "customer automation",
+      "meeting assistant",
+      "proposal automation",
       "enterprise chatbot",
-      "document querying",
-      "GDPR compliant AI",
-      "OpenRouter",
-      "Claude",
-      "GPT-4",
+      "RAG platform",
       "Edfu"
     ],
-    "ogTitle": "Edfu - Your Company's AI Knowledge Base",
-    "ogDescription": "Upload your documents, let your team ask questions with 300+ AI models, get instant accurate answers. Enterprise-grade, GDPR compliant infrastructure.",
-    "twitterTitle": "Edfu - Your Company's AI Knowledge Base",
-    "twitterDescription": "Upload your documents, let your team ask questions with 300+ AI models, get instant accurate answers."
+    "ogTitle": "Edfu - Multi-Channel AI Customer Communication Platform",
+    "ogDescription": "Talk to customers from WhatsApp, Instagram, Telegram through AI agents. Automate research, proposals, and meeting processes.",
+    "twitterTitle": "Edfu - Multi-Channel AI Customer Communication Platform",
+    "twitterDescription": "Talk to customers through AI agents. Automate research, proposals, and meeting processes."
   },
   "navbar": {
     "home": "Home",
-    "features": "Features",
-    "howItWorks": "How It Works",
+    "agents": "Agents",
+    "meeting": "Meeting",
+    "integrations": "Integrations",
     "pricing": "Pricing",
     "cta": "Try Free",
     "menuOpen": "Open menu",
     "menuClose": "Close menu"
   },
   "hero": {
-    "badge": "300+ AI models, one platform",
-    "titleLine1Before": "Every Question's ",
-    "titleLine1Highlight": "Answer",
-    "titleLine2Highlight": "Is Already",
-    "titleLine2After": " With You.",
-    "description": "Upload your documents, connect your sources, let your team ask.\nEdfu instantly finds the right answer from your company's entire knowledge.",
+    "badge": "Multi-Channel AI Communication Platform",
+    "titleLine1Before": "Automate Your ",
+    "titleLine1Highlight": "Customer",
+    "titleLine2Highlight": "Communication",
+    "titleLine2After": ".",
+    "description": "Talk to your customers from WhatsApp, Instagram, Telegram and other channels through AI agents.\nFully automate your research, proposals, and meeting processes.",
     "ctaPrimary": "Try Free",
     "ctaSecondary": "Sign In"
   },
   "logos": {
-    "subtitle": "Access 300+ AI models from a single platform",
+    "subtitle": "All your channels and meeting tools in one platform",
     "learnMore": "Learn More"
+  },
+  "connectData": {
+    "title": "Connect any type of data",
+    "description": "Sync product data, billing data, and everything in between, for a real-time single source of truth for your business.",
+    "cta": "Explore data",
+    "ctaHref": "/en/integrations",
+    "ariaLabel": "Connect any type of data",
+    "srText": "Data sources and record cards connected through the Edfu data layer.",
+    "sources": [
+      {
+        "id": "sales_engagement",
+        "label": "Sales engagement"
+      },
+      {
+        "id": "email_calendar",
+        "label": "Email & calendar"
+      },
+      {
+        "id": "data_warehouses",
+        "label": "Data warehouses"
+      },
+      {
+        "id": "customer_support",
+        "label": "Customer support"
+      },
+      {
+        "id": "billing_invoicing",
+        "label": "Billing & invoicing"
+      },
+      {
+        "id": "product_data",
+        "label": "Product data"
+      }
+    ],
+    "records": [
+      {
+        "id": "workspace",
+        "title": "Workspace",
+        "badge": "Standard",
+        "records": 2857,
+        "recordLabel": "Records",
+        "tone": "blue"
+      },
+      {
+        "id": "company",
+        "title": "Company",
+        "badge": "Standard",
+        "records": 3096,
+        "recordLabel": "Records",
+        "tone": "green"
+      },
+      {
+        "id": "deal",
+        "title": "Deal",
+        "badge": "Standard",
+        "records": 5490,
+        "recordLabel": "Records",
+        "tone": "orange"
+      }
+    ],
+    "integrationsLabel": "Connected integrations"
   },
   "features": {
     "title": "Build Your Company's Digital Memory",
@@ -76,23 +133,87 @@
     "fileProcessing": "Processing",
     "dragFileName": "Supplier_Agreement_2025.pdf",
     "uploadedFiles": [
-      { "name": "Supplier_Contract.pdf", "size": "2.4 MB", "color": "text-red-500", "status": "ready" },
-      { "name": "GDPR_Policy.pdf", "size": "890 KB", "color": "text-red-500", "status": "ready" },
-      { "name": "Product_Catalog.docx", "size": "1.8 MB", "color": "text-blue-600", "status": "ready" },
-      { "name": "Budget_2025_Q1.xlsx", "size": "3.2 MB", "color": "text-emerald-600", "status": "processing" },
-      { "name": "HR_Handbook.pdf", "size": "1.5 MB", "color": "text-red-500", "status": "ready" },
-      { "name": "Sales_Report.xlsx", "size": "540 KB", "color": "text-emerald-600", "status": "ready" },
-      { "name": "Client_Brief.docx", "size": "420 KB", "color": "text-blue-600", "status": "processing" },
-      { "name": "ISO_27001_Procedure.pdf", "size": "7.6 MB", "color": "text-red-500", "status": "ready" },
-      { "name": "Org_Chart.pdf", "size": "220 KB", "color": "text-red-500", "status": "ready" },
-      { "name": "Annual_Report.pdf", "size": "12 MB", "color": "text-red-500", "status": "processing" },
-      { "name": "Meeting_Minutes.docx", "size": "380 KB", "color": "text-blue-600", "status": "ready" },
-      { "name": "Price_List_2025.xlsx", "size": "1.1 MB", "color": "text-emerald-600", "status": "ready" }
+      {
+        "name": "Supplier_Contract.pdf",
+        "size": "2.4 MB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "GDPR_Policy.pdf",
+        "size": "890 KB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Product_Catalog.docx",
+        "size": "1.8 MB",
+        "color": "text-blue-600",
+        "status": "ready"
+      },
+      {
+        "name": "Budget_2025_Q1.xlsx",
+        "size": "3.2 MB",
+        "color": "text-emerald-600",
+        "status": "processing"
+      },
+      {
+        "name": "HR_Handbook.pdf",
+        "size": "1.5 MB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Sales_Report.xlsx",
+        "size": "540 KB",
+        "color": "text-emerald-600",
+        "status": "ready"
+      },
+      {
+        "name": "Client_Brief.docx",
+        "size": "420 KB",
+        "color": "text-blue-600",
+        "status": "processing"
+      },
+      {
+        "name": "ISO_27001_Procedure.pdf",
+        "size": "7.6 MB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Org_Chart.pdf",
+        "size": "220 KB",
+        "color": "text-red-500",
+        "status": "ready"
+      },
+      {
+        "name": "Annual_Report.pdf",
+        "size": "12 MB",
+        "color": "text-red-500",
+        "status": "processing"
+      },
+      {
+        "name": "Meeting_Minutes.docx",
+        "size": "380 KB",
+        "color": "text-blue-600",
+        "status": "ready"
+      },
+      {
+        "name": "Price_List_2025.xlsx",
+        "size": "1.1 MB",
+        "color": "text-emerald-600",
+        "status": "ready"
+      }
     ],
     "saved": "Saved",
     "noteTitle": "Q3 Sales Meeting",
     "noteContent": "Price objections stood out in client meetings. Comparisons with competitor products are being made. Sales team wants a new proposal template — to be prepared next week.",
-    "noteTags": ["sales", "meeting", "Q3"]
+    "noteTags": [
+      "sales",
+      "meeting",
+      "Q3"
+    ]
   },
   "testimonial": {
     "quote": "New team members used to go through weeks of adaptation. After Edfu, they can access the company's entire knowledge base and ask questions from day one. Knowledge loss and repetitive explanations are a thing of the past.",
@@ -141,63 +262,94 @@
     ]
   },
   "pricing": {
-    "title": "Choose the Right Plan for You",
-    "description": "All plans start with a 14-day free trial. Start with monthly or yearly payment options to fit your budget.",
+    "title": "Simple, transparent pricing.",
+    "description": "Start for free. Scale as you grow. No hidden fees.",
     "monthly": "Monthly",
-    "yearly": "Yearly",
-    "discount": "20% Off",
+    "yearly": "Annual",
+    "discount": "Save 20%",
     "perMonth": "/mo",
     "comingSoon": "Coming Soon",
-    "contactUs": "Contact Us",
-    "mostPopular": "Most Popular",
+    "contactUs": "Custom",
+    "mostPopular": "Popular",
     "plans": [
       {
-        "name": "Starter",
-        "description": "per user, excl. VAT",
-        "cta": "Try Free for 14 Days",
-        "inheritLabel": "Everything in Pro plan +",
-        "features": [
+        "name": "Standard",
+        "tagline": "For teams getting started",
+        "comingSoonLabel": null,
+        "cta": "Start free trial",
+        "ctaHref": "https://app.edfu.ai",
+        "highlights": [
           "Up to 5 users",
-          "10M tokens per user/month",
-          "Claude Sonnet fixed model",
-          "50 GB storage",
-          "5 integrations",
-          "200 URL crawls/month",
-          "10,000 page RAG limit",
+          "1 knowledge base",
+          "500 documents",
+          "Claude Sonnet AI model",
           "Email support"
-        ]
+        ],
+        "description": "per user/month, excl. VAT",
+        "inheritLabel": "Everything in Standard +",
+        "features": []
       },
       {
-        "name": "Professional",
-        "description": "per user, excl. VAT",
-        "cta": "Notify Me",
-        "inheritLabel": "Everything in Starter plan +",
-        "features": [
-          "300+ AI model access (OpenRouter)",
-          "25M tokens per user/month",
-          "200 GB storage",
-          "20 integrations",
-          "1,000 URL crawls/month",
-          "50,000 page RAG limit",
-          "Custom templates",
+        "name": "Pro",
+        "tagline": "For growing teams scaling up",
+        "comingSoonLabel": "Coming Soon",
+        "cta": "Continue with Pro",
+        "ctaHref": null,
+        "highlights": [
+          "300+ AI models (OpenRouter)",
+          "Unlimited users",
+          "10 knowledge bases",
+          "AI agents & custom instructions",
           "Priority support"
-        ]
+        ],
+        "description": "per user/month, excl. VAT",
+        "inheritLabel": "Everything in Pro +",
+        "features": []
       },
       {
         "name": "Enterprise",
-        "description": "Custom pricing for your needs",
-        "cta": "Talk to Sales",
-        "inheritLabel": "Everything in Professional plan +",
-        "features": [
-          "Unlimited users",
+        "tagline": "For enterprises needing control",
+        "comingSoonLabel": null,
+        "cta": "Talk to sales",
+        "ctaHref": null,
+        "highlights": [
+          "Unlimited knowledge bases",
           "Dedicated infrastructure",
           "White-label option",
-          "SLA guarantee",
-          "Custom integration development",
-          "1-on-1 onboarding"
-        ]
+          "SSO & audit logs",
+          "Dedicated account manager"
+        ],
+        "description": "Custom pricing for your needs",
+        "salesForm": {
+          "title": "Nearly there!",
+          "subtitle": "Just a few more details...",
+          "firstName": "First name",
+          "firstNamePlaceholder": "First",
+          "lastName": "Last name",
+          "lastNamePlaceholder": "Last",
+          "companyEmail": "Company email",
+          "companyEmailPlaceholder": "Your work email",
+          "phoneNumber": "Phone number (optional)",
+          "phoneNumberPlaceholder": "Your phone number",
+          "region": "Region",
+          "regionPlaceholder": "Select",
+          "numberOfUsers": "Number of users",
+          "numberOfUsersPlaceholder": "Select",
+          "details": "Details",
+          "detailsPlaceholder": "Tell us about your needs and questions",
+          "submit": "Submit",
+          "privacyPrefix": "This site is protected by reCAPTCHA and the Google",
+          "privacyPolicy": "Privacy Policy",
+          "privacyJoiner": "and",
+          "termsOfService": "Terms of Service",
+          "privacySuffix": "apply."
+        },
+        "inheritLabel": "",
+        "features": []
       }
-    ]
+    ],
+    "billingCycleLabel": "Select preferred billing cycle",
+    "popularLabel": "Popular"
   },
   "marqueeTestimonials": {
     "title": "Experiences from Teams Using Edfu",
@@ -279,7 +431,7 @@
     ]
   },
   "faq": {
-    "title": "Frequently Asked Questions",
+    "title": "Frequently Asked Questions.",
     "description": "We gathered the most common questions about Edfu. If you can't find your answer here, reach out to us.",
     "items": [
       {
@@ -306,7 +458,9 @@
         "question": "What does 300+ AI models mean, which one should I choose?",
         "answer": "Through OpenRouter integration, Edfu provides access to Claude, GPT-4, Gemini, Llama, and hundreds of different AI models from a single platform. Each model excels at different tasks. The Starter plan includes Claude Sonnet as a fixed model, while the Professional plan unlocks access to all models."
       }
-    ]
+    ],
+    "expandAll": "Expand all",
+    "collapseAll": "Collapse all"
   },
   "cta": {
     "line1": "Upload.",
@@ -320,27 +474,844 @@
     "columns": [
       {
         "heading": "Company",
-        "links": ["About Us", "Contact", "Blog", "Careers"]
+        "links": [
+          "About Us",
+          "Contact",
+          "Blog",
+          "Careers"
+        ]
       },
       {
         "heading": "Product",
-        "links": ["Features", "Pricing", "Integrations", "API Documentation"]
+        "links": [
+          "Features",
+          "Pricing",
+          "Integrations",
+          "API Documentation"
+        ]
       },
       {
         "heading": "Resources",
-        "links": ["Help Center", "User Guide", "Status Page", "Privacy Policy"]
+        "links": [
+          "Help Center",
+          "Subprocessors",
+          "Status Page",
+          "Privacy Policy"
+        ]
       }
     ]
   },
+  "subprocessors": {
+    "title": "Edfu Subprocessors",
+    "date": "Current as of Apr 24, 2026",
+    "description": "Know exactly where your data is and how it is being used. Edfu's subprocessors.",
+    "colName": "NAME",
+    "colPurpose": "PURPOSE",
+    "colLocation": "LOCATION",
+    "colWebsite": "WEBSITE"
+  },
+  "pricingPage": {
+    "hero": {
+      "title": "Choose the right plan for your business."
+    },
+    "cta": {
+      "title": "Get Started Today.",
+      "description": "Try free for 14 days, cancel anytime.",
+      "button": "Try Free"
+    }
+  },
+  "flowDiagram": {
+    "title": "How AI Works",
+    "description": "The entire process from customer message to proposal creation is automatic.",
+    "trigger": "Customer Message",
+    "triggerSub": "WhatsApp, Instagram, Telegram",
+    "conversation": "Conversation Agent",
+    "conversationSub": "AI conversation with customer",
+    "condition": "Is customer qualified?",
+    "conditionYes": "Yes",
+    "conditionNo": "No",
+    "research": "Research Agent",
+    "researchSub": "Company + internet research",
+    "proposal": "Proposal Agent",
+    "proposalSub": "Automatic proposal generation",
+    "inform": "Inform & Redirect",
+    "informSub": "Redirect unqualified customer",
+    "contextPanel": {
+      "title": "Live Conversation",
+      "messages": [
+        {
+          "from": "customer",
+          "text": "We're looking for CRM integration, team of 85."
+        },
+        {
+          "from": "ai",
+          "text": "I'll prepare a custom proposal. Let me quickly research your company."
+        }
+      ]
+    }
+  },
+  "automateEverything": {
+    "title": "Automate Everything",
+    "description": "Watch a deal update trigger a branching automation, route qualified contacts into an upsell sequence, and keep the rest of your playbooks moving in a live list.",
+    "cta": "Explore automations ",
+    "ariaLabel": "Automation flow section",
+    "srText": "Automation flow, 4 steps. Step 1 trigger When Deal updated, triggered. Step 2 condition. Step 3 enroll in sequence upsell. Step 4 enroll in sequence nurture.",
+    "trigger": {
+      "badge": "Deals",
+      "tabBadge": "Trigger",
+      "title": "When Deal updated",
+      "description": "Trigger when a Deal's status is updated",
+      "status": "Triggered"
+    },
+    "condition": {
+      "badge": "Condition",
+      "title": "Switch",
+      "description": "Route to upsell or nurture",
+      "status": "Completed",
+      "upsell": "Upsell",
+      "nurture": "Nurture"
+    },
+    "sequence": {
+      "upsell": {
+        "badge": "Sequences",
+        "title": "Enroll in sequence",
+        "description": "Enroll person in 'Power user upsell'",
+        "status": "Completed"
+      },
+      "nurture": {
+        "badge": "Sequences",
+        "title": "Enroll in sequence",
+        "description": "Enroll person in 'Nurture'",
+        "status": "Completed"
+      }
+    },
+    "list": {
+      "title": "Automation scenarios",
+      "items": [
+        {
+          "id": "reengage_cold_leads",
+          "title": "Re-engage cold leads",
+          "color": "rose"
+        },
+        {
+          "id": "mql_lead_routing",
+          "title": "MQL lead routing",
+          "color": "amber"
+        },
+        {
+          "id": "onboarding_handoff",
+          "title": "Onboarding hand-off",
+          "color": "blue"
+        },
+        {
+          "id": "new_deal_email_campaign",
+          "title": "New Deal email campaign",
+          "color": "green"
+        },
+        {
+          "id": "lead_form_submissions",
+          "title": "Lead form submissions",
+          "color": "violet"
+        },
+        {
+          "id": "monitor_customer_health",
+          "title": "Monitor customer health",
+          "color": "cyan"
+        },
+        {
+          "id": "identify_expansion",
+          "title": "Identify expansion opportunity",
+          "color": "lime"
+        }
+      ]
+    }
+  },
+  "deployAi": {
+    "title": "Deploy AI",
+    "description": "Search and create with Ask AI, connect your stack with MCP, or put agents to work on complex tasks like prospecting and lead scoring.",
+    "cta": "Explore AI",
+    "ariaLabel": "Example AI agent workflow",
+    "srText": "AI workflow: New lead found triggers three AI tasks — activate PLG motion, evaluate size of opportunity, identify key stakeholders.",
+    "trigger": {
+      "title": "New lead found"
+    },
+    "tasks": [
+      {
+        "title": "Activate PLG motion",
+        "question": "Does the company sell software to other businesses?",
+        "badge": "AI",
+        "answer": [
+          {
+            "type": "text",
+            "value": "Yes, they are a "
+          },
+          {
+            "type": "token",
+            "value": "B2B SaaS"
+          },
+          {
+            "type": "text",
+            "value": " business"
+          }
+        ]
+      },
+      {
+        "title": "Evaluate size of opportunity",
+        "question": "Did the company raise any funds recently?",
+        "badge": "AI",
+        "answer": [
+          {
+            "type": "token",
+            "value": "$25M"
+          },
+          {
+            "type": "text",
+            "value": " raised in "
+          },
+          {
+            "type": "token",
+            "value": "Series A"
+          },
+          {
+            "type": "text",
+            "value": " funding round"
+          }
+        ]
+      },
+      {
+        "title": "Identify key stakeholders",
+        "question": "Who are the key stakeholders at the company?",
+        "badge": "AI",
+        "truncate": true,
+        "answer": [
+          {
+            "type": "token",
+            "value": "Adam Kingsley, CEO; Anne Zaragoza, CTO; Tom …"
+          }
+        ]
+      }
+    ],
+    "response": {
+      "title": "Basepoint",
+      "domain": "basepoint.com",
+      "fields": [
+        {
+          "label": "Domains",
+          "icon": "link",
+          "value": "basepoint.com",
+          "chip": "blue"
+        },
+        {
+          "label": "Name",
+          "icon": "tag",
+          "value": "Basepoint"
+        },
+        {
+          "label": "Estimated ARR",
+          "icon": "dollar",
+          "value": "$1–10M",
+          "chip": "green"
+        },
+        {
+          "label": "Location",
+          "icon": "pin",
+          "value": "California, USA"
+        },
+        {
+          "label": "Categories",
+          "icon": "grid",
+          "chips": [
+            {
+              "value": "SaaS",
+              "chip": "purple"
+            },
+            {
+              "value": "B2B",
+              "chip": "blue"
+            }
+          ]
+        },
+        {
+          "label": "Funding raised",
+          "icon": "coin",
+          "value": "$25M Series A"
+        },
+        {
+          "label": "Stakeholders",
+          "icon": "users",
+          "value": "Adam Kingsley, ..."
+        }
+      ]
+    }
+  },
+  "aiGradientCard": {
+    "title": "AI Decision Engine",
+    "description": "Agents make smart decisions for every customer.",
+    "question": "Does this customer fit our ICP?",
+    "answer": "Yes. Company: 50-200 employees, SaaS sector, annual revenue 5M+ TRY. Decision maker: CTO. Previous interactions: 3 meetings, requested demo. Recommendation: Send a fast proposal.",
+    "label": "AI Analysis"
+  },
   "jsonLd": {
-    "orgDescription": "The platform that transforms your company's knowledge into AI.",
+    "orgDescription": "Multi-channel AI customer communication and automation platform.",
     "contactLanguage": "English",
-    "softwareDescription": "The platform that transforms your company's knowledge into AI. Upload your documents, let your team ask questions with 300+ AI models, get instant accurate answers.",
+    "softwareDescription": "Talk to customers from WhatsApp, Instagram, Telegram through AI agents. Automate research, proposals, and meeting processes.",
     "planStarterName": "Starter",
     "planStarterDesc": "Up to 5 users, 10M tokens per user/month, Claude Sonnet fixed model, 50 GB storage",
     "planStarterUnit": "per user / month",
     "planEnterpriseName": "Enterprise",
     "planEnterpriseDesc": "Unlimited users, dedicated infrastructure, white-label option, SLA guarantee",
-    "websiteDescription": "The platform that transforms your company's knowledge into AI."
+    "websiteDescription": "Multi-channel AI customer communication and automation platform."
+  },
+  "meetingPage": {
+    "hero": {
+      "badge": "Live",
+      "headlinePrimary": "Smarter meetings,",
+      "headlineMuted": "from start to finish.",
+      "subhead": "Automatic recording, transcription, action items.",
+      "ctaPrimary": "Start for free",
+      "ctaSecondary": "Book a demo",
+      "ctaTertiary": "View pricing"
+    },
+    "featureCards": [
+      {
+        "title": "Automatic recording & transcription",
+        "description": "Your Zoom, Meet, and Teams meetings are automatically recorded and transcribed."
+      },
+      {
+        "title": "No meeting notes get lost",
+        "description": "Notes are automatically linked to customer records."
+      },
+      {
+        "title": "Feeds company memory",
+        "description": "Every meeting updates the RAG agent, your team instantly accesses information."
+      }
+    ],
+    "stickySection": {
+      "title": "One meeting. Unlimited content.",
+      "features": [
+        {
+          "title": "Focus on the decision maker",
+          "description": "AI automatically identifies decision makers and key moments in meetings."
+        },
+        {
+          "title": "Leave every meeting with a plan",
+          "description": "Action items, owners, and dates are automatically extracted."
+        },
+        {
+          "title": "100+ language transcription",
+          "description": "Multi-language support for international teams."
+        }
+      ]
+    },
+    "numberedFeatures": [
+      {
+        "title": "Automatic customer signal detection",
+        "description": "AI automatically detects purchase signals and needs from meeting content."
+      },
+      {
+        "title": "Guide your team with context",
+        "description": "Meeting summaries and content provide full context to your team."
+      },
+      {
+        "title": "Seamless handoffs",
+        "description": "Facilitate team transitions with meeting clips and summaries."
+      },
+      {
+        "title": "Auto-feed the RAG agent",
+        "description": "Every meeting's content is automatically added to the company knowledge base."
+      }
+    ],
+    "integrationLogos": {
+      "title": "Instant sync. Zero setup.",
+      "tools": [
+        "Zoom",
+        "Google Meet",
+        "Microsoft Teams"
+      ]
+    },
+    "testimonial": {
+      "quote": "Meeting notes no longer get lost. AI writes everything, summarizes, and assigns actions to our team. Our productivity visibly increased.",
+      "authorName": "Ayse B.",
+      "authorTitle": "Operations Manager, Technology Company"
+    },
+    "cta": {
+      "title": "Transform your meetings.",
+      "button": "Try Free"
+    },
+    "templates": {
+      "title": "Ready-made meeting templates",
+      "items": [
+        {
+          "name": "SPICED",
+          "description": "Situation, Pain, Impact, Critical Event, Decision — ideal for sales meetings."
+        },
+        {
+          "name": "Customer Discovery",
+          "description": "Needs analysis, budget, timeline, and decision process discovery."
+        },
+        {
+          "name": "Sprint Retrospective",
+          "description": "What went well, what went wrong, actions — for product teams."
+        },
+        {
+          "name": "Kick-off",
+          "description": "Project scope, roles, timeline, and success criteria definition."
+        }
+      ]
+    }
+  },
+  "agentsPage": {
+    "hero": {
+      "badge": "AI Agent Ecosystem",
+      "title": "Automate. Research. Sell.",
+      "description": "5 AI agents working together to manage your customer communication end-to-end."
+    },
+    "tabs": {
+      "conversation": {
+        "title": "Conversation Agent",
+        "description": "Have 24/7 AI-powered conversations with your customers on WhatsApp, Instagram, and Telegram.",
+        "features": [
+          "Smart responses with NLP",
+          "Automatic customer qualification",
+          "Multi-channel support",
+          "Conversation history and analytics"
+        ]
+      },
+      "proposal": {
+        "title": "Proposal Agent",
+        "description": "Create automatic proposals for qualified customers. AI prepares personalized proposals based on customer needs.",
+        "features": [
+          "Personalized proposal creation",
+          "PDF output",
+          "Templates and branding",
+          "Automatic follow-up"
+        ]
+      },
+      "research": {
+        "title": "Research Agent",
+        "description": "Deep research on customers from internet and company data. Full information before proposals.",
+        "features": [
+          "Internet searches",
+          "Company data analysis",
+          "Competitor comparison",
+          "Automatic report generation"
+        ]
+      },
+      "meeting": {
+        "title": "Meeting Agent",
+        "description": "Automatically record, transcribe, and extract action items from your meetings.",
+        "features": [
+          "Automatic recording and transcription",
+          "Action item extraction",
+          "Meeting summary generation",
+          "Feed RAG agent"
+        ]
+      },
+      "rag": {
+        "title": "RAG Agent",
+        "description": "Transform your company's knowledge into AI. Your team can instantly access any information.",
+        "features": [
+          "Document upload and indexing",
+          "Natural language querying",
+          "Integration sources",
+          "Automatic updates"
+        ]
+      }
+    },
+    "numberedFeatures": [
+      {
+        "title": "Instant customer response",
+        "description": "Your agents are active 24/7. Respond to customer messages in seconds, never miss an opportunity."
+      },
+      {
+        "title": "Automatic customer qualification",
+        "description": "AI analyzes every customer and automatically identifies sales-ready ones."
+      },
+      {
+        "title": "Deep research",
+        "description": "Comprehensive research from internet and company data before sending proposals."
+      },
+      {
+        "title": "Building company memory",
+        "description": "Meetings and documents feed the RAG agent, your company's knowledge grows continuously."
+      }
+    ],
+    "dataModel": {
+      "sectionLabel": "Data Model",
+      "addObject": "Add object",
+      "cards": [
+        {
+          "title": "Customer",
+          "badge": "Standard",
+          "attrs": [
+            "Name",
+            "Email",
+            "Company"
+          ],
+          "moreCount": 8
+        },
+        {
+          "title": "Conversation",
+          "badge": "Standard",
+          "attrs": [
+            "Channel",
+            "Status",
+            "Agent"
+          ],
+          "moreCount": 5
+        },
+        {
+          "title": "Proposal",
+          "badge": "Custom",
+          "attrs": [
+            "Amount",
+            "Products",
+            "Date"
+          ],
+          "moreCount": 4
+        }
+      ]
+    },
+    "cta": {
+      "title": "Create your agents now.",
+      "button": "Try Free"
+    }
+  },
+  "integrationsPage": {
+    "hero": {
+      "title": "All your channels. One platform.",
+      "description": "Manage messaging channels, meeting tools, and business applications from a single platform."
+    },
+    "channels": {
+      "title": "Messaging Channels",
+      "items": [
+        {
+          "name": "WhatsApp",
+          "description": "Manage incoming messages with Business API",
+          "color": "#25D366"
+        },
+        {
+          "name": "Instagram",
+          "description": "Automate DM and story replies",
+          "color": "#E4405F"
+        },
+        {
+          "name": "Telegram",
+          "description": "Customer communication with bot integration",
+          "color": "#2AABEE"
+        },
+        {
+          "name": "Web Form",
+          "description": "Embeddable communication widget for your site",
+          "color": "#18181B"
+        },
+        {
+          "name": "Email",
+          "description": "AI-powered email classification and routing",
+          "color": "#EA4335"
+        },
+        {
+          "name": "Webhook",
+          "description": "Custom integration and API connection",
+          "color": "currentColor"
+        }
+      ]
+    },
+    "meetingTools": {
+      "title": "Meeting Tools",
+      "items": [
+        {
+          "name": "Zoom",
+          "description": "Meeting recording and transcription",
+          "color": "#2D8CFF"
+        },
+        {
+          "name": "Google Meet",
+          "description": "Automatic recording and summary",
+          "color": "#00897B"
+        },
+        {
+          "name": "Microsoft Teams",
+          "description": "Internal meetings",
+          "color": "#6264A7"
+        }
+      ]
+    },
+    "businessTools": {
+      "title": "Business Tools",
+      "items": [
+        {
+          "name": "Drive",
+          "description": "Documents"
+        },
+        {
+          "name": "Notion",
+          "description": "Wiki & notes"
+        },
+        {
+          "name": "Slack",
+          "description": "Messaging"
+        },
+        {
+          "name": "CRM",
+          "description": "Customer data"
+        },
+        {
+          "name": "ERP",
+          "description": "Business processes"
+        },
+        {
+          "name": "Jira",
+          "description": "Project management"
+        },
+        {
+          "name": "HubSpot",
+          "description": "Marketing"
+        },
+        {
+          "name": "+ API",
+          "description": "Custom integration"
+        }
+      ]
+    },
+    "dataModel": {
+      "sectionLabel": "Data Model",
+      "addObject": "Add object",
+      "cards": [
+        {
+          "title": "Customer",
+          "badge": "Standard",
+          "attrs": [
+            "Name",
+            "Email",
+            "Company"
+          ],
+          "moreCount": 8
+        },
+        {
+          "title": "Conversation",
+          "badge": "Standard",
+          "attrs": [
+            "Channel",
+            "Status",
+            "Agent"
+          ],
+          "moreCount": 5
+        },
+        {
+          "title": "Proposal",
+          "badge": "Custom",
+          "attrs": [
+            "Amount",
+            "Products",
+            "Date"
+          ],
+          "moreCount": 4
+        }
+      ]
+    },
+    "cta": {
+      "title": "Connect all your channels.",
+      "button": "Try Free"
+    }
+  },
+  "mockups": {
+    "whatsappChat": {
+      "contactName": "John Smith",
+      "contactInitials": "JS",
+      "online": "online",
+      "aiBadge": "AI Active",
+      "customerMsg1": "Hi, I'd like to learn about your enterprise software solutions.",
+      "aiMsg1": "Hello John! Happy to help. Could you tell me about your company's size and industry?",
+      "customerMsg2": "We're a team of 85 in the SaaS industry. Looking for CRM integration.",
+      "aiMsg2": "Great! We have packages that are a perfect fit. Let me quickly research your company and prepare a custom proposal."
+    },
+    "crmTable": {
+      "title": "Active Leads",
+      "updatedByAi": "Updated by AI",
+      "colName": "Name",
+      "colCompany": "Company",
+      "colStatus": "Status",
+      "colScore": "Score",
+      "leads": [
+        {
+          "name": "John Smith",
+          "company": "TechVista SaaS",
+          "status": "Qualified"
+        },
+        {
+          "name": "Emily Clark",
+          "company": "DataFlow Inc.",
+          "status": "In Meeting"
+        },
+        {
+          "name": "Mark Wilson",
+          "company": "NovaRetail",
+          "status": "New"
+        },
+        {
+          "name": "Sarah Johnson",
+          "company": "FinEdge Ltd.",
+          "status": "Qualified"
+        }
+      ]
+    },
+    "proposalDoc": {
+      "title": "Proposal — TechVista SaaS",
+      "aiBadge": "AI Generated",
+      "colItem": "Item",
+      "colQuantity": "Quantity",
+      "colAmount": "Amount",
+      "lineItems": [
+        {
+          "item": "Enterprise AI License",
+          "quantity": "85 users",
+          "amount": "$12,500"
+        },
+        {
+          "item": "CRM Integration",
+          "quantity": "1 module",
+          "amount": "$2,200"
+        },
+        {
+          "item": "Onboarding & Training",
+          "quantity": "1 package",
+          "amount": "$1,700"
+        }
+      ],
+      "totalLabel": "Total (excl. Tax)",
+      "totalAmount": "$16,400",
+      "validity": "Valid for: 30 days"
+    },
+    "meetingList": {
+      "title": "Recent Meetings",
+      "statusRecorded": "Recorded",
+      "statusProcessing": "Processing",
+      "meetings": [
+        {
+          "title": "TechVista — Sales Demo",
+          "date": "Apr 13, 2:00 PM",
+          "participants": "Mike K., John S.",
+          "duration": "45 min"
+        },
+        {
+          "title": "DataFlow — Onboarding",
+          "date": "Apr 13, 11:00 AM",
+          "participants": "Emily C., Sarah J.",
+          "duration": "30 min"
+        },
+        {
+          "title": "NovaRetail — Kick-off",
+          "date": "Apr 12, 4:00 PM",
+          "participants": "Mark W., Dan Y.",
+          "duration": "60 min"
+        },
+        {
+          "title": "FinEdge — Needs Analysis",
+          "date": "Apr 12, 10:30 AM",
+          "participants": "Lisa T., Brian O.",
+          "duration": "25 min"
+        }
+      ]
+    },
+    "researchReport": {
+      "title": "Company Research",
+      "agentBadge": "Research Agent",
+      "companyName": "TechVista SaaS Inc.",
+      "companyMeta": "B2B SaaS • San Francisco • 85 employees",
+      "scoreLabel": "ICP Score",
+      "findings": [
+        "Annual revenue: ~$1.4M, 40% growth in the last 2 years",
+        "Actively looking for a CRM solution (LinkedIn posts)",
+        "Current competitor: HubSpot Free — experiencing scaling issues",
+        "Decision maker: CTO (John Smith) — requested 3 demos"
+      ]
+    },
+    "ragSearch": {
+      "query": "What are the supplier contract terms?",
+      "agentBadge": "RAG Agent",
+      "sourcesFound": "3 sources found",
+      "answerPrefix": "According to the supplier contract, the payment term is",
+      "answerHighlight1": "45 days",
+      "answerMid1": ". In case of late payment, a monthly",
+      "answerHighlight2": "2%",
+      "answerMid2": "interest is applied. The minimum order amount is",
+      "answerHighlight3": "$50,000",
+      "answerSuffix": ".",
+      "sourceFile1": "Supplier_Contract.pdf",
+      "sourceFile2": "Procurement_Policy.docx"
+    },
+    "callPlayer": {
+      "title": "Sales Call — TechVista",
+      "speaker1Name": "Mike K.",
+      "speaker1Role": "Sales",
+      "speaker2Name": "John S.",
+      "speaker2Role": "Customer",
+      "transcriptLabel": "Transcript",
+      "lines": [
+        {
+          "time": "02:15",
+          "speaker": "Mike K.",
+          "text": "“How many people on your team are currently using it?”"
+        },
+        {
+          "time": "02:22",
+          "speaker": "John S.",
+          "text": "“We're a team of 85, and CRM integration is our top priority.”"
+        },
+        {
+          "time": "02:35",
+          "speaker": "Mike K.",
+          "text": "“Got it, our enterprise package is a perfect fit for your needs.”"
+        }
+      ]
+    },
+    "meetingTranscript": {
+      "title": "Meeting Transcript",
+      "subtitle": "Q3 Sales Meeting",
+      "aiSummaryLabel": "AI Summary",
+      "lines": [
+        {
+          "time": "14:22",
+          "speaker": "Mike K.",
+          "text": "“Our target this quarter is 200 new customers.”",
+          "isAction": false
+        },
+        {
+          "time": "14:25",
+          "speaker": "Emily C.",
+          "text": "“We'll need to increase the marketing budget by 30%.”",
+          "isAction": false
+        },
+        {
+          "time": "",
+          "speaker": "AI Summary",
+          "text": "Action: Marketing budget increase approval → Emily C. — by Apr 18",
+          "isAction": true
+        },
+        {
+          "time": "14:31",
+          "speaker": "Dan Y.",
+          "text": "“Let's have the demo environment ready by next week.”",
+          "isAction": false
+        },
+        {
+          "time": "",
+          "speaker": "AI Summary",
+          "text": "Action: Demo environment preparation → Dan Y. — by Apr 20",
+          "isAction": true
+        }
+      ]
+    },
+    "callWidget": {
+      "meetingTitle": "Product Demo w/ GreenLeaf",
+      "tabActive": "Insights",
+      "tabInactive": "Transcript",
+      "summaryTitle": "Summary",
+      "highlightPillLabel": "Discovery Call",
+      "insightsTitle": "Insights",
+      "timeElapsed": "10:15",
+      "timeTotal": "28:14"
+    }
   }
 }

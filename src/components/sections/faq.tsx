@@ -1,74 +1,181 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ChevronDown } from "lucide-react"
-import type { Dictionary } from "@/dictionaries"
+import { useState } from "react";
+import { Plus, Minus } from "lucide-react";
+import type { Dictionary } from "@/dictionaries";
 
 interface FAQProps {
   dict: Dictionary["faq"];
 }
 
 export function FAQ({ dict }: FAQProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openIndexes, setOpenIndexes] = useState<Set<number>>(new Set());
 
   const toggle = (index: number) => {
-    setOpenIndex((prev) => (prev === index ? null : index))
-  }
+    setOpenIndexes((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+  };
 
   return (
-    <section className="flex flex-col items-center justify-center gap-10 pb-10 w-full relative">
-      <div className="border-b w-full h-full px-4 py-10 md:p-14">
-        <div className="max-w-xl mx-auto flex flex-col items-center justify-center gap-2">
+    <section
+      style={{
+        background: "var(--background)",
+        width: "100%",
+        paddingBottom: 80,
+      }}
+    >
+      {/* Heading */}
+      <div
+        style={{
+          maxWidth: "50rem",
+          margin: "0 auto",
+          padding: "60px 24px 0",
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "space-between",
+          gap: 16,
+        }}
+      >
+        <div>
           <h2
-            className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground tracking-tighter text-center text-balance"
-            style={{ fontFamily: "var(--font-geist)", letterSpacing: "-0.05em" }}
+            style={{
+              fontSize: "clamp(28px, 4vw, 36px)",
+              fontWeight: 700,
+              letterSpacing: "-0.02em",
+              color: "var(--foreground)",
+              lineHeight: 1.1,
+            }}
           >
             {dict.title}
           </h2>
-          <p className="text-muted-foreground text-center text-balance font-medium">
-            {dict.description}
-          </p>
+          {dict.description && (
+            <p
+              style={{
+                marginTop: 10,
+                fontSize: 15,
+                color: "var(--muted-foreground)",
+                lineHeight: 1.6,
+                maxWidth: 440,
+              }}
+            >
+              {dict.description}
+            </p>
+          )}
         </div>
+
+        {/* Expand all button */}
+        {/* <button
+          onClick={handleExpandAll}
+          style={{
+            flexShrink: 0,
+            fontSize: 13,
+            fontWeight: 500,
+            color: "#374151",
+            background: "transparent",
+            border: "1px solid #d1d5db",
+            borderRadius: 8,
+            padding: "7px 14px",
+            cursor: "pointer",
+            whiteSpace: "nowrap",
+            transition: "all 130ms",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = "#f9fafb";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+          }}
+        >
+          {allExpanded ? dict.collapseAll : dict.expandAll}
+        </button> */}
       </div>
 
-      <div className="max-w-3xl w-full mx-auto px-4 sm:px-10">
-        <div className="w-full grid gap-2">
-          {dict.items.map((faq, index) => {
-            const isOpen = openIndex === index
-
-            return (
-              <div key={index} className="grid gap-2">
-                <button
-                  onClick={() => toggle(index)}
-                  className={`flex flex-1 items-start justify-between gap-4 text-left text-sm font-medium transition-all w-full border bg-white dark:bg-[#27272A] border-border rounded-lg px-4 py-3.5 cursor-pointer ${
-                    isOpen ? "ring ring-primary/20" : ""
-                  }`}
-                >
-                  <span>{faq.question}</span>
-                  <ChevronDown
-                    className={`text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-
-                <div
-                  className="grid transition-all duration-200 overflow-hidden text-sm"
+      {/* Accordion items */}
+      <div
+        style={{
+          maxWidth: "50rem",
+          margin: "0 auto",
+          padding: "24px 24px 0",
+        }}
+      >
+        {dict.items.map((faq, index) => {
+          const isOpen = openIndexes.has(index);
+          return (
+            <div
+              key={index}
+              style={{ borderBottom: "1px solid var(--border)" }}
+            >
+              <button
+                onClick={() => toggle(index)}
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "18px 0",
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  textAlign: "left",
+                  gap: 16,
+                }}
+              >
+                <span
                   style={{
-                    gridTemplateRows: isOpen ? "1fr" : "0fr",
+                    fontSize: 15,
+                    fontWeight: 500,
+                    color: "var(--foreground)",
+                    lineHeight: 1.4,
+                    letterSpacing: "-0.01em",
                   }}
                 >
-                  <div className="overflow-hidden">
-                    <div className="p-3 border border-border text-foreground rounded-lg bg-white dark:bg-[#27272A]">
-                      {faq.answer}
-                    </div>
-                  </div>
+                  {faq.question}
+                </span>
+                <span
+                  style={{
+                    width: 20,
+                    height: 20,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    color: "var(--muted-foreground)",
+                  }}
+                >
+                  [{isOpen ? <Minus size={20} /> : <Plus size={20} />}]
+                </span>
+              </button>
+
+              {/* Answer panel */}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateRows: isOpen ? "1fr" : "0fr",
+                  transition: "grid-template-rows 250ms ease",
+                  overflow: "hidden",
+                }}
+              >
+                <div style={{ overflow: "hidden" }}>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      lineHeight: 1.7,
+                      color: "var(--muted-foreground)",
+                      paddingBottom: 20,
+                    }}
+                  >
+                    {faq.answer}
+                  </p>
                 </div>
               </div>
-            )
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </section>
-  )
+  );
 }

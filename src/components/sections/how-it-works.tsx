@@ -45,7 +45,7 @@ export function HowItWorks({ dict }: HowItWorksProps) {
         <div className="max-w-xl mx-auto flex flex-col items-center justify-center gap-2">
           <h2
             className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center"
-            style={{ letterSpacing: "-0.05em", fontFamily: "var(--font-geist)" }}
+            style={{ letterSpacing: "-0.05em" }}
           >
             {dict.title}
           </h2>
@@ -68,7 +68,7 @@ export function HowItWorks({ dict }: HowItWorksProps) {
                     key={index}
                     className={`relative transition-all duration-300 ${
                       isActive
-                        ? "bg-white dark:bg-[#27272A] rounded-lg shadow-[0px_0px_1px_0px_rgba(0,0,0,0.16),0px_1px_2px_-0.5px_rgba(0,0,0,0.16)] dark:shadow-[0px_0px_0px_1px_rgba(249,250,251,0.06),0px_0px_0px_1px_#27272A,0px_1px_2px_-0.5px_rgba(0,0,0,0.24),0px_2px_4px_-1px_rgba(0,0,0,0.24)]"
+                        ? "bg-card rounded-lg shadow-[0px_0px_1px_0px_rgba(0,0,0,0.16),0px_1px_2px_-0.5px_rgba(0,0,0,0.16)] dark:shadow-[0px_0px_0px_1px_rgba(249,250,251,0.06),0px_0px_0px_1px_#27272A,0px_1px_2px_-0.5px_rgba(0,0,0,0.24),0px_2px_4px_-1px_rgba(0,0,0,0.24)]"
                         : ""
                     }`}
                   >
@@ -76,8 +76,7 @@ export function HowItWorks({ dict }: HowItWorksProps) {
                     <button
                       onClick={() => handleClick(index)}
                       className="flex h-[45px] flex-1 w-full cursor-pointer items-center justify-between p-3 font-semibold text-lg tracking-tight text-left"
-                      style={{ fontFamily: "var(--font-geist)" }}
-                    >
+                                         >
                       {step.title}
                     </button>
 
@@ -145,7 +144,7 @@ export function HowItWorks({ dict }: HowItWorksProps) {
                   onClick={() => handleClick(index)}
                   className="relative grid h-full min-w-[280px] max-w-[300px] shrink-0 items-start justify-center p-4 bg-background border-l last:border-r border-t border-b border-border first:rounded-tl-xl last:rounded-tr-xl snap-start cursor-pointer text-left"
                 >
-                  <h3 className="text-base font-bold" style={{ fontFamily: "var(--font-geist)" }}>{step.title}</h3>
+                  <h3 className="text-base font-bold">{step.title}</h3>
                   <p className="text-sm font-medium leading-relaxed text-muted-foreground">
                     {step.description}
                   </p>

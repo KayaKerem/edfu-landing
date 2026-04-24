@@ -1,16 +1,33 @@
 "use client";
 
-import Image from "next/image";
+import Link from "next/link";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
+import { EdfuThemeLogo } from "@/components/ui/edfu-brand";
 import type { Dictionary } from "@/dictionaries";
 
 const badges = ["KVKK", "EU Data", "GDPR"] as const;
 
 interface FooterProps {
   dict: Dictionary["footer"];
+  lang: string;
 }
 
-export function Footer({ dict }: FooterProps) {
+export function Footer({ dict, lang }: FooterProps) {
+  const prefix = lang === "tr" ? "" : `/${lang}`;
+
+  /* Route map keyed by column index + link index.
+     This avoids matching on translated label text, which breaks
+     if translations change. The indices correspond to the order
+     in the dictionary's footer.columns arrays. */
+  const routesByPosition: Record<string, string> = {
+    // Column 1 ("Product"/"Ürün") — index 0: Features, 1: Pricing, 2: Integrations
+    "1-0": `${prefix}/agents`,
+    "1-1": `${prefix}/pricing`,
+    "1-2": `${prefix}/integrations`,
+    // Column 2 ("Resources") — index 1: Subprocessors
+    "2-1": `${prefix}/subprocessors`,
+  };
+
   return (
     <footer className="border-t border-border">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
@@ -18,10 +35,10 @@ export function Footer({ dict }: FooterProps) {
           {/* Brand section */}
           <div className="lg:col-span-2">
             {/* Logo */}
-            <a href="#hero" className="flex items-end gap-2">
-              <Image src="/logo.png" alt="Edfu" width={32} height={32} className="size-8" />
-              <span className="text-xl leading-none translate-y-[2px] font-semibold tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>Edfu</span>
-            </a>
+            <Link href={`${prefix}/`} className="flex items-end gap-2">
+              <EdfuThemeLogo alt="Edfu" width={22} height={22} className="size-6" />
+              <span className="text-xl leading-none translate-y-[2px] font-semibold tracking-tight">Edfu</span>
+            </Link>
 
             {/* Description */}
             <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
@@ -44,22 +61,31 @@ export function Footer({ dict }: FooterProps) {
           </div>
 
           {/* Link columns */}
-          {dict.columns.map((col) => (
+          {dict.columns.map((col, colIdx) => (
             <div key={col.heading}>
               <h4 className="font-heading font-bold text-sm mb-4">
                 {col.heading}
               </h4>
               <ul className="space-y-3">
-                {col.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
+                {col.links.map((link, linkIdx) => {
+                  const route = routesByPosition[`${colIdx}-${linkIdx}`];
+                  return (
+                    <li key={link}>
+                      {route ? (
+                        <Link
+                          href={route}
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          {link}
+                        </Link>
+                      ) : (
+                        <span className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-default">
+                          {link}
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

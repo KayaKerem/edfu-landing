@@ -2,33 +2,24 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Menu, X } from "lucide-react";
-import Image from "next/image";
-import Lottie from "lottie-react";
-import navbarCatAnimation from "@/../public/navbar-cat.json";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
+import { EdfuThemeLogo } from "@/components/ui/edfu-brand";
+
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+  loading: () => <div className="size-8" />,
+});
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { motion, AnimatePresence } from "motion/react";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import type { Dictionary } from "@/dictionaries";
 
-function NavbarCatLogo() {
-  const lottieRef = useRef<any>(null);
-
-  const handleComplete = useCallback(() => {
-    setTimeout(() => {
-      lottieRef.current?.goToAndPlay(0);
-    }, 4000);
-  }, []);
-
-  return (
-    <Lottie
-      lottieRef={lottieRef}
-      animationData={navbarCatAnimation}
-      loop={false}
-      autoplay
-      onComplete={handleComplete}
-      className="size-8"
-    />
-  );
+interface NavLink {
+  label: string;
+  href: string;
+  routeId: string;
 }
 
 interface NavbarProps {
@@ -37,19 +28,25 @@ interface NavbarProps {
 }
 
 export function Navbar({ dict, lang }: NavbarProps) {
-  const navLinks = [
-    { label: dict.home, href: "#hero", sectionId: "hero" },
-    { label: dict.features, href: "#features", sectionId: "features" },
-    { label: dict.howItWorks, href: "#how-it-works", sectionId: "how-it-works" },
-    { label: dict.pricing, href: "#pricing", sectionId: "pricing" },
-  ] as const;
+  const prefix = lang === "tr" ? "" : `/${lang}`;
+
+  const navLinks: NavLink[] = [
+    { label: dict.home, href: `${prefix}/`, routeId: "/" },
+    { label: dict.agents, href: `${prefix}/agents`, routeId: "/agents" },
+    { label: dict.meeting, href: `${prefix}/meeting`, routeId: "/meeting" },
+    { label: dict.integrations, href: `${prefix}/integrations`, routeId: "/integrations" },
+    { label: dict.pricing, href: `${prefix}/pricing`, routeId: "/pricing" },
+  ];
+
+  const pathname = usePathname();
+  const currentRoute = pathname.replace(/^\/(tr|en)/, "") || "/";
+
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
+  const [pricingStickyPinned, setPricingStickyPinned] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
   const navRef = useRef<HTMLUListElement>(null);
   const linkRefs = useRef<Map<string, HTMLLIElement>>(new Map());
-  const isClickScrolling = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -58,29 +55,26 @@ export function Navbar({ dict, lang }: NavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Intersection Observer for active section
+  // Observe the pricing page's sticky-header pinned state (broadcast via
+  // `html[data-pricing-sticky-pinned]`). When pinned, we turn the outer
+  // <header> into a full-width opaque platform so the pricing sticky bar
+  // doesn't bleed through the semi-transparent navbar pill.
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    navLinks.forEach((link) => {
-      const el = document.getElementById(link.sectionId);
-      if (!el) return;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting && !isClickScrolling.current) {
-            setActiveSection(link.sectionId);
-          }
-        },
-        { rootMargin: "-80px 0px -50% 0px", threshold: 0 }
-      );
-      observer.observe(el);
-      observers.push(observer);
+    const root = document.documentElement;
+    const update = () => {
+      setPricingStickyPinned(root.dataset.pricingStickyPinned === "true");
+    };
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(root, {
+      attributes: true,
+      attributeFilter: ["data-pricing-sticky-pinned"],
     });
-    return () => observers.forEach((o) => o.disconnect());
+    return () => observer.disconnect();
   }, []);
 
-  // Update pill position
   const updatePill = useCallback(() => {
-    const activeLi = linkRefs.current.get(activeSection);
+    const activeLi = linkRefs.current.get(currentRoute);
     const nav = navRef.current;
     if (!activeLi || !nav) return;
     const navRect = nav.getBoundingClientRect();
@@ -89,7 +83,7 @@ export function Navbar({ dict, lang }: NavbarProps) {
       left: liRect.left - navRect.left,
       width: liRect.width,
     });
-  }, [activeSection]);
+  }, [currentRoute]);
 
   useEffect(() => {
     updatePill();
@@ -97,9 +91,16 @@ export function Navbar({ dict, lang }: NavbarProps) {
     return () => window.removeEventListener("resize", updatePill);
   }, [updatePill]);
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-4 transition-colors duration-300 ${
+        pricingStickyPinned ? "bg-background" : ""
+      }`}
+    >
       <motion.nav
         initial={false}
         animate={{
@@ -117,18 +118,19 @@ export function Navbar({ dict, lang }: NavbarProps) {
           }`}
         >
           <div className="relative flex h-14 items-center justify-between px-4 sm:px-5">
-            {/* Logo */}
-            <a href="#hero" className="flex items-end gap-2">
-              <NavbarCatLogo />
-              <span className="text-xl leading-none -translate-y-[1px] font-semibold tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>Edfu</span>
-            </a>
+            <Link href={`${prefix}/`} className="flex items-end gap-2">
+              <EdfuThemeLogo alt="Edfu" width={22} height={22} className="size-6" />
+              <span
+                className="text-xl leading-none -translate-y-[1px] font-semibold tracking-tight"
+              >
+                Edfu
+              </span>
+            </Link>
 
-            {/* Desktop nav links - absolute center */}
             <ul
               ref={navRef}
               className="absolute left-1/2 -translate-x-1/2 hidden h-11 items-center justify-center rounded-full px-2 md:flex whitespace-nowrap"
             >
-              {/* Animated pill indicator */}
               {pillStyle.width > 0 && (
                 <motion.li
                   className="absolute inset-y-0 my-1.5 rounded-full border border-border bg-background"
@@ -140,45 +142,37 @@ export function Navbar({ dict, lang }: NavbarProps) {
               )}
               {navLinks.map((link) => (
                 <li
-                  key={link.href}
+                  key={link.routeId}
                   ref={(el) => {
-                    if (el) linkRefs.current.set(link.sectionId, el);
+                    if (el) linkRefs.current.set(link.routeId, el);
                   }}
                   style={{ listStyle: "none" }}
                 >
-                  <a
+                  <Link
                     href={link.href}
-                    onClick={() => {
-                      setActiveSection(link.sectionId);
-                      isClickScrolling.current = true;
-                      setTimeout(() => { isClickScrolling.current = false; }, 1000);
-                    }}
-                    style={{ fontFamily: "var(--font-geist)" }}
                     className={`relative z-10 flex h-full cursor-pointer items-center justify-center px-3 py-2 text-sm font-medium tracking-tight transition-colors duration-200 ${
-                      activeSection === link.sectionId
+                      currentRoute === link.routeId
                         ? "text-foreground"
                         : "text-foreground/60 hover:text-foreground"
                     }`}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
 
-            {/* Right: CTA + Theme toggle */}
             <div className="hidden items-center gap-2 md:flex">
-              <a
-                href="#pricing"
-                className="bg-primary h-8 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground dark:text-primary-foreground w-fit px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12]"
+              <Link
+                href={`${prefix}/pricing`}
+                className="bg-primary h-8 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground dark:text-primary-foreground w-fit px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] hover:bg-primary/80 transition-all ease-out active:scale-95"
               >
                 {dict.cta}
-              </a>
+              </Link>
               <LanguageSwitcher lang={lang} />
               <AnimatedThemeToggler className="size-8 cursor-pointer rounded-full border border-border text-muted-foreground" />
             </div>
 
-            {/* Mobile */}
             <div className="flex items-center gap-2 md:hidden">
               <LanguageSwitcher lang={lang} />
               <AnimatedThemeToggler className="size-8 cursor-pointer rounded-full border border-border text-muted-foreground" />
@@ -193,7 +187,6 @@ export function Navbar({ dict, lang }: NavbarProps) {
           </div>
         </div>
 
-        {/* Mobile dropdown */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
@@ -205,26 +198,24 @@ export function Navbar({ dict, lang }: NavbarProps) {
             >
               <nav className="flex flex-col gap-1 p-4">
                 {navLinks.map((link) => (
-                  <a
-                    key={link.href}
+                  <Link
+                    key={link.routeId}
                     href={link.href}
-                    onClick={() => setMobileOpen(false)}
                     className={`rounded-xl px-4 py-2.5 text-sm font-medium transition-colors ${
-                      activeSection === link.sectionId
+                      currentRoute === link.routeId
                         ? "bg-accent text-foreground"
                         : "text-muted-foreground hover:bg-accent hover:text-foreground"
                     }`}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
-                <a
-                  href="#pricing"
-                  onClick={() => setMobileOpen(false)}
+                <Link
+                  href={`${prefix}/pricing`}
                   className="mt-2 flex h-10 items-center justify-center rounded-full bg-primary text-sm font-normal tracking-wide text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] transition-all ease-out active:scale-95"
                 >
                   {dict.cta}
-                </a>
+                </Link>
               </nav>
             </motion.div>
           )}

@@ -69,10 +69,7 @@ export function MarqueeTestimonials({ dict }: MarqueeTestimonialsProps) {
         <div className="max-w-xl mx-auto flex flex-col items-center justify-center gap-2">
           <h2
             className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground tracking-tighter text-center text-balance"
-            style={{
-              fontFamily: "var(--font-geist)",
-              letterSpacing: "-0.05em",
-            }}
+            style={{ letterSpacing: "-0.05em" }}
           >
             {dict.title}
           </h2>

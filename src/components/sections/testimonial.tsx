@@ -9,7 +9,7 @@ export function Testimonial({ dict }: TestimonialProps) {
   return (
     <section className="relative z-20 bg-white dark:bg-[oklch(0.14_0.005_250)] py-16 sm:py-20 px-4 sm:px-12 lg:px-20">
       <div className="mx-auto max-w-3xl">
-        <blockquote className="text-xl sm:text-2xl font-medium leading-relaxed tracking-tight" style={{ fontFamily: "var(--font-geist)" }}>
+        <blockquote className="text-xl sm:text-2xl font-medium leading-relaxed tracking-tight">
           {dict.quote}
         </blockquote>
 

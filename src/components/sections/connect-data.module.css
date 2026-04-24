@@ -1,0 +1,734 @@
+.root {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  max-height: 600px;
+  --cd-dot: rgba(96, 130, 198, 0.15);
+  --cd-grid: #edf0f5;
+  --cd-border: #e4e7ec;
+  --cd-hairline: #eceef4;
+  --cd-text: #232529;
+  --cd-muted: #6b7280;
+  --cd-accent: #4a87ff;
+  --cd-shadow: 0 6px 18px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.04);
+  --cd-surface: #ffffff;
+  --cd-surface-muted: #f4f5f6;
+  --cd-chip-border: transparent;
+  --cd-chip-text: #555b63;
+  --cd-strong-text: #30343a;
+  --cd-meta-text: #42464d;
+  --cd-meta-muted: #8a91a0;
+  --cd-grid-fade: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 16%,
+    rgba(255, 255, 255, 0.28) 30%,
+    rgba(255, 255, 255, 0) 46%
+  );
+  --cd-connector-base: #d4d4d8;
+  --cd-pulse-shadow: drop-shadow(0 0 4px rgba(74, 135, 255, 0.45));
+  --cd-pulse-color: #4a87ff;
+  --cd-integration-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+  --cd-hub-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.05);
+  --cd-icon-mark: #2b2f39;
+  --cd-cube-surface: #fafafb;
+  --cd-cube-stroke: #505967;
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 32px 24px;
+}
+@media (min-width: 640px) { .textCol { padding: 36px 40px; } }
+@media (min-width: 1024px) { .textCol { padding: 40px 48px; } }
+
+.title {
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--cd-text);
+  max-width: 340px;
+}
+@media (min-width: 640px) { .title { font-size: 30px; line-height: 36px; } }
+
+.description {
+  margin-top: 14px;
+  font-size: 14.5px;
+  line-height: 22px;
+  color: var(--cd-muted);
+  max-width: 340px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--cd-text);
+  transition: background 180ms ease, color 180ms ease;
+  align-self: flex-start;
+}
+.cta:hover {
+  background: var(--cd-surface-muted);
+  color: var(--cd-accent);
+}
+.arrow { display: inline-flex; }
+
+.canvas {
+  position: relative;
+  min-height: 480px;
+  background: var(--cd-bg);
+  background-image:
+    linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cd-grid) 1px, transparent 1px);
+  background-size: 36px 36px;
+  background-position: 0 0;
+  overflow: hidden;
+}
+
+.sourceGrid {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 200px;
+  pointer-events: none;
+}
+
+.sourceAccent {
+  position: absolute;
+  z-index: 1;
+  width: 1.5px;
+  background: rgba(94, 155, 255, 0.85);
+  opacity: 0;
+  transform-origin: top center;
+  transform: scaleY(0);
+  pointer-events: none;
+}
+
+.sourceAccentTop {
+  top: 97px;
+  left: calc(50% + 54px);
+  height: 32px;
+}
+
+.sourceAccentBottom {
+  top: 154px;
+  left: calc(50% + 54px);
+  height: 32px;
+}
+
+.sourceRows {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.sourcePair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sourcePair1,
+.sourcePair3 {
+  gap: 109px;
+}
+
+.sourcePair2 {
+  gap: 181px;
+}
+
+.sourceRow {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background: var(--cd-surface);
+  border: 1px solid var(--cd-chip-border);
+border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.sourceIcon {
+  display: inline-flex;
+  color: var(--cd-muted);
+}
+.sourceLabel {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 600;
+  color: var(--cd-strong-text);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.modelStage {
+  position: relative;
+  min-height: 360px;
+  overflow: hidden;
+}
+
+.modelStage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--cd-grid-fade);
+  pointer-events: none;
+}
+
+.modelDots {
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  background-image: radial-gradient(circle, var(--cd-dot) 1px, transparent 1px);
+  background-size: 10px 10px;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.connectorGuides,
+.lowerChart {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.guideSvg {
+  position: absolute;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.guidePath {
+  fill: none;
+  stroke: transparent;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.guideRightLower {
+  right: 50%;
+  bottom: 0;
+  transform: translateX(-0.5px);
+}
+
+.guideRightUpper {
+  right: 50%;
+  bottom: 36px;
+}
+
+.guideRightLong {
+  right: 50%;
+  bottom: 36px;
+}
+
+.guideLeftLong {
+  left: 50%;
+  bottom: 36px;
+}
+
+.guideLeftUpper {
+  left: 50%;
+  bottom: 36px;
+}
+
+.guideLeftLower {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(0.5px);
+}
+
+.lowerChart {
+  top: 42px;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-rows: 120px min-content 28px min-content;
+  align-items: center;
+  justify-items: center;
+}
+
+.connectorSvg {
+  position: relative;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.connectorLeft {
+  grid-column: 1 / span 4;
+  grid-row: 1 / span 3;
+  justify-self: end;
+  align-self: start;
+  transform: translateX(-14px);
+}
+
+.connectorCenter {
+  grid-column: 1 / span 8;
+  grid-row: 1 / span 3;
+  justify-self: center;
+  align-self: start;
+}
+
+.connectorRight {
+  grid-column: 5 / span 4;
+  grid-row: 1 / span 3;
+  justify-self: start;
+  align-self: start;
+  transform: translateX(14px);
+}
+
+.connectorBase {
+  fill: none;
+  stroke: var(--cd-connector-base);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.connectorPulse {
+  fill: none;
+  stroke: var(--cd-pulse-color);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 1;
+  filter: var(--cd-pulse-shadow);
+  --pulse-len: 26;
+  stroke-dasharray: var(--pulse-len) 9999;
+  stroke-dashoffset: calc((var(--len, 200) + var(--pulse-len)) * -1px);
+  will-change: stroke-dashoffset;
+}
+
+.hubCard {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 74px;
+  height: 74px;
+  transform: translateX(-50%) translateY(12px) scale(0.96);
+  border-radius: 16px;
+  background: var(--cd-surface);
+  border: 1px solid var(--cd-border);
+  box-shadow: var(--cd-hub-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  z-index: 3;
+}
+
+.hubMark { display: inline-flex; }
+.hubMark { color: var(--cd-icon-mark); }
+
+.recordGrid {
+  position: absolute;
+  inset: 18px 0 0;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-rows: 120px min-content 28px min-content;
+  align-items: center;
+  justify-items: center;
+  z-index: 2;
+}
+
+.recordCard {
+  position: relative;
+  width: 180px;
+  border-radius: 12px;
+  border: 1px solid var(--cd-border);
+  background: var(--cd-surface);
+  box-shadow: 0 4px 4px rgba(24, 39, 75, 0.04), 0 2px 4px rgba(24, 39, 75, 0.02);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(14px) scale(0.98);
+}
+.recordWorkspace {
+  grid-column: 1 / span 4;
+  grid-row: 2;
+}
+.recordCompany {
+  grid-column: 5 / span 4;
+  grid-row: 2;
+}
+.recordDeal {
+  grid-column: 3 / span 4;
+  grid-row: 4;
+  transform: translateY(14px) scale(0.98);
+}
+
+.recordHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 9px 7px;
+}
+.recordMark {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px solid;
+}
+.recordTitle {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--cd-strong-text);
+  letter-spacing: -0.02em;
+}
+.recordBadge {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  height: 19px;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: var(--cd-surface-muted);
+  border: 1px solid #eceef1;
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 500;
+  color: var(--cd-chip-text);
+  letter-spacing: -0.02em;
+}
+.recordHairline {
+  height: 1px;
+  background: var(--cd-hairline);
+}
+.recordMeta {
+  padding: 8px 9px 10px;
+  font-size: 11px;
+  line-height: 12px;
+  font-weight: 500;
+  color: var(--cd-meta-text);
+  letter-spacing: -0.02em;
+}
+.recordMeta span {
+  color: var(--cd-meta-muted);
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.sideCol {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+  background: var(--cd-bg);
+  background-image:
+    linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cd-grid) 1px, transparent 1px);
+  background-size: 36px 36px;
+  background-position: 0 0;
+}
+
+.integrationsTop {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 260px;
+  background: transparent;
+}
+
+.integrationGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 56px);
+  justify-content: center;
+  gap: 10px 18px;
+  padding: 22px 20px 20px;
+}
+
+.integrationBadge {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--cd-surface);
+  border: 1px solid var(--cd-border);
+  box-shadow: var(--cd-integration-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(10px) scale(0.96);
+}
+
+:global(.dark) .root {
+  --cd-bg: #18181b;
+  --cd-dot: rgba(255, 255, 255, 0.06);
+  --cd-grid: #34343a;
+  --cd-border: #3a3a3f;
+  --cd-hairline: #34343a;
+  --cd-text: #f3f4f6;
+  --cd-muted: #9ca3af;
+  --cd-accent: #8fb5ff;
+  --cd-shadow: 0 14px 28px rgba(0, 0, 0, 0.28), 0 4px 10px rgba(0, 0, 0, 0.22);
+  --cd-surface: #27272a;
+  --cd-surface-muted: #202024;
+  --cd-chip-border: #3a3a3f;
+  --cd-chip-text: #c3cad5;
+  --cd-strong-text: #e5e7eb;
+  --cd-meta-text: #d1d5db;
+  --cd-meta-muted: #8b95a7;
+  --cd-grid-fade: linear-gradient(
+    to bottom,
+    rgba(24, 24, 27, 0) 0%,
+    rgba(24, 24, 27, 0) 16%,
+    rgba(39, 39, 42, 0.38) 30%,
+    rgba(24, 24, 27, 0) 46%
+  );
+  --cd-connector-base: #4a4a52;
+  --cd-pulse-shadow: drop-shadow(0 0 4px rgba(143, 181, 255, 0.24));
+  --cd-pulse-color: #8fb5ff;
+  --cd-integration-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  --cd-hub-shadow: 0 14px 30px rgba(0, 0, 0, 0.24), 0 4px 10px rgba(0, 0, 0, 0.18);
+  --cd-icon-mark: #f3f4f6;
+  --cd-cube-surface: #232327;
+  --cd-cube-stroke: #a1a1aa;
+}
+
+.cubeWrap {
+  position: relative;
+  min-height: 220px;
+}
+
+.cubeGrid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, var(--cd-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cd-grid) 1px, transparent 1px);
+  background-size: 36px 36px;
+  background-position: 0 0;
+}
+
+.cubeCell,
+.cubeGrid > div {
+  border: 0;
+}
+
+.cubeGlyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+}
+
+.root[data-visible="true"] .sourceRow {
+  animation: cdFadeUp 420ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--delay) both;
+}
+
+.root[data-visible="true"] .hubCard {
+  animation:
+    cdPopIn 380ms cubic-bezier(0.2, 0.8, 0.2, 1) 420ms both,
+    cdHubIdle 3.2s ease-in-out 1s infinite;
+}
+
+.root[data-visible="true"] .sourceAccent {
+  animation: cdSourcePulse 4.8s linear 1.1s infinite;
+}
+
+.root[data-visible="true"] .sourceAccentTop {
+  animation-delay: 1.15s;
+}
+
+.root[data-visible="true"] .sourceAccentBottom {
+  animation-delay: 2.65s;
+}
+
+.connectorSvg {
+  opacity: 0;
+}
+.root[data-visible="true"] .connectorLeft {
+  animation: cdConnectorReveal 380ms ease-out 560ms forwards;
+}
+.root[data-visible="true"] .connectorCenter {
+  animation: cdConnectorReveal 380ms ease-out 640ms forwards;
+}
+.root[data-visible="true"] .connectorRight {
+  animation: cdConnectorReveal 380ms ease-out 720ms forwards;
+}
+
+.root[data-visible="true"] .connectorLeftPulse {
+  animation: cdTravel 2.2s cubic-bezier(0.45, 0, 0.25, 1) 1.15s infinite;
+}
+
+.root[data-visible="true"] .connectorRightPulse {
+  animation: cdTravel 2.2s cubic-bezier(0.45, 0, 0.25, 1) 1.45s infinite;
+}
+
+.root[data-visible="true"] .connectorCenterPulse {
+  animation: cdTravel 1.9s cubic-bezier(0.45, 0, 0.25, 1) 1.75s infinite;
+}
+
+.root[data-visible="true"] .recordCard {
+  animation: cdCardIn 360ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--card-delay) both;
+}
+.root[data-visible="true"] .recordDeal {
+  animation: cdCardInCenter 360ms cubic-bezier(0.2, 0.8, 0.2, 1) 880ms both;
+}
+
+.root[data-visible="true"] .integrationBadge {
+  animation: cdLogoIn 360ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--logo-delay) both;
+}
+
+.root[data-visible="true"] .cubeGlyph {
+  animation: cdCubeIn 520ms cubic-bezier(0.2, 0.8, 0.2, 1) 960ms both;
+}
+
+@keyframes cdFadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cdPopIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px) scale(0.96); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+}
+@keyframes cdSourceLine {
+  from { opacity: 0; transform: scaleY(0); }
+  to { opacity: 1; transform: scaleY(1); }
+}
+@keyframes cdSourcePulse {
+  0%, 12% { opacity: 0; transform: scaleY(0); }
+  18%, 30% { opacity: 0.9; transform: scaleY(1); }
+  42%, 100% { opacity: 0; transform: scaleY(0); }
+}
+@keyframes cdConnectorReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes cdTravel {
+  0%   { stroke-dashoffset: calc((var(--len, 200) + var(--pulse-len)) * -1px); }
+  100% { stroke-dashoffset: calc(var(--pulse-len) * 1px); }
+}
+@keyframes cdHubIdle {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.04);
+  }
+  50% {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10), 0 10px 28px rgba(0, 0, 0, 0.06);
+  }
+}
+@keyframes cdCardIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes cdCardInCenter {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes cdLogoIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes cdCubeIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 1023px) {
+  .canvas,
+  .sideCol {
+    min-height: auto;
+  }
+
+  .sourceRows {
+    padding-top: 20px;
+    gap: 4px;
+  }
+
+  .sourcePair,
+  .sourcePair1,
+  .sourcePair2,
+  .sourcePair3 {
+    gap: 14px;
+    flex-direction: column;
+  }
+
+  .modelStage {
+    min-height: 470px;
+  }
+
+  .connectorLeft,
+  .connectorCenter,
+  .connectorRight,
+  .guideSvg,
+  .sourceAccent {
+    display: none;
+  }
+
+  .lowerChart,
+  .recordGrid {
+    display: block;
+    inset: 0;
+    top: auto;
+  }
+
+  .recordWorkspace {
+    position: absolute;
+    left: 20px;
+    top: 116px;
+  }
+  .recordCompany {
+    position: absolute;
+    right: 20px;
+    top: 116px;
+  }
+  .recordDeal {
+    position: absolute;
+    top: 270px;
+    left: 50%;
+    transform: translateX(-50%) translateY(14px) scale(0.98);
+  }
+
+  .cubeWrap {
+    min-height: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sourceRow,
+  .hubCard,
+  .connectorPath,
+  .recordCard,
+  .integrationBadge,
+  .cubeGlyph {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .connectorPulse {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+  .recordDeal {
+    transform: none !important;
+  }
+
+  @media (max-width: 1023px) {
+    .recordDeal {
+      transform: translateX(-50%) !important;
+    }
+  }
+}
