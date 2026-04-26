@@ -429,7 +429,7 @@ border-radius: 20px;
 
 .sideCol {
   position: relative;
-  display: flex;
+  display: none;
   flex-direction: column;
   min-height: 480px;
   background: var(--cd-bg);
@@ -438,6 +438,10 @@ border-radius: 20px;
     linear-gradient(to bottom, var(--cd-grid) 1px, transparent 1px);
   background-size: 36px 36px;
   background-position: 0 0;
+}
+
+@media (min-width: 1024px) {
+  .sideCol { display: flex; }
 }
 
 .integrationsTop {
@@ -648,62 +652,77 @@ border-radius: 20px;
 }
 
 @media (max-width: 1023px) {
-  .canvas,
-  .sideCol {
+  .root {
+    max-height: none;
+  }
+
+  .canvas {
     min-height: auto;
   }
 
   .sourceRows {
-    padding-top: 20px;
-    gap: 4px;
+    padding-top: 16px;
+    padding-bottom: 12px;
+    gap: 8px;
   }
 
   .sourcePair,
   .sourcePair1,
   .sourcePair2,
   .sourcePair3 {
-    gap: 14px;
-    flex-direction: column;
+    gap: 8px;
+    flex-direction: row;
+    justify-content: center;
   }
 
   .modelStage {
-    min-height: 470px;
+    min-height: 300px;
   }
 
   .connectorLeft,
   .connectorCenter,
   .connectorRight,
   .guideSvg,
-  .sourceAccent {
+  .sourceAccent,
+  .lowerChart {
     display: none;
   }
 
-  .lowerChart,
+  /* Record cards stack inside the canvas on mobile */
   .recordGrid {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    bottom: auto;
     display: block;
-    inset: 0;
-    top: auto;
   }
-
   .recordWorkspace {
     position: absolute;
-    left: 20px;
-    top: 116px;
+    left: 6px;
+    top: 8px;
+    width: auto;
+    max-width: calc(50% - 10px);
+    grid-column: unset;
+    grid-row: unset;
   }
   .recordCompany {
     position: absolute;
-    right: 20px;
-    top: 116px;
+    right: 6px;
+    top: 8px;
+    width: auto;
+    max-width: calc(50% - 10px);
+    grid-column: unset;
+    grid-row: unset;
   }
   .recordDeal {
     position: absolute;
-    top: 270px;
-    left: 50%;
-    transform: translateX(-50%) translateY(14px) scale(0.98);
-  }
-
-  .cubeWrap {
-    min-height: 260px;
+    top: 116px;
+    left: calc(50% - 100px);
+    width: min(200px, calc(100% - 32px));
+    transform: translateY(14px) scale(0.98);
+    grid-column: unset;
+    grid-row: unset;
   }
 }
 
@@ -724,11 +743,5 @@ border-radius: 20px;
   }
   .recordDeal {
     transform: none !important;
-  }
-
-  @media (max-width: 1023px) {
-    .recordDeal {
-      transform: translateX(-50%) !important;
-    }
   }
 }

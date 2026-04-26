@@ -560,7 +560,7 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
     >
       {/* ─── Left: text ─── */}
             <div className="flex flex-col justify-between pl-6 py-6 sm:pl-10 sm:py-7 lg:pl-12 lg:py-8">
-              <div className="max-w-[320px] flex flex-col justify-start px-6">
+              <div className="max-w-[320px] flex flex-col justify-start">
                 <h2
                   className="text-[26px] sm:text-[30px] font-semibold leading-[32px] tracking-[-0.02em] text-[#0F1720] dark:text-[#F1F5F9]"
                   style={{ fontFamily: "var(--font-geist)" }}
@@ -581,9 +581,9 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
         </Link>
             </div>
             {/* ─── Center: diagram ─── */}
-            <div className="flex items-center justify-center min-h-auto pl-3 sm:pl-5 lg:pl-6">
-              <div className={cn(styles.diagramFrame, "relative w-full max-w-[560px] overflow-x-auto lg:overflow-hidden")}>
-                <div className="relative pt-0 mt-0" style={{ width: W, height: H, minWidth: W }}>
+            <div className="flex items-center justify-center min-h-auto sm:pl-5 lg:pl-6">
+              <div className={cn(styles.diagramFrame, "relative w-full max-w-[560px] overflow-hidden")}>
+                <div className={cn("relative pt-0 mt-0", styles.diagramScaler)} style={{ width: W, height: H, minWidth: W }}>
 
                   {/* SVG edges — always drawn, color transitions gray↔green */}
                   <svg
@@ -804,11 +804,11 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
               </div>
             </div>
 
-            {/* ─── Right: list + cubes ─── */}
-            <div className="relative flex flex-col min-h-[560px]">
+            {/* ─── Right: list + cubes (desktop only) ─── */}
+            <div className="hidden lg:flex flex-col relative lg:min-h-[560px]">
               {/* List section */}
-              <div className=" pl-[0.5rem] pt-[1rem]">
-                <div className="relative mx-auto flex min-h-[320px] overflow-visible min-w-[360px]">
+              <div className="pl-[0.5rem] pt-[1rem]">
+                <div className="relative mx-auto flex min-h-[240px] overflow-visible lg:min-w-[360px]">
                   <ul
                     role="list"
                     aria-label={dict.list.title}

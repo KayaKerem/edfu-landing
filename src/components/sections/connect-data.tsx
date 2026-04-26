@@ -583,7 +583,7 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
       data-visible={visible ? "true" : "false"}
     >
       <div className={styles.textCol}>
-        <div className="max-w-[320px] flex flex-col justify-start px-6">
+        <div className="max-w-[320px] flex flex-col justify-start">
           <h2 className={styles.title} style={{ fontFamily: "var(--font-geist)" }}>
             {dict.title}
           </h2>
