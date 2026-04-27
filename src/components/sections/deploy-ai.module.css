@@ -50,7 +50,8 @@
   padding: 32px 24px;
 }
 @media (min-width: 640px) { .textCol { padding: 36px 40px; } }
-@media (min-width: 1024px) { .textCol { padding: 40px 48px; } }
+@media (min-width: 1024px) { .textCol { padding: 40px 64px; } }
+@media (min-width: 1280px) { .textCol { padding: 40px 80px; } }
 
 .title {
   font-size: 28px;
@@ -72,9 +73,9 @@
 
 .cta {
   display: inline-flex;
-  align-items: center;
+  align-items: start;
   gap: 6px;
-  padding: 4px 24px;
+  padding: 4px 0px;
   border-radius: 10px;
   font-size: 14px;
   line-height: 20px;
@@ -258,7 +259,7 @@
 .taskCard {
   position: relative;
   width: 100%;
-  max-width: 328px;            /* Attio card max-w */
+  max-width: 330px;            /* Attio card max-w */
   border-radius: 12px;
   overflow: hidden;
   padding: 1px;                /* Attio p-px: the halo shows through 1px around inner */
@@ -364,7 +365,7 @@
 
 .taskQuestion {
   padding: 12px;               /* Attio p-3 */
-  padding-right: 16px;         /* Attio pr-1 extra on text */
+  padding-right: 8px;         /* Attio pr-1 extra on text */
   font-size: 12px;             /* Attio text-[12px] */
   line-height: 16px;           /* Attio leading-4 */
   font-weight: 500;            /* Attio font-medium */
@@ -536,16 +537,10 @@
   .responseCol { display: flex; }
 }
 
+/* Common rules for all <1024px (mobile + tablet) — only the truly shared bits live here. */
 @media (max-width: 1023px) {
-  .canvas { min-height: auto; padding: 12px 8px 20px; }
+  .canvas { min-height: auto; padding: 12px 16px 20px; }
   .root { max-height: none; }
-  .answerPill { max-width: 100% !important; }
-  .stage {
-    aspect-ratio: 500 / 580;
-    transform: scale(0.88);
-    transform-origin: top center;
-    margin-bottom: -56px;
-  }
   .canvasDots {
     -webkit-mask-image:
       linear-gradient(to right, transparent 0, rgba(0,0,0,.9) 24px, rgba(0,0,0,.9) calc(100% - 24px), transparent 100%),
@@ -554,6 +549,47 @@
       linear-gradient(to right, transparent 0, rgba(0,0,0,.9) 24px, rgba(0,0,0,.9) calc(100% - 24px), transparent 100%),
       linear-gradient(to bottom, rgba(0,0,0,1) 0, rgba(0,0,0,1) calc(100% - 80px), transparent 100%);
   }
+}
+
+/* Mobile-only (≤767px) — aggressive scaling + tiny pill text to fit ~329px canvas. */
+@media (max-width: 767px) {
+  .answerPill {
+    margin-top: 2%;
+    max-width: 100% !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: xx-small;
+    padding-top: 0.02%;
+    padding-bottom: 0.02%;
+    padding-left: 0.2%;
+    padding-right: 0.2%;
+  }
+  .answerText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .stage {
+    aspect-ratio: 500 / 720;
+    gap: 2%;
+    transform: scale(0.72);
+    transform-origin: top center;
+    margin-bottom: -138px;
+  }
+  .taskQuestion {
+    -webkit-line-clamp: 1;
+    font-size: 11px;
+    line-height: 18px;
+    padding: 5px 10px;
+  }
+}
+
+/* Tablet (768–1023px) — Attio-like: stage at natural size, canvas content centered, no scale. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .canvas { padding: 32px 24px 40px; }
+  .stage { max-width: 520px; }
+  .answerPill { max-width: 100% !important; }
 }
 
 /* Top area: response card centered horizontally */

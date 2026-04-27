@@ -472,15 +472,12 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
     // t=2400  Branch edges turn green; "Upsell"/"Nurture" labels appear
     // t=3120  Upsell activates; Nurture fades in (muted)
     // t=4200  + button appears with halo pulse
-    // t=6500  Hold phase — all active, reset about to begin
-    // t=7100  Instant reset to idle (all borders gray, no badges)
+    // Animation plays once and stays at "plus" final state (no reset to idle).
     schedule(0,    "trigger");
     schedule(1400, "condition");
     schedule(2400, "branch");
     schedule(3120, "leaves");
     schedule(4200, "plus");
-    schedule(6500, "resetting");
-    schedule(7100, "idle");
 
     return () => clearTimers();
   }, [visible, reducedMotion]);
@@ -559,7 +556,7 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
       }}
     >
       {/* ─── Left: text ─── */}
-            <div className="flex flex-col justify-between pl-6 py-6 sm:pl-10 sm:py-7 lg:pl-12 lg:py-8">
+            <div className="flex flex-col justify-between pl-6 py-6 sm:pl-10 sm:py-7 lg:pl-16 lg:py-8 xl:pl-20 gap-6">
               <div className="max-w-[320px] flex flex-col justify-start">
                 <h2
                   className="text-[26px] sm:text-[30px] font-semibold leading-[32px] tracking-[-0.02em] text-[#0F1720] dark:text-[#F1F5F9]"
@@ -581,8 +578,8 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
         </Link>
             </div>
             {/* ─── Center: diagram ─── */}
-            <div className="flex items-center justify-center min-h-auto sm:pl-5 lg:pl-6">
-              <div className={cn(styles.diagramFrame, "relative w-full max-w-[560px] overflow-hidden")}>
+            <div className="flex items-center justify-center min-h-auto lg:pl-6">
+              <div className={cn(styles.diagramFrame, "relative w-full max-w-[560px] overflow-visible lg:overflow-hidden")}>
                 <div className={cn("relative pt-0 mt-0", styles.diagramScaler)} style={{ width: W, height: H, minWidth: W }}>
 
                   {/* SVG edges — always drawn, color transitions gray↔green */}

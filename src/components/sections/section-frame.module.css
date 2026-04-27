@@ -24,7 +24,8 @@
 }
 
 .gutterStripe {
-  background-color: rgba(15, 23, 42, 0.015);
+  /* Opaque background matching the page background — fully occludes content beneath. */
+  background-color: var(--background, #ffffff);
   background-size: 10px 10px;
   background-image: repeating-linear-gradient(315deg, currentColor 0 1px, transparent 0 50%);
 }
@@ -51,5 +52,6 @@
 }
 
 :global(.dark) .gutterStripe {
-  background-color: rgba(255, 255, 255, 0.02);
+  /* Dark mode: --background = #18181B, matches section backgrounds. */
+  background-color: var(--background, #18181b);
 }

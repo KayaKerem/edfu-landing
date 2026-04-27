@@ -39,11 +39,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 16px;
+  gap: 24px;
   padding: 32px 24px;
 }
 @media (min-width: 640px) { .textCol { padding: 36px 40px; } }
-@media (min-width: 1024px) { .textCol { padding: 40px 48px; } }
+@media (min-width: 1024px) { .textCol { padding: 40px 64px; } }
+@media (min-width: 1280px) { .textCol { padding: 40px 80px; } }
 
 .title {
   font-size: 28px;
@@ -67,7 +68,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 24px;
+  padding: 4px 0px;
   border-radius: 10px;
   font-size: 14px;
   line-height: 20px;
@@ -99,6 +100,17 @@
   inset: 0 0 auto;
   height: 200px;
   pointer-events: none;
+  /* overflow: hidden;
+  background-image: radial-gradient(circle, var(--cd-dot) 1px, transparent 1px);
+  background-size: 10px 10px;
+  opacity: 0.9;
+}
+.sourceGrid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--cd-grid-fade);
+  pointer-events: none; */
 }
 
 .sourceAccent {
@@ -478,7 +490,7 @@ border-radius: 20px;
 :global(.dark) .root {
   --cd-bg: #18181b;
   --cd-dot: rgba(255, 255, 255, 0.06);
-  --cd-grid: #34343a;
+  --cd-grid: rgba(255, 255, 255, 0.03);
   --cd-border: #3a3a3f;
   --cd-hairline: #34343a;
   --cd-text: #f3f4f6;
@@ -655,10 +667,17 @@ border-radius: 20px;
   .root {
     max-height: none;
   }
-
   .canvas {
     min-height: auto;
   }
+}
+
+/* Mobile-only (≤767px): aggressive scaling + absolute record positioning to fit ~329px canvas. */
+@media (max-width: 767px) {
+  .hubCard { width: 54px; height: 54px; }
+  .sourceRow { height: 25px; }
+
+  .canvas { padding-left: 16px; padding-right: 16px; }
 
   .sourceRows {
     padding-top: 16px;
@@ -675,9 +694,7 @@ border-radius: 20px;
     justify-content: center;
   }
 
-  .modelStage {
-    min-height: 300px;
-  }
+  .modelStage { min-height: 300px; }
 
   .connectorLeft,
   .connectorCenter,
@@ -688,7 +705,6 @@ border-radius: 20px;
     display: none;
   }
 
-  /* Record cards stack inside the canvas on mobile */
   .recordGrid {
     position: absolute;
     top: 90px;
@@ -723,6 +739,14 @@ border-radius: 20px;
     transform: translateY(14px) scale(0.98);
     grid-column: unset;
     grid-row: unset;
+  }
+}
+
+/* Tablet (768–1023px) — Attio-like: keep desktop chart full width so the background covers all. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .canvas {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }
 
