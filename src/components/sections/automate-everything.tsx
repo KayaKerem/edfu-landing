@@ -391,11 +391,11 @@ function ListCard({
 
 export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const loopTimers = useRef<number[]>([]);
-  const hasPlayedRef = useRef(false);
+  const elapsedRef = useRef(0);
+  const lastTickRef = useRef<number | null>(null);
+  const completedRef = useRef(false);
   const [visible, setVisible] = useState(false);
   const [phase, setPhase] = useState<Phase>("idle");
-  const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [pageHidden, setPageHidden] = useState(false);
 
@@ -446,45 +446,73 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
     };
   }, []);
 
-  // Attio-style execution pulse timeline:
-  // All nodes visible from the start (idle = gray border).
-  // Phases drive "activation" (green border + badge slide-up), not node visibility.
+  // Attio-style execution pulse timeline (elapsed-ms based, RAF-driven).
+  // Animation only advances while the section is visible AND the page/tab is
+  // active. If the user scrolls away or switches tabs, time freezes; when they
+  // return, it picks up exactly where it left off. Plays once, then settles
+  // permanently on "plus" (no reset).
+  //
+  //   t=0     Trigger node activates (green border + "Triggered" badge)
+  //   t=1400  Switch activates (E1 already green, "Completed" badge)
+  //   t=2400  Branch edges turn green; "Upsell" / "Nurture" labels appear
+  //   t=3120  Upsell activates; Nurture stays muted
+  //   t=4200  + button appears with halo pulse — final frame
+  const TIMELINE: ReadonlyArray<readonly [number, Phase]> = [
+    [0, "trigger"],
+    [1400, "condition"],
+    [2400, "branch"],
+    [3120, "leaves"],
+    [4200, "plus"],
+  ];
+  const TOTAL_MS = 4200;
+
+  const phaseAt = (ms: number): Phase => {
+    let p: Phase = "idle";
+    for (const [t, next] of TIMELINE) {
+      if (ms >= t) p = next;
+    }
+    return p;
+  };
+
   useEffect(() => {
-    if (!visible || reducedMotion || hasPlayedRef.current) return;
-    hasPlayedRef.current = true;
+    if (reducedMotion) {
+      elapsedRef.current = TOTAL_MS;
+      completedRef.current = true;
+      setPhase("plus");
+      return;
+    }
+    if (!visible || pageHidden) {
+      // Freeze: drop the lastTick reference so the next resume doesn't apply
+      // a huge delta from the time we were paused.
+      lastTickRef.current = null;
+      return;
+    }
+    if (completedRef.current) {
+      setPhase("plus");
+      return;
+    }
 
-    const clearTimers = () => {
-      loopTimers.current.forEach((id) => window.clearTimeout(id));
-      loopTimers.current = [];
+    let raf = 0;
+    const tick = (now: number) => {
+      if (lastTickRef.current === null) lastTickRef.current = now;
+      const dt = now - lastTickRef.current;
+      lastTickRef.current = now;
+      elapsedRef.current = Math.min(elapsedRef.current + dt, TOTAL_MS);
+      setPhase(phaseAt(elapsedRef.current));
+      if (elapsedRef.current < TOTAL_MS) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        completedRef.current = true;
+      }
     };
-    clearTimers();
-
-    const schedule = (delay: number, next: Phase) => {
-      loopTimers.current.push(
-        window.setTimeout(() => {
-          setPhase(next);
-        }, delay)
-      );
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      lastTickRef.current = null;
     };
+  }, [visible, pageHidden, reducedMotion]);
 
-    // t=0     Trigger node activates (green border + "Triggered" badge slides up)
-    // t=1400  Switch activates (E1 already green, "Completed" badge slides up)
-    // t=2400  Branch edges turn green; "Upsell"/"Nurture" labels appear
-    // t=3120  Upsell activates; Nurture fades in (muted)
-    // t=4200  + button appears with halo pulse
-    // Animation plays once and stays at "plus" final state (no reset to idle).
-    schedule(0,    "trigger");
-    schedule(1400, "condition");
-    schedule(2400, "branch");
-    schedule(3120, "leaves");
-    schedule(4200, "plus");
-
-    return () => clearTimers();
-  }, [visible, reducedMotion]);
-
-  const isPaused = paused || pageHidden;
-  // Not visible / reduced-motion → show final activated state
-  const renderPhase = !visible || reducedMotion ? "plus" : phase;
+  const renderPhase = phase;
 
   // ── Node active states (NOT visibility — all nodes always rendered) ──
   const triggerActive  = renderPhase !== "idle";
@@ -514,10 +542,13 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
   // lands neatly on the card border instead of underneath it.
   const ARROW_GAP = 6;
 
-  const n1Top = 36,  n1H = 80,  n1Bottom = n1Top + n1H; // 116
-  const n2Top = 200, n2H = 80,  n2Bottom = n2Top + n2H; // 280
+  // Heights match the actual rendered NodeCard size (110px) so paths start
+  // at the visible card edge instead of inside it — otherwise the flow dots
+  // appear to travel through the cards.
+  const n1Top = 36,  n1H = 110, n1Bottom = n1Top + n1H; // 146
+  const n2Top = 200, n2H = 110, n2Bottom = n2Top + n2H; // 310
   const branchY  = 320;
-  const n34Top   = 392, n34H = 92;
+  const n34Top   = 392, n34H = 110;
 
   const upsellCardCx  = 150; // card: 0–300px (no overlap with nurture)
   // Nurture centered at 470 → card 320–620; canvas clips at 560 so the right
@@ -545,15 +576,9 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
       ariaLabel={dict.ariaLabel}
       className={cn(styles.root)}
       gridClassName="grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(500px,1.4fr)_minmax(360px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border"
-      data-paused={isPaused ? "true" : "false"}
+      data-paused={pageHidden ? "true" : "false"}
       data-reduced-motion={reducedMotion ? "true" : "false"}
       data-phase={renderPhase}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={(e) => {
-        if (!sectionRef.current?.contains(e.relatedTarget as Node | null)) setPaused(false);
-      }}
     >
       {/* ─── Left: text ─── */}
             <div className="flex flex-col justify-between pl-6 py-6 sm:pl-10 sm:py-7 lg:pl-16 lg:py-8 xl:pl-20 gap-6">

@@ -182,7 +182,7 @@ export default async function Home({
             <FlowDiagram dict={dict.flowDiagram} />
             <Security dict={dict.security} />
             {/* <AiGradientCard dict={dict.aiGradientCard} /> */}
-            <MarqueeTestimonials dict={dict.marqueeTestimonials} />
+            {/* <MarqueeTestimonials dict={dict.marqueeTestimonials} /> */}
             <CTA dict={dict.cta} />
           </div>
           <Footer dict={dict.footer} lang={lang} />

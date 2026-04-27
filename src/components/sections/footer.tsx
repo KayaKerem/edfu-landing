@@ -51,10 +51,10 @@ export function Footer({ dict, lang }: FooterProps) {
             </p>
 
             {/* Compliance badges */}
-            <div className="mt-6 grid grid-cols-3 overflow-hidden">
+            <div className="mt-6 flex justify-start items-center gap-10 overflow-hidden">
               {complianceBadges.map(({ label, Icon }) => (
                 <div key={label} className="flex flex-col items-center justify-center gap-3">
-                  <Icon className="w-10 h-10 opacity-70" />
+                  <Icon className="w-8 h-8 opacity-70" />
                   <span className="flex items-center gap-1 text-[11px] font-semibold text-muted-foreground">
                     <CheckCircleIcon />
                     {label}

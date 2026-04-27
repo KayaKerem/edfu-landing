@@ -272,16 +272,14 @@ function StickyHeader({
   setBilling,
   dict,
   headerRef,
-  isPinned,
 }: {
   billing: Billing;
   setBilling: (b: Billing) => void;
   dict: Dictionary["pricing"];
   headerRef?: React.RefObject<HTMLDivElement | null>;
-  isPinned?: boolean;
 }) {
   return (
-    <div ref={headerRef} className={cn(styles.stickyHeader, isPinned && styles.stickyHeaderPinned)}>
+    <div ref={headerRef} className={styles.stickyHeader}>
       <div className={styles.stickyInner}>
         {/* Left column: billing toggle */}
         <div className={styles.stickyLabel}>
@@ -400,56 +398,40 @@ export function PricingTable({ dict, billing, onBillingChange }: PricingTablePro
   const [stickyHeaderHeight, setStickyHeaderHeight] = useState(0);
   const [isStickyHeaderPinned, setIsStickyHeaderPinned] = useState(false);
 
+  // Measure header height (drives --pricing-sticky-header-height for category offsets)
   useEffect(() => {
     const header = stickyHeaderRef.current;
     if (!header) return;
-
-    const updateHeight = () => {
-      setStickyHeaderHeight(header.getBoundingClientRect().height);
-    };
-
+    const updateHeight = () => setStickyHeaderHeight(header.getBoundingClientRect().height);
     updateHeight();
-
-    const resizeObserver = new ResizeObserver(updateHeight);
-    resizeObserver.observe(header);
-
+    const ro = new ResizeObserver(updateHeight);
+    ro.observe(header);
     window.addEventListener("resize", updateHeight);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", updateHeight);
-    };
+    return () => { ro.disconnect(); window.removeEventListener("resize", updateHeight); };
   }, []);
 
+  // Scroll tracking — only for navbar broadcast (visual is pure CSS sticky)
   useEffect(() => {
     const root = tableRootRef.current;
     const header = stickyHeaderRef.current;
     if (!root || !header) return;
-
     const navbarOffset = 60;
-
     const updatePinnedState = () => {
       const rootRect = root.getBoundingClientRect();
       const headerHeight = header.getBoundingClientRect().height;
-      const shouldPin =
-        rootRect.top <= navbarOffset &&
-        rootRect.bottom - headerHeight > navbarOffset;
-
+      const shouldPin = rootRect.top <= navbarOffset && rootRect.bottom - headerHeight > navbarOffset;
       setIsStickyHeaderPinned(shouldPin);
     };
-
     updatePinnedState();
-
     window.addEventListener("scroll", updatePinnedState, { passive: true });
     window.addEventListener("resize", updatePinnedState);
-
     return () => {
       window.removeEventListener("scroll", updatePinnedState);
       window.removeEventListener("resize", updatePinnedState);
     };
   }, [stickyHeaderHeight]);
 
-  // Broadcast pinned state to the document root so the navbar can react.
+  // Broadcast pinned state to the document root so the navbar can react
   useEffect(() => {
     const root = document.documentElement;
     if (isStickyHeaderPinned) {
@@ -457,9 +439,7 @@ export function PricingTable({ dict, billing, onBillingChange }: PricingTablePro
     } else {
       delete root.dataset.pricingStickyPinned;
     }
-    return () => {
-      delete root.dataset.pricingStickyPinned;
-    };
+    return () => { delete root.dataset.pricingStickyPinned; };
   }, [isStickyHeaderPinned]);
 
   return (
@@ -468,22 +448,18 @@ export function PricingTable({ dict, billing, onBillingChange }: PricingTablePro
       className={styles.tableRoot}
       style={{ "--pricing-sticky-header-height": `${stickyHeaderHeight}px` } as CSSProperties}
     >
-      {/* Sticky header */}
-      <div
-        className={styles.stickyHeaderShell}
-        style={{ height: stickyHeaderHeight ? `${stickyHeaderHeight}px` : undefined }}
-      >
-        <StickyHeader
-          billing={billing}
-          setBilling={onBillingChange}
-          dict={dict}
-          headerRef={stickyHeaderRef}
-          isPinned={isStickyHeaderPinned}
-        />
-      </div>
+      <StickyHeader
+        billing={billing}
+        setBilling={onBillingChange}
+        dict={dict}
+        headerRef={stickyHeaderRef}
+      />
 
-      {/* Table body */}
-      <div className={styles.tableBody} role="table" aria-label="Feature comparison">
+      <div
+        className={styles.tableBody}
+        role="table"
+        aria-label="Feature comparison"
+      >
         {CATEGORIES.map((cat) => (
           <div key={cat.title} className={styles.categorySection}>
             <div className={styles.categoryHeading}>
