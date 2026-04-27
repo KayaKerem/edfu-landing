@@ -120,6 +120,29 @@ const PASSIVE_GUIDES = [
   },
 ] as const;
 
+const UPPER_CONNECTOR_SEGMENTS = [
+  {
+    id: "upper-left-top",
+    path: "M84 76V126H164V208H210V276",
+    delay: "0s",
+  },
+  {
+    id: "upper-right-top",
+    path: "M336 76V126H256V208H210V276",
+    delay: "0.8s",
+  },
+  {
+    id: "upper-left-mid",
+    path: "M48 133V164H176V208H210V276",
+    delay: "1.6s",
+  },
+  {
+    id: "upper-right-mid",
+    path: "M372 133V164H244V208H210V276",
+    delay: "2.4s",
+  },
+] as const;
+
 function ArrowRightIcon() {
   return (
     <svg viewBox="0 0 14 14" fill="none" aria-hidden="true" width={14} height={14}>
@@ -530,7 +553,8 @@ function IntegrationBadge({ idx, render: RenderIcon }: { idx: number; render: ()
 
 export function ConnectData({ dict }: { dict: ConnectDataDict }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const svgRef = useRef<HTMLDivElement>(null);
+  const upperSvgRef = useRef<HTMLDivElement>(null);
+  const lowerSvgRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const hasPlayedRef = useRef(false);
 
@@ -565,12 +589,13 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
   }, []);
 
   useEffect(() => {
-    const svg = svgRef.current;
-    if (!svg) return;
-    const paths = svg.querySelectorAll<SVGPathElement>("path[data-connector]");
-    paths.forEach((path) => {
-      const len = Math.ceil(path.getTotalLength());
-      path.style.setProperty("--len", String(len));
+    [upperSvgRef.current, lowerSvgRef.current].forEach((svg) => {
+      if (!svg) return;
+      const paths = svg.querySelectorAll<SVGPathElement>("path[data-connector]");
+      paths.forEach((path) => {
+        const len = Math.ceil(path.getTotalLength());
+        path.style.setProperty("--len", String(len));
+      });
     });
   }, []);
 
@@ -583,7 +608,7 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
       data-visible={visible ? "true" : "false"}
     >
       <div className={styles.textCol}>
-        <div className="max-w-[320px] flex flex-col justify-start px-6">
+        <div className="max-w-[320px] flex flex-col justify-start">
           <h2 className={styles.title} style={{ fontFamily: "var(--font-geist)" }}>
             {dict.title}
           </h2>
@@ -600,8 +625,22 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
 
       <div className={styles.canvas}>
         <div className={styles.sourceGrid} aria-hidden="true" />
-        {/* <div className={cn(styles.sourceAccent, styles.sourceAccentTop)} aria-hidden="true" /> */}
-        {/* <div className={cn(styles.sourceAccent, styles.sourceAccentBottom)} aria-hidden="true" /> */}
+        <div ref={upperSvgRef} className={styles.upperChart} aria-hidden="true">
+          <svg className={styles.upperConnectorSvg} viewBox="0 0 420 340" fill="none">
+            {UPPER_CONNECTOR_SEGMENTS.map((segment) => (
+              <path
+                key={segment.id}
+                className={styles.upperConnectorPulse}
+                d={segment.path}
+                data-connector={segment.id}
+                style={{
+                  "--pulse-delay": segment.delay,
+                  "--pulse-len": 42,
+                } as CSSProperties}
+              />
+            ))}
+          </svg>
+        </div>
         <div className={styles.sourceRows}>
           {SOURCE_ROWS.map((row, rowIndex) => (
             <SourcePair
@@ -629,7 +668,7 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
             ))}
           </div>
 
-          <div ref={svgRef} className={styles.lowerChart} aria-hidden="true">
+          <div ref={lowerSvgRef} className={styles.lowerChart} aria-hidden="true">
             {CONNECTOR_SEGMENTS.map((segment) => (
               <svg
                 key={segment.id}

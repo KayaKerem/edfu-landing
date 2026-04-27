@@ -48,29 +48,29 @@ export const SectionFrame = forwardRef<HTMLElement, SectionFrameProps>(
         {...rest}
       >
         <div className={styles.layout}>
-          <div className={cn("mx-4 sm:mx-6", styles.inner)}>
+          <div className={cn("mx-0 sm:mx-6", styles.inner)}>
             {/* Diagonal hatch stripes — left & right gutters */}
             <div
               className={cn(
-                "pointer-events-none absolute inset-y-0 left-0 z-[2] w-14 text-foreground/5 dark:text-white/8",
+                "pointer-events-none absolute inset-y-0 left-0 z-[2] w-4 lg:w-14 text-foreground/5 dark:text-white/8",
                 styles.gutterStripe
               )}
               aria-hidden="true"
             />
             <div
               className={cn(
-                "pointer-events-none absolute inset-y-0 right-0 z-[2] w-14 text-foreground/5 dark:text-white/8",
+                "pointer-events-none absolute inset-y-0 right-0 z-[2] w-4 lg:w-14 text-foreground/5 dark:text-white/8",
                 styles.gutterStripe
               )}
               aria-hidden="true"
             />
             {/* Vertical rule lines just inside the hatched gutters */}
             <div
-              className="pointer-events-none absolute inset-y-0 left-14 w-px z-[2] bg-border/70"
+              className="pointer-events-none absolute inset-y-0 left-4 lg:left-14 w-px z-[2] bg-border/70"
               aria-hidden="true"
             />
             <div
-              className="pointer-events-none absolute inset-y-0 right-14 w-px z-[2] bg-border/70"
+              className="pointer-events-none absolute inset-y-0 right-4 lg:right-14 w-px z-[2] bg-border/70"
               aria-hidden="true"
             />
             {/* Ambient dot grid background */}
