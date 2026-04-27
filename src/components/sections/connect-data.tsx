@@ -129,17 +129,17 @@ const UPPER_CONNECTOR_SEGMENTS = [
   {
     id: "upper-right-top",
     path: "M336 76V126H256V208H210V276",
-    delay: "0.8s",
+    delay: "2s",
   },
   {
     id: "upper-left-mid",
     path: "M48 133V164H176V208H210V276",
-    delay: "1.6s",
+    delay: "4s",
   },
   {
     id: "upper-right-mid",
     path: "M372 133V164H244V208H210V276",
-    delay: "2.4s",
+    delay: "6s",
   },
 ] as const;
 
@@ -480,7 +480,7 @@ const INTEGRATION_LOGOS: Array<{ id: string; render: () => ReactElement }> = [
 function SourceChip({ source, idx }: { source: ConnectDataSource; idx: number }) {
   const Icon = SOURCE_ICONS[source.id] ?? SourceArrowIcon;
   return (
-    <div className={styles.sourceRow} style={{ "--delay": `${120 + idx * 90}ms` } as CSSProperties}>
+    <div className={styles.sourceRow} style={{ "--delay": `${60 + idx}ms` } as CSSProperties}>
       <span className={styles.sourceIcon} aria-hidden="true">
         <Icon />
       </span>
