@@ -58,7 +58,7 @@ export function ScrollPinnedFeatures({
   return (
     <section
       ref={sectionRef}
-      className="relative border-x border-border h-[var(--scroll-h)]"
+      className="relative h-[var(--scroll-h)]"
       style={
         {
           "--scroll-h": `${Math.max(features.length, 1) * 100}vh`,
@@ -69,7 +69,7 @@ export function ScrollPinnedFeatures({
       <div className="hidden lg:sticky lg:top-0 lg:block lg:h-screen lg:overflow-hidden">
         <div className="mx-auto grid h-full max-w-[1440px] grid-cols-[48%_52%]">
           {/* Left */}
-          <div className="flex h-full flex-col justify-between px-12 py-16 lg:px-20 lg:py-20 xl:px-28 xl:py-24">
+          <div className="flex h-full flex-col justify-between px-12 py-16 lg:px-20 lg:py-24 xl:px-28 xl:py-28 ">
             <h2
               className="max-w-[560px] text-[20px] sm:text-[24px] lg:text-[28px] xl:text-[32px] font-semibold leading-snug tracking-[-0.045em]"
               style={{ fontFamily: "var(--font-geist)" }}
@@ -78,7 +78,7 @@ export function ScrollPinnedFeatures({
               <span className="text-[#98A1AF]">{titleMuted}</span>
             </h2>
 
-            <ul className="mb-3 flex max-w-[520px] flex-col 3 lg:mb-4">
+            <ul className=" flex max-w-[520px] flex-col 3 ">
               {features.map((feature, i) => {
                 const isActive = activeIndex === i;
                 const progress = progresses[i] ?? 0;
@@ -110,9 +110,9 @@ export function ScrollPinnedFeatures({
                         </p>
                       </div>
 
-                      <div className="mt-5 lg:mt-6 h-[2px] w-full overflow-hidden rounded-full bg-[#E1E5EA]">
+                      <div className="mt-5 lg:mt-6 h-[2px] w-full overflow-hidden rounded-full bg-[#E1E5EA] dark:bg-[#72767A]">
                         <motion.div
-                          className="h-full origin-left bg-black"
+                          className="h-full origin-left bg-black dark:bg-white"
                           animate={{
                             scaleX: isActive
                               ? progress
@@ -137,8 +137,8 @@ export function ScrollPinnedFeatures({
               <DottedBackdrop />
             </div>
 
-            <div className="absolute inset-x-0 top-[72px] border-t border-border lg:top-[88px] xl:top-[102px]" />
-            <div className="absolute inset-x-0 bottom-[72px] border-t border-border lg:bottom-[88px] xl:bottom-[102px]" />
+            <div className="absolute inset-x-0 top-[72px] border-t border-dashed lg:top-[88px] xl:top-[102px]" />
+            <div className="absolute inset-x-0 bottom-[72px] border-t border-dashed lg:bottom-[88px] xl:bottom-[102px]" />
 
             <div className="relative z-10 flex h-full w-full items-center justify-center">
               <AnimatePresence mode="wait">

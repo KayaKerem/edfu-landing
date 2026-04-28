@@ -1,11 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef, useEffect } from "react";
+import { motion, useAnimation, useReducedMotion } from "framer-motion";
 
-type IconProps = {
-  className?: string;
-};
+type IconProps = { className?: string };
 
 const ZoomIcon = ({ className }: IconProps) => (
   <svg viewBox="0 0 32 32" fill="none" className={className} aria-hidden="true">
@@ -34,137 +33,156 @@ const TeamsIcon = ({ className }: IconProps) => (
   </svg>
 );
 
+// Attio circle params (1280px reference)
+const CIRCLE_R = 680;
+const CIRCLE_CY = 700;
+const SVG_TOP_PX = 12;
+const REF_W = 1280;
+
+function getIconTopPx(xFrac: number): number {
+  const cx = REF_W / 2;
+  const x = xFrac * REF_W;
+  const dy = Math.sqrt(Math.max(0, CIRCLE_R ** 2 - (x - cx) ** 2));
+  return CIRCLE_CY - dy + SVG_TOP_PX;
+}
+
+// Arc-following start offset: icons begin at a lower point on the circle (svg_y=55)
+// and slide diagonally up-inward to their final position on the arc
+function getArcOffset(xFrac: number): { x: number; y: number } {
+  const cx = REF_W / 2;
+  const finalX = xFrac * REF_W;
+  const finalSvgY = CIRCLE_CY - Math.sqrt(Math.max(0, CIRCLE_R ** 2 - (finalX - cx) ** 2));
+  const startSvgY = 55;
+  const startDx = Math.sqrt(Math.max(0, CIRCLE_R ** 2 - (startSvgY - CIRCLE_CY) ** 2));
+  const startX = finalX < cx ? cx - startDx : finalX > cx ? cx + startDx : cx;
+  return {
+    x: Math.round(startX - finalX),
+    y: Math.round(startSvgY - finalSvgY),
+  };
+}
+
 const integrations = [
-  { label: "Zoom", Icon: ZoomIcon, x: 0.38, delay: 0 },
-  { label: "Google Meet", Icon: GoogleMeetIcon, x: 0.5, delay: 0.12 },
-  { label: "Microsoft Teams", Icon: TeamsIcon, x: 0.62, delay: 0.24 },
+  { label: "Zoom", Icon: ZoomIcon, xFrac: 0.42, delay: 0 },
+  { label: "Google Meet", Icon: GoogleMeetIcon, xFrac: 0.50, delay: 0.10 },
+  { label: "Microsoft Teams", Icon: TeamsIcon, xFrac: 0.58, delay: 0.20 },
 ];
 
-function getArcY(x: number) {
-  const t = x;
-  const p0 = 230;
-  const p1 = 72;
-  const p2 = 72;
-  const p3 = 230;
-
-  return (
-    Math.pow(1 - t, 3) * p0 +
-    3 * Math.pow(1 - t, 2) * t * p1 +
-    3 * (1 - t) * Math.pow(t, 2) * p2 +
-    Math.pow(t, 3) * p3
-  );
-}
+const HATCH_STYLE = {
+  backgroundImage:
+    "repeating-linear-gradient(125deg, transparent, transparent 6px, currentColor 6px, currentColor 7px)",
+} as const;
 
 export default function IntegrationSection() {
   const reduceMotion = useReducedMotion();
+  const arcRef = useRef<HTMLDivElement>(null);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (reduceMotion) {
+      controls.start("visible");
+      return;
+    }
+    const el = arcRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          controls.start("visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [controls, reduceMotion]);
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#FBFBFC]">
-      <div className="relative mx-auto h-[360px] max-w-[1440px] overflow-hidden sm:h-[390px] lg:h-[420px]">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.38]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, #EEF1F5 1px, transparent 1px), linear-gradient(to bottom, #EEF1F5 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-          }}
-        />
+    <section className="relative w-full overflow-hidden bg-[#FBFBFC] dark:bg-[#18181B]">
+      {/* Left hatched strip */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-15 text-border/40 dark:text-[#72767A]/20" style={HATCH_STYLE} />
+      {/* Right hatched strip */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-15 text-border/40 dark:text-[#72767A]/20" style={HATCH_STYLE} />
 
-        <div className="relative z-10 flex flex-col items-center px-6 pt-16 text-center sm:pt-18 lg:pt-20">
-          <motion.h2
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.7 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[18px] font-semibold leading-[1.12] tracking-[-0.035em] text-[#1F2329] sm:text-[22px] md:text-[26px]"
-          >
-            Instant sync. Zero setup friction.
-          </motion.h2>
+      {/* Header */}
+      <div className="flex flex-col items-center px-6 pt-12 pb-8 text-center max-sm:pt-10 max-sm:pb-6">
+        <motion.h2
+          initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+          animate={reduceMotion ? {} : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="text-balance font-semibold text-[20px] leading-[1.15] tracking-[-0.03em] text-foreground"
+        >
+          Instant sync. Zero setup friction.
+        </motion.h2>
 
-          <motion.p
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.7 }}
-            transition={{
-              duration: 0.5,
-              delay: 0.06,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="mt-3 max-w-[780px] text-[21px] font-semibold leading-[1.14] tracking-[-0.04em] text-[#7D8794] sm:text-[26px] md:text-[31px]"
-          >
-            Edfu connects with Zoom, Google Meet, and Microsoft Teams.
-          </motion.p>
-        </div>
-
-        <div className="absolute inset-x-0 bottom-[-54px] h-[255px]">
-          <svg
-            className="absolute inset-x-0 bottom-0 mx-auto h-full w-[78%] overflow-visible"
-            viewBox="0 0 1000 260"
-            fill="none"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-<motion.path
-  d="M0 230C260 72 740 72 1000 230"
-  strokeLinecap="round"
-stroke="#C9D1DD"
-strokeWidth="1.5"
-strokeDasharray="7 10"
-              initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}
-              whileInView={
-                reduceMotion ? undefined : { pathLength: 1, opacity: 1 }
-              }
-              viewport={{ once: true, amount: 0.45 }}
-              transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
-            />
-          </svg>
-
-          {integrations.map(({ label, Icon, x, delay }, index) => {
-            const y = getArcY(x);
-
-            return (
-              <motion.div
-                key={label}
-                initial={
-                  reduceMotion
-                    ? false
-                    : {
-                        opacity: 0,
-                        x: index === 0 ? -80 : index === 2 ? 80 : 0,
-                        y: 0,
-                        scale: 0.94,
-                      }
-                }
-                whileInView={
-                  reduceMotion
-                    ? undefined
-                    : {
-                        opacity: 1,
-                        x: 0,
-                        y: 0,
-                        scale: 1,
-                      }
-                }
-                viewport={{ once: true, amount: 0.45 }}
-                transition={{
-                  duration: 0.75,
-                  delay,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="absolute z-10 flex size-[58px] items-center justify-center rounded-full border border-[#E1E6EE] bg-white shadow-[0_16px_32px_rgba(31,35,41,0.08),0_2px_4px_rgba(31,35,41,0.07)] sm:size-[68px] lg:size-[76px]"
-                style={{
-                  left: `${x * 100}%`,
-                  top: `${(y / 260) * 100}%`,
-                  translate: "-50% -50%",
-                }}
-                aria-label={label}
-              >
-                <Icon className="size-6 sm:size-7 lg:size-8" />
-              </motion.div>
-            );
-          })}
-        </div>
+        <motion.p
+          initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+          animate={reduceMotion ? {} : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-1 text-balance text-[20px] leading-[1.15] tracking-[-0.03em] text-muted-foreground"
+        >
+          Edfu connects with Zoom, Google Meet, and Microsoft Teams.
+        </motion.p>
       </div>
+
+      {/* Arc + icons */}
+      <div ref={arcRef} className="relative h-[150px]">
+        {/* Circle arc SVG */}
+        <svg
+          aria-hidden="true"
+          width="100%"
+          height="180"
+          className="text-border"
+          style={{ position: "absolute", top: SVG_TOP_PX, left: 0, overflow: "visible" }}
+        >
+          <circle
+            cx="50%"
+            cy={CIRCLE_CY}
+            r={CIRCLE_R}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeDasharray="6 6"
+            strokeLinecap="round"
+            className="dark:text-[#72767A]/20"
+          />
+        </svg>
+
+        {/* Icons slide along arc from lower point upward to final position */}
+        {integrations.map(({ label, Icon, xFrac, delay }) => {
+          const topPx = getIconTopPx(xFrac);
+          const offset = getArcOffset(xFrac);
+
+          return (
+            <motion.div
+              key={label}
+              aria-label={label}
+              custom={delay}
+              variants={{
+                hidden: { opacity: 0, x: offset.x, y: offset.y },
+                visible: (d: number) => ({
+                  opacity: 1,
+                  x: 0,
+                  y: 0,
+                  transition: { duration: 0.75, delay: d, ease: [0.22, 1, 0.36, 1] },
+                }),
+              }}
+              initial={reduceMotion ? "visible" : "hidden"}
+              animate={controls}
+              style={{
+                position: "absolute",
+                left: `${xFrac * 100}%`,
+                top: `${topPx}px`,
+                translate: "-50% -50%",
+              }}
+              className="z-10 flex size-14 items-center justify-center rounded-full border border-border dark:text-[#72767A]/20 bg-card shadow-[0_16px_32px_rgba(31,35,41,0.08),0_2px_4px_rgba(31,35,41,0.07)] dark:shadow-[0_16px_32px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.2)]"
+            >
+              <Icon className="size-6" />
+            </motion.div>
+          );
+        })}
+      </div>
+
     </section>
   );
 }

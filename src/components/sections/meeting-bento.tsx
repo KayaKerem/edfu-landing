@@ -11,10 +11,11 @@ interface BentoDict {
 /* ── Dot pattern background (matches Attio's 10×10 dot lattice) ── */
 function DotPattern({ id }: { id: string }) {
   return (
+    <div className="text-[#D1D5DB] dark:text-[#72767A]/20">
     <svg
       width="100%"
       height="100%"
-      className="absolute inset-0"
+      className="absolute inset-0 text-[#D1D5DB] dark:opacity-20"
       aria-hidden="true"
     >
       <defs>
@@ -24,26 +25,27 @@ function DotPattern({ id }: { id: string }) {
           height="10"
           patternUnits="userSpaceOnUse"
         >
-          <rect x="5" y="5" width="1.2" height="1.2" fill="#D1D5DB" />
+          <rect x="5" y="5" width="1.2" height="1.2" fill="#D1D5DB"/>
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill={`url(#${id})`} />
     </svg>
+    </div>
   );
 }
 
 /* ── Top hatched gutter (diagonal stripes) ── */
 function HatchedGutter() {
   return (
-    <div className="relative h-5 max-xl:h-[18px] max-lg:h-4">
+    <div className="relative h-5 max-xl:h-[18px] max-lg:h-4 dark:text-[#72767A]/20">
       {/* diagonal stripes */}
       {/* dashed horizontal bottom line */}
       <div
         className="absolute inset-x-0 bottom-0 h-px"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(to right, hsl(var(--border)) 0 4px, transparent 4px 10px)",
-        }}
+        // style={{
+        //   backgroundImage:
+        //     "repeating-linear-gradient(to right, hsl(var(--border)) 0 4px, transparent 4px 10px)",
+        // }}
       />
     </div>
   );
@@ -64,7 +66,7 @@ function BentoCard({ patternId, visual, title, body, visualClass }: BentoCardPro
         {/* Visual area: square on lg+, golden on md, fixed height on mobile */}
         <div className="relative mb-6 max-md:mb-3 aspect-square max-md:aspect-auto max-md:h-[175px] w-full md:max-lg:aspect-[1.618] overflow-hidden">
           <DotPattern id={patternId} />
-          <div className={["absolute inset-0 size-full", visualClass].filter(Boolean).join(" ")}>{visual}</div>
+          <div className={["absolute inset-0 size-full ", visualClass].filter(Boolean).join(" ")}>{visual}</div>
         </div>
 
         {/* Text */}

@@ -74,7 +74,7 @@ export function MeetingHero({ dict, mockupsDict }: MeetingHeroProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: EASE, delay: 0.4 }}
             >
-              <Button size="lg" nativeButton={false} render={<a href="https://app.edfu.ai" />} className="bg-black">
+              <Button size="lg" nativeButton={false} render={<a href="https://app.edfu.ai" />} >
                 {/* TODO(brand): placeholder CTA label */}
                 {dict.ctaPrimary}
               </Button>
@@ -95,7 +95,7 @@ export function MeetingHero({ dict, mockupsDict }: MeetingHeroProps) {
             <svg
               width="100%"
               height="100%"
-              className="absolute inset-0"
+              className="absolute inset-0 dark:opacity-20"
               aria-hidden="true"
             >
               <defs>
