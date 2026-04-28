@@ -604,7 +604,8 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
       ref={sectionRef}
       ariaLabel={dict.ariaLabel}
       className={styles.root}
-      gridClassName="grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(500px,1.4fr)_minmax(360px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border"
+      // _minmax(360px,0.9fr)
+      gridClassName="grid-cols-1 lg:grid-cols-[minmax(400px,0.9fr)_minmax(680px,1.4fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border"
       data-visible={visible ? "true" : "false"}
     >
       <div className={styles.textCol}>
@@ -702,28 +703,32 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
         </div>
       </div>
 
-      <div className={styles.sideCol}>
-        <div className={styles.integrationsTop} aria-label={dict.integrationsLabel}>
-          <div className={styles.integrationGrid}>
-            {INTEGRATION_LOGOS.map((logo, idx) => (
-              <IntegrationBadge key={logo.id} idx={idx} render={logo.render} />
-            ))}
-          </div>
-        </div>
-        <div className={styles.cubeWrap}>
-          <div className={styles.cubeGrid} aria-hidden="true">
-            <div className={styles.cubeCell} />
-            <div className={styles.cubeCell} />
-            <div className={styles.cubeCell} />
-            <div className={styles.cubeCell} />
-            <div className={styles.cubeCell} />
-            <div />
-          </div>
-          <div className={styles.cubeGlyph} aria-hidden="true">
-            <CubeGlyph />
-          </div>
-        </div>
-      </div>
+   
     </SectionFrame>
   );
 }
+
+
+// 3.kısım 
+  //  <div className={styles.sideCol}>
+  //       <div className={styles.integrationsTop} aria-label={dict.integrationsLabel}>
+  //         <div className={styles.integrationGrid}>
+  //           {INTEGRATION_LOGOS.map((logo, idx) => (
+  //             <IntegrationBadge key={logo.id} idx={idx} render={logo.render} />
+  //           ))}
+  //         </div>
+  //       </div>
+  //       <div className={styles.cubeWrap}>
+  //         <div className={styles.cubeGrid} aria-hidden="true">
+  //           <div className={styles.cubeCell} />
+  //           <div className={styles.cubeCell} />
+  //           <div className={styles.cubeCell} />
+  //           <div className={styles.cubeCell} />
+  //           <div className={styles.cubeCell} />
+  //           <div />
+  //         </div>
+  //         <div className={styles.cubeGlyph} aria-hidden="true">
+  //           <CubeGlyph />
+  //         </div>
+  //       </div>
+  //     </div>

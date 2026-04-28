@@ -575,7 +575,8 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
       ref={sectionRef}
       ariaLabel={dict.ariaLabel}
       className={cn(styles.root)}
-      gridClassName="grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(500px,1.4fr)_minmax(360px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border"
+      // _minmax(360px,0.9fr)
+      gridClassName="grid-cols-1 lg:grid-cols-[minmax(400px,0.9fr)_minmax(680px,1.4fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border"
       data-paused={pageHidden ? "true" : "false"}
       data-reduced-motion={reducedMotion ? "true" : "false"}
       data-phase={renderPhase}
@@ -604,7 +605,7 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
             </div>
             {/* ─── Center: diagram ─── */}
             <div className="flex items-center justify-center min-h-auto lg:pl-6">
-              <div className={cn(styles.diagramFrame, "relative w-full max-w-[560px] overflow-visible lg:overflow-hidden")}>
+              <div className={cn(styles.diagramFrame, "relative w-full max-w-[680px] overflow-visible lg:overflow-hidden")}>
                 <div className={cn("relative pt-0 mt-0", styles.diagramScaler)} style={{ width: W, height: H, minWidth: W }}>
 
                   {/* SVG edges — always drawn, color transitions gray↔green */}
@@ -826,71 +827,75 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
               </div>
             </div>
 
-            {/* ─── Right: list + cubes (desktop only) ─── */}
-            <div className="hidden lg:flex flex-col relative lg:min-h-[560px]">
-              {/* List section */}
-              <div className="pl-[0.5rem] pt-[1rem]">
-                <div className="relative mx-auto flex min-h-[240px] overflow-visible lg:min-w-[360px]">
-                  <ul
-                    role="list"
-                    aria-label={dict.list.title}
-                    className={cn(
-                      styles.listMask,
-                      "ml-[0.25rem] grid w-[72%] max-w-[320px] grid-cols-1 gap-0 sm:max-w-[332px] lg:max-w-[344px]"
-                    )}
-                    style={{
-                      transform: "translateY(6px) scale(0.93)",
-                      transformOrigin: "top center",
-                    }}
-                  >
-                    {listItems.map((item, index) => {
-                      const distance = Math.abs(index - activeListIndex);
-                      const scaleByDistance = [1.02, 0.95, 0.88, 0.8];
-                      const opacityByDistance = [1, 0.84, 0.62, 0.4];
-                      const stackOffsetByDistance = [0, -6, -12, -18];
-
-                      return (
-                      <ListCard
-                          key={item.id}
-                          item={item}
-                          active={index === activeListIndex}
-                          muted={index !== activeListIndex}
-                          scale={scaleByDistance[distance] ?? 0.81}
-                          opacity={opacityByDistance[distance] ?? 0.7}
-                          stackOffset={stackOffsetByDistance[distance] ?? -24}
-                        />
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Dashed grid + cubes (desktop only) */}
-              <div className="hidden lg:block relative flex-1 min-h-[180px] border-t border-border">
-                {/* 3-column x 2-row dashed grid */}
-                <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 pointer-events-none" aria-hidden="true">
-                  <div className={cn(styles.dashedCell, "border-b border-r border-dashed")} />
-                  <div className={cn(styles.dashedCell, "border-b border-r border-dashed")} />
-                  <div className={cn(styles.dashedCell, "border-b border-dashed")} />
-                  <div className={cn(styles.dashedCell, "border-r border-dashed")} />
-                  <div className={cn(styles.dashedCell, "border-r border-dashed")} />
-                  <div />
-                </div>
-                {/* Cubes centered in grid */}
-                <div className={cn(styles.cubes, "absolute inset-0 flex items-center justify-center")} aria-hidden="true">
-                  <svg width="140" height="120" viewBox="0 0 120 120" fill="none" className="overflow-visible">
-                    <path d="M53.2944 38.3421L83.0481 23.4418C84.224 22.8527 85.6105 22.8527 86.7864 23.4418L116.54 38.3421C117.947 39.0465 118.835 40.4814 118.835 42.0509V72.0653C118.835 73.6344 117.947 75.0698 116.54 75.7741L86.7864 90.6745C85.6105 91.2635 84.224 91.2635 83.0481 90.6745L53.2944 75.7741C51.888 75.0698 51 73.6348 51 72.0653V42.0509C51 40.4818 51.888 39.0465 53.2944 38.3421Z" fill="var(--cube-surface-secondary)" stroke="var(--cube-stroke)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M3.29443 67.1331L33.0481 52.2328C34.224 51.6438 35.6105 51.6438 36.7864 52.2328L66.5401 67.1331C67.9466 67.8375 68.8345 69.2725 68.8345 70.8419V99.8563C68.8345 101.425 67.9466 102.861 66.5401 103.565L36.7864 118.465C35.6105 119.055 34.224 119.055 33.0481 118.465L3.29443 103.565C1.88795 102.861 1 101.426 1 99.8563V70.8419C1 69.2728 1.88795 67.8375 3.29443 67.1331Z" fill="var(--cube-surface-tertiary)" stroke="var(--cube-stroke)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path opacity="0.6" d="M1.65625 67.627L34.9181 84.4541L67.5 68M34.9167 118.914V84.4473" stroke="var(--cube-stroke)" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M3.29443 16.3421L33.0481 1.44179C34.224 0.852738 35.6105 0.852738 36.7864 1.44179L66.5401 16.3421C67.9466 17.0465 68.8345 18.4814 68.8345 20.0509V49.0653C68.8345 50.6344 67.9466 52.0698 66.5401 52.7741L36.7864 67.6745C35.6105 68.2635 34.224 68.2635 33.0481 67.6745L3.29443 52.7741C1.88795 52.0698 1 50.6348 1 49.0653V20.0509C1 18.4818 1.88795 17.0465 3.29443 16.3421Z" fill="var(--cube-surface-primary)" stroke="var(--cube-stroke)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path opacity="0.6" d="M1.65625 17.8359L34.9181 34.663L68.1803 17.8359M34.9167 68.1227V34.6563" stroke="var(--cube-stroke)" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M53.2944 38.8421L83.0481 23.9418C84.224 23.3527 85.6105 23.3527 86.7864 23.9418L116.54 38.8421C117.947 39.5465 118.835 40.9814 118.835 42.5509V58.5653L85.0481 75.1745L51 58.5653V42.5509C51 40.9818 51.888 39.5465 53.2944 38.8421Z" fill="var(--cube-surface-secondary)"/>
-                    <path d="M116.54 75.7741C117.947 75.0698 118.835 73.6344 118.835 72.0653V42.0509C118.835 40.4814 117.947 39.0465 116.54 38.3421L86.7864 23.4418C85.6105 22.8527 84.224 22.8527 83.0481 23.4418L53.2944 38.3421C51.888 39.0465 51 40.4818 51 42.0509V59.35L66 66.85" stroke="var(--cube-stroke)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path opacity="0.6" d="M51.6562 39.8359L84.9181 56.663L118.18 39.8359M84.9167 91.1227V56.6563" stroke="var(--cube-stroke)" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
+     
+ 
     </SectionFrame>
   );
 }
+
+// 3. kısım
+       {/* ─── Right: list + cubes (desktop only) ─── */}
+          //  <div className="hidden lg:flex flex-col relative lg:min-h-[560px]">
+          //     {/* List section */}
+          //     <div className="pl-[0.5rem] pt-[1rem]">
+          //       <div className="relative mx-auto flex min-h-[240px] overflow-visible lg:min-w-[360px]">
+          //         <ul
+          //           role="list"
+          //           aria-label={dict.list.title}
+          //           className={cn(
+          //             styles.listMask,
+          //             "ml-[0.25rem] grid w-[72%] max-w-[320px] grid-cols-1 gap-0 sm:max-w-[332px] lg:max-w-[344px]"
+          //           )}
+          //           style={{
+          //             transform: "translateY(6px) scale(0.93)",
+          //             transformOrigin: "top center",
+          //           }}
+          //         >
+          //           {listItems.map((item, index) => {
+          //             const distance = Math.abs(index - activeListIndex);
+          //             const scaleByDistance = [1.02, 0.95, 0.88, 0.8];
+          //             const opacityByDistance = [1, 0.84, 0.62, 0.4];
+          //             const stackOffsetByDistance = [0, -6, -12, -18];
+
+          //             return (
+          //             <ListCard
+          //                 key={item.id}
+          //                 item={item}
+          //                 active={index === activeListIndex}
+          //                 muted={index !== activeListIndex}
+          //                 scale={scaleByDistance[distance] ?? 0.81}
+          //                 opacity={opacityByDistance[distance] ?? 0.7}
+          //                 stackOffset={stackOffsetByDistance[distance] ?? -24}
+          //               />
+          //             );
+          //           })}
+          //         </ul>
+          //       </div>
+          //     </div>
+
+          //     {/* Dashed grid + cubes (desktop only) */}
+          //     <div className="hidden lg:block relative flex-1 min-h-[180px] border-t border-border">
+          //       {/* 3-column x 2-row dashed grid */}
+          //       <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 pointer-events-none" aria-hidden="true">
+          //         <div className={cn(styles.dashedCell, "border-b border-r border-dashed")} />
+          //         <div className={cn(styles.dashedCell, "border-b border-r border-dashed")} />
+          //         <div className={cn(styles.dashedCell, "border-b border-dashed")} />
+          //         <div className={cn(styles.dashedCell, "border-r border-dashed")} />
+          //         <div className={cn(styles.dashedCell, "border-r border-dashed")} />
+          //         <div />
+          //       </div>
+          //       {/* Cubes centered in grid */}
+          //       <div className={cn(styles.cubes, "absolute inset-0 flex items-center justify-center")} aria-hidden="true">
+          //         <svg width="140" height="120" viewBox="0 0 120 120" fill="none" className="overflow-visible">
+          //           <path d="M53.2944 38.3421L83.0481 23.4418C84.224 22.8527 85.6105 22.8527 86.7864 23.4418L116.54 38.3421C117.947 39.0465 118.835 40.4814 118.835 42.0509V72.0653C118.835 73.6344 117.947 75.0698 116.54 75.7741L86.7864 90.6745C85.6105 91.2635 84.224 91.2635 83.0481 90.6745L53.2944 75.7741C51.888 75.0698 51 73.6348 51 72.0653V42.0509C51 40.4818 51.888 39.0465 53.2944 38.3421Z" fill="var(--cube-surface-secondary)" stroke="var(--cube-stroke)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          //           <path d="M3.29443 67.1331L33.0481 52.2328C34.224 51.6438 35.6105 51.6438 36.7864 52.2328L66.5401 67.1331C67.9466 67.8375 68.8345 69.2725 68.8345 70.8419V99.8563C68.8345 101.425 67.9466 102.861 66.5401 103.565L36.7864 118.465C35.6105 119.055 34.224 119.055 33.0481 118.465L3.29443 103.565C1.88795 102.861 1 101.426 1 99.8563V70.8419C1 69.2728 1.88795 67.8375 3.29443 67.1331Z" fill="var(--cube-surface-tertiary)" stroke="var(--cube-stroke)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          //           <path opacity="0.6" d="M1.65625 67.627L34.9181 84.4541L67.5 68M34.9167 118.914V84.4473" stroke="var(--cube-stroke)" strokeLinecap="round" strokeLinejoin="round"/>
+          //           <path d="M3.29443 16.3421L33.0481 1.44179C34.224 0.852738 35.6105 0.852738 36.7864 1.44179L66.5401 16.3421C67.9466 17.0465 68.8345 18.4814 68.8345 20.0509V49.0653C68.8345 50.6344 67.9466 52.0698 66.5401 52.7741L36.7864 67.6745C35.6105 68.2635 34.224 68.2635 33.0481 67.6745L3.29443 52.7741C1.88795 52.0698 1 50.6348 1 49.0653V20.0509C1 18.4818 1.88795 17.0465 3.29443 16.3421Z" fill="var(--cube-surface-primary)" stroke="var(--cube-stroke)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          //           <path opacity="0.6" d="M1.65625 17.8359L34.9181 34.663L68.1803 17.8359M34.9167 68.1227V34.6563" stroke="var(--cube-stroke)" strokeLinecap="round" strokeLinejoin="round"/>
+          //           <path d="M53.2944 38.8421L83.0481 23.9418C84.224 23.3527 85.6105 23.3527 86.7864 23.9418L116.54 38.8421C117.947 39.5465 118.835 40.9814 118.835 42.5509V58.5653L85.0481 75.1745L51 58.5653V42.5509C51 40.9818 51.888 39.5465 53.2944 38.8421Z" fill="var(--cube-surface-secondary)"/>
+          //           <path d="M116.54 75.7741C117.947 75.0698 118.835 73.6344 118.835 72.0653V42.0509C118.835 40.4814 117.947 39.0465 116.54 38.3421L86.7864 23.4418C85.6105 22.8527 84.224 22.8527 83.0481 23.4418L53.2944 38.3421C51.888 39.0465 51 40.4818 51 42.0509V59.35L66 66.85" stroke="var(--cube-stroke)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          //           <path opacity="0.6" d="M51.6562 39.8359L84.9181 56.663L118.18 39.8359M84.9167 91.1227V56.6563" stroke="var(--cube-stroke)" strokeLinecap="round" strokeLinejoin="round"/>
+          //         </svg>
+          //       </div>
+          //     </div>
+          //   </div>
