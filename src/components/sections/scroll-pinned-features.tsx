@@ -69,9 +69,9 @@ export function ScrollPinnedFeatures({
       <div className="hidden lg:sticky lg:top-0 lg:block lg:h-screen lg:overflow-hidden">
         <div className="mx-auto grid h-full max-w-[1440px] grid-cols-[48%_52%]">
           {/* Left */}
-          <div className="flex h-full flex-col justify-between px-12 py-16 lg:px-20 lg:py-24 xl:px-28 xl:py-28 ">
+          <div className="flex h-full flex-col justify-around px-12 pt-12 lg:px-20 lg:pt-16 xl:px-16 xl:pt-20 ">
             <h2
-              className="max-w-[560px] text-[20px] sm:text-[24px] lg:text-[28px] xl:text-[32px] font-semibold leading-snug tracking-[-0.045em]"
+              className="max-w-[560px] text-[24px] sm:text-[28px] lg:text-[32px] xl:text-[36px] font-semibold leading-snug tracking-[-0.045em]"
               style={{ fontFamily: "var(--font-geist)" }}
             >
               <span className="text-foreground">{titleDark}</span>{" "}
@@ -91,7 +91,7 @@ export function ScrollPinnedFeatures({
                       className="w-full text-left"
                     >
                       <h3
-                        className="text-[12px] sm:text-[14px] lg:text-[16px] font-semibold tracking-[-0.02em] text-foreground"
+                        className="text-[18px] sm:text-[20px] lg:text-[22px] font-semibold tracking-[-0.02em] text-foreground"
                         style={{ fontFamily: "var(--font-geist)" }}
                       >
                         {feature.title}
@@ -105,7 +105,7 @@ export function ScrollPinnedFeatures({
                             : "mt-0 grid-rows-[0fr] opacity-0",
                         ].join(" ")}
                       >
-                        <p className="overflow-hidden text-[8px] sm:text-[10px] lg:text-[12px] leading-[1.5] text-muted-foreground">
+                        <p className="overflow-hidden text-[12px] sm:text-[14px] lg:text-[16px] leading-[1.5] text-muted-foreground">
                           {feature.description}
                         </p>
                       </div>

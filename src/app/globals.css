@@ -188,6 +188,11 @@
     @apply font-sans;
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
   }
 }
 
