@@ -803,12 +803,6 @@ export function AutomateEverything({ dict }: { dict: AutomateEverythingDict }) {
                       <span className={styles.pathDot}
                         style={{ offsetPath: `path("${path1}")`, "--dot-delay": "600ms" } as React.CSSProperties}
                       />
-                      {/* E2 trunk: delayed 600ms after condition border finishes */}
-                      {switchActive && (
-                        <span className={styles.pathDot}
-                          style={{ offsetPath: `path("${path2}")`, "--dot-delay": "600ms" } as React.CSSProperties}
-                        />
-                      )}
                       {/* E3 upsell branch: no delay, travels to upsell card as its border draws */}
                       {e3Green && (
                         <span className={styles.pathDot}

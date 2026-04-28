@@ -28,7 +28,7 @@ export function MeetingHero({ dict, mockupsDict }: MeetingHeroProps) {
     <section className="relative overflow-hidden">
       <MotionConfig reducedMotion="user">
         <div className="grid grid-cols-12">
-          <div className="col-span-12 md:col-[2/-2] grid grid-cols-1 gap-10 px-6 pt-24 pb-16 sm:pt-28 md:grid-cols-[60%_40%] md:gap-12 md:px-0 md:pt-[116px] md:pb-20 lg:pt-32 items-center">
+          <div className="col-span-12 md:col-[2/-2] grid grid-cols-1 px-6 pt-24 pb-16 sm:pt-28 md:grid-cols-[40%_60%] md:gap-12 md:px-0 md:pt-[116px] md:pb-20 lg:pt-32 items-center">
           {/* Left column: badge + headline + subhead + CTAs */}
           <div className="flex flex-col items-start">
             <motion.div

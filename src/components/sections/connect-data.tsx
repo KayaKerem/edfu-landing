@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { AnimatedNumber } from "@/components/ui/animated-number";
 import styles from "./connect-data.module.css";
 import { SectionFrame } from "./section-frame";
+import Image from "next/image";
+import { EdfuThemeLogo } from "../ui/edfu-brand";
 
 type ConnectDataSource = {
   id: string;
@@ -277,16 +279,6 @@ const RECORD_ICONS: Record<string, () => ReactElement> = {
   company: CompanyIcon,
   deal: DealIcon,
 };
-
-function HubMarkIcon() {
-  return (
-    <svg viewBox="0 0 28 28" fill="none" aria-hidden="true" width={28} height={28}>
-      <path d="M8.4 6.3 15 17.5 11.2 22.8 4.6 11.7 8.4 6.3Z" fill="currentColor" />
-      <path d="m16.2 17.4 4-5.8 3.2 5.4-4 5.8-3.2-5.4Z" fill="currentColor" opacity="0.9" />
-      <path d="m9.2 5.2 4.4-1.7 6.6 11.1-4.5 1.8L9.2 5.2Z" fill="currentColor" opacity="0.78" />
-    </svg>
-  );
-}
 
 function CubeGlyph() {
   return (
@@ -691,7 +683,7 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
 
           <div className={styles.hubCard}>
             <span className={styles.hubMark} aria-hidden="true">
-              <HubMarkIcon />
+ <EdfuThemeLogo alt="Edfu AI" width={22} height={22} className="size-6" />
             </span>
           </div>
 
