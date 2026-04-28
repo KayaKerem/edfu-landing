@@ -58,18 +58,18 @@ export function ScrollPinnedFeatures({
   return (
     <section
       ref={sectionRef}
-      className="relative h-auto border-x border-border md:h-[var(--scroll-h)]"
+      className="relative border-x border-border h-[var(--scroll-h)]"
       style={
         {
           "--scroll-h": `${Math.max(features.length, 1) * 100}vh`,
         } as React.CSSProperties
       }
     >
-      {/* Desktop */}
-      <div className="hidden md:sticky md:top-0 md:block md:h-screen md:overflow-hidden">
+      {/* Desktop (lg+) */}
+      <div className="hidden lg:sticky lg:top-0 lg:block lg:h-screen lg:overflow-hidden">
         <div className="mx-auto grid h-full max-w-[1440px] grid-cols-[48%_52%]">
           {/* Left */}
-          <div className="flex h-full flex-col justify-around px-12 py-16 lg:px-20 lg:py-20 xl:px-28 xl:py-24">
+          <div className="flex h-full flex-col justify-between px-12 py-16 lg:px-20 lg:py-20 xl:px-28 xl:py-24">
             <h2
               className="max-w-[560px] text-[20px] sm:text-[24px] lg:text-[28px] xl:text-[32px] font-semibold leading-snug tracking-[-0.045em]"
               style={{ fontFamily: "var(--font-geist)" }}
@@ -78,7 +78,7 @@ export function ScrollPinnedFeatures({
               <span className="text-[#98A1AF]">{titleMuted}</span>
             </h2>
 
-            <ul className="mb-6 flex max-w-[520px] flex-col gap-6 lg:mb-8">
+            <ul className="mb-3 flex max-w-[520px] flex-col 3 lg:mb-4">
               {features.map((feature, i) => {
                 const isActive = activeIndex === i;
                 const progress = progresses[i] ?? 0;
@@ -179,50 +179,100 @@ export function ScrollPinnedFeatures({
         </div>
       </div>
 
-      {/* Mobile */}
-      <div className="md:hidden flex flex-col gap-10 px-5 py-14">
-        <h2
-          className="text-[24px] sm:text-[28px] font-semibold leading-[1.1] tracking-[-0.04em]"
-          style={{ fontFamily: "var(--font-geist)" }}
-        >
-          <span className="text-foreground">{titleDark}</span>{" "}
-          <span className="text-[#98A1AF]">{titleMuted}</span>
-        </h2>
+      {/* Mobile / Tablet (< lg) — Attio's pinned 3-bar pattern */}
+      <div className="lg:hidden sticky top-0 flex h-screen w-full flex-col items-stretch py-[clamp(40px,5svh,160px)]">
+        {/* Title — scrolls with section */}
+        <header className="grid grid-cols-12">
+          <div className="col-[2/-2]">
+            <h2
+              className="max-w-[20em] text-pretty text-[24px] sm:text-[28px] font-semibold leading-[1.1] tracking-[-0.04em]"
+              style={{ fontFamily: "var(--font-geist)" }}
+            >
+              <span className="text-foreground">{titleDark}</span>{" "}
+              <span className="text-[#98A1AF]">{titleMuted}</span>
+            </h2>
+          </div>
+        </header>
 
-        <ul className="flex flex-col gap-4">
-          {features.map((feature, i) => (
-            <li key={i}>
-              <h3
-                className="text-[12px] sm:text-[14px] font-semibold text-foreground"
-                style={{ fontFamily: "var(--font-geist)" }}
-              >
-                {feature.title}
-              </h3>
+        {/* Top divider */}
+        <div className="mt-8 h-px w-full bg-border" />
 
-              <p className="mt-1 py-0 text-[10px] sm:text-[12px] leading-relaxed text-muted-foreground">
-                {feature.description}
-              </p>
+        {/* Visual area — square, dot-grid bg, fades between steps */}
+        <div className="relative aspect-square w-full flex-1 overflow-hidden">
+          <DottedBackdrop />
 
-              <div className="mt-5 h-[2px] w-full bg-black" />
-
-              {visuals?.[i] && (
+          <div className="absolute inset-0 flex items-center justify-center px-6">
+            <AnimatePresence mode="wait">
+              {visuals?.[activeIndex] && (
                 <motion.div
-                  initial={{ opacity: 0, y: 48 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{
-                    duration: 0.55,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="mt-8"
+                  key={activeIndex}
+                  initial={{ opacity: 0, filter: "blur(8px)", scale: 0.985 }}
+                  animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+                  exit={{ opacity: 0, filter: "blur(8px)", scale: 0.985 }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  className="w-full max-w-[520px]"
                   aria-hidden="true"
                 >
-                  {visuals[i]}
+                  {visuals[activeIndex]}
                 </motion.div>
               )}
-            </li>
-          ))}
-        </ul>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Bottom divider */}
+        <div className="h-px w-full bg-border" />
+
+        {/* Bars + active title — col-[2/-2] to align with header */}
+        <div className="relative grid w-full grid-cols-12">
+          <div className="relative col-[2/-2] h-32">
+            {/* Progress bars row */}
+            <div className="absolute inset-x-0 top-8 flex gap-1.5">
+              {features.map((_, i) => {
+                const progress = progresses[i] ?? 0;
+                const filled = i < activeIndex ? 1 : i > activeIndex ? 0 : progress;
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setActiveIndex(i)}
+                    aria-label={`Go to step ${i + 1}`}
+                    className="h-0.5 w-full cursor-pointer overflow-hidden rounded-full bg-[#E1E5EA]"
+                  >
+                    <motion.div
+                      className="size-full bg-foreground"
+                      animate={{ x: `${(filled - 1) * 100}%` }}
+                      transition={{ duration: 0.15, ease: "linear" }}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Active title + description below the bars */}
+            <div className="absolute inset-x-0 top-12">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{ filter: "blur(8px)", opacity: 0 }}
+                  animate={{ filter: "blur(0px)", opacity: 1 }}
+                  exit={{ filter: "blur(8px)", opacity: 0 }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <h3
+                    className="text-[16px] sm:text-[18px] font-semibold tracking-[-0.02em] text-foreground"
+                    style={{ fontFamily: "var(--font-geist)" }}
+                  >
+                    {features[activeIndex]?.title}
+                  </h3>
+                  <p className="mt-2 text-pretty text-[13px] sm:text-[14px] leading-[1.5] text-muted-foreground">
+                    {features[activeIndex]?.description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

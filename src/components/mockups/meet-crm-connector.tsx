@@ -58,20 +58,23 @@ export function MeetCrmConnector() {
             <stop offset="100%" stopColor="#E4E7EC" />
           </linearGradient>
 
-          {/* Vertical fade gradient — top half transparent, bottom half opaque */}
+          {/* Vertical fade gradient — top half transparent, bottom half opaque.
+              Coordinates are in the LOCAL space of the masked <g> (which has
+              translate(160.175 197.46)). The fade runs from the top of the
+              outer ring (local y ≈ -77) to the leaf-node baseline (local y ≈ 22). */}
           <linearGradient
             id="mcc-ring-fade-grad"
             x1="0"
-            y1="120"
+            y1="-77.46"
             x2="0"
-            y2="220"
+            y2="22.54"
             gradientUnits="userSpaceOnUse"
           >
             <stop offset="0%" stopColor="black" />
             <stop offset="100%" stopColor="white" />
           </linearGradient>
-          <mask id="mcc-ring-fade">
-            <rect x="0" y="0" width="321" height="321" fill="url(#mcc-ring-fade-grad)" />
+          <mask id="mcc-ring-fade" maskUnits="userSpaceOnUse" x="-160" y="-160" width="320" height="320">
+            <rect x="-160" y="-160" width="320" height="320" fill="url(#mcc-ring-fade-grad)" />
           </mask>
         </defs>
 

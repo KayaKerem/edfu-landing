@@ -55,7 +55,7 @@ function getArcY(x: number) {
   );
 }
 
-export default function AttioIntegrationSection() {
+export default function IntegrationSection() {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -92,7 +92,7 @@ export default function AttioIntegrationSection() {
             }}
             className="mt-3 max-w-[780px] text-[21px] font-semibold leading-[1.14] tracking-[-0.04em] text-[#7D8794] sm:text-[26px] md:text-[31px]"
           >
-            Attio connects with Zoom, Google Meet, and Microsoft Teams.
+            Edfu connects with Zoom, Google Meet, and Microsoft Teams.
           </motion.p>
         </div>
 

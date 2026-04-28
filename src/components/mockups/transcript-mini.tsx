@@ -52,7 +52,7 @@ export function TranscriptMini() {
     >
       <div
         data-animate="rise"
-        className="absolute left-1/2 top-[8%] w-[78%] -translate-x-1/2 rounded-xl border border-border bg-card shadow-[0_8px_24px_rgba(31,35,41,0.06),0_2px_4px_rgba(31,35,41,0.04)]"
+        className="absolute left-1/2 top-[8%] max-md:top-[3%] w-[78%] -translate-x-1/2 rounded-xl border border-border bg-card shadow-[0_8px_24px_rgba(31,35,41,0.06),0_2px_4px_rgba(31,35,41,0.04)]"
       >
         {/* Tab header — Insights active (Attio target) */}
         <div className="flex gap-4 border-b border-border px-4 pt-3">

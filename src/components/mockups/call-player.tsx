@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-const BAR_COUNT = 60;
+const BAR_COUNT = 50;
 const PLAYED_RATIO = 0.28;
 
 const speakerSegments = {
@@ -39,17 +39,16 @@ export function CallPlayer({
       )}
     >
       {/* Header */}
-      <div className="flex items-center gap-3 border-b border-border px-5 py-4">
-        <span className="relative flex h-3 w-3">
+      <div className="flex items-center gap-2 border-b border-border px-3 py-2">
+        <span className="relative flex h-2 w-2">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
-          <span className="relative inline-flex h-3 w-3 rounded-full bg-red-500" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
         </span>
-        <h3
-          className="flex-1 text-sm font-semibold text-foreground"        >
+        <h3 className="flex-1 text-xs font-semibold text-foreground">
           {dict.title}
         </h3>
         <span
-          className="text-xs text-muted-foreground"
+          className="text-[10px] text-muted-foreground"
           style={{ fontFamily: "var(--font-mono)" }}
         >
           12:34 / 45:00
@@ -58,19 +57,19 @@ export function CallPlayer({
 
       {/* Waveform */}
       <div
-        className="flex items-end gap-[2px] px-5 py-4"
-        style={{ height: 64 }}
+        className="flex items-end gap-[1.5px] px-3 py-2.5"
+        style={{ height: 44 }}
       >
         {Array.from({ length: BAR_COUNT }, (_, i) => {
           const normalised = i / BAR_COUNT;
           const height =
-            12 + 20 * Math.abs(Math.sin(normalised * Math.PI * 3));
+            6 + 14 * Math.abs(Math.sin(normalised * Math.PI * 3));
           const played = normalised < PLAYED_RATIO;
           return (
             <div
               key={i}
               className={cn(
-                "w-1 flex-shrink-0 rounded-full",
+                "w-[3px] flex-shrink-0 rounded-full",
                 played ? "bg-primary" : "bg-muted"
               )}
               style={{ height }}
@@ -80,42 +79,42 @@ export function CallPlayer({
       </div>
 
       {/* Speaker timeline */}
-      <div className="space-y-2 border-t border-border px-5 py-3">
+      <div className="space-y-1.5 border-t border-border px-3 py-2">
         {/* Speaker 1 */}
-        <div className="flex items-center gap-3">
-          <div className="w-20 flex-shrink-0">
-            <p className="text-xs font-medium text-foreground">
+        <div className="flex items-center gap-2">
+          <div className="w-14 flex-shrink-0">
+            <p className="text-[10px] font-medium text-foreground">
               {dict.speaker1Name}
             </p>
-            <p className="text-[10px] text-muted-foreground">
+            <p className="text-[9px] text-muted-foreground">
               {dict.speaker1Role}
             </p>
           </div>
-          <div className="relative h-2 flex-1 rounded-full bg-muted">
+          <div className="relative h-1.5 flex-1 rounded-full bg-muted">
             {speakerSegments.speaker1.map((pos) => (
               <div
                 key={pos}
-                className="absolute top-0 h-2 rounded-full bg-primary"
+                className="absolute top-0 h-1.5 rounded-full bg-primary"
                 style={{ left: `${pos}%`, width: "8%" }}
               />
             ))}
           </div>
         </div>
         {/* Speaker 2 */}
-        <div className="flex items-center gap-3">
-          <div className="w-20 flex-shrink-0">
-            <p className="text-xs font-medium text-foreground">
+        <div className="flex items-center gap-2">
+          <div className="w-14 flex-shrink-0">
+            <p className="text-[10px] font-medium text-foreground">
               {dict.speaker2Name}
             </p>
-            <p className="text-[10px] text-muted-foreground">
+            <p className="text-[9px] text-muted-foreground">
               {dict.speaker2Role}
             </p>
           </div>
-          <div className="relative h-2 flex-1 rounded-full bg-muted">
+          <div className="relative h-1.5 flex-1 rounded-full bg-muted">
             {speakerSegments.speaker2.map((pos) => (
               <div
                 key={pos}
-                className="absolute top-0 h-2 rounded-full bg-emerald-500"
+                className="absolute top-0 h-1.5 rounded-full bg-emerald-500"
                 style={{ left: `${pos}%`, width: "10%" }}
               />
             ))}
@@ -124,20 +123,20 @@ export function CallPlayer({
       </div>
 
       {/* Transcript */}
-      <div className="border-t border-border px-5 py-3">
-        <div className="mb-2 flex items-center gap-2">
-          <span className="text-xs font-medium text-foreground">
+      <div className="border-t border-border px-3 py-2">
+        <div className="mb-1.5 flex items-center gap-1.5">
+          <span className="text-[10px] font-medium text-foreground">
             {dict.transcriptLabel}
           </span>
-          <span className="inline-flex h-4 items-center rounded bg-primary/10 px-1.5 text-[10px] font-semibold text-primary">
+          <span className="inline-flex h-3.5 items-center rounded bg-primary/10 px-1 text-[9px] font-semibold text-primary">
             AI
           </span>
         </div>
-        <div className="space-y-1.5">
+        <div className="space-y-1">
           {dict.lines.map((line) => (
             <div
               key={line.time}
-              className="flex gap-2 text-[12px] leading-relaxed"
+              className="flex gap-1.5 text-[9px] leading-relaxed"
             >
               <span
                 className="flex-shrink-0 text-muted-foreground"

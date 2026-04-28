@@ -787,19 +787,38 @@
       }
     ],
     "stickySection": {
-      "title": "One meeting. Unlimited content.",
+      "titleDark": "One conversation. Limitless insights.",
+      "titleMuted": "Every decision on record.",
       "features": [
         {
-          "title": "Focus on the decision maker",
-          "description": "AI automatically identifies decision makers and key moments in meetings."
+          "title": "Fast forward to the buyer.",
+          "description": "With Focus Mode, zoom in on key decision makers and skip through the noise."
         },
         {
-          "title": "Leave every meeting with a plan",
-          "description": "Action items, owners, and dates are automatically extracted."
+          "title": "Leave every call with a plan.",
+          "description": "Templates track recaps, action items, and next steps before you even hang up."
         },
         {
-          "title": "100+ language transcription",
-          "description": "Multi-language support for international teams."
+          "title": "Transcripts in 100+ languages.",
+          "description": "Capture every customer conversation clearly, no matter where your buyers are."
+        }
+      ]
+    },
+    "bento": {
+      "headerTitle": "From hello to handoff, every word lives in Edfu.",
+      "headerSubtitle": "Search, replay, or uncover insights from any conversation.",
+      "cards": [
+        {
+          "title": "Every call, every detail.",
+          "body": "Our native AI records, transcribes, and logs every call as you talk."
+        },
+        {
+          "title": "No more lost call notes.",
+          "body": "Call recordings and meeting details are automatically linked to relevant records."
+        },
+        {
+          "title": "Context, not just content.",
+          "body": "Every conversation is instantly structured and searchable."
         }
       ]
     },

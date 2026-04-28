@@ -104,35 +104,14 @@ export default async function MeetingPage({
             }}
           />
 
-          <MeetingBento />
+          <MeetingBento dict={mp.bento} />
 
-          {/* <ScrollPinnedFeatures
-            title={mp.stickySection.title}
+          <ScrollPinnedFeatures
+            titleDark={mp.stickySection.titleDark}
+            titleMuted={mp.stickySection.titleMuted}
             features={mp.stickySection.features}
             visuals={stickyVisuals}
-          /> */}
-          <ScrollPinnedFeatures
-  titleDark="One conversation. Limitless insights. "
-  titleMuted="Every decision on record."
-  features={[
-    {
-      title: "Fast forward to the buyer.",
-      description:
-        "With Focus Mode, zoom in on key decision makers and skip through the noise.",
-    },
-    {
-      title: "Leave every call with a plan.",
-      description:
-        "Templates track recaps, action items, and next steps before you even hang up.",
-    },
-    {
-      title: "Transcripts in 100+ languages.",
-      description:
-        "Capture every customer conversation clearly, no matter where your buyers are.",
-    },
-  ]}
-  visuals={stickyVisuals}
-/>
+          />
 
           {/* Integration Logos */}
           {/* <section className="py-16 sm:py-20">

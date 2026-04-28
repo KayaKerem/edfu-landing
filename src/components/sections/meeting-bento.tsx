@@ -2,6 +2,12 @@ import { TranscriptMini } from "@/components/mockups/transcript-mini";
 import { MeetCrmConnector } from "@/components/mockups/meet-crm-connector";
 import { StatusFeedMini } from "@/components/mockups/status-feed-mini";
 
+interface BentoDict {
+  headerTitle: string;
+  headerSubtitle: string;
+  cards: { title: string; body: string }[];
+}
+
 /* ── Dot pattern background (matches Attio's 10×10 dot lattice) ── */
 function DotPattern({ id }: { id: string }) {
   return (
@@ -48,16 +54,17 @@ interface BentoCardProps {
   visual: React.ReactNode;
   title: string;
   body: string;
+  visualClass?: string;
 }
 
-function BentoCard({ patternId, visual, title, body }: BentoCardProps) {
+function BentoCard({ patternId, visual, title, body, visualClass }: BentoCardProps) {
   return (
     <div className="grid grid-cols-12 bg-background">
-      <div className="col-span-12 md:col-[2/-2] flex flex-col py-7 px-6 md:px-0">
-        {/* Visual area: square on lg+, golden on md, square on mobile */}
-        <div className="relative mb-6 aspect-square w-full md:max-lg:aspect-[1.618] overflow-hidden">
+      <div className="col-span-12 md:col-[2/-2] flex flex-col py-7 max-md:py-4 px-6 md:px-0">
+        {/* Visual area: square on lg+, golden on md, fixed height on mobile */}
+        <div className="relative mb-6 max-md:mb-3 aspect-square max-md:aspect-auto max-md:h-[175px] w-full md:max-lg:aspect-[1.618] overflow-hidden">
           <DotPattern id={patternId} />
-          <div className="absolute inset-0 size-full">{visual}</div>
+          <div className={["absolute inset-0 size-full", visualClass].filter(Boolean).join(" ")}>{visual}</div>
         </div>
 
         {/* Text */}
@@ -74,18 +81,17 @@ function BentoCard({ patternId, visual, title, body }: BentoCardProps) {
   );
 }
 
-export function MeetingBento() {
+export function MeetingBento({ dict }: { dict: BentoDict }) {
   return (
     <section className="relative">
-      {/* Header — Attio col-[2/-2] inline H2+P pattern */}
       <div className="grid grid-cols-12">
-        <header className="col-span-12 md:col-[2/-2] px-6 md:px-0 pt-[60px] pb-[40px] max-xl:pt-16 max-xl:pb-8 max-lg:pt-12 max-lg:pb-6">
+        <header className="col-span-12 md:col-[2/-2] px-6 md:px-0 pt-[60px] pb-[40px] max-xl:pt-16 max-xl:pb-8 max-lg:pt-12 max-lg:pb-6 max-md:pt-8 max-md:pb-4">
           <div className="max-w-[36em]">
             <h2 className="inline text-pretty text-[24px] sm:text-[28px] lg:text-[32px] xl:text-[36px] font-semibold leading-snug tracking-[-0.045em] text-foreground">
-              From hello to handoff, every word lives in Attio.
+              {dict.headerTitle}
             </h2>{" "}
             <p className="inline text-pretty text-[24px] sm:text-[28px] lg:text-[32px] xl:text-[36px] font-medium leading-snug tracking-[-0.045em] text-muted-foreground">
-              Search, replay, or uncover insights from any conversation.
+              {dict.headerSubtitle}
             </p>
           </div>
         </header>
@@ -111,20 +117,21 @@ export function MeetingBento() {
             <BentoCard
               patternId="meetingBentoDots1"
               visual={<TranscriptMini />}
-              title="Every call, every detail."
-              body="Our native AI records, transcribes, and logs every call as you talk."
+              title={dict.cards[0].title}
+              body={dict.cards[0].body}
             />
             <BentoCard
               patternId="meetingBentoDots2"
               visual={<MeetCrmConnector />}
-              title="No more lost call notes."
-              body="Call recordings and meeting details are automatically linked to relevant records."
+              title={dict.cards[1].title}
+              body={dict.cards[1].body}
+              visualClass="max-md:-translate-y-[12%]"
             />
             <BentoCard
               patternId="meetingBentoDots3"
               visual={<StatusFeedMini />}
-              title="Context, not just content."
-              body="Every conversation is instantly structured and searchable."
+              title={dict.cards[2].title}
+              body={dict.cards[2].body}
             />
           </div>
         </div>
