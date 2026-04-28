@@ -29,12 +29,11 @@ export function MeetingTranscript({
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-border px-4 py-3">
-        <h3
-          className="text-sm font-semibold text-foreground"        >
+      <div className="flex items-center justify-between border-b border-border px-3 py-2">
+        <h3 className="text-xs font-semibold text-foreground">
           {dict.title}
         </h3>
-        <span className="text-[11px] text-muted-foreground">
+        <span className="text-[9px] text-muted-foreground">
           {dict.subtitle}
         </span>
       </div>
@@ -45,28 +44,28 @@ export function MeetingTranscript({
           <div
             key={i}
             className={cn(
-              "flex items-start gap-3 px-4 py-2.5",
+              "flex items-center gap-2 px-3 py-1.5",
               line.isAction && "bg-primary/5 dark:bg-primary/10"
             )}
           >
             {/* Timestamp or action icon */}
             <span
               className={cn(
-                "mt-0.5 shrink-0 text-[10px]",
+                "shrink-0 text-[9px]",
                 line.isAction
-                  ? "w-8 text-center text-primary"
-                  : "w-8 text-right text-muted-foreground"
+                  ? "w-6 text-center text-primary"
+                  : "w-6 text-right text-muted-foreground"
               )}
               style={{ fontFamily: "var(--font-mono)" }}
             >
-              {line.isAction ? "\u26A1" : line.time}
+              {line.isAction ? "⚡" : line.time}
             </span>
 
             {/* Speaker + text */}
             <div className="min-w-0 flex-1">
               <span
                 className={cn(
-                  "text-xs font-semibold",
+                  "text-[9px] font-semibold",
                   line.isAction ? "text-primary" : "text-foreground"
                 )}
               >
@@ -74,7 +73,7 @@ export function MeetingTranscript({
               </span>{" "}
               <span
                 className={cn(
-                  "text-xs leading-relaxed",
+                  "text-[9px] leading-relaxed",
                   line.isAction
                     ? "font-medium text-primary"
                     : "text-foreground/80"

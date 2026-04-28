@@ -26,7 +26,7 @@ export function CallWidget({ dict, className }: CallWidgetProps) {
   return (
     <div
       className={cn(
-        "relative w-[min(416px,100%)] rounded-2xl border-4 border-[color:oklch(0_0_0_/_0.03)] p-0 backdrop-blur-xs",
+        "relative w-[min(816px,100%)] rounded-2xl border-4 border-[color:oklch(0_0_0_/_0.03)] p-0 backdrop-blur-xs",
         className
       )}
     >

@@ -18,29 +18,21 @@
 }
 
 /* ── Sticky comparison header ── */
-.stickyHeaderShell {
-  position: relative;
-}
-
 .stickyHeader {
-  position: relative;
-  background: var(--pricing-table-surface);
-  /* border-bottom: 1px solid var(--pricing-table-border); */
-  width: 100%;
-}
-
-.stickyHeaderPinned {
-  position: fixed;
+  position: sticky;
   top: var(--pricing-navbar-offset);
-  left: 0;
-  right: 0;
   z-index: 30;
+  background: color-mix(in srgb, var(--pricing-table-surface) 100%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  width: 100%;
 }
 
 .stickyInner {
   max-width: 1100px;
   margin: 0 auto;
   padding: 30 24px;
+  padding-top: 2vw;
   display: grid;
   grid-template-columns: 30% repeat(3, 1fr);
   align-items: end;
@@ -168,7 +160,7 @@
 border: 1px solid black;
 transition: all; }
 
-:global(html[data-expandable-screen-open="true"]) .stickyHeaderPinned {
+:global(html[data-expandable-screen-open="true"]) .stickyHeader {
   opacity: 0;
 }
 

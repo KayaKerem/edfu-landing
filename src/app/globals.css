@@ -246,14 +246,11 @@
 }
 
 @keyframes pulse-rings {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.8;
+  from {
+    transform: rotate(0deg);
   }
-  50% {
-    transform: scale(1.04);
-    opacity: 1;
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -298,12 +295,14 @@
 /* Looped animations — run unconditionally in-DOM */
 .pulse-ring-outer {
   transform-origin: center;
-  animation: pulse-rings 2.8s ease-in-out infinite;
+  transform-box: fill-box;
+  animation: pulse-rings 18s linear infinite;
 }
 .pulse-ring-inner {
   transform-origin: center;
-  /* delay = -duration/2 phases inner ring half a cycle apart from outer */
-  animation: pulse-rings 2.8s ease-in-out -1.4s infinite;
+  transform-box: fill-box;
+  /* inner ring rotates the opposite direction at a different speed for subtle motion */
+  animation: pulse-rings 14s linear infinite reverse;
 }
 .bead-flow-line {
   animation: bead-flow 2.6s linear infinite;

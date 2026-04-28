@@ -25,9 +25,10 @@ const EASE = [0.2, 0, 0, 1] as [number, number, number, number];
 
 export function MeetingHero({ dict, mockupsDict }: MeetingHeroProps) {
   return (
-    <section className="relative overflow-hidden pt-32 sm:pt-40 pb-16">
+    <section className="relative overflow-hidden">
       <MotionConfig reducedMotion="user">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 md:grid-cols-[60%_40%] md:gap-12 md:px-6 items-center">
+        <div className="grid grid-cols-12">
+          <div className="col-span-12 md:col-[2/-2] grid grid-cols-1 gap-10 px-6 pt-24 pb-16 sm:pt-28 md:grid-cols-[60%_40%] md:gap-12 md:px-0 md:pt-[116px] md:pb-20 lg:pt-32 items-center">
           {/* Left column: badge + headline + subhead + CTAs */}
           <div className="flex flex-col items-start">
             <motion.div
@@ -73,31 +74,54 @@ export function MeetingHero({ dict, mockupsDict }: MeetingHeroProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: EASE, delay: 0.4 }}
             >
-              <Button size="lg" render={<a href="https://app.edfu.ai" />}>
+              <Button size="lg" nativeButton={false} render={<a href="https://app.edfu.ai" />} >
                 {/* TODO(brand): placeholder CTA label */}
                 {dict.ctaPrimary}
               </Button>
-              <Button size="lg" variant="ghost" render={<a href="#contact" />}>
+              <Button size="lg" variant="ghost" nativeButton={false} render={<a href="#contact" />}>
                 {/* TODO(brand): placeholder CTA label */}
                 {dict.ctaSecondary}
               </Button>
-              <Button size="lg" variant="ghost" render={<Link href="/pricing" />}>
+              <Button size="lg" variant="ghost" nativeButton={false} render={<Link href="/pricing" />}>
                 {/* TODO(brand): placeholder CTA label */}
                 {dict.ctaTertiary}
               </Button>
             </motion.div>
           </div>
 
-          {/* Right column: floating CallWidget (hidden on <360px phones) */}
-          <motion.div
-            className="hidden [@media(min-width:360px)]:block"
-            aria-hidden="true"
-            initial={{ opacity: 0, scale: 0.94, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 220, damping: 24, mass: 0.9 }}
-          >
-            <CallWidget dict={mockupsDict.callWidget} />
-          </motion.div>
+          {/* Right column: floating CallWidget on dotted backdrop (hidden on <360px phones) */}
+          <div className="relative hidden [@media(min-width:360px)]:flex items-center justify-center overflow-hidden">
+            {/* Dot pattern backdrop */}
+            <svg
+              width="100%"
+              height="100%"
+              className="absolute inset-0 dark:opacity-20"
+              aria-hidden="true"
+            >
+              <defs>
+                <pattern
+                  id="meetingHeroDots"
+                  width="10"
+                  height="10"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <rect x="5" y="5" width="1.2" height="1.2" fill="#D1D5DB" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#meetingHeroDots)" />
+            </svg>
+
+            <motion.div
+              className="relative w-full max-w-[68%] mx-auto"
+              aria-hidden="true"
+              initial={{ opacity: 0, scale: 0.94, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 220, damping: 24, mass: 0.9 }}
+            >
+              <CallWidget dict={mockupsDict.callWidget} />
+            </motion.div>
+          </div>
+          </div>
         </div>
       </MotionConfig>
     </section>

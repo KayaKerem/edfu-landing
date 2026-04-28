@@ -765,13 +765,13 @@
   },
   "meetingPage": {
     "hero": {
-      "badge": "Live",
-      "headlinePrimary": "Smarter meetings,",
-      "headlineMuted": "from start to finish.",
-      "subhead": "Automatic recording, transcription, action items.",
-      "ctaPrimary": "Start for free",
-      "ctaSecondary": "Book a demo",
-      "ctaTertiary": "View pricing"
+      "badge": "Canlı",
+      "headlinePrimary": "Daha akıllı toplantılar,",
+      "headlineMuted": "başından sonuna.",
+      "subhead": "Otomatik kayıt, transkripsiyon, aksiyon maddeleri.",
+      "ctaPrimary": "Ücretsiz Başlayın",
+      "ctaSecondary": "Demo Al",
+      "ctaTertiary": "Fiyatları Gör"
     },
     "featureCards": [
       {
@@ -788,19 +788,38 @@
       }
     ],
     "stickySection": {
-      "title": "Bir toplantı. Sınırsız içerik.",
+      "titleDark": "Bir konuşma. Sınırsız içgörü.",
+      "titleMuted": "Her karar kayıt altında.",
       "features": [
         {
-          "title": "Karar vericiye odaklanın",
-          "description": "AI, toplantıdaki karar vericileri ve önemli anları otomatik tespit eder."
+          "title": "Karar vericiye hızlıca ulaşın.",
+          "description": "Odak Modu ile toplantılardaki karar vericilere odaklanın, gereksiz detayları atlayın."
         },
         {
-          "title": "Her toplantıdan bir planla çıkın",
-          "description": "Aksiyon maddeleri, sorumlular ve tarihler otomatik çıkarılır."
+          "title": "Her görüşmeden bir planla çıkın.",
+          "description": "Şablonlar özeti, aksiyonları ve sonraki adımları görüşme bitmeden otomatik çıkarır."
         },
         {
-          "title": "100+ dil transkripsiyonu",
-          "description": "Uluslararası ekipler için çoklu dil desteği."
+          "title": "100+ dilde transkripsiyon.",
+          "description": "Müşterileriniz nerede olursa olsun her görüşmeyi net bir şekilde kaydedin."
+        }
+      ]
+    },
+    "bento": {
+      "headerTitle": "İlk temastan devir teslime, her sözcük Edfu'da.",
+      "headerSubtitle": "Herhangi bir konuşmayı arayın, tekrar dinleyin veya içgörüler keşfedin.",
+      "cards": [
+        {
+          "title": "Her görüşme, her detay.",
+          "body": "Yerli AI'mız, görüşürken her çağrıyı kaydeder, yazıya döker ve kaydeder."
+        },
+        {
+          "title": "Görüşme notları artık kaybolmaz.",
+          "body": "Görüşme kayıtları ve toplantı detayları otomatik olarak ilgili kayıtlara bağlanır."
+        },
+        {
+          "title": "Bağlam, yalnızca içerik değil.",
+          "body": "Her konuşma anında yapılandırılır ve aranabilir hale gelir."
         }
       ]
     },
@@ -1305,12 +1324,12 @@
       ]
     },
     "callWidget": {
-      "meetingTitle": "Product Demo w/ GreenLeaf",
-      "tabActive": "Insights",
-      "tabInactive": "Transcript",
-      "summaryTitle": "Summary",
-      "highlightPillLabel": "Discovery Call",
-      "insightsTitle": "Insights",
+      "meetingTitle": "Ürün Demosu",
+      "tabActive": "İçgörüler",
+      "tabInactive": "Transkript",
+      "summaryTitle": "Özet",
+      "highlightPillLabel": "Keşif Görüşmesi",
+      "insightsTitle": "İçgörüler",
       "timeElapsed": "10:15",
       "timeTotal": "28:14"
     }

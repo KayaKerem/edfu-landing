@@ -3,9 +3,14 @@
 import Link from "next/link";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
 import { EdfuThemeLogo } from "@/components/ui/edfu-brand";
+import { TrustIcon, SecureDocumentIcon, StatsCircleIcon, CheckCircleIcon } from "@/components/ui/compliance-icons";
 import type { Dictionary } from "@/dictionaries";
 
-const badges = ["KVKK", "EU Data", "GDPR"] as const;
+const complianceBadges = [
+  { label: "GDPR", Icon: TrustIcon },
+  { label: "CCPA", Icon: SecureDocumentIcon },
+  { label: "ISO", Icon: StatsCircleIcon },
+] as const;
 
 interface FooterProps {
   dict: Dictionary["footer"];
@@ -46,14 +51,13 @@ export function Footer({ dict, lang }: FooterProps) {
             </p>
 
             {/* Compliance badges */}
-            <div className="mt-6 flex items-center gap-3">
-              {badges.map((badge) => (
-                <div
-                  key={badge}
-                  className="h-10 w-10 rounded-full border border-border bg-card flex items-center justify-center"
-                >
-                  <span className="text-[10px] font-bold text-muted-foreground leading-tight text-center">
-                    {badge}
+            <div className="mt-6 flex justify-start items-center gap-10 overflow-hidden">
+              {complianceBadges.map(({ label, Icon }) => (
+                <div key={label} className="flex flex-col items-center justify-center gap-3">
+                  <Icon className="w-8 h-8 opacity-70" />
+                  <span className="flex items-center gap-1 text-[11px] font-semibold text-muted-foreground">
+                    <CheckCircleIcon />
+                    {label}
                   </span>
                 </div>
               ))}

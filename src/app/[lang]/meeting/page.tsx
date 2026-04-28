@@ -14,6 +14,7 @@ import { CallPlayer as CallPlayerMockup } from "@/components/mockups/call-player
 import { Zoom } from "@/components/ui/svgs/zoom";
 import { GoogleMeet } from "@/components/ui/svgs/google-meet";
 import { MsTeams } from "@/components/ui/svgs/ms-teams";
+import IntegrationArc from "@/components/sections/integration-arc";
 
 const BASE_URL = "https://edfu.ai";
 
@@ -94,10 +95,8 @@ export default async function MeetingPage({
   return (
     <>
       <Navbar dict={dict.navbar} lang={lang} />
-      <div className="relative mx-auto max-w-7xl border-x border-border">
-        <div className="pointer-events-none absolute inset-y-0 left-4 md:left-6 z-10 w-px bg-border" />
-        <div className="pointer-events-none absolute inset-y-0 right-4 md:right-6 z-10 w-px bg-border" />
-        <main className="divide-y divide-border">
+      <div className="relative mx-auto max-w-7xl border-x border-border/70 lg:border-x max-lg:border-none">
+        <main className="divide-y divide-border/70">
           <MeetingHero
             dict={mp.hero}
             mockupsDict={{
@@ -105,16 +104,17 @@ export default async function MeetingPage({
             }}
           />
 
-          <MeetingBento />
+          <MeetingBento dict={mp.bento} />
 
           <ScrollPinnedFeatures
-            title={mp.stickySection.title}
+            titleDark={mp.stickySection.titleDark}
+            titleMuted={mp.stickySection.titleMuted}
             features={mp.stickySection.features}
             visuals={stickyVisuals}
           />
 
           {/* Integration Logos */}
-          <section className="py-16 sm:py-20">
+          {/* <section className="py-16 sm:py-20">
             <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
               <h2
                 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground mb-10"
@@ -143,10 +143,11 @@ export default async function MeetingPage({
                 })}
               </div>
             </div>
-          </section>
+          </section> */}
+          <IntegrationArc />
 
           {/* Templates */}
-          <section className="py-16 sm:py-20">
+          {/* <section className="py-16 sm:py-20">
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
               <h2
                 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium leading-none text-foreground text-center mb-12"
@@ -178,7 +179,7 @@ export default async function MeetingPage({
                 ))}
               </div>
             </div>
-          </section>
+          </section> */}
 
           {/* Testimonial */}
           <section className="relative z-20 bg-white dark:bg-card py-16 sm:py-20 px-4 sm:px-12 lg:px-20">

@@ -475,7 +475,8 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
       id="deploy-ai"
       ariaLabel={dict.ariaLabel}
       className={cn(styles.root)}
-      gridClassName="grid-cols-1 lg:grid-cols-[minmax(220px,0.9fr)_minmax(500px,1.4fr)_minmax(360px,0.9fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border"
+      // _minmax(360px,0.9fr)
+      gridClassName="grid-cols-1 lg:grid-cols-[minmax(400px,0.9fr)_minmax(680px,1.4fr)] divide-y divide-border lg:divide-y-0 lg:divide-x lg:divide-border"
       data-visible={visible ? "true" : "false"}
       data-phase={phase}
       data-hover-card={hoverAttr}
@@ -582,99 +583,103 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
       </div>
 
       {/* ─── Right: response card (top) + dashed grid + orbit glyph (bottom) ─── */}
-      <div className={styles.responseCol}>
-        <div className={styles.responseTop}>
-          <article
-            className={styles.responseCard}
-            aria-labelledby="deploy-ai-response-title"
-          >
-            <header className={styles.responseHead}>
-              <span className={styles.responseAvatar} aria-hidden="true">
-                <BasepointMarkIcon />
-              </span>
-              <div className={styles.responseHeadText}>
-                <h3 id="deploy-ai-response-title" className={styles.responseTitle}>
-                  {dict.response.title}
-                </h3>
-              </div>
-            </header>
-            <div className={styles.responseHairline} aria-hidden="true" />
-            <dl className={styles.responseFields}>
-              {dict.response.fields.map((field, i) => {
-                const Icon = ROW_ICONS[field.icon];
-                const chipClass =
-                  field.chip === "blue"
-                    ? styles.responseChipBlue
-                    : field.chip === "green"
-                      ? styles.responseChipGreen
-                      : field.chip === "purple"
-                        ? styles.responseChipPurple
-                        : undefined;
-                return (
-                  <div
-                    key={i}
-                    className={styles.responseRow}
-                    style={{ "--row-delay": `${2500 + i * 70}ms` } as CSSProperties}
-                  >
-                    <dt className={styles.responseLabel}>
-                      <span className={styles.responseRowIcon} aria-hidden="true">
-                        <Icon />
-                      </span>
-                      <span>{field.label}</span>
-                    </dt>
-                    <dd className={styles.responseValue}>
-                      {field.chips?.length ? (
-                        <span className={styles.responseValueChips}>
-                          {field.chips.map((chipItem) => {
-                            const multiChipClass =
-                              chipItem.chip === "blue"
-                                ? styles.responseChipBlue
-                                : chipItem.chip === "green"
-                                  ? styles.responseChipGreen
-                                  : styles.responseChipPurple;
-                            return (
-                              <span
-                                key={`${field.label}-${chipItem.value}`}
-                                className={cn(styles.responseChip, multiChipClass)}
-                              >
-                                {chipItem.value}
-                              </span>
-                            );
-                          })}
-                        </span>
-                      ) : !field.value ? (
-                        <span className={styles.responseValueEmpty} aria-hidden="true" />
-                      ) : chipClass ? (
-                        <span className={cn(styles.responseChip, chipClass)}>
-                          {field.value}
-                        </span>
-                      ) : (
-                        field.value
-                      )}
-                    </dd>
-                  </div>
-                );
-              })}
-            </dl>
-          </article>
-        </div>
-
-        {/* Dashed grid + orbit glyph (desktop only) — mirrors the cubes motif
-            at the bottom of automate-everything's right column. */}
-        <div className={styles.responseBottom}>
-          <div className={styles.responseDashedGrid} aria-hidden="true">
-            <div className={styles.dashedCell} />
-            <div className={styles.dashedCell} />
-            <div className={styles.dashedCell} />
-            <div className={styles.dashedCell} />
-            <div className={styles.dashedCell} />
-            <div />
-          </div>
-          <div className={styles.responseOrbit} aria-hidden="true">
-            <OrbitGlyph />
-          </div>
-        </div>
-      </div>
+    
     </SectionFrame>
   );
 }
+
+
+// 3.kısım 
+  // <div className={styles.responseCol}>
+  //       <div className={styles.responseTop}>
+  //         <article
+  //           className={styles.responseCard}
+  //           aria-labelledby="deploy-ai-response-title"
+  //         >
+  //           <header className={styles.responseHead}>
+  //             <span className={styles.responseAvatar} aria-hidden="true">
+  //               <BasepointMarkIcon />
+  //             </span>
+  //             <div className={styles.responseHeadText}>
+  //               <h3 id="deploy-ai-response-title" className={styles.responseTitle}>
+  //                 {dict.response.title}
+  //               </h3>
+  //             </div>
+  //           </header>
+  //           <div className={styles.responseHairline} aria-hidden="true" />
+  //           <dl className={styles.responseFields}>
+  //             {dict.response.fields.map((field, i) => {
+  //               const Icon = ROW_ICONS[field.icon];
+  //               const chipClass =
+  //                 field.chip === "blue"
+  //                   ? styles.responseChipBlue
+  //                   : field.chip === "green"
+  //                     ? styles.responseChipGreen
+  //                     : field.chip === "purple"
+  //                       ? styles.responseChipPurple
+  //                       : undefined;
+  //               return (
+  //                 <div
+  //                   key={i}
+  //                   className={styles.responseRow}
+  //                   style={{ "--row-delay": `${2500 + i * 70}ms` } as CSSProperties}
+  //                 >
+  //                   <dt className={styles.responseLabel}>
+  //                     <span className={styles.responseRowIcon} aria-hidden="true">
+  //                       <Icon />
+  //                     </span>
+  //                     <span>{field.label}</span>
+  //                   </dt>
+  //                   <dd className={styles.responseValue}>
+  //                     {field.chips?.length ? (
+  //                       <span className={styles.responseValueChips}>
+  //                         {field.chips.map((chipItem) => {
+  //                           const multiChipClass =
+  //                             chipItem.chip === "blue"
+  //                               ? styles.responseChipBlue
+  //                               : chipItem.chip === "green"
+  //                                 ? styles.responseChipGreen
+  //                                 : styles.responseChipPurple;
+  //                           return (
+  //                             <span
+  //                               key={`${field.label}-${chipItem.value}`}
+  //                               className={cn(styles.responseChip, multiChipClass)}
+  //                             >
+  //                               {chipItem.value}
+  //                             </span>
+  //                           );
+  //                         })}
+  //                       </span>
+  //                     ) : !field.value ? (
+  //                       <span className={styles.responseValueEmpty} aria-hidden="true" />
+  //                     ) : chipClass ? (
+  //                       <span className={cn(styles.responseChip, chipClass)}>
+  //                         {field.value}
+  //                       </span>
+  //                     ) : (
+  //                       field.value
+  //                     )}
+  //                   </dd>
+  //                 </div>
+  //               );
+  //             })}
+  //           </dl>
+  //         </article>
+  //       </div>
+
+  //       {/* Dashed grid + orbit glyph (desktop only) — mirrors the cubes motif
+  //           at the bottom of automate-everything's right column. */}
+  //       <div className={styles.responseBottom}>
+  //         <div className={styles.responseDashedGrid} aria-hidden="true">
+  //           <div className={styles.dashedCell} />
+  //           <div className={styles.dashedCell} />
+  //           <div className={styles.dashedCell} />
+  //           <div className={styles.dashedCell} />
+  //           <div className={styles.dashedCell} />
+  //           <div />
+  //         </div>
+  //         <div className={styles.responseOrbit} aria-hidden="true">
+  //           <OrbitGlyph />
+  //         </div>
+  //       </div>
+  //     </div>

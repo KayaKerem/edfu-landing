@@ -174,15 +174,15 @@ export default async function Home({
           <div className="pointer-events-none absolute inset-y-0 left-4 md:left-6 z-10 w-px bg-border/70" />
           <div className="pointer-events-none absolute inset-y-0 right-4 md:right-6 z-10 w-px bg-border/70" />
           <div className="divide-y divide-border/70">
-            <Logos dict={dict.logos} />
+            {/* <Logos dict={dict.logos} /> */}
             <AutomateEverything dict={dict.automateEverything} />
             <DeployAi dict={dict.deployAi as DeployAiDict} />
             <ConnectData dict={dict.connectData as ConnectDataDict} />
             <Testimonial dict={dict.testimonial} />
             <FlowDiagram dict={dict.flowDiagram} />
             <Security dict={dict.security} />
-            <AiGradientCard dict={dict.aiGradientCard} />
-            <MarqueeTestimonials dict={dict.marqueeTestimonials} />
+            {/* <AiGradientCard dict={dict.aiGradientCard} /> */}
+            {/* <MarqueeTestimonials dict={dict.marqueeTestimonials} /> */}
             <CTA dict={dict.cta} />
           </div>
           <Footer dict={dict.footer} lang={lang} />
