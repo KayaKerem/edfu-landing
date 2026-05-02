@@ -119,9 +119,9 @@ export function Navbar({ dict, lang }: NavbarProps) {
         >
           <div className="relative flex h-14 items-center justify-between px-4 sm:px-5">
             <Link href={`${prefix}/`} className="flex items-center gap-1.5">
-              <EdfuIosIcon alt="edfu" width={28} height={28} className="size-7 rounded-[7px]" />
+              <EdfuIosIcon alt="edfu" width={36} height={36} className="size-9 rounded-[8px]" />
               <span
-                className="text-xl leading-none font-semibold tracking-tight"
+                className="text-2xl leading-none font-semibold tracking-tight"
               >
                 edfu
               </span>

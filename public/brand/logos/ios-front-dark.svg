@@ -37,8 +37,6 @@
     </filter>
   </defs>
 
-  <rect x="0" y="0" width="1024" height="1024" fill="#18181b"></rect>
-
   <ellipse cx="512" cy="935" rx="340" ry="18" fill="#1d4ed8" opacity="0.35" filter="url(#shadowBlur)"></ellipse>
 
   <g filter="url(#dropShadow)">
