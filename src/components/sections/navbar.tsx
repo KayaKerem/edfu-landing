@@ -34,7 +34,6 @@ export function Navbar({ dict, lang }: NavbarProps) {
     { label: dict.home, href: `${prefix}/`, routeId: "/" },
     { label: dict.agents, href: `${prefix}/agents`, routeId: "/agents" },
     { label: dict.meeting, href: `${prefix}/meeting`, routeId: "/meeting" },
-    { label: dict.integrations, href: `${prefix}/integrations`, routeId: "/integrations" },
     { label: dict.pricing, href: `${prefix}/pricing`, routeId: "/pricing" },
   ];
 
