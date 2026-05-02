@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useTheme } from "@/providers/theme-provider";
 
 type EdfuBrandProps = {
@@ -75,5 +74,6 @@ export function EdfuIosIcon({ alt, width, height, className }: EdfuBrandProps) {
     resolvedTheme === "dark"
       ? "/brand/logos/ios-front-dark.svg"
       : "/brand/logos/ios-front-light.svg";
-  return <Image src={src} alt={alt} width={width} height={height} className={className} />;
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={src} alt={alt} width={width} height={height} className={className} />;
 }
