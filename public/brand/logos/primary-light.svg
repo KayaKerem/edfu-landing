@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100" width="640" height="200" fill="none">
+  <g>
+    <path d="M 10 30 L 50 50" stroke="#18181b" stroke-width="10" stroke-linecap="round"></path>
+    <path d="M 10 50 L 50 50" stroke="#18181b" stroke-width="10" stroke-linecap="round"></path>
+    <path d="M 10 70 L 50 50" stroke="#18181b" stroke-width="10" stroke-linecap="round"></path>
+    <path d="M 50 50 L 90 50" stroke="#18181b" stroke-width="10" stroke-linecap="round"></path>
+  </g>
+  <text x="120" y="74" font-family="Inter, system-ui, sans-serif" font-size="72" font-weight="600" letter-spacing="-3" fill="#18181b">edfu</text>
+</svg>

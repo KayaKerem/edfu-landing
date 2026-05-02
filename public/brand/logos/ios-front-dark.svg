@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bgGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#6ea8fe"></stop>
+      <stop offset="45%" stop-color="#3b82f6"></stop>
+      <stop offset="100%" stop-color="#1d4ed8"></stop>
+    </linearGradient>
+    <radialGradient id="topHighlight" cx="30%" cy="15%" r="60%" fx="30%" fy="15%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"></stop>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"></stop>
+    </radialGradient>
+    <linearGradient id="topGloss" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"></stop>
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="0"></stop>
+    </linearGradient>
+    <radialGradient id="bottomGlow" cx="50%" cy="100%" r="60%" fx="50%" fy="100%">
+      <stop offset="0%" stop-color="#a5c8ff" stop-opacity="0.5"></stop>
+      <stop offset="100%" stop-color="#a5c8ff" stop-opacity="0"></stop>
+    </radialGradient>
+    <linearGradient id="diagShine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"></stop>
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="0"></stop>
+      <stop offset="70%" stop-color="#ffffff" stop-opacity="0"></stop>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.18"></stop>
+    </linearGradient>
+    <filter id="shadowBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="24"></feGaussianBlur>
+    </filter>
+    <filter id="dropShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="22"></feGaussianBlur>
+      <feOffset dx="0" dy="36"></feOffset>
+      <feColorMatrix values="0 0 0 0 0.114  0 0 0 0 0.306  0 0 0 0 0.847  0 0 0 0.45 0"></feColorMatrix>
+      <feMerge>
+        <feMergeNode></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1024" height="1024" fill="#18181b"></rect>
+
+  <ellipse cx="512" cy="935" rx="340" ry="18" fill="#1d4ed8" opacity="0.35" filter="url(#shadowBlur)"></ellipse>
+
+  <g filter="url(#dropShadow)">
+    <rect x="112" y="112" width="800" height="800" rx="220" ry="220" fill="url(#bgGrad)"></rect>
+    <rect x="112" y="112" width="800" height="800" rx="220" ry="220" fill="url(#topHighlight)"></rect>
+    <rect x="130" y="130" width="764" height="764" rx="206" ry="206" fill="url(#topGloss)"></rect>
+    <rect x="130" y="130" width="764" height="764" rx="206" ry="206" fill="url(#bottomGlow)"></rect>
+    <rect x="112" y="112" width="800" height="800" rx="220" ry="220" fill="url(#diagShine)" opacity="0.6"></rect>
+    <rect x="113" y="113" width="798" height="798" rx="219" ry="219" fill="none" stroke="#ffffff" stroke-opacity="0.4" stroke-width="2"></rect>
+
+    <g transform="translate(280, 280) scale(4.64)" fill="none">
+      <path d="M 10 30 L 50 50" stroke="#ffffff" stroke-width="10" stroke-linecap="round"></path>
+  <path d="M 10 50 L 50 50" stroke="#ffffff" stroke-width="10" stroke-linecap="round"></path>
+  <path d="M 10 70 L 50 50" stroke="#ffffff" stroke-width="10" stroke-linecap="round"></path>
+  <path d="M 50 50 L 90 50" stroke="#ffffff" stroke-width="10" stroke-linecap="round"></path>
+    </g>
+  </g>
+</svg>

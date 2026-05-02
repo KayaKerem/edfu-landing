@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
-import { EdfuThemeLogo } from "@/components/ui/edfu-brand";
+import { EdfuIosIcon } from "@/components/ui/edfu-brand";
 
 const Lottie = dynamic(() => import("lottie-react"), {
   ssr: false,
@@ -118,12 +118,12 @@ export function Navbar({ dict, lang }: NavbarProps) {
           }`}
         >
           <div className="relative flex h-14 items-center justify-between px-4 sm:px-5">
-            <Link href={`${prefix}/`} className="flex items-end gap-2">
-              <EdfuThemeLogo alt="Edfu" width={22} height={22} className="size-6" />
+            <Link href={`${prefix}/`} className="flex items-center gap-1.5">
+              <EdfuIosIcon alt="edfu" width={28} height={28} className="size-7 rounded-[7px]" />
               <span
-                className="text-xl leading-none -translate-y-[1px] font-semibold tracking-tight"
+                className="text-xl leading-none font-semibold tracking-tight"
               >
-                Edfu
+                edfu
               </span>
             </Link>
 

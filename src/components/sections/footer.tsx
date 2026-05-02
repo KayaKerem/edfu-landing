@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
-import { EdfuThemeLogo } from "@/components/ui/edfu-brand";
+import { EdfuThemeMark } from "@/components/ui/edfu-brand";
 import { TrustIcon, SecureDocumentIcon, StatsCircleIcon, CheckCircleIcon } from "@/components/ui/compliance-icons";
 import type { Dictionary } from "@/dictionaries";
 
@@ -40,9 +40,9 @@ export function Footer({ dict, lang }: FooterProps) {
           {/* Brand section */}
           <div className="lg:col-span-2">
             {/* Logo */}
-            <Link href={`${prefix}/`} className="flex items-end gap-2">
-              <EdfuThemeLogo alt="Edfu" width={22} height={22} className="size-6" />
-              <span className="text-xl leading-none translate-y-[2px] font-semibold tracking-tight">Edfu</span>
+            <Link href={`${prefix}/`} className="flex items-center gap-2">
+              <EdfuThemeMark alt="edfu" width={22} height={22} className="size-6" />
+              <span className="text-xl leading-none font-semibold tracking-tight">edfu</span>
             </Link>
 
             {/* Description */}
@@ -101,8 +101,8 @@ export function Footer({ dict, lang }: FooterProps) {
         <div
           className="absolute inset-0"
           style={{
-            maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' dominant-baseline='middle' font-family='system-ui,-apple-system,sans-serif' font-size='200' font-weight='800' fill='black'%3EEdfu%3C/text%3E%3C/svg%3E")`,
-            WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' dominant-baseline='middle' font-family='system-ui,-apple-system,sans-serif' font-size='200' font-weight='800' fill='black'%3EEdfu%3C/text%3E%3C/svg%3E")`,
+            maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' dominant-baseline='middle' font-family='system-ui,-apple-system,sans-serif' font-size='200' font-weight='800' fill='black'%3Eedfu%3C/text%3E%3C/svg%3E")`,
+            WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' dominant-baseline='middle' font-family='system-ui,-apple-system,sans-serif' font-size='200' font-weight='800' fill='black'%3Eedfu%3C/text%3E%3C/svg%3E")`,
             maskSize: "100% 100%",
             WebkitMaskSize: "100% 100%",
             maskRepeat: "no-repeat",

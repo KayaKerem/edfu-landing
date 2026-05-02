@@ -16,7 +16,7 @@ import { Linear } from "@/components/ui/svgs/linear";
 import { Stripe } from "@/components/ui/svgs/stripe";
 import { Vercel } from "@/components/ui/svgs/vercel";
 import { Openai } from "@/components/ui/svgs/openai";
-import { EdfuThemeLoader, EdfuThemeLogo } from "@/components/ui/edfu-brand";
+import { EdfuThemeLoader, EdfuThemeMark } from "@/components/ui/edfu-brand";
 import dynamic from "next/dynamic";
 import catAnimation from "@/../public/cat-in-box.json";
 
@@ -109,9 +109,9 @@ function ChatMockup({ response, question }: { response: string; question: string
           <div className="flex items-start gap-2 animate-slide-up">
             <div className="flex size-10 shrink-0 items-center justify-center">
               {isThinking ? (
-                <EdfuThemeLoader alt="Edfu AI Loader" width={22} height={22} className="size-6" />
+                <EdfuThemeLoader alt="edfu AI loader" width={22} height={22} className="size-6" />
               ) : (
-                <EdfuThemeLogo alt="Edfu AI" width={22} height={22} className="size-6" />
+                <EdfuThemeMark alt="edfu AI" width={22} height={22} className="size-6" />
               )}
             </div>
             {/* Response bubble with streaming text */}

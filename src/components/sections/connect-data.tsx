@@ -8,7 +8,7 @@ import { AnimatedNumber } from "@/components/ui/animated-number";
 import styles from "./connect-data.module.css";
 import { SectionFrame } from "./section-frame";
 import Image from "next/image";
-import { EdfuThemeLogo } from "../ui/edfu-brand";
+import { EdfuThemeMark } from "../ui/edfu-brand";
 
 type ConnectDataSource = {
   id: string;
@@ -683,7 +683,7 @@ export function ConnectData({ dict }: { dict: ConnectDataDict }) {
 
           <div className={styles.hubCard}>
             <span className={styles.hubMark} aria-hidden="true">
- <EdfuThemeLogo alt="Edfu AI" width={22} height={22} className="size-6" />
+ <EdfuThemeMark alt="edfu" width={36} height={36} className="size-9" />
             </span>
           </div>
 

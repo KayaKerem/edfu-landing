@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import Script from "next/script";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
@@ -9,6 +9,20 @@ import { getDictionary, hasLocale } from "@/dictionaries";
 import type { Locale } from "@/dictionaries";
 import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  weight: ["400", "500"],
+  display: "swap",
+});
 
 const BASE_URL = "https://edfu.ai";
 
@@ -28,10 +42,6 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(BASE_URL),
-    icons: {
-      icon: "/favicon.ico",
-      apple: "/apple-touch-icon.png",
-    },
     title: {
       default: m.title,
       template: "%s | Edfu",
@@ -110,7 +120,7 @@ export default async function RootLayout({
   return (
     <html
       lang={lang}
-      className={theme}
+      className={`${theme} ${inter.variable} ${jetbrainsMono.variable}`}
       style={{ colorScheme: theme }}
       suppressHydrationWarning
     >
@@ -125,7 +135,6 @@ export default async function RootLayout({
       </head>
       <body
         className="min-h-screen font-sans antialiased"
-        style={{ "--font-geist-sans": "Inter, ui-sans-serif, system-ui, sans-serif" } as CSSProperties}
         suppressHydrationWarning
       >
         <ThemeProvider
