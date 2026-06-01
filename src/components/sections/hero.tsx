@@ -101,9 +101,9 @@ export function Hero({ dict, lang }: HeroProps) {
           </a>
         </motion.div>
 
-        {/* Browser Mockup */}
+        {/* Browser Mockup — hidden on mobile, visible from md (768px) up */}
         <motion.div
-          className="relative mt-16"
+          className="relative mt-16 hidden md:block"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.65 }}

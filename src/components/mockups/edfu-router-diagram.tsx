@@ -423,55 +423,53 @@ const ProviderNode = forwardRef<HTMLDivElement, ProviderNodeProps>(function Prov
     <div
       ref={ref}
       style={wrapperStyle}
-      className="group relative rounded-[10px] transition-transform hover:-translate-y-px"
+      className={`group relative flex items-center gap-2.5 rounded-[9px] border px-3 py-[9px] transition-all hover:-translate-y-px ${nodeBorder}`}
       onClick={isSoon ? undefined : onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       title={isSoon ? 'Backend altyapısı yok — yakında' : undefined}
     >
-      <div className={`relative flex items-center gap-2.5 rounded-[9px] border px-3 py-[9px] transition-colors ${nodeBorder}`}>
-        <span
-          className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md"
-          style={{
-            background: isLive || isSoon ? row.soft : '#f4f4f5',
-          }}
-        >
-          {row.icon}
-        </span>
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-1.5">
-            <span
-              className="text-[12.5px] font-semibold leading-tight"
-              style={{ color: isLive ? '#18181b' : '#71717a' }}
-            >
-              {row.label}
-            </span>
-            {row.builtin && (
-              <span className="rounded-[3px] border border-zinc-200 bg-zinc-100 px-[5px] py-px font-mono text-[9.5px] tracking-[0.04em] text-zinc-500">
-                hazır
-              </span>
-            )}
-            {isSoon && (
-              <span className="rounded-[3px] border border-dashed border-zinc-200 bg-zinc-100 px-[5px] py-px font-mono text-[9.5px] tracking-[0.04em] text-zinc-500">
-                yakında
-              </span>
-            )}
-          </div>
-          <div className="mt-0.5 font-mono flex justify-start text-start text-[10.5px] text-zinc-500">
-            {isSoon ? '// backend hazır olduğunda açılır' : '// bağla'}
-          </div>
-        </div>
-        {isLive ? (
+      <span
+        className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md"
+        style={{
+          background: isLive || isSoon ? row.soft : '#f4f4f5',
+        }}
+      >
+        {row.icon}
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center gap-1.5">
           <span
-            className="h-2 w-2 shrink-0 rounded-full"
-            style={{ background: row.brand, color: row.brand, animation: 'edfu-dot-pulse 2s ease-in-out infinite' }}
-          />
-        ) : (
-          <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full border border-dashed border-zinc-200 bg-zinc-100 text-[13px] leading-none text-zinc-500 transition-colors group-hover:border-solid group-hover:border-zinc-900 group-hover:bg-zinc-900 group-hover:text-white">
-            +
+            className="text-[12.5px] font-semibold leading-tight"
+            style={{ color: isLive ? '#18181b' : '#71717a' }}
+          >
+            {row.label}
           </span>
-        )}
+          {row.builtin && (
+            <span className="rounded-[3px] border border-zinc-200 bg-zinc-100 px-[5px] py-px font-mono text-[9.5px] tracking-[0.04em] text-zinc-500">
+              hazır
+            </span>
+          )}
+          {isSoon && (
+            <span className="rounded-[3px] border border-dashed border-zinc-200 bg-zinc-100 px-[5px] py-px font-mono text-[9.5px] tracking-[0.04em] text-zinc-500">
+              yakında
+            </span>
+          )}
+        </div>
+        <div className="mt-0.5 font-mono flex justify-start text-start text-[10.5px] text-zinc-500">
+          {isSoon ? '// backend hazır olduğunda açılır' : '// bağla'}
+        </div>
       </div>
+      {isLive ? (
+        <span
+          className="h-2 w-2 shrink-0 rounded-full"
+          style={{ background: row.brand, color: row.brand, animation: 'edfu-dot-pulse 2s ease-in-out infinite' }}
+        />
+      ) : (
+        <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full border border-dashed border-zinc-200 bg-zinc-100 text-[13px] leading-none text-zinc-500 transition-colors group-hover:border-solid group-hover:border-zinc-900 group-hover:bg-zinc-900 group-hover:text-white">
+          +
+        </span>
+      )}
     </div>
   )
 })
@@ -495,7 +493,7 @@ const PlaybookNode = forwardRef<HTMLDivElement, PlaybookNodeProps>(function Play
   const isLive = row.status === 'live'
   const sub = isLive ? `// ${row.rules} kural` : `// ${row.desc}`
 
-  const innerBaseClass = selected
+  const nodeBorder = selected
     ? 'border-zinc-900 shadow-[0_0_0_3px_#f4f4f5] bg-white'
     : isLive
       ? 'border-zinc-200 bg-white'
@@ -504,44 +502,42 @@ const PlaybookNode = forwardRef<HTMLDivElement, PlaybookNodeProps>(function Play
   return (
     <div
       ref={ref}
-      className="group relative cursor-pointer rounded-[10px] transition-transform hover:-translate-y-px"
+      className={`group relative flex cursor-pointer items-center gap-2.5 rounded-[9px] border px-3 py-[9px] transition-all hover:-translate-y-px ${nodeBorder}`}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <div className={`relative flex items-center gap-2.5 rounded-[9px] border px-3 py-[9px] transition-colors ${innerBaseClass}`}>
-        <span
-          className="h-2 w-2 shrink-0 rounded-full"
-          style={{
-            background: isLive ? row.color : 'transparent',
-              border: isLive ? 'none' : '1.5px dashed #d4d4d8',
-            color: row.color,
-            animation: 'edfu-dot-pulse 2s ease-in-out infinite',
-          }}
-        />
-        <div className="min-w-0 flex-1 text-right">
-          <div
-            className="text-[12.5px] font-semibold leading-tight"
-            style={{ color: isLive ? '#18181b' : '#71717a' }}
-          >
-            {row.label}
-          </div>
-          <div className="mt-0.5 font-mono text-[10.5px] text-zinc-500">
-            {sub}
-          </div>
-        </div>
-        <span
-          className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md"
-          style={{ background: isLive ? row.soft : '#f4f4f5' }}
+      <span
+        className="h-2 w-2 shrink-0 rounded-full"
+        style={{
+          background: isLive ? row.color : 'transparent',
+          border: isLive ? 'none' : '1.5px dashed #d4d4d8',
+          color: row.color,
+          animation: 'edfu-dot-pulse 2s ease-in-out infinite',
+        }}
+      />
+      <div className="min-w-0 flex-1 text-right">
+        <div
+          className="text-[12.5px] font-semibold leading-tight"
+          style={{ color: isLive ? '#18181b' : '#71717a' }}
         >
-          <BrainGlyph size={12} color={isLive ? row.color : '#a1a1aa'} />
-        </span>
-        {!isLive && (
-          <span className="pointer-events-none absolute right-2 top-1/2 flex h-[18px] w-[18px] -translate-y-1/2 items-center justify-center rounded-full border border-dashed border-zinc-200 bg-zinc-100 text-[13px] leading-none text-zinc-500 transition-colors group-hover:border-solid group-hover:border-zinc-900 group-hover:bg-zinc-900 group-hover:text-white">
-            +
-          </span>
-        )}
+          {row.label}
+        </div>
+        <div className="mt-0.5 font-mono text-[10.5px] text-zinc-500">
+          {sub}
+        </div>
       </div>
+      <span
+        className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md"
+        style={{ background: isLive ? row.soft : '#f4f4f5' }}
+      >
+        <BrainGlyph size={12} color={isLive ? row.color : '#a1a1aa'} />
+      </span>
+      {!isLive && (
+        <span className="pointer-events-none absolute right-2 top-1/2 flex h-[18px] w-[18px] -translate-y-1/2 items-center justify-center rounded-full border border-dashed border-zinc-200 bg-zinc-100 text-[13px] leading-none text-zinc-500 transition-colors group-hover:border-solid group-hover:border-zinc-900 group-hover:bg-zinc-900 group-hover:text-white">
+          +
+        </span>
+      )}
     </div>
   )
 })
@@ -882,7 +878,7 @@ export default function EdfuRouterDiagram() {
         }
       `}</style>
 
-      <div className="relative flex flex-col overflow-hidden rounded-[14px] border border-zinc-200 bg-white p-6">
+      <div className="relative flex flex-col overflow-hidden bg-white p-6">
         {/* dotted background */}
         <svg className="pointer-events-none absolute inset-0 text-zinc-500 opacity-55" width="100%" height="100%" aria-hidden>
           <defs>
