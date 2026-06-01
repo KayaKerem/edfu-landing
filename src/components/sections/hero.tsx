@@ -5,6 +5,7 @@ import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
+import EdfuRouterDiagram from "@/components/mockups/edfu-router-diagram";
 
 function LayersIcon({ className }: { className?: string }) {
   return (
@@ -100,9 +101,9 @@ export function Hero({ dict, lang }: HeroProps) {
           </a>
         </motion.div>
 
-        {/* Browser Mockup */}
+        {/* Browser Mockup — hidden on mobile, visible from md (768px) up */}
         <motion.div
-          className="relative mt-16"
+          className="relative mt-16 hidden md:block"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.65 }}
@@ -128,7 +129,9 @@ export function Hero({ dict, lang }: HeroProps) {
             </div>
 
             {/* Content area */}
-            <div className="h-[300px] rounded-b-xl bg-gradient-to-br from-primary/10 via-primary/5 to-background sm:h-[400px]" />
+            <div className="overflow-hidden rounded-b-xl">
+              <EdfuRouterDiagram />
+            </div>
           </div>
         </motion.div>
       </div>
