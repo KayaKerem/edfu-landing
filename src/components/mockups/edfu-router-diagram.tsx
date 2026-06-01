@@ -514,9 +514,9 @@ const PlaybookNode = forwardRef<HTMLDivElement, PlaybookNodeProps>(function Play
           className="h-2 w-2 shrink-0 rounded-full"
           style={{
             background: isLive ? row.color : 'transparent',
-            border: isLive ? 'none' : '1.5px dashed #d4d4d8',
+              border: isLive ? 'none' : '1.5px dashed #d4d4d8',
             color: row.color,
-            animation: isLive ? 'edfu-dot-pulse 2s ease-in-out infinite' : undefined,
+            animation: 'edfu-dot-pulse 2s ease-in-out infinite',
           }}
         />
         <div className="min-w-0 flex-1 text-right">
