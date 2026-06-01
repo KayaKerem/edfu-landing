@@ -5,6 +5,7 @@ import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
+import EdfuRouterDiagram from "@/components/mockups/edfu-router-diagram";
 
 function LayersIcon({ className }: { className?: string }) {
   return (
@@ -128,7 +129,9 @@ export function Hero({ dict, lang }: HeroProps) {
             </div>
 
             {/* Content area */}
-            <div className="h-[300px] rounded-b-xl bg-gradient-to-br from-primary/10 via-primary/5 to-background sm:h-[400px]" />
+            <div className="overflow-hidden rounded-b-xl">
+              <EdfuRouterDiagram />
+            </div>
           </div>
         </motion.div>
       </div>
