@@ -87,6 +87,12 @@ const PROVIDERS: ProviderRow[] = [
     soft: '#e0f2fe',
     status: 'soon',
     description: "Kendi web sitenize gömeceğiniz sohbet widget'ı. Yakında.",
+    bullets: [
+      'Tek satır kod gömme',
+      'Marka renkleriyle özelleştir',
+      'Mobil uyumlu',
+      "Tüm playbook'lara bağlı",
+    ],
     icon: (
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#0ea5e9" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
         <circle cx="12" cy="12" r="9" />
@@ -102,6 +108,12 @@ const PROVIDERS: ProviderRow[] = [
     soft: '#dcfce7',
     status: 'soon',
     description: 'Resmi WhatsApp Business API. QR kod ile bağlan, template mesajlar.',
+    bullets: [
+      'Resmi WhatsApp Business API',
+      'Template & onaylı mesajlar',
+      'Toplu gönderim',
+      'Etiket & gruplama',
+    ],
     icon: (
       <svg viewBox="0 0 24 24" width="14" height="14" fill="#16a34a" aria-hidden>
         <path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1c-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.4.4-.5l.3-.5c.1-.2 0-.4 0-.5l-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2.1 3.2 5 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5c1.5.8 3.3 1.3 5.2 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z" />
@@ -115,6 +127,12 @@ const PROVIDERS: ProviderRow[] = [
     soft: '#dbeafe',
     status: 'soon',
     description: 'Telegram Bot API ile bağlan. Bot token üzerinden mesaj alıp gönder.',
+    bullets: [
+      'Bot token ile hızlı kurulum',
+      'Grup & kanal desteği',
+      'Inline keyboard akışları',
+      'Dosya & medya transferi',
+    ],
     icon: (
       <svg viewBox="0 0 24 24" width="14" height="14" fill="#229ED9" aria-hidden>
         <path d="M22 3L2 11l6 2 2 6 4-4 5 4 3-16zm-4 4l-9 8-1-1 10-7z" />
@@ -128,6 +146,12 @@ const PROVIDERS: ProviderRow[] = [
     soft: '#fef3c7',
     status: 'soon',
     description: 'IMAP/SMTP veya Google Workspace. Cevaplar threadte kalır.',
+    bullets: [
+      'IMAP/SMTP & Google Workspace',
+      'Thread takibi & yanıtlama',
+      'Otomatik etiketleme',
+      'Spam filtreleme',
+    ],
     icon: (
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#a16207" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
         <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -142,6 +166,12 @@ const PROVIDERS: ProviderRow[] = [
     soft: '#fce7f3',
     status: 'soon',
     description: "Instagram DM'lerini ekibinin gelen kutusuna bağla. Meta hesabıyla giriş.",
+    bullets: [
+      'DM otomasyonu',
+      'Story mention takibi',
+      'Yorumlardan lead toplama',
+      'Reels & post etkileşimi',
+    ],
     icon: (
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#E4405F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
         <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -157,6 +187,12 @@ const PROVIDERS: ProviderRow[] = [
     soft: '#dbeafe',
     status: 'soon',
     description: 'Facebook/Instagram lead reklamlarındaki form gönderimlerini al.',
+    bullets: [
+      'Lead form gerçek zamanlı sync',
+      'Webhook ile anında bildirim',
+      'Özel form alanları',
+      'CRM entegrasyonu',
+    ],
     icon: (
       <svg viewBox="0 0 24 24" width="14" height="14" fill="#1877F2" aria-hidden>
         <path d="M22 12c0-5.5-4.5-10-10-10S2 6.5 2 12c0 5 3.7 9.1 8.4 9.9V15h-2.5v-3h2.5V9.8c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.5 3h-2.3v6.9C18.3 21.1 22 17 22 12z" />
@@ -372,15 +408,16 @@ const ProviderNode = forwardRef<HTMLDivElement, ProviderNodeProps>(function Prov
   const isDraft = row.status === 'draft'
 
   const wrapperStyle: CSSProperties = {
-    cursor: isSoon ? 'not-allowed' : 'pointer',
-    opacity: isSoon ? 0.65 : 1,
+    cursor: isSoon ? 'help' : 'pointer',
   }
 
   const nodeBorder = selected
     ? 'border-zinc-900 shadow-[0_0_0_3px_#f4f4f5] bg-white'
     : isDraft
       ? 'border-zinc-200 border-dashed bg-transparent group-hover:border-solid group-hover:border-zinc-700 group-hover:bg-zinc-100'
-      : 'border-zinc-200 bg-white'
+      : isSoon
+        ? 'border-zinc-200 border-dashed bg-white group-hover:border-solid group-hover:border-zinc-500 group-hover:bg-zinc-50'
+        : 'border-zinc-200 bg-white'
 
   return (
     <div
@@ -388,16 +425,15 @@ const ProviderNode = forwardRef<HTMLDivElement, ProviderNodeProps>(function Prov
       style={wrapperStyle}
       className="group relative rounded-[10px] transition-transform hover:-translate-y-px"
       onClick={isSoon ? undefined : onClick}
-      onMouseEnter={isSoon ? undefined : onMouseEnter}
-      onMouseLeave={isSoon ? undefined : onMouseLeave}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       title={isSoon ? 'Backend altyapısı yok — yakında' : undefined}
     >
       <div className={`relative flex items-center gap-2.5 rounded-[9px] border px-3 py-[9px] transition-colors ${nodeBorder}`}>
         <span
           className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md"
           style={{
-            background: isLive ? row.soft : '#f4f4f5',
-            opacity: isSoon ? 0.5 : 1,
+            background: isLive || isSoon ? row.soft : '#f4f4f5',
           }}
         >
           {row.icon}
@@ -425,17 +461,16 @@ const ProviderNode = forwardRef<HTMLDivElement, ProviderNodeProps>(function Prov
             {isSoon ? '// backend hazır olduğunda açılır' : '// bağla'}
           </div>
         </div>
-        {!isSoon &&
-          (isLive ? (
-            <span
-              className="h-2 w-2 shrink-0 rounded-full"
-              style={{ background: row.brand, color: row.brand, animation: 'edfu-dot-pulse 2s ease-in-out infinite' }}
-            />
-          ) : (
-            <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full border border-dashed border-zinc-200 bg-zinc-100 text-[13px] leading-none text-zinc-500 transition-colors group-hover:border-solid group-hover:border-zinc-900 group-hover:bg-zinc-900 group-hover:text-white">
-              +
-            </span>
-          ))}
+        {isLive ? (
+          <span
+            className="h-2 w-2 shrink-0 rounded-full"
+            style={{ background: row.brand, color: row.brand, animation: 'edfu-dot-pulse 2s ease-in-out infinite' }}
+          />
+        ) : (
+          <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full border border-dashed border-zinc-200 bg-zinc-100 text-[13px] leading-none text-zinc-500 transition-colors group-hover:border-solid group-hover:border-zinc-900 group-hover:bg-zinc-900 group-hover:text-white">
+            +
+          </span>
+        )}
       </div>
     </div>
   )
@@ -517,12 +552,15 @@ const PlaybookNode = forwardRef<HTMLDivElement, PlaybookNodeProps>(function Play
 
 function ProviderHoverCard({ row }: { row: ProviderRow }) {
   const isLive = row.status === 'live'
+  const isSoon = row.status === 'soon'
   const isEdfu = row.id === 'EDFU_LINK'
   const statusLabel = isLive
     ? '● Bağlı'
-    : row.status === 'configuring'
-      ? '○ Kuruluyor'
-      : '○ Boş — bağlanmamış'
+    : isSoon
+      ? '○ Yakında'
+      : row.status === 'configuring'
+        ? '○ Kuruluyor'
+        : '○ Boş — bağlanmamış'
 
   return (
     <div
@@ -570,12 +608,17 @@ function ProviderHoverCard({ row }: { row: ProviderRow }) {
           ))}
         </ul>
       )}
-      {!isLive && !isEdfu && (
+      {!isLive && !isEdfu && !isSoon && (
         <div
           className="mx-3 mb-3 rounded-md border border-dashed px-2.5 py-2 text-center text-[11.5px] font-medium tracking-[0.01em]"
           style={{ borderColor: row.brand, color: row.brand }}
         >
           → Bağlamak için tıkla
+        </div>
+      )}
+      {isSoon && (
+        <div className="mx-3 mb-3 rounded-md border border-dashed border-zinc-200 bg-zinc-50 px-2.5 py-2 text-center font-mono text-[10.5px] tracking-[0.04em] text-zinc-500">
+          // backend hazır olduğunda açılır
         </div>
       )}
     </div>
