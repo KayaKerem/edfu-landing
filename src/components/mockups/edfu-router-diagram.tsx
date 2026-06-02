@@ -19,6 +19,7 @@ import {
   type CSSProperties,
   type ReactNode,
 } from 'react'
+import { Brain } from 'lucide-react'
 
 // ──────────────────────────────────────────────────────────────────────────
 // Mock data
@@ -26,7 +27,6 @@ import {
 
 type ProviderId =
   | 'EDFU_LINK'
-  | 'WEB'
   | 'WHATSAPP'
   | 'TELEGRAM'
   | 'EMAIL'
@@ -40,8 +40,14 @@ interface ProviderRow {
   soft: string
   status: 'live' | 'soon' | 'draft' | 'configuring'
   builtin?: boolean
+  /** True when this provider has a click-through mock setup panel on the right. */
+  clickable?: boolean
   description: string
   bullets?: string[]
+  /** Setup fields shown in the right-side detail panel when clicked. */
+  setupFields?: { label: string; value: string; mono?: boolean }[]
+  /** Primary action label on the detail panel. */
+  primaryAction?: string
   icon: ReactNode
 }
 
@@ -65,6 +71,7 @@ const PROVIDERS: ProviderRow[] = [
     soft: '#ede9fe',
     status: 'draft',
     builtin: true,
+    clickable: true,
     description:
       'Hesabınla birlikte gelir, hep bağlı kalır. chat.edfu.ai/seninhesabin adresini müşterilere verirsin, doğrudan sohbet açılır.',
     bullets: [
@@ -73,32 +80,20 @@ const PROVIDERS: ProviderRow[] = [
       "Tüm playbook'lara bağlı",
       'Marka rengiyle özelleştir',
     ],
-    icon: (
-      <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden>
-        <rect width="24" height="24" rx="6" fill="#0a0a0a" />
-        <path d="M9 8l6 4-6 4V8z" fill="#fff" />
-      </svg>
-    ),
-  },
-  {
-    id: 'WEB',
-    label: 'Web',
-    brand: '#0ea5e9',
-    soft: '#e0f2fe',
-    status: 'soon',
-    description: "Kendi web sitenize gömeceğiniz sohbet widget'ı. Yakında.",
-    bullets: [
-      'Tek satır kod gömme',
-      'Marka renkleriyle özelleştir',
-      'Mobil uyumlu',
-      "Tüm playbook'lara bağlı",
+    setupFields: [
+      { label: 'Sohbet linki', value: 'chat.edfu.ai/seninhesabin', mono: true },
+      { label: 'Marka rengi', value: '#266DF0', mono: true },
+      { label: 'Karşılama mesajı', value: 'Merhaba! Size nasıl yardımcı olabilirim?' },
+      { label: 'Bağlı playbook', value: 'Satış · Destek · Yenileme' },
     ],
+    primaryAction: 'Linki kopyala',
     icon: (
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#0ea5e9" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M3 12h18" />
-        <path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18" />
-      </svg>
+      <>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/brand/logos/monokrom-ink.svg" alt="Edfu" className="block h-3.5 w-3.5 object-contain dark:hidden" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/brand/logos/monokrom-white.svg" alt="" aria-hidden="true" className="hidden h-3.5 w-3.5 object-contain dark:block" />
+      </>
     ),
   },
   {
@@ -106,7 +101,8 @@ const PROVIDERS: ProviderRow[] = [
     label: 'WhatsApp',
     brand: '#16a34a',
     soft: '#dcfce7',
-    status: 'soon',
+    status: 'draft',
+    clickable: true,
     description: 'Resmi WhatsApp Business API. QR kod ile bağlan, template mesajlar.',
     bullets: [
       'Resmi WhatsApp Business API',
@@ -114,9 +110,44 @@ const PROVIDERS: ProviderRow[] = [
       'Toplu gönderim',
       'Etiket & gruplama',
     ],
+    setupFields: [
+      { label: 'Telefon numarası', value: '+90 555 123 45 67', mono: true },
+      { label: 'Hesap adı', value: 'Firma Destek', mono: false },
+      { label: 'Template mesaj', value: '12 onaylı', mono: false },
+      { label: 'Doğrulama', value: 'Meta Business onaylı', mono: false },
+    ],
+    primaryAction: 'QR kod oluştur',
     icon: (
       <svg viewBox="0 0 24 24" width="14" height="14" fill="#16a34a" aria-hidden>
-        <path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1c-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.4.4-.5l.3-.5c.1-.2 0-.4 0-.5l-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2.1 3.2 5 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5c1.5.8 3.3 1.3 5.2 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z" />
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      </svg>
+    ),
+  },
+    {
+    id: 'EMAIL',
+    label: 'E-posta',
+    brand: '#a16207',
+    soft: '#fef3c7',
+    status: 'draft',
+    clickable: true,
+    description: 'IMAP/SMTP veya Google Workspace. Cevaplar threadte kalır.',
+    bullets: [
+      'IMAP/SMTP & Google Workspace',
+      'Thread takibi & yanıtlama',
+      'Otomatik etiketleme',
+      'Spam filtreleme',
+    ],
+    setupFields: [
+      { label: 'Hesap', value: 'destek@firmaniz.com', mono: true },
+      { label: 'Sunucu', value: 'IMAP / SMTP', mono: true },
+      { label: 'Cevap süresi', value: '< 2 dakika (ortalama)', mono: false },
+      { label: 'Bağlı thread', value: '142 aktif konuşma', mono: false },
+    ],
+    primaryAction: 'Bağlantıyı test et',
+    icon: (
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#a16207" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <rect width="20" height="16" x="2" y="4" rx="2" />
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
       </svg>
     ),
   },
@@ -134,31 +165,13 @@ const PROVIDERS: ProviderRow[] = [
       'Dosya & medya transferi',
     ],
     icon: (
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="#229ED9" aria-hidden>
-        <path d="M22 3L2 11l6 2 2 6 4-4 5 4 3-16zm-4 4l-9 8-1-1 10-7z" />
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#229ED9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M22 2 11 13" />
+        <path d="m22 2-7 20-4-9-9-4 20-7z" />
       </svg>
     ),
   },
-  {
-    id: 'EMAIL',
-    label: 'E-posta',
-    brand: '#a16207',
-    soft: '#fef3c7',
-    status: 'soon',
-    description: 'IMAP/SMTP veya Google Workspace. Cevaplar threadte kalır.',
-    bullets: [
-      'IMAP/SMTP & Google Workspace',
-      'Thread takibi & yanıtlama',
-      'Otomatik etiketleme',
-      'Spam filtreleme',
-    ],
-    icon: (
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#a16207" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-        <rect x="3" y="5" width="18" height="14" rx="2" />
-        <path d="M3 7l9 6 9-6" />
-      </svg>
-    ),
-  },
+
   {
     id: 'INSTAGRAM',
     label: 'Instagram',
@@ -173,10 +186,17 @@ const PROVIDERS: ProviderRow[] = [
       'Reels & post etkileşimi',
     ],
     icon: (
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#E4405F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-        <rect x="3" y="3" width="18" height="18" rx="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="0.6" fill="#E4405F" />
+      <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden>
+        <defs>
+          <linearGradient id="edfu-ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#FFDC80" />
+            <stop offset="25%" stopColor="#F77737" />
+            <stop offset="50%" stopColor="#E1306C" />
+            <stop offset="75%" stopColor="#C13584" />
+            <stop offset="100%" stopColor="#833AB4" />
+          </linearGradient>
+        </defs>
+        <path fill="url(#edfu-ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
       </svg>
     ),
   },
@@ -195,7 +215,7 @@ const PROVIDERS: ProviderRow[] = [
     ],
     icon: (
       <svg viewBox="0 0 24 24" width="14" height="14" fill="#1877F2" aria-hidden>
-        <path d="M22 12c0-5.5-4.5-10-10-10S2 6.5 2 12c0 5 3.7 9.1 8.4 9.9V15h-2.5v-3h2.5V9.8c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.5 3h-2.3v6.9C18.3 21.1 22 17 22 12z" />
+        <path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a4.892 4.892 0 00.825 1.736c.461.577 1.09.924 1.84.924 1.17 0 2.139-.693 2.987-1.743.85-1.05 1.597-2.49 2.235-4.12l.263-.672c.456-1.166.975-2.137 1.555-2.854.59-.73 1.247-1.163 1.976-1.163 1.095 0 1.964.809 2.602 2.106.636 1.288 1.005 3.063 1.005 5.233 0 1.12-.114 2.09-.343 2.86a3.786 3.786 0 01-.888 1.635A2.044 2.044 0 0113.2 21.5l-.606-.1a3.27 3.27 0 01-.855-.32c-.246-.15-.364-.376-.364-.678a1.895 1.895 0 01.295-.984c.2-.32.452-.594.755-.82l.182-.138c-.644-.105-1.184-.4-1.607-.886-.413-.473-.7-1.063-.853-1.718a7.8 7.8 0 01-.22-1.874c0-1.122.15-2.395.567-3.528.412-1.117 1.067-2.058 1.983-2.558a2.61 2.61 0 00-1.282-.312c-.973 0-1.825.593-2.53 1.497-.71.91-1.28 2.167-1.704 3.555l-.217.705c-.593 1.93-1.226 3.464-1.948 4.51C4.123 18.819 3.34 19.5 2.413 19.5c-.878 0-1.594-.547-2.059-1.4-.44-.806-.667-1.87-.667-3.101 0-2.86.776-5.771 2.179-7.9C3.323 5.029 5.076 4.03 6.915 4.03z" />
       </svg>
     ),
   },
@@ -294,11 +314,7 @@ interface PathSpec {
 // ──────────────────────────────────────────────────────────────────────────
 
 function BrainGlyph({ size = 14, color = '#fff' }: { size?: number; color?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M9.5 3a3 3 0 0 0-3 3v1a3 3 0 0 0-2 2.8V12a3 3 0 0 0 2 2.8V17a3 3 0 0 0 5 2.6A3 3 0 0 0 17 17v-2.2a3 3 0 0 0 2-2.8V9.8a3 3 0 0 0-2-2.8V6a3 3 0 0 0-3-3 3 3 0 0 0-2.5 1.3A3 3 0 0 0 9.5 3z" />
-    </svg>
-  )
+  return <Brain size={size} color={color} aria-hidden />
 }
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -406,25 +422,24 @@ const ProviderNode = forwardRef<HTMLDivElement, ProviderNodeProps>(function Prov
   const isLive = row.status === 'live'
   const isSoon = row.status === 'soon'
   const isDraft = row.status === 'draft'
+  const isClickable = !!row.clickable || isLive || isDraft
 
   const wrapperStyle: CSSProperties = {
-    cursor: isSoon ? 'help' : 'pointer',
+    cursor: isClickable ? 'pointer' : 'default',
   }
 
   const nodeBorder = selected
     ? 'border-zinc-900 shadow-[0_0_0_3px_#f4f4f5] bg-white'
-    : isDraft
+    : isDraft || isSoon
       ? 'border-zinc-200 border-dashed bg-transparent group-hover:border-solid group-hover:border-zinc-700 group-hover:bg-zinc-100'
-      : isSoon
-        ? 'border-zinc-200 border-dashed bg-white group-hover:border-solid group-hover:border-zinc-500 group-hover:bg-zinc-50'
-        : 'border-zinc-200 bg-white'
+      : 'border-zinc-200 bg-white'
 
   return (
     <div
       ref={ref}
       style={wrapperStyle}
-      className={`group relative flex items-center gap-2.5 rounded-[9px] border px-3 py-[9px] transition-all hover:-translate-y-px ${nodeBorder}`}
-      onClick={isSoon ? undefined : onClick}
+      className={`group relative flex min-h-[58px] items-center gap-2.5 rounded-[9px] border px-3 py-[9px] transition-all hover:-translate-y-px ${nodeBorder}`}
+      onClick={isClickable ? onClick : undefined}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       title={isSoon ? 'Backend altyapısı yok — yakında' : undefined}
@@ -432,7 +447,7 @@ const ProviderNode = forwardRef<HTMLDivElement, ProviderNodeProps>(function Prov
       <span
         className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md"
         style={{
-          background: isLive || isSoon ? row.soft : '#f4f4f5',
+          background: row.soft,
         }}
       >
         {row.icon}
@@ -445,7 +460,7 @@ const ProviderNode = forwardRef<HTMLDivElement, ProviderNodeProps>(function Prov
           >
             {row.label}
           </span>
-          {row.builtin && (
+          {row.clickable && (
             <span className="rounded-[3px] border border-zinc-200 bg-zinc-100 px-[5px] py-px font-mono text-[9.5px] tracking-[0.04em] text-zinc-500">
               hazır
             </span>
@@ -457,7 +472,7 @@ const ProviderNode = forwardRef<HTMLDivElement, ProviderNodeProps>(function Prov
           )}
         </div>
         <div className="mt-0.5 font-mono flex justify-start text-start text-[10.5px] text-zinc-500">
-          {isSoon ? '// backend hazır olduğunda açılır' : '// bağla'}
+          {isSoon ? '' : '// bağla'}
         </div>
       </div>
       {isLive ? (
@@ -614,7 +629,7 @@ function ProviderHoverCard({ row }: { row: ProviderRow }) {
       )}
       {isSoon && (
         <div className="mx-3 mb-3 rounded-md border border-dashed border-zinc-200 bg-zinc-50 px-2.5 py-2 text-center font-mono text-[10.5px] tracking-[0.04em] text-zinc-500">
-          // backend hazır olduğunda açılır
+          
         </div>
       )}
     </div>
@@ -892,7 +907,7 @@ export default function EdfuRouterDiagram() {
         {/* flow grid */}
         <div
           ref={stageRef}
-          className="relative z-[2] grid min-h-[360px] flex-1 items-center gap-x-8"
+          className="relative z-[2] grid min-h-[540px] -mt-14 flex-1 items-center gap-x-8"
           style={{ gridTemplateColumns: 'minmax(180px,1fr) 240px minmax(180px,1fr)' }}
         >
           {/* SVG paths layer */}
