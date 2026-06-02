@@ -89,6 +89,7 @@ export function MeetingBento({ dict }: { dict: BentoDict }) {
       <div className="grid grid-cols-12">
         <header className="col-span-12 md:col-[2/-2] px-6 md:px-0 pt-[60px] pb-[40px] max-xl:pt-16 max-xl:pb-8 max-lg:pt-12 max-lg:pb-6 max-md:pt-8 max-md:pb-4">
           <div className="max-w-[36em]">
+            <div className="app-eyebrow mb-3">{'// TOPLANTI ASİSTANI'}</div>
             <h2 className="inline text-pretty text-[24px] sm:text-[28px] lg:text-[32px] xl:text-[36px] font-semibold leading-snug tracking-[-0.045em] text-foreground">
               {dict.headerTitle}
             </h2>{" "}

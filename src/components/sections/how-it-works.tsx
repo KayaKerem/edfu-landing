@@ -68,15 +68,15 @@ export function HowItWorks({ dict }: HowItWorksProps) {
                     key={index}
                     className={`relative transition-all duration-300 ${
                       isActive
-                        ? "bg-card rounded-lg shadow-[0px_0px_1px_0px_rgba(0,0,0,0.16),0px_1px_2px_-0.5px_rgba(0,0,0,0.16)] dark:shadow-[0px_0px_0px_1px_rgba(249,250,251,0.06),0px_0px_0px_1px_#27272A,0px_1px_2px_-0.5px_rgba(0,0,0,0.24),0px_2px_4px_-1px_rgba(0,0,0,0.24)]"
+                        ? "bg-ds-panel rounded-[10px] border border-ds-line shadow-[var(--ds-shadow-sm)]"
                         : ""
                     }`}
                   >
                     {/* Title button */}
                     <button
                       onClick={() => handleClick(index)}
-                      className="flex h-[45px] flex-1 w-full cursor-pointer items-center justify-between p-3 font-semibold text-lg tracking-tight text-left"
-                                         >
+                      className="flex h-[45px] flex-1 w-full cursor-pointer items-center justify-between p-3 font-semibold text-[15px] tracking-tight text-left"
+                    >
                       {step.title}
                     </button>
 
@@ -88,7 +88,7 @@ export function HowItWorks({ dict }: HowItWorksProps) {
                       }}
                     >
                       <div className="overflow-hidden">
-                        <p className="text-sm font-medium p-3 pt-0">
+                        <p className="text-[13px] font-medium p-3 pt-0 text-ds-ink-2">
                           {step.description}
                         </p>
                       </div>
@@ -115,7 +115,7 @@ export function HowItWorks({ dict }: HowItWorksProps) {
 
           {/* Right visual */}
           <div className="col-span-1 h-[280px] sm:h-[350px] min-h-[200px] w-auto lg:col-span-3">
-            <div className="relative h-full w-full overflow-hidden rounded-xl border border-neutral-300/50 p-1">
+            <div className="relative h-full w-full overflow-hidden rounded-[10px] border border-ds-line p-1">
               <div className="flex h-full w-full items-center justify-center">
                 {steps.map((step, index) => (
                   <span
@@ -144,8 +144,8 @@ export function HowItWorks({ dict }: HowItWorksProps) {
                   onClick={() => handleClick(index)}
                   className="relative grid h-full min-w-[280px] max-w-[300px] shrink-0 items-start justify-center p-4 bg-background border-l last:border-r border-t border-b border-border first:rounded-tl-xl last:rounded-tr-xl snap-start cursor-pointer text-left"
                 >
-                  <h3 className="text-base font-bold">{step.title}</h3>
-                  <p className="text-sm font-medium leading-relaxed text-muted-foreground">
+                  <h3 className="text-[15px] font-semibold tracking-tight">{step.title}</h3>
+                  <p className="text-[13px] font-medium leading-relaxed text-ds-ink-2">
                     {step.description}
                   </p>
 

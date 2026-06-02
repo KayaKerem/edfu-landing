@@ -67,10 +67,10 @@ export function Footer({ dict, lang }: FooterProps) {
           {/* Link columns */}
           {dict.columns.map((col, colIdx) => (
             <div key={col.heading}>
-              <h4 className="font-heading font-bold text-sm mb-4">
+              <h4 className="app-eyebrow mb-4">
                 {col.heading}
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {col.links.map((link, linkIdx) => {
                   const route = routesByPosition[`${colIdx}-${linkIdx}`];
                   return (
@@ -78,12 +78,12 @@ export function Footer({ dict, lang }: FooterProps) {
                       {route ? (
                         <Link
                           href={route}
-                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                          className="text-[13px] text-muted-foreground hover:text-foreground transition-colors duration-[120ms]"
                         >
                           {link}
                         </Link>
                       ) : (
-                        <span className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-default">
+                        <span className="text-[13px] text-muted-foreground hover:text-foreground transition-colors duration-[120ms] cursor-default">
                           {link}
                         </span>
                       )}

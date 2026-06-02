@@ -193,17 +193,17 @@ export function Navbar({ dict, lang }: NavbarProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              className="mt-2 rounded-2xl border border-border bg-background/95 backdrop-blur-lg md:hidden"
+              className="mt-2 rounded-xl border border-border bg-background/95 backdrop-blur-lg md:hidden"
             >
-              <nav className="flex flex-col gap-1 p-4">
+              <nav className="flex flex-col gap-1 p-3">
                 {navLinks.map((link) => (
                   <Link
                     key={link.routeId}
                     href={link.href}
-                    className={`rounded-xl px-4 py-2.5 text-sm font-medium transition-colors ${
+                    className={`rounded-md px-3 py-2 text-[13px] font-medium transition-[background,color] duration-[120ms] ${
                       currentRoute === link.routeId
-                        ? "bg-accent text-foreground"
-                        : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                        ? "bg-ds-hover text-foreground"
+                        : "text-muted-foreground hover:bg-ds-hover hover:text-foreground"
                     }`}
                   >
                     {link.label}

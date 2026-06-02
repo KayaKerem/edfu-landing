@@ -271,6 +271,7 @@ export function Pricing({ dict, billing: externalBilling, onBillingChange }: Pri
     <div className={styles.root}>
       {/* Hero */}
       <div className={styles.hero}>
+        <div className="app-eyebrow mb-3">{'// FİYATLANDIRMA'}</div>
         <h1 className={styles.headline}>{dict.title}</h1>
         <p className={styles.subtitle}>{dict.description}</p>
         <BillingToggle billing={billing} setBilling={setBilling} saveLabel={dict.discount} />

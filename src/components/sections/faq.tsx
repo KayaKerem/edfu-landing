@@ -41,6 +41,7 @@ export function FAQ({ dict }: FAQProps) {
         }}
       >
         <div>
+          <div className="app-eyebrow mb-3">{'// SIKÇA SORULANLAR'}</div>
           <h2
             style={{
               fontSize: "clamp(28px, 4vw, 36px)",

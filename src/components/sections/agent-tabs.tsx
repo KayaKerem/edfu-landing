@@ -85,14 +85,14 @@ export function AgentTabs({ tabs, mockupsDict }: AgentTabsProps) {
               >
                 {tabs[activeTab].title}
               </h3>
-              <p className="mt-4 text-base text-muted-foreground leading-relaxed">
+              <p className="mt-4 text-[15px] text-muted-foreground leading-relaxed">
                 {tabs[activeTab].description}
               </p>
-              <ul className="mt-6 space-y-3">
+              <ul className="mt-6 space-y-2.5">
                 {tabs[activeTab].features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm text-foreground">
-                    <span className="size-5 rounded-full border border-primary/20 flex items-center justify-center shrink-0">
-                      <Check className="size-3 text-primary" strokeWidth={2.5} />
+                  <li key={i} className="flex items-center gap-2.5 text-[13px] text-foreground">
+                    <span className="size-[18px] rounded-full border border-ds-line bg-ds-hover flex items-center justify-center shrink-0">
+                      <Check className="size-3 text-ds-ink" strokeWidth={2.5} />
                     </span>
                     {feature}
                   </li>
