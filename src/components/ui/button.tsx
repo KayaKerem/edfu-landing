@@ -20,6 +20,19 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        /**
+         * Edfu app-style button variants — mirror `.ch-btn` in
+         * ai-rag-ui-template/src/features/channels/channels.css.
+         * Use these inside product mockups and feature illustrations so the
+         * visual identity matches the actual app. Pair with `size="app"`.
+         */
+        app: "rounded-md border border-ds-line bg-ds-panel text-ds-ink hover:bg-ds-hover transition-[background,border-color,color] duration-[120ms]",
+        "app-primary":
+          "rounded-md border border-ds-ink bg-ds-ink text-ds-bg hover:opacity-90 transition-opacity duration-[120ms]",
+        "app-ghost":
+          "rounded-md border border-transparent bg-transparent text-ds-ink-2 hover:bg-ds-hover transition-[background,color] duration-[120ms]",
+        "app-danger":
+          "rounded-md border border-ds-rose-border bg-ds-rose-soft text-ds-rose hover:opacity-90 transition-opacity duration-[120ms]",
       },
       size: {
         default:
@@ -33,6 +46,10 @@ const buttonVariants = cva(
         "icon-sm":
           "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
         "icon-lg": "size-9",
+        /** App-size variants — match `.ch-btn` heights (30px / 24px / 30px square). */
+        app: "h-[30px] gap-1.5 px-2.5 text-[12.5px]",
+        "app-sm": "h-6 gap-1 px-2 text-[11.5px] [&_svg:not([class*='size-'])]:size-3",
+        "app-icon": "size-[30px] p-0 justify-center",
       },
     },
     defaultVariants: {

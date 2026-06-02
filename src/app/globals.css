@@ -40,6 +40,31 @@
   --color-accent-blue: var(--accent-blue);
   --shadow-float: var(--shadow-float);
 
+  /* Edfu app surface tokens (mockups, demo cards, feature illustrations) */
+  --color-ds-page: var(--ds-page);
+  --color-ds-bg: var(--ds-bg);
+  --color-ds-panel: var(--ds-panel);
+  --color-ds-ink: var(--ds-ink);
+  --color-ds-ink-2: var(--ds-ink-2);
+  --color-ds-muted: var(--ds-muted);
+  --color-ds-muted-2: var(--ds-muted-2);
+  --color-ds-line: var(--ds-line);
+  --color-ds-line-2: var(--ds-line-2);
+  --color-ds-hover: var(--ds-hover);
+  --color-ds-accent: var(--ds-accent);
+  --color-ds-accent-soft: var(--ds-accent-soft);
+  --color-ds-green: var(--ds-green);
+  --color-ds-green-soft: var(--ds-green-soft);
+  --color-ds-amber: var(--ds-amber);
+  --color-ds-amber-soft: var(--ds-amber-soft);
+  --color-ds-rose: var(--ds-rose);
+  --color-ds-rose-soft: var(--ds-rose-soft);
+  --color-ds-rose-border: var(--ds-rose-border);
+  --color-ds-violet: var(--ds-violet);
+  --color-ds-blue-soft: var(--ds-blue-soft);
+  --shadow-ds-sm: var(--ds-shadow-sm);
+  --shadow-ds: var(--ds-shadow);
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-geist: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -162,6 +187,39 @@
   --dur-lg: 560ms;
   --ease-out: cubic-bezier(0.2, 0, 0, 1);
   --ease-spring: cubic-bezier(0.2, 1.2, 0.3, 1);
+
+  /* === Edfu app design system tokens (--ds-*) — light values ===
+   * Mirrors src/app/globals.css from ai-rag-ui-template. Used by the
+   * "app-style" surface layer (mockups, demo components, feature illustrations)
+   * to keep visual identity consistent with the actual product.
+   * Marketing layer (hero CTA, navbar pills, gradient backgrounds) uses the
+   * --brand-* tokens above. */
+  --ds-page: #efeeec;
+  --ds-bg: #fafaf9;
+  --ds-panel: #ffffff;
+  --ds-ink: #18181b;
+  --ds-ink-2: #3f3f46;
+  --ds-muted: #71717a;
+  --ds-muted-2: #a1a1aa;
+  --ds-line: #e4e4e7;
+  --ds-line-2: #f1f1f0;
+  --ds-hover: #f4f4f5;
+  --ds-accent: #2563eb;
+  --ds-accent-soft: #eff6ff;
+  --ds-green: #16a34a;
+  --ds-green-soft: #ecfdf5;
+  --ds-amber: #f59e0b;
+  --ds-amber-soft: #fffbeb;
+  --ds-rose: #e11d48;
+  --ds-rose-soft: #fff1f2;
+  --ds-rose-border: #fecdd3;
+  --ds-violet: #266DF0;
+  --ds-blue-soft: #eff6ff;
+  --ds-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, monospace;
+  --ds-shadow-sm: 0 1px 0 rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.04);
+  --ds-shadow: 0 1px 0 rgba(0,0,0,0.02), 0 8px 24px -8px rgba(0,0,0,0.10);
+  --ds-ease-app: cubic-bezier(0.2, 0, 0, 1);
+  --ds-ease-pop: cubic-bezier(0.34, 1.2, 0.64, 1);
 }
 
 .dark {
@@ -200,6 +258,110 @@
   --text-fade: var(--brand-muted-2);
   --accent-blue: var(--brand-blue-3);
   --shadow-float: 0 20px 50px -8px rgb(0 0 0 / 0.4), 0 4px 16px -2px rgb(0 0 0 / 0.3);
+
+  /* === Edfu app design system tokens (--ds-*) — dark values === */
+  --ds-page: #050507;
+  --ds-bg: #0b0b0d;
+  --ds-panel: #0b0b0d;
+  --ds-ink: #fafafa;
+  --ds-ink-2: #d4d4d8;
+  --ds-muted: #a1a1aa;
+  --ds-muted-2: #71717a;
+  --ds-line: #2a2a2e;
+  --ds-line-2: #1f1f23;
+  --ds-hover: #1a1a1f;
+  --ds-accent: #3b82f6;
+  --ds-accent-soft: rgba(59, 130, 246, 0.12);
+  --ds-green: #22c55e;
+  --ds-green-soft: rgba(34, 197, 94, 0.10);
+  --ds-amber: #f59e0b;
+  --ds-amber-soft: rgba(245, 158, 11, 0.10);
+  --ds-rose: #f43f5e;
+  --ds-rose-soft: rgba(244, 63, 94, 0.10);
+  --ds-rose-border: rgba(244, 63, 94, 0.40);
+  --ds-violet: #266DF0;
+  --ds-blue-soft: rgba(38, 109, 240, 0.10);
+  --ds-shadow-sm: 0 1px 0 rgba(0,0,0,0.20), 0 1px 2px rgba(0,0,0,0.30);
+  --ds-shadow: 0 1px 0 rgba(0,0,0,0.20), 0 8px 24px -8px rgba(0,0,0,0.40);
+}
+
+@layer components {
+  /* ──────────────────────────────────────────────────────────────────
+   * Edfu app surface primitives
+   * Mirror the visual vocabulary of the actual product (channels.css,
+   * playbook.css, inbox components). Apply these to mockup/demo content
+   * for visual continuity with the app. Marketing surfaces (hero CTA,
+   * gradient sections, navbar pills) keep their own --brand-* styling.
+   * ────────────────────────────────────────────────────────────────── */
+
+  /** Card — `.ch-card` analog. 1px border + 10px radius + panel bg, no shadow. */
+  .app-card {
+    background: var(--ds-panel);
+    border: 1px solid var(--ds-line);
+    border-radius: 10px;
+  }
+
+  /** Subtle elevated card — adds the ds-shadow-sm hair-line shadow. */
+  .app-card-raised {
+    background: var(--ds-panel);
+    border: 1px solid var(--ds-line);
+    border-radius: 10px;
+    box-shadow: var(--ds-shadow-sm);
+  }
+
+  /** Chip — `.ch-chip` analog. 22px tall pill, 11px font, 1px border. */
+  .app-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 22px;
+    padding: 0 8px;
+    border-radius: 999px;
+    border: 1px solid var(--ds-line);
+    background: var(--ds-panel);
+    color: var(--ds-ink-2);
+    font-size: 11px;
+    white-space: nowrap;
+    line-height: 1;
+  }
+  .app-chip-green { background: var(--ds-green-soft); color: var(--ds-green); border-color: rgba(34,197,94,0.30); }
+  .app-chip-amber { background: var(--ds-amber-soft); color: var(--ds-amber); border-color: rgba(245,158,11,0.30); }
+  .app-chip-rose  { background: var(--ds-rose-soft);  color: var(--ds-rose);  border-color: var(--ds-rose-border); }
+  .app-chip-gray  { background: var(--ds-hover);      color: var(--ds-ink-2); border-color: var(--ds-line); }
+  /** Chip dot — 6px circle prefix, used like `.ch-chip.dot::before`. */
+  .app-chip-dot::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--ds-muted);
+    flex-shrink: 0;
+  }
+  .app-chip-green.app-chip-dot::before { background: var(--ds-green); }
+  .app-chip-amber.app-chip-dot::before { background: var(--ds-amber); }
+  .app-chip-rose.app-chip-dot::before  { background: var(--ds-rose); }
+
+  /** Mono eyebrow label — `// SECTION` pattern. */
+  .app-eyebrow {
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--ds-muted);
+    text-transform: uppercase;
+  }
+  /** Mono inline sub-text (lowercase, used for // X kural style). */
+  .app-mono-sub {
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--ds-muted);
+  }
+
+  /** Dashed placeholder border — used for empty/coming-soon states. */
+  .app-placeholder {
+    border: 1.5px dashed var(--ds-line);
+    background: transparent;
+  }
 }
 
 @layer base {

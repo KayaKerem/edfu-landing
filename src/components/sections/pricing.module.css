@@ -221,20 +221,23 @@
 }
 
 /* ── Single plan card ── */
+/* App-style: 10px radius, 1px line border, hair-line shadow. Mirrors
+ * the .ch-card / .app-card primitive used across the actual product. */
 .card {
-  border-radius: 12px;
-  border: 1px solid var(--pricing-border);
-  background: var(--pricing-card-surface);
-  padding: 24px;
+  border-radius: 10px;
+  border: 1px solid var(--ds-line);
+  background: var(--ds-panel);
+  padding: 20px;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--ds-shadow-sm);
 }
 
 .cardHighlighted {
-  border-color: #93c5fd;
+  border-color: var(--ds-ink);
   box-shadow:
-    0 0 0 1px rgba(147, 197, 253, 0.5),
-    0 4px 20px rgba(59, 130, 246, 0.08);
+    0 0 0 1px var(--ds-ink),
+    0 4px 20px rgba(24, 24, 27, 0.08);
 }
 
 .planNameRow {

@@ -346,12 +346,12 @@ function DriveUploadMockup({ indexing, indexed, fileProcessed, fileProcessing, d
 
             {/* Dragged file card */}
             <motion.div
-              className="ml-3 -mt-1 flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2 shadow-lg"
+              className="ml-3 -mt-1 flex items-center gap-2 rounded-md border border-ds-line bg-ds-panel px-2.5 py-1.5 shadow-[var(--ds-shadow-sm)]"
               animate={{ rotate: [0, -2, 1, -1, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             >
-              <FileText className="size-4 text-blue-600 shrink-0" />
-              <span className="text-xs font-medium text-foreground whitespace-nowrap">{dragFileName}</span>
+              <FileText className="size-3.5 text-blue-600 shrink-0" />
+              <span className="text-[11.5px] font-medium text-foreground whitespace-nowrap">{dragFileName}</span>
             </motion.div>
           </motion.div>
         )}
@@ -428,7 +428,7 @@ function DriveUploadMockup({ indexing, indexed, fileProcessed, fileProcessing, d
                   initial={{ opacity: 0, y: 16, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.25, delay: i * 0.07 }}
-                  className="flex items-center gap-3 rounded-lg border border-border bg-white dark:bg-card px-3 py-2 shadow-sm"
+                  className="flex items-center gap-2.5 rounded-md border border-ds-line bg-ds-panel px-3 py-2 shadow-[var(--ds-shadow-sm)]"
                 >
                   <FileText className={`size-4 shrink-0 ${file.color}`} />
                   <div className="min-w-0 flex-1">
@@ -594,7 +594,7 @@ function NotesMockup({ noteTitle, noteTags, saved, noteContent }: { noteTitle: s
   return (
     <div ref={containerRef} className="flex h-full w-full flex-col p-5 pt-6 pb-16">
       {/* Note editor mockup */}
-      <div className="flex flex-1 flex-col rounded-xl border border-border bg-white dark:bg-card shadow-sm overflow-hidden">
+      <div className="flex flex-1 flex-col rounded-[10px] border border-ds-line bg-ds-panel shadow-[var(--ds-shadow-sm)] overflow-hidden">
         {/* Toolbar */}
         <div className="flex items-center gap-1 border-b border-border px-3 py-2">
           <div className="flex items-center gap-0.5">
@@ -715,6 +715,7 @@ export function BentoFeatures({ dict }: BentoFeaturesProps) {
       <div className="pt-12">
         {/* Header */}
         <div className="mx-auto mb-10 max-w-2xl px-4 text-center">
+          <div className="app-eyebrow mb-3">{'// ÖZELLİKLER'}</div>
           <h2 className="text-[28px] sm:text-[32px] md:text-[36px] font-medium text-balance text-foreground leading-none" style={{ letterSpacing: "-0.05em" }}>
             {dict.title}
           </h2>

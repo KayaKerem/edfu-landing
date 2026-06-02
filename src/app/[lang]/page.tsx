@@ -179,7 +179,7 @@ export default async function Home({
             <DeployAi dict={dict.deployAi as DeployAiDict} />
             <ConnectData dict={dict.connectData as ConnectDataDict} />
             <Testimonial dict={dict.testimonial} />
-            <FlowDiagram dict={dict.flowDiagram} />
+            {/* <FlowDiagram dict={dict.flowDiagram} /> */}
             <Security dict={dict.security} />
             {/* <AiGradientCard dict={dict.aiGradientCard} /> */}
             {/* <MarqueeTestimonials dict={dict.marqueeTestimonials} /> */}
