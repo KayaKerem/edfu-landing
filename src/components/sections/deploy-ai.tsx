@@ -498,7 +498,6 @@ export function DeployAi({ dict }: { dict: DeployAiDict }) {
 
       {/* ─── Right: flow canvas ─── */}
       <div className={styles.canvas} role="group" aria-label={dict.ariaLabel}>
-        <div className={styles.canvasDots} aria-hidden="true" />
         <div
           className={styles.stage}
           style={{ aspectRatio: `${STAGE_W} / ${STAGE_H}` }}
