@@ -220,7 +220,7 @@ export default async function SubprocessorsPage({
                 ]).map((col) => (
                   <th
                     key={col}
-                    className="text-[rgb(145,148,161)] dark:text-[rgb(110,113,126)] border-b border-[#EFEFF1] dark:border-[#2a2a35]"
+                    className="text-[rgb(145,148,161)] dark:text-[rgb(110,113,126)] border-b border-border-primary dark:border-border-primary"
                     style={{
                       fontFamily: "var(--font-sans)",
                       fontSize: 14,
@@ -241,7 +241,7 @@ export default async function SubprocessorsPage({
               {subprocessors.map((row) => (
                 <tr
                   key={row.name}
-                  className="group border-b border-[#EFEFF1] dark:border-[#2a2a35]"
+                  className="group border-b border-border-primary dark:border-border-primary"
                 >
                   <td
                     className="group-hover:bg-blue-50 dark:group-hover:bg-blue-950/40 transition-colors text-[#1F2937] dark:text-[#e2e4eb]"

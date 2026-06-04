@@ -280,7 +280,7 @@ function NodeCard({
       aria-label={ariaLabel}
       className={cn(
         styles.nodeCard,
-        "relative rounded-[14px] border",
+        "relative rounded-xl border",
         active && styles.nodeCardActive,
         muted && !active && styles.nodeCardMuted
       )}
@@ -290,7 +290,7 @@ function NodeCard({
       <div className="relative" style={{ zIndex: 2 }}>
         <div className="flex items-center gap-2.5" style={{ height: 28 }}>
           <span
-            className={cn(styles.nodeIcon, "flex size-7 shrink-0 items-center justify-center rounded-[8px]")}
+            className={cn(styles.nodeIcon, "flex size-7 shrink-0 items-center justify-center rounded-md")}
             style={{ background: iconBg, color: iconFg }}
           >
             <span className="size-4 inline-flex">{icon}</span>
@@ -358,7 +358,7 @@ function ListCard({
         aria-current={active ? "true" : undefined}
         className={cn(
           styles.listCard,
-          "flex h-8 w-full items-center gap-1.5 rounded-[11px] border px-2.5 text-left",
+          "flex h-8 w-full items-center gap-1.5 rounded-lg border px-2.5 text-left",
           active && styles.listCardActive,
           muted && !active && opacity === undefined && styles.listCardMuted
         )}
@@ -372,7 +372,7 @@ function ListCard({
         }
       >
         <span
-          className="flex size-[15px] shrink-0 items-center justify-center rounded-[5px]"
+          className="flex size-[15px] shrink-0 items-center justify-center rounded-sm"
           style={{ background: swatch.bg, color: swatch.color }}
         >
           <span className="inline-flex size-[9px]"><ListItemIcon /></span>

@@ -136,7 +136,7 @@ export function MeetCrmConnector() {
       <div
         data-animate="rise"
         style={{ left: "49.9%", top: "30.5%", animationDelay: "0ms" }}
-        className="absolute -translate-x-1/2 -translate-y-1/2 flex size-10 items-center justify-center rounded-[10px] border border-border bg-background shadow-[0_4px_12px_rgba(31,35,41,0.06),0_1px_2px_rgba(31,35,41,0.04)]"
+        className="absolute -translate-x-1/2 -translate-y-1/2 flex size-10 items-center justify-center rounded-lg border border-border bg-background shadow-[0_4px_12px_rgba(31,35,41,0.06),0_1px_2px_rgba(31,35,41,0.04)]"
       >
         <GoogleMeet className="size-5" />
       </div>
@@ -147,7 +147,7 @@ export function MeetCrmConnector() {
         style={{ left: "49.9%", top: "61.4%", animationDelay: "160ms" }}
         className="absolute -translate-x-1/2 -translate-y-1/2"
       >
-        <div className="relative flex size-11 items-center justify-center rounded-[11px] bg-[#1F2329] shadow-[0_4px_12px_rgba(31,35,41,0.12),0_1px_2px_rgba(31,35,41,0.06)]">
+        <div className="relative flex size-11 items-center justify-center rounded-lg bg-[#1F2329] shadow-[0_4px_12px_rgba(31,35,41,0.12),0_1px_2px_rgba(31,35,41,0.06)]">
           <LeafGlyph className="size-6" />
           {/* Small avatar overlay at bottom-right */}
           <span className="absolute -bottom-1 -right-1 flex size-[14px] items-center justify-center rounded-full border-[1.5px] border-card bg-[#F0B37E] overflow-hidden">

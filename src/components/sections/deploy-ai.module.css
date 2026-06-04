@@ -289,7 +289,7 @@
 .taskCardInner {
   position: relative;
   z-index: 1;
-  border-radius: 11px;         /* Attio rounded-[11px] */
+  border-radius: var(--radius-lg);    /* app parite: 10px */
   background: var(--da-card-bg);
   overflow: hidden;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72);
@@ -317,7 +317,7 @@
   justify-content: center;
   width: 20px;
   height: 20px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: var(--da-icon-chip-bg);
   border: 1px solid var(--da-icon-chip-border);
   color: var(--da-accent-indigo);
@@ -346,7 +346,7 @@
   margin-left: auto;           /* Attio ml-auto */
   height: 18px;
   padding: 0 6px;              /* Attio px-1.5 py-0.5 */
-  border-radius: 8px;          /* Attio rounded-[8px] */
+  border-radius: var(--radius-md);    /* app parite: 8px */
   background: var(--da-badge-bg);
   border: 1px solid var(--da-badge-border);
   font-size: 12px;             /* Attio text-[12px] */
@@ -383,7 +383,7 @@
   align-items: center;
   gap: 5px;
   padding: 7px 11px 7px 8px;
-  border-radius: 12px;         /* Attio rounded-[12px] */
+  border-radius: var(--radius-lg);    /* app parite: 10px */
   background: var(--da-pill-bg);
   border: 1px solid var(--da-pill-border);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);
@@ -699,7 +699,7 @@
   width: 100%;
   max-width: 252px;
   padding: 12px 14px 14px;
-  border-radius: 12px;                /* Attio rounded-[12px] */
+  border-radius: var(--radius-lg);    /* app parite: 10px */
   background: var(--da-card-bg);
   border: 1px solid var(--da-card-border);
   box-shadow:

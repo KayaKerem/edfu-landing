@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { GeistSans, GeistMono } from "geist/font";
 import "../globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
@@ -120,7 +121,7 @@ export default async function RootLayout({
   return (
     <html
       lang={lang}
-      className={`${theme} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${theme} ${inter.variable} ${jetbrainsMono.variable} ${GeistSans.variable} ${GeistMono.variable}`}
       style={{ colorScheme: theme }}
       suppressHydrationWarning
     >

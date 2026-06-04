@@ -68,7 +68,7 @@ export function HowItWorks({ dict }: HowItWorksProps) {
                     key={index}
                     className={`relative transition-all duration-300 ${
                       isActive
-                        ? "bg-ds-panel rounded-[10px] border border-ds-line shadow-[var(--ds-shadow-sm)]"
+                        ? "bg-ds-panel rounded-lg border border-ds-line shadow-[var(--ds-shadow-sm)]"
                         : ""
                     }`}
                   >
@@ -115,7 +115,7 @@ export function HowItWorks({ dict }: HowItWorksProps) {
 
           {/* Right visual */}
           <div className="col-span-1 h-[280px] sm:h-[350px] min-h-[200px] w-auto lg:col-span-3">
-            <div className="relative h-full w-full overflow-hidden rounded-[10px] border border-ds-line p-1">
+            <div className="relative h-full w-full overflow-hidden rounded-lg border border-ds-line p-1">
               <div className="flex h-full w-full items-center justify-center">
                 {steps.map((step, index) => (
                   <span

@@ -59,7 +59,7 @@ function LeftIcon({
   }
   if (variant === "video") {
     return (
-      <span className="flex size-6 items-center justify-center rounded-md bg-[#F2F3F5] border border-[#E4E7EC]">
+      <span className="flex size-6 items-center justify-center rounded-md bg-muted border border-border-primary">
         <svg viewBox="0 0 14 14" className="size-3" fill="none" aria-hidden="true">
           <rect
             x="2"
@@ -76,7 +76,7 @@ function LeftIcon({
     );
   }
   return (
-    <span className="flex size-6 items-center justify-center rounded-md bg-[#F2F3F5] border border-[#E4E7EC]">
+    <span className="flex size-6 items-center justify-center rounded-md bg-muted border border-border-primary">
       <svg viewBox="0 0 14 14" className="size-3" fill="none" aria-hidden="true">
         <path
           d="M11 4v2.5a2.5 2.5 0 01-2.5 2.5H4M4 9l2 2M4 9l2-2"
@@ -94,7 +94,7 @@ function LeftIcon({
 /* ── Miro-style brand mark (yellow tinted square + bold M) ───── */
 function MiroMark() {
   return (
-    <span className="flex size-5 items-center justify-center rounded-[5px] bg-[#FFF1C7] border border-[#FBE39A]">
+    <span className="flex size-5 items-center justify-center rounded-sm bg-[#FFF1C7] border border-[#FBE39A]">
       <span
         className="text-[11px] font-bold leading-none text-[#B8860B]"
         style={{ fontFamily: "var(--font-geist-mono, ui-monospace, monospace)" }}

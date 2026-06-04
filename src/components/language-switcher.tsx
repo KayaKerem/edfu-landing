@@ -17,7 +17,7 @@ export function LanguageSwitcher({ lang }: { lang: string }) {
   return (
     <button
       onClick={() => handleSwitch(isEn ? "tr" : "en")}
-      className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-border text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+      className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-border text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
     >
       {isEn ? "TR" : "EN"}
     </button>

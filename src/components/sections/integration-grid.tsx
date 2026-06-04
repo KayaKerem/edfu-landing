@@ -72,7 +72,7 @@ function IntegrationCard({ item }: { item: IntegrationGridItem }) {
         {Icon ? (
           <div
             className={cn(
-              "flex size-10 shrink-0 items-center justify-center rounded-[10px]",
+              "flex size-10 shrink-0 items-center justify-center rounded-lg",
               !hasColor && "bg-muted"
             )}
             style={hasColor ? { backgroundColor: item.color } : undefined}
@@ -85,7 +85,7 @@ function IntegrationCard({ item }: { item: IntegrationGridItem }) {
             />
           </div>
         ) : (
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-muted" />
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted" />
         )}
         <div className="min-w-0 pt-0.5">
           <p className="text-sm font-semibold text-foreground leading-tight">
