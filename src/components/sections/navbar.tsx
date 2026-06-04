@@ -110,7 +110,7 @@ export function Navbar({ dict, lang }: NavbarProps) {
         className="w-full"
       >
         <div
-          className={`rounded-2xl transition-all duration-300 ${
+          className={`rounded-md transition-all duration-300 ${
             isScrolled
               ? "border border-border bg-background/75 shadow-sm backdrop-blur-lg"
               : "bg-transparent"

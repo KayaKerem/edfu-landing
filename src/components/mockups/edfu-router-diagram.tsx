@@ -20,6 +20,7 @@ import {
   type ReactNode,
 } from 'react'
 import { Brain } from 'lucide-react'
+import { OnboardingConfetti } from './onboarding-confetti'
 
 // ──────────────────────────────────────────────────────────────────────────
 // Mock data
@@ -156,7 +157,8 @@ const PROVIDERS: ProviderRow[] = [
     label: 'Telegram',
     brand: '#229ED9',
     soft: '#dbeafe',
-    status: 'soon',
+    status: 'draft',
+    clickable: true,
     description: 'Telegram Bot API ile bağlan. Bot token üzerinden mesaj alıp gönder.',
     bullets: [
       'Bot token ile hızlı kurulum',
@@ -177,7 +179,8 @@ const PROVIDERS: ProviderRow[] = [
     label: 'Instagram',
     brand: '#E4405F',
     soft: '#fce7f3',
-    status: 'soon',
+    status: 'draft',
+    clickable: true,
     description: "Instagram DM'lerini ekibinin gelen kutusuna bağla. Meta hesabıyla giriş.",
     bullets: [
       'DM otomasyonu',
@@ -205,7 +208,8 @@ const PROVIDERS: ProviderRow[] = [
     label: 'Meta Ads',
     brand: '#1877F2',
     soft: '#dbeafe',
-    status: 'soon',
+    status: 'draft',
+    clickable: true,
     description: 'Facebook/Instagram lead reklamlarındaki form gönderimlerini al.',
     bullets: [
       'Lead form gerçek zamanlı sync',
@@ -288,6 +292,9 @@ const PLAYBOOKS: PlaybookRow[] = [
   },
 ]
 
+// Providers connected on first render — anything else is "hazır" until clicked.
+const INITIAL_CONNECTED: ProviderId[] = ['EDFU_LINK', 'WHATSAPP', 'EMAIL']
+
 // ──────────────────────────────────────────────────────────────────────────
 // Selection / hover types
 // ──────────────────────────────────────────────────────────────────────────
@@ -316,6 +323,7 @@ interface PathSpec {
 function BrainGlyph({ size = 14, color = '#fff' }: { size?: number; color?: string }) {
   return <Brain size={size} color={color} aria-hidden />
 }
+
 
 // ──────────────────────────────────────────────────────────────────────────
 // Hub (center card)
@@ -460,11 +468,22 @@ const ProviderNode = forwardRef<HTMLDivElement, ProviderNodeProps>(function Prov
           >
             {row.label}
           </span>
-          {row.clickable && (
+          {isLive ? (
+            <span
+              className="rounded-sm border px-[5px] py-px font-mono text-[9.5px] tracking-[0.04em]"
+              style={{
+                borderColor: `${row.brand}40`,
+                background: row.soft,
+                color: row.brand,
+              }}
+            >
+              bağlı
+            </span>
+          ) : row.clickable ? (
             <span className="rounded-sm border border-zinc-200 bg-zinc-100 px-[5px] py-px font-mono text-[9.5px] tracking-[0.04em] text-zinc-500">
               hazır
             </span>
-          )}
+          ) : null}
           {isSoon && (
             <span className="rounded-sm border border-dashed border-zinc-200 bg-zinc-100 px-[5px] py-px font-mono text-[9.5px] tracking-[0.04em] text-zinc-500">
               yakında
@@ -472,7 +491,7 @@ const ProviderNode = forwardRef<HTMLDivElement, ProviderNodeProps>(function Prov
           )}
         </div>
         <div className="mt-0.5 font-mono flex justify-start text-start text-[10.5px] text-zinc-500">
-          {isSoon ? '' : '// bağla'}
+          {isSoon ? '' : isLive ? '// bağlı' : '// bağla'}
         </div>
       </div>
       {isLive ? (
@@ -575,7 +594,7 @@ function ProviderHoverCard({ row }: { row: ProviderRow }) {
 
   return (
     <div
-      className="pointer-events-none absolute bottom-1/2 left-0 right-0 z-10 mx-auto w-[320px] translate-y-1/2 rounded-xl border border-zinc-200 bg-[#fafaf9] shadow-[0_12px_32px_-6px_rgba(0,0,0,0.22),0_3px_8px_-1px_rgba(0,0,0,0.1)]"
+      className="pointer-events-none absolute bottom-1/2 left-0 right-0 z-[3] mx-auto w-[320px] translate-y-1/2 rounded-xl border border-zinc-200 bg-[#fafaf9] shadow-[0_12px_32px_-6px_rgba(0,0,0,0.22),0_3px_8px_-1px_rgba(0,0,0,0.1)]"
       style={{ animation: 'edfu-hover-pop-center 0.18s cubic-bezier(0.34,1.2,0.64,1) both' }}
     >
       <div
@@ -642,7 +661,7 @@ function PlaybookHoverCard({ row }: { row: PlaybookRow }) {
 
   return (
     <div
-      className="pointer-events-none absolute bottom-1/2 left-0 right-0 z-10 mx-auto w-[320px] translate-y-1/2 rounded-xl border border-zinc-200 bg-[#fafaf9] shadow-[0_12px_32px_-6px_rgba(0,0,0,0.22),0_3px_8px_-1px_rgba(0,0,0,0.1)]"
+      className="pointer-events-none absolute bottom-1/2 left-0 right-0 z-[3] mx-auto w-[320px] translate-y-1/2 rounded-xl border border-zinc-200 bg-[#fafaf9] shadow-[0_12px_32px_-6px_rgba(0,0,0,0.22),0_3px_8px_-1px_rgba(0,0,0,0.1)]"
       style={{ animation: 'edfu-hover-pop-center 0.18s cubic-bezier(0.34,1.2,0.64,1) both' }}
     >
       <div
@@ -720,13 +739,27 @@ export default function EdfuRouterDiagram() {
     height: number
   }>({ ins: [], outs: [], width: 0, height: 0 })
   const [hoverPath, setHoverPath] = useState<{ d: string; brand: string } | null>(null)
+  const [connectedIds, setConnectedIds] = useState<Set<ProviderId>>(
+    () => new Set(INITIAL_CONNECTED),
+  )
+  const [justConnected, setJustConnected] = useState<{ id: ProviderId; key: number } | null>(
+    null,
+  )
 
   const stageRef = useRef<HTMLDivElement | null>(null)
   const hubRef = useRef<HTMLDivElement | null>(null)
   const provRefs = useRef<Record<string, HTMLDivElement | null>>({})
   const pbRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
-  const liveProvs = PROVIDERS.filter(p => p.status === 'live')
+  const providers = useMemo<ProviderRow[]>(
+    () =>
+      PROVIDERS.map(p =>
+        connectedIds.has(p.id) ? ({ ...p, status: 'live' } as ProviderRow) : p,
+      ),
+    [connectedIds],
+  )
+
+  const liveProvs = providers.filter(p => p.status === 'live')
   const livePbs = PLAYBOOKS.filter(p => p.status === 'live')
 
   // Edfu Sohbet is decorative — does not increment the hub's channel counter
@@ -822,7 +855,7 @@ export default function EdfuRouterDiagram() {
       const end = { x: hb.left - sb.left, y: hb.top - sb.top + hb.height / 2 }
       const midX = (start.x + end.x) / 2
       d = `M ${start.x} ${start.y} C ${midX} ${start.y}, ${midX} ${end.y}, ${end.x} ${end.y}`
-      brand = PROVIDERS.find(p => p.id === hovered.id)?.brand ?? '#71717a'
+      brand = providers.find(p => p.id === hovered.id)?.brand ?? '#71717a'
     } else {
       const start = { x: hb.right - sb.left, y: hb.top - sb.top + hb.height / 2 }
       const end = { x: nb.left - sb.left, y: nb.top - sb.top + nb.height / 2 }
@@ -836,10 +869,23 @@ export default function EdfuRouterDiagram() {
   const isSelected = (kind: 'provider' | 'playbook', id: string) =>
     selection?.kind === kind && (selection as { id: string }).id === id
 
+  function handleProviderClick(id: ProviderId) {
+    if (connectedIds.has(id)) {
+      setSelection({ kind: 'provider', id })
+      return
+    }
+    setConnectedIds(prev => {
+      const next = new Set(prev)
+      next.add(id)
+      return next
+    })
+    setJustConnected({ id, key: Date.now() })
+  }
+
   // Hovered provider → also light the hub→default-playbook spoke (real route).
   const hoveredDefaultOut = (() => {
     if (hovered?.kind !== 'provider') return null
-    const row = PROVIDERS.find(p => p.id === hovered.id)
+    const row = providers.find(p => p.id === hovered.id)
     if (!row || row.status !== 'live') return null
     return paths.outs.find(p => p.id === defaultPbId) ?? null
   })()
@@ -847,7 +893,7 @@ export default function EdfuRouterDiagram() {
   // Hovered row → drives hover card content
   const hoveredProviderRow =
     hovered?.kind === 'provider'
-      ? PROVIDERS.find(p => p.id === hovered.id) ?? null
+      ? providers.find(p => p.id === hovered.id) ?? null
       : null
   const hoveredPlaybookRow =
     hovered?.kind === 'playbook'
@@ -855,7 +901,7 @@ export default function EdfuRouterDiagram() {
       : null
 
   return (
-    <div className="font-sans text-[13px] text-left text-zinc-900">
+    <div className="ob-root font-sans text-[13px] text-left text-zinc-900">
       <style>{`
         @keyframes edfu-dot-pulse {
           0%, 100% { box-shadow: 0 0 0 0 currentColor; }
@@ -891,9 +937,28 @@ export default function EdfuRouterDiagram() {
         .edfu-hub-live {
           animation: edfu-hub-pulse 3s ease-in-out infinite;
         }
+        /* Confetti dots — subtle, on completion */
+        .ob-root .ob-confetti {
+          position: absolute; inset: 0;
+          pointer-events: none;
+          overflow: hidden;
+          z-index: 5;
+        }
+        .ob-root .ob-confetti-dot {
+          position: absolute;
+          width: 6px; height: 6px; border-radius: 99px;
+          animation: ob-confetti-fall 1.4s ease-out forwards;
+          top: 0;
+        }
+        @keyframes ob-confetti-fall {
+          0%   { opacity: 0; transform: translateY(-40px) scale(0.4); }
+          20%  { opacity: 1; }
+          100% { opacity: 0; transform: translateY(420px) scale(1.1); }
+        }
       `}</style>
 
       <div className="relative flex flex-col overflow-hidden bg-white p-6">
+        <OnboardingConfetti trigger={justConnected?.key ?? 0} />
         {/* dotted background */}
         <svg className="pointer-events-none absolute inset-0 text-zinc-500 opacity-55" width="100%" height="100%" aria-hidden>
           <defs>
@@ -1032,7 +1097,7 @@ export default function EdfuRouterDiagram() {
             <div className="mb-1 flex justify-start text-start font-mono text-[10px] tracking-[0.04em] text-zinc-500">
               // MÜŞTERİ KAYNAKLARI
             </div>
-            {PROVIDERS.map(p => (
+            {providers.map(p => (
               <ProviderNode
                 key={p.id}
                 ref={el => {
@@ -1040,7 +1105,7 @@ export default function EdfuRouterDiagram() {
                 }}
                 row={p}
                 selected={isSelected('provider', p.id)}
-                onClick={() => setSelection({ kind: 'provider', id: p.id })}
+                onClick={() => handleProviderClick(p.id)}
                 onMouseEnter={() => setHovered({ kind: 'provider', id: p.id })}
                 onMouseLeave={() =>
                   setHovered(h => (h?.kind === 'provider' && h.id === p.id ? null : h))
