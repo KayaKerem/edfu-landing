@@ -40,6 +40,41 @@
   --color-accent-blue: var(--accent-blue);
   --shadow-float: var(--shadow-float);
 
+  /* ── App parite: primary hover ── */
+  --color-primary-hover: var(--primary-hover);
+
+  /* ── App parite: Attio surface ladder ── */
+  --color-surface-0: var(--surface-0);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-surface-4: var(--surface-4);
+  --color-surface-5: var(--surface-5);
+
+  /* ── App parite: Attio border tiers ── */
+  --color-border-primary: var(--border-primary);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-outline: var(--border-outline);
+  --color-border-inset: var(--border-inset);
+
+  /* ── App parite: text color tiers ── */
+  --color-tertiary-foreground: var(--tertiary-foreground);
+  --color-hint-foreground: var(--hint-foreground);
+  --color-disabled-foreground: var(--disabled-foreground);
+
+  /* ── App parite: scrim (modals) ── */
+  --color-scrim: var(--scrim);
+
+  /* ── App parite: Attio elevation shadows ── */
+  --shadow-elevation-1: var(--elevation-1);
+  --shadow-elevation-2: var(--elevation-2);
+  --shadow-elevation-3: var(--elevation-3);
+  --shadow-elevation-4: var(--elevation-4);
+
+  /* ── App parite: button shadow tokens ── */
+  --shadow-button-primary: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 2px 4px -2px rgba(38, 109, 240, 0.12), 0 3px 6px -2px rgba(38, 109, 240, 0.08);
+  --shadow-button-secondary: var(--secondary-shadow);
+
   /* Edfu app surface tokens (mockups, demo cards, feature illustrations) */
   --color-ds-page: var(--ds-page);
   --color-ds-bg: var(--ds-bg);
@@ -65,16 +100,19 @@
   --shadow-ds-sm: var(--ds-shadow-sm);
   --shadow-ds: var(--ds-shadow);
 
+  /* App parite: Geist headings + Geist Mono. Inter remains body sans. */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-geist: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-heading: var(--font-geist-sans), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-geist: var(--font-geist-sans), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), var(--font-jetbrains-mono), ui-monospace, monospace;
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  /* App parite: Attio multiplicative radius scale (mirrors ai-rag-ui-template).
+   * --radius = 0.625rem (10px) → sm=6, md=8, lg=10, xl=14, 2xl=18 */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
 
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
@@ -121,7 +159,8 @@
     transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));}}}
 
 :root {
-  --radius: 0.5rem;
+  /* App parite: 10px base radius (was 0.5rem / 8px). */
+  --radius: 0.625rem;
 
   /* === Edfu brand kit v1.0 — raw palette === */
   /* Monokrom omurga */
@@ -132,13 +171,13 @@
   --brand-line: #E4E4E7;
   --brand-surface: #EFEEEC;
   --brand-paper: #FFFFFF;
-  /* Mavi spektrum */
+  /* Mavi spektrum — app parite: brand-blue-3 = #266DF0 (was #3B82F6) so --primary matches app's --primary. */
   --brand-blue-1: #93C5FD;
   --brand-blue-2: #60A5FA;
-  --brand-blue-3: #3B82F6;
-  --brand-blue-4: #2563EB;
+  --brand-blue-3: #266DF0;
+  --brand-blue-4: #1E5CCC;
   --brand-blue-5: #1D4ED8;
-  --brand-gradient: linear-gradient(180deg, #6EA8FE 0%, #3B82F6 45%, #1D4ED8 100%);
+  --brand-gradient: linear-gradient(180deg, #6EA8FE 0%, #266DF0 45%, #1D4ED8 100%);
   /* Aksesuar & status */
   --brand-violet: #7C3AED;
   --brand-live: #16A34A;
@@ -160,8 +199,10 @@
   --destructive-foreground: #FFFFFF;
   --primary: var(--brand-blue-3);
   --primary-foreground: #FFFFFF;
+  --primary-hover: var(--brand-blue-4);
   --secondary: var(--brand-ink);
   --secondary-foreground: #FFFFFF;
+  --secondary-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0), 0 0 2px 0 rgba(28, 40, 64, 0.18), 0 1px 3px 0 rgba(24, 41, 75, 0.04);
   --border: var(--brand-line);
   --input: var(--brand-paper);
   --ring: var(--brand-blue-3);
@@ -215,22 +256,52 @@
   --ds-rose-border: #fecdd3;
   --ds-violet: #266DF0;
   --ds-blue-soft: #eff6ff;
-  --ds-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, monospace;
+  --ds-mono: var(--font-geist-mono), var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, "Geist Mono", Menlo, monospace;
   --ds-shadow-sm: 0 1px 0 rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.04);
   --ds-shadow: 0 1px 0 rgba(0,0,0,0.02), 0 8px 24px -8px rgba(0,0,0,0.10);
   --ds-ease-app: cubic-bezier(0.2, 0, 0, 1);
   --ds-ease-pop: cubic-bezier(0.34, 1.2, 0.64, 1);
+
+  /* ── App parite: Attio surface ladder (light) ── */
+  --surface-0: #FFFFFF;
+  --surface-1: #F8F8F9;
+  --surface-2: #F3F3F5;
+  --surface-3: #EDEDF0;
+  --surface-4: #E8E8EB;
+  --surface-5: #E0E0E4;
+
+  /* ── App parite: border tiers (light) ── */
+  --border-primary: #E8E8EB;
+  --border-subtle: rgba(0,0,0,0.05);
+  --border-outline: rgba(0,0,0,0.07);
+  --border-inset: #E0E0E4;
+
+  /* ── App parite: text color tiers (light) ── */
+  --tertiary-foreground: #6B6E72;
+  --hint-foreground: rgba(0,0,0,0.55);
+  --disabled-foreground: rgba(0,0,0,0.29);
+
+  /* ── App parite: scrim (light) ── */
+  --scrim: rgba(17,24,39,0.35);
+
+  /* ── App parite: elevation (light) ── */
+  --elevation-1: #E0E0E4 0 0 0 1px inset, rgba(0,0,0,0.04) 0 0 2px 0, rgba(0,0,0,0.06) 0 1px 3px 0;
+  --elevation-2: rgba(0,0,0,0.04) 0 0 0 1px inset, rgba(38,109,240,0.10) 0 2px 4px -2px, rgba(38,109,240,0.06) 0 3px 6px -2px;
+  --elevation-3: rgba(0,0,0,0.08) 0 8px 28px -6px, rgba(0,0,0,0.12) 0 18px 88px -4px;
+  --elevation-4: rgba(0,0,0,0.03) 0 0 0 1px inset, rgba(0,0,0,0.06) 0 0 0 1px, rgba(0,0,0,0.06) 0 4px 8px -4px, rgba(0,0,0,0.08) 0 4px 12px -2px;
 }
 
 .dark {
-  /* === Semantic tokens (dark) === */
-  --background: var(--brand-ink);
+  /* === Semantic tokens (dark) ===
+   * App parite: single-canvas — --card/--popover collapse onto --background.
+   * Card chrome comes from --ds-line border, not a bg lift. */
+  --background: #0b0b0d;
   --foreground: #FAFAFA;
-  --card: #27272A;
+  --card: #0b0b0d;
   --card-foreground: #FAFAFA;
-  --popover: var(--brand-ink);
+  --popover: #0b0b0d;
   --popover-foreground: #FAFAFA;
-  --muted: #27272A;
+  --muted: #242529;
   --muted-foreground: var(--brand-muted-2);
   --accent: #1E3A8A;
   --accent-foreground: var(--brand-blue-1);
@@ -238,9 +309,11 @@
   --destructive-foreground: #FFFFFF;
   --primary: var(--brand-blue-3);
   --primary-foreground: #FFFFFF;
-  --secondary: #FAFAFA;
-  --secondary-foreground: var(--brand-ink);
-  --border: #27272A;
+  --primary-hover: #4E8CFC;
+  --secondary: #1A1D21;
+  --secondary-foreground: #FFFFFF;
+  --secondary-shadow: inset 0 0 0 1px #2F3033, 0 0 2px 0 #000000, 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+  --border: #2a2a2e;
   --input: var(--brand-ink-2);
   --ring: var(--brand-blue-3);
   --sidebar: var(--brand-ink);
@@ -283,6 +356,109 @@
   --ds-blue-soft: rgba(38, 109, 240, 0.10);
   --ds-shadow-sm: 0 1px 0 rgba(0,0,0,0.20), 0 1px 2px rgba(0,0,0,0.30);
   --ds-shadow: 0 1px 0 rgba(0,0,0,0.20), 0 8px 24px -8px rgba(0,0,0,0.40);
+
+  /* ── App parite: Attio surface ladder (dark) ── */
+  --surface-0: #050507;
+  --surface-1: #0b0b0d;
+  --surface-2: #0b0b0d;
+  --surface-3: #1a1a1f;
+  --surface-4: #242529;
+  --surface-5: #2F3033;
+
+  /* ── App parite: border tiers (dark) ── */
+  --border-primary: #2a2a2e;
+  --border-subtle: rgba(255,255,255,0.05);
+  --border-outline: rgba(255,255,255,0.07);
+  --border-inset: #2F3033;
+
+  /* ── App parite: text color tiers (dark) ── */
+  --tertiary-foreground: #CDCFD1;
+  --hint-foreground: rgba(255,255,255,0.55);
+  --disabled-foreground: rgba(255,255,255,0.29);
+
+  /* ── App parite: scrim (dark) ── */
+  --scrim: rgba(0,0,0,0.6);
+
+  /* ── App parite: elevation (dark) ── */
+  --elevation-1: #2F3033 0 0 0 1px inset, #000000 0 0 2px 0, rgba(0,0,0,0.08) 0 1px 3px 0;
+  --elevation-2: rgba(255,255,255,0.10) 0 0 0 1px inset, rgba(78,140,252,0.12) 0 2px 4px -2px, rgba(78,140,252,0.08) 0 3px 6px -2px;
+  --elevation-3: rgba(0,0,0,0.12) 0 6px 16px -6px, rgba(0,0,0,0.16) 0 12px 24px -8px;
+  --elevation-4: #2F3033 0 0 0 1px inset, rgba(0,0,0,0.12) 0 0 0 1px, rgba(0,0,0,0.28) 0 4px 8px -4px, rgba(0,0,0,0.36) 0 4px 12px -2px;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+ * App parite: Attio composite typography utilities
+ * Mirrors ai-rag-ui-template/src/app/globals.css §316-372. Use these
+ * for semantic typography instead of raw text-sm / text-xs.
+ * ────────────────────────────────────────────────────────────────── */
+
+@utility text-display {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+}
+
+@utility text-heading {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.16px;
+}
+
+@utility text-subheading {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.14px;
+}
+
+@utility text-body {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.14px;
+}
+
+@utility text-caption {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.12px;
+}
+
+@utility text-micro {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: normal;
+}
+
+@utility text-shortcut {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  line-height: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.22px;
+}
+
+@utility scrim {
+  background-color: var(--scrim);
+  backdrop-filter: blur(4px);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @layer components {

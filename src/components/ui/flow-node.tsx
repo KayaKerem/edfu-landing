@@ -40,9 +40,9 @@ export function FlowNode({
   return (
     <div
       className={cn(
-        "rounded-[10px] border border-[#EDEFF3] bg-white p-[7px] lg:rounded-xl lg:p-[11px]",
+        "rounded-lg border border-border-primary bg-card p-[7px] lg:rounded-xl lg:p-[11px]",
         "shadow-[0px_2px_3px_-2px_rgba(16,24,40,0.08)]",
-        "dark:border-[#2E3238] dark:bg-[#1C1C1F] dark:shadow-[0px_2px_3px_-2px_rgba(0,0,0,0.3)]",
+        "dark:bg-card dark:shadow-[0px_2px_3px_-2px_rgba(0,0,0,0.3)]",
         className
       )}
     >
@@ -54,7 +54,7 @@ export function FlowNode({
               {icon}
             </div>
           )}
-          <span className="truncate text-[11px] font-medium text-[#0F172A] dark:text-[#F1F5F9] lg:text-[14px]">
+          <span className="truncate text-[11px] font-medium text-foreground lg:text-[14px]">
             {label}
           </span>
         </div>
@@ -68,13 +68,13 @@ export function FlowNode({
                   statusPulse && "animate-pulse"
                 )}
               />
-              <span className="text-[9px] font-medium text-[#98A2B3] dark:text-[#64748B] lg:text-[11px]">
+              <span className="text-[9px] font-medium text-muted-foreground dark:text-muted-foreground lg:text-[11px]">
                 {status}
               </span>
             </div>
           )}
           {badge && (
-            <span className="rounded-md border border-[#EDEFF3] bg-[#F9FAFB] px-[3px] py-[0.5px] text-[8px] font-medium leading-[11px] text-[#475467] dark:border-[#2E3238] dark:bg-[#27272A] dark:text-[#94A3B8] lg:rounded-lg lg:px-[5px] lg:py-px lg:text-[10px] lg:leading-[14px]">
+            <span className="rounded-md border border-border-primary bg-muted px-[3px] py-[0.5px] text-[8px] font-medium leading-[11px] text-tertiary-foreground dark:border-border-primary dark:bg-muted dark:text-tertiary-foreground lg:rounded-lg lg:px-[5px] lg:py-px lg:text-[10px] lg:leading-[14px]">
               {badge}
             </span>
           )}
@@ -83,22 +83,22 @@ export function FlowNode({
 
       {/* Sublabel */}
       {sublabel && (
-        <p className="mt-0.5 truncate pl-1 text-[10px] text-[#475467] dark:text-[#94A3B8] lg:pl-2 lg:text-[12px]">
+        <p className="mt-0.5 truncate pl-1 text-[10px] text-tertiary-foreground dark:text-tertiary-foreground lg:pl-2 lg:text-[12px]">
           {sublabel}
         </p>
       )}
 
       {/* Attribute rows */}
       {attrs && attrs.length > 0 && (
-        <div className="mt-2 border-t border-[#EDEFF3] dark:border-[#2E3238] lg:mt-3">
+        <div className="mt-2 border-t border-border-primary dark:border-border-primary lg:mt-3">
           {attrs.map((a) => (
             <div
               key={a}
-              className="overflow-hidden border-b border-[#EDEFF3] dark:border-[#2E3238] pt-1 pb-[3px] pl-2 lg:pt-1.5 lg:pb-[5px] lg:pl-3"
+              className="overflow-hidden border-b border-border-primary dark:border-border-primary pt-1 pb-[3px] pl-2 lg:pt-1.5 lg:pb-[5px] lg:pl-3"
             >
-              <div className="flex items-center gap-x-1.5 text-[#98A2B3] dark:text-[#64748B]">
+              <div className="flex items-center gap-x-1.5 text-muted-foreground dark:text-muted-foreground">
                 {AttrIcon}
-                <span className="truncate text-[10px] text-[#475467] dark:text-[#94A3B8] lg:text-[12px]">
+                <span className="truncate text-[10px] text-tertiary-foreground dark:text-tertiary-foreground lg:text-[12px]">
                   {a}
                 </span>
               </div>
@@ -106,10 +106,10 @@ export function FlowNode({
           ))}
           {typeof moreCount === "number" && moreCount > 0 && (
             <div className="flex items-center mt-1 gap-x-[6.5px] pl-[8.5px] lg:mt-1.5 lg:gap-x-[7px] lg:pl-[13px]">
-              <span className="inline-block h-[3px] w-[3px] rounded-full bg-[#98A2B3] dark:bg-[#64748B]" />
-              <span className="inline-block h-[3px] w-[3px] rounded-full bg-[#98A2B3] dark:bg-[#64748B]" />
-              <span className="inline-block h-[3px] w-[3px] rounded-full bg-[#98A2B3] dark:bg-[#64748B]" />
-              <span className="ml-1 text-[9px] text-[#98A2B3] dark:text-[#64748B] lg:text-[11px]">
+              <span className="inline-block h-[3px] w-[3px] rounded-full bg-muted-foreground dark:bg-muted-foreground" />
+              <span className="inline-block h-[3px] w-[3px] rounded-full bg-muted-foreground dark:bg-muted-foreground" />
+              <span className="inline-block h-[3px] w-[3px] rounded-full bg-muted-foreground dark:bg-muted-foreground" />
+              <span className="ml-1 text-[9px] text-muted-foreground dark:text-muted-foreground lg:text-[11px]">
                 {moreCount} {moreLabel}
               </span>
             </div>
@@ -119,7 +119,7 @@ export function FlowNode({
 
       {/* Custom children */}
       {children && (
-        <div className="mt-2 border-t border-[#EDEFF3] dark:border-[#2E3238] pt-2 lg:mt-3 lg:pt-3">
+        <div className="mt-2 border-t border-border-primary dark:border-border-primary pt-2 lg:mt-3 lg:pt-3">
           {children}
         </div>
       )}

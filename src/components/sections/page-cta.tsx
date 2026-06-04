@@ -40,7 +40,7 @@ export function PageCTA({
             <div className="mt-10">
               <Link
                 href={buttonHref}
-                className="inline-flex h-12 items-center rounded-full bg-primary px-6 sm:px-8 text-sm sm:text-base font-normal tracking-wide text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] transition-all ease-out hover:bg-primary/90 active:scale-95"
+                className="inline-flex h-12 items-center rounded-md bg-primary px-6 sm:px-8 text-sm sm:text-base font-normal tracking-wide text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] transition-all ease-out hover:bg-primary/90 active:scale-95"
               >
                 {buttonText}
               </Link>

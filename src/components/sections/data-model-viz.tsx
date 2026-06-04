@@ -43,9 +43,9 @@ function ModelCard({
   return (
     <div
       className={cn(
-        "w-full rounded-[10px] border border-[#EDEFF3] bg-white p-[7px] lg:rounded-xl lg:p-[11px]",
+        "w-full rounded-lg border border-border-primary bg-card p-[7px] lg:rounded-xl lg:p-[11px]",
         "shadow-[0px_2px_3px_-2px_rgba(16,24,40,0.08)]",
-        "dark:border-[#2E3238] dark:bg-[#1C1C1F] dark:shadow-[0px_2px_3px_-2px_rgba(0,0,0,0.3)]",
+        "dark:bg-card dark:shadow-[0px_2px_3px_-2px_rgba(0,0,0,0.3)]",
         className
       )}
       style={style}
@@ -57,7 +57,7 @@ function ModelCard({
             <div className="flex size-[14px] shrink-0 items-center justify-center">
               {card.icon}
             </div>
-            <span className="truncate text-[11px] font-medium text-[#0F172A] dark:text-[#F1F5F9] lg:text-[14px]">
+            <span className="truncate text-[11px] font-medium text-foreground lg:text-[14px]">
               {card.title}
             </span>
           </div>
@@ -68,7 +68,7 @@ function ModelCard({
                 "lg:rounded-lg lg:px-[5px] lg:py-px lg:text-[10px] lg:leading-[14px]",
                 card.badge === "Custom"
                   ? "border-[#E9D7FE] bg-[#F9F5FF] text-[#6941C6] dark:border-[#5B21B6] dark:bg-[#2D1B69] dark:text-[#A78BFA]"
-                  : "border-[#EDEFF3] bg-[#F9FAFB] text-[#475467] dark:border-[#2E3238] dark:bg-[#27272A] dark:text-[#94A3B8]"
+                  : "border-border-primary bg-muted text-tertiary-foreground dark:border-border-primary dark:bg-muted dark:text-tertiary-foreground"
               )}
             >
               {card.badge}
@@ -77,15 +77,15 @@ function ModelCard({
         </div>
 
         {/* Attribute rows */}
-        <div className="mt-2 border-t border-[#EDEFF3] dark:border-[#2E3238] lg:mt-3">
+        <div className="mt-2 border-t border-border-primary dark:border-border-primary lg:mt-3">
           {card.attrs.map((a) => (
             <div
               key={a}
-              className="overflow-hidden border-b border-[#EDEFF3] dark:border-[#2E3238] pt-1 pb-[3px] pl-2 lg:pt-1.5 lg:pb-[5px] lg:pl-3"
+              className="overflow-hidden border-b border-border-primary dark:border-border-primary pt-1 pb-[3px] pl-2 lg:pt-1.5 lg:pb-[5px] lg:pl-3"
             >
-              <div className="flex items-center gap-x-1.5 text-[#98A2B3] dark:text-[#64748B]">
+              <div className="flex items-center gap-x-1.5 text-muted-foreground dark:text-muted-foreground">
                 {AttrIcon}
-                <span className="truncate text-[10px] text-[#475467] dark:text-[#94A3B8] lg:text-[12px]">
+                <span className="truncate text-[10px] text-tertiary-foreground dark:text-tertiary-foreground lg:text-[12px]">
                   {a}
                 </span>
               </div>
@@ -96,10 +96,10 @@ function ModelCard({
               {[0, 1, 2].map((i) => (
                 <span
                   key={i}
-                  className="inline-block h-[3px] w-[3px] rounded-full bg-[#98A2B3] dark:bg-[#64748B]"
+                  className="inline-block h-[3px] w-[3px] rounded-full bg-muted-foreground dark:bg-muted-foreground"
                 />
               ))}
-              <span className="ml-1 text-[9px] text-[#98A2B3] dark:text-[#64748B] lg:text-[11px]">
+              <span className="ml-1 text-[9px] text-muted-foreground dark:text-muted-foreground lg:text-[11px]">
                 {card.moreCount} {moreLabel}
               </span>
             </div>
@@ -116,12 +116,12 @@ function AddObjectCard({ label = "Add object" }: { label?: string }) {
     <div
       className={cn(
         "flex w-full items-center justify-center",
-        "rounded-[10px] border border-dashed border-[#D0D5DD] lg:rounded-xl",
-        "dark:border-[#475569]",
+        "rounded-lg border border-dashed border-border-inset lg:rounded-xl",
+        "dark:border-border-inset",
         "transition-transform duration-300 ease-[cubic-bezier(0.2,0,0,1)] hover:scale-[1.01]"
       )}
     >
-      <span className="flex items-center gap-x-1.5 text-[11px] text-[#98A2B3] dark:text-[#64748B] lg:text-[13px]">
+      <span className="flex items-center gap-x-1.5 text-[11px] text-muted-foreground dark:text-muted-foreground lg:text-[13px]">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path
             d="M7 3v8M3 7h8"
@@ -151,7 +151,7 @@ function Connectors({ visible }: { visible: boolean }) {
             strokeWidth="1"
             strokeDasharray="60"
             strokeDashoffset="60"
-            className="dark:stroke-[#334155]"
+            className="dark:stroke-border-inset"
             style={{ animation: "svg-connector-draw 1.2s cubic-bezier(0.2,0,0,1) 0.3s forwards" }}
           />
         </svg>
@@ -166,7 +166,7 @@ function Connectors({ visible }: { visible: boolean }) {
             strokeWidth="1"
             strokeDasharray="64"
             strokeDashoffset="64"
-            className="dark:stroke-[#334155]"
+            className="dark:stroke-border-inset"
             style={{ animation: "svg-connector-draw 1.2s cubic-bezier(0.2,0,0,1) 0.5s forwards" }}
           />
         </svg>
@@ -181,7 +181,7 @@ function Connectors({ visible }: { visible: boolean }) {
             strokeWidth="1"
             strokeDasharray="64"
             strokeDashoffset="64"
-            className="dark:stroke-[#334155]"
+            className="dark:stroke-border-inset"
             style={{ animation: "svg-connector-draw 1.2s cubic-bezier(0.2,0,0,1) 0.7s forwards" }}
           />
         </svg>
@@ -196,7 +196,7 @@ function Connectors({ visible }: { visible: boolean }) {
             strokeWidth="1"
             strokeDasharray="60"
             strokeDashoffset="60"
-            className="dark:stroke-[#334155]"
+            className="dark:stroke-border-inset"
             style={{ animation: "svg-connector-draw 1.2s cubic-bezier(0.2,0,0,1) 0.9s forwards" }}
           />
         </svg>
@@ -238,10 +238,10 @@ export function DataModelViz({
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         {/* Section heading (Attio style) */}
         {(sectionNumber || sectionLabel) && (
-          <div className="mb-8 flex items-center gap-x-[6px] text-[11px] uppercase tracking-[0.12em] text-[#475467] dark:text-[#94A3B8]">
+          <div className="mb-8 flex items-center gap-x-[6px] text-[11px] uppercase tracking-[0.12em] text-tertiary-foreground dark:text-tertiary-foreground">
             {sectionNumber && <span>{sectionNumber}</span>}
             {sectionLabel && (
-              <span className="text-[#0F172A] dark:text-[#F1F5F9] font-medium">
+              <span className="text-foreground font-medium">
                 {sectionLabel}
               </span>
             )}

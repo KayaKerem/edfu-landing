@@ -47,7 +47,7 @@ function SalesFormPanel({ dict }: { dict: TalkToSalesSheetDict }) {
 
   return (
     <div className="mx-auto flex h-full w-full max-w-[560px] items-center justify-center">
-      <div className="relative w-full rounded-[28px] border border-black/8 dark:border-white/8 bg-[#f3f3f4] dark:bg-[#1c1c1f] p-5 shadow-[0_30px_80px_rgba(15,23,42,0.14)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.5)] sm:p-6">
+      <div className="relative w-full rounded-2xl border border-black/8 dark:border-white/8 bg-muted dark:bg-card p-5 shadow-[0_30px_80px_rgba(15,23,42,0.14)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.5)] sm:p-6">
         <button
           type="button"
           onClick={collapse}

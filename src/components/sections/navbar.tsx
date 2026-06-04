@@ -118,7 +118,7 @@ export function Navbar({ dict, lang }: NavbarProps) {
         >
           <div className="relative flex h-14 items-center justify-between px-4 sm:px-5">
             <Link href={`${prefix}/`} className="flex items-center gap-1.5">
-              <EdfuIosIcon alt="edfu" width={36} height={36} className="size-9 rounded-[8px]" />
+              <EdfuIosIcon alt="edfu" width={36} height={36} className="size-9 rounded-md" />
               <span
                 className="text-2xl leading-none font-semibold tracking-tight"
               >
@@ -128,11 +128,11 @@ export function Navbar({ dict, lang }: NavbarProps) {
 
             <ul
               ref={navRef}
-              className="absolute left-1/2 -translate-x-1/2 hidden h-11 items-center justify-center rounded-full px-2 md:flex whitespace-nowrap"
+              className="absolute left-1/2 -translate-x-1/2 hidden h-11 items-center justify-center rounded-md px-2 md:flex whitespace-nowrap"
             >
               {pillStyle.width > 0 && (
                 <motion.li
-                  className="absolute inset-y-0 my-1.5 rounded-full border border-border bg-background"
+                  className="absolute inset-y-0 my-1.5 rounded-md border border-border bg-background"
                   animate={{ left: pillStyle.left, width: pillStyle.width }}
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   style={{ listStyle: "none" }}
@@ -164,17 +164,17 @@ export function Navbar({ dict, lang }: NavbarProps) {
             <div className="hidden items-center gap-2 md:flex">
               <Link
                 href={`${prefix}/pricing`}
-                className="bg-primary h-8 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground dark:text-primary-foreground w-fit px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] hover:bg-primary/80 transition-all ease-out active:scale-95"
+                className="bg-primary h-8 flex items-center justify-center text-sm font-normal tracking-wide rounded-md text-primary-foreground dark:text-primary-foreground w-fit px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] hover:bg-primary/80 transition-all ease-out active:scale-95"
               >
                 {dict.cta}
               </Link>
               <LanguageSwitcher lang={lang} />
-              <AnimatedThemeToggler className="size-8 cursor-pointer rounded-full border border-border text-muted-foreground" />
+              <AnimatedThemeToggler className="size-8 cursor-pointer rounded-md border border-border text-muted-foreground" />
             </div>
 
             <div className="flex items-center gap-2 md:hidden">
               <LanguageSwitcher lang={lang} />
-              <AnimatedThemeToggler className="size-8 cursor-pointer rounded-full border border-border text-muted-foreground" />
+              <AnimatedThemeToggler className="size-8 cursor-pointer rounded-md border border-border text-muted-foreground" />
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 aria-label={mobileOpen ? dict.menuClose : dict.menuOpen}
@@ -211,7 +211,7 @@ export function Navbar({ dict, lang }: NavbarProps) {
                 ))}
                 <Link
                   href={`${prefix}/pricing`}
-                  className="mt-2 flex h-10 items-center justify-center rounded-full bg-primary text-sm font-normal tracking-wide text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] transition-all ease-out active:scale-95"
+                  className="mt-2 flex h-10 items-center justify-center rounded-md bg-primary text-sm font-normal tracking-wide text-primary-foreground shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] transition-all ease-out active:scale-95"
                 >
                   {dict.cta}
                 </Link>

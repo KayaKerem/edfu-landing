@@ -594,7 +594,7 @@ function NotesMockup({ noteTitle, noteTags, saved, noteContent }: { noteTitle: s
   return (
     <div ref={containerRef} className="flex h-full w-full flex-col p-5 pt-6 pb-16">
       {/* Note editor mockup */}
-      <div className="flex flex-1 flex-col rounded-[10px] border border-ds-line bg-ds-panel shadow-[var(--ds-shadow-sm)] overflow-hidden">
+      <div className="flex flex-1 flex-col rounded-lg border border-ds-line bg-ds-panel shadow-[var(--ds-shadow-sm)] overflow-hidden">
         {/* Toolbar */}
         <div className="flex items-center gap-1 border-b border-border px-3 py-2">
           <div className="flex items-center gap-0.5">

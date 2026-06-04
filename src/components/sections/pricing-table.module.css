@@ -31,8 +31,10 @@
 .stickyInner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 30 24px;
-  padding-top: 2vw;
+  /* Fixed padding (was `padding: 30 24px` with an invalid unitless `30` that
+   * prod CSS minifiers drop, + `padding-top: 2vw` that scaled the pinned-header
+   * gap with viewport width — caused inconsistent spacing live vs local). */
+  padding: 24px 24px 30px;
   display: grid;
   grid-template-columns: 30% repeat(3, 1fr);
   align-items: end;
@@ -147,18 +149,17 @@
   color: var(--pricing-table-card-text);
 }
 .stickyCtaRegular:hover {
-  border: 1px solid black;
-  transition: all;
+  border-color: var(--pricing-table-text);
 }
 
 .stickyCtaPro {
-  background: #111827;
-  color: #ffffff;
-  border: 1px solid #111827;
+  background: var(--pricing-table-text);
+  color: var(--pricing-table-surface);
+  border: 1px solid var(--pricing-table-text);
 }
-.stickyCtaPro:hover { background: #1f2937;
-border: 1px solid black;
-transition: all; }
+.stickyCtaPro:hover {
+  opacity: 0.88;
+}
 
 :global(html[data-expandable-screen-open="true"]) .stickyHeader {
   opacity: 0;

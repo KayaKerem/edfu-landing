@@ -438,7 +438,7 @@ const ProviderNode = forwardRef<HTMLDivElement, ProviderNodeProps>(function Prov
     <div
       ref={ref}
       style={wrapperStyle}
-      className={`group relative flex min-h-[58px] items-center gap-2.5 rounded-[9px] border px-3 py-[9px] transition-all hover:-translate-y-px ${nodeBorder}`}
+      className={`group relative flex min-h-[58px] items-center gap-2.5 rounded-md border px-3 py-[9px] transition-all hover:-translate-y-px ${nodeBorder}`}
       onClick={isClickable ? onClick : undefined}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -461,12 +461,12 @@ const ProviderNode = forwardRef<HTMLDivElement, ProviderNodeProps>(function Prov
             {row.label}
           </span>
           {row.clickable && (
-            <span className="rounded-[3px] border border-zinc-200 bg-zinc-100 px-[5px] py-px font-mono text-[9.5px] tracking-[0.04em] text-zinc-500">
+            <span className="rounded-sm border border-zinc-200 bg-zinc-100 px-[5px] py-px font-mono text-[9.5px] tracking-[0.04em] text-zinc-500">
               hazır
             </span>
           )}
           {isSoon && (
-            <span className="rounded-[3px] border border-dashed border-zinc-200 bg-zinc-100 px-[5px] py-px font-mono text-[9.5px] tracking-[0.04em] text-zinc-500">
+            <span className="rounded-sm border border-dashed border-zinc-200 bg-zinc-100 px-[5px] py-px font-mono text-[9.5px] tracking-[0.04em] text-zinc-500">
               yakında
             </span>
           )}
@@ -517,7 +517,7 @@ const PlaybookNode = forwardRef<HTMLDivElement, PlaybookNodeProps>(function Play
   return (
     <div
       ref={ref}
-      className={`group relative flex cursor-pointer items-center gap-2.5 rounded-[9px] border px-3 py-[9px] transition-all hover:-translate-y-px ${nodeBorder}`}
+      className={`group relative flex cursor-pointer items-center gap-2.5 rounded-md border px-3 py-[9px] transition-all hover:-translate-y-px ${nodeBorder}`}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -1083,7 +1083,7 @@ export default function EdfuRouterDiagram() {
               type="button"
               onClick={() => setSelection({ kind: 'new-playbook' })}
               data-active={selection?.kind === 'new-playbook'}
-              className="group/addbtn mt-1 flex items-center justify-center gap-2 rounded-[9px] border-[1.5px] border-dashed border-zinc-200 bg-transparent px-3 py-[11px] font-sans text-[12px] text-zinc-500 transition-all hover:border-zinc-900 hover:bg-zinc-100 hover:text-zinc-900 data-[active=true]:border-zinc-900 data-[active=true]:bg-zinc-100 data-[active=true]:text-zinc-900"
+              className="group/addbtn mt-1 flex items-center justify-center gap-2 rounded-md border-[1.5px] border-dashed border-zinc-200 bg-transparent px-3 py-[11px] font-sans text-[12px] text-zinc-500 transition-all hover:border-zinc-900 hover:bg-zinc-100 hover:text-zinc-900 data-[active=true]:border-zinc-900 data-[active=true]:bg-zinc-100 data-[active=true]:text-zinc-900"
             >
               <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full border-[1.5px] border-dashed border-zinc-200 bg-zinc-100 text-[13px] leading-none text-zinc-500 transition-colors group-hover/addbtn:border-solid group-hover/addbtn:border-zinc-900 group-hover/addbtn:bg-zinc-900 group-hover/addbtn:text-white group-data-[active=true]/addbtn:border-solid group-data-[active=true]/addbtn:border-zinc-900 group-data-[active=true]/addbtn:bg-zinc-900 group-data-[active=true]/addbtn:text-white">
                 +

@@ -42,7 +42,7 @@ export function CallWidget({ dict, className }: CallWidgetProps) {
 
         {/* Video thumbnail */}
         <div className="px-1.5 py-2">
-          <div className="relative aspect-video w-full overflow-hidden rounded-[10px] bg-neutral-800">
+          <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-neutral-800">
             {/* Poster background. V1 does not ship a real video file; the
                 progress bar is decorative static markup. */}
             <div
