@@ -12,6 +12,7 @@
 
 import {
   forwardRef,
+  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -357,15 +358,6 @@ const Hub = forwardRef<HTMLDivElement, HubProps>(function Hub(
       ref={ref}
       className={`relative w-full rounded-xl bg-white px-[18px] py-4 transition-all ${borderClass}`}
     >
-      {stage === 'live' && (
-        <div
-          className="pointer-events-none absolute -inset-0.5 rounded-xl"
-          style={{
-            background:
-              'radial-gradient(closest-side, rgba(38,109,240,0.22), transparent 70%)',
-          }}
-        />
-      )}
       <div className="relative z-[1] mb-1 flex items-center gap-2.5">
         <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-900">
           <BrainGlyph size={14} color="#fff" />
@@ -745,6 +737,15 @@ export default function EdfuRouterDiagram() {
   const [justConnected, setJustConnected] = useState<{ id: ProviderId; key: number } | null>(
     null,
   )
+  const [confettiActive, setConfettiActive] = useState(false)
+
+  useEffect(() => {
+    if (!justConnected) return
+    setHovered(null)
+    setConfettiActive(true)
+    const t = setTimeout(() => setConfettiActive(false), 1800)
+    return () => clearTimeout(t)
+  }, [justConnected])
 
   const stageRef = useRef<HTMLDivElement | null>(null)
   const hubRef = useRef<HTMLDivElement | null>(null)
@@ -1162,8 +1163,8 @@ export default function EdfuRouterDiagram() {
         {/* hover cards (mounted on outer stage — its width is bounded by the
             host frame so bottom-center stays visually centered even when the
             inner grid content would push beyond viewport) */}
-        {hoveredProviderRow && <ProviderHoverCard row={hoveredProviderRow} />}
-        {hoveredPlaybookRow && <PlaybookHoverCard row={hoveredPlaybookRow} />}
+        {!confettiActive && hoveredProviderRow && <ProviderHoverCard row={hoveredProviderRow} />}
+        {!confettiActive && hoveredPlaybookRow && <PlaybookHoverCard row={hoveredPlaybookRow} />}
       </div>
     </div>
   )
